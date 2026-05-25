@@ -3,6 +3,8 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../../../core/network/lucy_dio_client.dart';
 import '../../../auth/domain/providers/auth_provider.dart';
 import '../../domain/repositories/onboarding_repository.dart';
+import '../datasources/onboarding_analyze_remote_data_source.dart';
+import '../datasources/onboarding_confirm_remote_data_source.dart';
 import '../datasources/onboarding_validate_remote_data_source.dart';
 import '../repositories/onboarding_repository_impl.dart';
 
@@ -25,8 +27,24 @@ OnboardingValidateRemoteDataSource onboardingValidateRemoteDataSource(
 }
 
 @Riverpod(keepAlive: true)
+OnboardingConfirmRemoteDataSource onboardingConfirmRemoteDataSource(
+  Ref ref,
+) {
+  return OnboardingConfirmRemoteDataSource(ref.watch(lucyDioClientProvider).dio);
+}
+
+@Riverpod(keepAlive: true)
+OnboardingAnalyzeRemoteDataSource onboardingAnalyzeRemoteDataSource(
+  Ref ref,
+) {
+  return OnboardingAnalyzeRemoteDataSource(ref.watch(lucyDioClientProvider).dio);
+}
+
+@Riverpod(keepAlive: true)
 OnboardingRepository onboardingRepositoryImpl(Ref ref) {
   return OnboardingRepositoryImpl(
     validateRemote: ref.watch(onboardingValidateRemoteDataSourceProvider),
+    confirmRemote: ref.watch(onboardingConfirmRemoteDataSourceProvider),
+    analyzeRemote: ref.watch(onboardingAnalyzeRemoteDataSourceProvider),
   );
 }

@@ -102,6 +102,110 @@ final class OnboardingValidateRemoteDataSourceProvider
 String _$onboardingValidateRemoteDataSourceHash() =>
     r'934192cd04cccff204cbd64aca2439fc60a0b091';
 
+@ProviderFor(onboardingConfirmRemoteDataSource)
+const onboardingConfirmRemoteDataSourceProvider =
+    OnboardingConfirmRemoteDataSourceProvider._();
+
+final class OnboardingConfirmRemoteDataSourceProvider
+    extends
+        $FunctionalProvider<
+          OnboardingConfirmRemoteDataSource,
+          OnboardingConfirmRemoteDataSource,
+          OnboardingConfirmRemoteDataSource
+        >
+    with $Provider<OnboardingConfirmRemoteDataSource> {
+  const OnboardingConfirmRemoteDataSourceProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'onboardingConfirmRemoteDataSourceProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() =>
+      _$onboardingConfirmRemoteDataSourceHash();
+
+  @$internal
+  @override
+  $ProviderElement<OnboardingConfirmRemoteDataSource> $createElement(
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
+
+  @override
+  OnboardingConfirmRemoteDataSource create(Ref ref) {
+    return onboardingConfirmRemoteDataSource(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(OnboardingConfirmRemoteDataSource value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<OnboardingConfirmRemoteDataSource>(
+        value,
+      ),
+    );
+  }
+}
+
+String _$onboardingConfirmRemoteDataSourceHash() =>
+    r'4941bdc2f785570e0bc0ec50c74fb393b14cfd83';
+
+@ProviderFor(onboardingAnalyzeRemoteDataSource)
+const onboardingAnalyzeRemoteDataSourceProvider =
+    OnboardingAnalyzeRemoteDataSourceProvider._();
+
+final class OnboardingAnalyzeRemoteDataSourceProvider
+    extends
+        $FunctionalProvider<
+          OnboardingAnalyzeRemoteDataSource,
+          OnboardingAnalyzeRemoteDataSource,
+          OnboardingAnalyzeRemoteDataSource
+        >
+    with $Provider<OnboardingAnalyzeRemoteDataSource> {
+  const OnboardingAnalyzeRemoteDataSourceProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'onboardingAnalyzeRemoteDataSourceProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() =>
+      _$onboardingAnalyzeRemoteDataSourceHash();
+
+  @$internal
+  @override
+  $ProviderElement<OnboardingAnalyzeRemoteDataSource> $createElement(
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
+
+  @override
+  OnboardingAnalyzeRemoteDataSource create(Ref ref) {
+    return onboardingAnalyzeRemoteDataSource(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(OnboardingAnalyzeRemoteDataSource value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<OnboardingAnalyzeRemoteDataSource>(
+        value,
+      ),
+    );
+  }
+}
+
+String _$onboardingAnalyzeRemoteDataSourceHash() =>
+    r'a26e0eb3c2c8eaa1980e3a7898d5cc4020187706';
+
 @ProviderFor(onboardingRepositoryImpl)
 const onboardingRepositoryImplProvider = OnboardingRepositoryImplProvider._();
 
@@ -148,4 +252,4 @@ final class OnboardingRepositoryImplProvider
 }
 
 String _$onboardingRepositoryImplHash() =>
-    r'bdf4a027e148320ebaf42f52fe85618ade168bf8';
+    r'f34d0cdfff8f6848348c2d35b787f5f1b09c6e40';

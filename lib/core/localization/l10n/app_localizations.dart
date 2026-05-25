@@ -483,6 +483,12 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'Votre réponse…'**
   String get onboardingAnswerHint;
+
+  /// Hint after analyze completes (F07 will replace with confirm page)
+  ///
+  /// In fr, this message translates to:
+  /// **'Analyse terminée. L’écran de confirmation arrive bientôt.'**
+  String get onboardingAnalysisReadyHint;
 }
 
 class _AppLocalizationsDelegate

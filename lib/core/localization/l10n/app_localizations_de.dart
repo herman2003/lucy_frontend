@@ -219,4 +219,8 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get onboardingAnswerHint => 'Ihre Antwort…';
+
+  @override
+  String get onboardingAnalysisReadyHint =>
+      'Analyse abgeschlossen. Der Bestätigungsbildschirm folgt in Kürze.';
 }

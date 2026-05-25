@@ -1,8 +1,16 @@
+import 'package:frontend/features/onboarding/domain/entities/confirm_turn_result.dart';
+import 'package:frontend/features/onboarding/domain/entities/learner_profile.dart';
+import 'package:frontend/features/onboarding/domain/entities/onboarding_analyze_result.dart';
 import 'package:frontend/features/onboarding/domain/entities/validate_answer_result.dart';
 import 'package:frontend/features/onboarding/domain/repositories/onboarding_repository.dart';
+import 'package:frontend/features/onboarding/utils/onboarding_question_ids.dart';
 
 class FakeOnboardingRepository implements OnboardingRepository {
-  FakeOnboardingRepository({this.validateHandler});
+  FakeOnboardingRepository({
+    this.validateHandler,
+    this.confirmHandler,
+    this.analyzeHandler,
+  });
 
   final Future<ValidateAnswerResult> Function({
     required String locale,
@@ -10,9 +18,22 @@ class FakeOnboardingRepository implements OnboardingRepository {
     required String answerText,
   })? validateHandler;
 
+  final Future<ConfirmTurnResult> Function({
+    required String locale,
+    required String questionId,
+    required String answerText,
+  })? confirmHandler;
+
+  final Future<OnboardingAnalyzeResult> Function({
+    required String locale,
+  })? analyzeHandler;
+
   int validateCallCount = 0;
+  int confirmCallCount = 0;
+  int analyzeCallCount = 0;
   String? lastQuestionId;
   String? lastAnswerText;
+  int completedTurnsAfterConfirm = 0;
 
   @override
   Future<ValidateAnswerResult> validateAnswer({
@@ -32,6 +53,49 @@ class FakeOnboardingRepository implements OnboardingRepository {
     }
     return const ValidateAnswerResult.accepted(
       turnSummary: 'Default summary.',
+    );
+  }
+
+  @override
+  Future<ConfirmTurnResult> confirmTurn({
+    required String locale,
+    required String questionId,
+    required String answerText,
+  }) async {
+    confirmCallCount++;
+    if (confirmHandler != null) {
+      return confirmHandler!(
+        locale: locale,
+        questionId: questionId,
+        answerText: answerText,
+      );
+    }
+
+    completedTurnsAfterConfirm++;
+    final isLast = completedTurnsAfterConfirm >= OnboardingQuestionIds.stepCount;
+    return ConfirmTurnResult(
+      onboardingStatus: isLast ? 'awaiting_analyze' : 'in_progress',
+      completedTurns: completedTurnsAfterConfirm,
+    );
+  }
+
+  @override
+  Future<OnboardingAnalyzeResult> analyze({required String locale}) async {
+    analyzeCallCount++;
+    if (analyzeHandler != null) {
+      return analyzeHandler!(locale: locale);
+    }
+    return OnboardingAnalyzeResult(
+      learnerProfile: const LearnerProfile(
+        primaryRole: 'student',
+        mainDomains: ['sciences'],
+        learningGoal: 'exam',
+        selfAssessedLevel: 'intermediate',
+        explanationStyle: 'step_by_step',
+        feedbackTone: 'encouraging',
+        tutoringLanguage: 'fr',
+      ),
+      summaryForUser: 'Profil analysé.',
     );
   }
 }

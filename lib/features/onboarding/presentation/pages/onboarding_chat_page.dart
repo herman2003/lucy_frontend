@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../core/constants/lucy_constants.dart';
 import '../../../../core/extensions/context.dart';
+import '../../../../core/localization/l10n/app_localizations.dart';
 import '../../../../shared/widgets/buttons/lucy_primary_button.dart';
 import '../../../../shared/widgets/buttons/lucy_secondary_button.dart';
 import '../../../../shared/widgets/feedback/lucy_snackbar.dart';
@@ -130,16 +131,27 @@ class _OnboardingChatPageState extends ConsumerState<OnboardingChatPage> {
                     Expanded(
                       child: LucyPrimaryButton(
                         text: l10n.onboardingConfirmTurn,
+                        isLoading: chatState.isSubmitting,
                         onPressed: chatState.isSubmitting
                             ? null
-                            : notifier.confirmTurn,
+                            : () => _confirmTurn(context, l10n),
                         width: double.infinity,
                       ),
                     ),
                   ],
                 ),
               ),
-            Padding(
+            if (chatState.isAnalysisReady)
+              Padding(
+                padding: const EdgeInsets.all(LucyConstants.kSpacingMedium),
+                child: Text(
+                  l10n.onboardingAnalysisReadyHint,
+                  style: Theme.of(context).textTheme.bodyMedium,
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            if (!chatState.isAnalysisReady)
+              Padding(
               padding: const EdgeInsets.fromLTRB(
                 LucyConstants.kSpacingMedium,
                 LucyConstants.kSpacingLow,
@@ -184,6 +196,20 @@ class _OnboardingChatPageState extends ConsumerState<OnboardingChatPage> {
         ),
       ),
     );
+  }
+
+  Future<void> _confirmTurn(BuildContext context, AppLocalizations l10n) async {
+    try {
+      await ref.read(onboardingChatProvider.notifier).confirmTurn(l10n);
+    } catch (error) {
+      if (!context.mounted) {
+        return;
+      }
+      LucySnackBar.showError(
+        context,
+        message: OnboardingErrorTranslator.fromException(context, error),
+      );
+    }
   }
 
   Future<void> _submit(BuildContext context) async {

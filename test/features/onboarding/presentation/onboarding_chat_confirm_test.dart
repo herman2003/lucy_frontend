@@ -1,0 +1,117 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:frontend/core/localization/l10n/app_localizations.dart';
+import 'package:frontend/features/onboarding/domain/entities/learner_profile.dart';
+import 'package:frontend/features/onboarding/domain/entities/onboarding_analyze_result.dart';
+import 'package:frontend/features/onboarding/domain/entities/validate_answer_result.dart';
+import 'package:frontend/features/onboarding/domain/providers/onboarding_provider.dart';
+import 'package:frontend/features/onboarding/presentation/pages/onboarding_chat_page.dart';
+import 'package:frontend/features/onboarding/services/onboarding_service.dart';
+import 'package:frontend/features/onboarding/utils/onboarding_question_ids.dart';
+
+import '../../../helpers/test_locales.dart';
+import '../helpers/fake_onboarding_repository.dart';
+
+void main() {
+  setUp(() {
+    setTestLocaleFr();
+  });
+
+  tearDown(clearTestLocaleOverride);
+
+  Future<void> pumpChat(
+    WidgetTester tester, {
+    required FakeOnboardingRepository repository,
+  }) async {
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [
+          onboardingRepositoryProvider.overrideWithValue(repository),
+          onboardingServiceProvider.overrideWithValue(
+            OnboardingService(repository: repository),
+          ),
+        ],
+        child: MaterialApp(
+          locale: const Locale('fr'),
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
+          home: const OnboardingChatPage(),
+        ),
+      ),
+    );
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 100));
+  }
+
+  Future<void> submitAcceptedAnswer(WidgetTester tester) async {
+    await tester.enterText(find.byType(TextField), 'Réponse claire.');
+    await tester.pump();
+    await tester.tap(find.text('Envoyer'));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 100));
+    await tester.pumpAndSettle();
+  }
+
+  testWidgets('confirmTurn advances to second question', (tester) async {
+    final repository = FakeOnboardingRepository(
+      validateHandler: ({required locale, required questionId, required answerText}) async {
+        return const ValidateAnswerResult.accepted(turnSummary: 'Résumé tour 1.');
+      },
+    );
+
+    await pumpChat(tester, repository: repository);
+    await submitAcceptedAnswer(tester);
+
+    await tester.tap(find.text('C’est bon'));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 100));
+    await tester.pumpAndSettle();
+
+    expect(repository.confirmCallCount, 1);
+    expect(find.text('2 / 7'), findsOneWidget);
+    expect(find.textContaining('domaines'), findsOneWidget);
+    expect(repository.analyzeCallCount, 0);
+  });
+
+  testWidgets('after seventh confirm calls analyze and shows summary', (
+    tester,
+  ) async {
+    const analyzeSummary = 'Tu prépares un examen en sciences.';
+
+    final repository = FakeOnboardingRepository(
+      validateHandler: ({required locale, required questionId, required answerText}) async {
+        return const ValidateAnswerResult.accepted(turnSummary: 'OK');
+      },
+      analyzeHandler: ({required locale}) async {
+        return OnboardingAnalyzeResult(
+          learnerProfile: const LearnerProfile(
+            primaryRole: 'student',
+            mainDomains: ['sciences'],
+            learningGoal: 'exam',
+            selfAssessedLevel: 'intermediate',
+            explanationStyle: 'step_by_step',
+            feedbackTone: 'encouraging',
+            tutoringLanguage: 'fr',
+          ),
+          summaryForUser: analyzeSummary,
+        );
+      },
+    );
+
+    await pumpChat(tester, repository: repository);
+
+    for (var step = 0; step < OnboardingQuestionIds.stepCount; step++) {
+      await submitAcceptedAnswer(tester);
+      await tester.tap(find.text('C’est bon'));
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 100));
+      await tester.pumpAndSettle();
+    }
+
+    expect(repository.confirmCallCount, OnboardingQuestionIds.stepCount);
+    expect(repository.analyzeCallCount, 1);
+    expect(find.text(analyzeSummary), findsOneWidget);
+    expect(find.textContaining('confirmation'), findsOneWidget);
+  });
+}

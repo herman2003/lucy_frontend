@@ -90,27 +90,54 @@ class OnboardingChatNotifier extends _$OnboardingChatNotifier {
     }
   }
 
-  void confirmTurn() {
+  Future<void> confirmTurn(AppLocalizations l10n) async {
     final summary = state.pendingTurnSummary;
     final answer = state.pendingAnswerText;
     if (summary == null || answer == null) {
       return;
     }
 
-    final completed = OnboardingCompletedTurn(
-      questionId: state.currentQuestionId,
-      questionText: state.activeQuestionText,
-      answerText: answer,
-      turnSummary: summary,
+    state = state.copyWith(
+      phase: OnboardingChatPhase.confirming,
+      isSubmitting: true,
     );
 
-    state = state.copyWith(
-      completedTurns: [...state.completedTurns, completed],
-      pendingTurnSummary: null,
-      pendingAnswerText: null,
-      phase: OnboardingChatPhase.awaitingAnswer,
-      isSubmitting: false,
-    );
+    try {
+      final confirmResult =
+          await ref.read(onboardingServiceProvider).confirmTurn(
+                locale: _apiLocale,
+                questionId: state.currentQuestionId,
+                answerText: answer,
+              );
+
+      final completed = OnboardingCompletedTurn(
+        questionId: state.currentQuestionId,
+        questionText: state.activeQuestionText,
+        answerText: answer,
+        turnSummary: summary,
+      );
+
+      final updatedTurns = [...state.completedTurns, completed];
+
+      state = state.copyWith(
+        completedTurns: updatedTurns,
+        pendingTurnSummary: null,
+        pendingAnswerText: null,
+      );
+
+      if (confirmResult.onboardingStatus == 'awaiting_analyze') {
+        await _runAnalyze();
+        return;
+      }
+
+      _advanceToNextQuestion(l10n);
+    } catch (error) {
+      state = state.copyWith(
+        phase: OnboardingChatPhase.awaitingConfirmation,
+        isSubmitting: false,
+      );
+      rethrow;
+    }
   }
 
   void rejectTurnSummary() {
@@ -147,6 +174,59 @@ class OnboardingChatNotifier extends _$OnboardingChatNotifier {
       phase: OnboardingChatPhase.awaitingAnswer,
       isSubmitting: false,
     );
+  }
+
+  void _advanceToNextQuestion(AppLocalizations l10n) {
+    final nextIndex = state.currentStepIndex + 1;
+    if (nextIndex >= OnboardingQuestionIds.ordered.length) {
+      state = state.copyWith(
+        phase: OnboardingChatPhase.awaitingAnswer,
+        isSubmitting: false,
+      );
+      return;
+    }
+
+    final nextId = OnboardingQuestionIds.ordered[nextIndex];
+    final questionText = onboardingQuestionText(l10n, nextId);
+
+    state = state.copyWith(
+      currentStepIndex: nextIndex,
+      currentQuestionId: nextId,
+      activeQuestionText: questionText,
+      messages: [OnboardingChatMessage(isFromLucy: true, text: questionText)],
+      phase: OnboardingChatPhase.awaitingAnswer,
+      isSubmitting: false,
+    );
+  }
+
+  Future<void> _runAnalyze() async {
+    state = state.copyWith(
+      phase: OnboardingChatPhase.analyzing,
+      isSubmitting: true,
+    );
+
+    try {
+      final result =
+          await ref.read(onboardingServiceProvider).analyze(locale: _apiLocale);
+
+      final summaryMessage = OnboardingChatMessage(
+        isFromLucy: true,
+        text: result.summaryForUser,
+      );
+
+      state = state.copyWith(
+        messages: [...state.messages, summaryMessage],
+        analyzeResult: result,
+        phase: OnboardingChatPhase.analysisReady,
+        isSubmitting: false,
+      );
+    } catch (error) {
+      state = state.copyWith(
+        phase: OnboardingChatPhase.awaitingAnswer,
+        isSubmitting: false,
+      );
+      rethrow;
+    }
   }
 
   void _showValidationSnackBar(BuildContext context, String message) {

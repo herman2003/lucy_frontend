@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../../../domain/entities/onboarding_analyze_result.dart';
 import '../../../domain/entities/onboarding_chat_message.dart';
 import '../../../domain/entities/onboarding_completed_turn.dart';
 
@@ -9,6 +10,9 @@ enum OnboardingChatPhase {
   awaitingAnswer,
   validating,
   awaitingConfirmation,
+  confirming,
+  analyzing,
+  analysisReady,
 }
 
 @freezed
@@ -27,6 +31,7 @@ abstract class OnboardingChatState with _$OnboardingChatState {
     String? pendingTurnSummary,
     String? pendingAnswerText,
     @Default([]) List<OnboardingCompletedTurn> completedTurns,
+    OnboardingAnalyzeResult? analyzeResult,
   }) = _OnboardingChatState;
 
   bool get canSendAnswer =>
@@ -35,8 +40,13 @@ abstract class OnboardingChatState with _$OnboardingChatState {
       !isSubmitting &&
       answerDraft.trim().isNotEmpty;
 
-  bool get showTypingIndicator => phase == OnboardingChatPhase.validating;
+  bool get showTypingIndicator =>
+      phase == OnboardingChatPhase.validating ||
+      phase == OnboardingChatPhase.confirming ||
+      phase == OnboardingChatPhase.analyzing;
 
   bool get showConfirmationActions =>
       phase == OnboardingChatPhase.awaitingConfirmation;
+
+  bool get isAnalysisReady => phase == OnboardingChatPhase.analysisReady;
 }

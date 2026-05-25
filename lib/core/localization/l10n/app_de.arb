@@ -76,5 +76,6 @@
   "onboardingGenericError": "Ein Fehler ist aufgetreten. Bitte erneut versuchen.",
   "onboardingAnswerRequired": "Bitte geben Sie zuerst eine Antwort ein.",
   "onboardingAnswerTooLong": "Ihre Antwort ist zu lang (max. 2000 Zeichen).",
-  "onboardingAnswerHint": "Ihre Antwort…"
+  "onboardingAnswerHint": "Ihre Antwort…",
+  "onboardingAnalysisReadyHint": "Analyse abgeschlossen. Der Bestätigungsbildschirm folgt in Kürze."
 }

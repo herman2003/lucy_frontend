@@ -218,4 +218,8 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get onboardingAnswerHint => 'Votre réponse…';
+
+  @override
+  String get onboardingAnalysisReadyHint =>
+      'Analyse terminée. L’écran de confirmation arrive bientôt.';
 }

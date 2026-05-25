@@ -76,5 +76,6 @@
   "onboardingGenericError": "Something went wrong. Please try again.",
   "onboardingAnswerRequired": "Please enter an answer before sending.",
   "onboardingAnswerTooLong": "Your answer is too long (2000 characters max).",
-  "onboardingAnswerHint": "Your answer…"
+  "onboardingAnswerHint": "Your answer…",
+  "onboardingAnalysisReadyHint": "Analysis complete. The confirmation screen is coming next."
 }

@@ -1,14 +1,26 @@
+import '../../domain/entities/confirm_turn_result.dart';
+import '../../domain/entities/onboarding_analyze_result.dart';
 import '../../domain/entities/validate_answer_result.dart';
 import '../../domain/repositories/onboarding_repository.dart';
+import '../datasources/onboarding_analyze_remote_data_source.dart';
+import '../datasources/onboarding_confirm_remote_data_source.dart';
 import '../datasources/onboarding_validate_remote_data_source.dart';
+import '../mappers/analyze_mapper.dart';
+import '../mappers/confirm_turn_mapper.dart';
 import '../mappers/validate_answer_mapper.dart';
 
 class OnboardingRepositoryImpl implements OnboardingRepository {
   OnboardingRepositoryImpl({
     required OnboardingValidateRemoteDataSource validateRemote,
-  }) : _validateRemote = validateRemote;
+    required OnboardingConfirmRemoteDataSource confirmRemote,
+    required OnboardingAnalyzeRemoteDataSource analyzeRemote,
+  })  : _validateRemote = validateRemote,
+        _confirmRemote = confirmRemote,
+        _analyzeRemote = analyzeRemote;
 
   final OnboardingValidateRemoteDataSource _validateRemote;
+  final OnboardingConfirmRemoteDataSource _confirmRemote;
+  final OnboardingAnalyzeRemoteDataSource _analyzeRemote;
 
   @override
   Future<ValidateAnswerResult> validateAnswer({
@@ -22,5 +34,25 @@ class OnboardingRepositoryImpl implements OnboardingRepository {
       answerText: answerText,
     );
     return ValidateAnswerMapper.fromJson(json);
+  }
+
+  @override
+  Future<ConfirmTurnResult> confirmTurn({
+    required String locale,
+    required String questionId,
+    required String answerText,
+  }) async {
+    final json = await _confirmRemote.confirmTurn(
+      locale: locale,
+      questionId: questionId,
+      answerText: answerText,
+    );
+    return ConfirmTurnMapper.fromJson(json);
+  }
+
+  @override
+  Future<OnboardingAnalyzeResult> analyze({required String locale}) async {
+    final json = await _analyzeRemote.analyze(locale: locale);
+    return AnalyzeMapper.fromJson(json);
   }
 }

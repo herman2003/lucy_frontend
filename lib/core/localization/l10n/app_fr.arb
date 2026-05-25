@@ -264,5 +264,9 @@
   "onboardingAnswerHint": "Votre réponse…",
   "@onboardingAnswerHint": {
     "description": "Chat answer field hint"
+  },
+  "onboardingAnalysisReadyHint": "Analyse terminée. L’écran de confirmation arrive bientôt.",
+  "@onboardingAnalysisReadyHint": {
+    "description": "Hint after analyze completes (F07 will replace with confirm page)"
   }
 }

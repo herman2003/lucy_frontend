@@ -3,6 +3,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../../core/localization/l10n/app_localizations.dart';
 import '../../domain/entities/onboarding_analyze_result.dart';
+import '../../domain/entities/onboarding_resume_progress.dart';
 import '../../domain/entities/onboarding_chat_message.dart';
 import '../../domain/entities/onboarding_completed_turn.dart';
 import '../../domain/entities/validate_answer_result.dart';
@@ -49,7 +50,7 @@ class OnboardingChatNotifier extends _$OnboardingChatNotifier {
         .read(onboardingServiceProvider)
         .fetchResumeProgress(uid: uid);
 
-    if (progress != null && progress.transcript.isNotEmpty) {
+    if (progress != null && _shouldResumeFromProgress(progress)) {
       state = buildOnboardingResumeState(l10n: l10n, progress: progress);
       return;
     }
@@ -481,5 +482,14 @@ class OnboardingChatNotifier extends _$OnboardingChatNotifier {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(content: Text(message)),
     );
+  }
+
+  bool _shouldResumeFromProgress(OnboardingResumeProgress progress) {
+    if (progress.transcript.isNotEmpty) {
+      return true;
+    }
+    return progress.onboardingStatus == 'awaiting_final_confirm' &&
+        progress.pendingLearnerProfile != null &&
+        progress.pendingSummaryForUser != null;
   }
 }

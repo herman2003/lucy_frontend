@@ -46,7 +46,8 @@ Manual (Firebase réel + Nest Admin):
 
 - [x] `flutter test` / `flutter analyze`
 - [x] `npm test` in `backend/`
-- [ ] Full SPEC §4.8 **post-MVP** UX (7 isolated chats, swipe, fallback after 10 failures) — see unchecked items in [SPEC.md](../SPEC.md) §4.8
+- [x] Post-MVP UX livré (7 chats, swipe, fallback 10 échecs) — voir [SPEC.md](../SPEC.md) §4.8
+- [ ] Reprise manuelle : kill app après `analyze`, rouvrir → écran confirm avec récap Firestore (`awaiting_final_confirm`)
 
 ---
 

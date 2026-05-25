@@ -187,6 +187,20 @@ P0–P2 → B01 → B02 → B03 → B04 (CP-1)
 
 ---
 
+## Phase 9 — Reprise écran confirmation (Q3 suite)
+
+| Statut | ID | Tâche | CP |
+|--------|-----|--------|-----|
+| [x] | Q3b | `awaiting_final_confirm` : `pendingSummaryForUser` + `pendingLearnerProfile` → confirm | — |
+
+**Q3b — Vérification :**
+
+- [x] Lecture Firestore des champs `pending*`
+- [x] `buildOnboardingResumeState` → `analysisReady` + navigation confirm
+- [x] Tests unitaires + `bootstrap`
+
+---
+
 ## Historique — Auth phase 1 (terminé)
 
 - [x] T01–T14 auth (voir commits / ancien suivi)

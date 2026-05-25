@@ -3,9 +3,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:frontend/core/localization/l10n/app_localizations.dart';
 import 'package:frontend/features/auth/domain/entities/auth_user.dart';
+import 'package:frontend/features/onboarding/domain/entities/learner_profile.dart';
+import 'package:frontend/features/onboarding/domain/entities/onboarding_analyze_result.dart';
 import 'package:frontend/features/onboarding/domain/entities/onboarding_resume_progress.dart';
 import 'package:frontend/features/onboarding/domain/entities/onboarding_transcript_turn.dart';
 import 'package:frontend/features/onboarding/presentation/controllers/onboarding_chat_notifier.dart';
+import 'package:frontend/features/onboarding/presentation/pages/onboarding_chat/onboarding_chat_state.dart';
 import 'package:frontend/features/onboarding/utils/onboarding_question_ids.dart';
 
 import '../helpers/fake_onboarding_repository.dart';
@@ -45,5 +48,49 @@ void main() {
     expect(state.currentStepIndex, 1);
     expect(state.messagesForStep(0).last.text, 'Réponse rôle');
     expect(state.messagesForStep(1), isNotEmpty);
+  });
+
+  test('bootstrap resumes awaiting_final_confirm with pending analysis', () async {
+    const profile = LearnerProfile(
+      primaryRole: 'student',
+      mainDomains: ['sciences'],
+      learningGoal: 'exam',
+      selfAssessedLevel: 'intermediate',
+      explanationStyle: 'step_by_step',
+      feedbackTone: 'encouraging',
+      tutoringLanguage: 'fr',
+    );
+    const resume = OnboardingResumeProgress(
+      onboardingStatus: 'awaiting_final_confirm',
+      pendingLearnerProfile: profile,
+      pendingSummaryForUser: 'Profil en attente de validation.',
+      transcript: [],
+    );
+
+    final repository = FakeOnboardingRepository();
+    final container = ProviderContainer(
+      overrides: [
+        ...onboardingChatTestOverrides(
+          repository: repository,
+          resumeProgress: resume,
+          authUser: const AuthUser(uid: 'test-uid', email: 'test@example.com'),
+        ),
+      ],
+    );
+    addTearDown(container.dispose);
+
+    final l10n = await AppLocalizations.delegate.load(const Locale('fr'));
+    final notifier = container.read(onboardingChatProvider.notifier);
+    await notifier.bootstrap(l10n: l10n, deviceLocale: const Locale('fr'));
+
+    final state = container.read(onboardingChatProvider);
+    expect(state.phase, OnboardingChatPhase.analysisReady);
+    expect(
+      state.analyzeResult,
+      const OnboardingAnalyzeResult.success(
+        learnerProfile: profile,
+        summaryForUser: 'Profil en attente de validation.',
+      ),
+    );
   });
 }

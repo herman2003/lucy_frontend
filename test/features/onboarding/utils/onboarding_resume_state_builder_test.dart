@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:frontend/core/localization/l10n/app_localizations.dart';
+import 'package:frontend/features/onboarding/domain/entities/learner_profile.dart';
+import 'package:frontend/features/onboarding/domain/entities/onboarding_analyze_result.dart';
 import 'package:frontend/features/onboarding/domain/entities/onboarding_resume_progress.dart';
 import 'package:frontend/features/onboarding/domain/entities/onboarding_transcript_turn.dart';
 import 'package:frontend/features/onboarding/presentation/pages/onboarding_chat/onboarding_chat_state.dart';
@@ -46,4 +48,48 @@ void main() {
     expect(state.messagesForStep(2), isNotEmpty);
     expect(state.phase, OnboardingChatPhase.awaitingAnswer);
   });
+
+  test(
+    'buildOnboardingResumeState restores confirm screen when awaiting_final_confirm',
+    () async {
+      final l10n = await AppLocalizations.delegate.load(const Locale('fr'));
+      const profile = LearnerProfile(
+        primaryRole: 'student',
+        mainDomains: ['sciences'],
+        learningGoal: 'exam',
+        selfAssessedLevel: 'intermediate',
+        explanationStyle: 'step_by_step',
+        feedbackTone: 'encouraging',
+        tutoringLanguage: 'fr',
+      );
+
+      final state = buildOnboardingResumeState(
+        l10n: l10n,
+        progress: OnboardingResumeProgress(
+          onboardingStatus: 'awaiting_final_confirm',
+          pendingLearnerProfile: profile,
+          pendingSummaryForUser: 'Récap en attente.',
+          transcript: List.generate(
+            OnboardingQuestionIds.stepCount,
+            (index) => OnboardingTranscriptTurn(
+              questionId: OnboardingQuestionIds.ordered[index],
+              questionText: 'Q$index',
+              answerText: 'A$index',
+              confirmedAt: '2026-01-01T00:0$index:00Z',
+            ),
+          ),
+        ),
+      );
+
+      expect(state.phase, OnboardingChatPhase.analysisReady);
+      expect(state.currentStepIndex, OnboardingQuestionIds.stepCount - 1);
+      expect(
+        state.analyzeResult,
+        const OnboardingAnalyzeResult.success(
+          learnerProfile: profile,
+          summaryForUser: 'Récap en attente.',
+        ),
+      );
+    },
+  );
 }

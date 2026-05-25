@@ -1,4 +1,5 @@
 import '../../../../core/localization/l10n/app_localizations.dart';
+import '../domain/entities/onboarding_analyze_result.dart';
 import '../domain/entities/onboarding_chat_message.dart';
 import '../domain/entities/onboarding_completed_turn.dart';
 import '../domain/entities/onboarding_resume_progress.dart';
@@ -50,9 +51,32 @@ OnboardingChatState buildOnboardingResumeState({
     ];
   }
 
+  final pendingProfile = progress.pendingLearnerProfile;
+  final pendingSummary = progress.pendingSummaryForUser;
+  if (progress.onboardingStatus == 'awaiting_final_confirm' &&
+      pendingProfile != null &&
+      pendingSummary != null) {
+    final lastStepIndex = OnboardingQuestionIds.stepCount - 1;
+    return OnboardingChatState(
+      isInitialized: true,
+      currentStepIndex: lastStepIndex,
+      currentQuestionId: OnboardingQuestionIds.ordered[lastStepIndex],
+      activeQuestionText: onboardingQuestionText(
+        l10n,
+        OnboardingQuestionIds.ordered[lastStepIndex],
+      ),
+      messagesByQuestionId: messagesByQuestionId,
+      completedTurns: completedTurns,
+      phase: OnboardingChatPhase.analysisReady,
+      analyzeResult: OnboardingAnalyzeResult.success(
+        learnerProfile: pendingProfile,
+        summaryForUser: pendingSummary,
+      ),
+    );
+  }
+
   final phase = switch (progress.onboardingStatus) {
     'awaiting_analyze' => OnboardingChatPhase.awaitingAnswer,
-    'awaiting_final_confirm' => OnboardingChatPhase.awaitingAnswer,
     _ => OnboardingChatPhase.awaitingAnswer,
   };
 

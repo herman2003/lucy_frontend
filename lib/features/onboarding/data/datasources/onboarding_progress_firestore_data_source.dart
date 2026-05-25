@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import '../mappers/pending_learner_profile_mapper.dart';
 import '../../domain/entities/onboarding_resume_progress.dart';
 import '../../domain/entities/onboarding_transcript_turn.dart';
 
@@ -20,14 +21,27 @@ class OnboardingProgressFirestoreDataSource {
     }
 
     final transcript = _parseTranscript(data['onboardingTranscript']);
-    if (transcript.isEmpty) {
+    final status = data['onboardingStatus'];
+    final onboardingStatus = status is String ? status : 'in_progress';
+    final pendingProfile =
+        PendingLearnerProfileMapper.fromFirestore(data['pendingLearnerProfile']);
+    final pendingSummary = data['pendingSummaryForUser'];
+    final pendingSummaryForUser =
+        pendingSummary is String && pendingSummary.trim().isNotEmpty
+            ? pendingSummary.trim()
+            : null;
+
+    if (transcript.isEmpty &&
+        onboardingStatus != 'awaiting_final_confirm' &&
+        pendingProfile == null) {
       return null;
     }
 
-    final status = data['onboardingStatus'];
     return OnboardingResumeProgress(
-      onboardingStatus: status is String ? status : 'in_progress',
+      onboardingStatus: onboardingStatus,
       transcript: transcript,
+      pendingLearnerProfile: pendingProfile,
+      pendingSummaryForUser: pendingSummaryForUser,
     );
   }
 

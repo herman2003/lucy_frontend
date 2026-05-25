@@ -74,7 +74,7 @@
 
 | Statut | ID | Tâche | CP | Bloc |
 |--------|-----|--------|-----|------|
-| [ ] | T11 | Console : Email only, **Firestore rules**, domaines, enum protection | **CP-4** | **Bloc** |
+| [x] | T11 | Firestore rules repo + guide console (SPEC §B–D) — **déployer / valider en console** | **CP-4** | **Bloc** |
 | ~~[ ]~~ | ~~T12~~ | ~~OAuth~~ — **annulé** | — | — |
 
 **CP-4 — Vérification :**
@@ -113,8 +113,10 @@
 
 ## Checklist console Firebase (T11 — humain)
 
+Voir [docs/firebase-console-t11.md](./docs/firebase-console-t11.md).
+
 - [ ] Email/Password activé (**seul** provider)
-- [ ] Firestore : règles `users/{uid}` (owner only)
+- [x] Firestore : règles `users/{uid}` (owner only) — fichier `firestore.rules` + `firebase deploy --only firestore:rules`
 - [ ] Email enumeration protection activée
 - [ ] Domaines autorisés web (`localhost` + prod)
 - [ ] Template / lien reset password configuré

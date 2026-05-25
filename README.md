@@ -44,6 +44,12 @@ flutter test
 flutter analyze
 ```
 
+## Firebase (T11)
+
+- Firestore security rules: [`firestore.rules`](./firestore.rules) (`users/{uid}` owner-only, SPEC §C)
+- Deploy rules: `firebase deploy --only firestore:rules --project lucy-7504c`
+- Console checklist: [docs/firebase-console-t11.md](./docs/firebase-console-t11.md)
+
 ## Project docs
 
 - [SPEC.md](./SPEC.md) — product and architecture spec

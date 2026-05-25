@@ -384,8 +384,9 @@ flutter run -d chrome
 - Nettoyer configs natives OAuth inutiles (entitlements Apple Sign-In, URL scheme Google) si présents — optionnel, pas bloquant email auth.
 
 **AC :**
-- [ ] SPEC §B, §C, §D cochés
-- [ ] Signup test crée doc `users/{uid}`
+- [x] Règles Firestore versionnées (`firestore.rules`) + `.firebaserc` + tests contrat
+- [ ] SPEC §B, §C, §D cochés en console (guide `docs/firebase-console-t11.md`)
+- [ ] Signup test crée doc `users/{uid}` (manuel après deploy rules)
 
 ---
 

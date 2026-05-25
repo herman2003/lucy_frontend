@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../../../core/router/lucy_route_paths.dart';
+import '../../../../core/router/post_auth_route.dart';
 import '../../../../core/utils/auth_error_translator.dart';
 import '../../../../shared/widgets/feedback/lucy_snackbar.dart';
 import '../../domain/providers/auth_provider.dart';
@@ -45,7 +45,11 @@ class SignUpNotifier extends _$SignUpNotifier {
       if (!context.mounted) {
         return;
       }
-      context.go(LucyRoutePaths.home);
+      final destination = await PostAuthRoute.resolve(ref);
+      if (!context.mounted) {
+        return;
+      }
+      context.go(destination);
     } catch (error) {
       if (!context.mounted) {
         return;

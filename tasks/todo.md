@@ -93,7 +93,7 @@
 |--------|-----|--------|-----|
 | [x] | F06 | Boucle 7 questions + `analyze` | — |
 | [x] | F07 | Écran confirmation + Firestore + `/home` | — |
-| [ ] | F07b | Signup/login → `/onboarding` si non configuré | **CP-4** |
+| [x] | F07b | Signup/login → `/onboarding` si non configuré | **CP-4** |
 
 **CP-4 — Vérification :**
 

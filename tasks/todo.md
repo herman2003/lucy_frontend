@@ -48,8 +48,8 @@
 
 | Statut | ID | Tâche | CP |
 |--------|-----|--------|-----|
-| [ ] | B03 | Prompts `onboarding-validate-answer` + PromptLoader | — |
-| [ ] | B04 | `POST /v1/onboarding/validate-answer` + tests | **CP-1** |
+| [x] | B03 | Prompts `onboarding-validate-answer` + PromptLoader | — |
+| [x] | B04 | `POST /v1/onboarding/validate-answer` + tests | **CP-1** |
 
 **CP-1 — Vérification :**
 

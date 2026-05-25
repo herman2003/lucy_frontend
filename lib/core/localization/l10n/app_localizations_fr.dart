@@ -210,6 +210,40 @@ class AppLocalizationsFr extends AppLocalizations {
   String get onboardingGenericError => 'Une erreur est survenue. Réessayez.';
 
   @override
+  String get onboardingErrorUnauthorized =>
+      'Votre session a expiré. Reconnectez-vous.';
+
+  @override
+  String get onboardingErrorValidation => 'Requête invalide. Réessayez.';
+
+  @override
+  String get onboardingErrorAlreadyComplete =>
+      'Votre profil est déjà configuré.';
+
+  @override
+  String get onboardingErrorTranscriptIncomplete =>
+      'Terminez les 7 questions avant de lancer l’analyse.';
+
+  @override
+  String get onboardingErrorProfileIncomplete =>
+      'Le profil généré est incomplet. Réessayez ou modifiez vos réponses.';
+
+  @override
+  String get onboardingErrorPendingProfileMissing =>
+      'Aucun profil en attente de validation. Relancez l’analyse.';
+
+  @override
+  String get onboardingErrorLlmInvalid =>
+      'Lucy n’a pas pu interpréter la réponse. Réessayez dans un instant.';
+
+  @override
+  String get onboardingErrorLlmUnavailable =>
+      'Lucy est temporairement indisponible. Réessayez plus tard.';
+
+  @override
+  String get onboardingErrorInternal => 'Une erreur est survenue. Réessayez.';
+
+  @override
   String get onboardingAnswerRequired => 'Répondez avant d’envoyer.';
 
   @override

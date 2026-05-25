@@ -210,6 +210,42 @@ class AppLocalizationsDe extends AppLocalizations {
       'Ein Fehler ist aufgetreten. Bitte erneut versuchen.';
 
   @override
+  String get onboardingErrorUnauthorized =>
+      'Ihre Sitzung ist abgelaufen. Bitte melden Sie sich erneut an.';
+
+  @override
+  String get onboardingErrorValidation =>
+      'Ungültige Anfrage. Bitte erneut versuchen.';
+
+  @override
+  String get onboardingErrorAlreadyComplete =>
+      'Ihr Profil ist bereits eingerichtet.';
+
+  @override
+  String get onboardingErrorTranscriptIncomplete =>
+      'Beantworten Sie alle 7 Fragen, bevor Sie die Analyse starten.';
+
+  @override
+  String get onboardingErrorProfileIncomplete =>
+      'Das erzeugte Profil ist unvollständig. Versuchen Sie es erneut oder passen Sie Ihre Antworten an.';
+
+  @override
+  String get onboardingErrorPendingProfileMissing =>
+      'Kein Profil wartet auf Bestätigung. Starten Sie die Analyse erneut.';
+
+  @override
+  String get onboardingErrorLlmInvalid =>
+      'Lucy konnte die Antwort nicht verarbeiten. Bitte gleich erneut versuchen.';
+
+  @override
+  String get onboardingErrorLlmUnavailable =>
+      'Lucy ist vorübergehend nicht verfügbar. Bitte später erneut versuchen.';
+
+  @override
+  String get onboardingErrorInternal =>
+      'Ein Fehler ist aufgetreten. Bitte erneut versuchen.';
+
+  @override
   String get onboardingAnswerRequired =>
       'Bitte geben Sie zuerst eine Antwort ein.';
 

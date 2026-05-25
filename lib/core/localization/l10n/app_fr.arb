@@ -253,6 +253,15 @@
   "@onboardingGenericError": {
     "description": "Generic onboarding API error"
   },
+  "onboardingErrorUnauthorized": "Votre session a expiré. Reconnectez-vous.",
+  "onboardingErrorValidation": "Requête invalide. Réessayez.",
+  "onboardingErrorAlreadyComplete": "Votre profil est déjà configuré.",
+  "onboardingErrorTranscriptIncomplete": "Terminez les 7 questions avant de lancer l’analyse.",
+  "onboardingErrorProfileIncomplete": "Le profil généré est incomplet. Réessayez ou modifiez vos réponses.",
+  "onboardingErrorPendingProfileMissing": "Aucun profil en attente de validation. Relancez l’analyse.",
+  "onboardingErrorLlmInvalid": "Lucy n’a pas pu interpréter la réponse. Réessayez dans un instant.",
+  "onboardingErrorLlmUnavailable": "Lucy est temporairement indisponible. Réessayez plus tard.",
+  "onboardingErrorInternal": "Une erreur est survenue. Réessayez.",
   "onboardingAnswerRequired": "Répondez avant d’envoyer.",
   "@onboardingAnswerRequired": {
     "description": "Empty answer validation"

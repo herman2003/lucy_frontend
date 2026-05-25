@@ -106,7 +106,7 @@
 
 | Statut | ID | Tâche | CP |
 |--------|-----|--------|-----|
-| [ ] | F08 | `onboarding_error_translator` + l10n erreurs API | — |
+| [x] | F08 | `onboarding_error_translator` + l10n erreurs API | — |
 | [ ] | F09 | Tests unit/widget/router | — |
 | [ ] | B06 | README backend | **CP-5** |
 

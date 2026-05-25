@@ -466,6 +466,60 @@ abstract class AppLocalizations {
   /// **'Une erreur est survenue. Réessayez.'**
   String get onboardingGenericError;
 
+  /// No description provided for @onboardingErrorUnauthorized.
+  ///
+  /// In fr, this message translates to:
+  /// **'Votre session a expiré. Reconnectez-vous.'**
+  String get onboardingErrorUnauthorized;
+
+  /// No description provided for @onboardingErrorValidation.
+  ///
+  /// In fr, this message translates to:
+  /// **'Requête invalide. Réessayez.'**
+  String get onboardingErrorValidation;
+
+  /// No description provided for @onboardingErrorAlreadyComplete.
+  ///
+  /// In fr, this message translates to:
+  /// **'Votre profil est déjà configuré.'**
+  String get onboardingErrorAlreadyComplete;
+
+  /// No description provided for @onboardingErrorTranscriptIncomplete.
+  ///
+  /// In fr, this message translates to:
+  /// **'Terminez les 7 questions avant de lancer l’analyse.'**
+  String get onboardingErrorTranscriptIncomplete;
+
+  /// No description provided for @onboardingErrorProfileIncomplete.
+  ///
+  /// In fr, this message translates to:
+  /// **'Le profil généré est incomplet. Réessayez ou modifiez vos réponses.'**
+  String get onboardingErrorProfileIncomplete;
+
+  /// No description provided for @onboardingErrorPendingProfileMissing.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucun profil en attente de validation. Relancez l’analyse.'**
+  String get onboardingErrorPendingProfileMissing;
+
+  /// No description provided for @onboardingErrorLlmInvalid.
+  ///
+  /// In fr, this message translates to:
+  /// **'Lucy n’a pas pu interpréter la réponse. Réessayez dans un instant.'**
+  String get onboardingErrorLlmInvalid;
+
+  /// No description provided for @onboardingErrorLlmUnavailable.
+  ///
+  /// In fr, this message translates to:
+  /// **'Lucy est temporairement indisponible. Réessayez plus tard.'**
+  String get onboardingErrorLlmUnavailable;
+
+  /// No description provided for @onboardingErrorInternal.
+  ///
+  /// In fr, this message translates to:
+  /// **'Une erreur est survenue. Réessayez.'**
+  String get onboardingErrorInternal;
+
   /// Empty answer validation
   ///
   /// In fr, this message translates to:

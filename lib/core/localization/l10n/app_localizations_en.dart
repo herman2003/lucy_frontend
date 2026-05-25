@@ -208,6 +208,41 @@ class AppLocalizationsEn extends AppLocalizations {
       'Something went wrong. Please try again.';
 
   @override
+  String get onboardingErrorUnauthorized =>
+      'Your session has expired. Please sign in again.';
+
+  @override
+  String get onboardingErrorValidation => 'Invalid request. Please try again.';
+
+  @override
+  String get onboardingErrorAlreadyComplete =>
+      'Your profile is already set up.';
+
+  @override
+  String get onboardingErrorTranscriptIncomplete =>
+      'Complete all 7 questions before running analysis.';
+
+  @override
+  String get onboardingErrorProfileIncomplete =>
+      'The generated profile is incomplete. Try again or edit your answers.';
+
+  @override
+  String get onboardingErrorPendingProfileMissing =>
+      'No profile is waiting for confirmation. Run analysis again.';
+
+  @override
+  String get onboardingErrorLlmInvalid =>
+      'Lucy could not interpret the response. Try again shortly.';
+
+  @override
+  String get onboardingErrorLlmUnavailable =>
+      'Lucy is temporarily unavailable. Please try again later.';
+
+  @override
+  String get onboardingErrorInternal =>
+      'Something went wrong. Please try again.';
+
+  @override
   String get onboardingAnswerRequired =>
       'Please enter an answer before sending.';
 

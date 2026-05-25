@@ -195,7 +195,11 @@
   },
   "authProfileWriteFailed": "Impossible d’enregistrer votre profil. Réessayez.",
   "@authProfileWriteFailed": {
-    "description": "Firestore profile write failed after signup"
+    "description": "Shown when Nest profile creation fails after signup"
+  },
+  "authUserProfileConflict": "Cet email est déjà associé à un autre profil.",
+  "@authUserProfileConflict": {
+    "description": "Shown when POST /v1/users/me returns USER_PROFILE_CONFLICT"
   },
   "onboardingPlaceholderTitle": "Configuration de votre profil apprenant",
   "@onboardingPlaceholderTitle": {

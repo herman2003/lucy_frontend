@@ -249,10 +249,10 @@ P0–P2 → B01 → B02 → B03 → B04 (CP-1)
 | [x] | C-B1b | DTOs parse create + response profil | — |
 | [x] | C-B1c | `GET` + `POST /v1/users/me` + guard + tests | **CP-C1** |
 | [x] | C-B1d | Erreur `USER_PROFILE_CONFLICT` (409) si conflit | — |
-| [ ] | C-F1a | `ApiEndpoints.usersMe` + `UserProfileApiRemoteDataSource` | — |
-| [ ] | C-F1b | Swap provider auth : API au lieu de Firestore ; signup POST | — |
-| [ ] | C-F1c | Router / bootstrap `isConfigured` via API | **CP-C2** |
-| [ ] | C-F1d | Translator l10n nouveaux codes API | — |
+| [x] | C-F1a | `ApiEndpoints.usersMe` + `UserProfileApiRemoteDataSource` | — |
+| [x] | C-F1b | Swap provider auth : API au lieu de Firestore ; signup POST | — |
+| [x] | C-F1c | Router / bootstrap `isConfigured` via API | **CP-C2** |
+| [x] | C-F1d | Translator l10n nouveaux codes API | — |
 
 **CP-C1 — Vérification :**
 
@@ -262,9 +262,9 @@ P0–P2 → B01 → B02 → B03 → B04 (CP-1)
 
 **CP-C2 — Vérification :**
 
-- [ ] Signup app → doc Firestore créé par Nest (pas SDK client)
-- [ ] Login `isConfigured: false` → `/onboarding` ; `true` → `/home`
-- [ ] `auth_repository_impl_test` + guards verts
+- [x] Signup app → profil via `POST /v1/users/me` (plus Firestore client)
+- [x] Login `isConfigured: false` → `/onboarding` ; `true` → `/home` (tests guards + repository)
+- [x] `auth_repository_impl_test` + datasource/mapper tests verts
 
 ---
 

@@ -5,9 +5,10 @@ import '../datasources/auth_remote_data_source.dart';
 import '../datasources/user_profile_remote_data_source.dart';
 import '../dtos/user_profile_dto.dart';
 import '../exceptions/firebase_auth_data_exception.dart';
+import '../exceptions/auth_profile_api_exception.dart';
 import '../mappers/auth_user_mapper.dart';
 
-/// Auth repository — orchestrates Firebase Auth + Firestore profile (SPEC option B).
+/// Auth repository — orchestrates Firebase Auth + Nest profile API (C-F1).
 class AuthRepositoryImpl implements AuthRepository {
   AuthRepositoryImpl({
     required AuthRemoteDataSource authRemote,
@@ -74,6 +75,9 @@ class AuthRepositoryImpl implements AuthRepository {
           uid: snapshot.uid,
           profile: profile,
         );
+      } on AuthProfileApiException catch (e) {
+        await _authRemote.deleteCurrentUser();
+        throw AuthException(code: e.code);
       } on Object {
         await _authRemote.deleteCurrentUser();
         throw const AuthException(code: 'profile-write-failed');
@@ -109,8 +113,12 @@ class AuthRepositoryImpl implements AuthRepository {
     if (uid == null) {
       return false;
     }
-    final profile = await _profileRemote.fetchUserProfile(uid: uid);
-    return profile?.isConfiguredEffective ?? false;
+    try {
+      final profile = await _profileRemote.fetchUserProfile(uid: uid);
+      return profile?.isConfiguredEffective ?? false;
+    } on AuthProfileApiException {
+      return false;
+    }
   }
 
   @override

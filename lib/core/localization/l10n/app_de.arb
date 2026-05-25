@@ -55,6 +55,7 @@
   "authUserDisabled": "Dieses Konto wurde deaktiviert.",
   "authOperationNotAllowed": "Diese Aktion ist nicht erlaubt.",
   "authProfileWriteFailed": "Profil konnte nicht gespeichert werden. Bitte erneut versuchen.",
+  "authUserProfileConflict": "Diese E-Mail ist bereits mit einem anderen Profil verknüpft.",
   "onboardingPlaceholderTitle": "Einrichtung Ihres Lernprofils",
   "onboardingQuestionQRole": "Erzählen Sie mir von Ihrer Situation: Studium, Berufswechsel oder selbstständiges Lernen?",
   "onboardingQuestionQDomains": "Welche Fächer oder Bereiche möchten Sie mit mir bearbeiten?",

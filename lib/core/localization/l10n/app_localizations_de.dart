@@ -162,6 +162,10 @@ class AppLocalizationsDe extends AppLocalizations {
       'Profil konnte nicht gespeichert werden. Bitte erneut versuchen.';
 
   @override
+  String get authUserProfileConflict =>
+      'Diese E-Mail ist bereits mit einem anderen Profil verknüpft.';
+
+  @override
   String get onboardingPlaceholderTitle => 'Einrichtung Ihres Lernprofils';
 
   @override

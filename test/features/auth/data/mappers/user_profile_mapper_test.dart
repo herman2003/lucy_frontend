@@ -53,6 +53,27 @@ void main() {
       expect(dto.isConfiguredEffective, isFalse);
     });
 
+    test('fromApiJson maps Nest users/me response', () {
+      final dto = UserProfileMapper.fromApiJson({
+        'uid': 'uid-1',
+        'fullName': 'Jane',
+        'email': 'jane@lucy.test',
+        'createdAt': '2026-05-25T12:00:00.000Z',
+        'isConfigured': true,
+        'onboardingStatus': 'completed',
+      });
+
+      expect(
+        dto,
+        const UserProfileDto(
+          fullName: 'Jane',
+          email: 'jane@lucy.test',
+          createdAt: '2026-05-25T12:00:00.000Z',
+          isConfigured: true,
+        ),
+      );
+    });
+
     test('fromFirestoreMap treats null isConfigured as false', () {
       final dto = UserProfileMapper.fromFirestoreMap({
         'fullName': 'Legacy',

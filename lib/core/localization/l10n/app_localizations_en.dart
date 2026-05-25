@@ -160,6 +160,10 @@ class AppLocalizationsEn extends AppLocalizations {
       'Could not save your profile. Please try again.';
 
   @override
+  String get authUserProfileConflict =>
+      'This email is already linked to another profile.';
+
+  @override
   String get onboardingPlaceholderTitle => 'Set up your learner profile';
 
   @override

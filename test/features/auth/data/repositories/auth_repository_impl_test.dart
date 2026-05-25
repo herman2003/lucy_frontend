@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:frontend/features/auth/data/exceptions/auth_profile_api_exception.dart';
 import 'package:frontend/features/auth/data/datasources/auth_remote_data_source.dart';
 import 'package:frontend/features/auth/data/datasources/auth_user_snapshot.dart';
 import 'package:frontend/features/auth/data/datasources/user_profile_remote_data_source.dart';
@@ -73,6 +74,8 @@ class _FakeAuthRemoteDataSource implements AuthRemoteDataSource {
 
 class _FakeProfileRemoteDataSource implements UserProfileRemoteDataSource {
   bool shouldFail = false;
+  bool shouldFailFetch = false;
+  String failCode = 'profile-write-failed';
   UserProfileDto? lastWritten;
 
   @override
@@ -81,13 +84,16 @@ class _FakeProfileRemoteDataSource implements UserProfileRemoteDataSource {
     required UserProfileDto profile,
   }) async {
     if (shouldFail) {
-      throw Exception('firestore write failed');
+      throw AuthProfileApiException(failCode);
     }
     lastWritten = profile;
   }
 
   @override
   Future<UserProfileDto?> fetchUserProfile({required String uid}) async {
+    if (shouldFailFetch) {
+      throw AuthProfileApiException(failCode);
+    }
     return lastWritten;
   }
 }
@@ -140,7 +146,7 @@ void main() {
       expect(await repository.fetchIsConfiguredForCurrentUser(), isTrue);
     });
 
-    test('signUp rolls back auth user when Firestore write fails', () async {
+    test('signUp rolls back auth user when profile API fails', () async {
       profileRemote.shouldFail = true;
 
       await expectLater(
@@ -160,6 +166,37 @@ void main() {
 
       expect(authRemote.deleteUserCalled, isTrue);
       expect(authRemote.currentUser, isNull);
+    });
+
+    test('signUp rolls back on user-profile-conflict', () async {
+      profileRemote.shouldFail = true;
+      profileRemote.failCode = 'user-profile-conflict';
+
+      await expectLater(
+        repository.signUpWithEmailAndPassword(
+          email: 'conflict@lucy.test',
+          password: 'password123',
+          fullName: 'Conflict User',
+        ),
+        throwsA(
+          isA<AuthException>().having(
+            (e) => e.code,
+            'code',
+            'user-profile-conflict',
+          ),
+        ),
+      );
+
+      expect(authRemote.deleteUserCalled, isTrue);
+    });
+
+    test('fetchIsConfiguredForCurrentUser returns false when profile API fails',
+        () async {
+      authRemote.current = const AuthUserSnapshot(
+        uid: 'uid-1',
+        email: 'a@lucy.test',
+      );
+      profileRemote.shouldFailFetch = true;
     });
 
     test('authStateChanges maps snapshots to AuthUser entities', () async {

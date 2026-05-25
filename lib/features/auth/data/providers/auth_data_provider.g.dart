@@ -8,17 +8,17 @@ part of 'auth_data_provider.dart';
 
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
-/// Wires Firebase SDKs to [AuthRepositoryImpl] (data layer only).
+/// Wires Firebase Auth + Nest profile API to [AuthRepositoryImpl].
 
 @ProviderFor(authRepositoryImpl)
 const authRepositoryImplProvider = AuthRepositoryImplProvider._();
 
-/// Wires Firebase SDKs to [AuthRepositoryImpl] (data layer only).
+/// Wires Firebase Auth + Nest profile API to [AuthRepositoryImpl].
 
 final class AuthRepositoryImplProvider
     extends $FunctionalProvider<AuthRepository, AuthRepository, AuthRepository>
     with $Provider<AuthRepository> {
-  /// Wires Firebase SDKs to [AuthRepositoryImpl] (data layer only).
+  /// Wires Firebase Auth + Nest profile API to [AuthRepositoryImpl].
   const AuthRepositoryImplProvider._()
     : super(
         from: null,
@@ -53,4 +53,4 @@ final class AuthRepositoryImplProvider
 }
 
 String _$authRepositoryImplHash() =>
-    r'62b9e089e6864e9493cea16412ca8fc05528ee6a';
+    r'1a201e72eb8ce0ea943c0fa3d5994b871f2adfb6';

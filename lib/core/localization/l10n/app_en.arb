@@ -55,6 +55,7 @@
   "authUserDisabled": "This account has been disabled.",
   "authOperationNotAllowed": "This operation is not allowed.",
   "authProfileWriteFailed": "Could not save your profile. Please try again.",
+  "authUserProfileConflict": "This email is already linked to another profile.",
   "onboardingPlaceholderTitle": "Set up your learner profile",
   "onboardingQuestionQRole": "Tell me about your situation: are you a student, changing careers, or learning on your own?",
   "onboardingQuestionQDomains": "Which subjects or areas will you work on with me?",

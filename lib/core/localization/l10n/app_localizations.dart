@@ -382,11 +382,17 @@ abstract class AppLocalizations {
   /// **'Cette opération n’est pas autorisée.'**
   String get authOperationNotAllowed;
 
-  /// Firestore profile write failed after signup
+  /// Shown when Nest profile creation fails after signup
   ///
   /// In fr, this message translates to:
   /// **'Impossible d’enregistrer votre profil. Réessayez.'**
   String get authProfileWriteFailed;
+
+  /// Shown when POST /v1/users/me returns USER_PROFILE_CONFLICT
+  ///
+  /// In fr, this message translates to:
+  /// **'Cet email est déjà associé à un autre profil.'**
+  String get authUserProfileConflict;
 
   /// Onboarding placeholder screen until chat UI is implemented
   ///

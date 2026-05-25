@@ -161,6 +161,10 @@ class AppLocalizationsFr extends AppLocalizations {
       'Impossible d’enregistrer votre profil. Réessayez.';
 
   @override
+  String get authUserProfileConflict =>
+      'Cet email est déjà associé à un autre profil.';
+
+  @override
   String get onboardingPlaceholderTitle =>
       'Configuration de votre profil apprenant';
 

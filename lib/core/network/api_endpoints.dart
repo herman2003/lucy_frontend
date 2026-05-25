@@ -15,4 +15,6 @@ abstract final class ApiEndpoints {
   static String get onboardingAnalyze => '$baseUrl/v1/onboarding/analyze';
 
   static String get onboardingFinalize => '$baseUrl/v1/onboarding/finalize';
+
+  static String get usersMe => '$baseUrl/v1/users/me';
 }

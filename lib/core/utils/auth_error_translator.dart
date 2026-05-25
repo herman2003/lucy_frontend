@@ -34,6 +34,8 @@ class AuthErrorTranslator {
         return l10n.authOperationNotAllowed;
       case 'profile-write-failed':
         return l10n.authProfileWriteFailed;
+      case 'user-profile-conflict':
+        return l10n.authUserProfileConflict;
       default:
         return l10n.authUnknownError;
     }

@@ -49,6 +49,23 @@ void main() {
       );
     });
 
+    testWidgets('maps user-profile-conflict to French l10n', (tester) async {
+      late String message;
+      await tester.pumpWidget(
+        _harness((context) {
+          message = AuthErrorTranslator.translate(
+            context,
+            'user-profile-conflict',
+          );
+          return const SizedBox.shrink();
+        }),
+      );
+      expect(
+        message,
+        'Cet email est déjà associé à un autre profil.',
+      );
+    });
+
     testWidgets('maps unknown code to generic French error', (tester) async {
       late String message;
       await tester.pumpWidget(

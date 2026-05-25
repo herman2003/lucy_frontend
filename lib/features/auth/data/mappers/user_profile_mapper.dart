@@ -40,4 +40,16 @@ class UserProfileMapper {
   static UserProfileDto fromFirestoreMap(Map<String, dynamic> map) {
     return map.toUserProfileDto();
   }
+
+  static UserProfileDto fromApiJson(Map<String, dynamic> json) {
+    return UserProfileDto(
+      fullName: json['fullName'] is String ? json['fullName'] as String : '',
+      email: json['email'] is String ? json['email'] as String : '',
+      createdAt:
+          json['createdAt'] is String
+              ? json['createdAt'] as String
+              : DateTime.fromMillisecondsSinceEpoch(0).toUtc().toIso8601String(),
+      isConfigured: json['isConfigured'] == true,
+    );
+  }
 }

@@ -21,7 +21,7 @@
 |--------|-----|--------|
 | [x] | P0 | Repo `Lucy/backend/` créé (hors repo git `frontend/`) |
 | [ ] | P1 | `GEMINI_API_KEY` dans `backend/.env` (ou `LLM_PROVIDER=mock` pour dev) |
-| [ ] | P2 | Compte de service Firebase pour Nest |
+| [ ] | P2 | Compte de service Firebase pour Nest (ou `FIRESTORE_PROVIDER=memory` + `FIREBASE_AUTH_MODE=dev`) |
 | [x] | P3 | CORS backend (Flutter web + localhost) |
 | [x] | P4 | Firestore rules commentées (R6) — onboarding écrit par Nest en prod |
 
@@ -36,6 +36,7 @@
 | [x] | F01 | `dio` + `ApiEndpoints` + `LucyDioClient` (token + 401 retry) | CP-0 |
 | [x] | F02 | `isConfigured: false` au signup + mapper + `fetchUserProfile` | CP-0 |
 | [x] | B07 | `MockLlmAdapter` + `LLM_PROVIDER=mock` (dev sans clé Gemini) | — |
+| [x] | B08 | Firestore mémoire + auth `dev:<uid>` (dev sans service account) | — |
 
 **CP-0 — Vérification :**
 
@@ -69,9 +70,9 @@
 
 **CP-2 — Vérification :**
 
-- [ ] Connecté, `isConfigured: false` → `/onboarding`
-- [ ] Réponse vague → bulle `rephrasedQuestion`, même étape
-- [ ] Réponse claire → acknowledgment, tour enregistré
+- [x] Connecté, `isConfigured: false` → `/onboarding` (auto : `lucy_router_guards_onboarding_test`)
+- [x] Réponse vague → bulle `rephrasedQuestion`, même étape (auto : `onboarding_chat_page_test`)
+- [x] Réponse claire → acknowledgment, tour enregistré (auto : `onboarding_chat_confirm_test`)
 
 ---
 
@@ -83,8 +84,8 @@
 
 **CP-3 — Vérification :**
 
-- [ ] Transcript 7 tours → 200 + `learnerProfile` §SPEC 4.4.1
-- [ ] Transcript incomplet → 400
+- [x] Transcript 7 tours → 200 + `learnerProfile` §SPEC 4.4.1 (auto : `onboarding.flow.memory.spec.ts`)
+- [x] Transcript incomplet → 400 (auto : `onboarding-analyze.spec.ts` + flow memory)
 
 ---
 

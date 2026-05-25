@@ -404,8 +404,8 @@ flutter run -d chrome
 - Renommer package `frontend` → `lucy` si décidé (imports, tests).
 
 **AC :**
-- [ ] Changer locale device → libellés changent
-- [ ] `flutter gen-l10n` sans untranslated critiques
+- [x] Changer locale device → libellés changent
+- [x] `flutter gen-l10n` sans untranslated critiques
 
 ---
 

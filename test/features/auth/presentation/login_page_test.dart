@@ -6,10 +6,13 @@ import 'package:frontend/features/auth/domain/providers/auth_provider.dart';
 import 'package:frontend/features/auth/presentation/pages/home/home_page.dart';
 import 'package:frontend/features/auth/presentation/pages/login/login_page.dart';
 
+import '../../../helpers/test_locales.dart';
 import '../helpers/fake_auth_repository.dart';
 
 void main() {
   testWidgets('login form navigates to home on success', (tester) async {
+    setTestLocaleFr();
+    addTearDown(clearTestLocaleOverride);
     final repository = FakeAuthRepository(null);
     tester.view.physicalSize = const Size(1200, 800);
     tester.view.devicePixelRatio = 1.0;
@@ -53,6 +56,8 @@ void main() {
   });
 
   testWidgets('logout returns to login', (tester) async {
+    setTestLocaleFr();
+    addTearDown(clearTestLocaleOverride);
     final repository = FakeAuthRepository(null);
     tester.view.physicalSize = const Size(1200, 800);
     tester.view.devicePixelRatio = 1.0;

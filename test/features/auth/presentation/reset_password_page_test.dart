@@ -6,6 +6,7 @@ import 'package:frontend/features/auth/domain/providers/auth_provider.dart';
 import 'package:frontend/features/auth/presentation/pages/login/login_page.dart';
 import 'package:frontend/features/auth/presentation/pages/reset_password/reset_password_page.dart';
 
+import '../../../helpers/test_locales.dart';
 import '../helpers/fake_auth_repository.dart';
 
 Future<void> _openResetPassword(WidgetTester tester) async {
@@ -19,6 +20,8 @@ void main() {
   testWidgets('reset flow shows success then try again returns to form', (
     tester,
   ) async {
+    setTestLocaleFr();
+    addTearDown(clearTestLocaleOverride);
     final repository = FakeAuthRepository(null);
     tester.view.physicalSize = const Size(1200, 800);
     tester.view.devicePixelRatio = 1.0;
@@ -61,6 +64,8 @@ void main() {
   });
 
   testWidgets('user-not-found still shows same success UI', (tester) async {
+    setTestLocaleFr();
+    addTearDown(clearTestLocaleOverride);
     final repository = FakeAuthRepository(null)
       ..passwordResetErrorCode = 'user-not-found';
     tester.view.physicalSize = const Size(1200, 800);
@@ -99,6 +104,8 @@ void main() {
   });
 
   testWidgets('back to login navigates from success', (tester) async {
+    setTestLocaleFr();
+    addTearDown(clearTestLocaleOverride);
     final repository = FakeAuthRepository(null);
     tester.view.physicalSize = const Size(1200, 800);
     tester.view.devicePixelRatio = 1.0;

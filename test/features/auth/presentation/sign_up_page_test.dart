@@ -7,6 +7,7 @@ import 'package:frontend/features/auth/presentation/pages/home/home_page.dart';
 import 'package:frontend/features/auth/presentation/pages/login/login_page.dart';
 import 'package:frontend/features/auth/presentation/pages/sign_up/sign_up_page.dart';
 
+import '../../../helpers/test_locales.dart';
 import '../helpers/fake_auth_repository.dart';
 
 Future<void> _openSignUp(WidgetTester tester) async {
@@ -18,6 +19,8 @@ Future<void> _openSignUp(WidgetTester tester) async {
 
 void main() {
   testWidgets('sign up navigates to home on success', (tester) async {
+    setTestLocaleFr();
+    addTearDown(clearTestLocaleOverride);
     final repository = FakeAuthRepository(null);
     tester.view.physicalSize = const Size(1200, 800);
     tester.view.devicePixelRatio = 1.0;
@@ -55,6 +58,8 @@ void main() {
   });
 
   testWidgets('profile write failure keeps user on sign up', (tester) async {
+    setTestLocaleFr();
+    addTearDown(clearTestLocaleOverride);
     final repository = FakeAuthRepository(null)..failProfileWrite = true;
     tester.view.physicalSize = const Size(1200, 800);
     tester.view.devicePixelRatio = 1.0;

@@ -1,16 +1,55 @@
-# frontend
+# Lucy (frontend)
 
-Lucy AI Agent
+Flutter client for **Lucy** — personalized AI tutoring (phase 1: Firebase email/password authentication).
 
-## Getting Started
+## Requirements
 
-This project is a starting point for a Flutter application.
+- Flutter SDK ^3.10
+- Firebase project `lucy-7504c` (see `lib/firebase_options.dart`)
 
-A few resources to get you started if this is your first Flutter project:
+## Setup
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+```bash
+flutter pub get
+dart run build_runner build --delete-conflicting-outputs
+flutter gen-l10n
+```
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Run
+
+```bash
+flutter run -d chrome
+# or: flutter run -d ios / android
+```
+
+## Localization (fr / en / de)
+
+- ARB files: `lib/core/localization/l10n/app_*.arb`
+- Regenerate: `flutter gen-l10n`
+- Untranslated keys: `untranslated_messages.txt` (should stay empty)
+- The app uses the **device language** when it is `fr`, `en`, or `de`; otherwise it falls back to French (`lib/core/localization/lucy_locale_resolution.dart`).
+
+## Code generation
+
+After changing Freezed models or `@riverpod` providers:
+
+```bash
+dart run build_runner build --delete-conflicting-outputs
+```
+
+## Tests
+
+```bash
+flutter test
+flutter analyze
+```
+
+## Project docs
+
+- [SPEC.md](./SPEC.md) — product and architecture spec
+- [tasks/plan.md](./tasks/plan.md) — implementation plan
+- [tasks/todo.md](./tasks/todo.md) — task checklist
+
+---
+
+*Ce document a été créé avec Cursor (IA).*

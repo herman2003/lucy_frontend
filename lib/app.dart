@@ -3,6 +3,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'core/localization/l10n/app_localizations.dart';
+import 'core/localization/lucy_locale_resolution.dart';
 import 'core/router/app_router.dart';
 import 'core/theme/lucy_flex_theme.dart';
 
@@ -13,14 +14,19 @@ class LucyApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final router = ref.watch(lucyRouterProvider);
+    final deviceLocale = readDeviceLocale();
 
     return MaterialApp.router(
       title: 'Lucy',
       theme: LucyFlexTheme.lightTheme,
       darkTheme: LucyFlexTheme.darkTheme,
       themeMode: ThemeMode.system,
-      locale: const Locale('fr'),
+      locale: resolveLucyLocale(deviceLocale),
       supportedLocales: AppLocalizations.supportedLocales,
+      localeListResolutionCallback: (locales, supportedLocales) =>
+          resolveLucyLocale(
+            locales != null && locales.isNotEmpty ? locales.first : null,
+          ),
       localizationsDelegates: const [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,

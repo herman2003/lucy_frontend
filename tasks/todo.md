@@ -87,7 +87,7 @@
 
 | Statut | ID | Tâche | CP |
 |--------|-----|--------|-----|
-| [ ] | T13 | l10n fr/en/de complète + branding web (`index.html`, manifest) | — |
+| [x] | T13 | l10n fr/en/de complète + branding web (`index.html`, manifest) | — |
 | [ ] | T14 | Tests unit/widget + DoD SPEC §1.4 | **CP-5** |
 
 **CP-5 — Vérification :**

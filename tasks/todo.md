@@ -99,8 +99,8 @@
 
 **CP-4 — Vérification :**
 
-- [ ] E2E : signup → 7 Q/R → confirm → `/home`
-- [ ] Firestore : `learnerProfile`, `onboardingTranscript`, `isConfigured: true`
+- [x] E2E : signup → 7 Q/R → confirm → `/home` (auto : `onboarding_cp4_e2e_flow_test`)
+- [x] Firestore : `learnerProfile`, `onboardingTranscript`, `isConfigured: true` (auto : `onboarding.flow.memory.spec.ts` + finalize E2E)
 
 ---
 

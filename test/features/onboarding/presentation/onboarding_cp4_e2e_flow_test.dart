@@ -1,0 +1,128 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:frontend/app.dart';
+import 'package:frontend/features/auth/domain/providers/auth_provider.dart';
+import 'package:frontend/features/auth/presentation/pages/home/home_page.dart';
+import 'package:frontend/features/auth/presentation/pages/login/login_page.dart';
+import 'package:frontend/features/auth/presentation/pages/sign_up/sign_up_page.dart';
+import 'package:frontend/features/onboarding/domain/entities/finalize_onboarding_result.dart';
+import 'package:frontend/features/onboarding/domain/entities/learner_profile.dart';
+import 'package:frontend/features/onboarding/domain/entities/onboarding_analyze_result.dart';
+import 'package:frontend/features/onboarding/domain/entities/validate_answer_result.dart';
+import 'package:frontend/features/onboarding/domain/providers/onboarding_provider.dart';
+import 'package:frontend/features/onboarding/presentation/pages/onboarding_chat_page.dart';
+import 'package:frontend/features/onboarding/presentation/pages/onboarding_confirm_page.dart';
+import 'package:frontend/features/onboarding/services/onboarding_service.dart';
+import 'package:frontend/features/onboarding/utils/onboarding_question_ids.dart';
+
+import '../../../helpers/test_locales.dart';
+import '../../auth/helpers/fake_auth_repository.dart';
+import '../helpers/fake_onboarding_repository.dart';
+
+/// CP-4 — automated E2E (signup → 7 Q/R → confirm → home) with fakes.
+void main() {
+  tearDown(() {
+    clearTestLocaleOverride();
+  });
+
+  testWidgets('signup through finalize reaches home with configured profile', (
+    tester,
+  ) async {
+    setTestLocaleFr();
+    tester.view.physicalSize = const Size(1200, 1200);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    final authRepository = FakeAuthRepository(null);
+    final onboardingRepository = FakeOnboardingRepository(
+      validateHandler: ({required locale, required questionId, required answerText}) async {
+        return const ValidateAnswerResult.accepted(turnSummary: 'Résumé accepté.');
+      },
+      analyzeHandler: ({required locale}) async {
+        return const OnboardingAnalyzeResult(
+          learnerProfile: LearnerProfile(
+            primaryRole: 'student',
+            mainDomains: ['sciences'],
+            learningGoal: 'exam',
+            selfAssessedLevel: 'intermediate',
+            explanationStyle: 'step_by_step',
+            feedbackTone: 'encouraging',
+            tutoringLanguage: 'fr',
+          ),
+          summaryForUser: 'Tu prépares un examen en sciences.',
+        );
+      },
+      finalizeHandler: () async {
+        authRepository.isConfigured = true;
+        return const FinalizeOnboardingResult();
+      },
+    );
+
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [
+          authRepositoryProvider.overrideWithValue(authRepository),
+          authStateChangesProvider.overrideWith(
+            (ref) => authRepository.authStateChanges(),
+          ),
+          onboardingRepositoryProvider.overrideWithValue(onboardingRepository),
+          onboardingServiceProvider.overrideWithValue(
+            OnboardingService(repository: onboardingRepository),
+          ),
+        ],
+        child: const LucyApp(),
+      ),
+    );
+
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 200));
+
+    expect(find.byType(LoginPage), findsOneWidget);
+    await tester.tap(find.text('Créer un compte'));
+    await tester.pumpAndSettle();
+    expect(find.byType(SignUpPage), findsOneWidget);
+
+    final fields = find.byType(TextFormField);
+    await tester.enterText(fields.at(0), 'Lucy E2E');
+    await tester.enterText(fields.at(1), 'e2e@lucy.test');
+    await tester.enterText(fields.at(2), 'password123');
+
+    await tester.tap(find.text('Créer mon compte'));
+    await tester.pumpAndSettle();
+
+    expect(find.byType(OnboardingChatPage), findsOneWidget);
+    expect(authRepository.isConfigured, isFalse);
+
+    for (var step = 0; step < OnboardingQuestionIds.stepCount; step++) {
+      await tester.enterText(find.byType(TextField), 'Réponse détaillée tour ${step + 1}.');
+      await tester.pump();
+      await tester.tap(find.text('Envoyer'));
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 100));
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.text('C’est bon'));
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 100));
+      await tester.pumpAndSettle();
+    }
+
+    expect(onboardingRepository.confirmCallCount, OnboardingQuestionIds.stepCount);
+    expect(onboardingRepository.analyzeCallCount, 1);
+    expect(find.byType(OnboardingConfirmPage), findsOneWidget);
+    expect(find.text('Tu prépares un examen en sciences.'), findsOneWidget);
+
+    await tester.tap(find.text('Valider et continuer'));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 100));
+    await tester.pumpAndSettle();
+
+    expect(onboardingRepository.finalizeCallCount, 1);
+    expect(authRepository.isConfigured, isTrue);
+    expect(find.byType(HomePage), findsOneWidget);
+    expect(find.text('Bienvenue sur Lucy'), findsOneWidget);
+    expect(find.byType(OnboardingChatPage), findsNothing);
+  });
+}

@@ -33,6 +33,11 @@ Automated structural DoD: `test/core/architecture/spec_48_onboarding_dod_test.da
 
 ## CP-4 — Full E2E
 
+Automated (fakes): `test/features/onboarding/presentation/onboarding_cp4_e2e_flow_test.dart`  
+Backend fields (memory): `backend/src/features/onboarding/onboarding.flow.memory.spec.ts`
+
+Manual (Firebase réel + Nest Admin):
+
 1. Signup → complete **7** Q/R with confirmations → analyze → **`/onboarding/confirm`** → finalize.
 2. Land on **`/home`**; logout/login still respects `isConfigured: true`.
 3. Firestore: `isConfigured: true`, `learnerProfile`, onboarding transcript per backend writes.

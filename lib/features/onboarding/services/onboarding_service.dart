@@ -24,11 +24,16 @@ class OnboardingService {
 
   Future<OnboardingResumeProgress?> fetchResumeProgress({
     required String? uid,
-  }) {
+  }) async {
     if (uid == null) {
-      return Future.value();
+      return null;
     }
-    return _progressRepository.fetchProgress(uid: uid);
+    try {
+      return await _progressRepository.fetchProgress(uid: uid);
+    } catch (_) {
+      // A16: allow bootstrap to fall back to local draft when API is unavailable.
+      return null;
+    }
   }
 
   Future<ValidateAnswerResult> validateAnswer({

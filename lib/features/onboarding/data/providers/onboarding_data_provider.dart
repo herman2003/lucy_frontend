@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../../core/network/lucy_dio_client.dart';
@@ -9,7 +8,7 @@ import '../datasources/onboarding_analyze_remote_data_source.dart';
 import '../datasources/onboarding_confirm_remote_data_source.dart';
 import '../datasources/onboarding_finalize_remote_data_source.dart';
 import '../datasources/onboarding_local_draft_prefs_data_source.dart';
-import '../datasources/onboarding_progress_firestore_data_source.dart';
+import '../datasources/onboarding_progress_api_remote_data_source.dart';
 import '../datasources/onboarding_validate_remote_data_source.dart';
 import '../repositories/onboarding_local_draft_repository_impl.dart';
 import '../repositories/onboarding_progress_repository_impl.dart';
@@ -66,9 +65,18 @@ OnboardingRepository onboardingRepositoryImpl(Ref ref) {
 }
 
 @Riverpod(keepAlive: true)
+OnboardingProgressApiRemoteDataSource onboardingProgressApiRemoteDataSource(
+  Ref ref,
+) {
+  return OnboardingProgressApiRemoteDataSource(
+    ref.watch(lucyDioClientProvider).dio,
+  );
+}
+
+@Riverpod(keepAlive: true)
 OnboardingProgressRepository onboardingProgressRepositoryImpl(Ref ref) {
   return OnboardingProgressRepositoryImpl(
-    OnboardingProgressFirestoreDataSource(FirebaseFirestore.instance),
+    ref.watch(onboardingProgressApiRemoteDataSourceProvider),
   );
 }
 

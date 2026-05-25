@@ -306,6 +306,57 @@ final class OnboardingRepositoryImplProvider
 String _$onboardingRepositoryImplHash() =>
     r'955c716bbd3af45fe105b5915b6d2ee9ee7a1a38';
 
+@ProviderFor(onboardingProgressApiRemoteDataSource)
+const onboardingProgressApiRemoteDataSourceProvider =
+    OnboardingProgressApiRemoteDataSourceProvider._();
+
+final class OnboardingProgressApiRemoteDataSourceProvider
+    extends
+        $FunctionalProvider<
+          OnboardingProgressApiRemoteDataSource,
+          OnboardingProgressApiRemoteDataSource,
+          OnboardingProgressApiRemoteDataSource
+        >
+    with $Provider<OnboardingProgressApiRemoteDataSource> {
+  const OnboardingProgressApiRemoteDataSourceProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'onboardingProgressApiRemoteDataSourceProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() =>
+      _$onboardingProgressApiRemoteDataSourceHash();
+
+  @$internal
+  @override
+  $ProviderElement<OnboardingProgressApiRemoteDataSource> $createElement(
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
+
+  @override
+  OnboardingProgressApiRemoteDataSource create(Ref ref) {
+    return onboardingProgressApiRemoteDataSource(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(OnboardingProgressApiRemoteDataSource value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride:
+          $SyncValueProvider<OnboardingProgressApiRemoteDataSource>(value),
+    );
+  }
+}
+
+String _$onboardingProgressApiRemoteDataSourceHash() =>
+    r'102e19da46c3005099e540b57802b354aee33f77';
+
 @ProviderFor(onboardingProgressRepositoryImpl)
 const onboardingProgressRepositoryImplProvider =
     OnboardingProgressRepositoryImplProvider._();
@@ -353,7 +404,7 @@ final class OnboardingProgressRepositoryImplProvider
 }
 
 String _$onboardingProgressRepositoryImplHash() =>
-    r'94a79b44c635e299e1357797dbfc32966bfa9bdf';
+    r'44dfb86c3d8a55a76443997bc626201fcb89b377';
 
 @ProviderFor(onboardingLocalDraftRepositoryImpl)
 const onboardingLocalDraftRepositoryImplProvider =

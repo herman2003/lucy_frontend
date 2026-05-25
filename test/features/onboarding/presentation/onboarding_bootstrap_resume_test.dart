@@ -17,7 +17,7 @@ import '../helpers/fake_onboarding_repository.dart';
 import '../helpers/onboarding_chat_test_overrides.dart';
 
 void main() {
-  test('bootstrap restores Firestore transcript into chat state', () async {
+  test('bootstrap restores remote progress transcript into chat state', () async {
     const resume = OnboardingResumeProgress(
       onboardingStatus: 'in_progress',
       transcript: [
@@ -148,7 +148,7 @@ void main() {
     expect(state.analyzeResult, isA<OnboardingAnalyzeSuccess>());
   });
 
-  test('bootstrap restores local draft when Firestore has no transcript', () async {
+  test('bootstrap restores local draft when remote progress is empty', () async {
     const draft = OnboardingLocalDraft(
       uid: 'test-uid',
       uiLocale: 'fr',

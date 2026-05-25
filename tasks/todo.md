@@ -272,20 +272,20 @@ P0–P2 → B01 → B02 → B03 → B04 (CP-1)
 
 | Statut | ID | Tâche | CP |
 |--------|-----|--------|-----|
-| [ ] | C-B2a | DTO `onboarding-progress-response` | — |
-| [ ] | C-B2b | `GET /v1/onboarding/progress` + tests | **CP-C3** |
-| [ ] | C-F2a | `ApiEndpoints.onboardingProgress` + datasource API | — |
-| [ ] | C-F2b | Provider onboarding : Firestore → API | **CP-C4** |
-| [ ] | C-F2c | Fallback brouillon local si API indisponible (A16) | — |
+| [x] | C-B2a | DTO `onboarding-progress-response` | — |
+| [x] | C-B2b | `GET /v1/onboarding/progress` + tests | **CP-C3** |
+| [x] | C-F2a | `ApiEndpoints.onboardingProgress` + datasource API | — |
+| [x] | C-F2b | Provider onboarding : Firestore → API | **CP-C4** |
+| [x] | C-F2c | Fallback brouillon local si API indisponible (A16) | — |
 
 **CP-C3 — Vérification :**
 
-- [ ] `curl GET …/v1/onboarding/progress` mid-parcours → transcript + status
-- [ ] État vide → 200 `not_started` (pas 404 bruyant)
+- [x] `curl GET …/v1/onboarding/progress` mid-parcours → transcript + status
+- [x] État vide → 200 `not_started` (pas 404 bruyant)
 
 **CP-C4 — Vérification :**
 
-- [ ] `onboarding_bootstrap_resume_test` vert (API mock)
+- [x] `onboarding_bootstrap_resume_test` vert (API mock)
 - [ ] Reprise manuelle kill app → panels restaurés
 
 ---

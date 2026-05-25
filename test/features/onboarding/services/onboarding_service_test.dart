@@ -70,6 +70,17 @@ void main() {
       expect(result, progress);
     });
 
+    test('fetchResumeProgress returns null when progress repository fails', () async {
+      service = OnboardingService(
+        repository: repository,
+        progressRepository: FakeOnboardingProgressRepository(throwOnFetch: true),
+        localDraftRepository: FakeOnboardingLocalDraftRepository(),
+      );
+
+      final result = await service.fetchResumeProgress(uid: 'uid-1');
+      expect(result, isNull);
+    });
+
     test('validateAnswer delegates to repository with params', () async {
       const expected = ValidateAnswerResult.accepted(turnSummary: 'OK');
 

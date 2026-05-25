@@ -106,6 +106,57 @@ final class OnboardingProgressRepositoryProvider
 String _$onboardingProgressRepositoryHash() =>
     r'348d945b2714937f6f0388e8b4ec4a148634f6d3';
 
+@ProviderFor(onboardingLocalDraftRepository)
+const onboardingLocalDraftRepositoryProvider =
+    OnboardingLocalDraftRepositoryProvider._();
+
+final class OnboardingLocalDraftRepositoryProvider
+    extends
+        $FunctionalProvider<
+          OnboardingLocalDraftRepository,
+          OnboardingLocalDraftRepository,
+          OnboardingLocalDraftRepository
+        >
+    with $Provider<OnboardingLocalDraftRepository> {
+  const OnboardingLocalDraftRepositoryProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'onboardingLocalDraftRepositoryProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$onboardingLocalDraftRepositoryHash();
+
+  @$internal
+  @override
+  $ProviderElement<OnboardingLocalDraftRepository> $createElement(
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
+
+  @override
+  OnboardingLocalDraftRepository create(Ref ref) {
+    return onboardingLocalDraftRepository(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(OnboardingLocalDraftRepository value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<OnboardingLocalDraftRepository>(
+        value,
+      ),
+    );
+  }
+}
+
+String _$onboardingLocalDraftRepositoryHash() =>
+    r'9c48498f27fc1395d8fcf0cf1c3d9eb4cecd4671';
+
 @ProviderFor(onboardingService)
 const onboardingServiceProvider = OnboardingServiceProvider._();
 
@@ -151,4 +202,4 @@ final class OnboardingServiceProvider
   }
 }
 
-String _$onboardingServiceHash() => r'046e6e6c036234f33d3891a7be3fa79a35b2bb61';
+String _$onboardingServiceHash() => r'f16fb364155f3b8d603f0cb631c0ad2e359f0623';

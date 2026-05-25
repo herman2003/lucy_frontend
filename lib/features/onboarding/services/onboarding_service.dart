@@ -3,6 +3,8 @@ import '../domain/entities/finalize_onboarding_result.dart';
 import '../domain/entities/onboarding_analyze_result.dart';
 import '../domain/entities/onboarding_resume_progress.dart';
 import '../domain/entities/validate_answer_result.dart';
+import '../domain/entities/onboarding_local_draft.dart';
+import '../domain/repositories/onboarding_local_draft_repository.dart';
 import '../domain/repositories/onboarding_progress_repository.dart';
 import '../domain/repositories/onboarding_repository.dart';
 
@@ -11,11 +13,14 @@ class OnboardingService {
   OnboardingService({
     required OnboardingRepository repository,
     required OnboardingProgressRepository progressRepository,
+    required OnboardingLocalDraftRepository localDraftRepository,
   })  : _repository = repository,
-        _progressRepository = progressRepository;
+        _progressRepository = progressRepository,
+        _localDraftRepository = localDraftRepository;
 
   final OnboardingRepository _repository;
   final OnboardingProgressRepository _progressRepository;
+  final OnboardingLocalDraftRepository _localDraftRepository;
 
   Future<OnboardingResumeProgress?> fetchResumeProgress({
     required String? uid,
@@ -66,5 +71,21 @@ class OnboardingService {
 
   Future<FinalizeOnboardingResult> finalizeOnboarding() {
     return _repository.finalizeOnboarding();
+  }
+
+  Future<void> saveUiLocale(String locale) {
+    return _localDraftRepository.saveUiLocale(locale);
+  }
+
+  Future<void> saveLocalDraft(OnboardingLocalDraft draft) {
+    return _localDraftRepository.saveDraft(draft);
+  }
+
+  Future<OnboardingLocalDraft?> loadLocalDraft({required String uid}) {
+    return _localDraftRepository.loadDraft(uid: uid);
+  }
+
+  Future<void> clearLocalDraft({required String uid}) {
+    return _localDraftRepository.clearDraft(uid: uid);
   }
 }

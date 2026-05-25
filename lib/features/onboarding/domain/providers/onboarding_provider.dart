@@ -2,6 +2,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../data/providers/onboarding_data_provider.dart';
 import '../../services/onboarding_service.dart';
+import '../repositories/onboarding_local_draft_repository.dart';
 import '../repositories/onboarding_progress_repository.dart';
 import '../repositories/onboarding_repository.dart';
 
@@ -18,9 +19,15 @@ OnboardingProgressRepository onboardingProgressRepository(Ref ref) {
 }
 
 @Riverpod(keepAlive: true)
+OnboardingLocalDraftRepository onboardingLocalDraftRepository(Ref ref) {
+  return ref.watch(onboardingLocalDraftRepositoryImplProvider);
+}
+
+@Riverpod(keepAlive: true)
 OnboardingService onboardingService(Ref ref) {
   return OnboardingService(
     repository: ref.watch(onboardingRepositoryProvider),
     progressRepository: ref.watch(onboardingProgressRepositoryProvider),
+    localDraftRepository: ref.watch(onboardingLocalDraftRepositoryProvider),
   );
 }

@@ -215,6 +215,22 @@ P0–P2 → B01 → B02 → B03 → B04 (CP-1)
 
 ---
 
+## Phase 11 — Miroir local (A16)
+
+| Statut | ID | Tâche | CP |
+|--------|-----|--------|-----|
+| [x] | A16 | `shared_preferences` : `uiLocale` + brouillon onboarding (Firestore prioritaire) | — |
+
+**A16 — Vérification :**
+
+- [x] `OnboardingLocalDraftRepository` + prefs datasource
+- [x] Persistance brouillon (réponse, confirmation en attente, tours locaux)
+- [x] `bootstrap` : Firestore d’abord, sinon brouillon local
+- [x] Effacement du brouillon après `finalize`
+- [x] `flutter test` / `flutter analyze`
+
+---
+
 ## Historique — Auth phase 1 (terminé)
 
 - [x] T01–T14 auth (voir commits / ancien suivi)

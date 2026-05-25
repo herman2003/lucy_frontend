@@ -3,11 +3,14 @@ import 'package:frontend/features/onboarding/domain/entities/confirm_turn_result
 import 'package:frontend/features/onboarding/domain/entities/finalize_onboarding_result.dart';
 import 'package:frontend/features/onboarding/domain/entities/learner_profile.dart';
 import 'package:frontend/features/onboarding/domain/entities/onboarding_analyze_result.dart';
+import 'package:frontend/features/onboarding/domain/entities/onboarding_local_draft.dart';
 import 'package:frontend/features/onboarding/domain/entities/onboarding_resume_progress.dart';
+import 'package:frontend/features/onboarding/utils/onboarding_question_ids.dart';
 import 'package:frontend/features/onboarding/domain/entities/validate_answer_result.dart';
 import 'package:frontend/features/onboarding/services/onboarding_service.dart';
 import 'package:frontend/features/onboarding/utils/onboarding_question_ids.dart';
 
+import '../helpers/fake_onboarding_local_draft_repository.dart';
 import '../helpers/fake_onboarding_progress_repository.dart';
 import '../helpers/fake_onboarding_repository.dart';
 
@@ -21,7 +24,30 @@ void main() {
       service = OnboardingService(
         repository: repository,
         progressRepository: FakeOnboardingProgressRepository(),
+        localDraftRepository: FakeOnboardingLocalDraftRepository(),
       );
+    });
+
+    test('saveLocalDraft delegates to local draft repository', () async {
+      final local = FakeOnboardingLocalDraftRepository();
+      service = OnboardingService(
+        repository: repository,
+        progressRepository: FakeOnboardingProgressRepository(),
+        localDraftRepository: local,
+      );
+
+      const draft = OnboardingLocalDraft(
+        uid: 'uid-1',
+        uiLocale: 'fr',
+        answerDraft: 'draft',
+        currentStepIndex: 0,
+        currentQuestionId: OnboardingQuestionIds.qRole,
+        activeQuestionText: 'Q',
+        phaseName: 'awaitingAnswer',
+      );
+      await service.saveLocalDraft(draft);
+
+      expect(await service.loadLocalDraft(uid: 'uid-1'), draft);
     });
 
     test('fetchResumeProgress returns null when uid is null', () async {
@@ -37,6 +63,7 @@ void main() {
       service = OnboardingService(
         repository: repository,
         progressRepository: FakeOnboardingProgressRepository(progress: progress),
+        localDraftRepository: FakeOnboardingLocalDraftRepository(),
       );
 
       final result = await service.fetchResumeProgress(uid: 'uid-1');
@@ -57,6 +84,7 @@ void main() {
       service = OnboardingService(
         repository: repository,
         progressRepository: FakeOnboardingProgressRepository(),
+        localDraftRepository: FakeOnboardingLocalDraftRepository(),
       );
 
       final result = await service.validateAnswer(
@@ -85,6 +113,7 @@ void main() {
       service = OnboardingService(
         repository: repository,
         progressRepository: FakeOnboardingProgressRepository(),
+        localDraftRepository: FakeOnboardingLocalDraftRepository(),
       );
 
       final result = await service.confirmTurn(
@@ -121,6 +150,7 @@ void main() {
       service = OnboardingService(
         repository: repository,
         progressRepository: FakeOnboardingProgressRepository(),
+        localDraftRepository: FakeOnboardingLocalDraftRepository(),
       );
 
       final result = await service.analyze(locale: 'de', profileReduced: true);
@@ -140,6 +170,7 @@ void main() {
       service = OnboardingService(
         repository: repository,
         progressRepository: FakeOnboardingProgressRepository(),
+        localDraftRepository: FakeOnboardingLocalDraftRepository(),
       );
 
       final result = await service.finalizeOnboarding();

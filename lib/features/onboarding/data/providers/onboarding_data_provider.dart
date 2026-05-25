@@ -8,10 +8,13 @@ import '../../domain/repositories/onboarding_repository.dart';
 import '../datasources/onboarding_analyze_remote_data_source.dart';
 import '../datasources/onboarding_confirm_remote_data_source.dart';
 import '../datasources/onboarding_finalize_remote_data_source.dart';
+import '../datasources/onboarding_local_draft_prefs_data_source.dart';
 import '../datasources/onboarding_progress_firestore_data_source.dart';
 import '../datasources/onboarding_validate_remote_data_source.dart';
+import '../repositories/onboarding_local_draft_repository_impl.dart';
 import '../repositories/onboarding_progress_repository_impl.dart';
 import '../repositories/onboarding_repository_impl.dart';
+import '../../domain/repositories/onboarding_local_draft_repository.dart';
 
 part 'onboarding_data_provider.g.dart';
 
@@ -66,5 +69,12 @@ OnboardingRepository onboardingRepositoryImpl(Ref ref) {
 OnboardingProgressRepository onboardingProgressRepositoryImpl(Ref ref) {
   return OnboardingProgressRepositoryImpl(
     OnboardingProgressFirestoreDataSource(FirebaseFirestore.instance),
+  );
+}
+
+@Riverpod(keepAlive: true)
+OnboardingLocalDraftRepository onboardingLocalDraftRepositoryImpl(Ref ref) {
+  return OnboardingLocalDraftRepositoryImpl(
+    OnboardingLocalDraftPrefsDataSource(),
   );
 }

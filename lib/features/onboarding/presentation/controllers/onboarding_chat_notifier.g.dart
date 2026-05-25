@@ -42,7 +42,7 @@ final class OnboardingChatNotifierProvider
 }
 
 String _$onboardingChatNotifierHash() =>
-    r'6c52a048a2b0994c786fd21ec72431718ac4bc74';
+    r'6578bfd62c8e931cf60c322040cdbf7ec065353f';
 
 abstract class _$OnboardingChatNotifier extends $Notifier<OnboardingChatState> {
   OnboardingChatState build();

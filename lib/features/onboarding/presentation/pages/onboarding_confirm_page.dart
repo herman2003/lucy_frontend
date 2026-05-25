@@ -116,7 +116,12 @@ class _OnboardingConfirmPageState extends ConsumerState<OnboardingConfirmPage> {
   Future<void> _accept(BuildContext context) async {
     setState(() => _isSubmitting = true);
     try {
-      await ref.read(onboardingServiceProvider).finalizeOnboarding();
+      final service = ref.read(onboardingServiceProvider);
+      await service.finalizeOnboarding();
+      final uid = ref.read(authRepositoryProvider).currentUser?.uid;
+      if (uid != null) {
+        await service.clearLocalDraft(uid: uid);
+      }
       ref.invalidate(authBootstrapProvider);
       if (!context.mounted) {
         return;

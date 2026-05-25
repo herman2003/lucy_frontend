@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -10,6 +12,8 @@ import '../../domain/entities/validate_answer_result.dart';
 import '../../../auth/domain/providers/auth_provider.dart';
 import '../../domain/providers/onboarding_provider.dart';
 import '../../utils/onboarding_api_locale.dart';
+import '../../utils/onboarding_local_draft_factory.dart';
+import '../../utils/onboarding_local_draft_state_builder.dart';
 import '../../utils/onboarding_resume_state_builder.dart';
 import '../../utils/onboarding_constants.dart';
 import '../../utils/onboarding_question_ids.dart';
@@ -44,21 +48,30 @@ class OnboardingChatNotifier extends _$OnboardingChatNotifier {
       return;
     }
     _apiLocale = resolveOnboardingApiLocale(deviceLocale);
+    final service = ref.read(onboardingServiceProvider);
+    await service.saveUiLocale(_apiLocale);
 
     final uid = ref.read(authRepositoryProvider).currentUser?.uid;
-    final progress = await ref
-        .read(onboardingServiceProvider)
-        .fetchResumeProgress(uid: uid);
+    final progress = await service.fetchResumeProgress(uid: uid);
 
     if (progress != null && _shouldResumeFromProgress(progress)) {
       state = buildOnboardingResumeState(l10n: l10n, progress: progress);
       if (shouldResumeAnalyze(progress)) {
         await _runAnalyze();
       }
+      await _mirrorLocalDraft();
       return;
     }
 
-    _initializeFresh(l10n);
+    if (uid != null) {
+      final draft = await service.loadLocalDraft(uid: uid);
+      if (draft != null && draft.hasResumableContent) {
+        state = buildOnboardingStateFromLocalDraft(l10n: l10n, draft: draft);
+        return;
+      }
+    }
+
+    await _initializeFresh(l10n);
   }
 
   void initialize({
@@ -69,13 +82,22 @@ class OnboardingChatNotifier extends _$OnboardingChatNotifier {
       return;
     }
     _apiLocale = resolveOnboardingApiLocale(deviceLocale);
-    _initializeFresh(l10n);
+    state = _freshChatState(l10n);
   }
 
-  void _initializeFresh(AppLocalizations l10n) {
+  Future<void> _initializeFresh(AppLocalizations l10n) async {
+    final uid = ref.read(authRepositoryProvider).currentUser?.uid;
+    if (uid != null) {
+      await ref.read(onboardingServiceProvider).clearLocalDraft(uid: uid);
+    }
+
+    state = _freshChatState(l10n);
+  }
+
+  OnboardingChatState _freshChatState(AppLocalizations l10n) {
     final questionId = OnboardingQuestionIds.ordered.first;
     final questionText = onboardingQuestionText(l10n, questionId);
-    state = OnboardingChatState(
+    return OnboardingChatState(
       isInitialized: true,
       currentStepIndex: 0,
       currentQuestionId: questionId,
@@ -88,6 +110,7 @@ class OnboardingChatNotifier extends _$OnboardingChatNotifier {
 
   void updateAnswerDraft(String value) {
     state = state.copyWith(answerDraft: value);
+    unawaited(_mirrorLocalDraft());
   }
 
   Future<void> submitAnswer(BuildContext context) async {
@@ -272,6 +295,7 @@ class OnboardingChatNotifier extends _$OnboardingChatNotifier {
       phase: OnboardingChatPhase.awaitingConfirmation,
       isSubmitting: false,
     );
+    unawaited(_mirrorLocalDraft());
   }
 
   void _handleNeedsRetry(String rephrasedQuestion) {
@@ -289,6 +313,7 @@ class OnboardingChatNotifier extends _$OnboardingChatNotifier {
       phase: OnboardingChatPhase.awaitingAnswer,
       isSubmitting: false,
     );
+    unawaited(_mirrorLocalDraft());
   }
 
   void _advanceToNextQuestion(AppLocalizations l10n) {
@@ -315,6 +340,7 @@ class OnboardingChatNotifier extends _$OnboardingChatNotifier {
       phase: OnboardingChatPhase.awaitingAnswer,
       isSubmitting: false,
     );
+    unawaited(_mirrorLocalDraft());
   }
 
   Future<void> retryAnalyzeWithReducedProfile() async {
@@ -485,6 +511,20 @@ class OnboardingChatNotifier extends _$OnboardingChatNotifier {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(content: Text(message)),
     );
+  }
+
+  Future<void> _mirrorLocalDraft() async {
+    final uid = ref.read(authRepositoryProvider).currentUser?.uid;
+    if (uid == null || !state.isInitialized) {
+      return;
+    }
+    await ref.read(onboardingServiceProvider).saveLocalDraft(
+          onboardingLocalDraftFromChatState(
+            uid: uid,
+            uiLocale: _apiLocale,
+            state: state,
+          ),
+        );
   }
 
   bool _shouldResumeFromProgress(OnboardingResumeProgress progress) {

@@ -11,6 +11,8 @@ import 'package:frontend/features/onboarding/presentation/controllers/onboarding
 import 'package:frontend/features/onboarding/presentation/pages/onboarding_chat/onboarding_chat_state.dart';
 import 'package:frontend/features/onboarding/utils/onboarding_question_ids.dart';
 
+import 'package:frontend/features/onboarding/domain/entities/onboarding_local_draft.dart';
+
 import '../helpers/fake_onboarding_repository.dart';
 import '../helpers/onboarding_chat_test_overrides.dart';
 
@@ -144,5 +146,41 @@ void main() {
     expect(repository.analyzeCallCount, 1);
     expect(state.phase, OnboardingChatPhase.analysisReady);
     expect(state.analyzeResult, isA<OnboardingAnalyzeSuccess>());
+  });
+
+  test('bootstrap restores local draft when Firestore has no transcript', () async {
+    const draft = OnboardingLocalDraft(
+      uid: 'test-uid',
+      uiLocale: 'fr',
+      answerDraft: 'Ma réponse en cours',
+      currentStepIndex: 0,
+      currentQuestionId: OnboardingQuestionIds.qRole,
+      activeQuestionText: 'Question rôle',
+      phaseName: 'awaitingAnswer',
+    );
+
+    final localDrafts = {
+      'test-uid': draft,
+    };
+
+    final container = ProviderContainer(
+      overrides: [
+        ...onboardingChatTestOverrides(
+          repository: FakeOnboardingRepository(),
+          resumeProgress: null,
+          authUser: const AuthUser(uid: 'test-uid', email: 'test@example.com'),
+          localDrafts: localDrafts,
+        ),
+      ],
+    );
+    addTearDown(container.dispose);
+
+    final l10n = await AppLocalizations.delegate.load(const Locale('fr'));
+    final notifier = container.read(onboardingChatProvider.notifier);
+    await notifier.bootstrap(l10n: l10n, deviceLocale: const Locale('fr'));
+
+    final state = container.read(onboardingChatProvider);
+    expect(state.answerDraft, 'Ma réponse en cours');
+    expect(state.currentQuestionId, OnboardingQuestionIds.qRole);
   });
 }

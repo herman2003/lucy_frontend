@@ -44,6 +44,13 @@ flutter test
 flutter analyze
 ```
 
+CP-0 web smoke (requires a prior web build):
+
+```bash
+flutter build web
+flutter test test/smoke/cp0_web_build_test.dart
+```
+
 ## Firebase (T11)
 
 - Firestore security rules: [`firestore.rules`](./firestore.rules) (`users/{uid}` owner-only, SPEC §C)

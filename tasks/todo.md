@@ -23,7 +23,9 @@
 
 **CP-0 — Vérification :**
 - [x] `flutter analyze` → 0 issue
-- [ ] `flutter run -d chrome` → splash Lucy + GoRouter (plus demo compteur)
+- [x] `flutter build web` → `build/web` OK
+- [x] `flutter run -d chrome` → app démarre (DevTools connecté)
+- [ ] Revue visuelle : splash Lucy + login (pas demo compteur)
 
 ---
 
@@ -78,7 +80,7 @@
 | ~~[ ]~~ | ~~T12~~ | ~~OAuth~~ — **annulé** | — | — |
 
 **CP-4 — Vérification :**
-- [ ] Règles Firestore déployées
+- [x] Règles Firestore déployées (`firebase deploy --only firestore:rules`, 2026-05-25)
 - [ ] Signup test → document `users/{uid}` visible
 
 ---
@@ -91,7 +93,7 @@
 | [x] | T14 | Tests unit/widget + DoD SPEC §1.4 | **CP-5** |
 
 **CP-5 — Vérification :**
-- [x] `flutter test` vert (58 tests)
+- [x] `flutter test` vert (62 tests)
 - [x] `flutter analyze` vert
 - [ ] Revue UI : login, signup, reset — web ~1440px + mobile ~390px
 - [ ] Tous les AC [SPEC.md §1.4](../SPEC.md) cochés
@@ -116,7 +118,7 @@
 Voir [docs/firebase-console-t11.md](./docs/firebase-console-t11.md).
 
 - [ ] Email/Password activé (**seul** provider)
-- [x] Firestore : règles `users/{uid}` (owner only) — fichier `firestore.rules` + `firebase deploy --only firestore:rules`
+- [x] Firestore : règles `users/{uid}` déployées en prod (`firestore.rules`)
 - [ ] Email enumeration protection activée
 - [ ] Domaines autorisés web (`localhost` + prod)
 - [ ] Template / lien reset password configuré

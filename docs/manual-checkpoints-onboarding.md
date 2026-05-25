@@ -46,7 +46,7 @@ Manual (Firebase réel + Nest Admin):
 
 - [x] `flutter test` / `flutter analyze`
 - [x] `npm test` in `backend/`
-- [ ] Full SPEC §4.8 UX items (7 isolated chats, swipe, fallback after 10 failures) — product review if not in MVP scope
+- [ ] Full SPEC §4.8 **post-MVP** UX (7 isolated chats, swipe, fallback after 10 failures) — see unchecked items in [SPEC.md](../SPEC.md) §4.8
 
 ---
 

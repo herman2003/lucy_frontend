@@ -152,6 +152,14 @@ P0–P2 → B01 → B02 → B03 → B04 (CP-1)
 
 ---
 
+## Phase 6 — Documentation
+
+| Statut | ID | Tâche | CP |
+|--------|-----|--------|-----|
+| [x] | DOC-1 | Aligner SPEC §4.8 (MVP `[x]` / post-MVP `[ ]`) + test sync | — |
+
+---
+
 ## Historique — Auth phase 1 (terminé)
 
 - [x] T01–T14 auth (voir commits / ancien suivi)

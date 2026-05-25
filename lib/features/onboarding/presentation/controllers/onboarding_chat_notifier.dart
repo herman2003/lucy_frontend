@@ -6,8 +6,10 @@ import '../../domain/entities/onboarding_analyze_result.dart';
 import '../../domain/entities/onboarding_chat_message.dart';
 import '../../domain/entities/onboarding_completed_turn.dart';
 import '../../domain/entities/validate_answer_result.dart';
+import '../../../auth/domain/providers/auth_provider.dart';
 import '../../domain/providers/onboarding_provider.dart';
 import '../../utils/onboarding_api_locale.dart';
+import '../../utils/onboarding_resume_state_builder.dart';
 import '../../utils/onboarding_constants.dart';
 import '../../utils/onboarding_question_ids.dart';
 import '../../utils/onboarding_question_l10n.dart';
@@ -32,6 +34,29 @@ class OnboardingChatNotifier extends _$OnboardingChatNotifier {
   @override
   OnboardingChatState build() => const OnboardingChatState();
 
+  /// Loads Firestore progress when present, otherwise starts at question 1 (Q3).
+  Future<void> bootstrap({
+    required AppLocalizations l10n,
+    required Locale deviceLocale,
+  }) async {
+    if (state.isInitialized) {
+      return;
+    }
+    _apiLocale = resolveOnboardingApiLocale(deviceLocale);
+
+    final uid = ref.read(authRepositoryProvider).currentUser?.uid;
+    final progress = await ref
+        .read(onboardingServiceProvider)
+        .fetchResumeProgress(uid: uid);
+
+    if (progress != null && progress.transcript.isNotEmpty) {
+      state = buildOnboardingResumeState(l10n: l10n, progress: progress);
+      return;
+    }
+
+    _initializeFresh(l10n);
+  }
+
   void initialize({
     required AppLocalizations l10n,
     required Locale deviceLocale,
@@ -40,6 +65,10 @@ class OnboardingChatNotifier extends _$OnboardingChatNotifier {
       return;
     }
     _apiLocale = resolveOnboardingApiLocale(deviceLocale);
+    _initializeFresh(l10n);
+  }
+
+  void _initializeFresh(AppLocalizations l10n) {
     final questionId = OnboardingQuestionIds.ordered.first;
     final questionText = onboardingQuestionText(l10n, questionId);
     state = OnboardingChatState(

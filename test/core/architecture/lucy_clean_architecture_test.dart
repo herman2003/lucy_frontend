@@ -5,7 +5,10 @@ import 'package:flutter_test/flutter_test.dart';
 /// Plan T04/T05 — Firebase SDK isolated to [lib/features/auth/data].
 void main() {
   const allowedFirebaseAuthRoots = ['lib/features/auth/data/'];
-  const allowedFirestoreRoots = ['lib/features/auth/data/'];
+  const allowedFirestoreRoots = [
+    'lib/features/auth/data/',
+    'lib/features/onboarding/data/',
+  ];
 
   final firebaseAuthImport = RegExp(r"import\s+'package:firebase_auth/");
   final firestoreImport = RegExp(r"import\s+'package:cloud_firestore/");

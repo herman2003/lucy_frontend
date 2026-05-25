@@ -12,11 +12,11 @@ import 'package:frontend/features/onboarding/domain/providers/onboarding_provide
 import 'package:frontend/features/onboarding/presentation/controllers/onboarding_chat_notifier.dart';
 import 'package:frontend/features/onboarding/presentation/pages/onboarding_chat/onboarding_chat_state.dart';
 import 'package:frontend/features/onboarding/presentation/pages/onboarding_confirm_page.dart';
-import 'package:frontend/features/onboarding/services/onboarding_service.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../helpers/test_locales.dart';
 import '../helpers/fake_onboarding_repository.dart';
+import '../helpers/test_onboarding_service_factory.dart';
 
 void main() {
   setUp(() {
@@ -70,7 +70,7 @@ void main() {
         overrides: [
           onboardingRepositoryProvider.overrideWithValue(repository),
           onboardingServiceProvider.overrideWithValue(
-            OnboardingService(repository: repository),
+            createTestOnboardingServiceFromFake(repository),
           ),
           authBootstrapProvider.overrideWith(
             (ref) async => const AuthBootstrapResult(

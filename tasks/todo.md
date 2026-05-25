@@ -172,6 +172,21 @@ P0–P2 → B01 → B02 → B03 → B04 (CP-1)
 
 ---
 
+## Phase 8 — Reprise Firestore (Q3)
+
+| Statut | ID | Tâche | CP |
+|--------|-----|--------|-----|
+| [x] | Q3 | `bootstrap` : lire `onboardingTranscript` + rouvrir premier step non confirmé | — |
+
+**Q3 — Vérification :**
+
+- [x] `OnboardingProgressRepository` + datasource Firestore `users/{uid}`
+- [x] `buildOnboardingResumeState` + tests unitaires
+- [x] `OnboardingChatNotifier.bootstrap` + test + overrides widget/auth
+- [x] `flutter test` onboarding + architecture Firestore onboarding/data
+
+---
+
 ## Historique — Auth phase 1 (terminé)
 
 - [x] T01–T14 auth (voir commits / ancien suivi)

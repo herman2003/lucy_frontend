@@ -3,10 +3,12 @@ import 'package:frontend/features/onboarding/domain/entities/confirm_turn_result
 import 'package:frontend/features/onboarding/domain/entities/finalize_onboarding_result.dart';
 import 'package:frontend/features/onboarding/domain/entities/learner_profile.dart';
 import 'package:frontend/features/onboarding/domain/entities/onboarding_analyze_result.dart';
+import 'package:frontend/features/onboarding/domain/entities/onboarding_resume_progress.dart';
 import 'package:frontend/features/onboarding/domain/entities/validate_answer_result.dart';
 import 'package:frontend/features/onboarding/services/onboarding_service.dart';
 import 'package:frontend/features/onboarding/utils/onboarding_question_ids.dart';
 
+import '../helpers/fake_onboarding_progress_repository.dart';
 import '../helpers/fake_onboarding_repository.dart';
 
 void main() {
@@ -16,7 +18,29 @@ void main() {
 
     setUp(() {
       repository = FakeOnboardingRepository();
-      service = OnboardingService(repository: repository);
+      service = OnboardingService(
+        repository: repository,
+        progressRepository: FakeOnboardingProgressRepository(),
+      );
+    });
+
+    test('fetchResumeProgress returns null when uid is null', () async {
+      final result = await service.fetchResumeProgress(uid: null);
+      expect(result, isNull);
+    });
+
+    test('fetchResumeProgress delegates to progress repository', () async {
+      const progress = OnboardingResumeProgress(
+        onboardingStatus: 'in_progress',
+        transcript: [],
+      );
+      service = OnboardingService(
+        repository: repository,
+        progressRepository: FakeOnboardingProgressRepository(progress: progress),
+      );
+
+      final result = await service.fetchResumeProgress(uid: 'uid-1');
+      expect(result, progress);
     });
 
     test('validateAnswer delegates to repository with params', () async {
@@ -30,7 +54,10 @@ void main() {
           return expected;
         },
       );
-      service = OnboardingService(repository: repository);
+      service = OnboardingService(
+        repository: repository,
+        progressRepository: FakeOnboardingProgressRepository(),
+      );
 
       final result = await service.validateAnswer(
         locale: 'fr',
@@ -55,7 +82,10 @@ void main() {
           return expected;
         },
       );
-      service = OnboardingService(repository: repository);
+      service = OnboardingService(
+        repository: repository,
+        progressRepository: FakeOnboardingProgressRepository(),
+      );
 
       final result = await service.confirmTurn(
         locale: 'en',
@@ -88,7 +118,10 @@ void main() {
           return expected;
         },
       );
-      service = OnboardingService(repository: repository);
+      service = OnboardingService(
+        repository: repository,
+        progressRepository: FakeOnboardingProgressRepository(),
+      );
 
       final result = await service.analyze(locale: 'de', profileReduced: true);
 
@@ -104,7 +137,10 @@ void main() {
           return const FinalizeOnboardingResult();
         },
       );
-      service = OnboardingService(repository: repository);
+      service = OnboardingService(
+        repository: repository,
+        progressRepository: FakeOnboardingProgressRepository(),
+      );
 
       final result = await service.finalizeOnboarding();
 

@@ -10,15 +10,14 @@ import 'package:frontend/features/onboarding/domain/entities/finalize_onboarding
 import 'package:frontend/features/onboarding/domain/entities/learner_profile.dart';
 import 'package:frontend/features/onboarding/domain/entities/onboarding_analyze_result.dart';
 import 'package:frontend/features/onboarding/domain/entities/validate_answer_result.dart';
-import 'package:frontend/features/onboarding/domain/providers/onboarding_provider.dart';
 import 'package:frontend/features/onboarding/presentation/pages/onboarding_chat_page.dart';
 import 'package:frontend/features/onboarding/presentation/pages/onboarding_confirm_page.dart';
-import 'package:frontend/features/onboarding/services/onboarding_service.dart';
 import 'package:frontend/features/onboarding/utils/onboarding_question_ids.dart';
 
 import '../../../helpers/test_locales.dart';
 import '../../auth/helpers/fake_auth_repository.dart';
 import '../helpers/fake_onboarding_repository.dart';
+import '../helpers/onboarding_chat_test_overrides.dart';
 
 /// CP-4 — automated E2E (signup → 7 Q/R → confirm → home) with fakes.
 void main() {
@@ -67,10 +66,7 @@ void main() {
           authStateChangesProvider.overrideWith(
             (ref) => authRepository.authStateChanges(),
           ),
-          onboardingRepositoryProvider.overrideWithValue(onboardingRepository),
-          onboardingServiceProvider.overrideWithValue(
-            OnboardingService(repository: onboardingRepository),
-          ),
+          ...onboardingProviderOverrides(repository: onboardingRepository),
         ],
         child: const LucyApp(),
       ),

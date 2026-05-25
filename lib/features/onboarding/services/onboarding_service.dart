@@ -1,15 +1,30 @@
 import '../domain/entities/confirm_turn_result.dart';
 import '../domain/entities/finalize_onboarding_result.dart';
 import '../domain/entities/onboarding_analyze_result.dart';
+import '../domain/entities/onboarding_resume_progress.dart';
 import '../domain/entities/validate_answer_result.dart';
+import '../domain/repositories/onboarding_progress_repository.dart';
 import '../domain/repositories/onboarding_repository.dart';
 
 /// Business orchestration for the onboarding chat flow (UI → notifier → service).
 class OnboardingService {
-  OnboardingService({required OnboardingRepository repository})
-      : _repository = repository;
+  OnboardingService({
+    required OnboardingRepository repository,
+    required OnboardingProgressRepository progressRepository,
+  })  : _repository = repository,
+        _progressRepository = progressRepository;
 
   final OnboardingRepository _repository;
+  final OnboardingProgressRepository _progressRepository;
+
+  Future<OnboardingResumeProgress?> fetchResumeProgress({
+    required String? uid,
+  }) {
+    if (uid == null) {
+      return Future.value();
+    }
+    return _progressRepository.fetchProgress(uid: uid);
+  }
 
   Future<ValidateAnswerResult> validateAnswer({
     required String locale,

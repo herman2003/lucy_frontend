@@ -4,13 +4,12 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:frontend/core/localization/l10n/app_localizations.dart';
 import 'package:frontend/core/router/lucy_route_paths.dart';
 import 'package:frontend/features/onboarding/domain/entities/validate_answer_result.dart';
-import 'package:frontend/features/onboarding/domain/providers/onboarding_provider.dart';
 import 'package:frontend/features/onboarding/presentation/pages/onboarding_chat_page.dart';
-import 'package:frontend/features/onboarding/services/onboarding_service.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../helpers/test_locales.dart';
 import '../helpers/fake_onboarding_repository.dart';
+import '../helpers/onboarding_chat_test_overrides.dart';
 
 void main() {
   setUp(() {
@@ -25,12 +24,7 @@ void main() {
   }) async {
     await tester.pumpWidget(
       ProviderScope(
-        overrides: [
-          onboardingRepositoryProvider.overrideWithValue(repository),
-          onboardingServiceProvider.overrideWithValue(
-            OnboardingService(repository: repository),
-          ),
-        ],
+        overrides: onboardingChatTestOverrides(repository: repository),
         child: MaterialApp.router(
           locale: const Locale('fr'),
           localizationsDelegates: AppLocalizations.localizationsDelegates,

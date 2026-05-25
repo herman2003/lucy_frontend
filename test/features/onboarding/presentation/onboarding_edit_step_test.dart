@@ -6,25 +6,19 @@ import 'package:frontend/features/onboarding/domain/entities/onboarding_analyze_
 import 'package:frontend/features/onboarding/domain/entities/onboarding_chat_message.dart';
 import 'package:frontend/features/onboarding/domain/entities/onboarding_completed_turn.dart';
 import 'package:frontend/features/onboarding/domain/entities/learner_profile.dart';
-import 'package:frontend/features/onboarding/domain/providers/onboarding_provider.dart';
 import 'package:frontend/features/onboarding/presentation/controllers/onboarding_chat_notifier.dart';
 import 'package:frontend/features/onboarding/presentation/pages/onboarding_chat/onboarding_chat_state.dart';
-import 'package:frontend/features/onboarding/services/onboarding_service.dart';
 import 'package:frontend/features/onboarding/utils/onboarding_question_ids.dart';
 
 import '../helpers/fake_onboarding_repository.dart';
+import '../helpers/onboarding_chat_test_overrides.dart';
 
 void main() {
   test('beginEditCompletedStep keeps other step threads and truncates turns', () async {
     final container = ProviderContainer(
-      overrides: [
-        onboardingRepositoryProvider.overrideWithValue(
-          FakeOnboardingRepository(),
-        ),
-        onboardingServiceProvider.overrideWithValue(
-          OnboardingService(repository: FakeOnboardingRepository()),
-        ),
-      ],
+      overrides: onboardingProviderOverrides(
+        repository: FakeOnboardingRepository(),
+      ),
     );
     addTearDown(container.dispose);
 

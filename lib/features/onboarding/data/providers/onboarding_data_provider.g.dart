@@ -305,3 +305,52 @@ final class OnboardingRepositoryImplProvider
 
 String _$onboardingRepositoryImplHash() =>
     r'955c716bbd3af45fe105b5915b6d2ee9ee7a1a38';
+
+@ProviderFor(onboardingProgressRepositoryImpl)
+const onboardingProgressRepositoryImplProvider =
+    OnboardingProgressRepositoryImplProvider._();
+
+final class OnboardingProgressRepositoryImplProvider
+    extends
+        $FunctionalProvider<
+          OnboardingProgressRepository,
+          OnboardingProgressRepository,
+          OnboardingProgressRepository
+        >
+    with $Provider<OnboardingProgressRepository> {
+  const OnboardingProgressRepositoryImplProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'onboardingProgressRepositoryImplProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$onboardingProgressRepositoryImplHash();
+
+  @$internal
+  @override
+  $ProviderElement<OnboardingProgressRepository> $createElement(
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
+
+  @override
+  OnboardingProgressRepository create(Ref ref) {
+    return onboardingProgressRepositoryImpl(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(OnboardingProgressRepository value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<OnboardingProgressRepository>(value),
+    );
+  }
+}
+
+String _$onboardingProgressRepositoryImplHash() =>
+    r'94a79b44c635e299e1357797dbfc32966bfa9bdf';

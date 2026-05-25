@@ -137,15 +137,21 @@ class _OnboardingChatPageState extends ConsumerState<OnboardingChatPage> {
     });
 
     if (!chatState.isInitialized) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
+      WidgetsBinding.instance.addPostFrameCallback((_) async {
         if (!mounted) {
           return;
         }
-        notifier.initialize(
+        await notifier.bootstrap(
           l10n: l10n,
           deviceLocale: Localizations.localeOf(context),
         );
-        setState(() => _viewingStepIndex = 0);
+        if (!mounted) {
+          return;
+        }
+        setState(
+          () => _viewingStepIndex =
+              ref.read(onboardingChatProvider).currentStepIndex,
+        );
       });
     }
 

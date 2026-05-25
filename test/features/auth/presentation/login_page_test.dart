@@ -12,6 +12,8 @@ import 'package:frontend/features/onboarding/presentation/pages/onboarding_chat_
 import 'package:frontend/shared/widgets/feedback/lucy_snackbar.dart';
 
 import '../../../helpers/test_locales.dart';
+import '../../onboarding/helpers/fake_onboarding_repository.dart';
+import '../../onboarding/helpers/onboarding_chat_test_overrides.dart';
 import '../helpers/fake_auth_repository.dart';
 
 void main() {
@@ -37,6 +39,9 @@ void main() {
           ),
           authStateChangesProvider.overrideWith(
             (ref) => repository.authStateChanges(),
+          ),
+          ...onboardingProviderOverrides(
+            repository: FakeOnboardingRepository(),
           ),
         ],
         child: const LucyApp(),

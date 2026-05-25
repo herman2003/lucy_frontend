@@ -11,6 +11,8 @@ import 'package:frontend/features/auth/presentation/pages/sign_up/sign_up_page.d
 import 'package:frontend/shared/widgets/feedback/lucy_snackbar.dart';
 
 import '../../../helpers/test_locales.dart';
+import '../../onboarding/helpers/fake_onboarding_repository.dart';
+import '../../onboarding/helpers/onboarding_chat_test_overrides.dart';
 import '../helpers/fake_auth_repository.dart';
 
 Future<void> _openSignUp(WidgetTester tester) async {
@@ -43,6 +45,9 @@ void main() {
           ),
           authStateChangesProvider.overrideWith(
             (ref) => repository.authStateChanges(),
+          ),
+          ...onboardingProviderOverrides(
+            repository: FakeOnboardingRepository(),
           ),
         ],
         child: const LucyApp(),
@@ -84,6 +89,9 @@ void main() {
           ),
           authStateChangesProvider.overrideWith(
             (ref) => repository.authStateChanges(),
+          ),
+          ...onboardingProviderOverrides(
+            repository: FakeOnboardingRepository(),
           ),
         ],
         child: const LucyApp(),

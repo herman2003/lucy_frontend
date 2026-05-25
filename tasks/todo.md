@@ -35,7 +35,7 @@
 | [x] | T05 | `AuthService` + `auth_error_translator` + clés ARB erreurs | — |
 | [x] | T06 | GoRouter + **splash** + guard + `authStateProvider` | — |
 | [x] | T07 | Shared : Lucy*Button, Lucy*TextField, logo (pattern AfroSchool, thème) | — |
-| [ ] | T08 | `LoginPage` + `HomePage` placeholder + slice email E2E | **CP-1** |
+| [x] | T08 | `LoginPage` + `HomePage` placeholder + slice email E2E | **CP-1** |
 
 **CP-1 — Vérification :**
 - [ ] Login compte Firebase test → `/home`

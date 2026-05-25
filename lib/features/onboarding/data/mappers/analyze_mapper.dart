@@ -4,6 +4,14 @@ import '../../domain/exceptions/onboarding_exception.dart';
 
 abstract final class AnalyzeMapper {
   static OnboardingAnalyzeResult fromJson(Map<String, dynamic> json) {
+    final fallbackProfileSummary = json['fallbackProfileSummary'];
+    if (fallbackProfileSummary is String &&
+        fallbackProfileSummary.trim().isNotEmpty) {
+      return OnboardingAnalyzeResult.fallback(
+        fallbackProfileSummary: fallbackProfileSummary.trim(),
+      );
+    }
+
     final profileRaw = json['learnerProfile'];
     final summary = json['summaryForUser'];
     if (profileRaw is! Map<String, dynamic>) {
@@ -15,7 +23,7 @@ abstract final class AnalyzeMapper {
 
     try {
       final profile = LearnerProfile.fromApiJson(profileRaw);
-      return OnboardingAnalyzeResult(
+      return OnboardingAnalyzeResult.success(
         learnerProfile: profile,
         summaryForUser: summary.trim(),
       );

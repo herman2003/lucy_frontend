@@ -9,11 +9,18 @@ class OnboardingAnalyzeRemoteDataSource {
 
   final Dio _dio;
 
-  Future<Map<String, dynamic>> analyze({required String locale}) async {
+  Future<Map<String, dynamic>> analyze({
+    required String locale,
+    bool profileReduced = false,
+  }) async {
     try {
+      final body = <String, dynamic>{'locale': locale};
+      if (profileReduced) {
+        body['profileReduced'] = true;
+      }
       final response = await _dio.post<Map<String, dynamic>>(
         ApiEndpoints.onboardingAnalyze,
-        data: {'locale': locale},
+        data: body,
       );
       return response.data ?? {};
     } on DioException catch (error) {

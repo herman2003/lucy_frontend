@@ -40,8 +40,8 @@ void main() {
       validateHandler: ({required locale, required questionId, required answerText, bool fallbackReduced = false}) async {
         return const ValidateAnswerResult.accepted(turnSummary: 'Résumé accepté.');
       },
-      analyzeHandler: ({required locale}) async {
-        return const OnboardingAnalyzeResult(
+      analyzeHandler: ({required locale, bool profileReduced = false}) async {
+        return const OnboardingAnalyzeResult.success(
           learnerProfile: LearnerProfile(
             primaryRole: 'student',
             mainDomains: ['sciences'],

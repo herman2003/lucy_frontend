@@ -83,6 +83,7 @@ void main() {
     ).readAsStringSync();
     expect(content, contains('maxAnswerLength = 2000'));
     expect(content, contains('maxValidateAttemptsPerQuestion = 10'));
+    expect(content, contains('maxAnalyzeAttempts = 10'));
   });
 
   test('router guards reference onboarding paths and isConfigured', () {

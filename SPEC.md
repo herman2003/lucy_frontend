@@ -732,7 +732,7 @@ Signup / login → `/onboarding` si `isConfigured != true` (lire Firestore **ava
 - [x] **« Ce n’est pas ça »** après `turnSummary` → retour saisie sans `confirm-turn`.
 - [x] **`confirm-turn`** après « C’est bon » ; Nest écrit Firestore ; miroir local.
 - [x] **`analyze`** + **`finalize`** pour clôturer (écran confirmation profil).
-- [ ] fallback profil après 10 échecs analyze.
+- [x] fallback profil après 10 échecs analyze.
 - [ ] **7 chats** (1 step = 1 fil) ; typing Lucy pendant appels IA ; steps futurs **verrouillés**.
 - [ ] Design messagerie complète (avatar, `colorScheme`) ; **swipe entre steps** terminés + courant.
 - [ ] Retour arrière : modifier un tour n’efface pas les autres.

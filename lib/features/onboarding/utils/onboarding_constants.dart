@@ -2,4 +2,5 @@
 abstract final class OnboardingConstants {
   static const int maxAnswerLength = 2000;
   static const int maxValidateAttemptsPerQuestion = 10;
+  static const int maxAnalyzeAttempts = 10;
 }

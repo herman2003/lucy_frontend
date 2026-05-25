@@ -61,8 +61,14 @@ class OnboardingRepositoryImpl implements OnboardingRepository {
   }
 
   @override
-  Future<OnboardingAnalyzeResult> analyze({required String locale}) async {
-    final json = await _analyzeRemote.analyze(locale: locale);
+  Future<OnboardingAnalyzeResult> analyze({
+    required String locale,
+    bool profileReduced = false,
+  }) async {
+    final json = await _analyzeRemote.analyze(
+      locale: locale,
+      profileReduced: profileReduced,
+    );
     return AnalyzeMapper.fromJson(json);
   }
 

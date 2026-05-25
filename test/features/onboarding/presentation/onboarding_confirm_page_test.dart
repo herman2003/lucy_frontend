@@ -26,7 +26,7 @@ void main() {
   tearDown(clearTestLocaleOverride);
 
   OnboardingAnalyzeResult sampleAnalysis() {
-    return const OnboardingAnalyzeResult(
+    return const OnboardingAnalyzeResult.success(
       learnerProfile: LearnerProfile(
         primaryRole: 'student',
         mainDomains: ['sciences'],

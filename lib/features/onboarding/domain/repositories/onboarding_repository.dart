@@ -18,7 +18,10 @@ abstract class OnboardingRepository {
     String confirmationType = 'normal',
   });
 
-  Future<OnboardingAnalyzeResult> analyze({required String locale});
+  Future<OnboardingAnalyzeResult> analyze({
+    required String locale,
+    bool profileReduced = false,
+  });
 
   Future<FinalizeOnboardingResult> finalizeOnboarding();
 }

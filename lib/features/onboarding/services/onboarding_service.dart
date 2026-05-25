@@ -39,8 +39,14 @@ class OnboardingService {
     );
   }
 
-  Future<OnboardingAnalyzeResult> analyze({required String locale}) {
-    return _repository.analyze(locale: locale);
+  Future<OnboardingAnalyzeResult> analyze({
+    required String locale,
+    bool profileReduced = false,
+  }) {
+    return _repository.analyze(
+      locale: locale,
+      profileReduced: profileReduced,
+    );
   }
 
   Future<FinalizeOnboardingResult> finalizeOnboarding() {

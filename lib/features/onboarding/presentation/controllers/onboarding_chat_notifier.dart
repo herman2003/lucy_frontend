@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../../core/localization/l10n/app_localizations.dart';
+import '../../domain/entities/onboarding_analyze_result.dart';
 import '../../domain/entities/onboarding_chat_message.dart';
 import '../../domain/entities/onboarding_completed_turn.dart';
 import '../../domain/entities/validate_answer_result.dart';
@@ -251,6 +252,43 @@ class OnboardingChatNotifier extends _$OnboardingChatNotifier {
     );
   }
 
+  Future<void> retryAnalyzeWithReducedProfile() async {
+    state = state.copyWith(
+      phase: OnboardingChatPhase.analyzing,
+      isSubmitting: true,
+      analyzeResult: null,
+    );
+
+    try {
+      final result = await ref.read(onboardingServiceProvider).analyze(
+            locale: _apiLocale,
+            profileReduced: true,
+          );
+
+      final summaryText = switch (result) {
+        OnboardingAnalyzeSuccess(:final summaryForUser) => summaryForUser,
+        OnboardingAnalyzeFallback(:final fallbackProfileSummary) =>
+          fallbackProfileSummary,
+      };
+
+      state = state.copyWith(
+        analyzeResult: result,
+        phase: OnboardingChatPhase.analysisReady,
+        isSubmitting: false,
+        messages: [
+          ...state.messages,
+          OnboardingChatMessage(isFromLucy: true, text: summaryText),
+        ],
+      );
+    } catch (error) {
+      state = state.copyWith(
+        phase: OnboardingChatPhase.analysisReady,
+        isSubmitting: false,
+      );
+      rethrow;
+    }
+  }
+
   void returnToEditFromConfirm(AppLocalizations l10n) {
     final lastIndex = OnboardingQuestionIds.ordered.length - 1;
     final lastId = OnboardingQuestionIds.ordered[lastIndex];
@@ -275,12 +313,19 @@ class OnboardingChatNotifier extends _$OnboardingChatNotifier {
     );
 
     try {
-      final result =
-          await ref.read(onboardingServiceProvider).analyze(locale: _apiLocale);
+      final result = await ref
+          .read(onboardingServiceProvider)
+          .analyze(locale: _apiLocale);
+
+      final summaryText = switch (result) {
+        OnboardingAnalyzeSuccess(:final summaryForUser) => summaryForUser,
+        OnboardingAnalyzeFallback(:final fallbackProfileSummary) =>
+          fallbackProfileSummary,
+      };
 
       final summaryMessage = OnboardingChatMessage(
         isFromLucy: true,
-        text: result.summaryForUser,
+        text: summaryText,
       );
 
       state = state.copyWith(

@@ -5,9 +5,13 @@ import 'learner_profile.dart';
 part 'onboarding_analyze_result.freezed.dart';
 
 @freezed
-abstract class OnboardingAnalyzeResult with _$OnboardingAnalyzeResult {
-  const factory OnboardingAnalyzeResult({
+sealed class OnboardingAnalyzeResult with _$OnboardingAnalyzeResult {
+  const factory OnboardingAnalyzeResult.success({
     required LearnerProfile learnerProfile,
     required String summaryForUser,
-  }) = _OnboardingAnalyzeResult;
+  }) = OnboardingAnalyzeSuccess;
+
+  const factory OnboardingAnalyzeResult.fallback({
+    required String fallbackProfileSummary,
+  }) = OnboardingAnalyzeFallback;
 }

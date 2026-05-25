@@ -9,6 +9,7 @@ import '../../../../shared/widgets/buttons/lucy_primary_button.dart';
 import '../../../../shared/widgets/buttons/lucy_secondary_button.dart';
 import '../../../../shared/widgets/feedback/lucy_snackbar.dart';
 import '../../../auth/domain/providers/auth_provider.dart';
+import '../../domain/entities/onboarding_analyze_result.dart';
 import '../../domain/providers/onboarding_provider.dart';
 import '../../utils/learner_profile_l10n.dart';
 import '../../utils/onboarding_error_translator.dart';
@@ -45,8 +46,16 @@ class _OnboardingConfirmPageState extends ConsumerState<OnboardingConfirmPage> {
       );
     }
 
-    final profileRows =
-        LearnerProfileL10n.profileRows(l10n, analyzeResult.learnerProfile);
+    final summaryText = switch (analyzeResult) {
+      OnboardingAnalyzeSuccess(:final summaryForUser) => summaryForUser,
+      OnboardingAnalyzeFallback(:final fallbackProfileSummary) =>
+        fallbackProfileSummary,
+    };
+    final profileRows = switch (analyzeResult) {
+      OnboardingAnalyzeSuccess(:final learnerProfile) =>
+        LearnerProfileL10n.profileRows(l10n, learnerProfile),
+      OnboardingAnalyzeFallback() => <({String label, String value})>[],
+    };
 
     return Scaffold(
       backgroundColor: scheme.surface,
@@ -63,7 +72,7 @@ class _OnboardingConfirmPageState extends ConsumerState<OnboardingConfirmPage> {
                     style: Theme.of(context).textTheme.titleMedium,
                   ),
                   const SizedBox(height: LucyConstants.kSpacingLow),
-                  Text(analyzeResult.summaryForUser),
+                  Text(summaryText),
                   const SizedBox(height: LucyConstants.kSpacingMedium),
                   for (final row in profileRows) ...[
                     Text(
@@ -91,7 +100,9 @@ class _OnboardingConfirmPageState extends ConsumerState<OnboardingConfirmPage> {
                   const SizedBox(height: LucyConstants.kSpacingLow),
                   LucySecondaryButton(
                     text: l10n.onboardingConfirmEdit,
-                    onPressed: _isSubmitting ? null : () => _edit(context),
+                    onPressed: _isSubmitting
+                        ? null
+                        : () async => _edit(context),
                   ),
                 ],
               ),
@@ -126,10 +137,30 @@ class _OnboardingConfirmPageState extends ConsumerState<OnboardingConfirmPage> {
     }
   }
 
-  void _edit(BuildContext context) {
+  Future<void> _edit(BuildContext context) async {
+    final analyzeResult = ref.read(onboardingChatProvider).analyzeResult;
+    if (analyzeResult is OnboardingAnalyzeFallback) {
+      try {
+        await ref
+            .read(onboardingChatProvider.notifier)
+            .retryAnalyzeWithReducedProfile();
+      } catch (error) {
+        if (!context.mounted) {
+          return;
+        }
+        LucySnackBar.showError(
+          context,
+          message: OnboardingErrorTranslator.fromException(context, error),
+        );
+      }
+      return;
+    }
+
     ref
         .read(onboardingChatProvider.notifier)
         .returnToEditFromConfirm(context.l10n);
-    context.go(LucyRoutePaths.onboarding);
+    if (context.mounted) {
+      context.go(LucyRoutePaths.onboarding);
+    }
   }
 }

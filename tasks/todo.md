@@ -165,6 +165,7 @@ P0–P2 → B01 → B02 → B03 → B04 (CP-1)
 | Statut | ID | Tâche | CP |
 |--------|-----|--------|-----|
 | [x] | UX-2 | Max 10 `validate` / question + `fallbackSummary` + `fallbackReduced` | — |
+| [x] | UX-3 | Max 10 `analyze` + `fallbackProfileSummary` + `profileReduced` | — |
 
 ---
 

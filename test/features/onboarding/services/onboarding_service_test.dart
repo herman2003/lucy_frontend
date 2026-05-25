@@ -67,8 +67,8 @@ void main() {
       expect(repository.confirmCallCount, 1);
     });
 
-    test('analyze delegates to repository with locale', () async {
-      const expected = OnboardingAnalyzeResult(
+    test('analyze delegates to repository with locale and profileReduced', () async {
+      const expected = OnboardingAnalyzeResult.success(
         learnerProfile: LearnerProfile(
           primaryRole: 'student',
           mainDomains: ['sciences'],
@@ -82,14 +82,15 @@ void main() {
       );
 
       repository = FakeOnboardingRepository(
-        analyzeHandler: ({required locale}) async {
+        analyzeHandler: ({required locale, bool profileReduced = false}) async {
           expect(locale, 'de');
+          expect(profileReduced, isTrue);
           return expected;
         },
       );
       service = OnboardingService(repository: repository);
 
-      final result = await service.analyze(locale: 'de');
+      final result = await service.analyze(locale: 'de', profileReduced: true);
 
       expect(result, expected);
       expect(repository.analyzeCallCount, 1);

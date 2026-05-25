@@ -32,7 +32,9 @@ class FakeOnboardingRepository implements OnboardingRepository {
 
   final Future<OnboardingAnalyzeResult> Function({
     required String locale,
-  })? analyzeHandler;
+    bool profileReduced,
+  })?
+  analyzeHandler;
 
   final Future<FinalizeOnboardingResult> Function()? finalizeHandler;
 
@@ -96,13 +98,19 @@ class FakeOnboardingRepository implements OnboardingRepository {
     );
   }
 
+  bool lastAnalyzeProfileReduced = false;
+
   @override
-  Future<OnboardingAnalyzeResult> analyze({required String locale}) async {
+  Future<OnboardingAnalyzeResult> analyze({
+    required String locale,
+    bool profileReduced = false,
+  }) async {
     analyzeCallCount++;
+    lastAnalyzeProfileReduced = profileReduced;
     if (analyzeHandler != null) {
-      return analyzeHandler!(locale: locale);
+      return analyzeHandler!(locale: locale, profileReduced: profileReduced);
     }
-    return OnboardingAnalyzeResult(
+    return OnboardingAnalyzeResult.success(
       learnerProfile: const LearnerProfile(
         primaryRole: 'student',
         mainDomains: ['sciences'],

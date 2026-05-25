@@ -14,71 +14,30 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$OnboardingAnalyzeResult {
 
- LearnerProfile get learnerProfile; String get summaryForUser;
-/// Create a copy of OnboardingAnalyzeResult
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-$OnboardingAnalyzeResultCopyWith<OnboardingAnalyzeResult> get copyWith => _$OnboardingAnalyzeResultCopyWithImpl<OnboardingAnalyzeResult>(this as OnboardingAnalyzeResult, _$identity);
+
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is OnboardingAnalyzeResult&&(identical(other.learnerProfile, learnerProfile) || other.learnerProfile == learnerProfile)&&(identical(other.summaryForUser, summaryForUser) || other.summaryForUser == summaryForUser));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is OnboardingAnalyzeResult);
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,learnerProfile,summaryForUser);
+int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'OnboardingAnalyzeResult(learnerProfile: $learnerProfile, summaryForUser: $summaryForUser)';
+  return 'OnboardingAnalyzeResult()';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $OnboardingAnalyzeResultCopyWith<$Res>  {
-  factory $OnboardingAnalyzeResultCopyWith(OnboardingAnalyzeResult value, $Res Function(OnboardingAnalyzeResult) _then) = _$OnboardingAnalyzeResultCopyWithImpl;
-@useResult
-$Res call({
- LearnerProfile learnerProfile, String summaryForUser
-});
-
-
-$LearnerProfileCopyWith<$Res> get learnerProfile;
-
-}
-/// @nodoc
-class _$OnboardingAnalyzeResultCopyWithImpl<$Res>
-    implements $OnboardingAnalyzeResultCopyWith<$Res> {
-  _$OnboardingAnalyzeResultCopyWithImpl(this._self, this._then);
-
-  final OnboardingAnalyzeResult _self;
-  final $Res Function(OnboardingAnalyzeResult) _then;
-
-/// Create a copy of OnboardingAnalyzeResult
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? learnerProfile = null,Object? summaryForUser = null,}) {
-  return _then(_self.copyWith(
-learnerProfile: null == learnerProfile ? _self.learnerProfile : learnerProfile // ignore: cast_nullable_to_non_nullable
-as LearnerProfile,summaryForUser: null == summaryForUser ? _self.summaryForUser : summaryForUser // ignore: cast_nullable_to_non_nullable
-as String,
-  ));
-}
-/// Create a copy of OnboardingAnalyzeResult
-/// with the given fields replaced by the non-null parameter values.
-@override
-@pragma('vm:prefer-inline')
-$LearnerProfileCopyWith<$Res> get learnerProfile {
-  
-  return $LearnerProfileCopyWith<$Res>(_self.learnerProfile, (value) {
-    return _then(_self.copyWith(learnerProfile: value));
-  });
-}
+class $OnboardingAnalyzeResultCopyWith<$Res>  {
+$OnboardingAnalyzeResultCopyWith(OnboardingAnalyzeResult _, $Res Function(OnboardingAnalyzeResult) __);
 }
 
 
@@ -96,11 +55,12 @@ extension OnboardingAnalyzeResultPatterns on OnboardingAnalyzeResult {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _OnboardingAnalyzeResult value)?  $default,{required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( OnboardingAnalyzeSuccess value)?  success,TResult Function( OnboardingAnalyzeFallback value)?  fallback,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
-case _OnboardingAnalyzeResult() when $default != null:
-return $default(_that);case _:
+case OnboardingAnalyzeSuccess() when success != null:
+return success(_that);case OnboardingAnalyzeFallback() when fallback != null:
+return fallback(_that);case _:
   return orElse();
 
 }
@@ -118,14 +78,12 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _OnboardingAnalyzeResult value)  $default,){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( OnboardingAnalyzeSuccess value)  success,required TResult Function( OnboardingAnalyzeFallback value)  fallback,}){
 final _that = this;
 switch (_that) {
-case _OnboardingAnalyzeResult():
-return $default(_that);case _:
-  throw StateError('Unexpected subclass');
-
-}
+case OnboardingAnalyzeSuccess():
+return success(_that);case OnboardingAnalyzeFallback():
+return fallback(_that);}
 }
 /// A variant of `map` that fallback to returning `null`.
 ///
@@ -139,11 +97,12 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _OnboardingAnalyzeResult value)?  $default,){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( OnboardingAnalyzeSuccess value)?  success,TResult? Function( OnboardingAnalyzeFallback value)?  fallback,}){
 final _that = this;
 switch (_that) {
-case _OnboardingAnalyzeResult() when $default != null:
-return $default(_that);case _:
+case OnboardingAnalyzeSuccess() when success != null:
+return success(_that);case OnboardingAnalyzeFallback() when fallback != null:
+return fallback(_that);case _:
   return null;
 
 }
@@ -160,10 +119,11 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( LearnerProfile learnerProfile,  String summaryForUser)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( LearnerProfile learnerProfile,  String summaryForUser)?  success,TResult Function( String fallbackProfileSummary)?  fallback,required TResult orElse(),}) {final _that = this;
 switch (_that) {
-case _OnboardingAnalyzeResult() when $default != null:
-return $default(_that.learnerProfile,_that.summaryForUser);case _:
+case OnboardingAnalyzeSuccess() when success != null:
+return success(_that.learnerProfile,_that.summaryForUser);case OnboardingAnalyzeFallback() when fallback != null:
+return fallback(_that.fallbackProfileSummary);case _:
   return orElse();
 
 }
@@ -181,13 +141,11 @@ return $default(_that.learnerProfile,_that.summaryForUser);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( LearnerProfile learnerProfile,  String summaryForUser)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( LearnerProfile learnerProfile,  String summaryForUser)  success,required TResult Function( String fallbackProfileSummary)  fallback,}) {final _that = this;
 switch (_that) {
-case _OnboardingAnalyzeResult():
-return $default(_that.learnerProfile,_that.summaryForUser);case _:
-  throw StateError('Unexpected subclass');
-
-}
+case OnboardingAnalyzeSuccess():
+return success(_that.learnerProfile,_that.summaryForUser);case OnboardingAnalyzeFallback():
+return fallback(_that.fallbackProfileSummary);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -201,10 +159,11 @@ return $default(_that.learnerProfile,_that.summaryForUser);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( LearnerProfile learnerProfile,  String summaryForUser)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( LearnerProfile learnerProfile,  String summaryForUser)?  success,TResult? Function( String fallbackProfileSummary)?  fallback,}) {final _that = this;
 switch (_that) {
-case _OnboardingAnalyzeResult() when $default != null:
-return $default(_that.learnerProfile,_that.summaryForUser);case _:
+case OnboardingAnalyzeSuccess() when success != null:
+return success(_that.learnerProfile,_that.summaryForUser);case OnboardingAnalyzeFallback() when fallback != null:
+return fallback(_that.fallbackProfileSummary);case _:
   return null;
 
 }
@@ -215,24 +174,24 @@ return $default(_that.learnerProfile,_that.summaryForUser);case _:
 /// @nodoc
 
 
-class _OnboardingAnalyzeResult implements OnboardingAnalyzeResult {
-  const _OnboardingAnalyzeResult({required this.learnerProfile, required this.summaryForUser});
+class OnboardingAnalyzeSuccess implements OnboardingAnalyzeResult {
+  const OnboardingAnalyzeSuccess({required this.learnerProfile, required this.summaryForUser});
   
 
-@override final  LearnerProfile learnerProfile;
-@override final  String summaryForUser;
+ final  LearnerProfile learnerProfile;
+ final  String summaryForUser;
 
 /// Create a copy of OnboardingAnalyzeResult
 /// with the given fields replaced by the non-null parameter values.
-@override @JsonKey(includeFromJson: false, includeToJson: false)
+@JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-_$OnboardingAnalyzeResultCopyWith<_OnboardingAnalyzeResult> get copyWith => __$OnboardingAnalyzeResultCopyWithImpl<_OnboardingAnalyzeResult>(this, _$identity);
+$OnboardingAnalyzeSuccessCopyWith<OnboardingAnalyzeSuccess> get copyWith => _$OnboardingAnalyzeSuccessCopyWithImpl<OnboardingAnalyzeSuccess>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _OnboardingAnalyzeResult&&(identical(other.learnerProfile, learnerProfile) || other.learnerProfile == learnerProfile)&&(identical(other.summaryForUser, summaryForUser) || other.summaryForUser == summaryForUser));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is OnboardingAnalyzeSuccess&&(identical(other.learnerProfile, learnerProfile) || other.learnerProfile == learnerProfile)&&(identical(other.summaryForUser, summaryForUser) || other.summaryForUser == summaryForUser));
 }
 
 
@@ -241,36 +200,36 @@ int get hashCode => Object.hash(runtimeType,learnerProfile,summaryForUser);
 
 @override
 String toString() {
-  return 'OnboardingAnalyzeResult(learnerProfile: $learnerProfile, summaryForUser: $summaryForUser)';
+  return 'OnboardingAnalyzeResult.success(learnerProfile: $learnerProfile, summaryForUser: $summaryForUser)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class _$OnboardingAnalyzeResultCopyWith<$Res> implements $OnboardingAnalyzeResultCopyWith<$Res> {
-  factory _$OnboardingAnalyzeResultCopyWith(_OnboardingAnalyzeResult value, $Res Function(_OnboardingAnalyzeResult) _then) = __$OnboardingAnalyzeResultCopyWithImpl;
-@override @useResult
+abstract mixin class $OnboardingAnalyzeSuccessCopyWith<$Res> implements $OnboardingAnalyzeResultCopyWith<$Res> {
+  factory $OnboardingAnalyzeSuccessCopyWith(OnboardingAnalyzeSuccess value, $Res Function(OnboardingAnalyzeSuccess) _then) = _$OnboardingAnalyzeSuccessCopyWithImpl;
+@useResult
 $Res call({
  LearnerProfile learnerProfile, String summaryForUser
 });
 
 
-@override $LearnerProfileCopyWith<$Res> get learnerProfile;
+$LearnerProfileCopyWith<$Res> get learnerProfile;
 
 }
 /// @nodoc
-class __$OnboardingAnalyzeResultCopyWithImpl<$Res>
-    implements _$OnboardingAnalyzeResultCopyWith<$Res> {
-  __$OnboardingAnalyzeResultCopyWithImpl(this._self, this._then);
+class _$OnboardingAnalyzeSuccessCopyWithImpl<$Res>
+    implements $OnboardingAnalyzeSuccessCopyWith<$Res> {
+  _$OnboardingAnalyzeSuccessCopyWithImpl(this._self, this._then);
 
-  final _OnboardingAnalyzeResult _self;
-  final $Res Function(_OnboardingAnalyzeResult) _then;
+  final OnboardingAnalyzeSuccess _self;
+  final $Res Function(OnboardingAnalyzeSuccess) _then;
 
 /// Create a copy of OnboardingAnalyzeResult
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? learnerProfile = null,Object? summaryForUser = null,}) {
-  return _then(_OnboardingAnalyzeResult(
+@pragma('vm:prefer-inline') $Res call({Object? learnerProfile = null,Object? summaryForUser = null,}) {
+  return _then(OnboardingAnalyzeSuccess(
 learnerProfile: null == learnerProfile ? _self.learnerProfile : learnerProfile // ignore: cast_nullable_to_non_nullable
 as LearnerProfile,summaryForUser: null == summaryForUser ? _self.summaryForUser : summaryForUser // ignore: cast_nullable_to_non_nullable
 as String,
@@ -287,6 +246,72 @@ $LearnerProfileCopyWith<$Res> get learnerProfile {
     return _then(_self.copyWith(learnerProfile: value));
   });
 }
+}
+
+/// @nodoc
+
+
+class OnboardingAnalyzeFallback implements OnboardingAnalyzeResult {
+  const OnboardingAnalyzeFallback({required this.fallbackProfileSummary});
+  
+
+ final  String fallbackProfileSummary;
+
+/// Create a copy of OnboardingAnalyzeResult
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$OnboardingAnalyzeFallbackCopyWith<OnboardingAnalyzeFallback> get copyWith => _$OnboardingAnalyzeFallbackCopyWithImpl<OnboardingAnalyzeFallback>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is OnboardingAnalyzeFallback&&(identical(other.fallbackProfileSummary, fallbackProfileSummary) || other.fallbackProfileSummary == fallbackProfileSummary));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,fallbackProfileSummary);
+
+@override
+String toString() {
+  return 'OnboardingAnalyzeResult.fallback(fallbackProfileSummary: $fallbackProfileSummary)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $OnboardingAnalyzeFallbackCopyWith<$Res> implements $OnboardingAnalyzeResultCopyWith<$Res> {
+  factory $OnboardingAnalyzeFallbackCopyWith(OnboardingAnalyzeFallback value, $Res Function(OnboardingAnalyzeFallback) _then) = _$OnboardingAnalyzeFallbackCopyWithImpl;
+@useResult
+$Res call({
+ String fallbackProfileSummary
+});
+
+
+
+
+}
+/// @nodoc
+class _$OnboardingAnalyzeFallbackCopyWithImpl<$Res>
+    implements $OnboardingAnalyzeFallbackCopyWith<$Res> {
+  _$OnboardingAnalyzeFallbackCopyWithImpl(this._self, this._then);
+
+  final OnboardingAnalyzeFallback _self;
+  final $Res Function(OnboardingAnalyzeFallback) _then;
+
+/// Create a copy of OnboardingAnalyzeResult
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? fallbackProfileSummary = null,}) {
+  return _then(OnboardingAnalyzeFallback(
+fallbackProfileSummary: null == fallbackProfileSummary ? _self.fallbackProfileSummary : fallbackProfileSummary // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
 }
 
 // dart format on

@@ -98,8 +98,8 @@ void main() {
       validateHandler: ({required locale, required questionId, required answerText, bool fallbackReduced = false}) async {
         return const ValidateAnswerResult.accepted(turnSummary: 'OK');
       },
-      analyzeHandler: ({required locale}) async {
-        return OnboardingAnalyzeResult(
+      analyzeHandler: ({required locale, bool profileReduced = false}) async {
+        return OnboardingAnalyzeResult.success(
           learnerProfile: const LearnerProfile(
             primaryRole: 'student',
             mainDomains: ['sciences'],

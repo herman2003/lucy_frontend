@@ -1,0 +1,17 @@
+{
+  "@@locale": "en",
+  "appTitle": "Lucy",
+  "splashLoading": "Loading…",
+  "authUnknownError": "Something went wrong. Please try again.",
+  "authUserNotFound": "No account matches this email.",
+  "authWrongPassword": "Incorrect password.",
+  "authInvalidCredentials": "Incorrect email or password.",
+  "authEmailAlreadyInUse": "This email is already in use.",
+  "authWeakPassword": "Password is too weak.",
+  "authInvalidEmail": "Invalid email address.",
+  "authNetworkError": "Connection problem. Check your network.",
+  "authTooManyRequests": "Too many attempts. Try again later.",
+  "authUserDisabled": "This account has been disabled.",
+  "authOperationNotAllowed": "This operation is not allowed.",
+  "authProfileWriteFailed": "Could not save your profile. Please try again."
+}

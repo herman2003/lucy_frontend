@@ -1,0 +1,59 @@
+{
+  "@@locale": "fr",
+  "appTitle": "Lucy",
+  "@appTitle": {
+    "description": "Application title"
+  },
+  "splashLoading": "Chargement…",
+  "@splashLoading": {
+    "description": "Splash screen loading message"
+  },
+  "authUnknownError": "Une erreur est survenue. Réessayez.",
+  "@authUnknownError": {
+    "description": "Generic auth error"
+  },
+  "authUserNotFound": "Aucun compte ne correspond à cet email.",
+  "@authUserNotFound": {
+    "description": "Firebase user-not-found"
+  },
+  "authWrongPassword": "Mot de passe incorrect.",
+  "@authWrongPassword": {
+    "description": "Firebase wrong-password"
+  },
+  "authInvalidCredentials": "Email ou mot de passe incorrect.",
+  "@authInvalidCredentials": {
+    "description": "Firebase invalid-credential"
+  },
+  "authEmailAlreadyInUse": "Cet email est déjà utilisé.",
+  "@authEmailAlreadyInUse": {
+    "description": "Firebase email-already-in-use"
+  },
+  "authWeakPassword": "Le mot de passe est trop faible.",
+  "@authWeakPassword": {
+    "description": "Firebase weak-password"
+  },
+  "authInvalidEmail": "Adresse email invalide.",
+  "@authInvalidEmail": {
+    "description": "Firebase invalid-email"
+  },
+  "authNetworkError": "Problème de connexion. Vérifiez votre réseau.",
+  "@authNetworkError": {
+    "description": "Firebase network-request-failed"
+  },
+  "authTooManyRequests": "Trop de tentatives. Réessayez plus tard.",
+  "@authTooManyRequests": {
+    "description": "Firebase too-many-requests"
+  },
+  "authUserDisabled": "Ce compte a été désactivé.",
+  "@authUserDisabled": {
+    "description": "Firebase user-disabled"
+  },
+  "authOperationNotAllowed": "Cette opération n’est pas autorisée.",
+  "@authOperationNotAllowed": {
+    "description": "Firebase operation-not-allowed"
+  },
+  "authProfileWriteFailed": "Impossible d’enregistrer votre profil. Réessayez.",
+  "@authProfileWriteFailed": {
+    "description": "Firestore profile write failed after signup"
+  }
+}

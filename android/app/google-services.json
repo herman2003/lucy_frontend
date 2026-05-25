@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "915801010147",
+    "project_id": "lucy-7504c",
+    "storage_bucket": "lucy-7504c.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:915801010147:android:866498945967265a8a3ad6",
+        "android_client_info": {
+          "package_name": "com.lucy.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "915801010147-lluo2pvhacu6ovpiglvbnc2fcu9t8l5n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDFnXBaVPCXLxfMlWhVz_X_7Uh_7HYuTp0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "915801010147-lluo2pvhacu6ovpiglvbnc2fcu9t8l5n.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "915801010147-t19l9e4ukna7f179h2oajk5qv5nkbo6g.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.lucy.app"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

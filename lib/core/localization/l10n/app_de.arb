@@ -1,0 +1,17 @@
+{
+  "@@locale": "de",
+  "appTitle": "Lucy",
+  "splashLoading": "Wird geladen…",
+  "authUnknownError": "Ein Fehler ist aufgetreten. Bitte erneut versuchen.",
+  "authUserNotFound": "Kein Konto mit dieser E-Mail gefunden.",
+  "authWrongPassword": "Falsches Passwort.",
+  "authInvalidCredentials": "E-Mail oder Passwort falsch.",
+  "authEmailAlreadyInUse": "Diese E-Mail wird bereits verwendet.",
+  "authWeakPassword": "Das Passwort ist zu schwach.",
+  "authInvalidEmail": "Ungültige E-Mail-Adresse.",
+  "authNetworkError": "Verbindungsproblem. Netzwerk prüfen.",
+  "authTooManyRequests": "Zu viele Versuche. Später erneut versuchen.",
+  "authUserDisabled": "Dieses Konto wurde deaktiviert.",
+  "authOperationNotAllowed": "Diese Operation ist nicht erlaubt.",
+  "authProfileWriteFailed": "Profil konnte nicht gespeichert werden. Bitte erneut versuchen."
+}

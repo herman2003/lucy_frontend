@@ -1,0 +1,55 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
+part of 'app_router.dart';
+
+// **************************************************************************
+// RiverpodGenerator
+// **************************************************************************
+
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
+/// Application [GoRouter] with auth bootstrap and session guard.
+
+@ProviderFor(lucyRouter)
+const lucyRouterProvider = LucyRouterProvider._();
+
+/// Application [GoRouter] with auth bootstrap and session guard.
+
+final class LucyRouterProvider
+    extends $FunctionalProvider<GoRouter, GoRouter, GoRouter>
+    with $Provider<GoRouter> {
+  /// Application [GoRouter] with auth bootstrap and session guard.
+  const LucyRouterProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'lucyRouterProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$lucyRouterHash();
+
+  @$internal
+  @override
+  $ProviderElement<GoRouter> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  GoRouter create(Ref ref) {
+    return lucyRouter(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(GoRouter value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<GoRouter>(value),
+    );
+  }
+}
+
+String _$lucyRouterHash() => r'299bf0fbfecef3bee1b25517dafe7082c70b847c';

@@ -4,10 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 /// SPEC §1.4 — auth/shared UI must not use raw hex or [LucyColors] in widgets.
 void main() {
-  const scanRoots = [
-    'lib/features/auth/presentation',
-    'lib/shared/widgets',
-  ];
+  const scanRoots = ['lib/features/auth/presentation', 'lib/shared/widgets'];
 
   final forbiddenColorPatterns = [
     RegExp(r'Color\s*\(\s*0x'),
@@ -38,7 +35,9 @@ void main() {
   });
 
   test('auth pages contain no OAuth sign-in code or copy', () {
-    for (final file in _dartFilesUnder('lib/features/auth/presentation/pages')) {
+    for (final file in _dartFilesUnder(
+      'lib/features/auth/presentation/pages',
+    )) {
       final content = File(file).readAsStringSync();
       for (final pattern in forbiddenOAuthPatterns) {
         expect(

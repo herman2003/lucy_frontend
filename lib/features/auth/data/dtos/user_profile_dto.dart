@@ -9,5 +9,11 @@ abstract class UserProfileDto with _$UserProfileDto {
     required String fullName,
     required String email,
     required String createdAt,
+    @Default(false) bool isConfigured,
   }) = _UserProfileDto;
+
+  const UserProfileDto._();
+
+  /// SPEC §4.4: absent or null in Firestore means not configured.
+  bool get isConfiguredEffective => isConfigured;
 }

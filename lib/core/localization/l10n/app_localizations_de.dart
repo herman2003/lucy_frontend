@@ -160,4 +160,7 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get authProfileWriteFailed =>
       'Profil konnte nicht gespeichert werden. Bitte erneut versuchen.';
+
+  @override
+  String get onboardingPlaceholderTitle => 'Einrichtung Ihres Lernprofils';
 }

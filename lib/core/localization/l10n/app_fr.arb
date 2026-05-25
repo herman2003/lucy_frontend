@@ -196,5 +196,9 @@
   "authProfileWriteFailed": "Impossible d’enregistrer votre profil. Réessayez.",
   "@authProfileWriteFailed": {
     "description": "Firestore profile write failed after signup"
+  },
+  "onboardingPlaceholderTitle": "Configuration de votre profil apprenant",
+  "@onboardingPlaceholderTitle": {
+    "description": "Onboarding placeholder screen until chat UI is implemented"
   }
 }

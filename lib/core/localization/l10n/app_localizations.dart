@@ -387,6 +387,12 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'Impossible d’enregistrer votre profil. Réessayez.'**
   String get authProfileWriteFailed;
+
+  /// Onboarding placeholder screen until chat UI is implemented
+  ///
+  /// In fr, this message translates to:
+  /// **'Configuration de votre profil apprenant'**
+  String get onboardingPlaceholderTitle;
 }
 
 class _AppLocalizationsDelegate

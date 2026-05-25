@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:frontend/app.dart';
+import 'package:frontend/features/auth/domain/entities/auth_bootstrap_result.dart';
 import 'package:frontend/features/auth/domain/providers/auth_provider.dart';
 import 'package:frontend/features/auth/presentation/pages/login/login_page.dart';
 import 'package:frontend/features/auth/presentation/pages/reset_password/reset_password_page.dart';
@@ -36,7 +37,9 @@ void main() {
       ProviderScope(
         overrides: [
           authRepositoryProvider.overrideWithValue(repository),
-          authBootstrapProvider.overrideWith((ref) async => null),
+          authBootstrapProvider.overrideWith(
+            (ref) async => const AuthBootstrapResult(),
+          ),
           authStateChangesProvider.overrideWith(
             (ref) => repository.authStateChanges(),
           ),
@@ -50,10 +53,7 @@ void main() {
 
     await _openResetPassword(tester);
 
-    await tester.enterText(
-      find.byType(TextFormField),
-      'user@lucy.test',
-    );
+    await tester.enterText(find.byType(TextFormField), 'user@lucy.test');
     await tester.tap(find.text('Envoyer le lien'));
     await tester.pumpAndSettle();
 
@@ -81,7 +81,9 @@ void main() {
       ProviderScope(
         overrides: [
           authRepositoryProvider.overrideWithValue(repository),
-          authBootstrapProvider.overrideWith((ref) async => null),
+          authBootstrapProvider.overrideWith(
+            (ref) async => const AuthBootstrapResult(),
+          ),
           authStateChangesProvider.overrideWith(
             (ref) => repository.authStateChanges(),
           ),
@@ -95,10 +97,7 @@ void main() {
 
     await _openResetPassword(tester);
 
-    await tester.enterText(
-      find.byType(TextFormField),
-      'unknown@lucy.test',
-    );
+    await tester.enterText(find.byType(TextFormField), 'unknown@lucy.test');
     await tester.tap(find.text('Envoyer le lien'));
     await tester.pumpAndSettle();
 
@@ -120,7 +119,9 @@ void main() {
       ProviderScope(
         overrides: [
           authRepositoryProvider.overrideWithValue(repository),
-          authBootstrapProvider.overrideWith((ref) async => null),
+          authBootstrapProvider.overrideWith(
+            (ref) async => const AuthBootstrapResult(),
+          ),
           authStateChangesProvider.overrideWith(
             (ref) => repository.authStateChanges(),
           ),
@@ -134,10 +135,7 @@ void main() {
 
     await _openResetPassword(tester);
 
-    await tester.enterText(
-      find.byType(TextFormField),
-      'user@lucy.test',
-    );
+    await tester.enterText(find.byType(TextFormField), 'user@lucy.test');
     await tester.tap(find.text('Envoyer le lien'));
     await tester.pumpAndSettle();
 

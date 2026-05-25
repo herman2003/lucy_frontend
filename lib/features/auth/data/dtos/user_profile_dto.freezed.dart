@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$UserProfileDto {
 
- String get fullName; String get email; String get createdAt;
+ String get fullName; String get email; String get createdAt; bool get isConfigured;
 /// Create a copy of UserProfileDto
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $UserProfileDtoCopyWith<UserProfileDto> get copyWith => _$UserProfileDtoCopyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is UserProfileDto&&(identical(other.fullName, fullName) || other.fullName == fullName)&&(identical(other.email, email) || other.email == email)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is UserProfileDto&&(identical(other.fullName, fullName) || other.fullName == fullName)&&(identical(other.email, email) || other.email == email)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.isConfigured, isConfigured) || other.isConfigured == isConfigured));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,fullName,email,createdAt);
+int get hashCode => Object.hash(runtimeType,fullName,email,createdAt,isConfigured);
 
 @override
 String toString() {
-  return 'UserProfileDto(fullName: $fullName, email: $email, createdAt: $createdAt)';
+  return 'UserProfileDto(fullName: $fullName, email: $email, createdAt: $createdAt, isConfigured: $isConfigured)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $UserProfileDtoCopyWith<$Res>  {
   factory $UserProfileDtoCopyWith(UserProfileDto value, $Res Function(UserProfileDto) _then) = _$UserProfileDtoCopyWithImpl;
 @useResult
 $Res call({
- String fullName, String email, String createdAt
+ String fullName, String email, String createdAt, bool isConfigured
 });
 
 
@@ -62,12 +62,13 @@ class _$UserProfileDtoCopyWithImpl<$Res>
 
 /// Create a copy of UserProfileDto
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? fullName = null,Object? email = null,Object? createdAt = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? fullName = null,Object? email = null,Object? createdAt = null,Object? isConfigured = null,}) {
   return _then(_self.copyWith(
 fullName: null == fullName ? _self.fullName : fullName // ignore: cast_nullable_to_non_nullable
 as String,email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
 as String,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
-as String,
+as String,isConfigured: null == isConfigured ? _self.isConfigured : isConfigured // ignore: cast_nullable_to_non_nullable
+as bool,
   ));
 }
 
@@ -152,10 +153,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String fullName,  String email,  String createdAt)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String fullName,  String email,  String createdAt,  bool isConfigured)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _UserProfileDto() when $default != null:
-return $default(_that.fullName,_that.email,_that.createdAt);case _:
+return $default(_that.fullName,_that.email,_that.createdAt,_that.isConfigured);case _:
   return orElse();
 
 }
@@ -173,10 +174,10 @@ return $default(_that.fullName,_that.email,_that.createdAt);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String fullName,  String email,  String createdAt)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String fullName,  String email,  String createdAt,  bool isConfigured)  $default,) {final _that = this;
 switch (_that) {
 case _UserProfileDto():
-return $default(_that.fullName,_that.email,_that.createdAt);case _:
+return $default(_that.fullName,_that.email,_that.createdAt,_that.isConfigured);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -193,10 +194,10 @@ return $default(_that.fullName,_that.email,_that.createdAt);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String fullName,  String email,  String createdAt)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String fullName,  String email,  String createdAt,  bool isConfigured)?  $default,) {final _that = this;
 switch (_that) {
 case _UserProfileDto() when $default != null:
-return $default(_that.fullName,_that.email,_that.createdAt);case _:
+return $default(_that.fullName,_that.email,_that.createdAt,_that.isConfigured);case _:
   return null;
 
 }
@@ -207,13 +208,14 @@ return $default(_that.fullName,_that.email,_that.createdAt);case _:
 /// @nodoc
 
 
-class _UserProfileDto implements UserProfileDto {
-  const _UserProfileDto({required this.fullName, required this.email, required this.createdAt});
+class _UserProfileDto extends UserProfileDto {
+  const _UserProfileDto({required this.fullName, required this.email, required this.createdAt, this.isConfigured = false}): super._();
   
 
 @override final  String fullName;
 @override final  String email;
 @override final  String createdAt;
+@override@JsonKey() final  bool isConfigured;
 
 /// Create a copy of UserProfileDto
 /// with the given fields replaced by the non-null parameter values.
@@ -225,16 +227,16 @@ _$UserProfileDtoCopyWith<_UserProfileDto> get copyWith => __$UserProfileDtoCopyW
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _UserProfileDto&&(identical(other.fullName, fullName) || other.fullName == fullName)&&(identical(other.email, email) || other.email == email)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _UserProfileDto&&(identical(other.fullName, fullName) || other.fullName == fullName)&&(identical(other.email, email) || other.email == email)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.isConfigured, isConfigured) || other.isConfigured == isConfigured));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,fullName,email,createdAt);
+int get hashCode => Object.hash(runtimeType,fullName,email,createdAt,isConfigured);
 
 @override
 String toString() {
-  return 'UserProfileDto(fullName: $fullName, email: $email, createdAt: $createdAt)';
+  return 'UserProfileDto(fullName: $fullName, email: $email, createdAt: $createdAt, isConfigured: $isConfigured)';
 }
 
 
@@ -245,7 +247,7 @@ abstract mixin class _$UserProfileDtoCopyWith<$Res> implements $UserProfileDtoCo
   factory _$UserProfileDtoCopyWith(_UserProfileDto value, $Res Function(_UserProfileDto) _then) = __$UserProfileDtoCopyWithImpl;
 @override @useResult
 $Res call({
- String fullName, String email, String createdAt
+ String fullName, String email, String createdAt, bool isConfigured
 });
 
 
@@ -262,12 +264,13 @@ class __$UserProfileDtoCopyWithImpl<$Res>
 
 /// Create a copy of UserProfileDto
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? fullName = null,Object? email = null,Object? createdAt = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? fullName = null,Object? email = null,Object? createdAt = null,Object? isConfigured = null,}) {
   return _then(_UserProfileDto(
 fullName: null == fullName ? _self.fullName : fullName // ignore: cast_nullable_to_non_nullable
 as String,email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
 as String,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
-as String,
+as String,isConfigured: null == isConfigured ? _self.isConfigured : isConfigured // ignore: cast_nullable_to_non_nullable
+as bool,
   ));
 }
 

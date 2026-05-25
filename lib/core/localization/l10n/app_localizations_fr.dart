@@ -159,4 +159,8 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get authProfileWriteFailed =>
       'Impossible d’enregistrer votre profil. Réessayez.';
+
+  @override
+  String get onboardingPlaceholderTitle =>
+      'Configuration de votre profil apprenant';
 }

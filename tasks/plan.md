@@ -1,475 +1,252 @@
-# Plan d’implémentation — Lucy Phase 1 (Authentification Firebase)
+# Plan d’implémentation — Lucy Onboarding (config apprenant)
 
-> Basé sur [SPEC.md](../SPEC.md). Mode plan : pas de modification de code applicatif dans cette étape.  
-> État repo au 2026-05-25 : `firebase_options.dart` + configs natives présents ; **0 %** feature auth ; `pubspec` sans deps Firebase.
+> Source : [SPEC.md](../SPEC.md) §4. Auth phase 1 : **livrée** ([todo.md](./todo.md) historique auth).  
+> Découpage **vertical** : chaque tâche livre un chemin testable de bout en bout.  
+> **Pas de modification de code** dans ce document — plan uniquement.
 
 ---
 
 ## 1. Objectif du plan
 
-Livrer un parcours auth **complet et vérifiable** sur **web + Android + iOS** :
+Livrer le parcours onboarding **obligatoire** :
 
-- Login **email + mot de passe** uniquement (pas de Google/Apple)  
-- Inscription → profil Firestore `users/{uid}` → session auto → `/home` (échec Firestore = pas de `/home`)  
-- Reset password (anti-énumération + UI succès)  
-- Splash bootstrap (`authStateChanges`)  
-- l10n **fr / en / de**, Clean Architecture, design Lucy  
+1. `validate-answer` → `turnSummary` → **« C’est bon »** → **`confirm-turn`** (Nest → Firestore) + local.
+2. 7 tours → `analyze` → récap → **`finalize`** → `/home`.
+3. Fallbacks après **10** échecs (question ou analyze) — §4.12.
+4. Nest **Admin** writer ; Flutter read ; **2000** car. — [SPEC.md](../SPEC.md) §4.12.
+5. UI **7 chats** + typing Lucy + design messagerie — §4.5.1.
 
-Découpage **vertical** : chaque tâche livre un chemin utilisateur testable de bout en bout, pas une couche vide (ex. « tout le data layer » sans UI).
+**Stack :** Flutter (`frontend/`) + NestJS (`Lucy/backend/`) + Gemini via `LlmPort`.
 
 ---
 
-## 2. Graphe de dépendances
+## 2. État actuel du repo
+
+| Élément | État |
+|---------|------|
+| Auth Firebase (login, signup, reset) | Livré |
+| `users/{uid}` (`fullName`, `email`, `createdAt`) | Livré |
+| `isConfigured`, onboarding feature | **Absent** |
+| `backend/` NestJS | **Absent** |
+| `dio`, `ApiEndpoints` | **Absent** (`pubspec`) |
+| Route `/onboarding` | **Absente** |
+| Router guard `isConfigured` | **Absent** (redirect → `/home` si connecté) |
+
+---
+
+## 3. Graphe de dépendances
 
 ```mermaid
 flowchart TB
+  subgraph prereq [Prérequis humain]
+    H1[GEMINI_API_KEY]
+    H2[Firebase service account backend]
+  end
+
   subgraph phase0 [Phase 0 — Fondation]
-    T01[T01 Bundle ID + FlutterFire]
-    T02[T02 pubspec + init Firebase]
-    T03[T03 Core minimal]
+    B01[B01 Scaffold backend]
+    B02[B02 Core LLM + Auth guard]
+    F01[F01 dio + ApiEndpoints]
+    F02[F02 Profil Firestore isConfigured]
   end
 
-  subgraph phase1 [Phase 1 — Login email]
-    T04[T04 Domain + Data Auth]
-    T05[T05 AuthService + errors]
-    T06[T06 Router + guard]
-    T07[T07 Shared widgets auth]
-    T08[T08 Login page E2E]
+  subgraph phase1 [Phase 1 — validate-answer]
+    B03[B03 Prompts validate]
+    B04[B04 Endpoint validate-answer]
   end
 
-  subgraph phase2 [Phase 2 — Signup]
-    T09[T09 Sign up E2E]
+  subgraph phase2 [Phase 2 — UI 1 tour]
+    F03[F03 Router + isConfigured read]
+    F04[F04 Feature skeleton + l10n]
+    F05[F05 Chat UI + 1 validate E2E]
   end
 
-  subgraph phase3 [Phase 3 — Reset]
-    T10[T10 Reset password E2E]
+  subgraph phase3 [Phase 3 — analyze]
+    B05[B05 Prompts + analyze endpoint]
   end
 
-  subgraph phase4 [Phase 4 — Qualité]
-    T13[T13 l10n complète]
-    T14[T14 Tests + DoD]
+  subgraph phase4 [Phase 4 — Parcours complet]
+    F06[F06 Boucle 7 questions]
+    F07[F07 Confirm + Firestore]
   end
 
-  T01 --> T02 --> T03
-  T03 --> T04 --> T05 --> T06
-  T03 --> T07
-  T06 --> T08
-  T07 --> T08
-  T05 --> T08
-  T08 --> T09
-  T08 --> T10
-  T09 --> T13
-  T10 --> T13
-  T13 --> T14
+  subgraph phase5 [Phase 5 — Qualité]
+    F08[F08 Errors l10n + tests]
+  end
+
+  H1 --> B02
+  H2 --> B02
+  B01 --> B02
+  B02 --> B03 --> B04
+  F01 --> F05
+  F02 --> F03 --> F04 --> F05
+  B04 --> F05
+  B02 --> B05
+  B04 --> B05
+  F05 --> F06
+  B05 --> F06
+  F06 --> F07
+  F07 --> F08
 ```
 
-**Chemins critiques :** T01 → T02 → T03 → T04 → T05 → T06 → T08 (premier vertical slice débloquant tout le reste).
+**Chemins critiques :** `B01 → B02 → B04` (API validate) puis `F01 → F02 → F03 → F05` en parallèle partiel ; `B05` avant `F06` complet.
 
-**Parallélisable après T03 :** T07 (widgets) en parallèle de T04–T05.
-
-**Bloquant externe (humain / console) :** règles Firestore `users/{uid}`, domaines auth web, email enumeration protection.
+**Parallélisable :** après `B02`, équipe peut scinder **backend** (B03–B05) et **frontend** (F01–F04) jusqu’à CP-2.
 
 ---
 
-## 3. Décisions techniques figées pour le plan
+## 4. Prérequis humains (bloquants)
 
-| Sujet | Choix plan |
-|--------|------------|
-| Profil | Firestore **obligatoire** `users/{uid}` (`fullName`, `email`, `createdAt`) ; mot de passe **Auth seulement** |
-| OAuth Google/Apple | **Hors scope** — supprimé du frontend (pas T11/T12) |
-| Plateformes | Web + Android + iOS ; pas macOS auth phase 1 |
-| Bundle ID | `com.lucy.app` (T01 fait) |
-| Bootstrap | Splash + 1er `authStateChanges` (T06) |
-| Vérif. email | Non (Firebase Auth suffit) |
-| Home | Placeholder + logout |
+| ID | Action | Bloque |
+|----|--------|--------|
+| P0 | Créer `Lucy/backend/` + `npm`/`pnpm` install | B01+ |
+| P1 | Clé **`GEMINI_API_KEY`** dans `backend/.env` | B02, appels réels |
+| P2 | **Compte de service Firebase** pour Nest (vérif idToken) | B02 |
+| P3 | CORS dev : autoriser origine Flutter web + `localhost` | F05+ (web) |
+| P4 | Étendre **Firestore rules** si nouveaux champs (même `users/{uid}`) | F07 |
 
 ---
 
-## 4. Phases et checkpoints
+## 5. Phases, tâches et critères d’acceptation
 
 ### Phase 0 — Fondation (bloquant)
 
-**But :** `flutter analyze` vert, app démarre avec Firebase initialisé, squelette `core/` + `app.dart`.
+**But :** backend démarre ; Flutter prêt pour HTTP ; profil signup avec `isConfigured: false`.
 
-| Checkpoint | Critère |
-|------------|---------|
-| **CP-0** | `flutter pub get` + `flutter analyze` sans erreur ; `flutter run -d chrome` affiche shell Lucy (pas demo compteur) |
+| ID | Tâche | AC (acceptation) | Vérification |
+|----|--------|------------------|--------------|
+| **B01** | Scaffold NestJS `Lucy/backend/` (`nest new`, prefix `/v1`, health) | `npm run start:dev` → serveur écoute `PORT` | `curl localhost:3000/health` ou équivalent |
+| **B02** | Core : `FirebaseAuthGuard`, config `.env.example`, `LlmPort`, `GeminiLlmAdapter`, filtres erreurs HTTP structurés | Guard rejette requête sans token ; adapter mockable | Test unit guard + adapter avec clé ou mock |
+| **F01** | `dio` dans `pubspec` ; `lib/core/network/` (`ApiEndpoints`, client + interceptor `getIdToken`) | Aucune URL en dur dans features | `flutter analyze` |
+| **F02** | Étendre `UserProfileDto` + mapper + signup : `isConfigured: false` ; lecture profil pour guard (stream/fetch) | Nouveau signup → doc Firestore avec `isConfigured: false` | Test mapper + signup integration / console Firestore |
 
----
-
-### Phase 1 — Vertical slice : Login email → Home
-
-**But :** Un utilisateur peut se connecter avec email/mot de passe et atterrir sur `/home`.
-
-| Checkpoint | Critère |
-|------------|---------|
-| **CP-1** | Compte Firebase test : login → `/home` ; logout → `/login` ; refresh web : session conservée |
+| **CP-0** | `flutter analyze` vert ; backend démarre ; signup crée `isConfigured: false` |
 
 ---
 
-### Phase 2 — Vertical slice : Sign up → Home
+### Phase 1 — Vertical slice : `validate-answer` (backend)
 
-**But :** Création compte + `displayName` + redirection auto `/home`.
+**But :** un appel API valide une réponse et renvoie `rephrasedQuestion` si besoin.
 
-| Checkpoint | CP-2 |
-|------------|------|
-| **CP-2** | Nouvel email : signup → home sans repasser par login ; email déjà utilisé → message l10n |
+| ID | Tâche | AC | Vérification |
+|----|--------|-----|--------------|
+| **B03** | `PromptLoaderService` + `prompts/onboarding-validate-answer.*` (règles SPEC : pas « Peux-tu préciser », `rephrasedQuestion` obligatoire si `valid: false`) | Fichiers présents ; chargement au boot | Revue prompt + test loader |
+| **B04** | `POST /v1/onboarding/validate-answer` : DTO, `OnboardingService`, controller, validation JSON sortie | Réponse claire → `{ valid: true, acknowledgment? }` ; vague → `{ valid: false, rephrasedQuestion }` | `curl` avec token Firebase test ; tests unit service mock `LlmPort` |
 
----
-
-### Phase 3 — Vertical slice : Reset password
-
-**But :** Demande reset + UI « vérifiez votre email » (design).
-
-| Checkpoint | Critère |
-|------------|---------|
-| **CP-3** | Email envoyé (console Firebase / boîte test) ; UI succès + try again + back login |
+| **CP-1** | 2 cas manuels : réponse OK + réponse vague → JSON conforme SPEC §4.6 |
 
 ---
 
-### Phase 4 — Console Firestore & qualité
+### Phase 2 — Vertical slice : UI 1 question + validate (Flutter)
 
-**But :** Règles Firestore + polish l10n/tests.
+**But :** un utilisateur connecté voit 1 question, envoie une réponse, Lucy valide ou repose la question.
 
-| Checkpoint | Critère |
-|------------|---------|
-| **CP-4** | T11 : règles `users/{uid}` OK ; signup crée document Firestore |
-| **CP-5** | Tous les AC SPEC §1.4 ; `flutter test` + `flutter analyze` verts |
+| ID | Tâche | AC | Vérification |
+|----|--------|-----|--------------|
+| **F03** | Route `/onboarding` ; `LucyRoutePaths` ; guard : connecté + `isConfigured == false` → onboarding ; `true` → `/home` ; signup/login → `/onboarding` si non configuré | Connecté non configuré sur `/home` → `/onboarding` | Test `LucyRouterGuards` + manuel |
+| **F04** | Feature `onboarding/` skeleton (domain/data/presentation) ; l10n 7 questions (`onboarding.*` ARB fr/en/de) ; constantes `questionId` | Pas de texte UI en dur | `flutter gen-l10n` ; analyze |
+| **F05** | `OnboardingChatPage` : bulles Lucy, champ réponse, envoi → `validate-answer` ; si `valid: false` afficher **`rephrasedQuestion`** (pas meta « préciser ») ; si `valid: true` acknowledgment + stocker tour localement | 1 tour validé visible dans l’état ; loading pendant appel | `flutter run` + backend local ; widget test états loading/error |
 
----
-
-### Phase 5 — Definition of Done (alias CP-5)
-
-| Checkpoint | Critère |
-|------------|---------|
-| *(voir CP-5 ci-dessus)* | Revue UI web ~1440px + mobile ~390px |
+| **CP-2** | Parcours manuel : réponse vague → nouvelle question Lucy ; réponse claire → passage (étape 2 ou fin slice selon implémentation temporaire) |
 
 ---
 
-## 5. Tâches détaillées (vertical slices)
+### Phase 3 — Vertical slice : `analyze` (backend)
 
-### T01 — Alignement identifiants & Firebase
+**But :** transcript 7 entrées → `learnerProfile` + `summaryForUser`.
 
-**Dépendances :** aucune  
-**Référence :** gap audit bundle `afroschool.cloud.frontend` vs OAuth `lucy` dans `google-services.json`
+| ID | Tâche | AC | Vérification |
+|----|--------|-----|--------------|
+| **B05** | Prompts `onboarding-analyze.*` + `POST /v1/onboarding/analyze` + validator enums §4.4.1 | 7 entrées valides → 200 + profil complet ; &lt;7 → 400 ; enum invalide → 422 | `curl` + tests unit |
 
-**Travail :**
-- Décider bundle ID final (`com.lucy.app` recommandé).
-- Mettre à jour Android `applicationId`, iOS/macOS `PRODUCT_BUNDLE_IDENTIFIER`, `MainActivity` package.
-- Relancer `flutterfire configure` pour régénérer `firebase_options.dart`, `google-services.json`, plist.
-- Vérifier cohérence des 3 plateformes dans console Firebase `lucy-7504c`.
-
-**AC :**
-- [ ] Un seul bundle ID sur Android / iOS / macOS / `firebase_options`
-- [ ] Pas de client OAuth iOS avec un bundle différent du projet Xcode
-
-**Vérification :**
-```bash
-grep -r "afroschool.cloud" android/ ios/ macos/ lib/firebase_options.dart  # doit être vide ou justifié
-flutterfire configure  # si changement bundle
-```
+| **CP-3** | Postman/curl : transcript fixture 7 tours → `learnerProfile` conforme |
 
 ---
 
-### T02 — Dépendances & bootstrap Firebase
+### Phase 4 — Vertical slice : parcours complet (Flutter)
 
-**Dépendances :** T01  
-**Référence :** SPEC §5.1, `lib/main.dart` actuel (demo)
+**But :** 7 questions avec validate à chaque tour → analyze → confirmation → Firestore.
 
-**Travail :**
-- Ajouter deps : `firebase_core`, `firebase_auth`, `cloud_firestore`, `flutter_riverpod`, `riverpod_annotation`, `freezed`, `freezed_annotation`, `go_router`, `flutter_localizations`, `intl`, `flutter_svg`, `flex_color_scheme`.
-- **Pas** de `google_sign_in` ni `sign_in_with_apple`.
-- Dev : `build_runner`, `riverpod_generator`, `json_serializable`.
-- `main.dart` : `WidgetsFlutterBinding.ensureInitialized()` → `Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform)` → `ProviderScope` → `LucyApp`.
-- Supprimer template compteur.
+| ID | Tâche | AC | Vérification |
+|----|--------|-----|--------------|
+| **F06** | Boucle 7 `questionId` ; transcript local (ajout seulement si `valid: true`) ; progression 1/7…7/7 ; après 7ᵉ → appel `analyze` | Impossible d’atteindre analyze avec &lt;7 tours validés | Test notifier ; manuel complet |
+| **F07** | `OnboardingConfirmPage` : `summaryForUser` + libellés enums l10n ; Valider → Firestore (`learnerProfile`, `onboardingTranscript`, `onboardingCompletedAt`, `isConfigured: true`) ; Modifier → retour chat | Après Valider → `/home` ; doc Firestore complet | Console Firestore ; manuel |
+| **F07b** | Auth signup redirect `/onboarding` (plus `/home` direct si profil incomplet) | Nouveau compte → onboarding | Manuel signup |
 
-**AC :**
-- [ ] `flutter analyze` : 0 erreur (y compris `firebase_options.dart`)
-- [ ] App compile web + au moins une plateforme mobile
-
-**Vérification :**
-```bash
-flutter pub get && flutter analyze && flutter run -d chrome
-```
+| **CP-4** | E2E : signup → 7 Q/R (dont 1 rephrase) → confirm → `/home` ; `isConfigured: true` |
 
 ---
 
-### T03 — Core minimal (thème FlexColorScheme, routes, l10n, extensions)
+### Phase 5 — Qualité
 
-**Dépendances :** T02  
-**Référence :** AfroSchool `l10n.yaml`, `af_flex_theme.dart`, `af_colors.dart`, SPEC §4
+| ID | Tâche | AC | Vérification |
+|----|--------|-----|--------------|
+| **F08** | `onboarding_error_translator` (codes API → l10n) ; pas de message brut | Codes 401, 422, 502, 503 couverts | Tests translator |
+| **F09** | Tests : `OnboardingService` mock repos ; widget confirm ; router guard avec profil mock | `flutter test` vert | CI |
+| **B06** | README `backend/` (run local, env) ; optionnel rate limit | Doc à jour | Revue |
 
-**Travail :**
-- `l10n.yaml` + `app_fr.arb` (template) + stubs `app_en.arb`, `app_de.arb`.
-- **`flex_color_scheme`** + `LucyFlexTheme` + `lucy_custom_theme/` (`lucy_colors`, `lucy_button_theme`, `lucy_text_field_theme`, `lucy_form_theme`).
-- **`LucyColors`** : triplet **primary / secondary / tertiary** harmonisé + seeds light/dark (comme `AFColors.colorScheme*Seed`).
-- `LucyFlexTheme` passe `primary`, `secondary`, `tertiary` à `FlexThemeData` — widgets utilisent `colorScheme.*`.
-- `LucyRoutePaths`, `LucyRouteNames`, `context.l10n`, `build_context_responsive`.
-- `app.dart` : `MaterialApp.router`, locales fr/en/de, `theme: LucyFlexTheme.lightTheme`.
-
-**AC :**
-- [ ] Router + splash : **uniquement** `context.colorScheme` — **0** `Color(0x…)` / `LucyColors` hors `lib/core/theme/`
-- [ ] `flutter gen-l10n` génère `AppLocalizations`
-
-**Vérification :**
-```bash
-flutter gen-l10n  # ou via flutter pub get
-flutter analyze
-```
-
----
-
-### T04 — Auth domain + data (Firebase encapsulé)
-
-**Dépendances :** T03  
-**Référence :** SPEC §4.2, AfroSchool `auth_repository.dart` (contrat simplifié)
-
-**Travail :**
-- `AuthUser` entity (uid, email, displayName).
-- `AuthRepository` abstract.
-- `FirebaseAuthDatasource` : wrappers `FirebaseAuth` uniquement ici.
-- `FirestoreUserDatasource` (ou méthodes dans repo) : `users/{uid}`.
-- **`auth_user_mapper.dart`** : `User` (SDK) → `AuthUser`.
-- **`user_profile_dto.dart`** + **`user_profile_mapper.dart`** pour Firestore.
-- `signUp` : Auth + `updateDisplayName` + Firestore ; échec Firestore → `deleteUser` + throw.
-- `AuthRepositoryImpl` + `authRepositoryProvider`.
-
-**AC :**
-- [ ] Aucun import `firebase_auth` / `cloud_firestore` hors `data/`
-- [ ] `authStateChanges()` exposé au domaine
-- [ ] Signup sans `/home` si écriture profil échoue
-
-**Vérification :**
-```bash
-rg "firebase_auth" lib/ --glob "!**/firebase_auth_datasource.dart" --glob "!**/auth_repository_impl.dart"
-# doit ne retourner que providers/service si imports types uniquement — idéalement zero hors data
-```
-
----
-
-### T05 — AuthService + traduction erreurs
-
-**Dépendances :** T04  
-**Référence :** AfroSchool `auth_error_translator.dart`
-
-**Travail :**
-- `AuthService` : login email, signup, reset email, signOut, streams.
-- `auth_error_translator.dart` : codes `user-not-found`, `wrong-password`, `email-already-in-use`, `weak-password`, `invalid-email`, `network-request-failed`, `too-many-requests`, `user-disabled`, `operation-not-allowed`, etc.
-- Clés ARB `auth.*` (fr/en/de) pour chaque code mappé.
-
-**AC :**
-- [ ] Service ne importe pas `firebase_auth` directement
-- [ ] Tests unitaires translator (codes → clés l10n)
-
-**Vérification :**
-```bash
-flutter test test/core/utils/auth_error_translator_test.dart
-```
-
----
-
-### T06 — Router GoRouter + guard session
-
-**Dépendances :** T05  
-**Référence :** AfroSchool `af_router_guards.dart`, routes auth publiques
-
-**Travail :**
-- Routes : `/` (splash), `/login`, `/signup`, `/reset-password`, `/home`.
-- Splash : attend le **1er** `authStateChanges` avant redirect (pas de flash login).
-- `GoRouter` `refreshListenable` sur stream auth.
-- Redirect : auth sur login/signup → home ; non auth → login (après splash).
-- Provider `authStateProvider` basé sur `authStateChanges()`.
-
-**AC :**
-- [ ] Cold start : pas de flash `/login` si déjà connecté
-- [ ] Guard empêche `/home` sans session
-
-**Vérification :**
-- Test widget/integration mock `AuthRepository` + navigation
-
----
-
-### T07 — Shared widgets & layouts auth (design Lucy)
-
-**Dépendances :** T03  
-**Référence :** design React + AfroSchool `auth_web_layout.dart`, `auth_mobile_layout.dart`, boutons shared
-
-**Travail :**
-- **`LucyPrimaryButton` / `LucySecondaryButton` / `LucyTertiaryButton`** (pattern `AF*Button`).
-- **`LucyTextFieldWeb` / `LucyTextFieldMobile`** (pattern `af_text_field_*`, thème `LucyTextFieldTheme`).
-- `LucyLogo`, `AuthScaffold`, `AuthWebLayout`, `AuthMobileLayout`.
-- Styles **uniquement** via `Theme.of(context).colorScheme` — **interdit** hex / `LucyColors` dans widgets.
-- **Aucune** section « or continue with » / boutons Google/Apple (supprimés du design).
-
-**AC :**
-- [x] Rendu carte ~max 448px web, plein écran mobile
-- [x] Couleurs via `colorScheme` uniquement (grep features/shared sans `Color(0x`)
-
-**Vérification :**
-- Revue manuelle chrome + simulateur iPhone
-
----
-
-### T08 — Vertical slice : Login email → Home
-
-**Dépendances :** T05, T06, T07  
-**Référence :** `login.tsx`, AfroSchool `login_page.dart`
-
-**Travail :**
-- `LoginState` (Freezed) + `LoginNotifier`.
-- `LoginPage` : formulaire, loading, erreurs l10n, liens signup/reset.
-- `HomePage` placeholder + logout.
-- Flux : `submitLogin` → service → `go('/home')`.
-
-**AC :**
-- [ ] **CP-1** validé sur compte Firebase console (manuel)
-- [x] Pas de texte UI en dur (l10n)
-- [x] Layout web vs mobile basé sur `context.isDesktop` / responsive
-
-**Vérification :**
-```bash
-flutter run -d chrome
-# login test user → home → logout → login
-```
-
----
-
-### T09 — Vertical slice : Sign up → Home
-
-**Dépendances :** T08  
-**Référence :** `sign-up.tsx`
-
-**Travail :**
-- `SignUpNotifier` + page : fullName, email, password.
-- Service : createUser + updateDisplayName + **Firestore** `users/{uid}`.
-- Redirect `/home` **uniquement** si Auth + Firestore OK.
-- Test manuel : couper réseau / règles Firestore → signup échoue, pas de home.
-
-**AC :**
-- [ ] **CP-2** validé (document Firestore présent — manuel / console)
-- [x] Échec Firestore → pas de session persistante sur `/home`
-
----
-
-### T10 — Vertical slice : Reset password
-
-**Dépendances :** T08  
-**Référence :** `reset-password.tsx` (form + success state)
-
-**Travail :**
-- `ResetPasswordNotifier` avec état `form | success`.
-- `sendPasswordResetEmail`.
-- UI succès : email affiché, try again, back to login.
-
-**AC :**
-- [ ] **CP-3** : email reçu ou log Firebase Auth OK (manuel)
-- [x] UI succès **identique** email inconnu vs connu (anti-énumération Q13)
-- [x] Pas d’écran custom « nouveau MDP » (SPEC)
-
-**Vérification :**
-- Soumettre email compte existant → état succès → try again → formulaire
-
----
-
-### T11 — Configuration console Firebase (humain, parallèle T08)
-
-**Dépendances :** T01  
-**Type :** DevOps / console
-
-**Travail :**
-- Auth : **Email/Password** uniquement.
-- Firestore : règles `users/{uid}` (lecture/écriture owner).
-- Web : domaines autorisés + templates reset.
-- **Email enumeration protection** : activée.
-- Nettoyer configs natives OAuth inutiles (entitlements Apple Sign-In, URL scheme Google) si présents — optionnel, pas bloquant email auth.
-
-**AC :**
-- [x] Règles Firestore versionnées (`firestore.rules`) + `.firebaserc` + tests contrat
-- [ ] SPEC §B, §C, §D cochés en console (guide `docs/firebase-console-t11.md`)
-- [ ] Signup test crée doc `users/{uid}` (manuel après deploy rules)
-
----
-
-### ~~T12 — OAuth~~ — **Annulé** (hors scope PO)
-
----
-
-### T13 — l10n complète & polish UI
-
-**Dépendances :** T09, T10
-
-**Travail :**
-- Compléter fr/en/de : tous libellés auth + home placeholder + erreurs.
-- `untranslated_messages.txt` vide ou justifié.
-- Harmoniser titres web (`index.html`, manifest : « Lucy »).
-- Renommer package `frontend` → `lucy` si décidé (imports, tests).
-
-**AC :**
-- [x] Changer locale device → libellés changent
-- [x] `flutter gen-l10n` sans untranslated critiques
-
----
-
-### T14 — Tests & Definition of Done
-
-**Dépendances :** T13  
-**Référence :** SPEC §7, §1.4
-
-**Travail :**
-- Tests : `AuthService` (mock repo), translator, widgets formulaires.
-- Mettre à jour `widget_test.dart` (smoke LucyApp).
-- Checklist SPEC §1.4 dans PR / `tasks/todo.md`.
-
-**AC :**
-- [x] **CP-5** : `flutter test` + `flutter analyze` verts
-- [ ] Revue design 3 écrans web + mobile (manuel)
+| **CP-5** | `flutter analyze` + `flutter test` verts ; revue SPEC §4.8 cochée |
 
 ---
 
 ## 6. Ordre d’exécution recommandé
 
 ```
-T01 → T02 → T03 ─┬→ T04 → T05 → T06 → T08 → T09 → T10 → T13 → T14
-                 └→ T07 ────────────────────────────────┘
-T11 (parallèle dès T01, Firestore + console)
+P0–P2 (humain)
+→ B01 → B02 ─┬→ B03 → B04 ────────────────┐
+             │                            │
+             ├→ B05 (après B04)           │
+             │                            │
+             └→ F01 → F02 → F03 → F04 → F05 (CP-2, besoin B04)
+→ F06 → F07 (besoin B05)
+→ F08 → F09 → B06 (CP-5)
 ```
 
-**Durée indicative (dev seul) :** 2–4 jours ouvrés (sans OAuth).
+---
+
+## 7. Stratégie de test (SPEC §4.8)
+
+| Niveau | Cible |
+|--------|--------|
+| Backend unit | `OnboardingService`, validator enums, `LlmPort` mock |
+| Backend e2e | Controller + guard (token mock) |
+| Flutter unit | Router guards, notifiers, translators, mappers profil |
+| Flutter widget | Chat (loading, rephrasedQuestion, acknowledgment) |
+| Manuel | CP-1 à CP-4 sur web Chrome + backend local |
+
+**Mode dev sans Gemini :** mock `LlmPort` dans backend pour F05–F07 si P1 pas prêt (documenter dans README backend).
 
 ---
 
-## 7. Risques & mitigations
+## 8. Risques et mitigations
 
-| Risque | Impact | Mitigation |
-|--------|--------|------------|
-| Règles Firestore manquantes | Signup échoue toujours | T11 avant tests T09 |
-| Signup partiel (Auth OK, Firestore KO) | Compte orphelin | Rollback `deleteUser` dans T04 |
-| `pubspec` name `frontend` | Confusion imports | T13 ou T02 renommer en `lucy` |
-| Enumération emails reset | Fuite existence compte | Protection Firebase + UI succès générique (T10) |
-| Flash login au cold start | UX | Splash T06 |
-
----
-
-## 8. Livrables fin phase 1
-
-- App Flutter Lucy : auth complète Firebase  
-- `lib/features/auth/` + `lib/core/` + `lib/shared/` conformes SPEC  
-- l10n fr/en/de  
-- `tasks/todo.md` entièrement coché  
-- Prêt pour phase 2 (module IA sur `/home`)
+| Risque | Mitigation |
+|--------|------------|
+| Latence Gemini à chaque réponse (7+ appels) | `gemini-2.5-flash` ; loading UX ; désactiver double-submit |
+| Coût API | Rate limit ; pas de retry agressif |
+| `rephrasedQuestion` meta « préciser » | Tests prompt + revue JSON schema |
+| Guard sans lecture Firestore | Provider `userProfileProvider` au bootstrap post-auth |
+| Comptes existants sans `isConfigured` | Traiter absent = `false` (SPEC) |
 
 ---
 
-## 9. Références code à copier/adapter
+## 9. Hors périmètre de ce plan
 
-| Élément | Projet référence |
-|---------|------------------|
-| Layouts auth | `afroschool_admin_web/lib/features/auth/presentation/widgets/` |
-| Login page structure | `.../presentation/pages/login/login_page.dart` |
-| Router guards | `.../core/router/af_router_guards.dart` |
-| l10n 3 langues | `.../core/localization/l10n/app_{fr,en,de}.arb` |
-| Design UI | `Design Authentication Flow Screens/src/app/components/` |
+- Chat tuteur, documents, RAG.
+- Édition profil dans Paramètres.
+- `openai` adapter (seul stub prévu).
+- Home fonctionnel au-delà du placeholder.
 
 ---
 
-*Ce document a été créé avec Cursor (IA).*
+## 10. Références
+
+| Document | Rôle |
+|----------|------|
+| [SPEC.md](../SPEC.md) | Spec produit §4 |
+| [docs/firebase-console-t11.md](../docs/firebase-console-t11.md) | Firestore rules |
+| `afroschool_admin_web` | Patterns Clean Arch / auth layouts |
+
+---
+
+*Ce document a été créé avec Cursor (IA). Dernière mise à jour : plan onboarding vertical (validate par tour + analyze).*

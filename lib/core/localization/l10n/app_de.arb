@@ -54,5 +54,6 @@
   "authTooManyRequests": "Zu viele Versuche. Später erneut versuchen.",
   "authUserDisabled": "Dieses Konto wurde deaktiviert.",
   "authOperationNotAllowed": "Diese Aktion ist nicht erlaubt.",
-  "authProfileWriteFailed": "Profil konnte nicht gespeichert werden. Bitte erneut versuchen."
+  "authProfileWriteFailed": "Profil konnte nicht gespeichert werden. Bitte erneut versuchen.",
+  "onboardingPlaceholderTitle": "Einrichtung Ihres Lernprofils"
 }

@@ -20,4 +20,7 @@ abstract class AuthRepository {
   Stream<AuthUser?> authStateChanges();
 
   AuthUser? get currentUser;
+
+  /// Reads `isConfigured` from Firestore profile; false if missing (SPEC §4.4).
+  Future<bool> fetchIsConfiguredForCurrentUser();
 }

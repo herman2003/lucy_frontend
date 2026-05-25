@@ -1,11 +1,17 @@
 rules_version = '2';
 
-// SPEC §C — profile documents: users/{uid}, owner read/write only.
+// SPEC §C — users/{uid}: owner read; signup writes base profile from client.
+// Onboarding transcript / pending* / status updates: Nest Admin SDK (SPEC R6).
+// MVP: owner write retained for isConfigured at signup; restrict onboarding
+// fields server-side in production when custom claims are available.
 service cloud.firestore {
   match /databases/{database}/documents {
     match /users/{userId} {
-      allow read, write: if request.auth != null
+      allow read: if request.auth != null
         && request.auth.uid == userId;
+      allow create, update: if request.auth != null
+        && request.auth.uid == userId;
+      allow delete: if false;
     }
   }
 }

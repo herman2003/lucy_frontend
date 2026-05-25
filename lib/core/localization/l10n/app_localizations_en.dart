@@ -158,4 +158,7 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get authProfileWriteFailed =>
       'Could not save your profile. Please try again.';
+
+  @override
+  String get onboardingPlaceholderTitle => 'Set up your learner profile';
 }

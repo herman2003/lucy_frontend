@@ -21,9 +21,7 @@ void main() {
 
       await tester.pumpWidget(
         ProviderScope(
-          overrides: [
-            authRepositoryProvider.overrideWithValue(repository),
-          ],
+          overrides: [authRepositoryProvider.overrideWithValue(repository)],
           child: Builder(
             builder: (context) {
               container = ProviderScope.containerOf(context);
@@ -61,9 +59,7 @@ void main() {
     test('submitSignUp creates user when profile write succeeds', () async {
       final repository = FakeAuthRepository(null);
       final container = ProviderContainer(
-        overrides: [
-          authRepositoryProvider.overrideWithValue(repository),
-        ],
+        overrides: [authRepositoryProvider.overrideWithValue(repository)],
       );
       addTearDown(container.dispose);
 
@@ -72,9 +68,7 @@ void main() {
       notifier.updateEmail('new@lucy.test');
       notifier.updatePassword('password1');
 
-      await notifier.submitSignUp(
-        _UnmountedContext(),
-      );
+      await notifier.submitSignUp(_UnmountedContext());
 
       expect(repository.currentUser?.email, 'new@lucy.test');
       expect(repository.currentUser?.displayName, 'Lucy User');

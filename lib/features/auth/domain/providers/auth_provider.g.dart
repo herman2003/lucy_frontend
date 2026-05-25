@@ -139,22 +139,24 @@ final class AuthStateChangesProvider
 
 String _$authStateChangesHash() => r'f31b96c0a82f4d470bb12831dc2f74e3b99fe1d5';
 
-/// First auth event before routing away from splash (Q14).
+/// Auth + `isConfigured` for routing; recomputes when [authStateChanges] updates.
 
 @ProviderFor(authBootstrap)
 const authBootstrapProvider = AuthBootstrapProvider._();
 
-/// First auth event before routing away from splash (Q14).
+/// Auth + `isConfigured` for routing; recomputes when [authStateChanges] updates.
 
 final class AuthBootstrapProvider
     extends
         $FunctionalProvider<
-          AsyncValue<AuthUser?>,
-          AuthUser?,
-          FutureOr<AuthUser?>
+          AsyncValue<AuthBootstrapResult>,
+          AuthBootstrapResult,
+          FutureOr<AuthBootstrapResult>
         >
-    with $FutureModifier<AuthUser?>, $FutureProvider<AuthUser?> {
-  /// First auth event before routing away from splash (Q14).
+    with
+        $FutureModifier<AuthBootstrapResult>,
+        $FutureProvider<AuthBootstrapResult> {
+  /// Auth + `isConfigured` for routing; recomputes when [authStateChanges] updates.
   const AuthBootstrapProvider._()
     : super(
         from: null,
@@ -171,13 +173,14 @@ final class AuthBootstrapProvider
 
   @$internal
   @override
-  $FutureProviderElement<AuthUser?> $createElement($ProviderPointer pointer) =>
-      $FutureProviderElement(pointer);
+  $FutureProviderElement<AuthBootstrapResult> $createElement(
+    $ProviderPointer pointer,
+  ) => $FutureProviderElement(pointer);
 
   @override
-  FutureOr<AuthUser?> create(Ref ref) {
+  FutureOr<AuthBootstrapResult> create(Ref ref) {
     return authBootstrap(ref);
   }
 }
 
-String _$authBootstrapHash() => r'6007aa90a4404567eeb6d0fc7489cf4917ead998';
+String _$authBootstrapHash() => r'98ddc70f53fef9650ce2de29d9b4d113322cd280';

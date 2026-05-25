@@ -66,6 +66,7 @@ class AuthRepositoryImpl implements AuthRepository {
         fullName: fullName,
         email: email,
         createdAt: DateTime.now().toUtc().toIso8601String(),
+        isConfigured: false,
       );
 
       try {
@@ -100,5 +101,15 @@ class AuthRepositoryImpl implements AuthRepository {
   @override
   Future<void> signOut() async {
     await _authRemote.signOut();
+  }
+
+  @override
+  Future<bool> fetchIsConfiguredForCurrentUser() async {
+    final uid = currentUser?.uid;
+    if (uid == null) {
+      return false;
+    }
+    final profile = await _profileRemote.fetchUserProfile(uid: uid);
+    return profile?.isConfiguredEffective ?? false;
   }
 }

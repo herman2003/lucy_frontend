@@ -36,4 +36,7 @@ class ThrowingAuthRepository implements AuthRepository {
 
   @override
   Future<void> signOut() async {}
+
+  @override
+  Future<bool> fetchIsConfiguredForCurrentUser() async => false;
 }

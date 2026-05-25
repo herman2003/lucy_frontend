@@ -14,16 +14,16 @@ void main() {
   group('ResetPasswordNotifier', () {
     tearDown(LucySnackBar.hideAll);
 
-    testWidgets('user-not-found shows success (anti-enumeration)', (tester) async {
+    testWidgets('user-not-found shows success (anti-enumeration)', (
+      tester,
+    ) async {
       final repository = FakeAuthRepository(null)
         ..passwordResetErrorCode = 'user-not-found';
       late ProviderContainer container;
 
       await tester.pumpWidget(
         ProviderScope(
-          overrides: [
-            authRepositoryProvider.overrideWithValue(repository),
-          ],
+          overrides: [authRepositoryProvider.overrideWithValue(repository)],
           child: Builder(
             builder: (context) {
               container = ProviderScope.containerOf(context);
@@ -60,9 +60,7 @@ void main() {
 
       await tester.pumpWidget(
         ProviderScope(
-          overrides: [
-            authRepositoryProvider.overrideWithValue(repository),
-          ],
+          overrides: [authRepositoryProvider.overrideWithValue(repository)],
           child: Builder(
             builder: (context) {
               container = ProviderScope.containerOf(context);
@@ -97,9 +95,7 @@ void main() {
     test('successful reset shows success view', () async {
       final repository = FakeAuthRepository(null);
       final container = ProviderContainer(
-        overrides: [
-          authRepositoryProvider.overrideWithValue(repository),
-        ],
+        overrides: [authRepositoryProvider.overrideWithValue(repository)],
       );
       addTearDown(container.dispose);
 
@@ -116,9 +112,7 @@ void main() {
     test('tryAgain returns to form', () async {
       final repository = FakeAuthRepository(null);
       final container = ProviderContainer(
-        overrides: [
-          authRepositoryProvider.overrideWithValue(repository),
-        ],
+        overrides: [authRepositoryProvider.overrideWithValue(repository)],
       );
       addTearDown(container.dispose);
 

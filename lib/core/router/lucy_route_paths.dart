@@ -7,4 +7,5 @@ class LucyRoutePaths {
   static const String signup = '/signup';
   static const String resetPassword = '/reset-password';
   static const String home = '/home';
+  static const String onboarding = '/onboarding';
 }

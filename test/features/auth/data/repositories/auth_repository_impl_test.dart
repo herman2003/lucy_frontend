@@ -81,6 +81,11 @@ class _FakeProfileRemoteDataSource implements UserProfileRemoteDataSource {
     }
     lastWritten = profile;
   }
+
+  @override
+  Future<UserProfileDto?> fetchUserProfile({required String uid}) async {
+    return lastWritten;
+  }
 }
 
 void main() {
@@ -109,7 +114,26 @@ void main() {
       expect(user.email, 'new@lucy.test');
       expect(user.displayName, 'New User');
       expect(profileRemote.lastWritten?.fullName, 'New User');
+      expect(profileRemote.lastWritten?.isConfigured, isFalse);
       expect(authRemote.deleteUserCalled, isFalse);
+    });
+
+    test('fetchIsConfiguredForCurrentUser returns false when not signed in',
+        () async {
+      expect(await repository.fetchIsConfiguredForCurrentUser(), isFalse);
+    });
+
+    test('fetchIsConfiguredForCurrentUser reads profile flag', () async {
+      await repository.signUpWithEmailAndPassword(
+        email: 'cfg@lucy.test',
+        password: 'password123',
+        fullName: 'Cfg User',
+      );
+      expect(await repository.fetchIsConfiguredForCurrentUser(), isFalse);
+      profileRemote.lastWritten = profileRemote.lastWritten!.copyWith(
+        isConfigured: true,
+      );
+      expect(await repository.fetchIsConfiguredForCurrentUser(), isTrue);
     });
 
     test('signUp rolls back auth user when Firestore write fails', () async {

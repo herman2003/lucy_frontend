@@ -6,7 +6,10 @@ import 'package:frontend/features/auth/domain/repositories/auth_repository.dart'
 
 /// In-memory [AuthRepository] for widget/router tests.
 class FakeAuthRepository implements AuthRepository {
-  FakeAuthRepository(AuthUser? user) : _user = user {
+  FakeAuthRepository(
+    AuthUser? user, {
+    this.isConfigured = false,
+  }) : _user = user {
     _authController.add(_user);
   }
 
@@ -15,6 +18,9 @@ class FakeAuthRepository implements AuthRepository {
 
   /// When set, [sendPasswordResetEmail] throws [AuthException] with this code.
   String? passwordResetErrorCode;
+
+  /// Simulates Firestore `isConfigured` for router tests (F03).
+  bool isConfigured;
 
   AuthUser? _user;
   final StreamController<AuthUser?> _authController =
@@ -25,6 +31,14 @@ class FakeAuthRepository implements AuthRepository {
 
   @override
   Stream<AuthUser?> authStateChanges() => _authController.stream;
+
+  @override
+  Future<bool> fetchIsConfiguredForCurrentUser() async {
+    if (_user == null) {
+      return false;
+    }
+    return isConfigured;
+  }
 
   @override
   Future<AuthUser> signInWithEmailAndPassword({

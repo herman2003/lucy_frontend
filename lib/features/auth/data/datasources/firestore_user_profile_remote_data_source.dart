@@ -23,4 +23,14 @@ class FirestoreUserProfileRemoteDataSource
         .doc(uid)
         .set(profile.toFirestoreMap());
   }
+
+  @override
+  Future<UserProfileDto?> fetchUserProfile({required String uid}) async {
+    final snapshot =
+        await _firestore.collection(_usersCollection).doc(uid).get();
+    if (!snapshot.exists || snapshot.data() == null) {
+      return null;
+    }
+    return UserProfileMapper.fromFirestoreMap(snapshot.data()!);
+  }
 }

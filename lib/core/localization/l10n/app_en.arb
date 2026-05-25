@@ -54,5 +54,6 @@
   "authTooManyRequests": "Too many attempts. Try again later.",
   "authUserDisabled": "This account has been disabled.",
   "authOperationNotAllowed": "This operation is not allowed.",
-  "authProfileWriteFailed": "Could not save your profile. Please try again."
+  "authProfileWriteFailed": "Could not save your profile. Please try again.",
+  "onboardingPlaceholderTitle": "Set up your learner profile"
 }

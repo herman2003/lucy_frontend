@@ -3,6 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:frontend/app.dart';
 import 'package:frontend/features/auth/presentation/pages/home/home_page.dart';
 import 'package:frontend/features/auth/presentation/pages/login/login_page.dart';
+import 'package:frontend/features/auth/domain/entities/auth_bootstrap_result.dart';
 import 'package:frontend/features/auth/domain/entities/auth_user.dart';
 import 'package:frontend/features/auth/domain/providers/auth_provider.dart';
 import '../../features/auth/helpers/fake_auth_repository.dart';
@@ -18,9 +19,14 @@ void main() {
           ProviderScope(
             overrides: [
               authRepositoryProvider.overrideWithValue(
-                FakeAuthRepository(testUser),
+                FakeAuthRepository(testUser, isConfigured: true),
               ),
-              authBootstrapProvider.overrideWith((ref) async => testUser),
+              authBootstrapProvider.overrideWith(
+                (ref) async => const AuthBootstrapResult(
+                  user: testUser,
+                  isConfigured: true,
+                ),
+              ),
               authStateChangesProvider.overrideWith(
                 (ref) => Stream.value(testUser),
               ),
@@ -49,7 +55,9 @@ void main() {
             authRepositoryProvider.overrideWithValue(
               FakeAuthRepository(null),
             ),
-            authBootstrapProvider.overrideWith((ref) async => null),
+            authBootstrapProvider.overrideWith(
+              (ref) async => const AuthBootstrapResult(),
+            ),
             authStateChangesProvider.overrideWith(
               (ref) => Stream.value(null),
             ),

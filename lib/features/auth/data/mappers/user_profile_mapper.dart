@@ -7,6 +7,7 @@ extension UserProfileDtoFirestore on UserProfileDto {
       'fullName': fullName,
       'email': email,
       'createdAt': createdAt,
+      'isConfigured': isConfigured,
     };
   }
 }
@@ -17,8 +18,19 @@ extension UserProfileFirestoreMap on Map<String, dynamic> {
       fullName: this['fullName'] as String,
       email: this['email'] as String,
       createdAt: this['createdAt'] as String,
+      isConfigured: _readIsConfigured(this['isConfigured']),
     );
   }
+}
+
+bool _readIsConfigured(Object? value) {
+  if (value == null) {
+    return false;
+  }
+  if (value is bool) {
+    return value;
+  }
+  return false;
 }
 
 /// Named factory for tests and repository.

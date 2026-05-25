@@ -4,11 +4,12 @@ import 'package:frontend/features/auth/data/mappers/user_profile_mapper.dart';
 
 void main() {
   group('UserProfileMapper', () {
-    test('toFirestoreMap writes expected keys', () {
+    test('toFirestoreMap writes expected keys including isConfigured', () {
       const dto = UserProfileDto(
         fullName: 'Jane Doe',
         email: 'jane@lucy.test',
         createdAt: '2026-05-25T12:00:00.000Z',
+        isConfigured: false,
       );
 
       expect(
@@ -17,15 +18,17 @@ void main() {
           'fullName': 'Jane Doe',
           'email': 'jane@lucy.test',
           'createdAt': '2026-05-25T12:00:00.000Z',
+          'isConfigured': false,
         },
       );
     });
 
-    test('fromFirestoreMap reads document fields', () {
+    test('fromFirestoreMap reads isConfigured when present', () {
       final dto = UserProfileMapper.fromFirestoreMap({
         'fullName': 'John',
         'email': 'john@lucy.test',
         'createdAt': '2026-05-25T10:00:00.000Z',
+        'isConfigured': true,
       });
 
       expect(
@@ -34,8 +37,31 @@ void main() {
           fullName: 'John',
           email: 'john@lucy.test',
           createdAt: '2026-05-25T10:00:00.000Z',
+          isConfigured: true,
         ),
       );
+    });
+
+    test('fromFirestoreMap treats missing isConfigured as false', () {
+      final dto = UserProfileMapper.fromFirestoreMap({
+        'fullName': 'Legacy',
+        'email': 'legacy@lucy.test',
+        'createdAt': '2026-05-25T10:00:00.000Z',
+      });
+
+      expect(dto.isConfigured, isFalse);
+      expect(dto.isConfiguredEffective, isFalse);
+    });
+
+    test('fromFirestoreMap treats null isConfigured as false', () {
+      final dto = UserProfileMapper.fromFirestoreMap({
+        'fullName': 'Legacy',
+        'email': 'legacy@lucy.test',
+        'createdAt': '2026-05-25T10:00:00.000Z',
+        'isConfigured': null,
+      });
+
+      expect(dto.isConfiguredEffective, isFalse);
     });
   });
 }

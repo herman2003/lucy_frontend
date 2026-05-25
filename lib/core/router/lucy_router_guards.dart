@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../features/auth/domain/entities/auth_bootstrap_result.dart';
 import '../../features/auth/domain/entities/auth_user.dart';
 import '../../features/auth/domain/providers/auth_provider.dart'
     show authBootstrapProvider, authRepositoryProvider;
 import 'lucy_route_paths.dart';
 
-/// Authentication redirects for [GoRouter] (SPEC §6.1, Q14).
+/// Authentication and onboarding redirects for [GoRouter] (SPEC §3, §4.7).
 class LucyRouterGuards {
   LucyRouterGuards._();
 
@@ -19,7 +20,7 @@ class LucyRouterGuards {
 
   /// Pure redirect rules (testable without [GoRouterState]).
   static String? resolveRedirect({
-    required AsyncValue<AuthUser?> bootstrap,
+    required AsyncValue<AuthBootstrapResult> bootstrap,
     AuthUser? sessionUser,
     required String location,
   }) {
@@ -27,18 +28,43 @@ class LucyRouterGuards {
       return location == LucyRoutePaths.splash ? null : LucyRoutePaths.splash;
     }
 
-    final isLoggedIn = sessionUser != null;
+    final result = bootstrap.value;
+    final user = result?.user ?? sessionUser;
+    final isConfigured = result?.isConfigured ?? false;
 
-    if (location == LucyRoutePaths.splash) {
-      return isLoggedIn ? LucyRoutePaths.home : LucyRoutePaths.login;
+    if (user == null) {
+      if (location == LucyRoutePaths.splash) {
+        return LucyRoutePaths.login;
+      }
+      if (location == LucyRoutePaths.onboarding) {
+        return LucyRoutePaths.login;
+      }
+      if (location == LucyRoutePaths.home) {
+        return LucyRoutePaths.login;
+      }
+      return null;
     }
 
-    if (isLoggedIn && _publicAuthPaths.contains(location)) {
+    if (location == LucyRoutePaths.splash) {
+      return isConfigured ? LucyRoutePaths.home : LucyRoutePaths.onboarding;
+    }
+
+    if (!isConfigured) {
+      if (location == LucyRoutePaths.onboarding) {
+        return null;
+      }
+      if (location == LucyRoutePaths.home || _publicAuthPaths.contains(location)) {
+        return LucyRoutePaths.onboarding;
+      }
+      return null;
+    }
+
+    if (location == LucyRoutePaths.onboarding) {
       return LucyRoutePaths.home;
     }
 
-    if (!isLoggedIn && location == LucyRoutePaths.home) {
-      return LucyRoutePaths.login;
+    if (_publicAuthPaths.contains(location)) {
+      return LucyRoutePaths.home;
     }
 
     return null;

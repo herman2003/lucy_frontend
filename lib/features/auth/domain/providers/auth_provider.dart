@@ -2,6 +2,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../data/providers/auth_data_provider.dart';
 import '../../services/auth_service.dart';
+import '../entities/auth_bootstrap_result.dart';
 import '../entities/auth_user.dart';
 import '../repositories/auth_repository.dart';
 
@@ -25,8 +26,17 @@ Stream<AuthUser?> authStateChanges(Ref ref) {
   return ref.watch(authServiceProvider).authStateChanges();
 }
 
-/// First auth event before routing away from splash (Q14).
+/// Auth + `isConfigured` for routing; recomputes when [authStateChanges] updates.
 @Riverpod(keepAlive: true)
-Future<AuthUser?> authBootstrap(Ref ref) {
-  return ref.watch(authServiceProvider).authStateChanges().first;
+Future<AuthBootstrapResult> authBootstrap(Ref ref) async {
+  ref.watch(authStateChangesProvider);
+
+  final user = ref.read(authRepositoryProvider).currentUser;
+  if (user == null) {
+    return const AuthBootstrapResult();
+  }
+  final isConfigured = await ref
+      .read(authRepositoryProvider)
+      .fetchIsConfiguredForCurrentUser();
+  return AuthBootstrapResult(user: user, isConfigured: isConfigured);
 }

@@ -6,4 +6,7 @@ abstract class UserProfileRemoteDataSource {
     required String uid,
     required UserProfileDto profile,
   });
+
+  /// Reads `users/{uid}` for router guard and onboarding reprise (SPEC §4).
+  Future<UserProfileDto?> fetchUserProfile({required String uid});
 }

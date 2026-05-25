@@ -1,15 +1,29 @@
-# Lucy Phase 1 — Liste de tâches
+# Lucy Onboarding — Liste de tâches
 
-> Suivi d’exécution pour [plan.md](./plan.md). Cocher `[x]` au fur et à mesure.  
-> **Ne pas commencer T04+ avant CP-0** (analyze vert + Firebase init).
+> Suivi pour [plan.md](./plan.md) et [SPEC.md](../SPEC.md) §4.  
+> Cocher `[x]` au fur et à mesure. **Auth phase 1** : terminée (historique en bas).
 
 ---
 
 ## Légende
 
-- **ID** : identifiant tâche  
-- **CP** : checkpoint de phase  
-- **Bloc** : dépendance externe (console Firebase / Apple)
+| Colonne | Signification |
+|---------|----------------|
+| **ID** | Tâche |
+| **CP** | Checkpoint |
+| **Bloc** | Prérequis humain / externe |
+
+---
+
+## Prérequis humains
+
+| Statut | ID | Action |
+|--------|-----|--------|
+| [x] | P0 | Repo `Lucy/backend/` créé (hors repo git `frontend/`) |
+| [ ] | P1 | `GEMINI_API_KEY` dans `backend/.env` |
+| [ ] | P2 | Compte de service Firebase pour Nest |
+| [ ] | P3 | CORS backend (Flutter web + localhost) |
+| [x] | P4 | Firestore rules commentées (R6) — onboarding écrit par Nest en prod |
 
 ---
 
@@ -17,71 +31,74 @@
 
 | Statut | ID | Tâche | CP |
 |--------|-----|--------|-----|
-| [x] | T01 | Aligner bundle ID (`com.lucy.app`) + `flutterfire configure` | CP-0 |
-| [x] | T02 | `pubspec` deps Firebase/Riverpod/GoRouter + init `main.dart` | CP-0 |
-| [x] | T03 | Core : `LucyFlexTheme` + l10n + routes ; couleurs UI = **colorScheme** only | CP-0 |
+| [x] | B01 | Scaffold NestJS + health | CP-0 |
+| [ ] | B02 | Core : Firebase guard, LlmPort, Gemini, errors | CP-0 |
+| [x] | F01 | `dio` + `ApiEndpoints` + `LucyDioClient` (token + 401 retry) | CP-0 |
+| [x] | F02 | `isConfigured: false` au signup + mapper + `fetchUserProfile` | CP-0 |
 
 **CP-0 — Vérification :**
+
+- [ ] `cd backend && npm run start:dev` OK
 - [x] `flutter analyze` → 0 issue
-- [x] `flutter build web` → `build/web` OK
-- [x] `flutter run -d chrome` → app démarre (DevTools connecté)
-- [ ] Revue visuelle : splash Lucy + login (pas demo compteur)
+- [ ] Signup test → Firestore `isConfigured: false`
 
 ---
 
-## Phase 1 — Login email → Home
+## Phase 1 — Backend `validate-answer`
 
 | Statut | ID | Tâche | CP |
 |--------|-----|--------|-----|
-| [x] | T04 | Auth + **Firestore** profil (`users/{uid}`) + rollback signup | — |
-| [x] | T05 | `AuthService` + `auth_error_translator` + clés ARB erreurs | — |
-| [x] | T06 | GoRouter + **splash** + guard + `authStateProvider` | — |
-| [x] | T07 | Shared : Lucy*Button, Lucy*TextField, logo (pattern AfroSchool, thème) | — |
-| [x] | T08 | `LoginPage` + `HomePage` placeholder + slice email E2E | **CP-1** |
+| [ ] | B03 | Prompts `onboarding-validate-answer` + PromptLoader | — |
+| [ ] | B04 | `POST /v1/onboarding/validate-answer` + tests | **CP-1** |
 
 **CP-1 — Vérification :**
-- [ ] Login compte Firebase test → `/home`
-- [ ] Logout → `/login`
-- [ ] Hot restart web : session toujours active
+
+- [ ] `curl` réponse claire → `valid: true`
+- [ ] `curl` réponse vague → `valid: false` + `rephrasedQuestion` (pas « Peux-tu préciser »)
 
 ---
 
-## Phase 2 — Sign up
+## Phase 2 — Flutter 1 tour + validate
 
 | Statut | ID | Tâche | CP |
 |--------|-----|--------|-----|
-| [x] | T09 | `SignUpPage` + Auth + Firestore → `/home` si tout OK | **CP-2** |
+| [x] | F03 | Route `/onboarding` + guards `isConfigured` | — |
+| [ ] | F04 | Feature skeleton + l10n 7 questions | — |
+| [ ] | F05 | `OnboardingChatPage` + appel validate | **CP-2** |
 
 **CP-2 — Vérification :**
-- [ ] Nouveau compte → doc Firestore `users/{uid}` + `/home`
-- [ ] Échec Firestore → pas de `/home` (rollback)
-- [ ] Email existant → message l10n (pas message Firebase brut)
+
+- [ ] Connecté, `isConfigured: false` → `/onboarding`
+- [ ] Réponse vague → bulle `rephrasedQuestion`, même étape
+- [ ] Réponse claire → acknowledgment, tour enregistré
 
 ---
 
-## Phase 3 — Reset password
+## Phase 3 — Backend `analyze`
 
 | Statut | ID | Tâche | CP |
 |--------|-----|--------|-----|
-| [x] | T10 | `ResetPasswordPage` form + succès + `sendPasswordResetEmail` | **CP-3** |
+| [ ] | B05 | Prompts analyze + `POST /v1/onboarding/analyze` + tests | **CP-3** |
 
 **CP-3 — Vérification :**
-- [ ] Email reset reçu ou succès côté Firebase Auth
-- [ ] UI succès identique email inconnu / connu (anti-énumération)
-- [ ] Try again + Back to login OK
+
+- [ ] Transcript 7 tours → 200 + `learnerProfile` §SPEC 4.4.1
+- [ ] Transcript incomplet → 400
 
 ---
 
-## Phase 4 — Console & qualité
+## Phase 4 — Parcours complet Flutter
 
-| Statut | ID | Tâche | CP | Bloc |
-|--------|-----|--------|-----|------|
-| [x] | T11 | Firestore rules repo + guide console (SPEC §B–D) — **déployer / valider en console** | **CP-4** | **Bloc** |
-| ~~[ ]~~ | ~~T12~~ | ~~OAuth~~ — **annulé** | — | — |
+| Statut | ID | Tâche | CP |
+|--------|-----|--------|-----|
+| [ ] | F06 | Boucle 7 questions + `analyze` | — |
+| [ ] | F07 | Écran confirmation + Firestore + `/home` | — |
+| [ ] | F07b | Signup/login → `/onboarding` si non configuré | **CP-4** |
 
 **CP-4 — Vérification :**
-- [x] Règles Firestore déployées (`firebase deploy --only firestore:rules`, 2026-05-25)
-- [ ] Signup test → document `users/{uid}` visible
+
+- [ ] E2E : signup → 7 Q/R → confirm → `/home`
+- [ ] Firestore : `learnerProfile`, `onboardingTranscript`, `isConfigured: true`
 
 ---
 
@@ -89,56 +106,53 @@
 
 | Statut | ID | Tâche | CP |
 |--------|-----|--------|-----|
-| [x] | T13 | l10n fr/en/de complète + branding web (`index.html`, manifest) | — |
-| [x] | T14 | Tests unit/widget + DoD SPEC §1.4 | **CP-5** |
+| [ ] | F08 | `onboarding_error_translator` + l10n erreurs API | — |
+| [ ] | F09 | Tests unit/widget/router | — |
+| [ ] | B06 | README backend | **CP-5** |
 
 **CP-5 — Vérification :**
-- [x] `flutter test` vert (67 tests)
-- [x] `flutter analyze` vert
-- [ ] Revue UI : login, signup, reset — web ~1440px + mobile ~390px
-- [ ] Tous les AC [SPEC.md §1.4](../SPEC.md) cochés
+
+- [ ] `flutter test` vert
+- [ ] `flutter analyze` vert
+- [ ] Checklist SPEC §4.8 app + backend cochée
 
 ---
 
-## Checklist SPEC §1.4 (Definition of Done)
+## Checklist SPEC §4.8 (Definition of Done)
 
-- [ ] 3 écrans conformes design (l10n fr/en/de), shared widgets + thème — **revue visuelle manuelle**
-- [x] Flux UI → Notifier → Service → Repository ; **mapper** data → entity domain (tests notifiers + mappers + `AuthService`)
-- [x] Erreurs Firebase → translator → l10n (`auth_error_translator_test`)
-- [x] `authStateChanges` + splash bootstrap + guard GoRouter + signOut (router + page tests)
-- [x] Aucun bouton / code Google ou Apple (`lucy_auth_ui_conventions_test`)
-- [x] Layouts web + mobile (`widget_test` + `AuthWebLayout` / `AuthMobileLayout`)
-- [x] Redirect post auth → `/home` (login/signup page tests)
-- [x] `build_runner` documenté / exécuté après Freezed-Riverpod (README)
+### App
 
----
+- [ ] 7 questions ; réponses texte libre
+- [ ] `validate-answer` après chaque réponse
+- [ ] `valid: false` → `rephrasedQuestion` (pas « Peux-tu préciser »)
+- [ ] `analyze` après 7 tours validés
+- [ ] Confirmation avant Firestore
+- [ ] Pas de skip ; garde router
+- [ ] l10n fr/en/de ; Clean Architecture
 
-## Checklist console Firebase (T11 — humain)
+### Backend
 
-Voir [docs/firebase-console-t11.md](./docs/firebase-console-t11.md).
-
-- [ ] Email/Password activé (**seul** provider)
-- [x] Firestore : règles `users/{uid}` déployées en prod (`firestore.rules`)
-- [ ] Email enumeration protection activée
-- [ ] Domaines autorisés web (`localhost` + prod)
-- [ ] Template / lien reset password configuré
-- [ ] SHA-1 Android (debug) dans Firebase
-- [ ] Comptes de test créés
-
----
-
-## Checkpoints manuels
-
-Guide pas à pas : [docs/manual-checkpoints.md](./docs/manual-checkpoints.md).
+- [ ] `validate-answer` + `analyze` conformes SPEC
+- [ ] Prompts dans `src/prompts/`
+- [ ] `LlmPort` + Gemini
+- [ ] Tests unitaires
 
 ---
 
 ## Ordre rapide
 
 ```
-T01 → T02 → T03 → T04 → T05 → T06 → T08 (+ T07 en parallèle après T03)
-→ T09 → T10 → (T11 → T12) → T13 → T14
+P0–P2 → B01 → B02 → B03 → B04 (CP-1)
+              ↘ F01 → F02 → F03 → F04 → F05 (CP-2)
+→ B05 (CP-3) → F06 → F07 → F07b (CP-4) → F08 → F09 → B06 (CP-5)
 ```
+
+---
+
+## Historique — Auth phase 1 (terminé)
+
+- [x] T01–T14 auth (voir commits / ancien suivi)
+- [x] Auth livré — spec détaillée dans [SPEC.md](../SPEC.md) §3
 
 ---
 

@@ -23,9 +23,7 @@ void main() {
 
       await tester.pumpWidget(
         ProviderScope(
-          overrides: [
-            authRepositoryProvider.overrideWithValue(repository),
-          ],
+          overrides: [authRepositoryProvider.overrideWithValue(repository)],
           child: Builder(
             builder: (context) {
               container = ProviderScope.containerOf(context);
@@ -61,9 +59,7 @@ void main() {
     test('submitLogin signs in via AuthService', () async {
       final repository = FakeAuthRepository(null);
       final container = ProviderContainer(
-        overrides: [
-          authRepositoryProvider.overrideWithValue(repository),
-        ],
+        overrides: [authRepositoryProvider.overrideWithValue(repository)],
       );
       addTearDown(container.dispose);
 

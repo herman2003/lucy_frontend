@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:frontend/features/auth/data/providers/auth_data_provider.dart';
+import 'package:frontend/features/auth/domain/entities/auth_bootstrap_result.dart';
 import 'package:frontend/features/auth/domain/entities/auth_user.dart';
 import 'package:frontend/features/auth/domain/providers/auth_provider.dart';
 import '../features/auth/helpers/fake_auth_repository.dart';
@@ -14,7 +15,7 @@ splashBootstrapOverrides() {
     authRepositoryImplProvider.overrideWith((ref) => repository),
     authRepositoryProvider.overrideWith((ref) => repository),
     authBootstrapProvider.overrideWith(
-      (ref) => Completer<AuthUser?>().future,
+      (ref) => Completer<AuthBootstrapResult>().future,
     ),
     authStateChangesProvider.overrideWith(
       (ref) => const Stream<AuthUser?>.empty(),

@@ -1,6 +1,9 @@
-/// Onboarding persistence and API access (validate, confirm, analyze, finalize).
-///
-/// Implementations live in `data/repositories/` (SPEC §4.7).
+import '../entities/validate_answer_result.dart';
+
 abstract class OnboardingRepository {
-  // Endpoints wired in F05–F07.
+  Future<ValidateAnswerResult> validateAnswer({
+    required String locale,
+    required String questionId,
+    required String answerText,
+  });
 }

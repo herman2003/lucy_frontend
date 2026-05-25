@@ -62,5 +62,19 @@
   "onboardingQuestionQLevel": "How would you describe your level today?",
   "onboardingQuestionQStyle": "How do you like concepts explained to you?",
   "onboardingQuestionQTone": "What tone do you prefer for corrections and feedback?",
-  "onboardingQuestionQLanguage": "Which language should I use to explain lessons to you?"
+  "onboardingQuestionQLanguage": "Which language should I use to explain lessons to you?",
+  "onboardingSendAnswer": "Send",
+  "onboardingStepProgress": "{current} / {total}",
+  "@onboardingStepProgress": {
+    "placeholders": {
+      "current": { "type": "int" },
+      "total": { "type": "int" }
+    }
+  },
+  "onboardingConfirmTurn": "Looks good",
+  "onboardingRejectTurn": "That’s not right",
+  "onboardingGenericError": "Something went wrong. Please try again.",
+  "onboardingAnswerRequired": "Please enter an answer before sending.",
+  "onboardingAnswerTooLong": "Your answer is too long (2000 characters max).",
+  "onboardingAnswerHint": "Your answer…"
 }

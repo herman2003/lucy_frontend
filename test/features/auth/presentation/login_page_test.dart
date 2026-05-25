@@ -7,7 +7,7 @@ import 'package:frontend/features/auth/data/providers/auth_data_provider.dart';
 import 'package:frontend/features/auth/domain/providers/auth_provider.dart';
 import 'package:frontend/features/auth/presentation/pages/home/home_page.dart';
 import 'package:frontend/features/auth/presentation/pages/login/login_page.dart';
-import 'package:frontend/features/onboarding/presentation/pages/onboarding_placeholder_page.dart';
+import 'package:frontend/features/onboarding/presentation/pages/onboarding_chat_page.dart';
 
 import 'package:frontend/shared/widgets/feedback/lucy_snackbar.dart';
 
@@ -56,7 +56,7 @@ void main() {
     await tester.pump(const Duration(milliseconds: 100));
     await tester.pumpAndSettle();
 
-    expect(find.byType(OnboardingPlaceholderPage), findsOneWidget);
+    expect(find.byType(OnboardingChatPage), findsOneWidget);
     expect(find.byType(LoginPage), findsNothing);
   });
 

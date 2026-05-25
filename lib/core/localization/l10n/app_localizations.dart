@@ -435,6 +435,54 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'Dans quelle langue dois-je vous expliquer les cours ?'**
   String get onboardingQuestionQLanguage;
+
+  /// Send answer button on onboarding chat
+  ///
+  /// In fr, this message translates to:
+  /// **'Envoyer'**
+  String get onboardingSendAnswer;
+
+  /// Step indicator on onboarding chat
+  ///
+  /// In fr, this message translates to:
+  /// **'{current} / {total}'**
+  String onboardingStepProgress(int current, int total);
+
+  /// User confirms Lucy understood the answer
+  ///
+  /// In fr, this message translates to:
+  /// **'C’est bon'**
+  String get onboardingConfirmTurn;
+
+  /// User rejects Lucy summary and re-enters answer
+  ///
+  /// In fr, this message translates to:
+  /// **'Ce n’est pas ça'**
+  String get onboardingRejectTurn;
+
+  /// Generic onboarding API error
+  ///
+  /// In fr, this message translates to:
+  /// **'Une erreur est survenue. Réessayez.'**
+  String get onboardingGenericError;
+
+  /// Empty answer validation
+  ///
+  /// In fr, this message translates to:
+  /// **'Répondez avant d’envoyer.'**
+  String get onboardingAnswerRequired;
+
+  /// Answer exceeds max length
+  ///
+  /// In fr, this message translates to:
+  /// **'Votre réponse est trop longue (2000 caractères maximum).'**
+  String get onboardingAnswerTooLong;
+
+  /// Chat answer field hint
+  ///
+  /// In fr, this message translates to:
+  /// **'Votre réponse…'**
+  String get onboardingAnswerHint;
 }
 
 class _AppLocalizationsDelegate

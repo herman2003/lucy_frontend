@@ -64,7 +64,7 @@
 |--------|-----|--------|-----|
 | [x] | F03 | Route `/onboarding` + guards `isConfigured` | — |
 | [x] | F04 | Feature skeleton + l10n 7 questions | — |
-| [ ] | F05 | `OnboardingChatPage` + appel validate | **CP-2** |
+| [x] | F05 | `OnboardingChatPage` + appel validate | **CP-2** |
 
 **CP-2 — Vérification :**
 

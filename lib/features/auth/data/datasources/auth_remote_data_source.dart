@@ -26,4 +26,7 @@ abstract class AuthRemoteDataSource {
   Future<void> sendPasswordResetEmail({required String email});
 
   Future<void> signOut();
+
+  /// Firebase ID token for backend `Authorization` header (SPEC §4.7).
+  Future<String?> getIdToken({bool forceRefresh = false});
 }

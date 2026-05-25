@@ -4,7 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:frontend/app.dart';
 import 'package:frontend/features/auth/domain/providers/auth_provider.dart';
 import 'package:frontend/features/auth/domain/entities/auth_bootstrap_result.dart';
-import 'package:frontend/features/onboarding/presentation/pages/onboarding_placeholder_page.dart';
+import 'package:frontend/features/onboarding/presentation/pages/onboarding_chat_page.dart';
 import 'package:frontend/features/auth/presentation/pages/login/login_page.dart';
 import 'package:frontend/features/auth/presentation/pages/sign_up/sign_up_page.dart';
 
@@ -62,7 +62,7 @@ void main() {
     await tester.tap(find.text('Créer mon compte'));
     await tester.pumpAndSettle();
 
-    expect(find.byType(OnboardingPlaceholderPage), findsOneWidget);
+    expect(find.byType(OnboardingChatPage), findsOneWidget);
     expect(find.byType(SignUpPage), findsNothing);
   });
 
@@ -105,7 +105,7 @@ void main() {
     await tester.pump(const Duration(milliseconds: 400));
 
     expect(find.byType(SignUpPage), findsOneWidget);
-    expect(find.byType(OnboardingPlaceholderPage), findsNothing);
+    expect(find.byType(OnboardingChatPage), findsNothing);
     expect(find.textContaining('profil'), findsOneWidget);
   });
 }

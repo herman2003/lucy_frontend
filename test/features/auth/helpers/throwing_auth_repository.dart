@@ -39,4 +39,7 @@ class ThrowingAuthRepository implements AuthRepository {
 
   @override
   Future<bool> fetchIsConfiguredForCurrentUser() async => false;
+
+  @override
+  Future<String?> getIdToken({bool forceRefresh = false}) async => null;
 }

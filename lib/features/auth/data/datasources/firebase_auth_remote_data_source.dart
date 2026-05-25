@@ -87,6 +87,15 @@ class FirebaseAuthRemoteDataSource implements AuthRemoteDataSource {
     await _firebaseAuth.signOut();
   }
 
+  @override
+  Future<String?> getIdToken({bool forceRefresh = false}) async {
+    final user = _firebaseAuth.currentUser;
+    if (user == null) {
+      return null;
+    }
+    return _wrap(() => user.getIdToken(forceRefresh));
+  }
+
   AuthUserSnapshot? _toSnapshot(User? user) {
     if (user == null) {
       return null;

@@ -2,7 +2,7 @@ import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../features/auth/presentation/pages/home/home_page.dart';
-import '../../features/onboarding/presentation/pages/onboarding_placeholder_page.dart';
+import '../../features/onboarding/presentation/pages/onboarding_chat_page.dart';
 import '../../features/auth/presentation/pages/login/login_page.dart';
 import '../../features/auth/presentation/pages/reset_password/reset_password_page.dart';
 import '../../features/auth/presentation/pages/sign_up/sign_up_page.dart';
@@ -54,7 +54,7 @@ GoRouter lucyRouter(Ref ref) {
       GoRoute(
         name: LucyRouteNames.onboarding,
         path: LucyRoutePaths.onboarding,
-        builder: (context, state) => const OnboardingPlaceholderPage(),
+        builder: (context, state) => const OnboardingChatPage(),
       ),
     ],
   );

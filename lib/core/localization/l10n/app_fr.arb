@@ -228,5 +228,41 @@
   "onboardingQuestionQLanguage": "Dans quelle langue dois-je vous expliquer les cours ?",
   "@onboardingQuestionQLanguage": {
     "description": "Onboarding question q_language"
+  },
+  "onboardingSendAnswer": "Envoyer",
+  "@onboardingSendAnswer": {
+    "description": "Send answer button on onboarding chat"
+  },
+  "onboardingStepProgress": "{current} / {total}",
+  "@onboardingStepProgress": {
+    "description": "Step indicator on onboarding chat",
+    "placeholders": {
+      "current": { "type": "int" },
+      "total": { "type": "int" }
+    }
+  },
+  "onboardingConfirmTurn": "C’est bon",
+  "@onboardingConfirmTurn": {
+    "description": "User confirms Lucy understood the answer"
+  },
+  "onboardingRejectTurn": "Ce n’est pas ça",
+  "@onboardingRejectTurn": {
+    "description": "User rejects Lucy summary and re-enters answer"
+  },
+  "onboardingGenericError": "Une erreur est survenue. Réessayez.",
+  "@onboardingGenericError": {
+    "description": "Generic onboarding API error"
+  },
+  "onboardingAnswerRequired": "Répondez avant d’envoyer.",
+  "@onboardingAnswerRequired": {
+    "description": "Empty answer validation"
+  },
+  "onboardingAnswerTooLong": "Votre réponse est trop longue (2000 caractères maximum).",
+  "@onboardingAnswerTooLong": {
+    "description": "Answer exceeds max length"
+  },
+  "onboardingAnswerHint": "Votre réponse…",
+  "@onboardingAnswerHint": {
+    "description": "Chat answer field hint"
   }
 }

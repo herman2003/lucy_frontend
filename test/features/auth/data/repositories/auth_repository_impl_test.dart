@@ -65,6 +65,10 @@ class _FakeAuthRemoteDataSource implements AuthRemoteDataSource {
       displayName: displayName,
     );
   }
+
+  @override
+  Future<String?> getIdToken({bool forceRefresh = false}) async =>
+      'fake-token';
 }
 
 class _FakeProfileRemoteDataSource implements UserProfileRemoteDataSource {

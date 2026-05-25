@@ -191,4 +191,31 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get onboardingQuestionQLanguage =>
       'Dans quelle langue dois-je vous expliquer les cours ?';
+
+  @override
+  String get onboardingSendAnswer => 'Envoyer';
+
+  @override
+  String onboardingStepProgress(int current, int total) {
+    return '$current / $total';
+  }
+
+  @override
+  String get onboardingConfirmTurn => 'C’est bon';
+
+  @override
+  String get onboardingRejectTurn => 'Ce n’est pas ça';
+
+  @override
+  String get onboardingGenericError => 'Une erreur est survenue. Réessayez.';
+
+  @override
+  String get onboardingAnswerRequired => 'Répondez avant d’envoyer.';
+
+  @override
+  String get onboardingAnswerTooLong =>
+      'Votre réponse est trop longue (2000 caractères maximum).';
+
+  @override
+  String get onboardingAnswerHint => 'Votre réponse…';
 }

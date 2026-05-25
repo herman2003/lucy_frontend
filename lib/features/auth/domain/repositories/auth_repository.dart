@@ -23,4 +23,7 @@ abstract class AuthRepository {
 
   /// Reads `isConfigured` from Firestore profile; false if missing (SPEC §4.4).
   Future<bool> fetchIsConfiguredForCurrentUser();
+
+  /// Firebase ID token for Lucy backend API calls.
+  Future<String?> getIdToken({bool forceRefresh = false});
 }

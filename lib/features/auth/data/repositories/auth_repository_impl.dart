@@ -112,4 +112,9 @@ class AuthRepositoryImpl implements AuthRepository {
     final profile = await _profileRemote.fetchUserProfile(uid: uid);
     return profile?.isConfiguredEffective ?? false;
   }
+
+  @override
+  Future<String?> getIdToken({bool forceRefresh = false}) {
+    return _authRemote.getIdToken(forceRefresh: forceRefresh);
+  }
 }

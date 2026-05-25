@@ -77,4 +77,12 @@ class FakeAuthRepository implements AuthRepository {
     _user = null;
     _authController.add(null);
   }
+
+  @override
+  Future<String?> getIdToken({bool forceRefresh = false}) async {
+    if (_user == null) {
+      return null;
+    }
+    return 'fake-id-token';
+  }
 }

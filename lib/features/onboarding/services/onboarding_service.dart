@@ -1,10 +1,22 @@
-import 'package:frontend/features/onboarding/domain/repositories/onboarding_repository.dart';
+import '../domain/entities/validate_answer_result.dart';
+import '../domain/repositories/onboarding_repository.dart';
 
 /// Business orchestration for the onboarding chat flow (UI → notifier → service).
 class OnboardingService {
-  OnboardingService(this._repository);
+  OnboardingService({required OnboardingRepository repository})
+      : _repository = repository;
 
   final OnboardingRepository _repository;
 
-  OnboardingRepository get repository => _repository;
+  Future<ValidateAnswerResult> validateAnswer({
+    required String locale,
+    required String questionId,
+    required String answerText,
+  }) {
+    return _repository.validateAnswer(
+      locale: locale,
+      questionId: questionId,
+      answerText: answerText,
+    );
+  }
 }

@@ -62,5 +62,19 @@
   "onboardingQuestionQLevel": "Wie würden Sie Ihr aktuelles Niveau beschreiben?",
   "onboardingQuestionQStyle": "Wie sollen Ihnen Inhalte am besten erklärt werden?",
   "onboardingQuestionQTone": "Welchen Ton bevorzugen Sie bei Korrekturen und Feedback?",
-  "onboardingQuestionQLanguage": "In welcher Sprache soll ich Ihnen den Unterricht erklären?"
+  "onboardingQuestionQLanguage": "In welcher Sprache soll ich Ihnen den Unterricht erklären?",
+  "onboardingSendAnswer": "Senden",
+  "onboardingStepProgress": "{current} / {total}",
+  "@onboardingStepProgress": {
+    "placeholders": {
+      "current": { "type": "int" },
+      "total": { "type": "int" }
+    }
+  },
+  "onboardingConfirmTurn": "Passt",
+  "onboardingRejectTurn": "Das stimmt nicht",
+  "onboardingGenericError": "Ein Fehler ist aufgetreten. Bitte erneut versuchen.",
+  "onboardingAnswerRequired": "Bitte geben Sie zuerst eine Antwort ein.",
+  "onboardingAnswerTooLong": "Ihre Antwort ist zu lang (max. 2000 Zeichen).",
+  "onboardingAnswerHint": "Ihre Antwort…"
 }

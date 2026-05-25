@@ -1,64 +1,74 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:frontend/features/auth/domain/entities/auth_user.dart';
-import 'package:frontend/features/auth/domain/repositories/auth_repository.dart';
+import 'package:frontend/features/auth/domain/exceptions/auth_exception.dart';
 import 'package:frontend/features/auth/services/auth_service.dart';
 
-class _FakeAuthRepository implements AuthRepository {
-  bool signOutCalled = false;
-
-  @override
-  AuthUser? get currentUser => const AuthUser(
-    uid: 'uid-1',
-    email: 'a@lucy.test',
-    displayName: 'A',
-  );
-
-  @override
-  Stream<AuthUser?> authStateChanges() => Stream.value(currentUser);
-
-  @override
-  Future<AuthUser> signInWithEmailAndPassword({
-    required String email,
-    required String password,
-  }) async {
-    return AuthUser(uid: 'uid-1', email: email);
-  }
-
-  @override
-  Future<AuthUser> signUpWithEmailAndPassword({
-    required String email,
-    required String password,
-    required String fullName,
-  }) async {
-    return AuthUser(uid: 'uid-2', email: email, displayName: fullName);
-  }
-
-  @override
-  Future<void> sendPasswordResetEmail({required String email}) async {}
-
-  @override
-  Future<void> signOut() async {
-    signOutCalled = true;
-  }
-}
+import '../helpers/fake_auth_repository.dart';
 
 void main() {
   group('AuthService', () {
-    test('delegates signOut to repository', () async {
-      final repository = _FakeAuthRepository();
-      final service = AuthService(repository: repository);
+    late FakeAuthRepository repository;
+    late AuthService service;
 
-      await service.signOut();
-
-      expect(repository.signOutCalled, isTrue);
+    setUp(() {
+      repository = FakeAuthRepository(null);
+      service = AuthService(repository: repository);
     });
 
-    test('exposes authStateChanges from repository', () async {
-      final service = AuthService(repository: _FakeAuthRepository());
+    test('delegates signOut to repository', () async {
+      await service.signOut();
 
-      final user = await service.authStateChanges().first;
+      expect(repository.currentUser, isNull);
+    });
 
-      expect(user?.email, 'a@lucy.test');
+    test('authStateChanges mirrors repository stream on login', () async {
+      final events = <AuthUser?>[];
+      final subscription = service.authStateChanges().listen(events.add);
+      addTearDown(subscription.cancel);
+
+      await service.loginWithEmail(
+        email: 'a@lucy.test',
+        password: 'password1',
+      );
+
+      expect(events.last?.email, 'a@lucy.test');
+      expect(service.currentUser?.email, 'a@lucy.test');
+    });
+
+    test('delegates loginWithEmail to repository', () async {
+      final user = await service.loginWithEmail(
+        email: 'user@lucy.test',
+        password: 'secret12',
+      );
+
+      expect(user.email, 'user@lucy.test');
+      expect(repository.currentUser?.email, 'user@lucy.test');
+    });
+
+    test('delegates signUpWithEmail to repository', () async {
+      final user = await service.signUpWithEmail(
+        email: 'new@lucy.test',
+        password: 'secret12',
+        fullName: 'Lucy User',
+      );
+
+      expect(user.displayName, 'Lucy User');
+      expect(repository.currentUser?.displayName, 'Lucy User');
+    });
+
+    test('delegates sendPasswordResetEmail to repository', () async {
+      await service.sendPasswordResetEmail(email: 'user@lucy.test');
+
+      expect(repository.passwordResetErrorCode, isNull);
+    });
+
+    test('surfaces repository reset errors', () async {
+      repository.passwordResetErrorCode = 'network-request-failed';
+
+      await expectLater(
+        service.sendPasswordResetEmail(email: 'user@lucy.test'),
+        throwsA(isA<AuthException>()),
+      );
     });
   });
 }

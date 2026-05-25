@@ -88,11 +88,11 @@
 | Statut | ID | Tâche | CP |
 |--------|-----|--------|-----|
 | [x] | T13 | l10n fr/en/de complète + branding web (`index.html`, manifest) | — |
-| [ ] | T14 | Tests unit/widget + DoD SPEC §1.4 | **CP-5** |
+| [x] | T14 | Tests unit/widget + DoD SPEC §1.4 | **CP-5** |
 
 **CP-5 — Vérification :**
-- [ ] `flutter test` vert
-- [ ] `flutter analyze` vert
+- [x] `flutter test` vert (58 tests)
+- [x] `flutter analyze` vert
 - [ ] Revue UI : login, signup, reset — web ~1440px + mobile ~390px
 - [ ] Tous les AC [SPEC.md §1.4](../SPEC.md) cochés
 
@@ -100,14 +100,14 @@
 
 ## Checklist SPEC §1.4 (Definition of Done)
 
-- [ ] 3 écrans conformes design (l10n fr/en/de), shared widgets + thème
-- [ ] Flux UI → Notifier → Service → Repository ; **mapper** data → entity domain
-- [ ] Erreurs Firebase → translator → l10n
-- [ ] `authStateChanges` + splash bootstrap + guard GoRouter + signOut
-- [ ] Aucun bouton / code Google ou Apple
-- [ ] Layouts web + mobile
-- [ ] Redirect post auth → `/home`
-- [ ] `build_runner` documenté / exécuté après Freezed-Riverpod
+- [ ] 3 écrans conformes design (l10n fr/en/de), shared widgets + thème — **revue visuelle manuelle**
+- [x] Flux UI → Notifier → Service → Repository ; **mapper** data → entity domain (tests notifiers + mappers + `AuthService`)
+- [x] Erreurs Firebase → translator → l10n (`auth_error_translator_test`)
+- [x] `authStateChanges` + splash bootstrap + guard GoRouter + signOut (router + page tests)
+- [x] Aucun bouton / code Google ou Apple (`lucy_auth_ui_conventions_test`)
+- [x] Layouts web + mobile (`widget_test` + `AuthWebLayout` / `AuthMobileLayout`)
+- [x] Redirect post auth → `/home` (login/signup page tests)
+- [x] `build_runner` documenté / exécuté après Freezed-Riverpod (README)
 
 ---
 

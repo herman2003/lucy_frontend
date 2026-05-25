@@ -420,8 +420,8 @@ flutter run -d chrome
 - Checklist SPEC §1.4 dans PR / `tasks/todo.md`.
 
 **AC :**
-- [ ] **CP-5** : `flutter test` + `flutter analyze` verts
-- [ ] Revue design 3 écrans web + mobile
+- [x] **CP-5** : `flutter test` + `flutter analyze` verts
+- [ ] Revue design 3 écrans web + mobile (manuel)
 
 ---
 

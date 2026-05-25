@@ -68,6 +68,7 @@ GitHub Actions runs `flutter analyze`, `flutter test`, and `flutter build web` o
 - [tasks/todo.md](./tasks/todo.md) — task checklist
 - [docs/manual-checkpoints.md](./docs/manual-checkpoints.md) — auth phase 1 (validation manuelle)
 - [docs/manual-checkpoints-onboarding.md](./docs/manual-checkpoints-onboarding.md) — onboarding CP-0 à CP-5
+- [docs/dev-local-stack.md](./docs/dev-local-stack.md) — backend mock + memory sans P1/P2
 
 ---
 

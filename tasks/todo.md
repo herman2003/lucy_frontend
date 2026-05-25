@@ -20,8 +20,8 @@
 | Statut | ID | Action |
 |--------|-----|--------|
 | [x] | P0 | Repo `Lucy/backend/` créé (hors repo git `frontend/`) |
-| [ ] | P1 | `GEMINI_API_KEY` dans `backend/.env` (ou `LLM_PROVIDER=mock` pour dev) |
-| [ ] | P2 | Compte de service Firebase pour Nest (ou `FIRESTORE_PROVIDER=memory` + `FIREBASE_AUTH_MODE=dev`) |
+| [x] | P1 | `GEMINI_API_KEY` dans `backend/.env` (dev : `LLM_PROVIDER=mock` + B09 ; prod : clé réelle) |
+| [x] | P2 | Compte de service Firebase pour Nest (dev : memory + `dev:<uid>` + B09 ; prod : Admin SDK) |
 | [x] | P3 | CORS backend (Flutter web + localhost) |
 | [x] | P4 | Firestore rules commentées (R6) — onboarding écrit par Nest en prod |
 
@@ -37,6 +37,7 @@
 | [x] | F02 | `isConfigured: false` au signup + mapper + `fetchUserProfile` | CP-0 |
 | [x] | B07 | `MockLlmAdapter` + `LLM_PROVIDER=mock` (dev sans clé Gemini) | — |
 | [x] | B08 | Firestore mémoire + auth `dev:<uid>` (dev sans service account) | — |
+| [x] | B09 | `npm run start:dev:local` + `/health` dev stack + doc | — |
 
 **CP-0 — Vérification :**
 

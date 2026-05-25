@@ -8,7 +8,6 @@ import 'package:frontend/features/onboarding/domain/entities/onboarding_resume_p
 import 'package:frontend/features/onboarding/utils/onboarding_question_ids.dart';
 import 'package:frontend/features/onboarding/domain/entities/validate_answer_result.dart';
 import 'package:frontend/features/onboarding/services/onboarding_service.dart';
-import 'package:frontend/features/onboarding/utils/onboarding_question_ids.dart';
 
 import '../helpers/fake_onboarding_local_draft_repository.dart';
 import '../helpers/fake_onboarding_progress_repository.dart';
@@ -62,7 +61,9 @@ void main() {
       );
       service = OnboardingService(
         repository: repository,
-        progressRepository: FakeOnboardingProgressRepository(progress: progress),
+        progressRepository: FakeOnboardingProgressRepository(
+          progress: progress,
+        ),
         localDraftRepository: FakeOnboardingLocalDraftRepository(),
       );
 
@@ -70,27 +71,38 @@ void main() {
       expect(result, progress);
     });
 
-    test('fetchResumeProgress returns null when progress repository fails', () async {
-      service = OnboardingService(
-        repository: repository,
-        progressRepository: FakeOnboardingProgressRepository(throwOnFetch: true),
-        localDraftRepository: FakeOnboardingLocalDraftRepository(),
-      );
+    test(
+      'fetchResumeProgress returns null when progress repository fails',
+      () async {
+        service = OnboardingService(
+          repository: repository,
+          progressRepository: FakeOnboardingProgressRepository(
+            throwOnFetch: true,
+          ),
+          localDraftRepository: FakeOnboardingLocalDraftRepository(),
+        );
 
-      final result = await service.fetchResumeProgress(uid: 'uid-1');
-      expect(result, isNull);
-    });
+        final result = await service.fetchResumeProgress(uid: 'uid-1');
+        expect(result, isNull);
+      },
+    );
 
     test('validateAnswer delegates to repository with params', () async {
       const expected = ValidateAnswerResult.accepted(turnSummary: 'OK');
 
       repository = FakeOnboardingRepository(
-        validateHandler: ({required locale, required questionId, required answerText, bool fallbackReduced = false}) async {
-          expect(locale, 'fr');
-          expect(questionId, OnboardingQuestionIds.qRole);
-          expect(answerText, 'Ma réponse');
-          return expected;
-        },
+        validateHandler:
+            ({
+              required locale,
+              required questionId,
+              required answerText,
+              bool fallbackReduced = false,
+            }) async {
+              expect(locale, 'fr');
+              expect(questionId, OnboardingQuestionIds.qRole);
+              expect(answerText, 'Ma réponse');
+              return expected;
+            },
       );
       service = OnboardingService(
         repository: repository,
@@ -115,11 +127,17 @@ void main() {
       );
 
       repository = FakeOnboardingRepository(
-        confirmHandler: ({required locale, required questionId, required answerText, String confirmationType = 'normal'}) async {
-          expect(locale, 'en');
-          expect(questionId, OnboardingQuestionIds.qGoal);
-          return expected;
-        },
+        confirmHandler:
+            ({
+              required locale,
+              required questionId,
+              required answerText,
+              String confirmationType = 'normal',
+            }) async {
+              expect(locale, 'en');
+              expect(questionId, OnboardingQuestionIds.qGoal);
+              return expected;
+            },
       );
       service = OnboardingService(
         repository: repository,
@@ -137,38 +155,45 @@ void main() {
       expect(repository.confirmCallCount, 1);
     });
 
-    test('analyze delegates to repository with locale and profileReduced', () async {
-      const expected = OnboardingAnalyzeResult.success(
-        learnerProfile: LearnerProfile(
-          primaryRole: 'student',
-          mainDomains: ['sciences'],
-          learningGoal: 'exam',
-          selfAssessedLevel: 'intermediate',
-          explanationStyle: 'step_by_step',
-          feedbackTone: 'encouraging',
-          tutoringLanguage: 'fr',
-        ),
-        summaryForUser: 'Résumé',
-      );
+    test(
+      'analyze delegates to repository with locale and profileReduced',
+      () async {
+        const expected = OnboardingAnalyzeResult.success(
+          learnerProfile: LearnerProfile(
+            primaryRole: 'student',
+            mainDomains: ['sciences'],
+            learningGoal: 'exam',
+            selfAssessedLevel: 'intermediate',
+            explanationStyle: 'step_by_step',
+            feedbackTone: 'encouraging',
+            tutoringLanguage: 'fr',
+          ),
+          summaryForUser: 'Résumé',
+        );
 
-      repository = FakeOnboardingRepository(
-        analyzeHandler: ({required locale, bool profileReduced = false}) async {
-          expect(locale, 'de');
-          expect(profileReduced, isTrue);
-          return expected;
-        },
-      );
-      service = OnboardingService(
-        repository: repository,
-        progressRepository: FakeOnboardingProgressRepository(),
-        localDraftRepository: FakeOnboardingLocalDraftRepository(),
-      );
+        repository = FakeOnboardingRepository(
+          analyzeHandler:
+              ({required locale, bool profileReduced = false}) async {
+                expect(locale, 'de');
+                expect(profileReduced, isTrue);
+                return expected;
+              },
+        );
+        service = OnboardingService(
+          repository: repository,
+          progressRepository: FakeOnboardingProgressRepository(),
+          localDraftRepository: FakeOnboardingLocalDraftRepository(),
+        );
 
-      final result = await service.analyze(locale: 'de', profileReduced: true);
+        final result = await service.analyze(
+          locale: 'de',
+          profileReduced: true,
+        );
 
-      expect(result, expected);
-      expect(repository.analyzeCallCount, 1);
-    });
+        expect(result, expected);
+        expect(repository.analyzeCallCount, 1);
+      },
+    );
 
     test('finalizeOnboarding delegates to repository', () async {
       var called = false;

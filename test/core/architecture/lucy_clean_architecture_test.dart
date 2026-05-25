@@ -5,10 +5,6 @@ import 'package:flutter_test/flutter_test.dart';
 /// Plan T04/T05 — Firebase SDK isolated to [lib/features/auth/data].
 void main() {
   const allowedFirebaseAuthRoots = ['lib/features/auth/data/'];
-  const allowedFirestoreRoots = [
-    'lib/features/auth/data/',
-    'lib/features/onboarding/data/',
-  ];
 
   final firebaseAuthImport = RegExp(r"import\s+'package:firebase_auth/");
   final firestoreImport = RegExp(r"import\s+'package:cloud_firestore/");
@@ -27,16 +23,13 @@ void main() {
     }
   });
 
-  test('cloud_firestore imports exist only under auth data layer', () {
+  test('lib never imports cloud_firestore (Nest is sole Firestore writer)', () {
     for (final file in _dartFilesUnder('lib')) {
       final content = File(file).readAsStringSync();
-      if (!firestoreImport.hasMatch(content)) {
-        continue;
-      }
       expect(
-        allowedFirestoreRoots.any(file.startsWith),
-        isTrue,
-        reason: '$file must not import cloud_firestore outside data/',
+        firestoreImport.hasMatch(content),
+        isFalse,
+        reason: '$file must not import cloud_firestore',
       );
     }
   });

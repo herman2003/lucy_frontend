@@ -294,17 +294,17 @@ P0–P2 → B01 → B02 → B03 → B04 (CP-1)
 
 | Statut | ID | Tâche | CP |
 |--------|-----|--------|-----|
-| [ ] | C-F3a | Supprimer `firestore_user_profile_remote_data_source.dart` | — |
-| [ ] | C-F3b | Supprimer `onboarding_progress_firestore_data_source.dart` | — |
-| [ ] | C-F3c | Retirer `cloud_firestore` du `pubspec.yaml` | — |
-| [ ] | C-F3d | Mettre à jour `lucy_clean_architecture_test` | **CP-C5** |
+| [x] | C-F3a | Supprimer `firestore_user_profile_remote_data_source.dart` | — |
+| [x] | C-F3b | Supprimer `onboarding_progress_firestore_data_source.dart` | — |
+| [x] | C-F3c | Retirer `cloud_firestore` du `pubspec.yaml` | — |
+| [x] | C-F3d | Mettre à jour `lucy_clean_architecture_test` | **CP-C5** |
 
 **CP-C5 — Vérification :**
 
-- [ ] Aucun `import cloud_firestore` dans `lib/`
-- [ ] `flutter analyze` → 0 issue
-- [ ] `flutter test` vert
-- [ ] `npm test` backend vert
+- [x] Aucun `import cloud_firestore` dans `lib/`
+- [x] `flutter analyze` → 0 issue
+- [x] `flutter test` vert
+- [x] `npm test` backend vert
 
 ---
 

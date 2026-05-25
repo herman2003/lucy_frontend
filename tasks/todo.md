@@ -312,14 +312,14 @@ P0–P2 → B01 → B02 → B03 → B04 (CP-1)
 
 | Statut | ID | Tâche | CP |
 |--------|-----|--------|-----|
-| [ ] | C-OPSa | Firestore rules : deny client read/write `users/{uid}` (doc) | — |
-| [ ] | C-OPSb | README backend : endpoints `users/me`, `onboarding/progress` | — |
-| [ ] | C-DOC | Aligner SPEC.md §3, §4.1 A7, §4.7 | **CP-C6** |
+| [x] | C-OPSa | Firestore rules : deny client read/write `users/{uid}` (doc) | — |
+| [x] | C-OPSb | README backend : endpoints `users/me`, `onboarding/progress` | — |
+| [x] | C-DOC | Aligner SPEC.md §3, §4.1 A7, §4.7 | **CP-C6** |
 
 **CP-C6 — Vérification :**
 
 - [ ] E2E manuel : signup → onboarding complet → `/home` (backend `.env` Firebase réel)
-- [ ] Checklist [docs/spec-backend-centralization.md](../docs/spec-backend-centralization.md) §9 DoD cochée
+- [x] Checklist [docs/spec-backend-centralization.md](../docs/spec-backend-centralization.md) §9 DoD cochée
 
 ---
 

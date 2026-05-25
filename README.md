@@ -53,7 +53,7 @@ flutter test test/smoke/cp0_web_build_test.dart
 
 ## Firebase (T11)
 
-- Firestore security rules: [`firestore.rules`](./firestore.rules) (`users/{uid}` owner-only, SPEC §C)
+- Firestore security rules: [`firestore.rules`](./firestore.rules) — **deny all client** access on `users/{uid}` (Nest Admin SDK only; see [docs/firestore-rules-centralization.md](./docs/firestore-rules-centralization.md))
 - Deploy rules: `firebase deploy --only firestore:rules --project lucy-7504c`
 - Console checklist: [docs/firebase-console-t11.md](./docs/firebase-console-t11.md)
 

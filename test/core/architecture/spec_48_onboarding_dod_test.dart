@@ -22,13 +22,15 @@ void main() {
     }
   });
 
-  test('ApiEndpoints exposes all onboarding HTTP routes', () {
+  test('ApiEndpoints exposes all onboarding and user HTTP routes', () {
     final content = File('lib/core/network/api_endpoints.dart').readAsStringSync();
     for (final segment in [
       'validate-answer',
       'confirm-turn',
       'analyze',
       'finalize',
+      'users/me',
+      'onboarding/progress',
     ]) {
       expect(content, contains(segment));
     }

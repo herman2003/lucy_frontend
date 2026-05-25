@@ -4,14 +4,15 @@ import 'dart:io';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  test('firestore.rules enforces owner-only access on users/{uid}', () {
+  test('firestore.rules denies client access on users/{uid}', () {
     final rulesFile = File('firestore.rules');
     expect(rulesFile.existsSync(), isTrue);
 
     final content = rulesFile.readAsStringSync();
     expect(content, contains('rules_version'));
     expect(content, contains('match /users/{userId}'));
-    expect(content, contains('request.auth.uid == userId'));
+    expect(content, contains('allow read, write: if false'));
+    expect(content, isNot(contains('request.auth.uid == userId')));
     expect(content, isNot(contains('allow read, write: if true')));
   });
 

@@ -1,17 +1,12 @@
 rules_version = '2';
 
-// SPEC §C — users/{uid}: owner read; signup writes base profile from client.
-// Onboarding transcript / pending* / status updates: Nest Admin SDK (SPEC R6).
-// MVP: owner write retained for isConfigured at signup; restrict onboarding
-// fields server-side in production when custom claims are available.
+// Centralization (C-OPS): Flutter has no Firestore SDK — Nest Admin SDK is the sole
+// reader/writer for users/{uid}. Deny all client access; deploy after C-F3.
+// Deploy: firebase deploy --only firestore:rules --project lucy-7504c
 service cloud.firestore {
   match /databases/{database}/documents {
     match /users/{userId} {
-      allow read: if request.auth != null
-        && request.auth.uid == userId;
-      allow create, update: if request.auth != null
-        && request.auth.uid == userId;
-      allow delete: if false;
+      allow read, write: if false;
     }
   }
 }

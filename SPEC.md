@@ -10,6 +10,7 @@
 |--------|--------|----------------|
 | **Authentification** | **Livré** | `lib/features/auth/`, [tasks/todo.md](./tasks/todo.md), [docs/firebase-console-t11.md](./docs/firebase-console-t11.md) |
 | **Onboarding / config apprenant** | **À implémenter** | `frontend/` + `Lucy/backend/` (NestJS) — §4 |
+| **Centralisation backend (données)** | **Spec prête** | [docs/spec-backend-centralization.md](./docs/spec-backend-centralization.md) — Nest seul accès Firestore ; Flutter garde Firebase Auth |
 | Home / shell | À venir | `lib/features/auth/presentation/pages/home/` (placeholder) |
 | Chat tuteur IA | À venir | — |
 | Documents / RAG | À venir | — |
@@ -43,9 +44,10 @@ flutter test
 ## 3. Authentification (livrée)
 
 - Routes : `/login`, `/signup`, `/reset-password`, `/home` (placeholder), splash + guard.
-- Firebase **email + mot de passe** ; profil `users/{uid}` (`fullName`, `email`, `createdAt`).
+- Firebase **email + mot de passe** ; profil créé via **`POST /v1/users/me`** (Nest) après signup Auth (`fullName`, `email`, `createdAt`).
+- **`GET /v1/users/me`** pour `isConfigured` et routing (plus de lecture Firestore client).
 - l10n **fr / en / de** ; pas de Google / Apple Sign-In.
-- **Évolution avec onboarding (§4)** : signup/login → `/onboarding` si `isConfigured != true` (`null`/absent = `false`) ; lecture profil Firestore au bootstrap ; sinon `/home`.
+- **Évolution avec onboarding (§4)** : signup/login → `/onboarding` si `isConfigured != true` (`null`/absent = `false`) ; sinon `/home`.
 
 ---
 
@@ -93,7 +95,7 @@ flutter test
 | A4 | Auth API | **Firebase Admin** — `Bearer <idToken>` |
 | A5 | Prompts | `backend/src/prompts/` (Git) — pas dans Flutter |
 | A6 | Appel LLM | **Serveur uniquement** |
-| A7 | Firestore + garde API | **Nest (Admin SDK)** : écrit transcript, statut, tentatives, langue ; **Flutter** : lecture + stockage local ; `analyze` / `finalize` lisent-écrivent via Nest |
+| A7 | Données `users/{uid}` | **Nest (Admin SDK) seul** accès Firestore ; **Flutter** : **aucun** SDK Firestore — profil et reprise onboarding via **`GET/POST /v1/users/me`**, **`GET /v1/onboarding/progress`** + miroir local (A16) ; validate / confirm / analyze / finalize via Nest |
 | A8 | Modèle | `gemini-2.5-flash` (`GEMINI_MODEL`) |
 | A9 | API | Préfixe **`/v1`** |
 
@@ -300,7 +302,7 @@ flowchart LR
 **État notifier (indicatif)**
 
 - `currentStepIndex` (0–6), `completedQuestionIds`, `chatsByQuestionId: Map<questionId, List<ChatMessage>>`, `isLucyTyping`, `typingContext` (validate | confirm | analyze).
-- Reprise (Q3) : reconstruire les **7 panels** depuis Firestore + local ; ouvrir le panel du **premier step non confirmé**.
+- Reprise (Q3) : reconstruire les **7 panels** depuis **`GET /v1/onboarding/progress`** (+ miroir local A16 si API indisponible) ; ouvrir le panel du **premier step non confirmé**.
 
 ### 4.6 Backend NestJS + Gemini
 
@@ -658,8 +660,10 @@ GEMINI_MODEL=gemini-2.5-flash
 | HTTP | `dio` |
 | Base URL | `ApiEndpoints.baseUrl` (ex. dev `http://localhost:3000`) |
 | Header | `Authorization: Bearer ${getIdToken()}` — interceptor : sur **401**, `getIdToken(true)` puis **un** retry |
-| Stockage local | `uiLocale`, brouillon transcript / index courant (reprise après kill app) |
-| Data sources | `onboarding_validate_remote_data_source.dart`, `onboarding_analyze_remote_data_source.dart` |
+| Stockage local | `uiLocale`, brouillon transcript / index courant (reprise après kill app — **A16**, miroir offline) |
+| Profil / routing | `GET /v1/users/me` — `isConfigured`, `onboardingStatus` |
+| Reprise onboarding | `GET /v1/onboarding/progress` — transcript, statut, pending profile |
+| Data sources | `user_profile_api_remote_data_source.dart`, `onboarding_progress_api_remote_data_source.dart`, `onboarding_*_remote_data_source.dart` |
 
 **Pas** de SDK Gemini dans l’app.
 
@@ -669,7 +673,7 @@ GEMINI_MODEL=gemini-2.5-flash
 onboarding/
 ├── data/
 │   ├── datasources/
-│   │   ├── onboarding_profile_remote_data_source.dart
+│   │   ├── onboarding_progress_api_remote_data_source.dart
 │   │   ├── onboarding_validate_remote_data_source.dart
 │   │   ├── onboarding_confirm_remote_data_source.dart
 │   │   ├── onboarding_analyze_remote_data_source.dart
@@ -689,7 +693,7 @@ onboarding/
         └── onboarding_step_progress_dots.dart
 ```
 
-Flux : UI → Notifier → Service → repositories (**API Nest** pour validate / confirm / analyze / finalize ; **lecture** profil Firestore pour guard ; **écriture** user doc onboarding = **Nest uniquement**).
+Flux : UI → Notifier → Service → repositories (**API Nest** pour profil, reprise, validate / confirm / analyze / finalize ; **aucun** accès Firestore client).
 
 #### UI onboarding (§4.5.1)
 
@@ -706,7 +710,7 @@ Flux : UI → Notifier → Service → repositories (**API Nest** pour validate 
 | `/onboarding` | `false` | Parcours + analyse + confirmation |
 | `/home` | `true` | Shell placeholder |
 
-Signup / login → `/onboarding` si `isConfigured != true` (lire Firestore **avant** redirect, pas seulement Auth). Connecté sur `/onboarding` avec `true` → `/home`. **Adapter** `LucyRouterGuards` + provider profil (§3, §4.11 A3).
+Signup / login → `/onboarding` si `isConfigured != true` (via **`GET /v1/users/me`**, pas Firestore client). Connecté sur `/onboarding` avec `true` → `/home`. **Adapter** `LucyRouterGuards` + provider profil (§3, §4.11 A3).
 
 #### Boutons (partagés)
 
@@ -737,7 +741,7 @@ Signup / login → `/onboarding` si `isConfigured != true` (lire Firestore **ava
 - [x] Design messagerie complète (avatar, `colorScheme`) ; **swipe entre steps** terminés + courant.
 - [x] Retour arrière : modifier un tour n’efface pas les autres.
 - [x] Réponses ≤ **2000 caractères** ; boutons désactivés pendant appels (widget partagé).
-- [x] Guard router : `isConfigured` lu depuis Firestore (`onboardingStatus` via réponses API confirm-turn).
+- [x] Guard router : `isConfigured` lu via **`GET /v1/users/me`** (plus Firestore client).
 - [x] Confirmation obligatoire avant Firestore.
 - [x] `onboardingTranscript` + `learnerProfile` + `isConfigured: true` après validation.
 - [x] Pas de skip ; garde `/home` si `false`.

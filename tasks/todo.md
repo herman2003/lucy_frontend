@@ -22,7 +22,7 @@
 | [x] | P0 | Repo `Lucy/backend/` créé (hors repo git `frontend/`) |
 | [ ] | P1 | `GEMINI_API_KEY` dans `backend/.env` |
 | [ ] | P2 | Compte de service Firebase pour Nest |
-| [ ] | P3 | CORS backend (Flutter web + localhost) |
+| [x] | P3 | CORS backend (Flutter web + localhost) |
 | [x] | P4 | Firestore rules commentées (R6) — onboarding écrit par Nest en prod |
 
 ---

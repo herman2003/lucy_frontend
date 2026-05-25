@@ -78,7 +78,7 @@
 
 | Statut | ID | Tâche | CP |
 |--------|-----|--------|-----|
-| [ ] | B05 | Prompts analyze + `POST /v1/onboarding/analyze` + tests | **CP-3** |
+| [x] | B05 | Prompts analyze + `POST /v1/onboarding/analyze` + tests | **CP-3** |
 
 **CP-3 — Vérification :**
 

@@ -52,6 +52,9 @@ class OnboardingChatNotifier extends _$OnboardingChatNotifier {
 
     if (progress != null && _shouldResumeFromProgress(progress)) {
       state = buildOnboardingResumeState(l10n: l10n, progress: progress);
+      if (shouldResumeAnalyze(progress)) {
+        await _runAnalyze();
+      }
       return;
     }
 

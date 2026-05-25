@@ -7,6 +7,12 @@ import '../presentation/pages/onboarding_chat/onboarding_chat_state.dart';
 import 'onboarding_question_ids.dart';
 import 'onboarding_question_l10n.dart';
 
+/// True when Firestore says all turns are done and [analyze] should run (SPEC Q3).
+bool shouldResumeAnalyze(OnboardingResumeProgress progress) {
+  return progress.onboardingStatus == 'awaiting_analyze' &&
+      progress.transcript.length >= OnboardingQuestionIds.stepCount;
+}
+
 /// Rebuilds chat UI state from Firestore transcript (SPEC §4.5 Q3).
 OnboardingChatState buildOnboardingResumeState({
   required AppLocalizations l10n,
@@ -75,10 +81,20 @@ OnboardingChatState buildOnboardingResumeState({
     );
   }
 
-  final phase = switch (progress.onboardingStatus) {
-    'awaiting_analyze' => OnboardingChatPhase.awaitingAnswer,
-    _ => OnboardingChatPhase.awaitingAnswer,
-  };
+  if (shouldResumeAnalyze(progress)) {
+    final lastStepIndex = OnboardingQuestionIds.stepCount - 1;
+    final lastQuestionId = OnboardingQuestionIds.ordered[lastStepIndex];
+    return OnboardingChatState(
+      isInitialized: true,
+      currentStepIndex: lastStepIndex,
+      currentQuestionId: lastQuestionId,
+      activeQuestionText: onboardingQuestionText(l10n, lastQuestionId),
+      messagesByQuestionId: messagesByQuestionId,
+      completedTurns: completedTurns,
+      phase: OnboardingChatPhase.analyzing,
+      isSubmitting: true,
+    );
+  }
 
   return OnboardingChatState(
     isInitialized: true,
@@ -87,6 +103,6 @@ OnboardingChatState buildOnboardingResumeState({
     activeQuestionText: onboardingQuestionText(l10n, currentQuestionId),
     messagesByQuestionId: messagesByQuestionId,
     completedTurns: completedTurns,
-    phase: phase,
+    phase: OnboardingChatPhase.awaitingAnswer,
   );
 }

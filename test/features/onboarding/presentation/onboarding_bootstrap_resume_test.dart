@@ -93,4 +93,56 @@ void main() {
       ),
     );
   });
+
+  test('bootstrap runs analyze when awaiting_analyze with full transcript', () async {
+    final resume = OnboardingResumeProgress(
+      onboardingStatus: 'awaiting_analyze',
+      transcript: List.generate(
+        OnboardingQuestionIds.stepCount,
+        (index) => OnboardingTranscriptTurn(
+          questionId: OnboardingQuestionIds.ordered[index],
+          questionText: 'Q$index',
+          answerText: 'A$index',
+          confirmedAt: '2026-01-01T00:0$index:00Z',
+        ),
+      ),
+    );
+
+    final repository = FakeOnboardingRepository(
+      analyzeHandler: ({required locale, bool profileReduced = false}) async {
+        return const OnboardingAnalyzeResult.success(
+          learnerProfile: LearnerProfile(
+            primaryRole: 'student',
+            mainDomains: ['sciences'],
+            learningGoal: 'exam',
+            selfAssessedLevel: 'intermediate',
+            explanationStyle: 'step_by_step',
+            feedbackTone: 'encouraging',
+            tutoringLanguage: 'fr',
+          ),
+          summaryForUser: 'Résumé après reprise analyze.',
+        );
+      },
+    );
+
+    final container = ProviderContainer(
+      overrides: [
+        ...onboardingChatTestOverrides(
+          repository: repository,
+          resumeProgress: resume,
+          authUser: const AuthUser(uid: 'test-uid', email: 'test@example.com'),
+        ),
+      ],
+    );
+    addTearDown(container.dispose);
+
+    final l10n = await AppLocalizations.delegate.load(const Locale('fr'));
+    final notifier = container.read(onboardingChatProvider.notifier);
+    await notifier.bootstrap(l10n: l10n, deviceLocale: const Locale('fr'));
+
+    final state = container.read(onboardingChatProvider);
+    expect(repository.analyzeCallCount, 1);
+    expect(state.phase, OnboardingChatPhase.analysisReady);
+    expect(state.analyzeResult, isA<OnboardingAnalyzeSuccess>());
+  });
 }

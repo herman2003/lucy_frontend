@@ -48,6 +48,7 @@ Manual (Firebase réel + Nest Admin):
 - [x] `npm test` in `backend/`
 - [x] Post-MVP UX livré (7 chats, swipe, fallback 10 échecs) — voir [SPEC.md](../SPEC.md) §4.8
 - [ ] Reprise manuelle : kill app après `analyze`, rouvrir → écran confirm avec récap Firestore (`awaiting_final_confirm`)
+- [ ] Reprise manuelle : kill app après 7ᵉ `confirm-turn` (`awaiting_analyze`), rouvrir → `analyze` relancé puis confirm
 
 ---
 

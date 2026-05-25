@@ -92,4 +92,32 @@ void main() {
       );
     },
   );
+
+  test(
+    'buildOnboardingResumeState sets analyzing when awaiting_analyze with 7 turns',
+    () async {
+      final l10n = await AppLocalizations.delegate.load(const Locale('fr'));
+
+      final state = buildOnboardingResumeState(
+        l10n: l10n,
+        progress: OnboardingResumeProgress(
+          onboardingStatus: 'awaiting_analyze',
+          transcript: List.generate(
+            OnboardingQuestionIds.stepCount,
+            (index) => OnboardingTranscriptTurn(
+              questionId: OnboardingQuestionIds.ordered[index],
+              questionText: 'Q$index',
+              answerText: 'A$index',
+              confirmedAt: '2026-01-01T00:0$index:00Z',
+            ),
+          ),
+        ),
+      );
+
+      expect(state.completedTurns, hasLength(7));
+      expect(state.currentStepIndex, OnboardingQuestionIds.stepCount - 1);
+      expect(state.phase, OnboardingChatPhase.analyzing);
+      expect(state.isSubmitting, isTrue);
+    },
+  );
 }

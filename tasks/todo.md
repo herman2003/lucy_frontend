@@ -201,6 +201,20 @@ P0–P2 → B01 → B02 → B03 → B04 (CP-1)
 
 ---
 
+## Phase 10 — Reprise analyze (Q3 suite)
+
+| Statut | ID | Tâche | CP |
+|--------|-----|--------|-----|
+| [x] | Q3c | `awaiting_analyze` + 7 tours → relancer `analyze` au bootstrap | — |
+
+**Q3c — Vérification :**
+
+- [x] `shouldResumeAnalyze` + état `analyzing` dans le builder
+- [x] `bootstrap` appelle `_runAnalyze` automatiquement
+- [x] Tests unitaires + bootstrap
+
+---
+
 ## Historique — Auth phase 1 (terminé)
 
 - [x] T01–T14 auth (voir commits / ancien suivi)

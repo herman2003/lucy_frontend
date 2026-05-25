@@ -102,5 +102,49 @@ void main() {
         LucyRoutePaths.login,
       );
     });
+
+    test('unauthenticated user cannot access onboarding confirm', () {
+      expect(
+        LucyRouterGuards.resolveRedirect(
+          bootstrap: const AsyncData(AuthBootstrapResult()),
+          sessionUser: null,
+          location: LucyRoutePaths.onboardingConfirm,
+        ),
+        LucyRoutePaths.login,
+      );
+    });
+
+    test('bootstrap loading keeps splash', () {
+      expect(
+        LucyRouterGuards.resolveRedirect(
+          bootstrap: const AsyncLoading<AuthBootstrapResult>(),
+          sessionUser: user,
+          location: LucyRoutePaths.splash,
+        ),
+        isNull,
+      );
+    });
+
+    test('bootstrap loading redirects away from home', () {
+      expect(
+        LucyRouterGuards.resolveRedirect(
+          bootstrap: const AsyncLoading<AuthBootstrapResult>(),
+          sessionUser: user,
+          location: LucyRoutePaths.home,
+        ),
+        LucyRoutePaths.splash,
+      );
+    });
+
+    test('configured user on login redirects to home', () {
+      expect(
+        LucyRouterGuards.resolveRedirect(
+          bootstrap: bootstrapConfigured,
+          sessionUser: user,
+          location: LucyRoutePaths.login,
+        ),
+        LucyRoutePaths.home,
+      );
+    });
   });
 }

@@ -102,6 +102,40 @@ void main() {
     await tester.pump(const Duration(milliseconds: 100));
   }
 
+  Future<void> pumpConfirmWithoutAnalysis(WidgetTester tester) async {
+    final router = GoRouter(
+      initialLocation: LucyRoutePaths.onboardingConfirm,
+      routes: [
+        GoRoute(
+          path: LucyRoutePaths.onboardingConfirm,
+          builder: (context, state) => const OnboardingConfirmPage(),
+        ),
+        GoRoute(
+          path: LucyRoutePaths.onboarding,
+          builder: (context, state) => const Scaffold(body: Text('Chat')),
+        ),
+      ],
+    );
+
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [
+          onboardingRepositoryProvider.overrideWithValue(
+            FakeOnboardingRepository(),
+          ),
+        ],
+        child: MaterialApp.router(
+          locale: const Locale('fr'),
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
+          routerConfig: router,
+        ),
+      ),
+    );
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 100));
+  }
+
   testWidgets('shows summary and profile labels', (tester) async {
     await pumpConfirm(
       tester,
@@ -114,4 +148,30 @@ void main() {
     expect(find.text('Valider et continuer'), findsOneWidget);
   });
 
+  testWidgets('redirects to chat when analysis is missing', (tester) async {
+    await pumpConfirmWithoutAnalysis(tester);
+    await tester.pumpAndSettle();
+
+    expect(find.text('Chat'), findsOneWidget);
+    expect(find.textContaining('analyse disponible'), findsNothing);
+  });
+
+  testWidgets('edit navigates back to onboarding chat', (tester) async {
+    tester.view.physicalSize = const Size(400, 900);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(tester.view.resetPhysicalSize);
+
+    await pumpConfirm(
+      tester,
+      repository: FakeOnboardingRepository(),
+      analysis: sampleAnalysis(),
+    );
+
+    await tester.ensureVisible(find.text('Modifier mes réponses'));
+    await tester.tap(find.text('Modifier mes réponses'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Chat'), findsOneWidget);
+    expect(find.text('Valider et continuer'), findsNothing);
+  });
 }

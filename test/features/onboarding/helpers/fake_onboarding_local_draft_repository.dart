@@ -3,11 +3,11 @@ import 'package:frontend/features/onboarding/domain/repositories/onboarding_loca
 
 class FakeOnboardingLocalDraftRepository implements OnboardingLocalDraftRepository {
   FakeOnboardingLocalDraftRepository({
-    this.drafts = const {},
+    Map<String, OnboardingLocalDraft>? drafts,
     this.uiLocale,
-  });
+  }) : _drafts = drafts ?? {};
 
-  final Map<String, OnboardingLocalDraft> drafts;
+  final Map<String, OnboardingLocalDraft> _drafts;
   String? uiLocale;
 
   @override
@@ -20,16 +20,16 @@ class FakeOnboardingLocalDraftRepository implements OnboardingLocalDraftReposito
 
   @override
   Future<void> saveDraft(OnboardingLocalDraft draft) async {
-    drafts[draft.uid] = draft;
+    _drafts[draft.uid] = draft;
   }
 
   @override
   Future<OnboardingLocalDraft?> loadDraft({required String uid}) async {
-    return drafts[uid];
+    return _drafts[uid];
   }
 
   @override
   Future<void> clearDraft({required String uid}) async {
-    drafts.remove(uid);
+    _drafts.remove(uid);
   }
 }

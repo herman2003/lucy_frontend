@@ -167,7 +167,7 @@ P0–P2 → B01 → B02 → B03 → B04 (CP-1)
 | [x] | UX-2 | Max 10 `validate` / question + `fallbackSummary` + `fallbackReduced` | — |
 | [x] | UX-3 | Max 10 `analyze` + `fallbackProfileSummary` + `profileReduced` | — |
 | [x] | UX-1 | 7 chats isolés + typing Lucy + steps futurs verrouillés | — |
-| [ ] | UX-4 | Design messagerie (avatar) + swipe steps terminés | — |
+| [x] | UX-4 | Design messagerie (avatar) + swipe steps terminés | — |
 | [ ] | UX-5 | Retour arrière sans effacer les autres tours | — |
 
 ---

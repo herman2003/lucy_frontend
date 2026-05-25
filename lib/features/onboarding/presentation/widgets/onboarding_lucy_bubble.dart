@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../core/constants/lucy_chat_constants.dart';
 import '../../../../core/constants/lucy_constants.dart';
 import '../../../../shared/widgets/branding/lucy_avatar.dart';
 
@@ -16,7 +17,7 @@ class OnboardingLucyBubble extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
-        const LucyAvatar(size: 36),
+        const LucyAvatar(size: LucyChatConstants.kAvatarSize),
         const SizedBox(width: LucyConstants.kSpacingLow),
         Flexible(
           child: Container(
@@ -26,12 +27,7 @@ class OnboardingLucyBubble extends StatelessWidget {
             ),
             decoration: BoxDecoration(
               color: scheme.surfaceContainerHighest,
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(16),
-                topRight: Radius.circular(16),
-                bottomRight: Radius.circular(16),
-                bottomLeft: Radius.circular(4),
-              ),
+              borderRadius: LucyChatConstants.lucyBubbleRadius,
             ),
             child: Text(
               text,

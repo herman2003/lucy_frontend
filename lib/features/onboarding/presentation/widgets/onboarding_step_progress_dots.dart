@@ -24,9 +24,11 @@ class OnboardingStepProgressDots extends StatelessWidget {
         horizontal: LucyConstants.kSpacingMedium,
         vertical: LucyConstants.kSpacingLow,
       ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: List.generate(OnboardingQuestionIds.stepCount, (index) {
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: List.generate(OnboardingQuestionIds.stepCount, (index) {
           final status = stepStatusForIndex(index);
           final color = switch (status) {
             OnboardingStepStatus.completed => scheme.primary,
@@ -62,7 +64,8 @@ class OnboardingStepProgressDots extends StatelessWidget {
                     ),
             ),
           );
-        }),
+          }),
+        ),
       ),
     );
   }

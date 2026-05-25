@@ -204,6 +204,12 @@ class AppLocalizationsDe extends AppLocalizations {
       'Schließe zuerst den aktuellen Schritt ab.';
 
   @override
+  String get onboardingLucyTyping => 'Lucy schreibt…';
+
+  @override
+  String get onboardingStepReadOnly => 'Schritt abgeschlossen — nur Ansicht.';
+
+  @override
   String get onboardingConfirmTurn => 'Passt';
 
   @override

@@ -202,6 +202,12 @@ class AppLocalizationsEn extends AppLocalizations {
       'Finish the current step before continuing.';
 
   @override
+  String get onboardingLucyTyping => 'Lucy is typing…';
+
+  @override
+  String get onboardingStepReadOnly => 'Step completed — read only.';
+
+  @override
   String get onboardingConfirmTurn => 'Looks good';
 
   @override

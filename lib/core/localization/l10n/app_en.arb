@@ -72,6 +72,8 @@
     }
   },
   "onboardingStepLocked": "Finish the current step before continuing.",
+  "onboardingLucyTyping": "Lucy is typing…",
+  "onboardingStepReadOnly": "Step completed — read only.",
   "onboardingConfirmTurn": "Looks good",
   "onboardingRejectTurn": "That’s not right",
   "onboardingGenericError": "Something went wrong. Please try again.",

@@ -72,6 +72,8 @@
     }
   },
   "onboardingStepLocked": "Schließe zuerst den aktuellen Schritt ab.",
+  "onboardingLucyTyping": "Lucy schreibt…",
+  "onboardingStepReadOnly": "Schritt abgeschlossen — nur Ansicht.",
   "onboardingConfirmTurn": "Passt",
   "onboardingRejectTurn": "Das stimmt nicht",
   "onboardingGenericError": "Ein Fehler ist aufgetreten. Bitte erneut versuchen.",

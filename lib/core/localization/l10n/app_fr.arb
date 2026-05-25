@@ -245,6 +245,14 @@
   "@onboardingStepLocked": {
     "description": "Snackbar when user tries to open a locked onboarding step"
   },
+  "onboardingLucyTyping": "Lucy écrit…",
+  "@onboardingLucyTyping": {
+    "description": "Label shown while Lucy typing indicator is visible"
+  },
+  "onboardingStepReadOnly": "Étape terminée — consultation seule.",
+  "@onboardingStepReadOnly": {
+    "description": "Banner when browsing a completed onboarding step chat"
+  },
   "onboardingConfirmTurn": "C’est bon",
   "@onboardingConfirmTurn": {
     "description": "User confirms Lucy understood the answer"

@@ -454,6 +454,18 @@ abstract class AppLocalizations {
   /// **'Terminez l’étape en cours avant de continuer.'**
   String get onboardingStepLocked;
 
+  /// Label shown while Lucy typing indicator is visible
+  ///
+  /// In fr, this message translates to:
+  /// **'Lucy écrit…'**
+  String get onboardingLucyTyping;
+
+  /// Banner when browsing a completed onboarding step chat
+  ///
+  /// In fr, this message translates to:
+  /// **'Étape terminée — consultation seule.'**
+  String get onboardingStepReadOnly;
+
   /// User confirms Lucy understood the answer
   ///
   /// In fr, this message translates to:

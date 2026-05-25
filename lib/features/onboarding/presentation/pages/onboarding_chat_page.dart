@@ -176,9 +176,13 @@ class _OnboardingChatPageState extends ConsumerState<OnboardingChatPage> {
                       stepIndex == chatState.currentStepIndex &&
                       chatState.showTypingIndicator;
 
+                  final readOnly =
+                      stepIndex < chatState.currentStepIndex;
+
                   return OnboardingStepChatPanel(
                     messages: chatState.messagesForStep(stepIndex),
                     showTypingIndicator: showTyping,
+                    readOnly: readOnly,
                   );
                 },
               ),

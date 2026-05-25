@@ -31,7 +31,7 @@ void main() {
     }
   });
 
-  test('delivered post-MVP UX-1 item is checked in SPEC §4.8', () {
+  test('delivered post-MVP UX items are checked in SPEC §4.8', () {
     for (final snippet in _postMvpCheckedSnippetsUx1) {
       expect(specSection48, contains(snippet), reason: snippet);
     }
@@ -87,9 +87,9 @@ const _mvpAppCheckedSnippetsExtraAnalyze = [
 
 const _postMvpCheckedSnippetsUx1 = [
   '- [x] **7 chats**',
+  '- [x] Design messagerie complète (avatar, `colorScheme`) ; **swipe entre steps**',
 ];
 
 const _postMvpUncheckedSnippets = [
-  '- [ ] Design messagerie complète (avatar, `colorScheme`) ; **swipe entre steps**',
   '- [ ] Retour arrière : modifier un tour',
 ];

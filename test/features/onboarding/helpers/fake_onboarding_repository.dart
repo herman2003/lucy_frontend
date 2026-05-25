@@ -18,13 +18,17 @@ class FakeOnboardingRepository implements OnboardingRepository {
     required String locale,
     required String questionId,
     required String answerText,
-  })? validateHandler;
+    bool fallbackReduced,
+  })?
+  validateHandler;
 
   final Future<ConfirmTurnResult> Function({
     required String locale,
     required String questionId,
     required String answerText,
-  })? confirmHandler;
+    String confirmationType,
+  })?
+  confirmHandler;
 
   final Future<OnboardingAnalyzeResult> Function({
     required String locale,
@@ -33,7 +37,9 @@ class FakeOnboardingRepository implements OnboardingRepository {
   final Future<FinalizeOnboardingResult> Function()? finalizeHandler;
 
   int validateCallCount = 0;
+  bool lastValidateFallbackReduced = false;
   int confirmCallCount = 0;
+  String lastConfirmationType = 'normal';
   int analyzeCallCount = 0;
   int finalizeCallCount = 0;
   String? lastQuestionId;
@@ -45,8 +51,10 @@ class FakeOnboardingRepository implements OnboardingRepository {
     required String locale,
     required String questionId,
     required String answerText,
+    bool fallbackReduced = false,
   }) async {
     validateCallCount++;
+    lastValidateFallbackReduced = fallbackReduced;
     lastQuestionId = questionId;
     lastAnswerText = answerText;
     if (validateHandler != null) {
@@ -54,6 +62,7 @@ class FakeOnboardingRepository implements OnboardingRepository {
         locale: locale,
         questionId: questionId,
         answerText: answerText,
+        fallbackReduced: fallbackReduced,
       );
     }
     return const ValidateAnswerResult.accepted(
@@ -66,13 +75,16 @@ class FakeOnboardingRepository implements OnboardingRepository {
     required String locale,
     required String questionId,
     required String answerText,
+    String confirmationType = 'normal',
   }) async {
     confirmCallCount++;
+    lastConfirmationType = confirmationType;
     if (confirmHandler != null) {
       return confirmHandler!(
         locale: locale,
         questionId: questionId,
         answerText: answerText,
+        confirmationType: confirmationType,
       );
     }
 

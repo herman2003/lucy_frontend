@@ -12,4 +12,8 @@ sealed class ValidateAnswerResult with _$ValidateAnswerResult {
     required String rephrasedQuestion,
     required String reason,
   }) = ValidateAnswerNeedsRetry;
+
+  const factory ValidateAnswerResult.needsFallback({
+    required String fallbackSummary,
+  }) = ValidateAnswerNeedsFallback;
 }

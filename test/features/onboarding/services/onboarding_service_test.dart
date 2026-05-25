@@ -23,7 +23,7 @@ void main() {
       const expected = ValidateAnswerResult.accepted(turnSummary: 'OK');
 
       repository = FakeOnboardingRepository(
-        validateHandler: ({required locale, required questionId, required answerText}) async {
+        validateHandler: ({required locale, required questionId, required answerText, bool fallbackReduced = false}) async {
           expect(locale, 'fr');
           expect(questionId, OnboardingQuestionIds.qRole);
           expect(answerText, 'Ma réponse');
@@ -49,7 +49,7 @@ void main() {
       );
 
       repository = FakeOnboardingRepository(
-        confirmHandler: ({required locale, required questionId, required answerText}) async {
+        confirmHandler: ({required locale, required questionId, required answerText, String confirmationType = 'normal'}) async {
           expect(locale, 'en');
           expect(questionId, OnboardingQuestionIds.qGoal);
           return expected;

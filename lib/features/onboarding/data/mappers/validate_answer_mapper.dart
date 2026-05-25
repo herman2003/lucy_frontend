@@ -16,6 +16,13 @@ abstract final class ValidateAnswerMapper {
       return ValidateAnswerResult.accepted(turnSummary: turnSummary.trim());
     }
 
+    final fallbackSummary = json['fallbackSummary'];
+    if (fallbackSummary is String && fallbackSummary.trim().isNotEmpty) {
+      return ValidateAnswerResult.needsFallback(
+        fallbackSummary: fallbackSummary.trim(),
+      );
+    }
+
     final rephrasedQuestion = json['rephrasedQuestion'];
     final reason = json['reason'];
     if (rephrasedQuestion is! String || rephrasedQuestion.trim().isEmpty) {

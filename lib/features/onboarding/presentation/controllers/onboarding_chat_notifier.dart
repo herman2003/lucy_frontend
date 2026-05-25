@@ -77,7 +77,9 @@ class OnboardingChatNotifier extends _$OnboardingChatNotifier {
 
       switch (result) {
         case ValidateAnswerAccepted(:final turnSummary):
-          _handleAccepted(turnSummary, answer);
+          _handleAccepted(turnSummary, answer, isFallback: false);
+        case ValidateAnswerNeedsFallback(:final fallbackSummary):
+          _handleAccepted(fallbackSummary, answer, isFallback: true);
         case ValidateAnswerNeedsRetry(:final rephrasedQuestion):
           _handleNeedsRetry(rephrasedQuestion);
       }
@@ -108,6 +110,8 @@ class OnboardingChatNotifier extends _$OnboardingChatNotifier {
                 locale: _apiLocale,
                 questionId: state.currentQuestionId,
                 answerText: answer,
+                confirmationType:
+                    state.isFallbackConfirmation ? 'fallback' : 'normal',
               );
 
       final completed = OnboardingCompletedTurn(
@@ -123,6 +127,7 @@ class OnboardingChatNotifier extends _$OnboardingChatNotifier {
         completedTurns: updatedTurns,
         pendingTurnSummary: null,
         pendingAnswerText: null,
+        isFallbackConfirmation: false,
       );
 
       if (confirmResult.onboardingStatus == 'awaiting_analyze') {
@@ -141,15 +146,61 @@ class OnboardingChatNotifier extends _$OnboardingChatNotifier {
   }
 
   void rejectTurnSummary() {
+    if (state.isFallbackConfirmation) {
+      rejectFallbackSummary();
+      return;
+    }
     state = state.copyWith(
       pendingTurnSummary: null,
       pendingAnswerText: null,
+      isFallbackConfirmation: false,
       phase: OnboardingChatPhase.awaitingAnswer,
       isSubmitting: false,
     );
   }
 
-  void _handleAccepted(String turnSummary, String answer) {
+  Future<void> rejectFallbackSummary() async {
+    final answer = state.pendingAnswerText;
+    if (answer == null) {
+      return;
+    }
+
+    state = state.copyWith(
+      pendingTurnSummary: null,
+      phase: OnboardingChatPhase.validating,
+      isSubmitting: true,
+    );
+
+    try {
+      final result = await ref.read(onboardingServiceProvider).validateAnswer(
+            locale: _apiLocale,
+            questionId: state.currentQuestionId,
+            answerText: answer,
+            fallbackReduced: true,
+          );
+
+      switch (result) {
+        case ValidateAnswerNeedsFallback(:final fallbackSummary):
+          _handleAccepted(fallbackSummary, answer, isFallback: true);
+        case ValidateAnswerAccepted(:final turnSummary):
+          _handleAccepted(turnSummary, answer, isFallback: false);
+        case ValidateAnswerNeedsRetry(:final rephrasedQuestion):
+          _handleNeedsRetry(rephrasedQuestion);
+      }
+    } catch (error) {
+      state = state.copyWith(
+        phase: OnboardingChatPhase.awaitingConfirmation,
+        isSubmitting: false,
+      );
+      rethrow;
+    }
+  }
+
+  void _handleAccepted(
+    String turnSummary,
+    String answer, {
+    required bool isFallback,
+  }) {
     final summaryMessage = OnboardingChatMessage(
       isFromLucy: true,
       text: turnSummary,
@@ -158,6 +209,7 @@ class OnboardingChatNotifier extends _$OnboardingChatNotifier {
       messages: [...state.messages, summaryMessage],
       pendingTurnSummary: turnSummary,
       pendingAnswerText: answer,
+      isFallbackConfirmation: isFallback,
       phase: OnboardingChatPhase.awaitingConfirmation,
       isSubmitting: false,
     );

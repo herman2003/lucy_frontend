@@ -33,11 +33,13 @@ class OnboardingRepositoryImpl implements OnboardingRepository {
     required String locale,
     required String questionId,
     required String answerText,
+    bool fallbackReduced = false,
   }) async {
     final json = await _validateRemote.validateAnswer(
       locale: locale,
       questionId: questionId,
       answerText: answerText,
+      fallbackReduced: fallbackReduced,
     );
     return ValidateAnswerMapper.fromJson(json);
   }
@@ -47,11 +49,13 @@ class OnboardingRepositoryImpl implements OnboardingRepository {
     required String locale,
     required String questionId,
     required String answerText,
+    String confirmationType = 'normal',
   }) async {
     final json = await _confirmRemote.confirmTurn(
       locale: locale,
       questionId: questionId,
       answerText: answerText,
+      confirmationType: confirmationType,
     );
     return ConfirmTurnMapper.fromJson(json);
   }

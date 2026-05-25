@@ -82,6 +82,7 @@ void main() {
       'lib/features/onboarding/utils/onboarding_constants.dart',
     ).readAsStringSync();
     expect(content, contains('maxAnswerLength = 2000'));
+    expect(content, contains('maxValidateAttemptsPerQuestion = 10'));
   });
 
   test('router guards reference onboarding paths and isConfigured', () {

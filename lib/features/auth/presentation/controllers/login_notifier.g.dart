@@ -44,7 +44,7 @@ final class LoginNotifierProvider
   }
 }
 
-String _$loginNotifierHash() => r'f304045bf8f2034d87d3dbca30c609697032b815';
+String _$loginNotifierHash() => r'721a1ccb079a8b9da452860d01cbcecbfde6519d';
 
 /// Login form notifier (UI → Notifier → [AuthService]).
 

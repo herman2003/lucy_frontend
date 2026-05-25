@@ -728,7 +728,7 @@ Signup / login → `/onboarding` si `isConfigured != true` (lire Firestore **ava
 - [x] 7 questions ; réponses texte libre.
 - [x] **`validate-answer` après chaque saisie** ; si `valid: true`, **`turnSummary` + confirmation utilisateur** avant question suivante.
 - [x] Si `valid: false` : **`rephrasedQuestion` remplace** le libellé (pas « Peux-tu préciser »).
-- [ ] max **10** tentatives / question ; 10 échecs validate → **`fallbackSummary`** + validation / rendu réduit si refus.
+- [x] max **10** tentatives / question ; 10 échecs validate → **`fallbackSummary`** + validation / rendu réduit si refus.
 - [x] **« Ce n’est pas ça »** après `turnSummary` → retour saisie sans `confirm-turn`.
 - [x] **`confirm-turn`** après « C’est bon » ; Nest écrit Firestore ; miroir local.
 - [x] **`analyze`** + **`finalize`** pour clôturer (écran confirmation profil).

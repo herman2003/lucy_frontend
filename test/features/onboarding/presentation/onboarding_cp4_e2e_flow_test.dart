@@ -37,7 +37,7 @@ void main() {
 
     final authRepository = FakeAuthRepository(null);
     final onboardingRepository = FakeOnboardingRepository(
-      validateHandler: ({required locale, required questionId, required answerText}) async {
+      validateHandler: ({required locale, required questionId, required answerText, bool fallbackReduced = false}) async {
         return const ValidateAnswerResult.accepted(turnSummary: 'Résumé accepté.');
       },
       analyzeHandler: ({required locale}) async {

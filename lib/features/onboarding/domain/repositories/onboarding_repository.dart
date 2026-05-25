@@ -8,12 +8,14 @@ abstract class OnboardingRepository {
     required String locale,
     required String questionId,
     required String answerText,
+    bool fallbackReduced = false,
   });
 
   Future<ConfirmTurnResult> confirmTurn({
     required String locale,
     required String questionId,
     required String answerText,
+    String confirmationType = 'normal',
   });
 
   Future<OnboardingAnalyzeResult> analyze({required String locale});

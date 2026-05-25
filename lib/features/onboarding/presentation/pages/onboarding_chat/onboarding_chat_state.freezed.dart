@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$OnboardingChatState {
 
- bool get isInitialized; int get currentStepIndex; String get currentQuestionId; String get activeQuestionText; List<OnboardingChatMessage> get messages; OnboardingChatPhase get phase; String get answerDraft; bool get isSubmitting; String? get pendingTurnSummary; String? get pendingAnswerText; List<OnboardingCompletedTurn> get completedTurns; OnboardingAnalyzeResult? get analyzeResult;
+ bool get isInitialized; int get currentStepIndex; String get currentQuestionId; String get activeQuestionText; List<OnboardingChatMessage> get messages; OnboardingChatPhase get phase; String get answerDraft; bool get isSubmitting; String? get pendingTurnSummary; String? get pendingAnswerText; bool get isFallbackConfirmation; List<OnboardingCompletedTurn> get completedTurns; OnboardingAnalyzeResult? get analyzeResult;
 /// Create a copy of OnboardingChatState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $OnboardingChatStateCopyWith<OnboardingChatState> get copyWith => _$OnboardingCh
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is OnboardingChatState&&(identical(other.isInitialized, isInitialized) || other.isInitialized == isInitialized)&&(identical(other.currentStepIndex, currentStepIndex) || other.currentStepIndex == currentStepIndex)&&(identical(other.currentQuestionId, currentQuestionId) || other.currentQuestionId == currentQuestionId)&&(identical(other.activeQuestionText, activeQuestionText) || other.activeQuestionText == activeQuestionText)&&const DeepCollectionEquality().equals(other.messages, messages)&&(identical(other.phase, phase) || other.phase == phase)&&(identical(other.answerDraft, answerDraft) || other.answerDraft == answerDraft)&&(identical(other.isSubmitting, isSubmitting) || other.isSubmitting == isSubmitting)&&(identical(other.pendingTurnSummary, pendingTurnSummary) || other.pendingTurnSummary == pendingTurnSummary)&&(identical(other.pendingAnswerText, pendingAnswerText) || other.pendingAnswerText == pendingAnswerText)&&const DeepCollectionEquality().equals(other.completedTurns, completedTurns)&&(identical(other.analyzeResult, analyzeResult) || other.analyzeResult == analyzeResult));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is OnboardingChatState&&(identical(other.isInitialized, isInitialized) || other.isInitialized == isInitialized)&&(identical(other.currentStepIndex, currentStepIndex) || other.currentStepIndex == currentStepIndex)&&(identical(other.currentQuestionId, currentQuestionId) || other.currentQuestionId == currentQuestionId)&&(identical(other.activeQuestionText, activeQuestionText) || other.activeQuestionText == activeQuestionText)&&const DeepCollectionEquality().equals(other.messages, messages)&&(identical(other.phase, phase) || other.phase == phase)&&(identical(other.answerDraft, answerDraft) || other.answerDraft == answerDraft)&&(identical(other.isSubmitting, isSubmitting) || other.isSubmitting == isSubmitting)&&(identical(other.pendingTurnSummary, pendingTurnSummary) || other.pendingTurnSummary == pendingTurnSummary)&&(identical(other.pendingAnswerText, pendingAnswerText) || other.pendingAnswerText == pendingAnswerText)&&(identical(other.isFallbackConfirmation, isFallbackConfirmation) || other.isFallbackConfirmation == isFallbackConfirmation)&&const DeepCollectionEquality().equals(other.completedTurns, completedTurns)&&(identical(other.analyzeResult, analyzeResult) || other.analyzeResult == analyzeResult));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,isInitialized,currentStepIndex,currentQuestionId,activeQuestionText,const DeepCollectionEquality().hash(messages),phase,answerDraft,isSubmitting,pendingTurnSummary,pendingAnswerText,const DeepCollectionEquality().hash(completedTurns),analyzeResult);
+int get hashCode => Object.hash(runtimeType,isInitialized,currentStepIndex,currentQuestionId,activeQuestionText,const DeepCollectionEquality().hash(messages),phase,answerDraft,isSubmitting,pendingTurnSummary,pendingAnswerText,isFallbackConfirmation,const DeepCollectionEquality().hash(completedTurns),analyzeResult);
 
 @override
 String toString() {
-  return 'OnboardingChatState(isInitialized: $isInitialized, currentStepIndex: $currentStepIndex, currentQuestionId: $currentQuestionId, activeQuestionText: $activeQuestionText, messages: $messages, phase: $phase, answerDraft: $answerDraft, isSubmitting: $isSubmitting, pendingTurnSummary: $pendingTurnSummary, pendingAnswerText: $pendingAnswerText, completedTurns: $completedTurns, analyzeResult: $analyzeResult)';
+  return 'OnboardingChatState(isInitialized: $isInitialized, currentStepIndex: $currentStepIndex, currentQuestionId: $currentQuestionId, activeQuestionText: $activeQuestionText, messages: $messages, phase: $phase, answerDraft: $answerDraft, isSubmitting: $isSubmitting, pendingTurnSummary: $pendingTurnSummary, pendingAnswerText: $pendingAnswerText, isFallbackConfirmation: $isFallbackConfirmation, completedTurns: $completedTurns, analyzeResult: $analyzeResult)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $OnboardingChatStateCopyWith<$Res>  {
   factory $OnboardingChatStateCopyWith(OnboardingChatState value, $Res Function(OnboardingChatState) _then) = _$OnboardingChatStateCopyWithImpl;
 @useResult
 $Res call({
- bool isInitialized, int currentStepIndex, String currentQuestionId, String activeQuestionText, List<OnboardingChatMessage> messages, OnboardingChatPhase phase, String answerDraft, bool isSubmitting, String? pendingTurnSummary, String? pendingAnswerText, List<OnboardingCompletedTurn> completedTurns, OnboardingAnalyzeResult? analyzeResult
+ bool isInitialized, int currentStepIndex, String currentQuestionId, String activeQuestionText, List<OnboardingChatMessage> messages, OnboardingChatPhase phase, String answerDraft, bool isSubmitting, String? pendingTurnSummary, String? pendingAnswerText, bool isFallbackConfirmation, List<OnboardingCompletedTurn> completedTurns, OnboardingAnalyzeResult? analyzeResult
 });
 
 
@@ -62,7 +62,7 @@ class _$OnboardingChatStateCopyWithImpl<$Res>
 
 /// Create a copy of OnboardingChatState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? isInitialized = null,Object? currentStepIndex = null,Object? currentQuestionId = null,Object? activeQuestionText = null,Object? messages = null,Object? phase = null,Object? answerDraft = null,Object? isSubmitting = null,Object? pendingTurnSummary = freezed,Object? pendingAnswerText = freezed,Object? completedTurns = null,Object? analyzeResult = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? isInitialized = null,Object? currentStepIndex = null,Object? currentQuestionId = null,Object? activeQuestionText = null,Object? messages = null,Object? phase = null,Object? answerDraft = null,Object? isSubmitting = null,Object? pendingTurnSummary = freezed,Object? pendingAnswerText = freezed,Object? isFallbackConfirmation = null,Object? completedTurns = null,Object? analyzeResult = freezed,}) {
   return _then(_self.copyWith(
 isInitialized: null == isInitialized ? _self.isInitialized : isInitialized // ignore: cast_nullable_to_non_nullable
 as bool,currentStepIndex: null == currentStepIndex ? _self.currentStepIndex : currentStepIndex // ignore: cast_nullable_to_non_nullable
@@ -74,7 +74,8 @@ as OnboardingChatPhase,answerDraft: null == answerDraft ? _self.answerDraft : an
 as String,isSubmitting: null == isSubmitting ? _self.isSubmitting : isSubmitting // ignore: cast_nullable_to_non_nullable
 as bool,pendingTurnSummary: freezed == pendingTurnSummary ? _self.pendingTurnSummary : pendingTurnSummary // ignore: cast_nullable_to_non_nullable
 as String?,pendingAnswerText: freezed == pendingAnswerText ? _self.pendingAnswerText : pendingAnswerText // ignore: cast_nullable_to_non_nullable
-as String?,completedTurns: null == completedTurns ? _self.completedTurns : completedTurns // ignore: cast_nullable_to_non_nullable
+as String?,isFallbackConfirmation: null == isFallbackConfirmation ? _self.isFallbackConfirmation : isFallbackConfirmation // ignore: cast_nullable_to_non_nullable
+as bool,completedTurns: null == completedTurns ? _self.completedTurns : completedTurns // ignore: cast_nullable_to_non_nullable
 as List<OnboardingCompletedTurn>,analyzeResult: freezed == analyzeResult ? _self.analyzeResult : analyzeResult // ignore: cast_nullable_to_non_nullable
 as OnboardingAnalyzeResult?,
   ));
@@ -173,10 +174,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( bool isInitialized,  int currentStepIndex,  String currentQuestionId,  String activeQuestionText,  List<OnboardingChatMessage> messages,  OnboardingChatPhase phase,  String answerDraft,  bool isSubmitting,  String? pendingTurnSummary,  String? pendingAnswerText,  List<OnboardingCompletedTurn> completedTurns,  OnboardingAnalyzeResult? analyzeResult)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( bool isInitialized,  int currentStepIndex,  String currentQuestionId,  String activeQuestionText,  List<OnboardingChatMessage> messages,  OnboardingChatPhase phase,  String answerDraft,  bool isSubmitting,  String? pendingTurnSummary,  String? pendingAnswerText,  bool isFallbackConfirmation,  List<OnboardingCompletedTurn> completedTurns,  OnboardingAnalyzeResult? analyzeResult)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _OnboardingChatState() when $default != null:
-return $default(_that.isInitialized,_that.currentStepIndex,_that.currentQuestionId,_that.activeQuestionText,_that.messages,_that.phase,_that.answerDraft,_that.isSubmitting,_that.pendingTurnSummary,_that.pendingAnswerText,_that.completedTurns,_that.analyzeResult);case _:
+return $default(_that.isInitialized,_that.currentStepIndex,_that.currentQuestionId,_that.activeQuestionText,_that.messages,_that.phase,_that.answerDraft,_that.isSubmitting,_that.pendingTurnSummary,_that.pendingAnswerText,_that.isFallbackConfirmation,_that.completedTurns,_that.analyzeResult);case _:
   return orElse();
 
 }
@@ -194,10 +195,10 @@ return $default(_that.isInitialized,_that.currentStepIndex,_that.currentQuestion
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( bool isInitialized,  int currentStepIndex,  String currentQuestionId,  String activeQuestionText,  List<OnboardingChatMessage> messages,  OnboardingChatPhase phase,  String answerDraft,  bool isSubmitting,  String? pendingTurnSummary,  String? pendingAnswerText,  List<OnboardingCompletedTurn> completedTurns,  OnboardingAnalyzeResult? analyzeResult)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( bool isInitialized,  int currentStepIndex,  String currentQuestionId,  String activeQuestionText,  List<OnboardingChatMessage> messages,  OnboardingChatPhase phase,  String answerDraft,  bool isSubmitting,  String? pendingTurnSummary,  String? pendingAnswerText,  bool isFallbackConfirmation,  List<OnboardingCompletedTurn> completedTurns,  OnboardingAnalyzeResult? analyzeResult)  $default,) {final _that = this;
 switch (_that) {
 case _OnboardingChatState():
-return $default(_that.isInitialized,_that.currentStepIndex,_that.currentQuestionId,_that.activeQuestionText,_that.messages,_that.phase,_that.answerDraft,_that.isSubmitting,_that.pendingTurnSummary,_that.pendingAnswerText,_that.completedTurns,_that.analyzeResult);case _:
+return $default(_that.isInitialized,_that.currentStepIndex,_that.currentQuestionId,_that.activeQuestionText,_that.messages,_that.phase,_that.answerDraft,_that.isSubmitting,_that.pendingTurnSummary,_that.pendingAnswerText,_that.isFallbackConfirmation,_that.completedTurns,_that.analyzeResult);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -214,10 +215,10 @@ return $default(_that.isInitialized,_that.currentStepIndex,_that.currentQuestion
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( bool isInitialized,  int currentStepIndex,  String currentQuestionId,  String activeQuestionText,  List<OnboardingChatMessage> messages,  OnboardingChatPhase phase,  String answerDraft,  bool isSubmitting,  String? pendingTurnSummary,  String? pendingAnswerText,  List<OnboardingCompletedTurn> completedTurns,  OnboardingAnalyzeResult? analyzeResult)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( bool isInitialized,  int currentStepIndex,  String currentQuestionId,  String activeQuestionText,  List<OnboardingChatMessage> messages,  OnboardingChatPhase phase,  String answerDraft,  bool isSubmitting,  String? pendingTurnSummary,  String? pendingAnswerText,  bool isFallbackConfirmation,  List<OnboardingCompletedTurn> completedTurns,  OnboardingAnalyzeResult? analyzeResult)?  $default,) {final _that = this;
 switch (_that) {
 case _OnboardingChatState() when $default != null:
-return $default(_that.isInitialized,_that.currentStepIndex,_that.currentQuestionId,_that.activeQuestionText,_that.messages,_that.phase,_that.answerDraft,_that.isSubmitting,_that.pendingTurnSummary,_that.pendingAnswerText,_that.completedTurns,_that.analyzeResult);case _:
+return $default(_that.isInitialized,_that.currentStepIndex,_that.currentQuestionId,_that.activeQuestionText,_that.messages,_that.phase,_that.answerDraft,_that.isSubmitting,_that.pendingTurnSummary,_that.pendingAnswerText,_that.isFallbackConfirmation,_that.completedTurns,_that.analyzeResult);case _:
   return null;
 
 }
@@ -229,7 +230,7 @@ return $default(_that.isInitialized,_that.currentStepIndex,_that.currentQuestion
 
 
 class _OnboardingChatState extends OnboardingChatState {
-  const _OnboardingChatState({this.isInitialized = false, this.currentStepIndex = 0, this.currentQuestionId = '', this.activeQuestionText = '', final  List<OnboardingChatMessage> messages = const [], this.phase = OnboardingChatPhase.awaitingAnswer, this.answerDraft = '', this.isSubmitting = false, this.pendingTurnSummary, this.pendingAnswerText, final  List<OnboardingCompletedTurn> completedTurns = const [], this.analyzeResult}): _messages = messages,_completedTurns = completedTurns,super._();
+  const _OnboardingChatState({this.isInitialized = false, this.currentStepIndex = 0, this.currentQuestionId = '', this.activeQuestionText = '', final  List<OnboardingChatMessage> messages = const [], this.phase = OnboardingChatPhase.awaitingAnswer, this.answerDraft = '', this.isSubmitting = false, this.pendingTurnSummary, this.pendingAnswerText, this.isFallbackConfirmation = false, final  List<OnboardingCompletedTurn> completedTurns = const [], this.analyzeResult}): _messages = messages,_completedTurns = completedTurns,super._();
   
 
 @override@JsonKey() final  bool isInitialized;
@@ -248,6 +249,7 @@ class _OnboardingChatState extends OnboardingChatState {
 @override@JsonKey() final  bool isSubmitting;
 @override final  String? pendingTurnSummary;
 @override final  String? pendingAnswerText;
+@override@JsonKey() final  bool isFallbackConfirmation;
  final  List<OnboardingCompletedTurn> _completedTurns;
 @override@JsonKey() List<OnboardingCompletedTurn> get completedTurns {
   if (_completedTurns is EqualUnmodifiableListView) return _completedTurns;
@@ -267,16 +269,16 @@ _$OnboardingChatStateCopyWith<_OnboardingChatState> get copyWith => __$Onboardin
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _OnboardingChatState&&(identical(other.isInitialized, isInitialized) || other.isInitialized == isInitialized)&&(identical(other.currentStepIndex, currentStepIndex) || other.currentStepIndex == currentStepIndex)&&(identical(other.currentQuestionId, currentQuestionId) || other.currentQuestionId == currentQuestionId)&&(identical(other.activeQuestionText, activeQuestionText) || other.activeQuestionText == activeQuestionText)&&const DeepCollectionEquality().equals(other._messages, _messages)&&(identical(other.phase, phase) || other.phase == phase)&&(identical(other.answerDraft, answerDraft) || other.answerDraft == answerDraft)&&(identical(other.isSubmitting, isSubmitting) || other.isSubmitting == isSubmitting)&&(identical(other.pendingTurnSummary, pendingTurnSummary) || other.pendingTurnSummary == pendingTurnSummary)&&(identical(other.pendingAnswerText, pendingAnswerText) || other.pendingAnswerText == pendingAnswerText)&&const DeepCollectionEquality().equals(other._completedTurns, _completedTurns)&&(identical(other.analyzeResult, analyzeResult) || other.analyzeResult == analyzeResult));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _OnboardingChatState&&(identical(other.isInitialized, isInitialized) || other.isInitialized == isInitialized)&&(identical(other.currentStepIndex, currentStepIndex) || other.currentStepIndex == currentStepIndex)&&(identical(other.currentQuestionId, currentQuestionId) || other.currentQuestionId == currentQuestionId)&&(identical(other.activeQuestionText, activeQuestionText) || other.activeQuestionText == activeQuestionText)&&const DeepCollectionEquality().equals(other._messages, _messages)&&(identical(other.phase, phase) || other.phase == phase)&&(identical(other.answerDraft, answerDraft) || other.answerDraft == answerDraft)&&(identical(other.isSubmitting, isSubmitting) || other.isSubmitting == isSubmitting)&&(identical(other.pendingTurnSummary, pendingTurnSummary) || other.pendingTurnSummary == pendingTurnSummary)&&(identical(other.pendingAnswerText, pendingAnswerText) || other.pendingAnswerText == pendingAnswerText)&&(identical(other.isFallbackConfirmation, isFallbackConfirmation) || other.isFallbackConfirmation == isFallbackConfirmation)&&const DeepCollectionEquality().equals(other._completedTurns, _completedTurns)&&(identical(other.analyzeResult, analyzeResult) || other.analyzeResult == analyzeResult));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,isInitialized,currentStepIndex,currentQuestionId,activeQuestionText,const DeepCollectionEquality().hash(_messages),phase,answerDraft,isSubmitting,pendingTurnSummary,pendingAnswerText,const DeepCollectionEquality().hash(_completedTurns),analyzeResult);
+int get hashCode => Object.hash(runtimeType,isInitialized,currentStepIndex,currentQuestionId,activeQuestionText,const DeepCollectionEquality().hash(_messages),phase,answerDraft,isSubmitting,pendingTurnSummary,pendingAnswerText,isFallbackConfirmation,const DeepCollectionEquality().hash(_completedTurns),analyzeResult);
 
 @override
 String toString() {
-  return 'OnboardingChatState(isInitialized: $isInitialized, currentStepIndex: $currentStepIndex, currentQuestionId: $currentQuestionId, activeQuestionText: $activeQuestionText, messages: $messages, phase: $phase, answerDraft: $answerDraft, isSubmitting: $isSubmitting, pendingTurnSummary: $pendingTurnSummary, pendingAnswerText: $pendingAnswerText, completedTurns: $completedTurns, analyzeResult: $analyzeResult)';
+  return 'OnboardingChatState(isInitialized: $isInitialized, currentStepIndex: $currentStepIndex, currentQuestionId: $currentQuestionId, activeQuestionText: $activeQuestionText, messages: $messages, phase: $phase, answerDraft: $answerDraft, isSubmitting: $isSubmitting, pendingTurnSummary: $pendingTurnSummary, pendingAnswerText: $pendingAnswerText, isFallbackConfirmation: $isFallbackConfirmation, completedTurns: $completedTurns, analyzeResult: $analyzeResult)';
 }
 
 
@@ -287,7 +289,7 @@ abstract mixin class _$OnboardingChatStateCopyWith<$Res> implements $OnboardingC
   factory _$OnboardingChatStateCopyWith(_OnboardingChatState value, $Res Function(_OnboardingChatState) _then) = __$OnboardingChatStateCopyWithImpl;
 @override @useResult
 $Res call({
- bool isInitialized, int currentStepIndex, String currentQuestionId, String activeQuestionText, List<OnboardingChatMessage> messages, OnboardingChatPhase phase, String answerDraft, bool isSubmitting, String? pendingTurnSummary, String? pendingAnswerText, List<OnboardingCompletedTurn> completedTurns, OnboardingAnalyzeResult? analyzeResult
+ bool isInitialized, int currentStepIndex, String currentQuestionId, String activeQuestionText, List<OnboardingChatMessage> messages, OnboardingChatPhase phase, String answerDraft, bool isSubmitting, String? pendingTurnSummary, String? pendingAnswerText, bool isFallbackConfirmation, List<OnboardingCompletedTurn> completedTurns, OnboardingAnalyzeResult? analyzeResult
 });
 
 
@@ -304,7 +306,7 @@ class __$OnboardingChatStateCopyWithImpl<$Res>
 
 /// Create a copy of OnboardingChatState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? isInitialized = null,Object? currentStepIndex = null,Object? currentQuestionId = null,Object? activeQuestionText = null,Object? messages = null,Object? phase = null,Object? answerDraft = null,Object? isSubmitting = null,Object? pendingTurnSummary = freezed,Object? pendingAnswerText = freezed,Object? completedTurns = null,Object? analyzeResult = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? isInitialized = null,Object? currentStepIndex = null,Object? currentQuestionId = null,Object? activeQuestionText = null,Object? messages = null,Object? phase = null,Object? answerDraft = null,Object? isSubmitting = null,Object? pendingTurnSummary = freezed,Object? pendingAnswerText = freezed,Object? isFallbackConfirmation = null,Object? completedTurns = null,Object? analyzeResult = freezed,}) {
   return _then(_OnboardingChatState(
 isInitialized: null == isInitialized ? _self.isInitialized : isInitialized // ignore: cast_nullable_to_non_nullable
 as bool,currentStepIndex: null == currentStepIndex ? _self.currentStepIndex : currentStepIndex // ignore: cast_nullable_to_non_nullable
@@ -316,7 +318,8 @@ as OnboardingChatPhase,answerDraft: null == answerDraft ? _self.answerDraft : an
 as String,isSubmitting: null == isSubmitting ? _self.isSubmitting : isSubmitting // ignore: cast_nullable_to_non_nullable
 as bool,pendingTurnSummary: freezed == pendingTurnSummary ? _self.pendingTurnSummary : pendingTurnSummary // ignore: cast_nullable_to_non_nullable
 as String?,pendingAnswerText: freezed == pendingAnswerText ? _self.pendingAnswerText : pendingAnswerText // ignore: cast_nullable_to_non_nullable
-as String?,completedTurns: null == completedTurns ? _self._completedTurns : completedTurns // ignore: cast_nullable_to_non_nullable
+as String?,isFallbackConfirmation: null == isFallbackConfirmation ? _self.isFallbackConfirmation : isFallbackConfirmation // ignore: cast_nullable_to_non_nullable
+as bool,completedTurns: null == completedTurns ? _self._completedTurns : completedTurns // ignore: cast_nullable_to_non_nullable
 as List<OnboardingCompletedTurn>,analyzeResult: freezed == analyzeResult ? _self.analyzeResult : analyzeResult // ignore: cast_nullable_to_non_nullable
 as OnboardingAnalyzeResult?,
   ));

@@ -16,7 +16,7 @@ void main() {
   });
 
   test('MVP app DoD items are checked in SPEC §4.8', () {
-    for (final snippet in _mvpAppCheckedSnippets) {
+    for (final snippet in [..._mvpAppCheckedSnippets, ..._mvpAppCheckedSnippetsExtra]) {
       expect(specSection48, contains(snippet), reason: snippet);
     }
   });
@@ -67,8 +67,11 @@ const _mvpBackendCheckedSnippets = [
   '- [x] Tests : `OnboardingService`',
 ];
 
+const _mvpAppCheckedSnippetsExtra = [
+  '- [x] max **10** tentatives / question',
+];
+
 const _postMvpUncheckedSnippets = [
-  '- [ ] max **10** tentatives / question',
   '- [ ] fallback profil après 10 échecs analyze.',
   '- [ ] **7 chats**',
   '- [ ] Design messagerie complète (avatar, `colorScheme`) ; **swipe entre steps**',

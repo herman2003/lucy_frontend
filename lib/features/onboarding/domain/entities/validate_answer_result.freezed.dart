@@ -55,12 +55,13 @@ extension ValidateAnswerResultPatterns on ValidateAnswerResult {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( ValidateAnswerAccepted value)?  accepted,TResult Function( ValidateAnswerNeedsRetry value)?  needsRetry,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( ValidateAnswerAccepted value)?  accepted,TResult Function( ValidateAnswerNeedsRetry value)?  needsRetry,TResult Function( ValidateAnswerNeedsFallback value)?  needsFallback,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case ValidateAnswerAccepted() when accepted != null:
 return accepted(_that);case ValidateAnswerNeedsRetry() when needsRetry != null:
-return needsRetry(_that);case _:
+return needsRetry(_that);case ValidateAnswerNeedsFallback() when needsFallback != null:
+return needsFallback(_that);case _:
   return orElse();
 
 }
@@ -78,12 +79,13 @@ return needsRetry(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( ValidateAnswerAccepted value)  accepted,required TResult Function( ValidateAnswerNeedsRetry value)  needsRetry,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( ValidateAnswerAccepted value)  accepted,required TResult Function( ValidateAnswerNeedsRetry value)  needsRetry,required TResult Function( ValidateAnswerNeedsFallback value)  needsFallback,}){
 final _that = this;
 switch (_that) {
 case ValidateAnswerAccepted():
 return accepted(_that);case ValidateAnswerNeedsRetry():
-return needsRetry(_that);}
+return needsRetry(_that);case ValidateAnswerNeedsFallback():
+return needsFallback(_that);}
 }
 /// A variant of `map` that fallback to returning `null`.
 ///
@@ -97,12 +99,13 @@ return needsRetry(_that);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( ValidateAnswerAccepted value)?  accepted,TResult? Function( ValidateAnswerNeedsRetry value)?  needsRetry,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( ValidateAnswerAccepted value)?  accepted,TResult? Function( ValidateAnswerNeedsRetry value)?  needsRetry,TResult? Function( ValidateAnswerNeedsFallback value)?  needsFallback,}){
 final _that = this;
 switch (_that) {
 case ValidateAnswerAccepted() when accepted != null:
 return accepted(_that);case ValidateAnswerNeedsRetry() when needsRetry != null:
-return needsRetry(_that);case _:
+return needsRetry(_that);case ValidateAnswerNeedsFallback() when needsFallback != null:
+return needsFallback(_that);case _:
   return null;
 
 }
@@ -119,11 +122,12 @@ return needsRetry(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String turnSummary)?  accepted,TResult Function( String rephrasedQuestion,  String reason)?  needsRetry,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String turnSummary)?  accepted,TResult Function( String rephrasedQuestion,  String reason)?  needsRetry,TResult Function( String fallbackSummary)?  needsFallback,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case ValidateAnswerAccepted() when accepted != null:
 return accepted(_that.turnSummary);case ValidateAnswerNeedsRetry() when needsRetry != null:
-return needsRetry(_that.rephrasedQuestion,_that.reason);case _:
+return needsRetry(_that.rephrasedQuestion,_that.reason);case ValidateAnswerNeedsFallback() when needsFallback != null:
+return needsFallback(_that.fallbackSummary);case _:
   return orElse();
 
 }
@@ -141,11 +145,12 @@ return needsRetry(_that.rephrasedQuestion,_that.reason);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String turnSummary)  accepted,required TResult Function( String rephrasedQuestion,  String reason)  needsRetry,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String turnSummary)  accepted,required TResult Function( String rephrasedQuestion,  String reason)  needsRetry,required TResult Function( String fallbackSummary)  needsFallback,}) {final _that = this;
 switch (_that) {
 case ValidateAnswerAccepted():
 return accepted(_that.turnSummary);case ValidateAnswerNeedsRetry():
-return needsRetry(_that.rephrasedQuestion,_that.reason);}
+return needsRetry(_that.rephrasedQuestion,_that.reason);case ValidateAnswerNeedsFallback():
+return needsFallback(_that.fallbackSummary);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -159,11 +164,12 @@ return needsRetry(_that.rephrasedQuestion,_that.reason);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String turnSummary)?  accepted,TResult? Function( String rephrasedQuestion,  String reason)?  needsRetry,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String turnSummary)?  accepted,TResult? Function( String rephrasedQuestion,  String reason)?  needsRetry,TResult? Function( String fallbackSummary)?  needsFallback,}) {final _that = this;
 switch (_that) {
 case ValidateAnswerAccepted() when accepted != null:
 return accepted(_that.turnSummary);case ValidateAnswerNeedsRetry() when needsRetry != null:
-return needsRetry(_that.rephrasedQuestion,_that.reason);case _:
+return needsRetry(_that.rephrasedQuestion,_that.reason);case ValidateAnswerNeedsFallback() when needsFallback != null:
+return needsFallback(_that.fallbackSummary);case _:
   return null;
 
 }
@@ -298,6 +304,72 @@ class _$ValidateAnswerNeedsRetryCopyWithImpl<$Res>
   return _then(ValidateAnswerNeedsRetry(
 rephrasedQuestion: null == rephrasedQuestion ? _self.rephrasedQuestion : rephrasedQuestion // ignore: cast_nullable_to_non_nullable
 as String,reason: null == reason ? _self.reason : reason // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class ValidateAnswerNeedsFallback implements ValidateAnswerResult {
+  const ValidateAnswerNeedsFallback({required this.fallbackSummary});
+  
+
+ final  String fallbackSummary;
+
+/// Create a copy of ValidateAnswerResult
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$ValidateAnswerNeedsFallbackCopyWith<ValidateAnswerNeedsFallback> get copyWith => _$ValidateAnswerNeedsFallbackCopyWithImpl<ValidateAnswerNeedsFallback>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ValidateAnswerNeedsFallback&&(identical(other.fallbackSummary, fallbackSummary) || other.fallbackSummary == fallbackSummary));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,fallbackSummary);
+
+@override
+String toString() {
+  return 'ValidateAnswerResult.needsFallback(fallbackSummary: $fallbackSummary)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $ValidateAnswerNeedsFallbackCopyWith<$Res> implements $ValidateAnswerResultCopyWith<$Res> {
+  factory $ValidateAnswerNeedsFallbackCopyWith(ValidateAnswerNeedsFallback value, $Res Function(ValidateAnswerNeedsFallback) _then) = _$ValidateAnswerNeedsFallbackCopyWithImpl;
+@useResult
+$Res call({
+ String fallbackSummary
+});
+
+
+
+
+}
+/// @nodoc
+class _$ValidateAnswerNeedsFallbackCopyWithImpl<$Res>
+    implements $ValidateAnswerNeedsFallbackCopyWith<$Res> {
+  _$ValidateAnswerNeedsFallbackCopyWithImpl(this._self, this._then);
+
+  final ValidateAnswerNeedsFallback _self;
+  final $Res Function(ValidateAnswerNeedsFallback) _then;
+
+/// Create a copy of ValidateAnswerResult
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? fallbackSummary = null,}) {
+  return _then(ValidateAnswerNeedsFallback(
+fallbackSummary: null == fallbackSummary ? _self.fallbackSummary : fallbackSummary // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }

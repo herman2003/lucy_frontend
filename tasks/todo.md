@@ -160,6 +160,14 @@ P0–P2 → B01 → B02 → B03 → B04 (CP-1)
 
 ---
 
+## Phase 7 — Post-MVP SPEC §4.6
+
+| Statut | ID | Tâche | CP |
+|--------|-----|--------|-----|
+| [x] | UX-2 | Max 10 `validate` / question + `fallbackSummary` + `fallbackReduced` | — |
+
+---
+
 ## Historique — Auth phase 1 (terminé)
 
 - [x] T01–T14 auth (voir commits / ancien suivi)

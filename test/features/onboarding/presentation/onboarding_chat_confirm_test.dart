@@ -70,7 +70,7 @@ void main() {
 
   testWidgets('confirmTurn advances to second question', (tester) async {
     final repository = FakeOnboardingRepository(
-      validateHandler: ({required locale, required questionId, required answerText}) async {
+      validateHandler: ({required locale, required questionId, required answerText, bool fallbackReduced = false}) async {
         return const ValidateAnswerResult.accepted(turnSummary: 'Résumé tour 1.');
       },
     );
@@ -95,7 +95,7 @@ void main() {
     const analyzeSummary = 'Tu prépares un examen en sciences.';
 
     final repository = FakeOnboardingRepository(
-      validateHandler: ({required locale, required questionId, required answerText}) async {
+      validateHandler: ({required locale, required questionId, required answerText, bool fallbackReduced = false}) async {
         return const ValidateAnswerResult.accepted(turnSummary: 'OK');
       },
       analyzeHandler: ({required locale}) async {

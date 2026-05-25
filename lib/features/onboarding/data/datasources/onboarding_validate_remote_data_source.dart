@@ -13,17 +13,22 @@ class OnboardingValidateRemoteDataSource {
     required String locale,
     required String questionId,
     required String answerText,
+    bool fallbackReduced = false,
   }) async {
     try {
+      final body = <String, dynamic>{
+        'locale': locale,
+        'turn': {
+          'questionId': questionId,
+          'answerText': answerText,
+        },
+      };
+      if (fallbackReduced) {
+        body['fallbackReduced'] = true;
+      }
       final response = await _dio.post<Map<String, dynamic>>(
         ApiEndpoints.onboardingValidateAnswer,
-        data: {
-          'locale': locale,
-          'turn': {
-            'questionId': questionId,
-            'answerText': answerText,
-          },
-        },
+        data: body,
       );
       return response.data ?? {};
     } on DioException catch (error) {

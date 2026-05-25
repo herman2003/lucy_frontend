@@ -15,11 +15,13 @@ class OnboardingService {
     required String locale,
     required String questionId,
     required String answerText,
+    bool fallbackReduced = false,
   }) {
     return _repository.validateAnswer(
       locale: locale,
       questionId: questionId,
       answerText: answerText,
+      fallbackReduced: fallbackReduced,
     );
   }
 
@@ -27,11 +29,13 @@ class OnboardingService {
     required String locale,
     required String questionId,
     required String answerText,
+    String confirmationType = 'normal',
   }) {
     return _repository.confirmTurn(
       locale: locale,
       questionId: questionId,
       answerText: answerText,
+      confirmationType: confirmationType,
     );
   }
 

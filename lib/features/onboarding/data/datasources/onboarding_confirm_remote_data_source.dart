@@ -13,13 +13,14 @@ class OnboardingConfirmRemoteDataSource {
     required String locale,
     required String questionId,
     required String answerText,
+    String confirmationType = 'normal',
   }) async {
     try {
       final response = await _dio.post<Map<String, dynamic>>(
         ApiEndpoints.onboardingConfirmTurn,
         data: {
           'locale': locale,
-          'confirmationType': 'normal',
+          'confirmationType': confirmationType,
           'turn': {
             'questionId': questionId,
             'answerText': answerText,

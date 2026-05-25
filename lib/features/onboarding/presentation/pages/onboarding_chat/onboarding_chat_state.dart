@@ -30,6 +30,7 @@ abstract class OnboardingChatState with _$OnboardingChatState {
     @Default(false) bool isSubmitting,
     String? pendingTurnSummary,
     String? pendingAnswerText,
+    @Default(false) bool isFallbackConfirmation,
     @Default([]) List<OnboardingCompletedTurn> completedTurns,
     OnboardingAnalyzeResult? analyzeResult,
   }) = _OnboardingChatState;

@@ -238,4 +238,109 @@ P0–P2 → B01 → B02 → B03 → B04 (CP-1)
 
 ---
 
+## Phase 12 — Centralisation backend : profil user (C-B1 + C-F1)
+
+> Spec : [docs/spec-backend-centralization.md](../docs/spec-backend-centralization.md)  
+> Plan : [plan.md](./plan.md) §11
+
+| Statut | ID | Tâche | CP |
+|--------|-----|--------|-----|
+| [x] | C-B1a | `UsersModule` + port repository (Firebase / memory) | — |
+| [x] | C-B1b | DTOs parse create + response profil | — |
+| [x] | C-B1c | `GET` + `POST /v1/users/me` + guard + tests | **CP-C1** |
+| [x] | C-B1d | Erreur `USER_PROFILE_CONFLICT` (409) si conflit | — |
+| [ ] | C-F1a | `ApiEndpoints.usersMe` + `UserProfileApiRemoteDataSource` | — |
+| [ ] | C-F1b | Swap provider auth : API au lieu de Firestore ; signup POST | — |
+| [ ] | C-F1c | Router / bootstrap `isConfigured` via API | **CP-C2** |
+| [ ] | C-F1d | Translator l10n nouveaux codes API | — |
+
+**CP-C1 — Vérification :**
+
+- [x] `curl -H "Authorization: Bearer <token>" http://localhost:3000/v1/users/me` → 200
+- [x] `curl -X POST …/v1/users/me` → 201 profil ; second POST → 200 idempotent
+- [x] `npm test` users vert
+
+**CP-C2 — Vérification :**
+
+- [ ] Signup app → doc Firestore créé par Nest (pas SDK client)
+- [ ] Login `isConfigured: false` → `/onboarding` ; `true` → `/home`
+- [ ] `auth_repository_impl_test` + guards verts
+
+---
+
+## Phase 13 — Centralisation backend : reprise onboarding (C-B2 + C-F2)
+
+| Statut | ID | Tâche | CP |
+|--------|-----|--------|-----|
+| [ ] | C-B2a | DTO `onboarding-progress-response` | — |
+| [ ] | C-B2b | `GET /v1/onboarding/progress` + tests | **CP-C3** |
+| [ ] | C-F2a | `ApiEndpoints.onboardingProgress` + datasource API | — |
+| [ ] | C-F2b | Provider onboarding : Firestore → API | **CP-C4** |
+| [ ] | C-F2c | Fallback brouillon local si API indisponible (A16) | — |
+
+**CP-C3 — Vérification :**
+
+- [ ] `curl GET …/v1/onboarding/progress` mid-parcours → transcript + status
+- [ ] État vide → 200 `not_started` (pas 404 bruyant)
+
+**CP-C4 — Vérification :**
+
+- [ ] `onboarding_bootstrap_resume_test` vert (API mock)
+- [ ] Reprise manuelle kill app → panels restaurés
+
+---
+
+## Phase 14 — Nettoyage Firestore client (C-F3)
+
+| Statut | ID | Tâche | CP |
+|--------|-----|--------|-----|
+| [ ] | C-F3a | Supprimer `firestore_user_profile_remote_data_source.dart` | — |
+| [ ] | C-F3b | Supprimer `onboarding_progress_firestore_data_source.dart` | — |
+| [ ] | C-F3c | Retirer `cloud_firestore` du `pubspec.yaml` | — |
+| [ ] | C-F3d | Mettre à jour `lucy_clean_architecture_test` | **CP-C5** |
+
+**CP-C5 — Vérification :**
+
+- [ ] Aucun `import cloud_firestore` dans `lib/`
+- [ ] `flutter analyze` → 0 issue
+- [ ] `flutter test` vert
+- [ ] `npm test` backend vert
+
+---
+
+## Phase 15 — Ops & documentation (C-OPS + C-DOC)
+
+| Statut | ID | Tâche | CP |
+|--------|-----|--------|-----|
+| [ ] | C-OPSa | Firestore rules : deny client read/write `users/{uid}` (doc) | — |
+| [ ] | C-OPSb | README backend : endpoints `users/me`, `onboarding/progress` | — |
+| [ ] | C-DOC | Aligner SPEC.md §3, §4.1 A7, §4.7 | **CP-C6** |
+
+**CP-C6 — Vérification :**
+
+- [ ] E2E manuel : signup → onboarding complet → `/home` (backend `.env` Firebase réel)
+- [ ] Checklist [docs/spec-backend-centralization.md](../docs/spec-backend-centralization.md) §9 DoD cochée
+
+---
+
+## Prérequis — Centralisation (P5–P6)
+
+| Statut | ID | Action |
+|--------|-----|--------|
+| [x] | P5 | `backend/.env` + `GOOGLE_APPLICATION_CREDENTIALS` configurés |
+| [ ] | P6 | `npm run start:dev` OK ; `curl /health` → 200 |
+
+---
+
+## Ordre rapide — Centralisation
+
+```
+P5–P6
+→ C-B1 (CP-C1) → C-F1 (CP-C2)
+→ C-B2 (CP-C3) → C-F2 (CP-C4)
+→ C-F3 (CP-C5) → C-OPS + C-DOC (CP-C6)
+```
+
+---
+
 *Ce document a été créé avec Cursor (IA).*

@@ -20,7 +20,7 @@
 | Statut | ID | Action |
 |--------|-----|--------|
 | [x] | P0 | Repo `Lucy/backend/` créé (hors repo git `frontend/`) |
-| [ ] | P1 | `GEMINI_API_KEY` dans `backend/.env` |
+| [ ] | P1 | `GEMINI_API_KEY` dans `backend/.env` (ou `LLM_PROVIDER=mock` pour dev) |
 | [ ] | P2 | Compte de service Firebase pour Nest |
 | [x] | P3 | CORS backend (Flutter web + localhost) |
 | [x] | P4 | Firestore rules commentées (R6) — onboarding écrit par Nest en prod |
@@ -35,12 +35,13 @@
 | [x] | B02 | Core : Firebase guard, LlmPort, Gemini, errors | CP-0 |
 | [x] | F01 | `dio` + `ApiEndpoints` + `LucyDioClient` (token + 401 retry) | CP-0 |
 | [x] | F02 | `isConfigured: false` au signup + mapper + `fetchUserProfile` | CP-0 |
+| [x] | B07 | `MockLlmAdapter` + `LLM_PROVIDER=mock` (dev sans clé Gemini) | — |
 
 **CP-0 — Vérification :**
 
 - [x] `cd backend && npm run start:dev` OK
 - [x] `flutter analyze` → 0 issue
-- [ ] Signup test → Firestore `isConfigured: false`
+- [x] Signup test → Firestore `isConfigured: false` (`cp0_signup_is_configured_test` + `auth_repository_impl_test`)
 
 ---
 
@@ -53,8 +54,8 @@
 
 **CP-1 — Vérification :**
 
-- [ ] `curl` réponse claire → `valid: true`
-- [ ] `curl` réponse vague → `valid: false` + `rephrasedQuestion` (pas « Peux-tu préciser »)
+- [x] `curl` réponse claire → `valid: true` (auto : `onboarding.service.mock-llm.spec` avec `LLM_PROVIDER=mock`)
+- [x] `curl` réponse vague → `valid: false` + `rephrasedQuestion` (pas « Peux-tu préciser »)
 
 ---
 

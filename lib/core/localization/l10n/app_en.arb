@@ -55,5 +55,12 @@
   "authUserDisabled": "This account has been disabled.",
   "authOperationNotAllowed": "This operation is not allowed.",
   "authProfileWriteFailed": "Could not save your profile. Please try again.",
-  "onboardingPlaceholderTitle": "Set up your learner profile"
+  "onboardingPlaceholderTitle": "Set up your learner profile",
+  "onboardingQuestionQRole": "Tell me about your situation: are you a student, changing careers, or learning on your own?",
+  "onboardingQuestionQDomains": "Which subjects or areas will you work on with me?",
+  "onboardingQuestionQGoal": "What is your main goal with me?",
+  "onboardingQuestionQLevel": "How would you describe your level today?",
+  "onboardingQuestionQStyle": "How do you like concepts explained to you?",
+  "onboardingQuestionQTone": "What tone do you prefer for corrections and feedback?",
+  "onboardingQuestionQLanguage": "Which language should I use to explain lessons to you?"
 }

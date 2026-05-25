@@ -55,5 +55,12 @@
   "authUserDisabled": "Dieses Konto wurde deaktiviert.",
   "authOperationNotAllowed": "Diese Aktion ist nicht erlaubt.",
   "authProfileWriteFailed": "Profil konnte nicht gespeichert werden. Bitte erneut versuchen.",
-  "onboardingPlaceholderTitle": "Einrichtung Ihres Lernprofils"
+  "onboardingPlaceholderTitle": "Einrichtung Ihres Lernprofils",
+  "onboardingQuestionQRole": "Erzählen Sie mir von Ihrer Situation: Studium, Berufswechsel oder selbstständiges Lernen?",
+  "onboardingQuestionQDomains": "Welche Fächer oder Bereiche möchten Sie mit mir bearbeiten?",
+  "onboardingQuestionQGoal": "Was ist Ihr Hauptziel mit mir?",
+  "onboardingQuestionQLevel": "Wie würden Sie Ihr aktuelles Niveau beschreiben?",
+  "onboardingQuestionQStyle": "Wie sollen Ihnen Inhalte am besten erklärt werden?",
+  "onboardingQuestionQTone": "Welchen Ton bevorzugen Sie bei Korrekturen und Feedback?",
+  "onboardingQuestionQLanguage": "In welcher Sprache soll ich Ihnen den Unterricht erklären?"
 }

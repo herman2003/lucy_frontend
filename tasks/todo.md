@@ -32,13 +32,13 @@
 | Statut | ID | Tâche | CP |
 |--------|-----|--------|-----|
 | [x] | B01 | Scaffold NestJS + health | CP-0 |
-| [ ] | B02 | Core : Firebase guard, LlmPort, Gemini, errors | CP-0 |
+| [x] | B02 | Core : Firebase guard, LlmPort, Gemini, errors | CP-0 |
 | [x] | F01 | `dio` + `ApiEndpoints` + `LucyDioClient` (token + 401 retry) | CP-0 |
 | [x] | F02 | `isConfigured: false` au signup + mapper + `fetchUserProfile` | CP-0 |
 
 **CP-0 — Vérification :**
 
-- [ ] `cd backend && npm run start:dev` OK
+- [x] `cd backend && npm run start:dev` OK
 - [x] `flutter analyze` → 0 issue
 - [ ] Signup test → Firestore `isConfigured: false`
 
@@ -63,7 +63,7 @@
 | Statut | ID | Tâche | CP |
 |--------|-----|--------|-----|
 | [x] | F03 | Route `/onboarding` + guards `isConfigured` | — |
-| [ ] | F04 | Feature skeleton + l10n 7 questions | — |
+| [x] | F04 | Feature skeleton + l10n 7 questions | — |
 | [ ] | F05 | `OnboardingChatPage` + appel validate | **CP-2** |
 
 **CP-2 — Vérification :**

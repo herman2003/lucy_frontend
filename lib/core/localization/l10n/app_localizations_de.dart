@@ -163,4 +163,31 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get onboardingPlaceholderTitle => 'Einrichtung Ihres Lernprofils';
+
+  @override
+  String get onboardingQuestionQRole =>
+      'Erzählen Sie mir von Ihrer Situation: Studium, Berufswechsel oder selbstständiges Lernen?';
+
+  @override
+  String get onboardingQuestionQDomains =>
+      'Welche Fächer oder Bereiche möchten Sie mit mir bearbeiten?';
+
+  @override
+  String get onboardingQuestionQGoal => 'Was ist Ihr Hauptziel mit mir?';
+
+  @override
+  String get onboardingQuestionQLevel =>
+      'Wie würden Sie Ihr aktuelles Niveau beschreiben?';
+
+  @override
+  String get onboardingQuestionQStyle =>
+      'Wie sollen Ihnen Inhalte am besten erklärt werden?';
+
+  @override
+  String get onboardingQuestionQTone =>
+      'Welchen Ton bevorzugen Sie bei Korrekturen und Feedback?';
+
+  @override
+  String get onboardingQuestionQLanguage =>
+      'In welcher Sprache soll ich Ihnen den Unterricht erklären?';
 }

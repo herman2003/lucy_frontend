@@ -393,6 +393,48 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'Configuration de votre profil apprenant'**
   String get onboardingPlaceholderTitle;
+
+  /// Onboarding question q_role (primary_role)
+  ///
+  /// In fr, this message translates to:
+  /// **'Parlez-moi de votre situation : êtes-vous étudiant·e, en reconversion, ou apprenez-vous de votre côté ?'**
+  String get onboardingQuestionQRole;
+
+  /// Onboarding question q_domains
+  ///
+  /// In fr, this message translates to:
+  /// **'Quels sujets ou domaines allez-vous travailler avec moi ?'**
+  String get onboardingQuestionQDomains;
+
+  /// Onboarding question q_goal
+  ///
+  /// In fr, this message translates to:
+  /// **'Quel est votre objectif principal avec moi ?'**
+  String get onboardingQuestionQGoal;
+
+  /// Onboarding question q_level
+  ///
+  /// In fr, this message translates to:
+  /// **'Comment décririez-vous votre niveau aujourd’hui ?'**
+  String get onboardingQuestionQLevel;
+
+  /// Onboarding question q_style
+  ///
+  /// In fr, this message translates to:
+  /// **'Comment aimez-vous qu’on vous explique les notions ?'**
+  String get onboardingQuestionQStyle;
+
+  /// Onboarding question q_tone
+  ///
+  /// In fr, this message translates to:
+  /// **'Quel ton préférez-vous pour les corrections et le feedback ?'**
+  String get onboardingQuestionQTone;
+
+  /// Onboarding question q_language
+  ///
+  /// In fr, this message translates to:
+  /// **'Dans quelle langue dois-je vous expliquer les cours ?'**
+  String get onboardingQuestionQLanguage;
 }
 
 class _AppLocalizationsDelegate

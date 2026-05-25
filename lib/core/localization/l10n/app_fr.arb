@@ -200,5 +200,33 @@
   "onboardingPlaceholderTitle": "Configuration de votre profil apprenant",
   "@onboardingPlaceholderTitle": {
     "description": "Onboarding placeholder screen until chat UI is implemented"
+  },
+  "onboardingQuestionQRole": "Parlez-moi de votre situation : êtes-vous étudiant·e, en reconversion, ou apprenez-vous de votre côté ?",
+  "@onboardingQuestionQRole": {
+    "description": "Onboarding question q_role (primary_role)"
+  },
+  "onboardingQuestionQDomains": "Quels sujets ou domaines allez-vous travailler avec moi ?",
+  "@onboardingQuestionQDomains": {
+    "description": "Onboarding question q_domains"
+  },
+  "onboardingQuestionQGoal": "Quel est votre objectif principal avec moi ?",
+  "@onboardingQuestionQGoal": {
+    "description": "Onboarding question q_goal"
+  },
+  "onboardingQuestionQLevel": "Comment décririez-vous votre niveau aujourd’hui ?",
+  "@onboardingQuestionQLevel": {
+    "description": "Onboarding question q_level"
+  },
+  "onboardingQuestionQStyle": "Comment aimez-vous qu’on vous explique les notions ?",
+  "@onboardingQuestionQStyle": {
+    "description": "Onboarding question q_style"
+  },
+  "onboardingQuestionQTone": "Quel ton préférez-vous pour les corrections et le feedback ?",
+  "@onboardingQuestionQTone": {
+    "description": "Onboarding question q_tone"
+  },
+  "onboardingQuestionQLanguage": "Dans quelle langue dois-je vous expliquer les cours ?",
+  "@onboardingQuestionQLanguage": {
+    "description": "Onboarding question q_language"
   }
 }

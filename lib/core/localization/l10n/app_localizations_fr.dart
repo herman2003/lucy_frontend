@@ -163,4 +163,32 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get onboardingPlaceholderTitle =>
       'Configuration de votre profil apprenant';
+
+  @override
+  String get onboardingQuestionQRole =>
+      'Parlez-moi de votre situation : êtes-vous étudiant·e, en reconversion, ou apprenez-vous de votre côté ?';
+
+  @override
+  String get onboardingQuestionQDomains =>
+      'Quels sujets ou domaines allez-vous travailler avec moi ?';
+
+  @override
+  String get onboardingQuestionQGoal =>
+      'Quel est votre objectif principal avec moi ?';
+
+  @override
+  String get onboardingQuestionQLevel =>
+      'Comment décririez-vous votre niveau aujourd’hui ?';
+
+  @override
+  String get onboardingQuestionQStyle =>
+      'Comment aimez-vous qu’on vous explique les notions ?';
+
+  @override
+  String get onboardingQuestionQTone =>
+      'Quel ton préférez-vous pour les corrections et le feedback ?';
+
+  @override
+  String get onboardingQuestionQLanguage =>
+      'Dans quelle langue dois-je vous expliquer les cours ?';
 }

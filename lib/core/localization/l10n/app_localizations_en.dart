@@ -161,4 +161,31 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get onboardingPlaceholderTitle => 'Set up your learner profile';
+
+  @override
+  String get onboardingQuestionQRole =>
+      'Tell me about your situation: are you a student, changing careers, or learning on your own?';
+
+  @override
+  String get onboardingQuestionQDomains =>
+      'Which subjects or areas will you work on with me?';
+
+  @override
+  String get onboardingQuestionQGoal => 'What is your main goal with me?';
+
+  @override
+  String get onboardingQuestionQLevel =>
+      'How would you describe your level today?';
+
+  @override
+  String get onboardingQuestionQStyle =>
+      'How do you like concepts explained to you?';
+
+  @override
+  String get onboardingQuestionQTone =>
+      'What tone do you prefer for corrections and feedback?';
+
+  @override
+  String get onboardingQuestionQLanguage =>
+      'Which language should I use to explain lessons to you?';
 }

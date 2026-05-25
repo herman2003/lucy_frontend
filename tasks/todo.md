@@ -108,12 +108,12 @@
 |--------|-----|--------|-----|
 | [x] | F08 | `onboarding_error_translator` + l10n erreurs API | — |
 | [x] | F09 | Tests unit/widget/router | — |
-| [ ] | B06 | README backend | **CP-5** |
+| [x] | B06 | README backend | **CP-5** |
 
 **CP-5 — Vérification :**
 
-- [ ] `flutter test` vert
-- [ ] `flutter analyze` vert
+- [x] `flutter test` vert
+- [x] `flutter analyze` vert
 - [ ] Checklist SPEC §4.8 app + backend cochée
 
 ---

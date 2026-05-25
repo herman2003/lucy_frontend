@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../core/constants/lucy_constants.dart';
+import '../../../../core/router/lucy_route_paths.dart';
 import '../../../../core/extensions/context.dart';
 import '../../../../core/localization/l10n/app_localizations.dart';
 import '../../../../shared/widgets/buttons/lucy_primary_button.dart';
@@ -64,6 +66,14 @@ class _OnboardingChatPageState extends ConsumerState<OnboardingChatPage> {
           next.answerDraft.isEmpty &&
           _answerController.text.isNotEmpty) {
         _answerController.clear();
+      }
+      if (next.isAnalysisReady && previous?.isAnalysisReady != true) {
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          if (!mounted) {
+            return;
+          }
+          context.push(LucyRoutePaths.onboardingConfirm);
+        });
       }
     });
 
@@ -139,15 +149,6 @@ class _OnboardingChatPageState extends ConsumerState<OnboardingChatPage> {
                       ),
                     ),
                   ],
-                ),
-              ),
-            if (chatState.isAnalysisReady)
-              Padding(
-                padding: const EdgeInsets.all(LucyConstants.kSpacingMedium),
-                child: Text(
-                  l10n.onboardingAnalysisReadyHint,
-                  style: Theme.of(context).textTheme.bodyMedium,
-                  textAlign: TextAlign.center,
                 ),
               ),
             if (!chatState.isAnalysisReady)

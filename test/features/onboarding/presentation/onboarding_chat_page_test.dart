@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:frontend/core/localization/l10n/app_localizations.dart';
+import 'package:frontend/core/router/lucy_route_paths.dart';
+import 'package:go_router/go_router.dart';
 import 'package:frontend/features/onboarding/domain/entities/validate_answer_result.dart';
 import 'package:frontend/features/onboarding/domain/providers/onboarding_provider.dart';
 import 'package:frontend/features/onboarding/presentation/pages/onboarding_chat_page.dart';
@@ -30,11 +32,24 @@ void main() {
             OnboardingService(repository: repository),
           ),
         ],
-        child: MaterialApp(
+        child: MaterialApp.router(
           locale: const Locale('fr'),
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
-          home: const OnboardingChatPage(),
+          routerConfig: GoRouter(
+            initialLocation: LucyRoutePaths.onboarding,
+            routes: [
+              GoRoute(
+                path: LucyRoutePaths.onboarding,
+                builder: (context, state) => const OnboardingChatPage(),
+              ),
+              GoRoute(
+                path: LucyRoutePaths.onboardingConfirm,
+                builder: (context, state) =>
+                    const Scaffold(body: Text('Confirm')),
+              ),
+            ],
+          ),
         ),
       ),
     );

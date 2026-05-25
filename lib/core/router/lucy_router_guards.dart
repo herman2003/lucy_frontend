@@ -18,6 +18,11 @@ class LucyRouterGuards {
     LucyRoutePaths.resetPassword,
   };
 
+  static bool _isOnboardingPath(String location) {
+    return location == LucyRoutePaths.onboarding ||
+        location == LucyRoutePaths.onboardingConfirm;
+  }
+
   /// Pure redirect rules (testable without [GoRouterState]).
   static String? resolveRedirect({
     required AsyncValue<AuthBootstrapResult> bootstrap,
@@ -36,7 +41,7 @@ class LucyRouterGuards {
       if (location == LucyRoutePaths.splash) {
         return LucyRoutePaths.login;
       }
-      if (location == LucyRoutePaths.onboarding) {
+      if (_isOnboardingPath(location)) {
         return LucyRoutePaths.login;
       }
       if (location == LucyRoutePaths.home) {
@@ -50,7 +55,7 @@ class LucyRouterGuards {
     }
 
     if (!isConfigured) {
-      if (location == LucyRoutePaths.onboarding) {
+      if (_isOnboardingPath(location)) {
         return null;
       }
       if (location == LucyRoutePaths.home || _publicAuthPaths.contains(location)) {
@@ -59,7 +64,7 @@ class LucyRouterGuards {
       return null;
     }
 
-    if (location == LucyRoutePaths.onboarding) {
+    if (_isOnboardingPath(location)) {
       return LucyRoutePaths.home;
     }
 

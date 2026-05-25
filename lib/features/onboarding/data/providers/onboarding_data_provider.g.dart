@@ -206,6 +206,58 @@ final class OnboardingAnalyzeRemoteDataSourceProvider
 String _$onboardingAnalyzeRemoteDataSourceHash() =>
     r'a26e0eb3c2c8eaa1980e3a7898d5cc4020187706';
 
+@ProviderFor(onboardingFinalizeRemoteDataSource)
+const onboardingFinalizeRemoteDataSourceProvider =
+    OnboardingFinalizeRemoteDataSourceProvider._();
+
+final class OnboardingFinalizeRemoteDataSourceProvider
+    extends
+        $FunctionalProvider<
+          OnboardingFinalizeRemoteDataSource,
+          OnboardingFinalizeRemoteDataSource,
+          OnboardingFinalizeRemoteDataSource
+        >
+    with $Provider<OnboardingFinalizeRemoteDataSource> {
+  const OnboardingFinalizeRemoteDataSourceProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'onboardingFinalizeRemoteDataSourceProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() =>
+      _$onboardingFinalizeRemoteDataSourceHash();
+
+  @$internal
+  @override
+  $ProviderElement<OnboardingFinalizeRemoteDataSource> $createElement(
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
+
+  @override
+  OnboardingFinalizeRemoteDataSource create(Ref ref) {
+    return onboardingFinalizeRemoteDataSource(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(OnboardingFinalizeRemoteDataSource value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<OnboardingFinalizeRemoteDataSource>(
+        value,
+      ),
+    );
+  }
+}
+
+String _$onboardingFinalizeRemoteDataSourceHash() =>
+    r'f517d5a9053f237db922d4bdf634039bd78243ae';
+
 @ProviderFor(onboardingRepositoryImpl)
 const onboardingRepositoryImplProvider = OnboardingRepositoryImplProvider._();
 
@@ -252,4 +304,4 @@ final class OnboardingRepositoryImplProvider
 }
 
 String _$onboardingRepositoryImplHash() =>
-    r'f34d0cdfff8f6848348c2d35b787f5f1b09c6e40';
+    r'955c716bbd3af45fe105b5915b6d2ee9ee7a1a38';

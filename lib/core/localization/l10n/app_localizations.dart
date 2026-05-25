@@ -489,6 +489,276 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'Analyse terminée. L’écran de confirmation arrive bientôt.'**
   String get onboardingAnalysisReadyHint;
+
+  /// No description provided for @onboardingConfirmTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Votre profil apprenant'**
+  String get onboardingConfirmTitle;
+
+  /// No description provided for @onboardingConfirmSummaryHeading.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ce que Lucy a retenu'**
+  String get onboardingConfirmSummaryHeading;
+
+  /// No description provided for @onboardingConfirmAccept.
+  ///
+  /// In fr, this message translates to:
+  /// **'Valider et continuer'**
+  String get onboardingConfirmAccept;
+
+  /// No description provided for @onboardingConfirmEdit.
+  ///
+  /// In fr, this message translates to:
+  /// **'Modifier mes réponses'**
+  String get onboardingConfirmEdit;
+
+  /// No description provided for @onboardingConfirmMissingAnalysis.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucune analyse disponible. Terminez d’abord le questionnaire.'**
+  String get onboardingConfirmMissingAnalysis;
+
+  /// No description provided for @onboardingProfileLabelPrimaryRole.
+  ///
+  /// In fr, this message translates to:
+  /// **'Situation'**
+  String get onboardingProfileLabelPrimaryRole;
+
+  /// No description provided for @onboardingProfileLabelMainDomains.
+  ///
+  /// In fr, this message translates to:
+  /// **'Domaines'**
+  String get onboardingProfileLabelMainDomains;
+
+  /// No description provided for @onboardingProfileLabelLearningGoal.
+  ///
+  /// In fr, this message translates to:
+  /// **'Objectif'**
+  String get onboardingProfileLabelLearningGoal;
+
+  /// No description provided for @onboardingProfileLabelSelfAssessedLevel.
+  ///
+  /// In fr, this message translates to:
+  /// **'Niveau'**
+  String get onboardingProfileLabelSelfAssessedLevel;
+
+  /// No description provided for @onboardingProfileLabelExplanationStyle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Style d’explication'**
+  String get onboardingProfileLabelExplanationStyle;
+
+  /// No description provided for @onboardingProfileLabelFeedbackTone.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ton du feedback'**
+  String get onboardingProfileLabelFeedbackTone;
+
+  /// No description provided for @onboardingProfileLabelTutoringLanguage.
+  ///
+  /// In fr, this message translates to:
+  /// **'Langue des explications'**
+  String get onboardingProfileLabelTutoringLanguage;
+
+  /// No description provided for @onboardingEnumPrimaryRoleStudent.
+  ///
+  /// In fr, this message translates to:
+  /// **'Étudiant·e'**
+  String get onboardingEnumPrimaryRoleStudent;
+
+  /// No description provided for @onboardingEnumPrimaryRoleProfessional.
+  ///
+  /// In fr, this message translates to:
+  /// **'Professionnel·le'**
+  String get onboardingEnumPrimaryRoleProfessional;
+
+  /// No description provided for @onboardingEnumPrimaryRoleEducator.
+  ///
+  /// In fr, this message translates to:
+  /// **'Enseignant·e'**
+  String get onboardingEnumPrimaryRoleEducator;
+
+  /// No description provided for @onboardingEnumPrimaryRoleSelfLearner.
+  ///
+  /// In fr, this message translates to:
+  /// **'Apprentissage autonome'**
+  String get onboardingEnumPrimaryRoleSelfLearner;
+
+  /// No description provided for @onboardingEnumPrimaryRoleOther.
+  ///
+  /// In fr, this message translates to:
+  /// **'Autre'**
+  String get onboardingEnumPrimaryRoleOther;
+
+  /// No description provided for @onboardingEnumDomainSciences.
+  ///
+  /// In fr, this message translates to:
+  /// **'Sciences'**
+  String get onboardingEnumDomainSciences;
+
+  /// No description provided for @onboardingEnumDomainLaw.
+  ///
+  /// In fr, this message translates to:
+  /// **'Droit'**
+  String get onboardingEnumDomainLaw;
+
+  /// No description provided for @onboardingEnumDomainMedicine.
+  ///
+  /// In fr, this message translates to:
+  /// **'Médecine'**
+  String get onboardingEnumDomainMedicine;
+
+  /// No description provided for @onboardingEnumDomainLanguages.
+  ///
+  /// In fr, this message translates to:
+  /// **'Langues'**
+  String get onboardingEnumDomainLanguages;
+
+  /// No description provided for @onboardingEnumDomainBusiness.
+  ///
+  /// In fr, this message translates to:
+  /// **'Commerce / gestion'**
+  String get onboardingEnumDomainBusiness;
+
+  /// No description provided for @onboardingEnumDomainCs.
+  ///
+  /// In fr, this message translates to:
+  /// **'Informatique'**
+  String get onboardingEnumDomainCs;
+
+  /// No description provided for @onboardingEnumDomainOther.
+  ///
+  /// In fr, this message translates to:
+  /// **'Autre'**
+  String get onboardingEnumDomainOther;
+
+  /// No description provided for @onboardingEnumLearningGoalExam.
+  ///
+  /// In fr, this message translates to:
+  /// **'Préparer un examen'**
+  String get onboardingEnumLearningGoalExam;
+
+  /// No description provided for @onboardingEnumLearningGoalUnderstandCourse.
+  ///
+  /// In fr, this message translates to:
+  /// **'Mieux comprendre un cours'**
+  String get onboardingEnumLearningGoalUnderstandCourse;
+
+  /// No description provided for @onboardingEnumLearningGoalQuickReview.
+  ///
+  /// In fr, this message translates to:
+  /// **'Révision rapide'**
+  String get onboardingEnumLearningGoalQuickReview;
+
+  /// No description provided for @onboardingEnumLearningGoalProfessional.
+  ///
+  /// In fr, this message translates to:
+  /// **'Montée en compétences pro'**
+  String get onboardingEnumLearningGoalProfessional;
+
+  /// No description provided for @onboardingEnumLearningGoalCertification.
+  ///
+  /// In fr, this message translates to:
+  /// **'Certification'**
+  String get onboardingEnumLearningGoalCertification;
+
+  /// No description provided for @onboardingEnumLearningGoalOther.
+  ///
+  /// In fr, this message translates to:
+  /// **'Autre'**
+  String get onboardingEnumLearningGoalOther;
+
+  /// No description provided for @onboardingEnumLevelBeginner.
+  ///
+  /// In fr, this message translates to:
+  /// **'Débutant'**
+  String get onboardingEnumLevelBeginner;
+
+  /// No description provided for @onboardingEnumLevelIntermediate.
+  ///
+  /// In fr, this message translates to:
+  /// **'Intermédiaire'**
+  String get onboardingEnumLevelIntermediate;
+
+  /// No description provided for @onboardingEnumLevelAdvanced.
+  ///
+  /// In fr, this message translates to:
+  /// **'Avancé'**
+  String get onboardingEnumLevelAdvanced;
+
+  /// No description provided for @onboardingEnumLevelVariable.
+  ///
+  /// In fr, this message translates to:
+  /// **'Variable selon les sujets'**
+  String get onboardingEnumLevelVariable;
+
+  /// No description provided for @onboardingEnumStyleStepByStep.
+  ///
+  /// In fr, this message translates to:
+  /// **'Étape par étape'**
+  String get onboardingEnumStyleStepByStep;
+
+  /// No description provided for @onboardingEnumStyleSummaryFirst.
+  ///
+  /// In fr, this message translates to:
+  /// **'Résumé d’abord'**
+  String get onboardingEnumStyleSummaryFirst;
+
+  /// No description provided for @onboardingEnumStyleAnalogies.
+  ///
+  /// In fr, this message translates to:
+  /// **'Analogies'**
+  String get onboardingEnumStyleAnalogies;
+
+  /// No description provided for @onboardingEnumStyleSocratic.
+  ///
+  /// In fr, this message translates to:
+  /// **'Questions guidées'**
+  String get onboardingEnumStyleSocratic;
+
+  /// No description provided for @onboardingEnumToneEncouraging.
+  ///
+  /// In fr, this message translates to:
+  /// **'Encourageant'**
+  String get onboardingEnumToneEncouraging;
+
+  /// No description provided for @onboardingEnumToneNeutral.
+  ///
+  /// In fr, this message translates to:
+  /// **'Neutre'**
+  String get onboardingEnumToneNeutral;
+
+  /// No description provided for @onboardingEnumToneStrict.
+  ///
+  /// In fr, this message translates to:
+  /// **'Exigeant'**
+  String get onboardingEnumToneStrict;
+
+  /// No description provided for @onboardingEnumTutoringLangFr.
+  ///
+  /// In fr, this message translates to:
+  /// **'Français'**
+  String get onboardingEnumTutoringLangFr;
+
+  /// No description provided for @onboardingEnumTutoringLangEn.
+  ///
+  /// In fr, this message translates to:
+  /// **'Anglais'**
+  String get onboardingEnumTutoringLangEn;
+
+  /// No description provided for @onboardingEnumTutoringLangDe.
+  ///
+  /// In fr, this message translates to:
+  /// **'Allemand'**
+  String get onboardingEnumTutoringLangDe;
+
+  /// No description provided for @onboardingEnumTutoringLangMatchDocument.
+  ///
+  /// In fr, this message translates to:
+  /// **'Langue du document'**
+  String get onboardingEnumTutoringLangMatchDocument;
 }
 
 class _AppLocalizationsDelegate

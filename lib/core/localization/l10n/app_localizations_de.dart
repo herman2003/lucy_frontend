@@ -223,4 +223,142 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get onboardingAnalysisReadyHint =>
       'Analyse abgeschlossen. Der Bestätigungsbildschirm folgt in Kürze.';
+
+  @override
+  String get onboardingConfirmTitle => 'Ihr Lernprofil';
+
+  @override
+  String get onboardingConfirmSummaryHeading => 'Was Lucy verstanden hat';
+
+  @override
+  String get onboardingConfirmAccept => 'Bestätigen und weiter';
+
+  @override
+  String get onboardingConfirmEdit => 'Antworten bearbeiten';
+
+  @override
+  String get onboardingConfirmMissingAnalysis =>
+      'Keine Analyse verfügbar. Bitte zuerst den Fragebogen abschließen.';
+
+  @override
+  String get onboardingProfileLabelPrimaryRole => 'Situation';
+
+  @override
+  String get onboardingProfileLabelMainDomains => 'Fachgebiete';
+
+  @override
+  String get onboardingProfileLabelLearningGoal => 'Ziel';
+
+  @override
+  String get onboardingProfileLabelSelfAssessedLevel => 'Niveau';
+
+  @override
+  String get onboardingProfileLabelExplanationStyle => 'Erklärungsstil';
+
+  @override
+  String get onboardingProfileLabelFeedbackTone => 'Feedback-Ton';
+
+  @override
+  String get onboardingProfileLabelTutoringLanguage => 'Erklärungssprache';
+
+  @override
+  String get onboardingEnumPrimaryRoleStudent => 'Studierende';
+
+  @override
+  String get onboardingEnumPrimaryRoleProfessional => 'Berufstätige';
+
+  @override
+  String get onboardingEnumPrimaryRoleEducator => 'Lehrende';
+
+  @override
+  String get onboardingEnumPrimaryRoleSelfLearner => 'Selbstlerner';
+
+  @override
+  String get onboardingEnumPrimaryRoleOther => 'Sonstiges';
+
+  @override
+  String get onboardingEnumDomainSciences => 'Naturwissenschaften';
+
+  @override
+  String get onboardingEnumDomainLaw => 'Recht';
+
+  @override
+  String get onboardingEnumDomainMedicine => 'Medizin';
+
+  @override
+  String get onboardingEnumDomainLanguages => 'Sprachen';
+
+  @override
+  String get onboardingEnumDomainBusiness => 'Wirtschaft';
+
+  @override
+  String get onboardingEnumDomainCs => 'Informatik';
+
+  @override
+  String get onboardingEnumDomainOther => 'Sonstiges';
+
+  @override
+  String get onboardingEnumLearningGoalExam => 'Prüfungsvorbereitung';
+
+  @override
+  String get onboardingEnumLearningGoalUnderstandCourse =>
+      'Kurs besser verstehen';
+
+  @override
+  String get onboardingEnumLearningGoalQuickReview => 'Schnelle Wiederholung';
+
+  @override
+  String get onboardingEnumLearningGoalProfessional =>
+      'Berufliche Weiterbildung';
+
+  @override
+  String get onboardingEnumLearningGoalCertification => 'Zertifizierung';
+
+  @override
+  String get onboardingEnumLearningGoalOther => 'Sonstiges';
+
+  @override
+  String get onboardingEnumLevelBeginner => 'Anfänger';
+
+  @override
+  String get onboardingEnumLevelIntermediate => 'Mittelstufe';
+
+  @override
+  String get onboardingEnumLevelAdvanced => 'Fortgeschritten';
+
+  @override
+  String get onboardingEnumLevelVariable => 'Je nach Thema unterschiedlich';
+
+  @override
+  String get onboardingEnumStyleStepByStep => 'Schritt für Schritt';
+
+  @override
+  String get onboardingEnumStyleSummaryFirst => 'Zuerst Zusammenfassung';
+
+  @override
+  String get onboardingEnumStyleAnalogies => 'Analogien';
+
+  @override
+  String get onboardingEnumStyleSocratic => 'Geführte Fragen';
+
+  @override
+  String get onboardingEnumToneEncouraging => 'Ermutigend';
+
+  @override
+  String get onboardingEnumToneNeutral => 'Neutral';
+
+  @override
+  String get onboardingEnumToneStrict => 'Streng';
+
+  @override
+  String get onboardingEnumTutoringLangFr => 'Französisch';
+
+  @override
+  String get onboardingEnumTutoringLangEn => 'Englisch';
+
+  @override
+  String get onboardingEnumTutoringLangDe => 'Deutsch';
+
+  @override
+  String get onboardingEnumTutoringLangMatchDocument => 'Sprache des Dokuments';
 }

@@ -92,7 +92,7 @@
 | Statut | ID | Tâche | CP |
 |--------|-----|--------|-----|
 | [x] | F06 | Boucle 7 questions + `analyze` | — |
-| [ ] | F07 | Écran confirmation + Firestore + `/home` | — |
+| [x] | F07 | Écran confirmation + Firestore + `/home` | — |
 | [ ] | F07b | Signup/login → `/onboarding` si non configuré | **CP-4** |
 
 **CP-4 — Vérification :**

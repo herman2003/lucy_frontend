@@ -14,7 +14,7 @@ void main() {
     AuthBootstrapResult(user: user, isConfigured: false),
   );
 
-  group('LucyRouterGuards onboarding (F03)', () {
+  group('onboarding router guards (F03/F07)', () {
     test('authenticated not configured: login redirects to onboarding', () {
       expect(
         LucyRouterGuards.resolveRedirect(
@@ -45,6 +45,28 @@ void main() {
           location: LucyRoutePaths.onboarding,
         ),
         LucyRoutePaths.home,
+      );
+    });
+
+    test('authenticated configured: confirm redirects to home', () {
+      expect(
+        LucyRouterGuards.resolveRedirect(
+          bootstrap: bootstrapConfigured,
+          sessionUser: user,
+          location: LucyRoutePaths.onboardingConfirm,
+        ),
+        LucyRoutePaths.home,
+      );
+    });
+
+    test('authenticated not configured: confirm page allowed', () {
+      expect(
+        LucyRouterGuards.resolveRedirect(
+          bootstrap: bootstrapNotConfigured,
+          sessionUser: user,
+          location: LucyRoutePaths.onboardingConfirm,
+        ),
+        isNull,
       );
     });
 

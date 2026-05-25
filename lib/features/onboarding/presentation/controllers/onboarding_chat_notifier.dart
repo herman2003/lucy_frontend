@@ -199,6 +199,23 @@ class OnboardingChatNotifier extends _$OnboardingChatNotifier {
     );
   }
 
+  void returnToEditFromConfirm(AppLocalizations l10n) {
+    final lastIndex = OnboardingQuestionIds.ordered.length - 1;
+    final lastId = OnboardingQuestionIds.ordered[lastIndex];
+    final questionText = onboardingQuestionText(l10n, lastId);
+
+    state = OnboardingChatState(
+      isInitialized: true,
+      currentStepIndex: lastIndex,
+      currentQuestionId: lastId,
+      activeQuestionText: questionText,
+      messages: [OnboardingChatMessage(isFromLucy: true, text: questionText)],
+      phase: OnboardingChatPhase.awaitingAnswer,
+      completedTurns: state.completedTurns,
+      analyzeResult: null,
+    );
+  }
+
   Future<void> _runAnalyze() async {
     state = state.copyWith(
       phase: OnboardingChatPhase.analyzing,

@@ -1,4 +1,5 @@
 import '../domain/entities/confirm_turn_result.dart';
+import '../domain/entities/finalize_onboarding_result.dart';
 import '../domain/entities/onboarding_analyze_result.dart';
 import '../domain/entities/validate_answer_result.dart';
 import '../domain/repositories/onboarding_repository.dart';
@@ -36,5 +37,9 @@ class OnboardingService {
 
   Future<OnboardingAnalyzeResult> analyze({required String locale}) {
     return _repository.analyze(locale: locale);
+  }
+
+  Future<FinalizeOnboardingResult> finalizeOnboarding() {
+    return _repository.finalizeOnboarding();
   }
 }

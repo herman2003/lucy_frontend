@@ -1,4 +1,5 @@
 import 'package:frontend/features/onboarding/domain/entities/confirm_turn_result.dart';
+import 'package:frontend/features/onboarding/domain/entities/finalize_onboarding_result.dart';
 import 'package:frontend/features/onboarding/domain/entities/learner_profile.dart';
 import 'package:frontend/features/onboarding/domain/entities/onboarding_analyze_result.dart';
 import 'package:frontend/features/onboarding/domain/entities/validate_answer_result.dart';
@@ -10,6 +11,7 @@ class FakeOnboardingRepository implements OnboardingRepository {
     this.validateHandler,
     this.confirmHandler,
     this.analyzeHandler,
+    this.finalizeHandler,
   });
 
   final Future<ValidateAnswerResult> Function({
@@ -28,9 +30,12 @@ class FakeOnboardingRepository implements OnboardingRepository {
     required String locale,
   })? analyzeHandler;
 
+  final Future<FinalizeOnboardingResult> Function()? finalizeHandler;
+
   int validateCallCount = 0;
   int confirmCallCount = 0;
   int analyzeCallCount = 0;
+  int finalizeCallCount = 0;
   String? lastQuestionId;
   String? lastAnswerText;
   int completedTurnsAfterConfirm = 0;
@@ -97,5 +102,14 @@ class FakeOnboardingRepository implements OnboardingRepository {
       ),
       summaryForUser: 'Profil analysé.',
     );
+  }
+
+  @override
+  Future<FinalizeOnboardingResult> finalizeOnboarding() async {
+    finalizeCallCount++;
+    if (finalizeHandler != null) {
+      return finalizeHandler!();
+    }
+    return const FinalizeOnboardingResult();
   }
 }

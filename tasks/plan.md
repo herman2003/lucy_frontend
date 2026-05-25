@@ -362,9 +362,9 @@ flutter run -d chrome
 - UI succès : email affiché, try again, back to login.
 
 **AC :**
-- [ ] **CP-3** : email reçu ou log Firebase Auth OK
-- [ ] UI succès **identique** email inconnu vs connu (anti-énumération Q13)
-- [ ] Pas d’écran custom « nouveau MDP » (SPEC)
+- [ ] **CP-3** : email reçu ou log Firebase Auth OK (manuel)
+- [x] UI succès **identique** email inconnu vs connu (anti-énumération Q13)
+- [x] Pas d’écran custom « nouveau MDP » (SPEC)
 
 **Vérification :**
 - Soumettre email compte existant → état succès → try again → formulaire

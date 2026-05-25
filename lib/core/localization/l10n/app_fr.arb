@@ -100,6 +100,47 @@
   "@authLoginLink": {
     "description": "Link to login page from sign up"
   },
+  "authResetBrandingTitle": "Réinitialisez votre mot de passe",
+  "@authResetBrandingTitle": {
+    "description": "Reset password web branding headline"
+  },
+  "authResetBrandingSubtitle": "Recevez un lien sécurisé par e-mail pour choisir un nouveau mot de passe.",
+  "@authResetBrandingSubtitle": {
+    "description": "Reset password web branding subtitle"
+  },
+  "authResetTitle": "Mot de passe oublié",
+  "@authResetTitle": {
+    "description": "Reset password form title"
+  },
+  "authResetSubtitle": "Saisissez votre adresse e-mail pour recevoir un lien de réinitialisation.",
+  "@authResetSubtitle": {
+    "description": "Reset password form subtitle"
+  },
+  "authResetButton": "Envoyer le lien",
+  "@authResetButton": {
+    "description": "Reset password submit button"
+  },
+  "authResetSuccessTitle": "Vérifiez votre e-mail",
+  "@authResetSuccessTitle": {
+    "description": "Reset password success title"
+  },
+  "authResetSuccessMessage": "Si un compte est associé à {email}, vous recevrez un e-mail pour réinitialiser votre mot de passe.",
+  "@authResetSuccessMessage": {
+    "description": "Reset success message (anti-enumeration)",
+    "placeholders": {
+      "email": {
+        "type": "String"
+      }
+    }
+  },
+  "authResetTryAgain": "Réessayer",
+  "@authResetTryAgain": {
+    "description": "Return to reset form from success"
+  },
+  "authResetBackToLogin": "Retour à la connexion",
+  "@authResetBackToLogin": {
+    "description": "Navigate back to login from reset success"
+  },
   "homeWelcome": "Bienvenue sur Lucy",
   "@homeWelcome": {
     "description": "Home placeholder title"

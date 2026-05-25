@@ -13,6 +13,9 @@ class FakeAuthRepository implements AuthRepository {
   /// When true, [signUpWithEmailAndPassword] simulates Firestore rollback (T09).
   bool failProfileWrite = false;
 
+  /// When set, [sendPasswordResetEmail] throws [AuthException] with this code.
+  String? passwordResetErrorCode;
+
   AuthUser? _user;
   final StreamController<AuthUser?> _authController =
       StreamController<AuthUser?>.broadcast();
@@ -48,7 +51,12 @@ class FakeAuthRepository implements AuthRepository {
   }
 
   @override
-  Future<void> sendPasswordResetEmail({required String email}) async {}
+  Future<void> sendPasswordResetEmail({required String email}) async {
+    final code = passwordResetErrorCode;
+    if (code != null) {
+      throw AuthException(code: code);
+    }
+  }
 
   @override
   Future<void> signOut() async {

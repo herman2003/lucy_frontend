@@ -86,6 +86,37 @@ class AppLocalizationsFr extends AppLocalizations {
   String get authLoginLink => 'Se connecter';
 
   @override
+  String get authResetBrandingTitle => 'Réinitialisez votre mot de passe';
+
+  @override
+  String get authResetBrandingSubtitle =>
+      'Recevez un lien sécurisé par e-mail pour choisir un nouveau mot de passe.';
+
+  @override
+  String get authResetTitle => 'Mot de passe oublié';
+
+  @override
+  String get authResetSubtitle =>
+      'Saisissez votre adresse e-mail pour recevoir un lien de réinitialisation.';
+
+  @override
+  String get authResetButton => 'Envoyer le lien';
+
+  @override
+  String get authResetSuccessTitle => 'Vérifiez votre e-mail';
+
+  @override
+  String authResetSuccessMessage(String email) {
+    return 'Si un compte est associé à $email, vous recevrez un e-mail pour réinitialiser votre mot de passe.';
+  }
+
+  @override
+  String get authResetTryAgain => 'Réessayer';
+
+  @override
+  String get authResetBackToLogin => 'Retour à la connexion';
+
+  @override
   String get homeWelcome => 'Bienvenue sur Lucy';
 
   @override

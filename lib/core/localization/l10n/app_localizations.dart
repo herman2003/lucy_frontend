@@ -250,6 +250,60 @@ abstract class AppLocalizations {
   /// **'Se connecter'**
   String get authLoginLink;
 
+  /// Reset password web branding headline
+  ///
+  /// In fr, this message translates to:
+  /// **'Réinitialisez votre mot de passe'**
+  String get authResetBrandingTitle;
+
+  /// Reset password web branding subtitle
+  ///
+  /// In fr, this message translates to:
+  /// **'Recevez un lien sécurisé par e-mail pour choisir un nouveau mot de passe.'**
+  String get authResetBrandingSubtitle;
+
+  /// Reset password form title
+  ///
+  /// In fr, this message translates to:
+  /// **'Mot de passe oublié'**
+  String get authResetTitle;
+
+  /// Reset password form subtitle
+  ///
+  /// In fr, this message translates to:
+  /// **'Saisissez votre adresse e-mail pour recevoir un lien de réinitialisation.'**
+  String get authResetSubtitle;
+
+  /// Reset password submit button
+  ///
+  /// In fr, this message translates to:
+  /// **'Envoyer le lien'**
+  String get authResetButton;
+
+  /// Reset password success title
+  ///
+  /// In fr, this message translates to:
+  /// **'Vérifiez votre e-mail'**
+  String get authResetSuccessTitle;
+
+  /// Reset success message (anti-enumeration)
+  ///
+  /// In fr, this message translates to:
+  /// **'Si un compte est associé à {email}, vous recevrez un e-mail pour réinitialiser votre mot de passe.'**
+  String authResetSuccessMessage(String email);
+
+  /// Return to reset form from success
+  ///
+  /// In fr, this message translates to:
+  /// **'Réessayer'**
+  String get authResetTryAgain;
+
+  /// Navigate back to login from reset success
+  ///
+  /// In fr, this message translates to:
+  /// **'Retour à la connexion'**
+  String get authResetBackToLogin;
+
   /// Home placeholder title
   ///
   /// In fr, this message translates to:

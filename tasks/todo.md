@@ -61,7 +61,7 @@
 
 | Statut | ID | Tâche | CP |
 |--------|-----|--------|-----|
-| [ ] | T10 | `ResetPasswordPage` form + succès + `sendPasswordResetEmail` | **CP-3** |
+| [x] | T10 | `ResetPasswordPage` form + succès + `sendPasswordResetEmail` | **CP-3** |
 
 **CP-3 — Vérification :**
 - [ ] Email reset reçu ou succès côté Firebase Auth

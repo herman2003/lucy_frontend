@@ -86,6 +86,37 @@ class AppLocalizationsDe extends AppLocalizations {
   String get authLoginLink => 'Anmelden';
 
   @override
+  String get authResetBrandingTitle => 'Passwort zurücksetzen';
+
+  @override
+  String get authResetBrandingSubtitle =>
+      'Erhalten Sie einen sicheren Link per E-Mail für ein neues Passwort.';
+
+  @override
+  String get authResetTitle => 'Passwort vergessen';
+
+  @override
+  String get authResetSubtitle =>
+      'Geben Sie Ihre E-Mail-Adresse ein, um einen Reset-Link zu erhalten.';
+
+  @override
+  String get authResetButton => 'Link senden';
+
+  @override
+  String get authResetSuccessTitle => 'E-Mail prüfen';
+
+  @override
+  String authResetSuccessMessage(String email) {
+    return 'Wenn ein Konto für $email existiert, erhalten Sie eine E-Mail zum Zurücksetzen des Passworts.';
+  }
+
+  @override
+  String get authResetTryAgain => 'Erneut versuchen';
+
+  @override
+  String get authResetBackToLogin => 'Zurück zur Anmeldung';
+
+  @override
   String get homeWelcome => 'Willkommen bei Lucy';
 
   @override

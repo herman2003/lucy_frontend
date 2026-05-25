@@ -25,6 +25,22 @@
   "authSignUpButton": "Create account",
   "authAlreadyHaveAccountPrompt": "Already have an account?",
   "authLoginLink": "Log in",
+  "authResetBrandingTitle": "Reset your password",
+  "authResetBrandingSubtitle": "Get a secure email link to choose a new password.",
+  "authResetTitle": "Forgot password",
+  "authResetSubtitle": "Enter your email address to receive a reset link.",
+  "authResetButton": "Send reset link",
+  "authResetSuccessTitle": "Check your email",
+  "authResetSuccessMessage": "If an account exists for {email}, you will receive an email to reset your password.",
+  "@authResetSuccessMessage": {
+    "placeholders": {
+      "email": {
+        "type": "String"
+      }
+    }
+  },
+  "authResetTryAgain": "Try again",
+  "authResetBackToLogin": "Back to log in",
   "homeWelcome": "Welcome to Lucy",
   "homeLogout": "Log out",
   "authUnknownError": "Something went wrong. Please try again.",

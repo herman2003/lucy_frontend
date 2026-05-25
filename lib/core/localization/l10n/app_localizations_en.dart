@@ -86,6 +86,37 @@ class AppLocalizationsEn extends AppLocalizations {
   String get authLoginLink => 'Log in';
 
   @override
+  String get authResetBrandingTitle => 'Reset your password';
+
+  @override
+  String get authResetBrandingSubtitle =>
+      'Get a secure email link to choose a new password.';
+
+  @override
+  String get authResetTitle => 'Forgot password';
+
+  @override
+  String get authResetSubtitle =>
+      'Enter your email address to receive a reset link.';
+
+  @override
+  String get authResetButton => 'Send reset link';
+
+  @override
+  String get authResetSuccessTitle => 'Check your email';
+
+  @override
+  String authResetSuccessMessage(String email) {
+    return 'If an account exists for $email, you will receive an email to reset your password.';
+  }
+
+  @override
+  String get authResetTryAgain => 'Try again';
+
+  @override
+  String get authResetBackToLogin => 'Back to log in';
+
+  @override
   String get homeWelcome => 'Welcome to Lucy';
 
   @override

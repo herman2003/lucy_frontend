@@ -8,6 +8,70 @@
   "@splashLoading": {
     "description": "Splash screen loading message"
   },
+  "authLoginBrandingTitle": "Votre tuteur IA personnel",
+  "@authLoginBrandingTitle": {
+    "description": "Login web branding headline"
+  },
+  "authLoginBrandingSubtitle": "Progressez à votre rythme avec un accompagnement sur mesure.",
+  "@authLoginBrandingSubtitle": {
+    "description": "Login web branding subtitle"
+  },
+  "authLoginTitle": "Connexion",
+  "@authLoginTitle": {
+    "description": "Login form title"
+  },
+  "authEmailLabel": "Email",
+  "@authEmailLabel": {
+    "description": "Email field label"
+  },
+  "authEmailHint": "vous@exemple.com",
+  "@authEmailHint": {
+    "description": "Email field hint"
+  },
+  "authPasswordLabel": "Mot de passe",
+  "@authPasswordLabel": {
+    "description": "Password field label"
+  },
+  "authPasswordHint": "Entrez votre mot de passe",
+  "@authPasswordHint": {
+    "description": "Password field hint"
+  },
+  "authEmailRequired": "L’email est requis.",
+  "@authEmailRequired": {
+    "description": "Validation when email is empty"
+  },
+  "authPasswordRequired": "Le mot de passe est requis.",
+  "@authPasswordRequired": {
+    "description": "Validation when password is empty"
+  },
+  "authLoginButton": "Se connecter",
+  "@authLoginButton": {
+    "description": "Login submit button"
+  },
+  "authForgotPasswordPrompt": "Mot de passe oublié ?",
+  "@authForgotPasswordPrompt": {
+    "description": "Forgot password prompt before link"
+  },
+  "authForgotPasswordLink": "Réinitialiser",
+  "@authForgotPasswordLink": {
+    "description": "Link to reset password page"
+  },
+  "authNoAccountPrompt": "Pas encore de compte ?",
+  "@authNoAccountPrompt": {
+    "description": "Sign up prompt before link"
+  },
+  "authSignUpLink": "Créer un compte",
+  "@authSignUpLink": {
+    "description": "Link to sign up page"
+  },
+  "homeWelcome": "Bienvenue sur Lucy",
+  "@homeWelcome": {
+    "description": "Home placeholder title"
+  },
+  "homeLogout": "Se déconnecter",
+  "@homeLogout": {
+    "description": "Logout button on home"
+  },
   "authUnknownError": "Une erreur est survenue. Réessayez.",
   "@authUnknownError": {
     "description": "Generic auth error"

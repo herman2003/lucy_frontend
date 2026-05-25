@@ -32,6 +32,7 @@ void main() {
       expect(
         LucyRouterGuards.resolveRedirect(
           bootstrap: const AsyncData(null),
+          sessionUser: null,
           location: LucyRoutePaths.home,
         ),
         LucyRoutePaths.login,
@@ -42,6 +43,7 @@ void main() {
       expect(
         LucyRouterGuards.resolveRedirect(
           bootstrap: const AsyncData(user),
+          sessionUser: user,
           location: LucyRoutePaths.login,
         ),
         LucyRoutePaths.home,
@@ -52,6 +54,7 @@ void main() {
       expect(
         LucyRouterGuards.resolveRedirect(
           bootstrap: const AsyncData(user),
+          sessionUser: user,
           location: LucyRoutePaths.splash,
         ),
         LucyRoutePaths.home,

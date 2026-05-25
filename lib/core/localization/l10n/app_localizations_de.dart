@@ -15,8 +15,57 @@ class AppLocalizationsDe extends AppLocalizations {
   String get splashLoading => 'Wird geladen…';
 
   @override
+  String get authLoginBrandingTitle => 'Ihr persönlicher KI-Tutor';
+
+  @override
+  String get authLoginBrandingSubtitle =>
+      'Lernen Sie in Ihrem Tempo mit individueller Begleitung.';
+
+  @override
+  String get authLoginTitle => 'Anmelden';
+
+  @override
+  String get authEmailLabel => 'E-Mail';
+
+  @override
+  String get authEmailHint => 'sie@beispiel.de';
+
+  @override
+  String get authPasswordLabel => 'Passwort';
+
+  @override
+  String get authPasswordHint => 'Passwort eingeben';
+
+  @override
+  String get authEmailRequired => 'E-Mail ist erforderlich.';
+
+  @override
+  String get authPasswordRequired => 'Passwort ist erforderlich.';
+
+  @override
+  String get authLoginButton => 'Anmelden';
+
+  @override
+  String get authForgotPasswordPrompt => 'Passwort vergessen?';
+
+  @override
+  String get authForgotPasswordLink => 'Zurücksetzen';
+
+  @override
+  String get authNoAccountPrompt => 'Noch kein Konto?';
+
+  @override
+  String get authSignUpLink => 'Konto erstellen';
+
+  @override
+  String get homeWelcome => 'Willkommen bei Lucy';
+
+  @override
+  String get homeLogout => 'Abmelden';
+
+  @override
   String get authUnknownError =>
-      'Ein Fehler ist aufgetreten. Bitte erneut versuchen.';
+      'Etwas ist schiefgelaufen. Bitte erneut versuchen.';
 
   @override
   String get authUserNotFound => 'Kein Konto mit dieser E-Mail gefunden.';
@@ -25,7 +74,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get authWrongPassword => 'Falsches Passwort.';
 
   @override
-  String get authInvalidCredentials => 'E-Mail oder Passwort falsch.';
+  String get authInvalidCredentials => 'E-Mail oder Passwort ist falsch.';
 
   @override
   String get authEmailAlreadyInUse => 'Diese E-Mail wird bereits verwendet.';
@@ -37,7 +86,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get authInvalidEmail => 'Ungültige E-Mail-Adresse.';
 
   @override
-  String get authNetworkError => 'Verbindungsproblem. Netzwerk prüfen.';
+  String get authNetworkError => 'Verbindungsproblem. Prüfen Sie Ihr Netzwerk.';
 
   @override
   String get authTooManyRequests =>
@@ -47,7 +96,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get authUserDisabled => 'Dieses Konto wurde deaktiviert.';
 
   @override
-  String get authOperationNotAllowed => 'Diese Operation ist nicht erlaubt.';
+  String get authOperationNotAllowed => 'Diese Aktion ist nicht erlaubt.';
 
   @override
   String get authProfileWriteFailed =>

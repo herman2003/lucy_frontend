@@ -112,6 +112,102 @@ abstract class AppLocalizations {
   /// **'Chargement…'**
   String get splashLoading;
 
+  /// Login web branding headline
+  ///
+  /// In fr, this message translates to:
+  /// **'Votre tuteur IA personnel'**
+  String get authLoginBrandingTitle;
+
+  /// Login web branding subtitle
+  ///
+  /// In fr, this message translates to:
+  /// **'Progressez à votre rythme avec un accompagnement sur mesure.'**
+  String get authLoginBrandingSubtitle;
+
+  /// Login form title
+  ///
+  /// In fr, this message translates to:
+  /// **'Connexion'**
+  String get authLoginTitle;
+
+  /// Email field label
+  ///
+  /// In fr, this message translates to:
+  /// **'Email'**
+  String get authEmailLabel;
+
+  /// Email field hint
+  ///
+  /// In fr, this message translates to:
+  /// **'vous@exemple.com'**
+  String get authEmailHint;
+
+  /// Password field label
+  ///
+  /// In fr, this message translates to:
+  /// **'Mot de passe'**
+  String get authPasswordLabel;
+
+  /// Password field hint
+  ///
+  /// In fr, this message translates to:
+  /// **'Entrez votre mot de passe'**
+  String get authPasswordHint;
+
+  /// Validation when email is empty
+  ///
+  /// In fr, this message translates to:
+  /// **'L’email est requis.'**
+  String get authEmailRequired;
+
+  /// Validation when password is empty
+  ///
+  /// In fr, this message translates to:
+  /// **'Le mot de passe est requis.'**
+  String get authPasswordRequired;
+
+  /// Login submit button
+  ///
+  /// In fr, this message translates to:
+  /// **'Se connecter'**
+  String get authLoginButton;
+
+  /// Forgot password prompt before link
+  ///
+  /// In fr, this message translates to:
+  /// **'Mot de passe oublié ?'**
+  String get authForgotPasswordPrompt;
+
+  /// Link to reset password page
+  ///
+  /// In fr, this message translates to:
+  /// **'Réinitialiser'**
+  String get authForgotPasswordLink;
+
+  /// Sign up prompt before link
+  ///
+  /// In fr, this message translates to:
+  /// **'Pas encore de compte ?'**
+  String get authNoAccountPrompt;
+
+  /// Link to sign up page
+  ///
+  /// In fr, this message translates to:
+  /// **'Créer un compte'**
+  String get authSignUpLink;
+
+  /// Home placeholder title
+  ///
+  /// In fr, this message translates to:
+  /// **'Bienvenue sur Lucy'**
+  String get homeWelcome;
+
+  /// Logout button on home
+  ///
+  /// In fr, this message translates to:
+  /// **'Se déconnecter'**
+  String get homeLogout;
+
   /// Generic auth error
   ///
   /// In fr, this message translates to:

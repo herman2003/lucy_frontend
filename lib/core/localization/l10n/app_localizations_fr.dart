@@ -15,6 +15,55 @@ class AppLocalizationsFr extends AppLocalizations {
   String get splashLoading => 'Chargement…';
 
   @override
+  String get authLoginBrandingTitle => 'Votre tuteur IA personnel';
+
+  @override
+  String get authLoginBrandingSubtitle =>
+      'Progressez à votre rythme avec un accompagnement sur mesure.';
+
+  @override
+  String get authLoginTitle => 'Connexion';
+
+  @override
+  String get authEmailLabel => 'Email';
+
+  @override
+  String get authEmailHint => 'vous@exemple.com';
+
+  @override
+  String get authPasswordLabel => 'Mot de passe';
+
+  @override
+  String get authPasswordHint => 'Entrez votre mot de passe';
+
+  @override
+  String get authEmailRequired => 'L’email est requis.';
+
+  @override
+  String get authPasswordRequired => 'Le mot de passe est requis.';
+
+  @override
+  String get authLoginButton => 'Se connecter';
+
+  @override
+  String get authForgotPasswordPrompt => 'Mot de passe oublié ?';
+
+  @override
+  String get authForgotPasswordLink => 'Réinitialiser';
+
+  @override
+  String get authNoAccountPrompt => 'Pas encore de compte ?';
+
+  @override
+  String get authSignUpLink => 'Créer un compte';
+
+  @override
+  String get homeWelcome => 'Bienvenue sur Lucy';
+
+  @override
+  String get homeLogout => 'Se déconnecter';
+
+  @override
   String get authUnknownError => 'Une erreur est survenue. Réessayez.';
 
   @override

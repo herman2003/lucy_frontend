@@ -15,6 +15,55 @@ class AppLocalizationsEn extends AppLocalizations {
   String get splashLoading => 'Loading…';
 
   @override
+  String get authLoginBrandingTitle => 'Your personal AI tutor';
+
+  @override
+  String get authLoginBrandingSubtitle =>
+      'Learn at your own pace with tailored guidance.';
+
+  @override
+  String get authLoginTitle => 'Log in';
+
+  @override
+  String get authEmailLabel => 'Email';
+
+  @override
+  String get authEmailHint => 'you@example.com';
+
+  @override
+  String get authPasswordLabel => 'Password';
+
+  @override
+  String get authPasswordHint => 'Enter your password';
+
+  @override
+  String get authEmailRequired => 'Email is required.';
+
+  @override
+  String get authPasswordRequired => 'Password is required.';
+
+  @override
+  String get authLoginButton => 'Log in';
+
+  @override
+  String get authForgotPasswordPrompt => 'Forgot password?';
+
+  @override
+  String get authForgotPasswordLink => 'Reset';
+
+  @override
+  String get authNoAccountPrompt => 'Don\'t have an account?';
+
+  @override
+  String get authSignUpLink => 'Sign up';
+
+  @override
+  String get homeWelcome => 'Welcome to Lucy';
+
+  @override
+  String get homeLogout => 'Log out';
+
+  @override
   String get authUnknownError => 'Something went wrong. Please try again.';
 
   @override

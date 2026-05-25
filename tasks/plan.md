@@ -322,9 +322,9 @@ flutter test test/core/utils/auth_error_translator_test.dart
 - Flux : `submitLogin` → service → `go('/home')`.
 
 **AC :**
-- [ ] **CP-1** validé sur compte Firebase console
-- [ ] Pas de texte UI en dur (l10n)
-- [ ] Layout web vs mobile basé sur `context.isDesktop` / responsive
+- [ ] **CP-1** validé sur compte Firebase console (manuel)
+- [x] Pas de texte UI en dur (l10n)
+- [x] Layout web vs mobile basé sur `context.isDesktop` / responsive
 
 **Vérification :**
 ```bash

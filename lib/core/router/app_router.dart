@@ -1,7 +1,8 @@
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../presentation/pages/home_placeholder_page.dart';
+import '../../features/auth/presentation/pages/home/home_page.dart';
+import '../../features/auth/presentation/pages/login/login_page.dart';
 import '../presentation/pages/login_placeholder_page.dart';
 import '../presentation/pages/splash_page.dart';
 import 'lucy_route_names.dart';
@@ -31,7 +32,7 @@ GoRouter lucyRouter(Ref ref) {
       GoRoute(
         name: LucyRouteNames.login,
         path: LucyRoutePaths.login,
-        builder: (context, state) => const LoginPlaceholderPage(),
+        builder: (context, state) => const LoginPage(),
       ),
       GoRoute(
         name: LucyRouteNames.signup,
@@ -46,7 +47,7 @@ GoRouter lucyRouter(Ref ref) {
       GoRoute(
         name: LucyRouteNames.home,
         path: LucyRoutePaths.home,
-        builder: (context, state) => const HomePlaceholderPage(),
+        builder: (context, state) => const HomePage(),
       ),
     ],
   );

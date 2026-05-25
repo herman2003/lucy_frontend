@@ -21,18 +21,18 @@ class AuthScaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (context.isDesktop) {
-      return AuthWebLayout(
-        formContent: formContent,
-        brandingTitle: brandingTitle,
-        brandingSubtitle: brandingSubtitle,
-        formKey: formKey,
-      );
-    }
+    final body = context.isDesktop
+        ? AuthWebLayout(
+            formContent: formContent,
+            brandingTitle: brandingTitle,
+            brandingSubtitle: brandingSubtitle,
+            formKey: formKey,
+          )
+        : AuthMobileLayout(
+            formContent: formContent,
+            formKey: formKey,
+          );
 
-    return AuthMobileLayout(
-      formContent: formContent,
-      formKey: formKey,
-    );
+    return Scaffold(body: body);
   }
 }

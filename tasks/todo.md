@@ -114,7 +114,7 @@
 
 - [x] `flutter test` vert
 - [x] `flutter analyze` vert
-- [ ] Checklist SPEC §4.8 app + backend cochée
+- [x] Checklist SPEC §4.8 app + backend cochée (DoD automatisé ; voir `docs/manual-checkpoints-onboarding.md` pour E2E)
 
 ---
 
@@ -122,20 +122,20 @@
 
 ### App
 
-- [ ] 7 questions ; réponses texte libre
-- [ ] `validate-answer` après chaque réponse
-- [ ] `valid: false` → `rephrasedQuestion` (pas « Peux-tu préciser »)
-- [ ] `analyze` après 7 tours validés
-- [ ] Confirmation avant Firestore
-- [ ] Pas de skip ; garde router
-- [ ] l10n fr/en/de ; Clean Architecture
+- [x] 7 questions ; réponses texte libre
+- [x] `validate-answer` après chaque réponse
+- [x] `valid: false` → `rephrasedQuestion` (pas « Peux-tu préciser »)
+- [x] `analyze` après 7 tours validés
+- [x] Confirmation avant Firestore
+- [x] Pas de skip ; garde router
+- [x] l10n fr/en/de ; Clean Architecture
 
 ### Backend
 
-- [ ] `validate-answer` + `analyze` conformes SPEC
-- [ ] Prompts dans `src/prompts/`
-- [ ] `LlmPort` + Gemini
-- [ ] Tests unitaires
+- [x] `validate-answer` + `analyze` conformes SPEC
+- [x] Prompts dans `src/prompts/`
+- [x] `LlmPort` + Gemini
+- [x] Tests unitaires
 
 ---
 

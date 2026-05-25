@@ -21,6 +21,14 @@ class Validators {
     return null;
   }
 
+  static String? validateFullName(BuildContext context, String? value) {
+    final trimmed = value?.trim() ?? '';
+    if (trimmed.isEmpty) {
+      return context.l10n.authFullNameRequired;
+    }
+    return null;
+  }
+
   static String? validatePassword(BuildContext context, String? value) {
     if (value == null || value.isEmpty) {
       return context.l10n.authPasswordRequired;

@@ -3,6 +3,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../features/auth/presentation/pages/home/home_page.dart';
 import '../../features/auth/presentation/pages/login/login_page.dart';
+import '../../features/auth/presentation/pages/sign_up/sign_up_page.dart';
 import '../presentation/pages/login_placeholder_page.dart';
 import '../presentation/pages/splash_page.dart';
 import 'lucy_route_names.dart';
@@ -37,7 +38,7 @@ GoRouter lucyRouter(Ref ref) {
       GoRoute(
         name: LucyRouteNames.signup,
         path: LucyRoutePaths.signup,
-        builder: (context, state) => const LoginPlaceholderPage(),
+        builder: (context, state) => const SignUpPage(),
       ),
       GoRoute(
         name: LucyRouteNames.resetPassword,

@@ -48,7 +48,7 @@
 
 | Statut | ID | Tâche | CP |
 |--------|-----|--------|-----|
-| [ ] | T09 | `SignUpPage` + Auth + Firestore → `/home` si tout OK | **CP-2** |
+| [x] | T09 | `SignUpPage` + Auth + Firestore → `/home` si tout OK | **CP-2** |
 
 **CP-2 — Vérification :**
 - [ ] Nouveau compte → doc Firestore `users/{uid}` + `/home`

@@ -196,6 +196,60 @@ abstract class AppLocalizations {
   /// **'Créer un compte'**
   String get authSignUpLink;
 
+  /// Sign up web branding headline
+  ///
+  /// In fr, this message translates to:
+  /// **'Rejoignez Lucy'**
+  String get authSignUpBrandingTitle;
+
+  /// Sign up web branding subtitle
+  ///
+  /// In fr, this message translates to:
+  /// **'Créez votre compte et commencez à apprendre avec votre tuteur IA.'**
+  String get authSignUpBrandingSubtitle;
+
+  /// Sign up form title
+  ///
+  /// In fr, this message translates to:
+  /// **'Créer un compte'**
+  String get authSignUpTitle;
+
+  /// Full name field label
+  ///
+  /// In fr, this message translates to:
+  /// **'Nom complet'**
+  String get authFullNameLabel;
+
+  /// Full name field hint
+  ///
+  /// In fr, this message translates to:
+  /// **'Votre nom'**
+  String get authFullNameHint;
+
+  /// Validation when full name is empty
+  ///
+  /// In fr, this message translates to:
+  /// **'Le nom complet est requis.'**
+  String get authFullNameRequired;
+
+  /// Sign up submit button
+  ///
+  /// In fr, this message translates to:
+  /// **'Créer mon compte'**
+  String get authSignUpButton;
+
+  /// Login prompt before link on sign up
+  ///
+  /// In fr, this message translates to:
+  /// **'Déjà un compte ?'**
+  String get authAlreadyHaveAccountPrompt;
+
+  /// Link to login page from sign up
+  ///
+  /// In fr, this message translates to:
+  /// **'Se connecter'**
+  String get authLoginLink;
+
   /// Home placeholder title
   ///
   /// In fr, this message translates to:

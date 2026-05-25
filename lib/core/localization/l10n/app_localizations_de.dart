@@ -58,6 +58,34 @@ class AppLocalizationsDe extends AppLocalizations {
   String get authSignUpLink => 'Konto erstellen';
 
   @override
+  String get authSignUpBrandingTitle => 'Lucy beitreten';
+
+  @override
+  String get authSignUpBrandingSubtitle =>
+      'Erstellen Sie Ihr Konto und lernen Sie mit Ihrem KI-Tutor.';
+
+  @override
+  String get authSignUpTitle => 'Konto erstellen';
+
+  @override
+  String get authFullNameLabel => 'Vollständiger Name';
+
+  @override
+  String get authFullNameHint => 'Ihr Name';
+
+  @override
+  String get authFullNameRequired => 'Der vollständige Name ist erforderlich.';
+
+  @override
+  String get authSignUpButton => 'Konto erstellen';
+
+  @override
+  String get authAlreadyHaveAccountPrompt => 'Bereits ein Konto?';
+
+  @override
+  String get authLoginLink => 'Anmelden';
+
+  @override
   String get homeWelcome => 'Willkommen bei Lucy';
 
   @override

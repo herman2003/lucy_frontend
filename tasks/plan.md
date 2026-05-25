@@ -346,8 +346,8 @@ flutter run -d chrome
 - Test manuel : couper réseau / règles Firestore → signup échoue, pas de home.
 
 **AC :**
-- [ ] **CP-2** validé (document Firestore présent)
-- [ ] Échec Firestore → pas de session persistante sur `/home`
+- [ ] **CP-2** validé (document Firestore présent — manuel / console)
+- [x] Échec Firestore → pas de session persistante sur `/home`
 
 ---
 

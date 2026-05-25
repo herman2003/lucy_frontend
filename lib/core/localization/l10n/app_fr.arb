@@ -64,6 +64,42 @@
   "@authSignUpLink": {
     "description": "Link to sign up page"
   },
+  "authSignUpBrandingTitle": "Rejoignez Lucy",
+  "@authSignUpBrandingTitle": {
+    "description": "Sign up web branding headline"
+  },
+  "authSignUpBrandingSubtitle": "Créez votre compte et commencez à apprendre avec votre tuteur IA.",
+  "@authSignUpBrandingSubtitle": {
+    "description": "Sign up web branding subtitle"
+  },
+  "authSignUpTitle": "Créer un compte",
+  "@authSignUpTitle": {
+    "description": "Sign up form title"
+  },
+  "authFullNameLabel": "Nom complet",
+  "@authFullNameLabel": {
+    "description": "Full name field label"
+  },
+  "authFullNameHint": "Votre nom",
+  "@authFullNameHint": {
+    "description": "Full name field hint"
+  },
+  "authFullNameRequired": "Le nom complet est requis.",
+  "@authFullNameRequired": {
+    "description": "Validation when full name is empty"
+  },
+  "authSignUpButton": "Créer mon compte",
+  "@authSignUpButton": {
+    "description": "Sign up submit button"
+  },
+  "authAlreadyHaveAccountPrompt": "Déjà un compte ?",
+  "@authAlreadyHaveAccountPrompt": {
+    "description": "Login prompt before link on sign up"
+  },
+  "authLoginLink": "Se connecter",
+  "@authLoginLink": {
+    "description": "Link to login page from sign up"
+  },
   "homeWelcome": "Bienvenue sur Lucy",
   "@homeWelcome": {
     "description": "Home placeholder title"

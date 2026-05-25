@@ -58,6 +58,34 @@ class AppLocalizationsEn extends AppLocalizations {
   String get authSignUpLink => 'Sign up';
 
   @override
+  String get authSignUpBrandingTitle => 'Join Lucy';
+
+  @override
+  String get authSignUpBrandingSubtitle =>
+      'Create your account and start learning with your AI tutor.';
+
+  @override
+  String get authSignUpTitle => 'Create account';
+
+  @override
+  String get authFullNameLabel => 'Full name';
+
+  @override
+  String get authFullNameHint => 'Your name';
+
+  @override
+  String get authFullNameRequired => 'Full name is required.';
+
+  @override
+  String get authSignUpButton => 'Create account';
+
+  @override
+  String get authAlreadyHaveAccountPrompt => 'Already have an account?';
+
+  @override
+  String get authLoginLink => 'Log in';
+
+  @override
   String get homeWelcome => 'Welcome to Lucy';
 
   @override

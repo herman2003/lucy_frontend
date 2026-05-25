@@ -37,12 +37,6 @@ void main() {
     }
   });
 
-  test('remaining post-MVP UX items stay unchecked in SPEC §4.8', () {
-    for (final snippet in _postMvpUncheckedSnippets) {
-      expect(specSection48, contains(snippet), reason: snippet);
-    }
-  });
-
   test('SPEC §4.8 documents MVP vs post-MVP status', () {
     expect(specSection48, contains('**Statut MVP**'));
     expect(specSection48, contains('spec_48_onboarding_dod_test.dart'));
@@ -88,8 +82,5 @@ const _mvpAppCheckedSnippetsExtraAnalyze = [
 const _postMvpCheckedSnippetsUx1 = [
   '- [x] **7 chats**',
   '- [x] Design messagerie complète (avatar, `colorScheme`) ; **swipe entre steps**',
-];
-
-const _postMvpUncheckedSnippets = [
-  '- [ ] Retour arrière : modifier un tour',
+  '- [x] Retour arrière : modifier un tour',
 ];

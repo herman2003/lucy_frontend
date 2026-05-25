@@ -208,6 +208,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get onboardingStepReadOnly => 'Step completed — read only.';
 
   @override
+  String get onboardingStepEdit => 'Edit this step';
+
+  @override
+  String get onboardingRegenerateProfile => 'Regenerate profile';
+
+  @override
   String get onboardingConfirmTurn => 'Looks good';
 
   @override

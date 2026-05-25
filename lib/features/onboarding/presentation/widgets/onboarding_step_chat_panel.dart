@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/constants/lucy_constants.dart';
 import '../../../../core/extensions/context.dart';
+import '../../../../shared/widgets/buttons/lucy_secondary_button.dart';
 import '../../domain/entities/onboarding_chat_message.dart';
 import 'onboarding_lucy_bubble.dart';
 import 'onboarding_lucy_typing_row.dart';
@@ -14,11 +15,13 @@ class OnboardingStepChatPanel extends StatelessWidget {
     required this.messages,
     required this.showTypingIndicator,
     this.readOnly = false,
+    this.onEditStep,
   });
 
   final List<OnboardingChatMessage> messages;
   final bool showTypingIndicator;
   final bool readOnly;
+  final VoidCallback? onEditStep;
 
   @override
   Widget build(BuildContext context) {
@@ -34,22 +37,35 @@ class OnboardingStepChatPanel extends StatelessWidget {
                 horizontal: LucyConstants.kSpacingMedium,
                 vertical: LucyConstants.kSpacingLow,
               ),
-              child: Row(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Icon(
-                    Icons.visibility_outlined,
-                    size: LucyConstants.kIconMedium,
-                    color: scheme.onSurfaceVariant,
-                  ),
-                  const SizedBox(width: LucyConstants.kSpacingLow),
-                  Expanded(
-                    child: Text(
-                      context.l10n.onboardingStepReadOnly,
-                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.visibility_outlined,
+                        size: LucyConstants.kIconMedium,
                         color: scheme.onSurfaceVariant,
                       ),
-                    ),
+                      const SizedBox(width: LucyConstants.kSpacingLow),
+                      Expanded(
+                        child: Text(
+                          context.l10n.onboardingStepReadOnly,
+                          style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                            color: scheme.onSurfaceVariant,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
+                  if (onEditStep != null) ...[
+                    const SizedBox(height: LucyConstants.kSpacingLow),
+                    LucySecondaryButton(
+                      text: context.l10n.onboardingStepEdit,
+                      onPressed: onEditStep,
+                      width: double.infinity,
+                    ),
+                  ],
                 ],
               ),
             ),

@@ -14,6 +14,7 @@ enum OnboardingChatPhase {
   confirming,
   analyzing,
   analysisReady,
+  awaitingRegenerateProfile,
 }
 
 /// Visual state for one of the seven onboarding step dots (SPEC §4.5.1).
@@ -41,6 +42,7 @@ abstract class OnboardingChatState with _$OnboardingChatState {
     @Default(false) bool isFallbackConfirmation,
     @Default([]) List<OnboardingCompletedTurn> completedTurns,
     OnboardingAnalyzeResult? analyzeResult,
+    @Default(false) bool showRegenerateProfile,
   }) = _OnboardingChatState;
 
   /// Messages for the active step only (backward-compatible accessor).
@@ -91,4 +93,7 @@ abstract class OnboardingChatState with _$OnboardingChatState {
       phase == OnboardingChatPhase.awaitingConfirmation;
 
   bool get isAnalysisReady => phase == OnboardingChatPhase.analysisReady;
+
+  bool get isAwaitingRegenerateProfile =>
+      phase == OnboardingChatPhase.awaitingRegenerateProfile;
 }

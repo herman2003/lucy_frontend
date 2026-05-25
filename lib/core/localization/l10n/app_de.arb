@@ -74,6 +74,8 @@
   "onboardingStepLocked": "Schließe zuerst den aktuellen Schritt ab.",
   "onboardingLucyTyping": "Lucy schreibt…",
   "onboardingStepReadOnly": "Schritt abgeschlossen — nur Ansicht.",
+  "onboardingStepEdit": "Schritt bearbeiten",
+  "onboardingRegenerateProfile": "Profil neu erstellen",
   "onboardingConfirmTurn": "Passt",
   "onboardingRejectTurn": "Das stimmt nicht",
   "onboardingGenericError": "Ein Fehler ist aufgetreten. Bitte erneut versuchen.",

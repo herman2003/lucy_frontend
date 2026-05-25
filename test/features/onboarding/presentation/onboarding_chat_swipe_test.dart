@@ -94,5 +94,16 @@ void main() {
     expect(find.text('Fil étape 2'), findsOneWidget);
     expect(find.text('Étape terminée — consultation seule.'), findsOneWidget);
     expect(find.byType(TextField), findsNothing);
+
+    await tester.tap(find.text('Modifier cette étape'));
+    await tester.pumpAndSettle();
+
+    expect(container.read(onboardingChatProvider).currentStepIndex, 1);
+    expect(
+      container.read(onboardingChatProvider).messagesByQuestionId[
+          OnboardingQuestionIds.qGoal],
+      isNotEmpty,
+    );
+    expect(find.byType(TextField), findsOneWidget);
   });
 }

@@ -100,7 +100,8 @@ class _OnboardingChatPageState extends ConsumerState<OnboardingChatPage> {
 
   bool _showInputForStep(OnboardingChatState chatState) {
     return _viewingStepIndex == chatState.currentStepIndex &&
-        !chatState.isAnalysisReady;
+        !chatState.isAnalysisReady &&
+        !chatState.isAwaitingRegenerateProfile;
   }
 
   @override
@@ -183,6 +184,18 @@ class _OnboardingChatPageState extends ConsumerState<OnboardingChatPage> {
                     messages: chatState.messagesForStep(stepIndex),
                     showTypingIndicator: showTyping,
                     readOnly: readOnly,
+                    onEditStep: readOnly
+                        ? () {
+                            notifier.beginEditCompletedStep(
+                              stepIndex: stepIndex,
+                              l10n: l10n,
+                            );
+                            setState(
+                              () => _viewingStepIndex = stepIndex,
+                            );
+                            _syncPageToStep(stepIndex);
+                          }
+                        : null,
                   );
                 },
               ),
@@ -215,6 +228,18 @@ class _OnboardingChatPageState extends ConsumerState<OnboardingChatPage> {
                       ),
                     ),
                   ],
+                ),
+              ),
+            if (isViewingCurrent && chatState.isAwaitingRegenerateProfile)
+              Padding(
+                padding: const EdgeInsets.all(LucyConstants.kSpacingMedium),
+                child: LucyPrimaryButton(
+                  text: l10n.onboardingRegenerateProfile,
+                  isLoading: chatState.isSubmitting,
+                  onPressed: chatState.isSubmitting
+                      ? null
+                      : () => _regenerateProfile(context),
+                  width: double.infinity,
                 ),
               ),
             if (_showInputForStep(chatState))
@@ -268,6 +293,20 @@ class _OnboardingChatPageState extends ConsumerState<OnboardingChatPage> {
   Future<void> _confirmTurn(BuildContext context, AppLocalizations l10n) async {
     try {
       await ref.read(onboardingChatProvider.notifier).confirmTurn(l10n);
+    } catch (error) {
+      if (!context.mounted) {
+        return;
+      }
+      LucySnackBar.showError(
+        context,
+        message: OnboardingErrorTranslator.fromException(context, error),
+      );
+    }
+  }
+
+  Future<void> _regenerateProfile(BuildContext context) async {
+    try {
+      await ref.read(onboardingChatProvider.notifier).regenerateProfile();
     } catch (error) {
       if (!context.mounted) {
         return;

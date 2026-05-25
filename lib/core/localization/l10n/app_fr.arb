@@ -253,6 +253,14 @@
   "@onboardingStepReadOnly": {
     "description": "Banner when browsing a completed onboarding step chat"
   },
+  "onboardingStepEdit": "Modifier cette étape",
+  "@onboardingStepEdit": {
+    "description": "Button to edit a completed onboarding step without clearing others"
+  },
+  "onboardingRegenerateProfile": "Regénérer le profil",
+  "@onboardingRegenerateProfile": {
+    "description": "Runs analyze again after the user edited answers post-analysis"
+  },
   "onboardingConfirmTurn": "C’est bon",
   "@onboardingConfirmTurn": {
     "description": "User confirms Lucy understood the answer"

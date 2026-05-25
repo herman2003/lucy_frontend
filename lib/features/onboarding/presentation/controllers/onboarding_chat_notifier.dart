@@ -146,6 +146,13 @@ class OnboardingChatNotifier extends _$OnboardingChatNotifier {
       );
 
       if (confirmResult.onboardingStatus == 'awaiting_analyze') {
+        if (state.showRegenerateProfile) {
+          state = state.copyWith(
+            phase: OnboardingChatPhase.awaitingRegenerateProfile,
+            isSubmitting: false,
+          );
+          return;
+        }
         await _runAnalyze();
         return;
       }
@@ -319,6 +326,57 @@ class OnboardingChatNotifier extends _$OnboardingChatNotifier {
     }
   }
 
+  /// Re-opens a completed step for editing without clearing other chats (SPEC §4.5, UX-5).
+  void beginEditCompletedStep({
+    required int stepIndex,
+    required AppLocalizations l10n,
+  }) {
+    if (stepIndex < 0 ||
+        stepIndex >= OnboardingQuestionIds.ordered.length ||
+        stepIndex >= state.currentStepIndex) {
+      return;
+    }
+
+    final questionId = OnboardingQuestionIds.ordered[stepIndex];
+    final hadAnalysis = state.analyzeResult != null;
+    final preservedTurns = state.completedTurns
+        .where(
+          (turn) =>
+              OnboardingQuestionIds.ordered.indexOf(turn.questionId) < stepIndex,
+        )
+        .toList();
+
+    OnboardingCompletedTurn? existingTurn;
+    for (final turn in state.completedTurns) {
+      if (turn.questionId == questionId) {
+        existingTurn = turn;
+        break;
+      }
+    }
+    final questionText =
+        existingTurn?.questionText ?? onboardingQuestionText(l10n, questionId);
+
+    state = state.copyWith(
+      currentStepIndex: stepIndex,
+      currentQuestionId: questionId,
+      activeQuestionText: questionText,
+      completedTurns: preservedTurns,
+      analyzeResult: null,
+      showRegenerateProfile: hadAnalysis || state.showRegenerateProfile,
+      phase: OnboardingChatPhase.awaitingAnswer,
+      pendingTurnSummary: null,
+      pendingAnswerText: null,
+      isFallbackConfirmation: false,
+      isSubmitting: false,
+      answerDraft: '',
+    );
+  }
+
+  Future<void> regenerateProfile() async {
+    state = state.copyWith(showRegenerateProfile: false);
+    await _runAnalyze();
+  }
+
   void returnToEditFromConfirm(AppLocalizations l10n) {
     final lastIndex = OnboardingQuestionIds.ordered.length - 1;
     final lastId = OnboardingQuestionIds.ordered[lastIndex];
@@ -342,6 +400,7 @@ class OnboardingChatNotifier extends _$OnboardingChatNotifier {
       phase: OnboardingChatPhase.awaitingAnswer,
       completedTurns: state.completedTurns,
       analyzeResult: null,
+      showRegenerateProfile: state.showRegenerateProfile,
     );
   }
 

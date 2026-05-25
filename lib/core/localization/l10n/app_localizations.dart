@@ -466,6 +466,18 @@ abstract class AppLocalizations {
   /// **'Étape terminée — consultation seule.'**
   String get onboardingStepReadOnly;
 
+  /// Button to edit a completed onboarding step without clearing others
+  ///
+  /// In fr, this message translates to:
+  /// **'Modifier cette étape'**
+  String get onboardingStepEdit;
+
+  /// Runs analyze again after the user edited answers post-analysis
+  ///
+  /// In fr, this message translates to:
+  /// **'Regénérer le profil'**
+  String get onboardingRegenerateProfile;
+
   /// User confirms Lucy understood the answer
   ///
   /// In fr, this message translates to:

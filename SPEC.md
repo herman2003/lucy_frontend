@@ -735,7 +735,7 @@ Signup / login → `/onboarding` si `isConfigured != true` (lire Firestore **ava
 - [x] fallback profil après 10 échecs analyze.
 - [x] **7 chats** (1 step = 1 fil) ; typing Lucy pendant appels IA ; steps futurs **verrouillés**.
 - [x] Design messagerie complète (avatar, `colorScheme`) ; **swipe entre steps** terminés + courant.
-- [ ] Retour arrière : modifier un tour n’efface pas les autres.
+- [x] Retour arrière : modifier un tour n’efface pas les autres.
 - [x] Réponses ≤ **2000 caractères** ; boutons désactivés pendant appels (widget partagé).
 - [x] Guard router : `isConfigured` lu depuis Firestore (`onboardingStatus` via réponses API confirm-turn).
 - [x] Confirmation obligatoire avant Firestore.

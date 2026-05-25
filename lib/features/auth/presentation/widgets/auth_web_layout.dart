@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../core/constants/lucy_constants.dart';
 import '../../../../core/extensions/context.dart';
 import '../../../../core/theme/lucy_flex_theme.dart';
+import '../../../../shared/widgets/branding/auth_twinkling_stars_background.dart';
 import '../../../../shared/widgets/branding/lucy_logo.dart';
 import '../../../../shared/widgets/containers/lucy_form_container.dart';
 
@@ -32,30 +33,33 @@ class AuthWebLayout extends StatelessWidget {
             decoration: BoxDecoration(
               gradient: LucyFlexTheme.primaryGradient(context),
             ),
-            child: Center(
-              child: Padding(
-                padding: const EdgeInsets.all(LucyConstants.kSpacingLarge * 2),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    const LucyLogo(size: 96),
-                    const SizedBox(height: LucyConstants.kSpacingLarge),
-                    Text(
-                      brandingTitle,
-                      textAlign: TextAlign.center,
-                      style: context.textTheme.titleMedium?.copyWith(
-                        color: scheme.onPrimary,
+            child: AuthTwinklingStarsBackground(
+              child: Center(
+                child: Padding(
+                  padding:
+                      const EdgeInsets.all(LucyConstants.kSpacingLarge * 2),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const LucyLogo(size: 96),
+                      const SizedBox(height: LucyConstants.kSpacingLarge),
+                      Text(
+                        brandingTitle,
+                        textAlign: TextAlign.center,
+                        style: context.textTheme.titleMedium?.copyWith(
+                          color: scheme.onPrimary,
+                        ),
                       ),
-                    ),
-                    const SizedBox(height: LucyConstants.kSpacingLow),
-                    Text(
-                      brandingSubtitle,
-                      textAlign: TextAlign.center,
-                      style: context.textTheme.bodyMedium?.copyWith(
-                        color: scheme.onPrimary.withValues(alpha: 0.9),
+                      const SizedBox(height: LucyConstants.kSpacingLow),
+                      Text(
+                        brandingSubtitle,
+                        textAlign: TextAlign.center,
+                        style: context.textTheme.bodyMedium?.copyWith(
+                          color: scheme.onPrimary.withValues(alpha: 0.9),
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),

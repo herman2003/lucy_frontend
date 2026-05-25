@@ -375,7 +375,8 @@ lib/shared/widgets/
 │   ├── lucy_text_field_web.dart
 │   └── lucy_text_field_mobile.dart
 └── branding/
-    └── lucy_logo.dart                 # SVG / widget (design lucy-logo.tsx)
+    ├── lucy_logo.dart                 # SVG / widget (design lucy-logo.tsx)
+    └── auth_twinkling_stars_background.dart  # étoiles scintillantes + filantes (auth)
 ```
 
 ### 5.2 Contrat widgets (comme AF)
@@ -387,6 +388,7 @@ lib/shared/widgets/
 | `LucyTertiaryButton` | `TextButton` | `colorScheme.tertiary` ou `primary` pour liens (design) |
 | `LucyTextFieldWeb` / `LucyTextFieldMobile` | `TextFormField` | label, erreur, obscureText — styles depuis `LucyTextFieldTheme` |
 | `LucyLogo` | — | variantes `icon` / `full`, tailles `sm`–`xl` (design) |
+| `AuthTwinklingStarsBackground` | `CustomPaint` | Panneau branding auth : étoiles qui scintillent, dérivent lentement et traits filants ; `colorScheme.onPrimary` uniquement ; désactivé si `disableAnimations` |
 
 ### 5.3 Layouts auth (feature)
 
@@ -398,6 +400,8 @@ features/auth/presentation/widgets/
 ```
 
 Les **pages** n’assemblent que des widgets **shared** + l10n — pas de `TextField`/`ElevatedButton` bruts stylés à la main.
+
+**Branding animé (login, signup, reset)** : colonne dégradé (`AuthWebLayout`) et fond mobile (`AuthMobileLayout`) enveloppent le contenu dans `AuthTwinklingStarsBackground` pour un effet d’étoiles visible en mouvement, sans hex hors thème.
 
 Références : `af_primary_button.dart`, `af_text_field_web.dart`, `auth_web_layout.dart`.
 

@@ -241,6 +241,10 @@
       "total": { "type": "int" }
     }
   },
+  "onboardingStepLocked": "Terminez l’étape en cours avant de continuer.",
+  "@onboardingStepLocked": {
+    "description": "Snackbar when user tries to open a locked onboarding step"
+  },
   "onboardingConfirmTurn": "C’est bon",
   "@onboardingConfirmTurn": {
     "description": "User confirms Lucy understood the answer"

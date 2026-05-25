@@ -31,7 +31,13 @@ void main() {
     }
   });
 
-  test('post-MVP UX items stay unchecked in SPEC §4.8', () {
+  test('delivered post-MVP UX-1 item is checked in SPEC §4.8', () {
+    for (final snippet in _postMvpCheckedSnippetsUx1) {
+      expect(specSection48, contains(snippet), reason: snippet);
+    }
+  });
+
+  test('remaining post-MVP UX items stay unchecked in SPEC §4.8', () {
     for (final snippet in _postMvpUncheckedSnippets) {
       expect(specSection48, contains(snippet), reason: snippet);
     }
@@ -79,8 +85,11 @@ const _mvpAppCheckedSnippetsExtraAnalyze = [
   '- [x] fallback profil après 10 échecs analyze.',
 ];
 
+const _postMvpCheckedSnippetsUx1 = [
+  '- [x] **7 chats**',
+];
+
 const _postMvpUncheckedSnippets = [
-  '- [ ] **7 chats**',
   '- [ ] Design messagerie complète (avatar, `colorScheme`) ; **swipe entre steps**',
   '- [ ] Retour arrière : modifier un tour',
 ];

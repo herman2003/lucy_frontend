@@ -448,6 +448,12 @@ abstract class AppLocalizations {
   /// **'{current} / {total}'**
   String onboardingStepProgress(int current, int total);
 
+  /// Snackbar when user tries to open a locked onboarding step
+  ///
+  /// In fr, this message translates to:
+  /// **'Terminez l’étape en cours avant de continuer.'**
+  String get onboardingStepLocked;
+
   /// User confirms Lucy understood the answer
   ///
   /// In fr, this message translates to:

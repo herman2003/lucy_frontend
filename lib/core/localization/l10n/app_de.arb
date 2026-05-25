@@ -71,6 +71,7 @@
       "total": { "type": "int" }
     }
   },
+  "onboardingStepLocked": "Schließe zuerst den aktuellen Schritt ab.",
   "onboardingConfirmTurn": "Passt",
   "onboardingRejectTurn": "Das stimmt nicht",
   "onboardingGenericError": "Ein Fehler ist aufgetreten. Bitte erneut versuchen.",

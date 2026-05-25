@@ -200,6 +200,10 @@ class AppLocalizationsDe extends AppLocalizations {
   }
 
   @override
+  String get onboardingStepLocked =>
+      'Schließe zuerst den aktuellen Schritt ab.';
+
+  @override
   String get onboardingConfirmTurn => 'Passt';
 
   @override

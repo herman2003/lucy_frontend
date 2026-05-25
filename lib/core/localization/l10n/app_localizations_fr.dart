@@ -201,6 +201,10 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
+  String get onboardingStepLocked =>
+      'Terminez l’étape en cours avant de continuer.';
+
+  @override
   String get onboardingConfirmTurn => 'C’est bon';
 
   @override

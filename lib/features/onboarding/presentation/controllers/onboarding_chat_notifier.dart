@@ -19,6 +19,16 @@ part 'onboarding_chat_notifier.g.dart';
 class OnboardingChatNotifier extends _$OnboardingChatNotifier {
   late String _apiLocale;
 
+  List<OnboardingChatMessage> _threadFor(String questionId) =>
+      state.messagesByQuestionId[questionId] ?? const [];
+
+  Map<String, List<OnboardingChatMessage>> _replaceThread(
+    String questionId,
+    List<OnboardingChatMessage> messages,
+  ) {
+    return {...state.messagesByQuestionId, questionId: messages};
+  }
+
   @override
   OnboardingChatState build() => const OnboardingChatState();
 
@@ -37,9 +47,9 @@ class OnboardingChatNotifier extends _$OnboardingChatNotifier {
       currentStepIndex: 0,
       currentQuestionId: questionId,
       activeQuestionText: questionText,
-      messages: [
-        OnboardingChatMessage(isFromLucy: true, text: questionText),
-      ],
+      messagesByQuestionId: {
+        questionId: [OnboardingChatMessage(isFromLucy: true, text: questionText)],
+      },
     );
   }
 
@@ -62,8 +72,12 @@ class OnboardingChatNotifier extends _$OnboardingChatNotifier {
 
     final userMessage = OnboardingChatMessage(isFromLucy: false, text: answer);
 
+    final questionId = state.currentQuestionId;
     state = state.copyWith(
-      messages: [...state.messages, userMessage],
+      messagesByQuestionId: _replaceThread(
+        questionId,
+        [..._threadFor(questionId), userMessage],
+      ),
       answerDraft: '',
       phase: OnboardingChatPhase.validating,
       isSubmitting: true,
@@ -206,8 +220,12 @@ class OnboardingChatNotifier extends _$OnboardingChatNotifier {
       isFromLucy: true,
       text: turnSummary,
     );
+    final questionId = state.currentQuestionId;
     state = state.copyWith(
-      messages: [...state.messages, summaryMessage],
+      messagesByQuestionId: _replaceThread(
+        questionId,
+        [..._threadFor(questionId), summaryMessage],
+      ),
       pendingTurnSummary: turnSummary,
       pendingAnswerText: answer,
       isFallbackConfirmation: isFallback,
@@ -221,9 +239,13 @@ class OnboardingChatNotifier extends _$OnboardingChatNotifier {
       isFromLucy: true,
       text: rephrasedQuestion,
     );
+    final questionId = state.currentQuestionId;
     state = state.copyWith(
       activeQuestionText: rephrasedQuestion,
-      messages: [...state.messages, lucyMessage],
+      messagesByQuestionId: _replaceThread(
+        questionId,
+        [..._threadFor(questionId), lucyMessage],
+      ),
       phase: OnboardingChatPhase.awaitingAnswer,
       isSubmitting: false,
     );
@@ -246,7 +268,10 @@ class OnboardingChatNotifier extends _$OnboardingChatNotifier {
       currentStepIndex: nextIndex,
       currentQuestionId: nextId,
       activeQuestionText: questionText,
-      messages: [OnboardingChatMessage(isFromLucy: true, text: questionText)],
+      messagesByQuestionId: {
+        ...state.messagesByQuestionId,
+        nextId: [OnboardingChatMessage(isFromLucy: true, text: questionText)],
+      },
       phase: OnboardingChatPhase.awaitingAnswer,
       isSubmitting: false,
     );
@@ -271,14 +296,19 @@ class OnboardingChatNotifier extends _$OnboardingChatNotifier {
           fallbackProfileSummary,
       };
 
+      final questionId = state.currentQuestionId;
+      final analyzeMessage = OnboardingChatMessage(
+        isFromLucy: true,
+        text: summaryText,
+      );
       state = state.copyWith(
         analyzeResult: result,
         phase: OnboardingChatPhase.analysisReady,
         isSubmitting: false,
-        messages: [
-          ...state.messages,
-          OnboardingChatMessage(isFromLucy: true, text: summaryText),
-        ],
+        messagesByQuestionId: _replaceThread(
+          questionId,
+          [..._threadFor(questionId), analyzeMessage],
+        ),
       );
     } catch (error) {
       state = state.copyWith(
@@ -294,12 +324,21 @@ class OnboardingChatNotifier extends _$OnboardingChatNotifier {
     final lastId = OnboardingQuestionIds.ordered[lastIndex];
     final questionText = onboardingQuestionText(l10n, lastId);
 
+    final preservedThreads = Map<String, List<OnboardingChatMessage>>.from(
+      state.messagesByQuestionId,
+    );
+    if (!preservedThreads.containsKey(lastId)) {
+      preservedThreads[lastId] = [
+        OnboardingChatMessage(isFromLucy: true, text: questionText),
+      ];
+    }
+
     state = OnboardingChatState(
       isInitialized: true,
       currentStepIndex: lastIndex,
       currentQuestionId: lastId,
       activeQuestionText: questionText,
-      messages: [OnboardingChatMessage(isFromLucy: true, text: questionText)],
+      messagesByQuestionId: preservedThreads,
       phase: OnboardingChatPhase.awaitingAnswer,
       completedTurns: state.completedTurns,
       analyzeResult: null,
@@ -328,8 +367,12 @@ class OnboardingChatNotifier extends _$OnboardingChatNotifier {
         text: summaryText,
       );
 
+      final questionId = state.currentQuestionId;
       state = state.copyWith(
-        messages: [...state.messages, summaryMessage],
+        messagesByQuestionId: _replaceThread(
+          questionId,
+          [..._threadFor(questionId), summaryMessage],
+        ),
         analyzeResult: result,
         phase: OnboardingChatPhase.analysisReady,
         isSubmitting: false,

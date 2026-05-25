@@ -13,11 +13,10 @@ import '../../utils/onboarding_error_translator.dart';
 import '../../utils/onboarding_question_ids.dart';
 import '../controllers/onboarding_chat_notifier.dart';
 import 'onboarding_chat/onboarding_chat_state.dart';
-import '../widgets/onboarding_lucy_bubble.dart';
-import '../widgets/onboarding_lucy_typing_row.dart';
-import '../widgets/onboarding_user_bubble.dart';
+import '../widgets/onboarding_step_chat_panel.dart';
+import '../widgets/onboarding_step_progress_dots.dart';
 
-/// First onboarding chat step with validate-answer (SPEC §4.5.1, F05).
+/// Onboarding shell: 7 isolated step chats with horizontal pager (SPEC §4.5.1, UX-1).
 class OnboardingChatPage extends ConsumerStatefulWidget {
   const OnboardingChatPage({super.key});
 
@@ -27,10 +26,13 @@ class OnboardingChatPage extends ConsumerStatefulWidget {
 
 class _OnboardingChatPageState extends ConsumerState<OnboardingChatPage> {
   final _answerController = TextEditingController();
+  late final PageController _pageController;
+  int _viewingStepIndex = 0;
 
   @override
   void initState() {
     super.initState();
+    _pageController = PageController();
     _answerController.addListener(_onAnswerControllerChanged);
   }
 
@@ -38,6 +40,7 @@ class _OnboardingChatPageState extends ConsumerState<OnboardingChatPage> {
   void dispose() {
     _answerController.removeListener(_onAnswerControllerChanged);
     _answerController.dispose();
+    _pageController.dispose();
     super.dispose();
   }
 
@@ -45,13 +48,59 @@ class _OnboardingChatPageState extends ConsumerState<OnboardingChatPage> {
     setState(() {});
   }
 
+  void _syncPageToStep(int stepIndex) {
+    if (!_pageController.hasClients) {
+      return;
+    }
+    if (_pageController.page?.round() == stepIndex) {
+      return;
+    }
+    _pageController.jumpToPage(stepIndex);
+  }
+
+  void _onStepSelected(int stepIndex, OnboardingChatState chatState) {
+    if (!chatState.canNavigateToStepIndex(stepIndex)) {
+      LucySnackBar.showError(
+        context,
+        message: context.l10n.onboardingStepLocked,
+      );
+      return;
+    }
+    setState(() => _viewingStepIndex = stepIndex);
+    _pageController.animateToPage(
+      stepIndex,
+      duration: const Duration(milliseconds: 250),
+      curve: Curves.easeInOut,
+    );
+  }
+
+  void _onPageChanged(int stepIndex, OnboardingChatState chatState) {
+    if (!chatState.canNavigateToStepIndex(stepIndex)) {
+      _syncPageToStep(chatState.currentStepIndex);
+      LucySnackBar.showError(
+        context,
+        message: context.l10n.onboardingStepLocked,
+      );
+      return;
+    }
+    setState(() => _viewingStepIndex = stepIndex);
+  }
+
   bool _canSendAnswer(OnboardingChatState chatState) {
+    if (_viewingStepIndex != chatState.currentStepIndex) {
+      return false;
+    }
     if (chatState.phase != OnboardingChatPhase.awaitingAnswer ||
         chatState.isSubmitting) {
       return false;
     }
     return _answerController.text.trim().isNotEmpty ||
         chatState.answerDraft.trim().isNotEmpty;
+  }
+
+  bool _showInputForStep(OnboardingChatState chatState) {
+    return _viewingStepIndex == chatState.currentStepIndex &&
+        !chatState.isAnalysisReady;
   }
 
   @override
@@ -75,6 +124,15 @@ class _OnboardingChatPageState extends ConsumerState<OnboardingChatPage> {
           context.push(LucyRoutePaths.onboardingConfirm);
         });
       }
+      if (previous?.currentStepIndex != next.currentStepIndex) {
+        setState(() => _viewingStepIndex = next.currentStepIndex);
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          if (!mounted) {
+            return;
+          }
+          _syncPageToStep(next.currentStepIndex);
+        });
+      }
     });
 
     if (!chatState.isInitialized) {
@@ -86,10 +144,12 @@ class _OnboardingChatPageState extends ConsumerState<OnboardingChatPage> {
           l10n: l10n,
           deviceLocale: Localizations.localeOf(context),
         );
+        setState(() => _viewingStepIndex = 0);
       });
     }
 
     final stepNumber = chatState.currentStepIndex + 1;
+    final isViewingCurrent = _viewingStepIndex == chatState.currentStepIndex;
 
     return Scaffold(
       backgroundColor: scheme.surface,
@@ -102,26 +162,28 @@ class _OnboardingChatPageState extends ConsumerState<OnboardingChatPage> {
       body: SafeArea(
         child: Column(
           children: [
+            OnboardingStepProgressDots(
+              stepStatusForIndex: chatState.stepStatus,
+              onStepSelected: (index) => _onStepSelected(index, chatState),
+            ),
             Expanded(
-              child: ListView.separated(
-                padding: const EdgeInsets.all(LucyConstants.kSpacingMedium),
-                itemCount:
-                    chatState.messages.length +
-                    (chatState.showTypingIndicator ? 1 : 0),
-                separatorBuilder: (_, _) =>
-                    const SizedBox(height: LucyConstants.kSpacingMedium),
-                itemBuilder: (context, index) {
-                  if (index >= chatState.messages.length) {
-                    return const OnboardingLucyTypingRow();
-                  }
-                  final message = chatState.messages[index];
-                  return message.isFromLucy
-                      ? OnboardingLucyBubble(text: message.text)
-                      : OnboardingUserBubble(text: message.text);
+              child: PageView.builder(
+                controller: _pageController,
+                itemCount: OnboardingQuestionIds.stepCount,
+                onPageChanged: (index) => _onPageChanged(index, chatState),
+                itemBuilder: (context, stepIndex) {
+                  final showTyping = isViewingCurrent &&
+                      stepIndex == chatState.currentStepIndex &&
+                      chatState.showTypingIndicator;
+
+                  return OnboardingStepChatPanel(
+                    messages: chatState.messagesForStep(stepIndex),
+                    showTypingIndicator: showTyping,
+                  );
                 },
               ),
             ),
-            if (chatState.showConfirmationActions)
+            if (isViewingCurrent && chatState.showConfirmationActions)
               Padding(
                 padding: const EdgeInsets.symmetric(
                   horizontal: LucyConstants.kSpacingMedium,
@@ -151,48 +213,48 @@ class _OnboardingChatPageState extends ConsumerState<OnboardingChatPage> {
                   ],
                 ),
               ),
-            if (!chatState.isAnalysisReady)
+            if (_showInputForStep(chatState))
               Padding(
-              padding: const EdgeInsets.fromLTRB(
-                LucyConstants.kSpacingMedium,
-                LucyConstants.kSpacingLow,
-                LucyConstants.kSpacingMedium,
-                LucyConstants.kSpacingMedium,
-              ),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  Expanded(
-                    child: TextField(
-                      controller: _answerController,
-                      enabled:
-                          chatState.phase ==
-                              OnboardingChatPhase.awaitingAnswer &&
-                          !chatState.isSubmitting,
-                      maxLines: 4,
-                      minLines: 1,
-                      decoration: InputDecoration(
-                        hintText: l10n.onboardingAnswerHint,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(
-                            LucyConstants.kButtonBorderRadius,
+                padding: const EdgeInsets.fromLTRB(
+                  LucyConstants.kSpacingMedium,
+                  LucyConstants.kSpacingLow,
+                  LucyConstants.kSpacingMedium,
+                  LucyConstants.kSpacingMedium,
+                ),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Expanded(
+                      child: TextField(
+                        controller: _answerController,
+                        enabled:
+                            chatState.phase ==
+                                OnboardingChatPhase.awaitingAnswer &&
+                            !chatState.isSubmitting,
+                        maxLines: 4,
+                        minLines: 1,
+                        decoration: InputDecoration(
+                          hintText: l10n.onboardingAnswerHint,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(
+                              LucyConstants.kButtonBorderRadius,
+                            ),
                           ),
                         ),
+                        onChanged: notifier.updateAnswerDraft,
                       ),
-                      onChanged: notifier.updateAnswerDraft,
                     ),
-                  ),
-                  const SizedBox(width: LucyConstants.kSpacingLow),
-                  LucyPrimaryButton(
-                    text: l10n.onboardingSendAnswer,
-                    isLoading: chatState.isSubmitting,
-                    onPressed: _canSendAnswer(chatState)
-                        ? () => _submit(context)
-                        : null,
-                  ),
-                ],
+                    const SizedBox(width: LucyConstants.kSpacingLow),
+                    LucyPrimaryButton(
+                      text: l10n.onboardingSendAnswer,
+                      isLoading: chatState.isSubmitting,
+                      onPressed: _canSendAnswer(chatState)
+                          ? () => _submit(context)
+                          : null,
+                    ),
+                  ],
+                ),
               ),
-            ),
           ],
         ),
       ),

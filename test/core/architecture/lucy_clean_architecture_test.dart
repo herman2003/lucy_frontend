@@ -4,19 +4,11 @@ import 'package:flutter_test/flutter_test.dart';
 
 /// Plan T04/T05 — Firebase SDK isolated to [lib/features/auth/data].
 void main() {
-  const allowedFirebaseAuthRoots = [
-    'lib/features/auth/data/',
-  ];
-  const allowedFirestoreRoots = [
-    'lib/features/auth/data/',
-  ];
+  const allowedFirebaseAuthRoots = ['lib/features/auth/data/'];
+  const allowedFirestoreRoots = ['lib/features/auth/data/'];
 
-  final firebaseAuthImport = RegExp(
-    r"import\s+'package:firebase_auth/",
-  );
-  final firestoreImport = RegExp(
-    r"import\s+'package:cloud_firestore/",
-  );
+  final firebaseAuthImport = RegExp(r"import\s+'package:firebase_auth/");
+  final firestoreImport = RegExp(r"import\s+'package:cloud_firestore/");
 
   test('firebase_auth imports exist only under auth data layer', () {
     for (final file in _dartFilesUnder('lib')) {
@@ -62,14 +54,8 @@ void main() {
   });
 
   test('router and splash use colorScheme only (no LucyColors in UI)', () {
-    const uiRoots = [
-      'lib/core/router/',
-      'lib/core/presentation/',
-    ];
-    final forbidden = [
-      RegExp(r'Color\s*\(\s*0x'),
-      RegExp(r'LucyColors\.'),
-    ];
+    const uiRoots = ['lib/core/router/', 'lib/core/presentation/'];
+    final forbidden = [RegExp(r'Color\s*\(\s*0x'), RegExp(r'LucyColors\.')];
     for (final root in uiRoots) {
       for (final file in _dartFilesUnder(root)) {
         final content = File(file).readAsStringSync();

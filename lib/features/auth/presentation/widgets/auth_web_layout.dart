@@ -36,8 +36,9 @@ class AuthWebLayout extends StatelessWidget {
             child: AuthTwinklingStarsBackground(
               child: Center(
                 child: Padding(
-                  padding:
-                      const EdgeInsets.all(LucyConstants.kSpacingLarge * 2),
+                  padding: const EdgeInsets.all(
+                    LucyConstants.kSpacingLarge * 2,
+                  ),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
@@ -71,10 +72,7 @@ class AuthWebLayout extends StatelessWidget {
               padding: const EdgeInsets.symmetric(
                 vertical: LucyConstants.kSpacingLarge,
               ),
-              child: LucyFormContainer(
-                formKey: formKey,
-                children: formContent,
-              ),
+              child: LucyFormContainer(formKey: formKey, children: formContent),
             ),
           ),
         ),

@@ -138,10 +138,11 @@ Pas de configuration Google/Apple côté frontend. Section design « or continue
 
 Apprenants / professionnels utilisant un **tuteur IA** sur documents personnels.
 
-### 1.3 Hors périmètre phase 1
+### 1.3 Hors périmètre phase 1 (prévu phase 2)
 
 - **Google / Apple Sign-In** (code, dépendances, UI, config frontend).
-- Module IA (chat, upload, RAG).
+- Module IA (chat, upload, RAG) — voir **§13 Onboarding apprenant**.
+- Questionnaire de personnalisation (`isConfigured`, §13) — **pas** en phase 1 auth.
 - API métier Lucy avec intercepteur Dio (sauf préparation `getIdToken()` pour phase 2).
 - WebSocket, notifications push (Firebase Messaging possible plus tard, comme AfroSchool).
 - RBAC école, matricule AfroSchool.
@@ -153,7 +154,7 @@ Apprenants / professionnels utilisant un **tuteur IA** sur documents personnels.
 - [ ] 3 écrans conformes au design (l10n **fr / en / de**) ; **aucun** élément Google/Apple (section social absente).
 - [ ] Flux **UI → Notifier → Service → Repository** ; data avec **mapper** ; domain **sans** types Firebase.
 - [ ] UI auth : **shared widgets** + couleurs **100 % `colorScheme`** (0 hex hors `lucy_colors.dart`).
-- [ ] Erreurs `FirebaseAuthException` → `auth_error_translator` → clés l10n (jamais message brut Firebase en UI).
+- [ ] Erreurs `FirebaseAuthException` → `auth_error_translator` → **LucySnackBar** (pas dans le state du formulaire) ; validation locale → **sous les champs** (`validator`).
 - [ ] Session : écoute `authStateChanges` ; guard GoRouter ; **splash** au 1er lancement ; logout `signOut()` uniquement (pas de `GoogleSignIn`).
 - [ ] Layouts **web** et **mobile** (pattern AfroSchool).
 - [ ] Après login/signup **réussis** (Auth + Firestore profil OK) : **`/home`** placeholder.
@@ -293,7 +294,7 @@ lib/core/theme/
     ├── lucy_button_theme.dart
     ├── lucy_text_field_theme.dart
     ├── lucy_form_theme.dart
-    └── lucy_snackbar_theme.dart      # si snackbars auth
+    └── lucy_snackbar_theme.dart      # optionnel (styles via colorScheme dans LucySnackBar)
 ```
 
 ### 4.2 Palette **primary / secondary / tertiary** (harmonie obligatoire)
@@ -389,6 +390,7 @@ lib/shared/widgets/
 | `LucyTextFieldWeb` / `LucyTextFieldMobile` | `TextFormField` | label, erreur, obscureText — styles depuis `LucyTextFieldTheme` |
 | `LucyLogo` | — | variantes `icon` / `full`, tailles `sm`–`xl` (design) |
 | `AuthTwinklingStarsBackground` | `CustomPaint` | Panneau branding auth : étoiles qui scintillent, dérivent lentement et traits filants ; `colorScheme.onPrimary` uniquement ; désactivé si `disableAnimations` |
+| `LucySnackBar` | Overlay | Erreurs **backend** (Firebase/Firestore) et succès globaux — **pas** les erreurs de validation champ |
 
 ### 5.3 Layouts auth (feature)
 
@@ -402,6 +404,8 @@ features/auth/presentation/widgets/
 Les **pages** n’assemblent que des widgets **shared** + l10n — pas de `TextField`/`ElevatedButton` bruts stylés à la main.
 
 **Branding animé (login, signup, reset)** : colonne dégradé (`AuthWebLayout`) et fond mobile (`AuthMobileLayout`) enveloppent le contenu dans `AuthTwinklingStarsBackground` pour un effet d’étoiles visible en mouvement, sans hex hors thème.
+
+**Feedback erreurs auth** : `Validators` + `TextFormField` pour les champs ; `LucySnackBar.showError` dans les notifiers pour les échecs API (pattern telC / AfroSchool).
 
 Références : `af_primary_button.dart`, `af_text_field_web.dart`, `auth_web_layout.dart`.
 

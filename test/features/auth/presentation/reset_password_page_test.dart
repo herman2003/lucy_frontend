@@ -6,6 +6,8 @@ import 'package:frontend/features/auth/domain/providers/auth_provider.dart';
 import 'package:frontend/features/auth/presentation/pages/login/login_page.dart';
 import 'package:frontend/features/auth/presentation/pages/reset_password/reset_password_page.dart';
 
+import 'package:frontend/shared/widgets/feedback/lucy_snackbar.dart';
+
 import '../../../helpers/test_locales.dart';
 import '../helpers/fake_auth_repository.dart';
 
@@ -17,6 +19,8 @@ Future<void> _openResetPassword(WidgetTester tester) async {
 }
 
 void main() {
+  tearDown(LucySnackBar.hideAll);
+
   testWidgets('reset flow shows success then try again returns to form', (
     tester,
   ) async {

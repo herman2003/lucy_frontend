@@ -6,10 +6,14 @@ import 'package:frontend/features/auth/domain/providers/auth_provider.dart';
 import 'package:frontend/features/auth/presentation/pages/home/home_page.dart';
 import 'package:frontend/features/auth/presentation/pages/login/login_page.dart';
 
+import 'package:frontend/shared/widgets/feedback/lucy_snackbar.dart';
+
 import '../../../helpers/test_locales.dart';
 import '../helpers/fake_auth_repository.dart';
 
 void main() {
+  tearDown(LucySnackBar.hideAll);
+
   testWidgets('login form navigates to home on success', (tester) async {
     setTestLocaleFr();
     addTearDown(clearTestLocaleOverride);

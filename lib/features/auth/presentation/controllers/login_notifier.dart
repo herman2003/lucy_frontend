@@ -4,6 +4,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../../core/router/lucy_route_paths.dart';
 import '../../../../core/utils/auth_error_translator.dart';
+import '../../../../shared/widgets/feedback/lucy_snackbar.dart';
 import '../../domain/providers/auth_provider.dart';
 import '../pages/login/login_state.dart';
 
@@ -16,11 +17,11 @@ class LoginNotifier extends _$LoginNotifier {
   LoginState build() => const LoginState();
 
   void updateEmail(String value) {
-    state = state.copyWith(email: value, errorMessage: null);
+    state = state.copyWith(email: value);
   }
 
   void updatePassword(String value) {
-    state = state.copyWith(password: value, errorMessage: null);
+    state = state.copyWith(password: value);
   }
 
   Future<void> submitLogin(BuildContext context) async {
@@ -28,7 +29,7 @@ class LoginNotifier extends _$LoginNotifier {
       return;
     }
 
-    state = state.copyWith(isLoading: true, errorMessage: null);
+    state = state.copyWith(isLoading: true);
 
     try {
       await ref.read(authServiceProvider).loginWithEmail(
@@ -44,9 +45,10 @@ class LoginNotifier extends _$LoginNotifier {
       if (!context.mounted) {
         return;
       }
-      state = state.copyWith(
-        isLoading: false,
-        errorMessage: AuthErrorTranslator.fromException(context, error),
+      state = state.copyWith(isLoading: false);
+      LucySnackBar.showError(
+        context,
+        message: AuthErrorTranslator.fromException(context, error),
       );
     }
   }

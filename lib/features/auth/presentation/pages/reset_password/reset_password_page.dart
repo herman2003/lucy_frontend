@@ -86,13 +86,6 @@ class _ResetPasswordPageState extends ConsumerState<ResetPasswordPage> {
         ),
       ),
       SizedBox(height: context.screenHeight * 0.02),
-      if (resetState.errorMessage != null) ...[
-        Text(
-          resetState.errorMessage!,
-          style: context.textTheme.bodyMedium?.copyWith(color: scheme.error),
-        ),
-        const SizedBox(height: LucyConstants.kSpacingLow),
-      ],
       emailField,
       SizedBox(height: context.screenHeight * 0.02),
       LucyPrimaryButton(

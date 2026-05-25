@@ -56,13 +56,6 @@ class _LoginPageState extends ConsumerState<LoginPage> {
         ),
       ),
       SizedBox(height: context.screenHeight * 0.02),
-      if (loginState.errorMessage != null) ...[
-        Text(
-          loginState.errorMessage!,
-          style: context.textTheme.bodyMedium?.copyWith(color: scheme.error),
-        ),
-        const SizedBox(height: LucyConstants.kSpacingLow),
-      ],
       if (useMobileField)
         LucyTextFieldMobile(
           label: context.l10n.authEmailLabel,
@@ -83,6 +76,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
           onChanged: loginNotifier.updateEmail,
           isEnabled: !loginState.isLoading,
         ),
+      SizedBox(height: LucyConstants.kSpacingLow),
       if (useMobileField)
         LucyTextFieldMobile(
           label: context.l10n.authPasswordLabel,
@@ -131,6 +125,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
               color: scheme.onSurface,
             ),
           ),
+          SizedBox(width: LucyConstants.kSpacingLow),
           LucyTertiaryButton(
             text: context.l10n.authSignUpLink,
             onPressed: loginState.isLoading

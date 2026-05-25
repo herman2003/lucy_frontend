@@ -130,15 +130,12 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
         ),
       ),
       SizedBox(height: context.screenHeight * 0.02),
-      if (signUpState.errorMessage != null) ...[
-        Text(
-          signUpState.errorMessage!,
-          style: context.textTheme.bodyMedium?.copyWith(color: scheme.error),
-        ),
-        const SizedBox(height: LucyConstants.kSpacingLow),
-      ],
       nameField(),
+      SizedBox(height: LucyConstants.kSpacingLow),
+
       emailField(),
+      SizedBox(height: LucyConstants.kSpacingLow),
+
       passwordField(),
       SizedBox(height: context.screenHeight * 0.02),
       LucyPrimaryButton(
@@ -158,6 +155,8 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
               color: scheme.onSurface,
             ),
           ),
+          SizedBox(width: LucyConstants.kSpacingLow),
+
           LucyTertiaryButton(
             text: context.l10n.authLoginLink,
             onPressed: signUpState.isLoading

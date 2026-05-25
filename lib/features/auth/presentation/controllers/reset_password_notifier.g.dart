@@ -45,7 +45,7 @@ final class ResetPasswordNotifierProvider
 }
 
 String _$resetPasswordNotifierHash() =>
-    r'a1d34bb874df11a4a02b4b9da38c9f44bc9356c9';
+    r'83e5b7428be10ecffc65e9652f4da80a119abc6b';
 
 /// Reset password notifier — always shows success for unknown emails (Q13).
 

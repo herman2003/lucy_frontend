@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../../core/utils/auth_error_translator.dart';
+import '../../../../shared/widgets/feedback/lucy_snackbar.dart';
 import '../../domain/exceptions/auth_exception.dart';
 import '../../domain/providers/auth_provider.dart';
 import '../pages/reset_password/reset_password_state.dart';
@@ -15,7 +16,7 @@ class ResetPasswordNotifier extends _$ResetPasswordNotifier {
   ResetPasswordState build() => const ResetPasswordState();
 
   void updateEmail(String value) {
-    state = state.copyWith(email: value, errorMessage: null);
+    state = state.copyWith(email: value);
   }
 
   void tryAgain() {
@@ -28,7 +29,7 @@ class ResetPasswordNotifier extends _$ResetPasswordNotifier {
     }
 
     final email = state.email.trim();
-    state = state.copyWith(isLoading: true, errorMessage: null);
+    state = state.copyWith(isLoading: true);
 
     try {
       await ref.read(authServiceProvider).sendPasswordResetEmail(email: email);
@@ -41,17 +42,19 @@ class ResetPasswordNotifier extends _$ResetPasswordNotifier {
       if (!context.mounted) {
         return;
       }
-      state = state.copyWith(
-        isLoading: false,
-        errorMessage: AuthErrorTranslator.fromException(context, error),
+      state = state.copyWith(isLoading: false);
+      LucySnackBar.showError(
+        context,
+        message: AuthErrorTranslator.fromException(context, error),
       );
     } catch (error) {
       if (!context.mounted) {
         return;
       }
-      state = state.copyWith(
-        isLoading: false,
-        errorMessage: AuthErrorTranslator.fromException(context, error),
+      state = state.copyWith(isLoading: false);
+      LucySnackBar.showError(
+        context,
+        message: AuthErrorTranslator.fromException(context, error),
       );
     }
   }

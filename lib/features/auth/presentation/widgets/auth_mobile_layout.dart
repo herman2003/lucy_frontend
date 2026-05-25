@@ -7,11 +7,7 @@ import '../../../../shared/widgets/containers/lucy_form_container.dart';
 
 /// Full-screen gradient auth layout for mobile.
 class AuthMobileLayout extends StatelessWidget {
-  const AuthMobileLayout({
-    super.key,
-    required this.formContent,
-    this.formKey,
-  });
+  const AuthMobileLayout({super.key, required this.formContent, this.formKey});
 
   final List<Widget> formContent;
   final GlobalKey<FormState>? formKey;
@@ -24,18 +20,15 @@ class AuthMobileLayout extends StatelessWidget {
       ),
       child: AuthTwinklingStarsBackground(
         child: SafeArea(
-        child: Center(
-          child: SingleChildScrollView(
-            padding: const EdgeInsets.symmetric(
-              horizontal: LucyConstants.kSpacingMedium,
-              vertical: LucyConstants.kSpacingLarge,
-            ),
-            child: LucyFormContainer(
-              formKey: formKey,
-              children: formContent,
+          child: Center(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.symmetric(
+                horizontal: LucyConstants.kSpacingMedium,
+                vertical: LucyConstants.kSpacingLarge,
+              ),
+              child: LucyFormContainer(formKey: formKey, children: formContent),
             ),
           ),
-        ),
         ),
       ),
     );

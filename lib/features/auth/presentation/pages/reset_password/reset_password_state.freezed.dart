@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$ResetPasswordState {
 
- ResetPasswordView get view; bool get isLoading; String get email; String? get submittedEmail; String? get errorMessage;
+ ResetPasswordView get view; bool get isLoading; String get email; String? get submittedEmail;
 /// Create a copy of ResetPasswordState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $ResetPasswordStateCopyWith<ResetPasswordState> get copyWith => _$ResetPasswordS
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ResetPasswordState&&(identical(other.view, view) || other.view == view)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.email, email) || other.email == email)&&(identical(other.submittedEmail, submittedEmail) || other.submittedEmail == submittedEmail)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ResetPasswordState&&(identical(other.view, view) || other.view == view)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.email, email) || other.email == email)&&(identical(other.submittedEmail, submittedEmail) || other.submittedEmail == submittedEmail));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,view,isLoading,email,submittedEmail,errorMessage);
+int get hashCode => Object.hash(runtimeType,view,isLoading,email,submittedEmail);
 
 @override
 String toString() {
-  return 'ResetPasswordState(view: $view, isLoading: $isLoading, email: $email, submittedEmail: $submittedEmail, errorMessage: $errorMessage)';
+  return 'ResetPasswordState(view: $view, isLoading: $isLoading, email: $email, submittedEmail: $submittedEmail)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $ResetPasswordStateCopyWith<$Res>  {
   factory $ResetPasswordStateCopyWith(ResetPasswordState value, $Res Function(ResetPasswordState) _then) = _$ResetPasswordStateCopyWithImpl;
 @useResult
 $Res call({
- ResetPasswordView view, bool isLoading, String email, String? submittedEmail, String? errorMessage
+ ResetPasswordView view, bool isLoading, String email, String? submittedEmail
 });
 
 
@@ -62,13 +62,12 @@ class _$ResetPasswordStateCopyWithImpl<$Res>
 
 /// Create a copy of ResetPasswordState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? view = null,Object? isLoading = null,Object? email = null,Object? submittedEmail = freezed,Object? errorMessage = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? view = null,Object? isLoading = null,Object? email = null,Object? submittedEmail = freezed,}) {
   return _then(_self.copyWith(
 view: null == view ? _self.view : view // ignore: cast_nullable_to_non_nullable
 as ResetPasswordView,isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
 as bool,email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
 as String,submittedEmail: freezed == submittedEmail ? _self.submittedEmail : submittedEmail // ignore: cast_nullable_to_non_nullable
-as String?,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }
@@ -154,10 +153,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( ResetPasswordView view,  bool isLoading,  String email,  String? submittedEmail,  String? errorMessage)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( ResetPasswordView view,  bool isLoading,  String email,  String? submittedEmail)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _ResetPasswordState() when $default != null:
-return $default(_that.view,_that.isLoading,_that.email,_that.submittedEmail,_that.errorMessage);case _:
+return $default(_that.view,_that.isLoading,_that.email,_that.submittedEmail);case _:
   return orElse();
 
 }
@@ -175,10 +174,10 @@ return $default(_that.view,_that.isLoading,_that.email,_that.submittedEmail,_tha
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( ResetPasswordView view,  bool isLoading,  String email,  String? submittedEmail,  String? errorMessage)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( ResetPasswordView view,  bool isLoading,  String email,  String? submittedEmail)  $default,) {final _that = this;
 switch (_that) {
 case _ResetPasswordState():
-return $default(_that.view,_that.isLoading,_that.email,_that.submittedEmail,_that.errorMessage);case _:
+return $default(_that.view,_that.isLoading,_that.email,_that.submittedEmail);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -195,10 +194,10 @@ return $default(_that.view,_that.isLoading,_that.email,_that.submittedEmail,_tha
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( ResetPasswordView view,  bool isLoading,  String email,  String? submittedEmail,  String? errorMessage)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( ResetPasswordView view,  bool isLoading,  String email,  String? submittedEmail)?  $default,) {final _that = this;
 switch (_that) {
 case _ResetPasswordState() when $default != null:
-return $default(_that.view,_that.isLoading,_that.email,_that.submittedEmail,_that.errorMessage);case _:
+return $default(_that.view,_that.isLoading,_that.email,_that.submittedEmail);case _:
   return null;
 
 }
@@ -210,14 +209,13 @@ return $default(_that.view,_that.isLoading,_that.email,_that.submittedEmail,_tha
 
 
 class _ResetPasswordState extends ResetPasswordState {
-  const _ResetPasswordState({this.view = ResetPasswordView.form, this.isLoading = false, this.email = '', this.submittedEmail, this.errorMessage}): super._();
+  const _ResetPasswordState({this.view = ResetPasswordView.form, this.isLoading = false, this.email = '', this.submittedEmail}): super._();
   
 
 @override@JsonKey() final  ResetPasswordView view;
 @override@JsonKey() final  bool isLoading;
 @override@JsonKey() final  String email;
 @override final  String? submittedEmail;
-@override final  String? errorMessage;
 
 /// Create a copy of ResetPasswordState
 /// with the given fields replaced by the non-null parameter values.
@@ -229,16 +227,16 @@ _$ResetPasswordStateCopyWith<_ResetPasswordState> get copyWith => __$ResetPasswo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ResetPasswordState&&(identical(other.view, view) || other.view == view)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.email, email) || other.email == email)&&(identical(other.submittedEmail, submittedEmail) || other.submittedEmail == submittedEmail)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ResetPasswordState&&(identical(other.view, view) || other.view == view)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.email, email) || other.email == email)&&(identical(other.submittedEmail, submittedEmail) || other.submittedEmail == submittedEmail));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,view,isLoading,email,submittedEmail,errorMessage);
+int get hashCode => Object.hash(runtimeType,view,isLoading,email,submittedEmail);
 
 @override
 String toString() {
-  return 'ResetPasswordState(view: $view, isLoading: $isLoading, email: $email, submittedEmail: $submittedEmail, errorMessage: $errorMessage)';
+  return 'ResetPasswordState(view: $view, isLoading: $isLoading, email: $email, submittedEmail: $submittedEmail)';
 }
 
 
@@ -249,7 +247,7 @@ abstract mixin class _$ResetPasswordStateCopyWith<$Res> implements $ResetPasswor
   factory _$ResetPasswordStateCopyWith(_ResetPasswordState value, $Res Function(_ResetPasswordState) _then) = __$ResetPasswordStateCopyWithImpl;
 @override @useResult
 $Res call({
- ResetPasswordView view, bool isLoading, String email, String? submittedEmail, String? errorMessage
+ ResetPasswordView view, bool isLoading, String email, String? submittedEmail
 });
 
 
@@ -266,13 +264,12 @@ class __$ResetPasswordStateCopyWithImpl<$Res>
 
 /// Create a copy of ResetPasswordState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? view = null,Object? isLoading = null,Object? email = null,Object? submittedEmail = freezed,Object? errorMessage = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? view = null,Object? isLoading = null,Object? email = null,Object? submittedEmail = freezed,}) {
   return _then(_ResetPasswordState(
 view: null == view ? _self.view : view // ignore: cast_nullable_to_non_nullable
 as ResetPasswordView,isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
 as bool,email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
 as String,submittedEmail: freezed == submittedEmail ? _self.submittedEmail : submittedEmail // ignore: cast_nullable_to_non_nullable
-as String?,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }

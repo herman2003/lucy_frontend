@@ -12,7 +12,6 @@ abstract class SignUpState with _$SignUpState {
     @Default('') String fullName,
     @Default('') String email,
     @Default('') String password,
-    String? errorMessage,
   }) = _SignUpState;
 
   bool get canSubmit =>

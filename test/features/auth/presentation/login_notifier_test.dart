@@ -6,12 +6,16 @@ import 'package:frontend/core/localization/l10n/app_localizations.dart';
 import 'package:frontend/features/auth/domain/exceptions/auth_exception.dart';
 import 'package:frontend/features/auth/domain/providers/auth_provider.dart';
 import 'package:frontend/features/auth/presentation/controllers/login_notifier.dart';
+import 'package:frontend/shared/widgets/feedback/lucy_snackbar.dart';
+
 import '../helpers/fake_auth_repository.dart';
 import '../helpers/throwing_auth_repository.dart';
 
 void main() {
   group('LoginNotifier', () {
-    testWidgets('submitLogin sets errorMessage on AuthException', (tester) async {
+    tearDown(LucySnackBar.hideAll);
+
+    testWidgets('submitLogin shows snackbar on AuthException', (tester) async {
       final repository = ThrowingAuthRepository(
         const AuthException(code: 'user-not-found'),
       );
@@ -46,10 +50,12 @@ void main() {
       notifier.updatePassword('secret12');
 
       await notifier.submitLogin(tester.element(find.byType(SizedBox)));
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 400));
 
       final state = container.read(loginProvider);
       expect(state.isLoading, isFalse);
-      expect(state.errorMessage, isNotEmpty);
+      expect(find.textContaining('Aucun compte'), findsOneWidget);
     });
 
     test('submitLogin signs in via AuthService', () async {

@@ -18,7 +18,6 @@ abstract class ResetPasswordState with _$ResetPasswordState {
     @Default(false) bool isLoading,
     @Default('') String email,
     String? submittedEmail,
-    String? errorMessage,
   }) = _ResetPasswordState;
 
   bool get canSubmit => !isLoading && email.trim().isNotEmpty;

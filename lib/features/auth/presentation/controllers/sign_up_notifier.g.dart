@@ -44,7 +44,7 @@ final class SignUpNotifierProvider
   }
 }
 
-String _$signUpNotifierHash() => r'b2f9220afcdce241bb9903db20450e0da582f77b';
+String _$signUpNotifierHash() => r'c9d799be46e9c4442c42c2d1460c6f0541fe2364';
 
 /// Sign up form notifier (UI → Notifier → [AuthService]).
 

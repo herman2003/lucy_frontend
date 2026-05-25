@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$LoginState {
 
- bool get isLoading; String get email; String get password; String? get errorMessage;
+ bool get isLoading; String get email; String get password;
 /// Create a copy of LoginState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $LoginStateCopyWith<LoginState> get copyWith => _$LoginStateCopyWithImpl<LoginSt
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is LoginState&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.email, email) || other.email == email)&&(identical(other.password, password) || other.password == password)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is LoginState&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.email, email) || other.email == email)&&(identical(other.password, password) || other.password == password));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,isLoading,email,password,errorMessage);
+int get hashCode => Object.hash(runtimeType,isLoading,email,password);
 
 @override
 String toString() {
-  return 'LoginState(isLoading: $isLoading, email: $email, password: $password, errorMessage: $errorMessage)';
+  return 'LoginState(isLoading: $isLoading, email: $email, password: $password)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $LoginStateCopyWith<$Res>  {
   factory $LoginStateCopyWith(LoginState value, $Res Function(LoginState) _then) = _$LoginStateCopyWithImpl;
 @useResult
 $Res call({
- bool isLoading, String email, String password, String? errorMessage
+ bool isLoading, String email, String password
 });
 
 
@@ -62,13 +62,12 @@ class _$LoginStateCopyWithImpl<$Res>
 
 /// Create a copy of LoginState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? isLoading = null,Object? email = null,Object? password = null,Object? errorMessage = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? isLoading = null,Object? email = null,Object? password = null,}) {
   return _then(_self.copyWith(
 isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
 as bool,email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
 as String,password: null == password ? _self.password : password // ignore: cast_nullable_to_non_nullable
-as String,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
-as String?,
+as String,
   ));
 }
 
@@ -153,10 +152,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( bool isLoading,  String email,  String password,  String? errorMessage)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( bool isLoading,  String email,  String password)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _LoginState() when $default != null:
-return $default(_that.isLoading,_that.email,_that.password,_that.errorMessage);case _:
+return $default(_that.isLoading,_that.email,_that.password);case _:
   return orElse();
 
 }
@@ -174,10 +173,10 @@ return $default(_that.isLoading,_that.email,_that.password,_that.errorMessage);c
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( bool isLoading,  String email,  String password,  String? errorMessage)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( bool isLoading,  String email,  String password)  $default,) {final _that = this;
 switch (_that) {
 case _LoginState():
-return $default(_that.isLoading,_that.email,_that.password,_that.errorMessage);case _:
+return $default(_that.isLoading,_that.email,_that.password);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -194,10 +193,10 @@ return $default(_that.isLoading,_that.email,_that.password,_that.errorMessage);c
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( bool isLoading,  String email,  String password,  String? errorMessage)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( bool isLoading,  String email,  String password)?  $default,) {final _that = this;
 switch (_that) {
 case _LoginState() when $default != null:
-return $default(_that.isLoading,_that.email,_that.password,_that.errorMessage);case _:
+return $default(_that.isLoading,_that.email,_that.password);case _:
   return null;
 
 }
@@ -209,13 +208,12 @@ return $default(_that.isLoading,_that.email,_that.password,_that.errorMessage);c
 
 
 class _LoginState extends LoginState {
-  const _LoginState({this.isLoading = false, this.email = '', this.password = '', this.errorMessage}): super._();
+  const _LoginState({this.isLoading = false, this.email = '', this.password = ''}): super._();
   
 
 @override@JsonKey() final  bool isLoading;
 @override@JsonKey() final  String email;
 @override@JsonKey() final  String password;
-@override final  String? errorMessage;
 
 /// Create a copy of LoginState
 /// with the given fields replaced by the non-null parameter values.
@@ -227,16 +225,16 @@ _$LoginStateCopyWith<_LoginState> get copyWith => __$LoginStateCopyWithImpl<_Log
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _LoginState&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.email, email) || other.email == email)&&(identical(other.password, password) || other.password == password)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _LoginState&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.email, email) || other.email == email)&&(identical(other.password, password) || other.password == password));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,isLoading,email,password,errorMessage);
+int get hashCode => Object.hash(runtimeType,isLoading,email,password);
 
 @override
 String toString() {
-  return 'LoginState(isLoading: $isLoading, email: $email, password: $password, errorMessage: $errorMessage)';
+  return 'LoginState(isLoading: $isLoading, email: $email, password: $password)';
 }
 
 
@@ -247,7 +245,7 @@ abstract mixin class _$LoginStateCopyWith<$Res> implements $LoginStateCopyWith<$
   factory _$LoginStateCopyWith(_LoginState value, $Res Function(_LoginState) _then) = __$LoginStateCopyWithImpl;
 @override @useResult
 $Res call({
- bool isLoading, String email, String password, String? errorMessage
+ bool isLoading, String email, String password
 });
 
 
@@ -264,13 +262,12 @@ class __$LoginStateCopyWithImpl<$Res>
 
 /// Create a copy of LoginState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? isLoading = null,Object? email = null,Object? password = null,Object? errorMessage = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? isLoading = null,Object? email = null,Object? password = null,}) {
   return _then(_LoginState(
 isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
 as bool,email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
 as String,password: null == password ? _self.password : password // ignore: cast_nullable_to_non_nullable
-as String,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
-as String?,
+as String,
   ));
 }
 

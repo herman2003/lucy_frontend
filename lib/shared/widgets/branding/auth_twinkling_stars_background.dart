@@ -6,10 +6,7 @@ import 'package:flutter/material.dart';
 ///
 /// Uses [ColorScheme.onPrimary] only. Respects reduced-motion settings.
 class AuthTwinklingStarsBackground extends StatefulWidget {
-  const AuthTwinklingStarsBackground({
-    super.key,
-    required this.child,
-  });
+  const AuthTwinklingStarsBackground({super.key, required this.child});
 
   final Widget child;
 
@@ -18,7 +15,8 @@ class AuthTwinklingStarsBackground extends StatefulWidget {
       _AuthTwinklingStarsBackgroundState();
 }
 
-class _AuthTwinklingStarsBackgroundState extends State<AuthTwinklingStarsBackground>
+class _AuthTwinklingStarsBackgroundState
+    extends State<AuthTwinklingStarsBackground>
     with SingleTickerProviderStateMixin {
   late final AnimationController _controller;
 
@@ -88,10 +86,8 @@ class _StarSeed {
 }
 
 class _TwinklingStarsPainter extends CustomPainter {
-  _TwinklingStarsPainter({
-    required this.progress,
-    required this.starColor,
-  }) : _stars = _generateStars(52);
+  _TwinklingStarsPainter({required this.progress, required this.starColor})
+    : _stars = _generateStars(52);
 
   final double progress;
   final Color starColor;
@@ -117,9 +113,7 @@ class _TwinklingStarsPainter extends CustomPainter {
 
     for (final star in _stars) {
       final twinkle =
-          0.25 +
-          0.75 *
-              ((math.sin(driftPhase * 2.2 + star.phase) + 1) * 0.5);
+          0.25 + 0.75 * ((math.sin(driftPhase * 2.2 + star.phase) + 1) * 0.5);
       final driftX = math.sin(driftPhase + star.phase) * 10;
       final driftY = math.cos(driftPhase * 0.85 + star.phase) * 8;
       final paint = Paint()
@@ -127,10 +121,7 @@ class _TwinklingStarsPainter extends CustomPainter {
         ..style = PaintingStyle.fill;
 
       canvas.drawCircle(
-        Offset(
-          star.x * size.width + driftX,
-          star.y * size.height + driftY,
-        ),
+        Offset(star.x * size.width + driftX, star.y * size.height + driftY),
         star.radius,
         paint,
       );

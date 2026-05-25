@@ -7,6 +7,8 @@ import 'package:frontend/features/auth/presentation/pages/home/home_page.dart';
 import 'package:frontend/features/auth/presentation/pages/login/login_page.dart';
 import 'package:frontend/features/auth/presentation/pages/sign_up/sign_up_page.dart';
 
+import 'package:frontend/shared/widgets/feedback/lucy_snackbar.dart';
+
 import '../../../helpers/test_locales.dart';
 import '../helpers/fake_auth_repository.dart';
 
@@ -18,6 +20,8 @@ Future<void> _openSignUp(WidgetTester tester) async {
 }
 
 void main() {
+  tearDown(LucySnackBar.hideAll);
+
   testWidgets('sign up navigates to home on success', (tester) async {
     setTestLocaleFr();
     addTearDown(clearTestLocaleOverride);
@@ -91,7 +95,7 @@ void main() {
 
     await tester.tap(find.text('Créer mon compte'));
     await tester.pump();
-    await tester.pump(const Duration(milliseconds: 100));
+    await tester.pump(const Duration(milliseconds: 400));
 
     expect(find.byType(SignUpPage), findsOneWidget);
     expect(find.byType(HomePage), findsNothing);

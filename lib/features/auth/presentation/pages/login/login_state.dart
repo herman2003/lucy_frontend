@@ -11,7 +11,6 @@ abstract class LoginState with _$LoginState {
     @Default(false) bool isLoading,
     @Default('') String email,
     @Default('') String password,
-    String? errorMessage,
   }) = _LoginState;
 
   bool get canSubmit =>

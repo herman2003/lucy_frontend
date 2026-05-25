@@ -11,9 +11,7 @@ void main() {
       MaterialApp(
         theme: LucyFlexTheme.lightTheme,
         home: const Scaffold(
-          body: AuthTwinklingStarsBackground(
-            child: SizedBox.expand(),
-          ),
+          body: AuthTwinklingStarsBackground(child: SizedBox.expand()),
         ),
       ),
     );
@@ -27,29 +25,28 @@ void main() {
     );
   });
 
-  testWidgets('AuthTwinklingStarsBackground skips animation when motion reduced', (
-    tester,
-  ) async {
-    await tester.pumpWidget(
-      MaterialApp(
-        theme: LucyFlexTheme.lightTheme,
-        home: MediaQuery(
-          data: const MediaQueryData(disableAnimations: true),
-          child: const Scaffold(
-            body: AuthTwinklingStarsBackground(
-              child: SizedBox.expand(),
+  testWidgets(
+    'AuthTwinklingStarsBackground skips animation when motion reduced',
+    (tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          theme: LucyFlexTheme.lightTheme,
+          home: MediaQuery(
+            data: const MediaQueryData(disableAnimations: true),
+            child: const Scaffold(
+              body: AuthTwinklingStarsBackground(child: SizedBox.expand()),
             ),
           ),
         ),
-      ),
-    );
+      );
 
-    expect(
-      find.descendant(
-        of: find.byType(AuthTwinklingStarsBackground),
-        matching: find.byType(CustomPaint),
-      ),
-      findsNothing,
-    );
-  });
+      expect(
+        find.descendant(
+          of: find.byType(AuthTwinklingStarsBackground),
+          matching: find.byType(CustomPaint),
+        ),
+        findsNothing,
+      );
+    },
+  );
 }

@@ -5,12 +5,17 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:frontend/core/localization/l10n/app_localizations.dart';
 import 'package:frontend/features/auth/domain/providers/auth_provider.dart';
 import 'package:frontend/features/auth/presentation/controllers/sign_up_notifier.dart';
+import 'package:frontend/shared/widgets/feedback/lucy_snackbar.dart';
 
 import '../helpers/fake_auth_repository.dart';
 
 void main() {
   group('SignUpNotifier', () {
-    testWidgets('submitSignUp sets profile-write-failed message', (tester) async {
+    tearDown(LucySnackBar.hideAll);
+
+    testWidgets('submitSignUp shows snackbar on profile-write-failed', (
+      tester,
+    ) async {
       final repository = FakeAuthRepository(null)..failProfileWrite = true;
       late ProviderContainer container;
 
@@ -44,10 +49,12 @@ void main() {
       notifier.updatePassword('password1');
 
       await notifier.submitSignUp(tester.element(find.byType(SizedBox)));
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 400));
 
       final state = container.read(signUpProvider);
       expect(state.isLoading, isFalse);
-      expect(state.errorMessage, isNotEmpty);
+      expect(find.textContaining('profil'), findsOneWidget);
       expect(repository.currentUser, isNull);
     });
 

@@ -93,7 +93,7 @@
 | [x] | T14 | Tests unit/widget + DoD SPEC §1.4 | **CP-5** |
 
 **CP-5 — Vérification :**
-- [x] `flutter test` vert (62 tests)
+- [x] `flutter test` vert (67 tests)
 - [x] `flutter analyze` vert
 - [ ] Revue UI : login, signup, reset — web ~1440px + mobile ~390px
 - [ ] Tous les AC [SPEC.md §1.4](../SPEC.md) cochés
@@ -124,6 +124,12 @@ Voir [docs/firebase-console-t11.md](./docs/firebase-console-t11.md).
 - [ ] Template / lien reset password configuré
 - [ ] SHA-1 Android (debug) dans Firebase
 - [ ] Comptes de test créés
+
+---
+
+## Checkpoints manuels
+
+Guide pas à pas : [docs/manual-checkpoints.md](./docs/manual-checkpoints.md).
 
 ---
 

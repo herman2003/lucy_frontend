@@ -57,11 +57,16 @@ flutter test test/smoke/cp0_web_build_test.dart
 - Deploy rules: `firebase deploy --only firestore:rules --project lucy-7504c`
 - Console checklist: [docs/firebase-console-t11.md](./docs/firebase-console-t11.md)
 
+## CI
+
+GitHub Actions runs `flutter analyze`, `flutter test`, and `flutter build web` on push/PR (see [.github/workflows/ci.yml](./.github/workflows/ci.yml)).
+
 ## Project docs
 
 - [SPEC.md](./SPEC.md) — product and architecture spec
 - [tasks/plan.md](./tasks/plan.md) — implementation plan
 - [tasks/todo.md](./tasks/todo.md) — task checklist
+- [docs/manual-checkpoints.md](./docs/manual-checkpoints.md) — CP-0 à CP-5 (validation manuelle)
 
 ---
 

@@ -19,6 +19,8 @@ abstract class DocumentsRepository {
 
   Future<DocumentCompleteResult> completeDocument(String id);
 
+  Future<DocumentCompleteResult> reprocessDocument(String id);
+
   Future<void> uploadBinary({
     required String uploadUrl,
     required List<int> bytes,

@@ -1,8 +1,12 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../../../core/extensions/context.dart';
 import '../../../../shared/widgets/feedback/lucy_snackbar.dart';
+import '../../domain/entities/document.dart';
 import '../../domain/entities/document_status.dart';
 import '../../domain/exceptions/document_exception.dart';
 import '../../domain/providers/documents_provider.dart';
@@ -14,6 +18,8 @@ part 'documents_notifier.g.dart';
 
 @riverpod
 class DocumentsNotifier extends _$DocumentsNotifier {
+  final Set<String> _failedSnackbarsShown = {};
+
   @override
   DocumentsState build() => const DocumentsState();
 
@@ -30,10 +36,29 @@ class DocumentsNotifier extends _$DocumentsNotifier {
 
   Future<void> refresh(BuildContext context) async {
     try {
+      final previous = state.documents;
       await load();
+      _notifyNewlyFailed(context, previous, state.documents);
     } catch (error) {
       _showError(context, error);
     }
+  }
+
+  /// Silent refresh while polling processing/uploading documents (SPEC DOC-11).
+  Future<void> pollForUpdates(BuildContext context) async {
+    if (!state.needsProcessingPoll) {
+      return;
+    }
+    final previous = state.documents;
+    try {
+      await load();
+    } catch (_) {
+      return;
+    }
+    if (!context.mounted) {
+      return;
+    }
+    _notifyNewlyFailed(context, previous, state.documents);
   }
 
   Future<void> uploadDocument(
@@ -114,6 +139,19 @@ class DocumentsNotifier extends _$DocumentsNotifier {
     }
   }
 
+  Future<void> reprocessDocument(BuildContext context, String documentId) async {
+    state = state.copyWith(busyDocumentId: documentId);
+    try {
+      await ref.read(documentsServiceProvider).reprocessDocument(documentId);
+      _failedSnackbarsShown.remove(documentId);
+      await load();
+    } catch (error) {
+      _showError(context, error);
+    } finally {
+      state = state.copyWith(busyDocumentId: null);
+    }
+  }
+
   Future<void> downloadDocument(BuildContext context, String documentId) async {
     state = state.copyWith(busyDocumentId: documentId);
     try {
@@ -128,6 +166,39 @@ class DocumentsNotifier extends _$DocumentsNotifier {
       _showError(context, error);
     } finally {
       state = state.copyWith(busyDocumentId: null);
+    }
+  }
+
+  void _notifyNewlyFailed(
+    BuildContext context,
+    List<Document> before,
+    List<Document> after,
+  ) {
+    if (!context.mounted) {
+      return;
+    }
+    final l10n = context.l10n;
+    for (final doc in after) {
+      if (doc.status != DocumentStatus.failed) {
+        continue;
+      }
+      if (_failedSnackbarsShown.contains(doc.id)) {
+        continue;
+      }
+      final wasAlreadyFailed = before.any(
+        (d) => d.id == doc.id && d.status == DocumentStatus.failed,
+      );
+      if (wasAlreadyFailed) {
+        continue;
+      }
+      _failedSnackbarsShown.add(doc.id);
+      final code = doc.errorCode ?? 'DOCUMENT_PROCESSING_FAILED';
+      LucySnackBar.showError(
+        context,
+        message: DocumentErrorTranslator.translate(context, code),
+        actionLabel: l10n.authResetTryAgain,
+        onAction: () => reprocessDocument(context, doc.id),
+      );
     }
   }
 

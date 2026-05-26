@@ -31,4 +31,10 @@ abstract class DocumentsState with _$DocumentsState {
   bool get hasProcessingDocument => documents.any(
         (d) => d.status == DocumentStatus.processing,
       );
+
+  bool get needsProcessingPoll => documents.any(
+        (d) =>
+            d.status == DocumentStatus.processing ||
+            d.status == DocumentStatus.uploading,
+      );
 }

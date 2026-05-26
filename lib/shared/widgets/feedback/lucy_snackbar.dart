@@ -18,6 +18,8 @@ class LucySnackBar {
     BuildContext context, {
     required String message,
     String? title,
+    String? actionLabel,
+    VoidCallback? onAction,
     Duration? duration,
   }) {
     _show(
@@ -25,7 +27,9 @@ class LucySnackBar {
       message: message,
       title: title,
       type: LucySnackBarType.error,
-      duration: duration,
+      duration: duration ?? (onAction != null ? const Duration(seconds: 8) : null),
+      actionLabel: actionLabel,
+      onAction: onAction,
     );
   }
 
@@ -70,6 +74,8 @@ class LucySnackBar {
     String? title,
     required LucySnackBarType type,
     Duration? duration,
+    String? actionLabel,
+    VoidCallback? onAction,
   }) {
     _currentOverlay?.remove();
     _currentOverlay = null;
@@ -92,6 +98,8 @@ class LucySnackBar {
         duration: duration ?? const Duration(seconds: 4),
         theme: theme,
         isMobileLayout: context.isMobile,
+        actionLabel: actionLabel,
+        onAction: onAction,
         onDismiss: () {
           _currentOverlay?.remove();
           _currentOverlay = null;
@@ -114,6 +122,8 @@ class _LucySnackBarOverlay extends StatefulWidget {
     required this.theme,
     required this.isMobileLayout,
     required this.onDismiss,
+    this.actionLabel,
+    this.onAction,
   });
 
   final String message;
@@ -123,6 +133,8 @@ class _LucySnackBarOverlay extends StatefulWidget {
   final ThemeData theme;
   final bool isMobileLayout;
   final VoidCallback onDismiss;
+  final String? actionLabel;
+  final VoidCallback? onAction;
 
   @override
   State<_LucySnackBarOverlay> createState() => _LucySnackBarOverlayState();
@@ -192,6 +204,8 @@ class _LucySnackBarOverlayState extends State<_LucySnackBarOverlay>
               type: widget.type,
               theme: widget.theme,
               isMobileLayout: widget.isMobileLayout,
+              actionLabel: widget.actionLabel,
+              onAction: widget.onAction,
               onDismiss: () {
                 _dismissTimer?.cancel();
                 _dismiss();
@@ -212,6 +226,8 @@ class _LucySnackBarCard extends StatelessWidget {
     required this.theme,
     required this.isMobileLayout,
     required this.onDismiss,
+    this.actionLabel,
+    this.onAction,
   });
 
   final String message;
@@ -220,6 +236,8 @@ class _LucySnackBarCard extends StatelessWidget {
   final ThemeData theme;
   final bool isMobileLayout;
   final VoidCallback onDismiss;
+  final String? actionLabel;
+  final VoidCallback? onAction;
 
   @override
   Widget build(BuildContext context) {
@@ -281,6 +299,19 @@ class _LucySnackBarCard extends StatelessWidget {
                     height: 1.4,
                   ),
                 ),
+                if (actionLabel != null && onAction != null) ...[
+                  const SizedBox(height: 8),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: TextButton(
+                      onPressed: () {
+                        onAction!();
+                        onDismiss();
+                      },
+                      child: Text(actionLabel!),
+                    ),
+                  ),
+                ],
               ],
             ),
           ),

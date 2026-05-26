@@ -57,6 +57,31 @@ class FakeDocumentsRepository implements DocumentsRepository {
   }
 
   @override
+  Future<DocumentCompleteResult> reprocessDocument(String id) async {
+    final index = _documents.indexWhere((d) => d.id == id);
+    if (index < 0) {
+      throw StateError('Document not found: $id');
+    }
+    final current = _documents[index];
+    if (current.status != DocumentStatus.failed) {
+      throw StateError('Document is not failed');
+    }
+    final updated = Document(
+      id: current.id,
+      title: current.title,
+      fileName: current.fileName,
+      mimeType: current.mimeType,
+      byteSize: current.byteSize,
+      status: DocumentStatus.processing,
+      searchEnabled: false,
+      createdAt: current.createdAt,
+      updatedAt: DateTime.now().toUtc().toIso8601String(),
+    );
+    _documents[index] = updated;
+    return DocumentCompleteResult(id: id, status: DocumentStatus.processing.name);
+  }
+
+  @override
   Future<DocumentCompleteResult> completeDocument(String id) async {
     final index = _documents.indexWhere((d) => d.id == id);
     if (index < 0) {

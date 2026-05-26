@@ -71,4 +71,23 @@ void main() {
     );
     expect(state.activeSearchCount, 1);
   });
+
+  test('needsProcessingPoll is true when uploading or processing', () {
+    const state = DocumentsState(
+      documents: [
+        Document(
+          id: '1',
+          title: 'A',
+          fileName: 'a.txt',
+          mimeType: 'text/plain',
+          byteSize: 1,
+          status: DocumentStatus.uploading,
+          searchEnabled: false,
+          createdAt: '2026-01-01T00:00:00.000Z',
+          updatedAt: '2026-01-01T00:00:00.000Z',
+        ),
+      ],
+    );
+    expect(state.needsProcessingPoll, isTrue);
+  });
 }

@@ -1,8 +1,13 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../core/extensions/context.dart';
+import '../../utils/documents_constants.dart';
 import '../controllers/documents_notifier.dart';
+import '../controllers/documents_state.dart';
+import '../../domain/entities/document_status.dart';
 import '../widgets/add_document_sheet.dart';
 import '../widgets/document_list_tile.dart';
 
@@ -15,6 +20,8 @@ class DocumentsPage extends ConsumerStatefulWidget {
 }
 
 class _DocumentsPageState extends ConsumerState<DocumentsPage> {
+  Timer? _processingPollTimer;
+
   @override
   void initState() {
     super.initState();
@@ -24,6 +31,32 @@ class _DocumentsPageState extends ConsumerState<DocumentsPage> {
       }
       ref.read(documentsProvider.notifier).refresh(context);
     });
+  }
+
+  @override
+  void dispose() {
+    _processingPollTimer?.cancel();
+    super.dispose();
+  }
+
+  void _syncProcessingPoll(DocumentsState state) {
+    if (!state.needsProcessingPoll) {
+      _processingPollTimer?.cancel();
+      _processingPollTimer = null;
+      return;
+    }
+    if (_processingPollTimer != null) {
+      return;
+    }
+    _processingPollTimer = Timer.periodic(
+      DocumentsConstants.processingPollInterval,
+      (_) {
+        if (!mounted) {
+          return;
+        }
+        ref.read(documentsProvider.notifier).pollForUpdates(context);
+      },
+    );
   }
 
   Future<void> _openAddSheet() async {
@@ -81,6 +114,8 @@ class _DocumentsPageState extends ConsumerState<DocumentsPage> {
     final state = ref.watch(documentsProvider);
     final l10n = context.l10n;
     final notifier = ref.read(documentsProvider.notifier);
+
+    _syncProcessingPoll(state);
 
     return Scaffold(
       appBar: AppBar(
@@ -153,6 +188,12 @@ class _DocumentsPageState extends ConsumerState<DocumentsPage> {
                               doc.id,
                             ),
                             onDelete: () => _confirmDelete(doc.id, doc.title),
+                            onReprocess: doc.status == DocumentStatus.failed
+                                ? () => notifier.reprocessDocument(
+                                      context,
+                                      doc.id,
+                                    )
+                                : null,
                           );
                         },
                         childCount: state.documents.length,

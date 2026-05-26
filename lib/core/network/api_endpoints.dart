@@ -26,5 +26,7 @@ abstract final class ApiEndpoints {
 
   static String documentComplete(String id) => '${document(id)}/complete';
 
+  static String documentReprocess(String id) => '${document(id)}/reprocess';
+
   static String documentDownload(String id) => '${document(id)}/download';
 }

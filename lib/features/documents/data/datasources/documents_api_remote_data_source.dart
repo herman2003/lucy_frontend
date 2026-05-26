@@ -82,6 +82,24 @@ class DocumentsApiRemoteDataSource {
     }
   }
 
+  Future<DocumentCompleteResult> reprocessDocument(String id) async {
+    try {
+      final response = await _dio.post<Map<String, dynamic>>(
+        ApiEndpoints.documentReprocess(id),
+      );
+      final data = response.data;
+      if (data == null) {
+        throw const DocumentException('INTERNAL_ERROR');
+      }
+      return DocumentCompleteResult(
+        id: data['id'] as String? ?? id,
+        status: data['status'] as String? ?? 'processing',
+      );
+    } on DioException catch (error) {
+      throw _mapDioError(error);
+    }
+  }
+
   Future<DocumentCompleteResult> completeDocument(String id) async {
     try {
       final response = await _dio.post<Map<String, dynamic>>(

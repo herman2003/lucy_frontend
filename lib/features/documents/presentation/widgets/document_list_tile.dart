@@ -14,6 +14,7 @@ class DocumentListTile extends StatelessWidget {
     required this.onSearchToggled,
     required this.onDownload,
     required this.onDelete,
+    this.onReprocess,
     super.key,
   });
 
@@ -23,6 +24,7 @@ class DocumentListTile extends StatelessWidget {
   final void Function(bool enabled) onSearchToggled;
   final VoidCallback onDownload;
   final VoidCallback onDelete;
+  final VoidCallback? onReprocess;
 
   @override
   Widget build(BuildContext context) {
@@ -54,6 +56,8 @@ class DocumentListTile extends StatelessWidget {
               enabled: !isBusy,
               onSelected: (value) {
                 switch (value) {
+                  case 'reprocess':
+                    onReprocess?.call();
                   case 'download':
                     onDownload();
                   case 'delete':
@@ -61,6 +65,11 @@ class DocumentListTile extends StatelessWidget {
                 }
               },
               itemBuilder: (context) => [
+                if (onReprocess != null)
+                  PopupMenuItem(
+                    value: 'reprocess',
+                    child: Text(l10n.authResetTryAgain),
+                  ),
                 PopupMenuItem(
                   value: 'download',
                   child: Text(l10n.documentsDownload),

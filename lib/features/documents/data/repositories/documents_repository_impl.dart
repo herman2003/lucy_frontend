@@ -51,6 +51,10 @@ class DocumentsRepositoryImpl implements DocumentsRepository {
       _remote.completeDocument(id);
 
   @override
+  Future<DocumentCompleteResult> reprocessDocument(String id) =>
+      _remote.reprocessDocument(id);
+
+  @override
   Future<void> uploadBinary({
     required String uploadUrl,
     required List<int> bytes,

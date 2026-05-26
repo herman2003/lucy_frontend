@@ -42,6 +42,10 @@ class DocumentsService {
 
   Future<void> deleteDocument(String id) => _repository.deleteDocument(id);
 
+  Future<void> reprocessDocument(String id) async {
+    await _repository.reprocessDocument(id);
+  }
+
   Future<DocumentDownloadResult> getDownloadUrl(String id) =>
       _repository.getDownloadUrl(id);
 

@@ -30,4 +30,12 @@ void main() {
       isTrue,
     );
   });
+
+  test('backend D2 ingestion flow spec exists', () {
+    final spec = File(
+      '../backend/src/features/documents/documents.d2-flow.spec.ts',
+    ).readAsStringSync();
+    expect(spec, contains('chunkCount'));
+    expect(spec, contains('DOCUMENT_TYPE_MISMATCH'));
+  });
 }

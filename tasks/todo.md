@@ -28,7 +28,7 @@
 | [x] | DOC-09 | EmbeddingPort Gemini uniquement (`text-embedding-004` défaut) ; fake en test |
 | [x] | DOC-10 | Pipeline ingestion async après complete |
 | [x] | DOC-11 | Chunks Firestore + UI refresh processing/failed |
-| [ ] | DOC-12 | Tests D2 + validation manuelle CP-D2 |
+| [x] | DOC-12 | Tests D2 + validation manuelle CP-D2 |
 
 ---
 

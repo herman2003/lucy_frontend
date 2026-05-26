@@ -316,6 +316,60 @@ abstract class AppLocalizations {
   /// **'Se déconnecter'**
   String get homeLogout;
 
+  /// Placeholder for shell tabs not yet implemented
+  ///
+  /// In fr, this message translates to:
+  /// **'En cours de réalisation'**
+  String get pageUnderDevelopment;
+
+  /// No description provided for @navDocuments.
+  ///
+  /// In fr, this message translates to:
+  /// **'Documents'**
+  String get navDocuments;
+
+  /// No description provided for @navChat.
+  ///
+  /// In fr, this message translates to:
+  /// **'Chat'**
+  String get navChat;
+
+  /// No description provided for @navQuiz.
+  ///
+  /// In fr, this message translates to:
+  /// **'Quiz'**
+  String get navQuiz;
+
+  /// No description provided for @navSettings.
+  ///
+  /// In fr, this message translates to:
+  /// **'Paramètres'**
+  String get navSettings;
+
+  /// No description provided for @documentsTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Documents'**
+  String get documentsTitle;
+
+  /// No description provided for @chatTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Chat'**
+  String get chatTitle;
+
+  /// No description provided for @quizTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Quiz'**
+  String get quizTitle;
+
+  /// No description provided for @settingsTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Paramètres'**
+  String get settingsTitle;
+
   /// Generic auth error
   ///
   /// In fr, this message translates to:

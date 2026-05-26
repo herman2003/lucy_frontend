@@ -53,8 +53,8 @@ void main() {
           builder: (context, state) => const OnboardingConfirmPage(),
         ),
         GoRoute(
-          path: LucyRoutePaths.home,
-          builder: (context, state) => const Scaffold(body: Text('Home')),
+          path: LucyRoutePaths.documents,
+          builder: (context, state) => const Scaffold(body: Text('Documents')),
         ),
         GoRoute(
           path: LucyRoutePaths.onboarding,

@@ -13,6 +13,8 @@ abstract final class PostAuthRoute {
 
   static Future<String> resolveFromRepository(AuthRepository repository) async {
     final isConfigured = await repository.fetchIsConfiguredForCurrentUser();
-    return isConfigured ? LucyRoutePaths.home : LucyRoutePaths.onboarding;
+    return isConfigured
+        ? LucyRoutePaths.shellDefault
+        : LucyRoutePaths.onboarding;
   }
 }

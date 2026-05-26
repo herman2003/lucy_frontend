@@ -123,6 +123,33 @@ class AppLocalizationsEn extends AppLocalizations {
   String get homeLogout => 'Log out';
 
   @override
+  String get pageUnderDevelopment => 'Under development';
+
+  @override
+  String get navDocuments => 'Documents';
+
+  @override
+  String get navChat => 'Chat';
+
+  @override
+  String get navQuiz => 'Quiz';
+
+  @override
+  String get navSettings => 'Settings';
+
+  @override
+  String get documentsTitle => 'Documents';
+
+  @override
+  String get chatTitle => 'Chat';
+
+  @override
+  String get quizTitle => 'Quiz';
+
+  @override
+  String get settingsTitle => 'Settings';
+
+  @override
   String get authUnknownError => 'Something went wrong. Please try again.';
 
   @override

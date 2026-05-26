@@ -1,22 +1,17 @@
-# Plan d’implémentation — Lucy Onboarding (config apprenant)
+# Plan d’implémentation — Shell post-login (P0)
 
-> Source : [SPEC.md](../SPEC.md) §4. Auth phase 1 : **livrée** ([todo.md](./todo.md) historique auth).  
-> Découpage **vertical** : chaque tâche livre un chemin testable de bout en bout.  
-> **Pas de modification de code** dans ce document — plan uniquement.
+> Source : [SPEC.md](../SPEC.md) §2.  
+> Référence UI : [`telC_frontend`](../../telC/telC_frontend) — `TcAppShell`, `StatefulShellRoute.indexedStack`, `AnimatedBottomNavigationBar`.  
+> Découpage **vertical** : chaque tâche livre un chemin utilisateur testable.  
+> **Plan mode** — pas de modification de code dans ce document.
 
 ---
 
-## 1. Objectif du plan
+## 1. Objectif
 
-Livrer le parcours onboarding **obligatoire** :
+Après onboarding (`isConfigured: true`), l’apprenant voit une **coque à 4 onglets** (Documents, Chat, Quiz, Paramètres) avec barre du bas Material ; **Documents** est l’onglet par défaut. Contenu métier = placeholder l10n `pageUnderDevelopment` ; **Paramètres** inclut la déconnexion (ex-`HomePage`).
 
-1. `validate-answer` → `turnSummary` → **« C’est bon »** → **`confirm-turn`** (Nest → Firestore) + local.
-2. 7 tours → `analyze` → récap → **`finalize`** → `/home`.
-3. Fallbacks après **10** échecs (question ou analyze) — §4.12.
-4. Nest **Admin** writer ; Flutter read ; **2000** car. — [SPEC.md](../SPEC.md) §4.12.
-5. UI **7 chats** + typing Lucy + design messagerie — §4.5.1.
-
-**Stack :** Flutter (`frontend/`) + NestJS (`Lucy/backend/`) + Gemini via `LlmPort`.
+**Hors périmètre P0** : upload PDF, RAG, chat LLM, quiz, sidebar desktop.
 
 ---
 
@@ -24,13 +19,15 @@ Livrer le parcours onboarding **obligatoire** :
 
 | Élément | État |
 |---------|------|
-| Auth Firebase (login, signup, reset) | Livré |
-| `users/{uid}` (`fullName`, `email`, `createdAt`) | Livré |
-| `isConfigured`, onboarding feature | **Absent** |
-| `backend/` NestJS | **Absent** |
-| `dio`, `ApiEndpoints` | **Absent** (`pubspec`) |
-| Route `/onboarding` | **Absente** |
-| Router guard `isConfigured` | **Absent** (redirect → `/home` si connecté) |
+| Auth + onboarding | Livré |
+| Route post-configuré | `/home` → `HomePage` (welcome + logout) |
+| `StatefulShellRoute` | **Absent** |
+| Routes `/documents`, `/chat`, `/quiz`, `/settings` | **Absentes** |
+| `animated_bottom_navigation_bar` | **Absent** (`pubspec.yaml`) |
+| l10n `pageUnderDevelopment`, libellés nav | **Absents** |
+| `LucyRouterGuards` | Redirige vers `LucyRoutePaths.home` si configuré |
+| `PostAuthRoute` | Retourne `home` si configuré |
+| `onboarding_confirm_page` | `context.go(LucyRoutePaths.home)` après finalize |
 
 ---
 
@@ -38,215 +35,189 @@ Livrer le parcours onboarding **obligatoire** :
 
 ```mermaid
 flowchart TB
-  subgraph prereq [Prérequis humain]
-    H1[GEMINI_API_KEY]
-    H2[Firebase service account backend]
+  subgraph phaseA [Phase A — Fondations]
+    S01[S01 Dépendance + l10n + routes]
   end
 
-  subgraph phase0 [Phase 0 — Fondation]
-    B01[B01 Scaffold backend]
-    B02[B02 Core LLM + Auth guard]
-    F01[F01 dio + ApiEndpoints]
-    F02[F02 Profil Firestore isConfigured]
+  subgraph phaseB [Phase B — UI réutilisable]
+    S02[S02 Widget placeholder partagé]
+    S03[S03 Quatre pages feature]
   end
 
-  subgraph phase1 [Phase 1 — validate-answer]
-    B03[B03 Prompts validate]
-    B04[B04 Endpoint validate-answer]
+  subgraph phaseC [Phase C — Shell + router]
+    S04[S04 LucyAppShell]
+    S05[S05 StatefulShellRoute app_router]
   end
 
-  subgraph phase2 [Phase 2 — UI 1 tour]
-    F03[F03 Router + isConfigured read]
-    F04[F04 Feature skeleton + l10n]
-    F05[F05 Chat UI + 1 validate E2E]
+  subgraph phaseD [Phase D — Guards + migration]
+    S06[S06 Guards + PostAuth + redirects]
+    S07[S07 Settings logout + retirer HomePage]
   end
 
-  subgraph phase3 [Phase 3 — analyze]
-    B05[B05 Prompts + analyze endpoint]
+  subgraph phaseE [Phase E — Qualité]
+    S08[S08 Tests + docs + CP final]
   end
 
-  subgraph phase4 [Phase 4 — Parcours complet]
-    F06[F06 Boucle 7 questions]
-    F07[F07 Confirm + Firestore]
-  end
-
-  subgraph phase5 [Phase 5 — Qualité]
-    F08[F08 Errors l10n + tests]
-  end
-
-  H1 --> B02
-  H2 --> B02
-  B01 --> B02
-  B02 --> B03 --> B04
-  F01 --> F05
-  F02 --> F03 --> F04 --> F05
-  B04 --> F05
-  B02 --> B05
-  B04 --> B05
-  F05 --> F06
-  B05 --> F06
-  F06 --> F07
-  F07 --> F08
+  S01 --> S02 --> S03
+  S03 --> S04 --> S05
+  S05 --> S06 --> S07 --> S08
 ```
 
-**Chemins critiques :** `B01 → B02 → B04` (API validate) puis `F01 → F02 → F03 → F05` en parallèle partiel ; `B05` avant `F06` complet.
-
-**Parallélisable :** après `B02`, équipe peut scinder **backend** (B03–B05) et **frontend** (F01–F04) jusqu’à CP-2.
+**Ordre strict** : S04 dépend de S03 (pages existent avant branches). S06 dépend de S05 (chemins shell connus).
 
 ---
 
-## 4. Prérequis humains (bloquants)
+## 4. Découpage vertical (tâches)
 
-| ID | Action | Bloque |
-|----|--------|--------|
-| P0 | Créer `Lucy/backend/` + `npm`/`pnpm` install | B01+ |
-| P1 | Clé **`GEMINI_API_KEY`** dans `backend/.env` | B02, appels réels |
-| P2 | **Compte de service Firebase** pour Nest (vérif idToken) | B02 |
-| P3 | CORS dev : autoriser origine Flutter web + `localhost` | F05+ (web) |
-| P4 | Étendre **Firestore rules** si nouveaux champs (même `users/{uid}`) | F07 |
+### S01 — Fondations (pas d’écran visible seul)
 
----
-
-## 5. Phases, tâches et critères d’acceptation
-
-### Phase 0 — Fondation (bloquant)
-
-**But :** backend démarre ; Flutter prêt pour HTTP ; profil signup avec `isConfigured: false`.
-
-| ID | Tâche | AC (acceptation) | Vérification |
-|----|--------|------------------|--------------|
-| **B01** | Scaffold NestJS `Lucy/backend/` (`nest new`, prefix `/v1`, health) | `npm run start:dev` → serveur écoute `PORT` | `curl localhost:3000/health` ou équivalent |
-| **B02** | Core : `FirebaseAuthGuard`, config `.env.example`, `LlmPort`, `GeminiLlmAdapter`, filtres erreurs HTTP structurés | Guard rejette requête sans token ; adapter mockable | Test unit guard + adapter avec clé ou mock |
-| **F01** | `dio` dans `pubspec` ; `lib/core/network/` (`ApiEndpoints`, client + interceptor `getIdToken`) | Aucune URL en dur dans features | `flutter analyze` |
-| **F02** | Étendre `UserProfileDto` + mapper + signup : `isConfigured: false` ; lecture profil pour guard (stream/fetch) | Nouveau signup → doc Firestore avec `isConfigured: false` | Test mapper + signup integration / console Firestore |
-
-| **CP-0** | `flutter analyze` vert ; backend démarre ; signup crée `isConfigured: false` |
+| Champ | Détail |
+|-------|--------|
+| **Livrable** | Package + constantes routes + clés l10n générées |
+| **Fichiers** | `pubspec.yaml`, `lucy_route_paths.dart`, `lucy_route_names.dart`, `app_*.arb` |
+| **AC** | `documents`, `chat`, `quiz`, `settings` dans paths/names ; ARB fr/en/de : `pageUnderDevelopment`, `navDocuments`, `navChat`, `navQuiz`, `navSettings`, titres AppBar (`documentsTitle`, etc.) |
+| **Vérification** | `flutter pub get` ; `flutter gen-l10n` ; `flutter analyze` sur router/l10n |
 
 ---
 
-### Phase 1 — Vertical slice : `validate-answer` (backend)
+### S02 — Widget placeholder partagé (V1 partiel)
 
-**But :** un appel API valide une réponse et renvoie `rephrasedQuestion` si besoin.
+| Champ | Détail |
+|-------|--------|
+| **Livrable** | Corps réutilisable « En cours de réalisation » |
+| **Fichiers** | `lib/shared/widgets/placeholders/lucy_under_development_body.dart` (ou `lucy_placeholder_page.dart` avec AppBar optionnel) |
+| **AC** | `Scaffold` + `AppBar` (titre paramètre) + `Center` + `context.l10n.pageUnderDevelopment` ; `colorScheme` uniquement |
+| **Vérification** | Widget test : trouve le texte l10n FR |
 
-| ID | Tâche | AC | Vérification |
-|----|--------|-----|--------------|
-| **B03** | `PromptLoaderService` + `prompts/onboarding-validate-answer.*` (règles SPEC : pas « Peux-tu préciser », `rephrasedQuestion` obligatoire si `valid: false`) | Fichiers présents ; chargement au boot | Revue prompt + test loader |
-| **B04** | `POST /v1/onboarding/validate-answer` : DTO, `OnboardingService`, controller, validation JSON sortie | Réponse claire → `{ valid: true, acknowledgment? }` ; vague → `{ valid: false, rephrasedQuestion }` | `curl` avec token Firebase test ; tests unit service mock `LlmPort` |
-
-| **CP-1** | 2 cas manuels : réponse OK + réponse vague → JSON conforme SPEC §4.6 |
-
----
-
-### Phase 2 — Vertical slice : UI 1 question + validate (Flutter)
-
-**But :** un utilisateur connecté voit 1 question, envoie une réponse, Lucy valide ou repose la question.
-
-| ID | Tâche | AC | Vérification |
-|----|--------|-----|--------------|
-| **F03** | Route `/onboarding` ; `LucyRoutePaths` ; guard : connecté + `isConfigured == false` → onboarding ; `true` → `/home` ; signup/login → `/onboarding` si non configuré | Connecté non configuré sur `/home` → `/onboarding` | Test `LucyRouterGuards` + manuel |
-| **F04** | Feature `onboarding/` skeleton (domain/data/presentation) ; l10n 7 questions (`onboarding.*` ARB fr/en/de) ; constantes `questionId` | Pas de texte UI en dur | `flutter gen-l10n` ; analyze |
-| **F05** | `OnboardingChatPage` : bulles Lucy, champ réponse, envoi → `validate-answer` ; si `valid: false` afficher **`rephrasedQuestion`** (pas meta « préciser ») ; si `valid: true` acknowledgment + stocker tour localement | 1 tour validé visible dans l’état ; loading pendant appel | `flutter run` + backend local ; widget test états loading/error |
-
-| **CP-2** | Parcours manuel : réponse vague → nouvelle question Lucy ; réponse claire → passage (étape 2 ou fin slice selon implémentation temporaire) |
+**Checkpoint CP-S0** : après S02, `flutter test` sur le widget placeholder.
 
 ---
 
-### Phase 3 — Vertical slice : `analyze` (backend)
+### S03 — Quatre pages feature (V1 partiel)
 
-**But :** transcript 7 entrées → `learnerProfile` + `summaryForUser`.
-
-| ID | Tâche | AC | Vérification |
-|----|--------|-----|--------------|
-| **B05** | Prompts `onboarding-analyze.*` + `POST /v1/onboarding/analyze` + validator enums §4.4.1 | 7 entrées valides → 200 + profil complet ; &lt;7 → 400 ; enum invalide → 422 | `curl` + tests unit |
-
-| **CP-3** | Postman/curl : transcript fixture 7 tours → `learnerProfile` conforme |
-
----
-
-### Phase 4 — Vertical slice : parcours complet (Flutter)
-
-**But :** 7 questions avec validate à chaque tour → analyze → confirmation → Firestore.
-
-| ID | Tâche | AC | Vérification |
-|----|--------|-----|--------------|
-| **F06** | Boucle 7 `questionId` ; transcript local (ajout seulement si `valid: true`) ; progression 1/7…7/7 ; après 7ᵉ → appel `analyze` | Impossible d’atteindre analyze avec &lt;7 tours validés | Test notifier ; manuel complet |
-| **F07** | `OnboardingConfirmPage` : `summaryForUser` + libellés enums l10n ; Valider → Firestore (`learnerProfile`, `onboardingTranscript`, `onboardingCompletedAt`, `isConfigured: true`) ; Modifier → retour chat | Après Valider → `/home` ; doc Firestore complet | Console Firestore ; manuel |
-| **F07b** | Auth signup redirect `/onboarding` (plus `/home` direct si profil incomplet) | Nouveau compte → onboarding | Manuel signup |
-
-| **CP-4** | E2E : signup → 7 Q/R (dont 1 rephrase) → confirm → `/home` ; `isConfigured: true` |
+| Champ | Détail |
+|-------|--------|
+| **Livrable** | Pages présentation minimales par onglet |
+| **Fichiers** | `features/documents/.../documents_page.dart`, `chat/...`, `quiz/...`, `settings/...` |
+| **AC** | Documents / Chat / Quiz utilisent le placeholder ; Settings affiche logout (`LucyPrimaryButton` + `authService.signOut`) + optionnel placeholder sous le bouton |
+| **Vérification** | Tests widget légers (Settings : bouton présent) ; pas de texte en dur |
 
 ---
 
-### Phase 5 — Qualité
+### S04 — LucyAppShell
 
-| ID | Tâche | AC | Vérification |
-|----|--------|-----|--------------|
-| **F08** | `onboarding_error_translator` (codes API → l10n) ; pas de message brut | Codes 401, 422, 502, 503 couverts | Tests translator |
-| **F09** | Tests : `OnboardingService` mock repos ; widget confirm ; router guard avec profil mock | `flutter test` vert | CI |
-| **B06** | README `backend/` (run local, env) ; optionnel rate limit | Doc à jour | Revue |
-
-| **CP-5** | `flutter analyze` + `flutter test` verts ; revue SPEC §4.8 cochée |
-
----
-
-## 6. Ordre d’exécution recommandé
-
-```
-P0–P2 (humain)
-→ B01 → B02 ─┬→ B03 → B04 ────────────────┐
-             │                            │
-             ├→ B05 (après B04)           │
-             │                            │
-             └→ F01 → F02 → F03 → F04 → F05 (CP-2, besoin B04)
-→ F06 → F07 (besoin B05)
-→ F08 → F09 → B06 (CP-5)
-```
+| Champ | Détail |
+|-------|--------|
+| **Livrable** | Coque avec `AnimatedBottomNavigationBar` |
+| **Fichiers** | `lib/core/shell/lucy_app_shell.dart` |
+| **AC** | 4 icônes Material ; `activeIndex` dérivé de `GoRouterState.uri.path` ; `onTap` → `navigationShell.goBranch(index)` ; `activeColor: primary`, `inactiveColor: onSurfaceVariant` ; **MVP** : barre sur toutes largeurs (pas de sidebar) |
+| **Référence** | `tc_app_shell.dart` lignes 69–89 (mode mobile uniquement) |
+| **Vérification** | Analyse statique ; test widget optionnel (smoke pump avec mock shell) |
 
 ---
 
-## 7. Stratégie de test (SPEC §4.8)
+### S05 — Router : StatefulShellRoute (V2 — parcours complet navigation)
 
-| Niveau | Cible |
-|--------|--------|
-| Backend unit | `OnboardingService`, validator enums, `LlmPort` mock |
-| Backend e2e | Controller + guard (token mock) |
-| Flutter unit | Router guards, notifiers, translators, mappers profil |
-| Flutter widget | Chat (loading, rephrasedQuestion, acknowledgment) |
-| Manuel | CP-1 à CP-4 sur web Chrome + backend local |
+| Champ | Détail |
+|-------|--------|
+| **Livrable** | 4 branches indexed stack + `NoTransitionPage` |
+| **Fichiers** | `app_router.dart` (+ `build_runner` si `.g.dart` impacté) |
+| **AC** | Branches ordre : 0 Documents, 1 Chat, 2 Quiz, 3 Settings ; builder shell = `LucyAppShell` ; `/home` reste route top-level **ou** redirect only (préféré : redirect dans guards, pas de builder HomePage) |
+| **Vérification** | **Manuel** : connecté + configuré → navigation entre 4 onglets sans flash |
 
-**Mode dev sans Gemini :** mock `LlmPort` dans backend pour F05–F07 si P1 pas prêt (documenter dans README backend).
+**Checkpoint CP-S1** : après S05, parcours manuel 4 onglets (contenu placeholder).
 
 ---
 
-## 8. Risques et mitigations
+### S06 — Guards, bootstrap, finalize (V3 — bonne destination post-login)
+
+| Champ | Détail |
+|-------|--------|
+| **Livrable** | Destination `/documents` partout |
+| **Fichiers** | `lucy_router_guards.dart`, `post_auth_route.dart`, `onboarding_confirm_page.dart` |
+| **AC** | `_shellPaths` = documents, chat, quiz, settings ; non connecté sur shell → login ; non configuré sur shell → onboarding ; configuré sur onboarding → documents ; splash configuré → documents ; `/home` configuré → documents ; public auth configuré → documents |
+| **AC** | `PostAuthRoute` → `documents` si configuré |
+| **AC** | Finalize → `context.go(LucyRoutePaths.documents)` |
+| **Vérification** | `lucy_router_guards_onboarding_test.dart`, `post_auth_route_test.dart`, `lucy_router_guards_test.dart` mis à jour |
+
+---
+
+### S07 — Nettoyage HomePage
+
+| Champ | Détail |
+|-------|--------|
+| **Livrable** | Plus d’écran `/home` comme destination finale |
+| **Fichiers** | Retirer ou garder `home_page.dart` uniquement si redirect ; mettre à jour imports tests (`login_page_test`, `auth_redirect_test`, `onboarding_cp4_e2e_flow_test`) |
+| **AC** | Logout uniquement depuis Settings ; `homeWelcome` / `homeLogout` réutilisés ou renommés l10n settings si besoin |
+| **Vérification** | `grep HomePage` — uniquement tests redirect ou fichier supprimé |
+
+---
+
+### S08 — Tests, docs, SPEC checklist (V4 — DoD P0)
+
+| Champ | Détail |
+|-------|--------|
+| **Livrable** | Suite verte + spec cochée |
+| **Fichiers** | Tests router/shell ; `docs/manual-checkpoints.md` (section shell) ; cocher SPEC §2.4 |
+| **AC** | `flutter analyze` 0 issue ; `flutter test` vert ; smoke traceability si chemins `/home` |
+| **Vérification** | **CP-S2** checklist ci-dessous |
+
+**Checkpoint CP-S2 (DoD P0)** :
+
+- [ ] Compte configuré : splash → `/documents`
+- [ ] Tap chaque onglet → bon titre AppBar + « En cours de réalisation »
+- [ ] Paramètres → déconnexion → login
+- [ ] Non configuré : URL `/documents` → redirect onboarding
+- [ ] Finalize onboarding → `/documents` (pas `/home`)
+- [ ] `flutter test` + `flutter analyze` OK
+
+---
+
+## 5. Risques et mitigations
 
 | Risque | Mitigation |
 |--------|------------|
-| Latence Gemini à chaque réponse (7+ appels) | `gemini-2.5-flash` ; loading UX ; désactiver double-submit |
-| Coût API | Rate limit ; pas de retry agressif |
-| `rephrasedQuestion` meta « préciser » | Tests prompt + revue JSON schema |
-| Guard sans lecture Firestore | Provider `userProfileProvider` au bootstrap post-auth |
-| Comptes existants sans `isConfigured` | Traiter absent = `false` (SPEC) |
+| Tests cassés sur `/home` | Mettre à jour en même temps que S06 ; garder redirect `/home` → `/documents` |
+| `goBranch` index ≠ ordre branches | Constante `shellBranchDocuments = 0` documentée dans shell |
+| Oubli l10n DE/EN | S01 : ajouter les 3 ARB avant toute page |
+| `build_runner` router | Lancer après modification `@Riverpod` router |
 
 ---
 
-## 9. Hors périmètre de ce plan
+## 6. Estimation relative
 
-- Chat tuteur, documents, RAG.
-- Édition profil dans Paramètres.
-- `openai` adapter (seul stub prévu).
-- Home fonctionnel au-delà du placeholder.
-
----
-
-## 10. Références
-
-| Document | Rôle |
-|----------|------|
-| [SPEC.md](../SPEC.md) | Spec produit §4 |
-| [docs/firebase-console-t11.md](../docs/firebase-console-t11.md) | Firestore rules |
-| `afroschool_admin_web` | Patterns Clean Arch / auth layouts |
+| Phase | Tâches | Complexité |
+|-------|--------|------------|
+| A | S01 | Faible |
+| B | S02–S03 | Faible |
+| C | S04–S05 | Moyenne |
+| D | S06–S07 | Moyenne (nombreux tests) |
+| E | S08 | Faible |
 
 ---
 
-*Ce document a été créé avec Cursor (IA). Dernière mise à jour : plan onboarding vertical (validate par tour + analyze).*
+## 7. Après P0 (ne pas traiter dans ce plan)
+
+| ID | Brique | Spec |
+|----|--------|------|
+| P1 | Upload documents | SPEC §3 Sprint 1 |
+| P2 | Pipeline RAG | SPEC §3 Sprint 2 |
+| P3 | Chat source-based | SPEC §3 Sprint 3 |
+| P4 | Quiz | SPEC §3 Sprint 3 |
+
+---
+
+## 8. Références code actuel à modifier
+
+| Fichier | Changement attendu |
+|---------|-------------------|
+| `lib/core/router/app_router.dart` | Shell 4 branches |
+| `lib/core/router/lucy_router_guards.dart` | `home` → `documents`, shell paths |
+| `lib/core/router/post_auth_route.dart` | `documents` |
+| `lib/features/onboarding/.../onboarding_confirm_page.dart` | `go(documents)` |
+| `test/core/router/*.dart` | Assertions `/documents` |
+| `test/smoke/cp4_*` | Chemins backend inchangés ; E2E widget destination documents |
+
+---
+
+*Ce document a été créé avec Cursor (IA). Plan P0 shell — 2026-05-25.*

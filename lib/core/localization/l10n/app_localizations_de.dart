@@ -123,6 +123,33 @@ class AppLocalizationsDe extends AppLocalizations {
   String get homeLogout => 'Abmelden';
 
   @override
+  String get pageUnderDevelopment => 'In Entwicklung';
+
+  @override
+  String get navDocuments => 'Dokumente';
+
+  @override
+  String get navChat => 'Chat';
+
+  @override
+  String get navQuiz => 'Quiz';
+
+  @override
+  String get navSettings => 'Einstellungen';
+
+  @override
+  String get documentsTitle => 'Dokumente';
+
+  @override
+  String get chatTitle => 'Chat';
+
+  @override
+  String get quizTitle => 'Quiz';
+
+  @override
+  String get settingsTitle => 'Einstellungen';
+
+  @override
   String get authUnknownError =>
       'Etwas ist schiefgelaufen. Bitte erneut versuchen.';
 

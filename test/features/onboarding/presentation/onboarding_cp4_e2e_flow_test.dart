@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:frontend/app.dart';
 import 'package:frontend/features/auth/domain/providers/auth_provider.dart';
-import 'package:frontend/features/auth/presentation/pages/home/home_page.dart';
+import 'package:frontend/features/documents/presentation/pages/documents_page.dart';
 import 'package:frontend/features/auth/presentation/pages/login/login_page.dart';
 import 'package:frontend/features/auth/presentation/pages/sign_up/sign_up_page.dart';
 import 'package:frontend/features/onboarding/domain/entities/finalize_onboarding_result.dart';
@@ -117,8 +117,8 @@ void main() {
 
     expect(onboardingRepository.finalizeCallCount, 1);
     expect(authRepository.isConfigured, isTrue);
-    expect(find.byType(HomePage), findsOneWidget);
-    expect(find.text('Bienvenue sur Lucy'), findsOneWidget);
+    expect(find.byType(DocumentsPage), findsOneWidget);
+    expect(find.text('En cours de réalisation'), findsOneWidget);
     expect(find.byType(OnboardingChatPage), findsNothing);
   });
 }

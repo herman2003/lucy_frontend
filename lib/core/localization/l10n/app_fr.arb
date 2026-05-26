@@ -149,6 +149,18 @@
   "@homeLogout": {
     "description": "Logout button on home"
   },
+  "pageUnderDevelopment": "En cours de réalisation",
+  "@pageUnderDevelopment": {
+    "description": "Placeholder for shell tabs not yet implemented"
+  },
+  "navDocuments": "Documents",
+  "navChat": "Chat",
+  "navQuiz": "Quiz",
+  "navSettings": "Paramètres",
+  "documentsTitle": "Documents",
+  "chatTitle": "Chat",
+  "quizTitle": "Quiz",
+  "settingsTitle": "Paramètres",
   "authUnknownError": "Une erreur est survenue. Réessayez.",
   "@authUnknownError": {
     "description": "Generic auth error"

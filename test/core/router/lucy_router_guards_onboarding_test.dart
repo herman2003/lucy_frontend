@@ -37,25 +37,25 @@ void main() {
       );
     });
 
-    test('authenticated configured: onboarding redirects to home', () {
+    test('authenticated configured: onboarding redirects to documents', () {
       expect(
         LucyRouterGuards.resolveRedirect(
           bootstrap: bootstrapConfigured,
           sessionUser: user,
           location: LucyRoutePaths.onboarding,
         ),
-        LucyRoutePaths.home,
+        LucyRoutePaths.documents,
       );
     });
 
-    test('authenticated configured: confirm redirects to home', () {
+    test('authenticated configured: confirm redirects to documents', () {
       expect(
         LucyRouterGuards.resolveRedirect(
           bootstrap: bootstrapConfigured,
           sessionUser: user,
           location: LucyRoutePaths.onboardingConfirm,
         ),
-        LucyRoutePaths.home,
+        LucyRoutePaths.documents,
       );
     });
 
@@ -70,14 +70,14 @@ void main() {
       );
     });
 
-    test('authenticated configured: splash redirects to home', () {
+    test('authenticated configured: splash redirects to documents', () {
       expect(
         LucyRouterGuards.resolveRedirect(
           bootstrap: bootstrapConfigured,
           sessionUser: user,
           location: LucyRoutePaths.splash,
         ),
-        LucyRoutePaths.home,
+        LucyRoutePaths.documents,
       );
     });
 
@@ -136,14 +136,25 @@ void main() {
       );
     });
 
-    test('configured user on login redirects to home', () {
+    test('authenticated not configured: documents redirects to onboarding', () {
+      expect(
+        LucyRouterGuards.resolveRedirect(
+          bootstrap: bootstrapNotConfigured,
+          sessionUser: user,
+          location: LucyRoutePaths.documents,
+        ),
+        LucyRoutePaths.onboarding,
+      );
+    });
+
+    test('configured user on login redirects to documents', () {
       expect(
         LucyRouterGuards.resolveRedirect(
           bootstrap: bootstrapConfigured,
           sessionUser: user,
           location: LucyRoutePaths.login,
         ),
-        LucyRoutePaths.home,
+        LucyRoutePaths.documents,
       );
     });
   });

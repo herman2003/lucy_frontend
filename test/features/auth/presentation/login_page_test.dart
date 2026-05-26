@@ -5,7 +5,7 @@ import 'package:frontend/app.dart';
 import 'package:frontend/features/auth/domain/entities/auth_bootstrap_result.dart';
 import 'package:frontend/features/auth/data/providers/auth_data_provider.dart';
 import 'package:frontend/features/auth/domain/providers/auth_provider.dart';
-import 'package:frontend/features/auth/presentation/pages/home/home_page.dart';
+import 'package:frontend/features/settings/presentation/pages/settings_page.dart';
 import 'package:frontend/features/auth/presentation/pages/login/login_page.dart';
 import 'package:frontend/features/onboarding/presentation/pages/onboarding_chat_page.dart';
 
@@ -97,7 +97,12 @@ void main() {
     await tester.pump(const Duration(milliseconds: 300));
     await tester.pumpAndSettle();
 
-    expect(find.byType(HomePage), findsOneWidget);
+    expect(find.text('En cours de réalisation'), findsOneWidget);
+
+    await tester.tap(find.byIcon(Icons.settings_outlined));
+    await tester.pumpAndSettle();
+
+    expect(find.byType(SettingsPage), findsOneWidget);
 
     await tester.tap(find.text('Se déconnecter'));
     await tester.pump();
@@ -105,6 +110,6 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.byType(LoginPage), findsOneWidget);
-    expect(find.byType(HomePage), findsNothing);
+    expect(find.byType(SettingsPage), findsNothing);
   });
 }

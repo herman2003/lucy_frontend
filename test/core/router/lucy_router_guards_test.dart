@@ -54,25 +54,47 @@ void main() {
       );
     });
 
-    test('sends configured user from login to home', () {
+    test('sends configured user from login to documents', () {
       expect(
         LucyRouterGuards.resolveRedirect(
           bootstrap: configured,
           sessionUser: user,
           location: LucyRoutePaths.login,
         ),
-        LucyRoutePaths.home,
+        LucyRoutePaths.documents,
       );
     });
 
-    test('sends configured user from splash to home', () {
+    test('sends configured user from splash to documents', () {
       expect(
         LucyRouterGuards.resolveRedirect(
           bootstrap: configured,
           sessionUser: user,
           location: LucyRoutePaths.splash,
         ),
-        LucyRoutePaths.home,
+        LucyRoutePaths.documents,
+      );
+    });
+
+    test('redirects /home to documents when configured', () {
+      expect(
+        LucyRouterGuards.resolveRedirect(
+          bootstrap: configured,
+          sessionUser: user,
+          location: LucyRoutePaths.home,
+        ),
+        LucyRoutePaths.documents,
+      );
+    });
+
+    test('blocks shell when not logged in', () {
+      expect(
+        LucyRouterGuards.resolveRedirect(
+          bootstrap: const AsyncData(AuthBootstrapResult()),
+          sessionUser: null,
+          location: LucyRoutePaths.documents,
+        ),
+        LucyRoutePaths.login,
       );
     });
   });

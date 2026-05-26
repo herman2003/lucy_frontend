@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:frontend/app.dart';
-import 'package:frontend/features/auth/presentation/pages/home/home_page.dart';
+import 'package:frontend/features/documents/presentation/pages/documents_page.dart';
 import 'package:frontend/features/auth/presentation/pages/login/login_page.dart';
 import 'package:frontend/features/auth/domain/entities/auth_bootstrap_result.dart';
 import 'package:frontend/features/auth/domain/entities/auth_user.dart';
@@ -13,7 +13,7 @@ void main() {
 
   group('Auth redirect (T06)', () {
     testWidgets(
-      'authenticated user reaches home after bootstrap without login flash',
+      'authenticated user reaches documents shell after bootstrap',
       (tester) async {
         await tester.pumpWidget(
           ProviderScope(
@@ -41,7 +41,7 @@ void main() {
         await tester.pump();
         await tester.pump(const Duration(milliseconds: 100));
 
-        expect(find.byType(HomePage), findsOneWidget);
+        expect(find.byType(DocumentsPage), findsOneWidget);
         expect(find.byType(LoginPage), findsNothing);
       },
     );
@@ -71,7 +71,7 @@ void main() {
       await tester.pump(const Duration(milliseconds: 100));
 
       expect(find.byType(LoginPage), findsOneWidget);
-      expect(find.byType(HomePage), findsNothing);
+      expect(find.byType(DocumentsPage), findsNothing);
     });
   });
 }

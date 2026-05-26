@@ -123,6 +123,33 @@ class AppLocalizationsFr extends AppLocalizations {
   String get homeLogout => 'Se déconnecter';
 
   @override
+  String get pageUnderDevelopment => 'En cours de réalisation';
+
+  @override
+  String get navDocuments => 'Documents';
+
+  @override
+  String get navChat => 'Chat';
+
+  @override
+  String get navQuiz => 'Quiz';
+
+  @override
+  String get navSettings => 'Paramètres';
+
+  @override
+  String get documentsTitle => 'Documents';
+
+  @override
+  String get chatTitle => 'Chat';
+
+  @override
+  String get quizTitle => 'Quiz';
+
+  @override
+  String get settingsTitle => 'Paramètres';
+
+  @override
   String get authUnknownError => 'Une erreur est survenue. Réessayez.';
 
   @override

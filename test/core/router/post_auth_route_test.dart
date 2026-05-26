@@ -35,6 +35,6 @@ void main() {
 
     final route = await PostAuthRoute.resolveFromRepository(repository);
 
-    expect(route, LucyRoutePaths.home);
+    expect(route, LucyRoutePaths.documents);
   });
 }

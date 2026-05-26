@@ -126,7 +126,7 @@ class _OnboardingConfirmPageState extends ConsumerState<OnboardingConfirmPage> {
       if (!context.mounted) {
         return;
       }
-      context.go(LucyRoutePaths.home);
+      context.go(LucyRoutePaths.shellDefault);
     } catch (error) {
       if (!context.mounted) {
         return;

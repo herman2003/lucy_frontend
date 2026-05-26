@@ -8,7 +8,7 @@ import '../../features/auth/domain/providers/auth_provider.dart'
     show authBootstrapProvider, authRepositoryProvider;
 import 'lucy_route_paths.dart';
 
-/// Authentication and onboarding redirects for [GoRouter] (SPEC §3, §4.7).
+/// Authentication, onboarding, and shell redirects for [GoRouter] (SPEC §2).
 class LucyRouterGuards {
   LucyRouterGuards._();
 
@@ -41,7 +41,7 @@ class LucyRouterGuards {
       if (location == LucyRoutePaths.splash) {
         return LucyRoutePaths.login;
       }
-      if (_isOnboardingPath(location)) {
+      if (_isOnboardingPath(location) || LucyRoutePaths.isShellPath(location)) {
         return LucyRoutePaths.login;
       }
       if (location == LucyRoutePaths.home) {
@@ -51,25 +51,33 @@ class LucyRouterGuards {
     }
 
     if (location == LucyRoutePaths.splash) {
-      return isConfigured ? LucyRoutePaths.home : LucyRoutePaths.onboarding;
+      return isConfigured
+          ? LucyRoutePaths.shellDefault
+          : LucyRoutePaths.onboarding;
     }
 
     if (!isConfigured) {
       if (_isOnboardingPath(location)) {
         return null;
       }
-      if (location == LucyRoutePaths.home || _publicAuthPaths.contains(location)) {
+      if (location == LucyRoutePaths.home ||
+          LucyRoutePaths.isShellPath(location) ||
+          _publicAuthPaths.contains(location)) {
         return LucyRoutePaths.onboarding;
       }
       return null;
     }
 
     if (_isOnboardingPath(location)) {
-      return LucyRoutePaths.home;
+      return LucyRoutePaths.shellDefault;
+    }
+
+    if (location == LucyRoutePaths.home) {
+      return LucyRoutePaths.shellDefault;
     }
 
     if (_publicAuthPaths.contains(location)) {
-      return LucyRoutePaths.home;
+      return LucyRoutePaths.shellDefault;
     }
 
     return null;

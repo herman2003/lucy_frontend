@@ -445,4 +445,127 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get onboardingEnumTutoringLangMatchDocument => 'Langue du document';
+
+  @override
+  String get documentGenericError =>
+      'Une erreur est survenue avec vos documents. Réessayez.';
+
+  @override
+  String get documentErrorValidation =>
+      'Requête invalide. Vérifiez le fichier et réessayez.';
+
+  @override
+  String get documentErrorUnauthorized =>
+      'Votre session a expiré. Reconnectez-vous.';
+
+  @override
+  String get documentErrorUploadNotReady =>
+      'Le fichier n’est pas encore prêt. Patientez puis réessayez.';
+
+  @override
+  String get documentErrorProcessingNoDelete =>
+      'Traitement en cours. Vous ne pouvez pas supprimer ce document pour l’instant.';
+
+  @override
+  String get documentErrorOneUploadAtATime =>
+      'Un autre téléversement est déjà en cours. Attendez la fin.';
+
+  @override
+  String get documentErrorSearchActiveLimit =>
+      'Vous pouvez activer au maximum 5 documents pour la recherche.';
+
+  @override
+  String get documentErrorTypeNotAllowed =>
+      'Ce type de fichier n’est pas pris en charge.';
+
+  @override
+  String get documentErrorTypeMismatch =>
+      'Le contenu du fichier ne correspond pas au type indiqué.';
+
+  @override
+  String get documentErrorTooLarge =>
+      'Ce fichier est trop volumineux (20 Mo maximum).';
+
+  @override
+  String get documentErrorEmptyExtraction =>
+      'Lucy n’a pas pu extraire assez de texte de ce document.';
+
+  @override
+  String get documentErrorPasswordProtected =>
+      'Ce PDF est protégé par mot de passe. Retirez la protection puis réessayez.';
+
+  @override
+  String get documentErrorOcrRequired =>
+      'Ce document semble être un scan sans texte lisible.';
+
+  @override
+  String get documentErrorNotFound => 'Document introuvable.';
+
+  @override
+  String get documentProcessingFailed =>
+      'Le traitement du document a échoué. Vous pouvez réessayer.';
+
+  @override
+  String get documentErrorUploadAbandoned =>
+      'Le téléversement a expiré. Supprimez l’entrée et réessayez.';
+
+  @override
+  String get documentErrorEmbeddingUnavailable =>
+      'L’indexation est temporairement indisponible. Réessayez plus tard.';
+
+  @override
+  String get documentsAdd => 'Ajouter';
+
+  @override
+  String get documentsAddTitle => 'Ajouter un document';
+
+  @override
+  String get documentsEmpty =>
+      'Aucun document pour l’instant. Ajoutez un PDF, Word ou fichier texte pour commencer.';
+
+  @override
+  String get documentsProcessingHint =>
+      'Lucy traite votre document. Cela peut prendre un moment.';
+
+  @override
+  String get documentsPickFile => 'Choisir un fichier';
+
+  @override
+  String get documentsPickFileRequired =>
+      'Veuillez choisir un fichier à téléverser.';
+
+  @override
+  String get documentsFieldTitle => 'Titre';
+
+  @override
+  String get documentsUpload => 'Téléverser';
+
+  @override
+  String get documentsDownload => 'Télécharger';
+
+  @override
+  String get documentsDelete => 'Supprimer';
+
+  @override
+  String get documentsDialogCancel => 'Annuler';
+
+  @override
+  String get documentsDeleteConfirmTitle => 'Supprimer le document ?';
+
+  @override
+  String documentsDeleteConfirmMessage(String title) {
+    return 'Supprimer « $title » ? Cette action est irréversible.';
+  }
+
+  @override
+  String get documentsStatusUploading => 'Téléversement';
+
+  @override
+  String get documentsStatusProcessing => 'Traitement';
+
+  @override
+  String get documentsStatusReady => 'Prêt';
+
+  @override
+  String get documentsStatusFailed => 'Échec';
 }

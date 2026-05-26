@@ -447,4 +447,127 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get onboardingEnumTutoringLangMatchDocument => 'Sprache des Dokuments';
+
+  @override
+  String get documentGenericError =>
+      'Bei Ihren Dokumenten ist ein Fehler aufgetreten. Bitte erneut versuchen.';
+
+  @override
+  String get documentErrorValidation =>
+      'Ungültige Anfrage. Prüfen Sie die Datei und versuchen Sie es erneut.';
+
+  @override
+  String get documentErrorUnauthorized =>
+      'Ihre Sitzung ist abgelaufen. Bitte melden Sie sich erneut an.';
+
+  @override
+  String get documentErrorUploadNotReady =>
+      'Die Datei ist noch nicht bereit. Warten Sie kurz und versuchen Sie es erneut.';
+
+  @override
+  String get documentErrorProcessingNoDelete =>
+      'Verarbeitung läuft. Dieses Dokument kann noch nicht gelöscht werden.';
+
+  @override
+  String get documentErrorOneUploadAtATime =>
+      'Ein anderer Upload läuft bereits. Bitte warten Sie, bis er abgeschlossen ist.';
+
+  @override
+  String get documentErrorSearchActiveLimit =>
+      'Sie können höchstens 5 Dokumente für die Suche aktivieren.';
+
+  @override
+  String get documentErrorTypeNotAllowed =>
+      'Dieser Dateityp wird nicht unterstützt.';
+
+  @override
+  String get documentErrorTypeMismatch =>
+      'Der Dateiinhalt entspricht nicht dem angegebenen Typ.';
+
+  @override
+  String get documentErrorTooLarge =>
+      'Diese Datei ist zu groß (maximal 20 MB).';
+
+  @override
+  String get documentErrorEmptyExtraction =>
+      'Lucy konnte nicht genug Text aus diesem Dokument extrahieren.';
+
+  @override
+  String get documentErrorPasswordProtected =>
+      'Diese PDF ist passwortgeschützt. Entfernen Sie den Schutz und versuchen Sie es erneut.';
+
+  @override
+  String get documentErrorOcrRequired =>
+      'Dieses Dokument scheint ein Scan ohne lesbaren Text zu sein.';
+
+  @override
+  String get documentErrorNotFound => 'Dokument nicht gefunden.';
+
+  @override
+  String get documentProcessingFailed =>
+      'Die Dokumentverarbeitung ist fehlgeschlagen. Sie können es erneut versuchen.';
+
+  @override
+  String get documentErrorUploadAbandoned =>
+      'Der Upload ist abgelaufen. Löschen Sie den Eintrag und versuchen Sie es erneut.';
+
+  @override
+  String get documentErrorEmbeddingUnavailable =>
+      'Die Indizierung ist vorübergehend nicht verfügbar. Versuchen Sie es später erneut.';
+
+  @override
+  String get documentsAdd => 'Hinzufügen';
+
+  @override
+  String get documentsAddTitle => 'Dokument hinzufügen';
+
+  @override
+  String get documentsEmpty =>
+      'Noch keine Dokumente. Fügen Sie eine PDF-, Word- oder Textdatei hinzu.';
+
+  @override
+  String get documentsProcessingHint =>
+      'Lucy verarbeitet Ihr Dokument. Das kann einen Moment dauern.';
+
+  @override
+  String get documentsPickFile => 'Datei auswählen';
+
+  @override
+  String get documentsPickFileRequired =>
+      'Bitte wählen Sie eine Datei zum Hochladen.';
+
+  @override
+  String get documentsFieldTitle => 'Titel';
+
+  @override
+  String get documentsUpload => 'Hochladen';
+
+  @override
+  String get documentsDownload => 'Herunterladen';
+
+  @override
+  String get documentsDelete => 'Löschen';
+
+  @override
+  String get documentsDialogCancel => 'Abbrechen';
+
+  @override
+  String get documentsDeleteConfirmTitle => 'Dokument löschen?';
+
+  @override
+  String documentsDeleteConfirmMessage(String title) {
+    return '„$title“ löschen? Dies kann nicht rückgängig gemacht werden.';
+  }
+
+  @override
+  String get documentsStatusUploading => 'Hochladen';
+
+  @override
+  String get documentsStatusProcessing => 'Verarbeitung';
+
+  @override
+  String get documentsStatusReady => 'Bereit';
+
+  @override
+  String get documentsStatusFailed => 'Fehlgeschlagen';
 }

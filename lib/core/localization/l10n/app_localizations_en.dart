@@ -445,4 +445,124 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get onboardingEnumTutoringLangMatchDocument =>
       'Match document language';
+
+  @override
+  String get documentGenericError =>
+      'Something went wrong with your documents. Please try again.';
+
+  @override
+  String get documentErrorValidation =>
+      'Invalid request. Check the file and try again.';
+
+  @override
+  String get documentErrorUnauthorized =>
+      'Your session has expired. Please sign in again.';
+
+  @override
+  String get documentErrorUploadNotReady =>
+      'The file is not ready yet. Wait a moment and try again.';
+
+  @override
+  String get documentErrorProcessingNoDelete =>
+      'Processing is in progress. You cannot delete this document yet.';
+
+  @override
+  String get documentErrorOneUploadAtATime =>
+      'Another upload is already in progress. Wait until it finishes.';
+
+  @override
+  String get documentErrorSearchActiveLimit =>
+      'You can activate at most 5 documents for search.';
+
+  @override
+  String get documentErrorTypeNotAllowed => 'This file type is not supported.';
+
+  @override
+  String get documentErrorTypeMismatch =>
+      'The file content does not match the selected type.';
+
+  @override
+  String get documentErrorTooLarge => 'This file is too large (20 MB maximum).';
+
+  @override
+  String get documentErrorEmptyExtraction =>
+      'Lucy could not extract enough text from this document.';
+
+  @override
+  String get documentErrorPasswordProtected =>
+      'This PDF is password-protected. Remove the password and try again.';
+
+  @override
+  String get documentErrorOcrRequired =>
+      'This document looks like a scan without readable text.';
+
+  @override
+  String get documentErrorNotFound => 'Document not found.';
+
+  @override
+  String get documentProcessingFailed =>
+      'Document processing failed. You can try again.';
+
+  @override
+  String get documentErrorUploadAbandoned =>
+      'Upload timed out. Delete the entry and try again.';
+
+  @override
+  String get documentErrorEmbeddingUnavailable =>
+      'Indexing is temporarily unavailable. Try again later.';
+
+  @override
+  String get documentsAdd => 'Add';
+
+  @override
+  String get documentsAddTitle => 'Add a document';
+
+  @override
+  String get documentsEmpty =>
+      'No documents yet. Add a PDF, Word, or text file to get started.';
+
+  @override
+  String get documentsProcessingHint =>
+      'Lucy is processing your document. This may take a moment.';
+
+  @override
+  String get documentsPickFile => 'Choose a file';
+
+  @override
+  String get documentsPickFileRequired => 'Please choose a file to upload.';
+
+  @override
+  String get documentsFieldTitle => 'Title';
+
+  @override
+  String get documentsUpload => 'Upload';
+
+  @override
+  String get documentsDownload => 'Download';
+
+  @override
+  String get documentsDelete => 'Delete';
+
+  @override
+  String get documentsDialogCancel => 'Cancel';
+
+  @override
+  String get documentsDeleteConfirmTitle => 'Delete document?';
+
+  @override
+  String documentsDeleteConfirmMessage(String title) {
+    return 'Delete \"$title\"? This cannot be undone.';
+  }
+
+  @override
+  String get documentsStatusUploading => 'Uploading';
+
+  @override
+  String get documentsStatusProcessing => 'Processing';
+
+  @override
+  String get documentsStatusReady => 'Ready';
+
+  @override
+  String get documentsStatusFailed => 'Failed';
 }

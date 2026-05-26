@@ -359,5 +359,46 @@
   "onboardingEnumTutoringLangFr": "Français",
   "onboardingEnumTutoringLangEn": "Anglais",
   "onboardingEnumTutoringLangDe": "Allemand",
-  "onboardingEnumTutoringLangMatchDocument": "Langue du document"
+  "onboardingEnumTutoringLangMatchDocument": "Langue du document",
+  "documentGenericError": "Une erreur est survenue avec vos documents. Réessayez.",
+  "documentErrorValidation": "Requête invalide. Vérifiez le fichier et réessayez.",
+  "documentErrorUnauthorized": "Votre session a expiré. Reconnectez-vous.",
+  "documentErrorUploadNotReady": "Le fichier n’est pas encore prêt. Patientez puis réessayez.",
+  "documentErrorProcessingNoDelete": "Traitement en cours. Vous ne pouvez pas supprimer ce document pour l’instant.",
+  "documentErrorOneUploadAtATime": "Un autre téléversement est déjà en cours. Attendez la fin.",
+  "documentErrorSearchActiveLimit": "Vous pouvez activer au maximum 5 documents pour la recherche.",
+  "documentErrorTypeNotAllowed": "Ce type de fichier n’est pas pris en charge.",
+  "documentErrorTypeMismatch": "Le contenu du fichier ne correspond pas au type indiqué.",
+  "documentErrorTooLarge": "Ce fichier est trop volumineux (20 Mo maximum).",
+  "documentErrorEmptyExtraction": "Lucy n’a pas pu extraire assez de texte de ce document.",
+  "documentErrorPasswordProtected": "Ce PDF est protégé par mot de passe. Retirez la protection puis réessayez.",
+  "documentErrorOcrRequired": "Ce document semble être un scan sans texte lisible.",
+  "documentErrorNotFound": "Document introuvable.",
+  "documentProcessingFailed": "Le traitement du document a échoué. Vous pouvez réessayer.",
+  "documentErrorUploadAbandoned": "Le téléversement a expiré. Supprimez l’entrée et réessayez.",
+  "documentErrorEmbeddingUnavailable": "L’indexation est temporairement indisponible. Réessayez plus tard.",
+  "documentsAdd": "Ajouter",
+  "documentsAddTitle": "Ajouter un document",
+  "documentsEmpty": "Aucun document pour l’instant. Ajoutez un PDF, Word ou fichier texte pour commencer.",
+  "documentsProcessingHint": "Lucy traite votre document. Cela peut prendre un moment.",
+  "documentsPickFile": "Choisir un fichier",
+  "documentsPickFileRequired": "Veuillez choisir un fichier à téléverser.",
+  "documentsFieldTitle": "Titre",
+  "documentsUpload": "Téléverser",
+  "documentsDownload": "Télécharger",
+  "documentsDelete": "Supprimer",
+  "documentsDialogCancel": "Annuler",
+  "documentsDeleteConfirmTitle": "Supprimer le document ?",
+  "documentsDeleteConfirmMessage": "Supprimer « {title} » ? Cette action est irréversible.",
+  "@documentsDeleteConfirmMessage": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "documentsStatusUploading": "Téléversement",
+  "documentsStatusProcessing": "Traitement",
+  "documentsStatusReady": "Prêt",
+  "documentsStatusFailed": "Échec"
 }

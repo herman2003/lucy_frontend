@@ -909,6 +909,210 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'Langue du document'**
   String get onboardingEnumTutoringLangMatchDocument;
+
+  /// No description provided for @documentGenericError.
+  ///
+  /// In fr, this message translates to:
+  /// **'Une erreur est survenue avec vos documents. Réessayez.'**
+  String get documentGenericError;
+
+  /// No description provided for @documentErrorValidation.
+  ///
+  /// In fr, this message translates to:
+  /// **'Requête invalide. Vérifiez le fichier et réessayez.'**
+  String get documentErrorValidation;
+
+  /// No description provided for @documentErrorUnauthorized.
+  ///
+  /// In fr, this message translates to:
+  /// **'Votre session a expiré. Reconnectez-vous.'**
+  String get documentErrorUnauthorized;
+
+  /// No description provided for @documentErrorUploadNotReady.
+  ///
+  /// In fr, this message translates to:
+  /// **'Le fichier n’est pas encore prêt. Patientez puis réessayez.'**
+  String get documentErrorUploadNotReady;
+
+  /// No description provided for @documentErrorProcessingNoDelete.
+  ///
+  /// In fr, this message translates to:
+  /// **'Traitement en cours. Vous ne pouvez pas supprimer ce document pour l’instant.'**
+  String get documentErrorProcessingNoDelete;
+
+  /// No description provided for @documentErrorOneUploadAtATime.
+  ///
+  /// In fr, this message translates to:
+  /// **'Un autre téléversement est déjà en cours. Attendez la fin.'**
+  String get documentErrorOneUploadAtATime;
+
+  /// No description provided for @documentErrorSearchActiveLimit.
+  ///
+  /// In fr, this message translates to:
+  /// **'Vous pouvez activer au maximum 5 documents pour la recherche.'**
+  String get documentErrorSearchActiveLimit;
+
+  /// No description provided for @documentErrorTypeNotAllowed.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ce type de fichier n’est pas pris en charge.'**
+  String get documentErrorTypeNotAllowed;
+
+  /// No description provided for @documentErrorTypeMismatch.
+  ///
+  /// In fr, this message translates to:
+  /// **'Le contenu du fichier ne correspond pas au type indiqué.'**
+  String get documentErrorTypeMismatch;
+
+  /// No description provided for @documentErrorTooLarge.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ce fichier est trop volumineux (20 Mo maximum).'**
+  String get documentErrorTooLarge;
+
+  /// No description provided for @documentErrorEmptyExtraction.
+  ///
+  /// In fr, this message translates to:
+  /// **'Lucy n’a pas pu extraire assez de texte de ce document.'**
+  String get documentErrorEmptyExtraction;
+
+  /// No description provided for @documentErrorPasswordProtected.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ce PDF est protégé par mot de passe. Retirez la protection puis réessayez.'**
+  String get documentErrorPasswordProtected;
+
+  /// No description provided for @documentErrorOcrRequired.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ce document semble être un scan sans texte lisible.'**
+  String get documentErrorOcrRequired;
+
+  /// No description provided for @documentErrorNotFound.
+  ///
+  /// In fr, this message translates to:
+  /// **'Document introuvable.'**
+  String get documentErrorNotFound;
+
+  /// No description provided for @documentProcessingFailed.
+  ///
+  /// In fr, this message translates to:
+  /// **'Le traitement du document a échoué. Vous pouvez réessayer.'**
+  String get documentProcessingFailed;
+
+  /// No description provided for @documentErrorUploadAbandoned.
+  ///
+  /// In fr, this message translates to:
+  /// **'Le téléversement a expiré. Supprimez l’entrée et réessayez.'**
+  String get documentErrorUploadAbandoned;
+
+  /// No description provided for @documentErrorEmbeddingUnavailable.
+  ///
+  /// In fr, this message translates to:
+  /// **'L’indexation est temporairement indisponible. Réessayez plus tard.'**
+  String get documentErrorEmbeddingUnavailable;
+
+  /// No description provided for @documentsAdd.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ajouter'**
+  String get documentsAdd;
+
+  /// No description provided for @documentsAddTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ajouter un document'**
+  String get documentsAddTitle;
+
+  /// No description provided for @documentsEmpty.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucun document pour l’instant. Ajoutez un PDF, Word ou fichier texte pour commencer.'**
+  String get documentsEmpty;
+
+  /// No description provided for @documentsProcessingHint.
+  ///
+  /// In fr, this message translates to:
+  /// **'Lucy traite votre document. Cela peut prendre un moment.'**
+  String get documentsProcessingHint;
+
+  /// No description provided for @documentsPickFile.
+  ///
+  /// In fr, this message translates to:
+  /// **'Choisir un fichier'**
+  String get documentsPickFile;
+
+  /// No description provided for @documentsPickFileRequired.
+  ///
+  /// In fr, this message translates to:
+  /// **'Veuillez choisir un fichier à téléverser.'**
+  String get documentsPickFileRequired;
+
+  /// No description provided for @documentsFieldTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Titre'**
+  String get documentsFieldTitle;
+
+  /// No description provided for @documentsUpload.
+  ///
+  /// In fr, this message translates to:
+  /// **'Téléverser'**
+  String get documentsUpload;
+
+  /// No description provided for @documentsDownload.
+  ///
+  /// In fr, this message translates to:
+  /// **'Télécharger'**
+  String get documentsDownload;
+
+  /// No description provided for @documentsDelete.
+  ///
+  /// In fr, this message translates to:
+  /// **'Supprimer'**
+  String get documentsDelete;
+
+  /// No description provided for @documentsDialogCancel.
+  ///
+  /// In fr, this message translates to:
+  /// **'Annuler'**
+  String get documentsDialogCancel;
+
+  /// No description provided for @documentsDeleteConfirmTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Supprimer le document ?'**
+  String get documentsDeleteConfirmTitle;
+
+  /// No description provided for @documentsDeleteConfirmMessage.
+  ///
+  /// In fr, this message translates to:
+  /// **'Supprimer « {title} » ? Cette action est irréversible.'**
+  String documentsDeleteConfirmMessage(String title);
+
+  /// No description provided for @documentsStatusUploading.
+  ///
+  /// In fr, this message translates to:
+  /// **'Téléversement'**
+  String get documentsStatusUploading;
+
+  /// No description provided for @documentsStatusProcessing.
+  ///
+  /// In fr, this message translates to:
+  /// **'Traitement'**
+  String get documentsStatusProcessing;
+
+  /// No description provided for @documentsStatusReady.
+  ///
+  /// In fr, this message translates to:
+  /// **'Prêt'**
+  String get documentsStatusReady;
+
+  /// No description provided for @documentsStatusFailed.
+  ///
+  /// In fr, this message translates to:
+  /// **'Échec'**
+  String get documentsStatusFailed;
 }
 
 class _AppLocalizationsDelegate

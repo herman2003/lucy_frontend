@@ -147,5 +147,46 @@
   "onboardingEnumTutoringLangFr": "Französisch",
   "onboardingEnumTutoringLangEn": "Englisch",
   "onboardingEnumTutoringLangDe": "Deutsch",
-  "onboardingEnumTutoringLangMatchDocument": "Sprache des Dokuments"
+  "onboardingEnumTutoringLangMatchDocument": "Sprache des Dokuments",
+  "documentGenericError": "Bei Ihren Dokumenten ist ein Fehler aufgetreten. Bitte erneut versuchen.",
+  "documentErrorValidation": "Ungültige Anfrage. Prüfen Sie die Datei und versuchen Sie es erneut.",
+  "documentErrorUnauthorized": "Ihre Sitzung ist abgelaufen. Bitte melden Sie sich erneut an.",
+  "documentErrorUploadNotReady": "Die Datei ist noch nicht bereit. Warten Sie kurz und versuchen Sie es erneut.",
+  "documentErrorProcessingNoDelete": "Verarbeitung läuft. Dieses Dokument kann noch nicht gelöscht werden.",
+  "documentErrorOneUploadAtATime": "Ein anderer Upload läuft bereits. Bitte warten Sie, bis er abgeschlossen ist.",
+  "documentErrorSearchActiveLimit": "Sie können höchstens 5 Dokumente für die Suche aktivieren.",
+  "documentErrorTypeNotAllowed": "Dieser Dateityp wird nicht unterstützt.",
+  "documentErrorTypeMismatch": "Der Dateiinhalt entspricht nicht dem angegebenen Typ.",
+  "documentErrorTooLarge": "Diese Datei ist zu groß (maximal 20 MB).",
+  "documentErrorEmptyExtraction": "Lucy konnte nicht genug Text aus diesem Dokument extrahieren.",
+  "documentErrorPasswordProtected": "Diese PDF ist passwortgeschützt. Entfernen Sie den Schutz und versuchen Sie es erneut.",
+  "documentErrorOcrRequired": "Dieses Dokument scheint ein Scan ohne lesbaren Text zu sein.",
+  "documentErrorNotFound": "Dokument nicht gefunden.",
+  "documentProcessingFailed": "Die Dokumentverarbeitung ist fehlgeschlagen. Sie können es erneut versuchen.",
+  "documentErrorUploadAbandoned": "Der Upload ist abgelaufen. Löschen Sie den Eintrag und versuchen Sie es erneut.",
+  "documentErrorEmbeddingUnavailable": "Die Indizierung ist vorübergehend nicht verfügbar. Versuchen Sie es später erneut.",
+  "documentsAdd": "Hinzufügen",
+  "documentsAddTitle": "Dokument hinzufügen",
+  "documentsEmpty": "Noch keine Dokumente. Fügen Sie eine PDF-, Word- oder Textdatei hinzu.",
+  "documentsProcessingHint": "Lucy verarbeitet Ihr Dokument. Das kann einen Moment dauern.",
+  "documentsPickFile": "Datei auswählen",
+  "documentsPickFileRequired": "Bitte wählen Sie eine Datei zum Hochladen.",
+  "documentsFieldTitle": "Titel",
+  "documentsUpload": "Hochladen",
+  "documentsDownload": "Herunterladen",
+  "documentsDelete": "Löschen",
+  "documentsDialogCancel": "Abbrechen",
+  "documentsDeleteConfirmTitle": "Dokument löschen?",
+  "documentsDeleteConfirmMessage": "„{title}“ löschen? Dies kann nicht rückgängig gemacht werden.",
+  "@documentsDeleteConfirmMessage": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "documentsStatusUploading": "Hochladen",
+  "documentsStatusProcessing": "Verarbeitung",
+  "documentsStatusReady": "Bereit",
+  "documentsStatusFailed": "Fehlgeschlagen"
 }

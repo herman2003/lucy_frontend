@@ -147,5 +147,46 @@
   "onboardingEnumTutoringLangFr": "French",
   "onboardingEnumTutoringLangEn": "English",
   "onboardingEnumTutoringLangDe": "German",
-  "onboardingEnumTutoringLangMatchDocument": "Match document language"
+  "onboardingEnumTutoringLangMatchDocument": "Match document language",
+  "documentGenericError": "Something went wrong with your documents. Please try again.",
+  "documentErrorValidation": "Invalid request. Check the file and try again.",
+  "documentErrorUnauthorized": "Your session has expired. Please sign in again.",
+  "documentErrorUploadNotReady": "The file is not ready yet. Wait a moment and try again.",
+  "documentErrorProcessingNoDelete": "Processing is in progress. You cannot delete this document yet.",
+  "documentErrorOneUploadAtATime": "Another upload is already in progress. Wait until it finishes.",
+  "documentErrorSearchActiveLimit": "You can activate at most 5 documents for search.",
+  "documentErrorTypeNotAllowed": "This file type is not supported.",
+  "documentErrorTypeMismatch": "The file content does not match the selected type.",
+  "documentErrorTooLarge": "This file is too large (20 MB maximum).",
+  "documentErrorEmptyExtraction": "Lucy could not extract enough text from this document.",
+  "documentErrorPasswordProtected": "This PDF is password-protected. Remove the password and try again.",
+  "documentErrorOcrRequired": "This document looks like a scan without readable text.",
+  "documentErrorNotFound": "Document not found.",
+  "documentProcessingFailed": "Document processing failed. You can try again.",
+  "documentErrorUploadAbandoned": "Upload timed out. Delete the entry and try again.",
+  "documentErrorEmbeddingUnavailable": "Indexing is temporarily unavailable. Try again later.",
+  "documentsAdd": "Add",
+  "documentsAddTitle": "Add a document",
+  "documentsEmpty": "No documents yet. Add a PDF, Word, or text file to get started.",
+  "documentsProcessingHint": "Lucy is processing your document. This may take a moment.",
+  "documentsPickFile": "Choose a file",
+  "documentsPickFileRequired": "Please choose a file to upload.",
+  "documentsFieldTitle": "Title",
+  "documentsUpload": "Upload",
+  "documentsDownload": "Download",
+  "documentsDelete": "Delete",
+  "documentsDialogCancel": "Cancel",
+  "documentsDeleteConfirmTitle": "Delete document?",
+  "documentsDeleteConfirmMessage": "Delete \"{title}\"? This cannot be undone.",
+  "@documentsDeleteConfirmMessage": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "documentsStatusUploading": "Uploading",
+  "documentsStatusProcessing": "Processing",
+  "documentsStatusReady": "Ready",
+  "documentsStatusFailed": "Failed"
 }

@@ -1,38 +1,62 @@
-# Lucy — Liste de tâches (travail actif)
+# Todo — Documents & RAG
 
-> Suivi pour [plan.md](./plan.md) et [SPEC.md](../SPEC.md).  
-> **P0 shell** : livré (2026-05-25).
+> Plan détaillé : [plan.md](./plan.md) · Spec : [SPEC.md](../SPEC.md) §3
+
+**Légende** : `[ ]` à faire · `[x]` fait · `[-]` annulé
 
 ---
 
-## P0 — Shell post-login ✅
+## Checkpoint CP-D1 (upload + liste)
 
-| Statut | ID | Tâche |
+| Statut | Id | Tâche |
 |--------|-----|--------|
-| [x] | S01 | `animated_bottom_navigation_bar` + routes |
-| [x] | S01b | l10n fr/en/de |
-| [x] | S02 | Widget placeholder |
-| [x] | S03a–c | Pages documents / chat / quiz / settings |
-| [x] | S04 | `LucyAppShell` |
-| [x] | S05 | `StatefulShellRoute` |
-| [x] | S06–S06b | Guards + `PostAuthRoute` + finalize → `/documents` |
-| [x] | S07 | `HomePage` retirée |
-| [x] | S08 | Tests + analyze |
-| [x] | S08b | SPEC §2.4 cochée |
-
-**CP-S2 manuel restant** : parcours signup → onboarding → shell sur device réel (optionnel).
+| [x] | DOC-01 | Backend create + list (memory, DTOs, erreurs document) |
+| [x] | DOC-02 | Backend complete, delete, download URL, PATCH searchEnabled (max 5), validations MIME/taille |
+| [x] | DOC-03 | Firebase Storage signed URL + Firestore repository |
+| [x] | DOC-04 | Flutter data layer (models, datasource, repository, l10n erreurs) |
+| [x] | DOC-05 | Flutter UI liste + upload (file_picker, PUT, statuts) |
+| [ ] | DOC-06 | Tests D1 + validation manuelle CP-D1 |
 
 ---
 
-## Backlog (prochaine spec)
+## Checkpoint CP-D2 (indexation RAG)
 
-| Priorité | Brique |
-|----------|--------|
-| P1 | Upload documents (Storage + API) |
-| P2 | Pipeline RAG |
-| P3 | Chat source-based |
-| P4 | Quiz / flashcards |
+| Statut | Id | Tâche |
+|--------|-----|--------|
+| [ ] | DOC-07 | Extracteurs PDF / DOCX / txt / md |
+| [ ] | DOC-08 | Service chunking (pur + tests) |
+| [ ] | DOC-09 | EmbeddingPort Gemini uniquement (`text-embedding-004` défaut) ; fake en test |
+| [ ] | DOC-10 | Pipeline ingestion async après complete |
+| [ ] | DOC-11 | Chunks Firestore + UI refresh processing/failed |
+| [ ] | DOC-12 | Tests D2 + validation manuelle CP-D2 |
 
 ---
 
-*Ce document a été créé avec Cursor (IA).*
+## Checkpoint CP-D3 (retrieval)
+
+| Statut | Id | Tâche |
+|--------|-----|--------|
+| [ ] | DOC-13 | `POST /v1/retrieval/search` top-k |
+| [ ] | DOC-14 | Tests retrieval + validation manuelle CP-D3 |
+
+---
+
+## Phase D4 (backlog — pas dans ce sprint)
+
+| Statut | Id | Tâche |
+|--------|-----|--------|
+| [ ] | DOC-20 | Chat source-based (consomme retrieval) |
+| [ ] | DOC-21 | Quiz depuis corpus |
+
+---
+
+## Vérification globale (chaque tâche)
+
+```bash
+cd backend && npm test
+cd frontend && flutter analyze && flutter test
+```
+
+---
+
+*Ce document a été créé avec Cursor (IA). Todo Documents/RAG — aligné Q1–Q10, 2026-05-26.*

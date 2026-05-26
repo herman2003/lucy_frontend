@@ -19,4 +19,12 @@ abstract final class ApiEndpoints {
   static String get usersMe => '$baseUrl/v1/users/me';
 
   static String get onboardingProgress => '$baseUrl/v1/onboarding/progress';
+
+  static String get documents => '$baseUrl/v1/documents';
+
+  static String document(String id) => '$documents/$id';
+
+  static String documentComplete(String id) => '${document(id)}/complete';
+
+  static String documentDownload(String id) => '${document(id)}/download';
 }

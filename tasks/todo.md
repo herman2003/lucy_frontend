@@ -25,7 +25,7 @@
 |--------|-----|--------|
 | [x] | DOC-07 | Extracteurs PDF / DOCX / txt / md |
 | [x] | DOC-08 | Service chunking (pur + tests) |
-| [ ] | DOC-09 | EmbeddingPort Gemini uniquement (`text-embedding-004` défaut) ; fake en test |
+| [x] | DOC-09 | EmbeddingPort Gemini uniquement (`text-embedding-004` défaut) ; fake en test |
 | [ ] | DOC-10 | Pipeline ingestion async après complete |
 | [ ] | DOC-11 | Chunks Firestore + UI refresh processing/failed |
 | [ ] | DOC-12 | Tests D2 + validation manuelle CP-D2 |

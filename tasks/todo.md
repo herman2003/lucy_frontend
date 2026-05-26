@@ -15,7 +15,7 @@
 | [x] | DOC-03 | Firebase Storage signed URL + Firestore repository |
 | [x] | DOC-04 | Flutter data layer (models, datasource, repository, l10n erreurs) |
 | [x] | DOC-05 | Flutter UI liste + upload (file_picker, PUT, statuts) |
-| [ ] | DOC-06 | Tests D1 + validation manuelle CP-D1 |
+| [x] | DOC-06 | Tests D1 + validation manuelle CP-D1 |
 
 ---
 

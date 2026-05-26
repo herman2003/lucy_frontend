@@ -21,4 +21,13 @@ void main() {
     expect(flowSpec, contains('learnerProfile'));
     expect(flowSpec, contains('isConfigured'));
   });
+
+  test('backend D1 documents flow spec exists', () {
+    expect(
+      File(
+        '../backend/src/features/documents/documents.d1-flow.spec.ts',
+      ).existsSync(),
+      isTrue,
+    );
+  });
 }

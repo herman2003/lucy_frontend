@@ -16,6 +16,7 @@ import 'package:frontend/features/onboarding/utils/onboarding_question_ids.dart'
 
 import '../../../helpers/test_locales.dart';
 import '../../auth/helpers/fake_auth_repository.dart';
+import '../../documents/helpers/documents_test_overrides.dart';
 import '../helpers/fake_onboarding_repository.dart';
 import '../helpers/onboarding_chat_test_overrides.dart';
 
@@ -67,6 +68,7 @@ void main() {
             (ref) => authRepository.authStateChanges(),
           ),
           ...onboardingProviderOverrides(repository: onboardingRepository),
+          ...documentsProviderOverrides(),
         ],
         child: const LucyApp(),
       ),
@@ -118,7 +120,7 @@ void main() {
     expect(onboardingRepository.finalizeCallCount, 1);
     expect(authRepository.isConfigured, isTrue);
     expect(find.byType(DocumentsPage), findsOneWidget);
-    expect(find.text('En cours de réalisation'), findsOneWidget);
+    expect(find.text('Ajouter'), findsOneWidget);
     expect(find.byType(OnboardingChatPage), findsNothing);
   });
 }

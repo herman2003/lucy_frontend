@@ -78,4 +78,17 @@ void main() {
     expect(find.text('Cours de maths'), findsOneWidget);
     expect(find.textContaining('Prêt'), findsOneWidget);
   });
+
+  testWidgets('tapping add FAB opens upload sheet', (tester) async {
+    await pumpDocumentsPage(
+      tester,
+      repository: FakeDocumentsRepository(),
+    );
+
+    await tester.tap(find.text('Ajouter'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Ajouter un document'), findsOneWidget);
+    expect(find.text('Téléverser'), findsOneWidget);
+  });
 }

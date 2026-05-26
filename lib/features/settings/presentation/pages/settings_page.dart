@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../core/constants/lucy_constants.dart';
+import '../../../../core/constants/responsive_constants.dart';
 import '../../../../core/extensions/context.dart';
 import '../../../auth/domain/providers/auth_provider.dart';
 import '../../../../shared/widgets/buttons/lucy_primary_button.dart';
@@ -34,12 +35,15 @@ class SettingsPage extends ConsumerWidget {
                   color: scheme.onSurfaceVariant,
                 ),
               ),
-              const SizedBox(height: LucyConstants.kSpacingLarge),
-              LucyPrimaryButton(
-                text: context.l10n.homeLogout,
-                onPressed: () => ref.read(authServiceProvider).signOut(),
-                width: double.infinity,
-              ),
+              if (MediaQuery.sizeOf(context).width <
+                  ResponsiveConstants.kTabletBreakpoint) ...[
+                const SizedBox(height: LucyConstants.kSpacingLarge),
+                LucyPrimaryButton(
+                  text: context.l10n.homeLogout,
+                  onPressed: () => ref.read(authServiceProvider).signOut(),
+                  width: double.infinity,
+                ),
+              ],
             ],
           ),
         ),

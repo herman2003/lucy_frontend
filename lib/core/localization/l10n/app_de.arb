@@ -52,6 +52,7 @@
   "chatTitle": "Chat",
   "quizTitle": "Quiz",
   "settingsTitle": "Einstellungen",
+  "shellMenu": "Menü",
   "authUnknownError": "Etwas ist schiefgelaufen. Bitte erneut versuchen.",
   "authUserNotFound": "Kein Konto mit dieser E-Mail gefunden.",
   "authWrongPassword": "Falsches Passwort.",

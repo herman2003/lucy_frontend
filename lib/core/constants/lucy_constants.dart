@@ -7,4 +7,8 @@ abstract final class LucyConstants {
   static const double kBorderRadiusAuthCard = 16;
   static const double kButtonBorderRadius = 12;
   static const double kIconMedium = 24;
+  static const double kBorderWidthSmall = 1;
+  static const double kBorderRadiusMedium = 12;
+  static const double kContainerPaddingSmall = 8;
+  static const double kShellSidebarWidth = 280;
 }

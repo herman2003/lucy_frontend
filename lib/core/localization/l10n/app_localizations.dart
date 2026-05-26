@@ -370,6 +370,12 @@ abstract class AppLocalizations {
   /// **'Paramètres'**
   String get settingsTitle;
 
+  /// No description provided for @shellMenu.
+  ///
+  /// In fr, this message translates to:
+  /// **'Menu'**
+  String get shellMenu;
+
   /// Generic auth error
   ///
   /// In fr, this message translates to:

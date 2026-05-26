@@ -150,6 +150,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get settingsTitle => 'Paramètres';
 
   @override
+  String get shellMenu => 'Menu';
+
+  @override
   String get authUnknownError => 'Une erreur est survenue. Réessayez.';
 
   @override

@@ -150,6 +150,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settingsTitle => 'Settings';
 
   @override
+  String get shellMenu => 'Menu';
+
+  @override
   String get authUnknownError => 'Something went wrong. Please try again.';
 
   @override

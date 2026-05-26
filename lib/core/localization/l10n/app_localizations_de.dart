@@ -150,6 +150,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get settingsTitle => 'Einstellungen';
 
   @override
+  String get shellMenu => 'Menü';
+
+  @override
   String get authUnknownError =>
       'Etwas ist schiefgelaufen. Bitte erneut versuchen.';
 

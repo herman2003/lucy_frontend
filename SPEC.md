@@ -52,7 +52,7 @@ Aligné pitch *Personalized learning AI agent based on your own documents* :
 | S1 | Destination post-login | **`/documents`** (plus `/home` comme écran final) |
 | S2 | `/home` | Redirect **`/documents`** (compat) |
 | S3 | Bottom bar | `animated_bottom_navigation_bar`, `colorScheme` |
-| S4 | Layout | Barre du bas sur toutes largeurs MVP ; sidebar desktop = phase 2 |
+| S4 | Layout | &lt; 600 px : barre du bas ; ≥ 600 px : sidebar (ref. telC) ; 600–1024 : menu hamburger |
 | S5 | Placeholder | l10n `pageUnderDevelopment` (fr / en / de) |
 | S6 | Transitions | `NoTransitionPage` entre branches |
 | S7 | Garde | Shell si connecté **et** `isConfigured == true` |
@@ -60,11 +60,11 @@ Aligné pitch *Personalized learning AI agent based on your own documents* :
 ### 2.4 Critères d’acceptation
 
 - [x] `StatefulShellRoute.indexedStack` — 4 branches (`documents`, `chat`, `quiz`, `settings`)
-- [x] `LucyAppShell` — `Scaffold` + `AnimatedBottomNavigationBar` (4 icônes, `activeColor: primary`)
+- [x] `LucyAppShell` — responsive telC : bottom bar mobile + `LucySidebar` desktop
 - [x] Redirect bootstrap : configuré → **`/documents`**
 - [x] `/home` → **`/documents`**
 - [x] Documents / Chat / Quiz : AppBar + `pageUnderDevelopment`
-- [x] Paramètres : **Se déconnecter** + placeholder pour le reste
+- [x] Paramètres : déconnexion mobile (bouton) ; desktop (sidebar) + placeholder
 - [x] l10n : `navDocuments`, `navChat`, `navQuiz`, `navSettings`, titres AppBar, `pageUnderDevelopment`
 - [x] `flutter analyze` + tests router verts
 
@@ -72,6 +72,8 @@ Aligné pitch *Personalized learning AI agent based on your own documents* :
 
 ```
 lib/core/shell/lucy_app_shell.dart
+lib/core/shell/lucy_sidebar.dart
+lib/core/constants/responsive_constants.dart
 lib/core/router/          # paths, names, guards, StatefulShellRoute
 lib/features/documents/presentation/pages/documents_page.dart
 lib/features/chat/presentation/pages/chat_page.dart

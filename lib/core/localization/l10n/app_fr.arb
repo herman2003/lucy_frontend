@@ -161,6 +161,7 @@
   "chatTitle": "Chat",
   "quizTitle": "Quiz",
   "settingsTitle": "Paramètres",
+  "shellMenu": "Menu",
   "authUnknownError": "Une erreur est survenue. Réessayez.",
   "@authUnknownError": {
     "description": "Generic auth error"

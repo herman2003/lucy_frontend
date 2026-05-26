@@ -23,7 +23,7 @@
 
 | Statut | Id | Tâche |
 |--------|-----|--------|
-| [ ] | DOC-07 | Extracteurs PDF / DOCX / txt / md |
+| [x] | DOC-07 | Extracteurs PDF / DOCX / txt / md |
 | [ ] | DOC-08 | Service chunking (pur + tests) |
 | [ ] | DOC-09 | EmbeddingPort Gemini uniquement (`text-embedding-004` défaut) ; fake en test |
 | [ ] | DOC-10 | Pipeline ingestion async après complete |

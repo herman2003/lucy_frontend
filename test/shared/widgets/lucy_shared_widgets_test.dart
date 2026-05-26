@@ -44,21 +44,19 @@ void main() {
     expect(tapped, isTrue);
   });
 
-  testWidgets('LucyTertiaryButton uses colorScheme tertiary', (tester) async {
+  testWidgets('LucyTertiaryButton uses colorScheme primary', (tester) async {
     await tester.pumpWidget(
-      _app(
-        const Scaffold(
-          body: LucyTertiaryButton(text: 'Sign Up'),
-        ),
-      ),
+      _app(const Scaffold(body: LucyTertiaryButton(text: 'Sign Up'))),
     );
 
     final text = tester.widget<Text>(find.text('Sign Up'));
     final scheme = LucyFlexTheme.lightTheme.colorScheme;
-    expect(text.style?.color, scheme.tertiary);
+    expect(text.style?.color, scheme.primary);
   });
 
-  testWidgets('AuthWebLayout constrains form card to max 448px', (tester) async {
+  testWidgets('AuthWebLayout constrains form card to max 448px', (
+    tester,
+  ) async {
     await tester.pumpWidget(
       _app(
         MediaQuery(
@@ -85,11 +83,7 @@ void main() {
 
   testWidgets('LucyLogo shows localized title', (tester) async {
     await tester.pumpWidget(
-      _app(
-        const Scaffold(
-          body: Center(child: LucyLogo()),
-        ),
-      ),
+      _app(const Scaffold(body: Center(child: LucyLogo()))),
     );
 
     expect(find.text('Lucy'), findsOneWidget);

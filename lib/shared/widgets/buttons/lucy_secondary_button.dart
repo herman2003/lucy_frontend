@@ -4,7 +4,7 @@ import '../../../core/constants/lucy_constants.dart';
 import '../../../core/extensions/build_context_responsive.dart';
 import '../../../core/extensions/context.dart';
 
-/// Outlined secondary button using [ColorScheme.secondary].
+/// Outlined secondary button — uses [ColorScheme.primary] by default (swap via theme).
 class LucySecondaryButton extends StatelessWidget {
   const LucySecondaryButton({
     super.key,
@@ -32,8 +32,8 @@ class LucySecondaryButton extends StatelessWidget {
     final button = OutlinedButton(
       onPressed: (isLoading || onPressed == null) ? null : onPressed,
       style: OutlinedButton.styleFrom(
-        foregroundColor: scheme.secondary,
-        side: BorderSide(color: scheme.secondary),
+        foregroundColor: scheme.primary,
+        side: BorderSide(color: scheme.primary),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(LucyConstants.kButtonBorderRadius),
         ),
@@ -48,14 +48,14 @@ class LucySecondaryButton extends StatelessWidget {
               height: LucyConstants.kIconMedium,
               child: CircularProgressIndicator(
                 strokeWidth: 2,
-                valueColor: AlwaysStoppedAnimation<Color>(scheme.secondary),
+                valueColor: AlwaysStoppedAnimation<Color>(scheme.primary),
               ),
             )
           : Text(
               text,
               textAlign: TextAlign.center,
               style: context.textTheme.labelLarge?.copyWith(
-                color: scheme.secondary,
+                color: scheme.primary,
                 fontWeight: FontWeight.w600,
               ),
             ),

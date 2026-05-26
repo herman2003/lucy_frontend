@@ -20,7 +20,8 @@ void main() {
     final configFile = File('firebase.json');
     expect(configFile.existsSync(), isTrue);
 
-    final config = jsonDecode(configFile.readAsStringSync()) as Map<String, dynamic>;
+    final config =
+        jsonDecode(configFile.readAsStringSync()) as Map<String, dynamic>;
     final firestore = config['firestore'] as Map<String, dynamic>?;
 
     expect(firestore, isNotNull);

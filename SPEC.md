@@ -17,7 +17,7 @@
 
 ---
 
-## 2. Shell post-login (P0 — à implémenter maintenant)
+## 2. Shell post-login (P0 — livré)
 
 > **Référence UI** : [`telC_frontend`](../telC/telC_frontend) — `StatefulShellRoute.indexedStack`, `TcAppShell`, `AnimatedBottomNavigationBar`, `pageUnderDevelopment`.
 

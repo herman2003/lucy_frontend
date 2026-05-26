@@ -6,7 +6,9 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   test('CP-2 router redirect when not configured', () {
     expect(
-      File('test/core/router/lucy_router_guards_onboarding_test.dart').existsSync(),
+      File(
+        'test/core/router/lucy_router_guards_onboarding_test.dart',
+      ).existsSync(),
       isTrue,
     );
   });
@@ -29,13 +31,14 @@ void main() {
   test('CP-3 analyze with seven turns is covered by backend flow spec', () {
     expect(
       File(
-        '../backend/src/features/onboarding/onboarding.flow.memory.spec.ts',
+        '../backend/src/features/onboarding/services/onboarding.flow.memory.spec.ts',
       ).existsSync(),
       isTrue,
     );
     expect(
-      File('../backend/src/features/onboarding/onboarding-analyze.spec.ts')
-          .existsSync(),
+      File(
+        '../backend/src/features/onboarding/services/onboarding-analyze.spec.ts',
+      ).existsSync(),
       isTrue,
     );
   });

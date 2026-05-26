@@ -77,7 +77,7 @@ class _LucyTextFieldState extends State<LucyTextField> {
       textInputAction: widget.textInputAction,
       onChanged: widget.onChanged,
       validator: widget.validator,
-      style: context.textTheme.bodyLarge?.copyWith(color: scheme.onSurface),
+     // style: context.textTheme.bodyLarge?.copyWith(color: scheme.onSurface),
       decoration: InputDecoration(
         labelText: widget.label,
         hintText: widget.hintText,

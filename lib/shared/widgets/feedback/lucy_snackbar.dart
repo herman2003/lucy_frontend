@@ -7,7 +7,8 @@ import '../../../core/extensions/build_context_responsive.dart';
 
 /// Overlay feedback for backend / API errors (not field validation).
 ///
-/// Colors from [ColorScheme] only. Field errors stay on [TextFormField] validators.
+/// Semantic colors from [ColorScheme] only: success → [secondary], info →
+/// [primary], error → [error]. Field errors stay on [TextFormField] validators.
 class LucySnackBar {
   LucySnackBar._();
 
@@ -222,50 +223,23 @@ class _LucySnackBarCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final scheme = theme.colorScheme;
-    final isDark = theme.brightness == Brightness.dark;
-
-    final (:surface, :border, :iconBg, :iconFg, :icon, :textColor) = switch (type) {
-      LucySnackBarType.success => (
-        surface: scheme.primary.withValues(alpha: isDark ? 0.22 : 0.12),
-        border: scheme.primary.withValues(alpha: 0.35),
-        iconBg: scheme.primary,
-        iconFg: scheme.onPrimary,
-        icon: Icons.check_circle_outline,
-        textColor: scheme.primary,
-      ),
-      LucySnackBarType.error => (
-        surface: scheme.error.withValues(alpha: isDark ? 0.22 : 0.12),
-        border: scheme.error.withValues(alpha: 0.35),
-        iconBg: scheme.error,
-        iconFg: scheme.onError,
-        icon: Icons.error_outline,
-        textColor: scheme.error,
-      ),
-      LucySnackBarType.info => (
-        surface: scheme.secondary.withValues(alpha: isDark ? 0.22 : 0.12),
-        border: scheme.secondary.withValues(alpha: 0.35),
-        iconBg: scheme.secondary,
-        iconFg: scheme.onSecondary,
-        icon: Icons.info_outline,
-        textColor: scheme.secondary,
-      ),
-    };
-
+    final colors = _snackBarColors(theme.colorScheme, type);
     final width = isMobileLayout ? double.infinity : 360.0;
 
     return Container(
       width: width,
       padding: const EdgeInsets.all(LucyConstants.kSpacingMedium),
       decoration: BoxDecoration(
-        color: surface,
-        borderRadius: BorderRadius.circular(LucyConstants.kBorderRadiusAuthCard),
-        border: Border.all(color: border),
+        color: colors.background,
+        borderRadius: BorderRadius.circular(
+          LucyConstants.kBorderRadiusAuthCard,
+        ),
+        border: Border.all(color: colors.border),
         boxShadow: [
           BoxShadow(
-            color: scheme.shadow.withValues(alpha: 0.12),
-            blurRadius: 12,
-            offset: const Offset(0, 4),
+            color: colors.shadow,
+            blurRadius: 20,
+            offset: const Offset(0, 8),
           ),
         ],
       ),
@@ -275,10 +249,14 @@ class _LucySnackBarCard extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(6),
             decoration: BoxDecoration(
-              color: iconBg,
+              color: colors.iconBackground,
               shape: BoxShape.circle,
             ),
-            child: Icon(icon, color: iconFg, size: LucyConstants.kIconMedium),
+            child: Icon(
+              colors.icon,
+              color: colors.iconForeground,
+              size: LucyConstants.kIconMedium,
+            ),
           ),
           const SizedBox(width: LucyConstants.kSpacingMedium),
           Expanded(
@@ -290,7 +268,7 @@ class _LucySnackBarCard extends StatelessWidget {
                   Text(
                     title!,
                     style: theme.textTheme.titleSmall?.copyWith(
-                      color: textColor,
+                      color: colors.text,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
@@ -299,14 +277,15 @@ class _LucySnackBarCard extends StatelessWidget {
                 Text(
                   message,
                   style: theme.textTheme.bodyMedium?.copyWith(
-                    color: scheme.onSurface,
+                    color: colors.text,
+                    height: 1.4,
                   ),
                 ),
               ],
             ),
           ),
           IconButton(
-            icon: Icon(Icons.close, color: textColor, size: 20),
+            icon: Icon(Icons.close, color: colors.text, size: 20),
             onPressed: onDismiss,
             padding: EdgeInsets.zero,
             constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
@@ -315,4 +294,53 @@ class _LucySnackBarCard extends StatelessWidget {
       ),
     );
   }
+}
+
+/// SnackBar palette derived from [ColorScheme] semantic slots.
+class _SnackBarColors {
+  const _SnackBarColors({
+    required this.background,
+    required this.border,
+    required this.shadow,
+    required this.iconBackground,
+    required this.iconForeground,
+    required this.text,
+    required this.icon,
+  });
+
+  final Color background;
+  final Color border;
+  final Color shadow;
+  final Color iconBackground;
+  final Color iconForeground;
+  final Color text;
+  final IconData icon;
+}
+
+_SnackBarColors _snackBarColors(ColorScheme scheme, LucySnackBarType type) {
+  final accent = switch (type) {
+    LucySnackBarType.success => scheme.secondary,
+    LucySnackBarType.error => scheme.error,
+    LucySnackBarType.info => scheme.primary,
+  };
+  final onAccent = switch (type) {
+    LucySnackBarType.success => scheme.onSecondary,
+    LucySnackBarType.error => scheme.onError,
+    LucySnackBarType.info => scheme.onPrimary,
+  };
+  final icon = switch (type) {
+    LucySnackBarType.success => Icons.check_circle_outline,
+    LucySnackBarType.error => Icons.error_outline,
+    LucySnackBarType.info => Icons.info_outline,
+  };
+
+  return _SnackBarColors(
+    background: accent.withValues(alpha: 0.1),
+    border: accent.withValues(alpha: 0.3),
+    shadow: accent.withValues(alpha: 0.15),
+    iconBackground: accent,
+    iconForeground: onAccent,
+    text: accent,
+    icon: icon,
+  );
 }

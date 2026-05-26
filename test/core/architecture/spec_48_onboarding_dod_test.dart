@@ -23,7 +23,9 @@ void main() {
   });
 
   test('ApiEndpoints exposes all onboarding and user HTTP routes', () {
-    final content = File('lib/core/network/api_endpoints.dart').readAsStringSync();
+    final content = File(
+      'lib/core/network/api_endpoints.dart',
+    ).readAsStringSync();
     for (final segment in [
       'validate-answer',
       'confirm-turn',
@@ -47,8 +49,9 @@ void main() {
   });
 
   test('onboarding pages map caught errors via OnboardingErrorTranslator', () {
-    for (final file
-        in _dartFilesUnder('lib/features/onboarding/presentation/pages/')) {
+    for (final file in _dartFilesUnder(
+      'lib/features/onboarding/presentation/pages/',
+    )) {
       final content = File(file).readAsStringSync();
       if (!content.contains('catch (error)')) {
         continue;
@@ -72,7 +75,9 @@ void main() {
       'onboardingQuestionQLanguage',
     ];
     for (final arb in ['app_fr.arb', 'app_en.arb', 'app_de.arb']) {
-      final content = File('lib/core/localization/l10n/$arb').readAsStringSync();
+      final content = File(
+        'lib/core/localization/l10n/$arb',
+      ).readAsStringSync();
       for (final key in keys) {
         expect(content, contains('"$key"'), reason: '$arb missing $key');
       }
@@ -89,7 +94,9 @@ void main() {
   });
 
   test('router guards reference onboarding paths and isConfigured', () {
-    final content = File('lib/core/router/lucy_router_guards.dart').readAsStringSync();
+    final content = File(
+      'lib/core/router/lucy_router_guards.dart',
+    ).readAsStringSync();
     expect(content, contains('isConfigured'));
     expect(content, contains('LucyRoutePaths.onboarding'));
     expect(content, contains('LucyRoutePaths.onboardingConfirm'));

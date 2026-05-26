@@ -2,12 +2,12 @@ import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
 
-/// Keeps [SPEC.md] §4.8 checkboxes aligned with the delivered onboarding MVP.
+/// Keeps [docs/spec-onboarding-delivered.md] §4.8 checkboxes aligned with onboarding MVP.
 void main() {
   late String specSection48;
 
   setUpAll(() {
-    final spec = File('SPEC.md').readAsStringSync();
+    final spec = File('docs/spec-onboarding-delivered.md').readAsStringSync();
     final start = spec.indexOf('### 4.8 Critères d’acceptation');
     final end = spec.indexOf('### 4.9 Plan de mise en place');
     expect(start, greaterThan(0));
@@ -37,7 +37,7 @@ void main() {
     }
   });
 
-  test('SPEC §4.8 documents MVP vs post-MVP status', () {
+  test('onboarding delivered spec documents MVP status', () {
     expect(specSection48, contains('**Statut MVP**'));
     expect(specSection48, contains('spec_48_onboarding_dod_test.dart'));
   });

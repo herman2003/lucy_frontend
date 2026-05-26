@@ -31,7 +31,7 @@ class AuthWebLayout extends StatelessWidget {
         Expanded(
           child: DecoratedBox(
             decoration: BoxDecoration(
-              gradient: LucyFlexTheme.primaryGradient(context),
+              gradient: LucyFlexTheme.authBrandingGradient(context),
             ),
             child: AuthTwinklingStarsBackground(
               child: Center(

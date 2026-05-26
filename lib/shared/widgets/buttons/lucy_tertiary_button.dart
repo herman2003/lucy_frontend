@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../core/extensions/context.dart';
 
-/// Text link button using [ColorScheme.tertiary].
+/// Text link button — [ColorScheme.primary] by default (theme can diverge later).
 class LucyTertiaryButton extends StatelessWidget {
   const LucyTertiaryButton({
     super.key,
@@ -22,7 +22,7 @@ class LucyTertiaryButton extends StatelessWidget {
     final button = TextButton(
       onPressed: onPressed,
       style: TextButton.styleFrom(
-        foregroundColor: scheme.tertiary,
+        foregroundColor: scheme.primary,
         padding: EdgeInsets.zero,
         minimumSize: Size.zero,
         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
@@ -30,7 +30,7 @@ class LucyTertiaryButton extends StatelessWidget {
       child: Text(
         text,
         style: context.textTheme.bodyMedium?.copyWith(
-          color: scheme.tertiary,
+          color: scheme.primary,
           fontWeight: FontWeight.w600,
           decoration: TextDecoration.none,
         ),

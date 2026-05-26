@@ -27,31 +27,31 @@ LucyDioClient lucyDioClient(Ref ref) {
 }
 
 @Riverpod(keepAlive: true)
-OnboardingValidateRemoteDataSource onboardingValidateRemoteDataSource(
-  Ref ref,
-) {
-  return OnboardingValidateRemoteDataSource(ref.watch(lucyDioClientProvider).dio);
+OnboardingValidateRemoteDataSource onboardingValidateRemoteDataSource(Ref ref) {
+  return OnboardingValidateRemoteDataSource(
+    ref.watch(lucyDioClientProvider).dio,
+  );
 }
 
 @Riverpod(keepAlive: true)
-OnboardingConfirmRemoteDataSource onboardingConfirmRemoteDataSource(
-  Ref ref,
-) {
-  return OnboardingConfirmRemoteDataSource(ref.watch(lucyDioClientProvider).dio);
+OnboardingConfirmRemoteDataSource onboardingConfirmRemoteDataSource(Ref ref) {
+  return OnboardingConfirmRemoteDataSource(
+    ref.watch(lucyDioClientProvider).dio,
+  );
 }
 
 @Riverpod(keepAlive: true)
-OnboardingAnalyzeRemoteDataSource onboardingAnalyzeRemoteDataSource(
-  Ref ref,
-) {
-  return OnboardingAnalyzeRemoteDataSource(ref.watch(lucyDioClientProvider).dio);
+OnboardingAnalyzeRemoteDataSource onboardingAnalyzeRemoteDataSource(Ref ref) {
+  return OnboardingAnalyzeRemoteDataSource(
+    ref.watch(lucyDioClientProvider).dio,
+  );
 }
 
 @Riverpod(keepAlive: true)
-OnboardingFinalizeRemoteDataSource onboardingFinalizeRemoteDataSource(
-  Ref ref,
-) {
-  return OnboardingFinalizeRemoteDataSource(ref.watch(lucyDioClientProvider).dio);
+OnboardingFinalizeRemoteDataSource onboardingFinalizeRemoteDataSource(Ref ref) {
+  return OnboardingFinalizeRemoteDataSource(
+    ref.watch(lucyDioClientProvider).dio,
+  );
 }
 
 @Riverpod(keepAlive: true)

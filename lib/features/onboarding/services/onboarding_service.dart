@@ -14,9 +14,9 @@ class OnboardingService {
     required OnboardingRepository repository,
     required OnboardingProgressRepository progressRepository,
     required OnboardingLocalDraftRepository localDraftRepository,
-  })  : _repository = repository,
-        _progressRepository = progressRepository,
-        _localDraftRepository = localDraftRepository;
+  }) : _repository = repository,
+       _progressRepository = progressRepository,
+       _localDraftRepository = localDraftRepository;
 
   final OnboardingRepository _repository;
   final OnboardingProgressRepository _progressRepository;
@@ -68,10 +68,7 @@ class OnboardingService {
     required String locale,
     bool profileReduced = false,
   }) {
-    return _repository.analyze(
-      locale: locale,
-      profileReduced: profileReduced,
-    );
+    return _repository.analyze(locale: locale, profileReduced: profileReduced);
   }
 
   Future<FinalizeOnboardingResult> finalizeOnboarding() {

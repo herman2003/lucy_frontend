@@ -3,9 +3,8 @@ import 'package:flutter/material.dart';
 import '../../../core/constants/lucy_constants.dart';
 import '../../../core/extensions/build_context_responsive.dart';
 import '../../../core/extensions/context.dart';
-import '../../../core/theme/lucy_flex_theme.dart';
 
-/// Primary action button (gradient from [ColorScheme]).
+/// Primary action button — flat [ColorScheme.primary] (no gradient).
 class LucyPrimaryButton extends StatelessWidget {
   const LucyPrimaryButton({
     super.key,
@@ -26,7 +25,8 @@ class LucyPrimaryButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final scheme = context.colorScheme;
     final enabled = !isLoading && onPressed != null;
-    final buttonWidth = width ??
+    final buttonWidth =
+        width ??
         (context.isDesktop
             ? context.screenWidth * 0.2.clamp(0.15, 0.3)
             : context.screenWidth * 0.85);
@@ -56,10 +56,12 @@ class LucyPrimaryButton extends StatelessWidget {
         borderRadius: BorderRadius.circular(LucyConstants.kButtonBorderRadius),
         child: Ink(
           decoration: BoxDecoration(
-            gradient: enabled ? LucyFlexTheme.primaryGradient(context) : null,
-            color: enabled ? null : scheme.onSurface.withValues(alpha: 0.12),
-            borderRadius:
-                BorderRadius.circular(LucyConstants.kButtonBorderRadius),
+            color: enabled
+                ? scheme.primary
+                : scheme.onSurface.withValues(alpha: 0.12),
+            borderRadius: BorderRadius.circular(
+              LucyConstants.kButtonBorderRadius,
+            ),
           ),
           child: Container(
             alignment: Alignment.center,

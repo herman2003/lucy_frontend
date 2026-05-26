@@ -8,13 +8,14 @@ abstract final class OnboardingProgressMapper {
     final transcript = _parseTranscript(data['transcript']);
     final status = data['onboardingStatus'];
     final onboardingStatus = status is String ? status : 'in_progress';
-    final pendingProfile =
-        PendingLearnerProfileMapper.fromFirestore(data['pendingLearnerProfile']);
+    final pendingProfile = PendingLearnerProfileMapper.fromFirestore(
+      data['pendingLearnerProfile'],
+    );
     final pendingSummary = data['pendingSummaryForUser'];
     final pendingSummaryForUser =
         pendingSummary is String && pendingSummary.trim().isNotEmpty
-            ? pendingSummary.trim()
-            : null;
+        ? pendingSummary.trim()
+        : null;
 
     if (transcript.isEmpty &&
         onboardingStatus != 'awaiting_final_confirm' &&

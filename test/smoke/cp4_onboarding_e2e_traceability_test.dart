@@ -15,7 +15,7 @@ void main() {
 
   test('backend memory flow persists transcript, profile, and isConfigured', () {
     final flowSpec = File(
-      '../backend/src/features/onboarding/onboarding.flow.memory.spec.ts',
+      '../backend/src/features/onboarding/services/onboarding.flow.memory.spec.ts',
     ).readAsStringSync();
     expect(flowSpec, contains('onboardingTranscript'));
     expect(flowSpec, contains('learnerProfile'));

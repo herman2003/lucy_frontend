@@ -36,7 +36,7 @@
 
 | Statut | Id | Tâche |
 |--------|-----|--------|
-| [ ] | DOC-13 | `POST /v1/retrieval/search` top-k |
+| [x] | DOC-13 | `POST /v1/retrieval/search` top-k |
 | [ ] | DOC-14 | Tests retrieval + validation manuelle CP-D3 |
 
 ---

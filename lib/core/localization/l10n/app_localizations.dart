@@ -934,6 +934,12 @@ abstract class AppLocalizations {
   /// **'Le fichier n’est pas encore prêt. Patientez puis réessayez.'**
   String get documentErrorUploadNotReady;
 
+  /// No description provided for @documentErrorUploadNetwork.
+  ///
+  /// In fr, this message translates to:
+  /// **'Échec de l’envoi vers le stockage (réseau ou CORS). Configurez le CORS du bucket Firebase Storage pour le web.'**
+  String get documentErrorUploadNetwork;
+
   /// No description provided for @documentErrorProcessingNoDelete.
   ///
   /// In fr, this message translates to:
@@ -1113,6 +1119,138 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'Échec'**
   String get documentsStatusFailed;
+
+  /// Default title for a new chat thread
+  ///
+  /// In fr, this message translates to:
+  /// **'Nouvelle conversation'**
+  String get chatDefaultTitle;
+
+  /// No description provided for @chatNewConversation.
+  ///
+  /// In fr, this message translates to:
+  /// **'Nouvelle conversation'**
+  String get chatNewConversation;
+
+  /// No description provided for @chatSourcesTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Sources'**
+  String get chatSourcesTitle;
+
+  /// No description provided for @chatSourcePages.
+  ///
+  /// In fr, this message translates to:
+  /// **'Pages {pageStart}–{pageEnd}'**
+  String chatSourcePages(int pageStart, int pageEnd);
+
+  /// No description provided for @chatEmptyHint.
+  ///
+  /// In fr, this message translates to:
+  /// **'Posez une question sur vos documents actifs.'**
+  String get chatEmptyHint;
+
+  /// No description provided for @chatComposerHint.
+  ///
+  /// In fr, this message translates to:
+  /// **'Votre message…'**
+  String get chatComposerHint;
+
+  /// No description provided for @chatSend.
+  ///
+  /// In fr, this message translates to:
+  /// **'Envoyer'**
+  String get chatSend;
+
+  /// No description provided for @chatRetry.
+  ///
+  /// In fr, this message translates to:
+  /// **'Réessayer'**
+  String get chatRetry;
+
+  /// No description provided for @chatLoading.
+  ///
+  /// In fr, this message translates to:
+  /// **'Chargement…'**
+  String get chatLoading;
+
+  /// No description provided for @chatOfflineBanner.
+  ///
+  /// In fr, this message translates to:
+  /// **'Hors ligne — affichage du cache local. L’envoi est désactivé.'**
+  String get chatOfflineBanner;
+
+  /// No description provided for @chatNoCorpusTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucun document actif'**
+  String get chatNoCorpusTitle;
+
+  /// No description provided for @chatNoCorpusMessage.
+  ///
+  /// In fr, this message translates to:
+  /// **'Activez la recherche sur au moins un document prêt dans l’onglet Documents.'**
+  String get chatNoCorpusMessage;
+
+  /// No description provided for @chatNoCorpusCta.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aller aux documents'**
+  String get chatNoCorpusCta;
+
+  /// No description provided for @chatErrorNoActiveDocuments.
+  ///
+  /// In fr, this message translates to:
+  /// **'Activez au moins un document pour discuter avec Lucy.'**
+  String get chatErrorNoActiveDocuments;
+
+  /// No description provided for @chatErrorLearnerProfileMissing.
+  ///
+  /// In fr, this message translates to:
+  /// **'Terminez l’onboarding pour utiliser le chat.'**
+  String get chatErrorLearnerProfileMissing;
+
+  /// No description provided for @chatErrorUnauthorized.
+  ///
+  /// In fr, this message translates to:
+  /// **'Session expirée. Reconnectez-vous.'**
+  String get chatErrorUnauthorized;
+
+  /// No description provided for @chatErrorNotFound.
+  ///
+  /// In fr, this message translates to:
+  /// **'Conversation introuvable.'**
+  String get chatErrorNotFound;
+
+  /// No description provided for @chatErrorInvalidMessage.
+  ///
+  /// In fr, this message translates to:
+  /// **'Message invalide.'**
+  String get chatErrorInvalidMessage;
+
+  /// No description provided for @chatErrorLlmUnavailable.
+  ///
+  /// In fr, this message translates to:
+  /// **'Lucy est temporairement indisponible. Réessayez plus tard.'**
+  String get chatErrorLlmUnavailable;
+
+  /// No description provided for @chatErrorInvalidResponse.
+  ///
+  /// In fr, this message translates to:
+  /// **'Réponse invalide du serveur. Réessayez.'**
+  String get chatErrorInvalidResponse;
+
+  /// No description provided for @chatErrorStreamInProgress.
+  ///
+  /// In fr, this message translates to:
+  /// **'Un message est déjà en cours de génération.'**
+  String get chatErrorStreamInProgress;
+
+  /// No description provided for @chatGenericError.
+  ///
+  /// In fr, this message translates to:
+  /// **'Une erreur est survenue. Réessayez.'**
+  String get chatGenericError;
 }
 
 class _AppLocalizationsDelegate

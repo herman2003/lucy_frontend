@@ -152,6 +152,7 @@
   "documentErrorValidation": "Invalid request. Check the file and try again.",
   "documentErrorUnauthorized": "Your session has expired. Please sign in again.",
   "documentErrorUploadNotReady": "The file is not ready yet. Wait a moment and try again.",
+  "documentErrorUploadNetwork": "Upload to storage failed (network or CORS). Check Firebase Storage CORS for web.",
   "documentErrorProcessingNoDelete": "Processing is in progress. You cannot delete this document yet.",
   "documentErrorOneUploadAtATime": "Another upload is already in progress. Wait until it finishes.",
   "documentErrorSearchActiveLimit": "You can activate at most 5 documents for search.",
@@ -188,5 +189,40 @@
   "documentsStatusUploading": "Uploading",
   "documentsStatusProcessing": "Processing",
   "documentsStatusReady": "Ready",
-  "documentsStatusFailed": "Failed"
+  "documentsStatusFailed": "Failed",
+  "chatDefaultTitle": "New conversation",
+  "@chatDefaultTitle": {
+    "description": "Default title for a new chat thread"
+  },
+  "chatNewConversation": "New conversation",
+  "chatSourcesTitle": "Sources",
+  "chatSourcePages": "Pages {pageStart}–{pageEnd}",
+  "@chatSourcePages": {
+    "placeholders": {
+      "pageStart": {
+        "type": "int"
+      },
+      "pageEnd": {
+        "type": "int"
+      }
+    }
+  },
+  "chatEmptyHint": "Ask a question about your active documents.",
+  "chatComposerHint": "Your message…",
+  "chatSend": "Send",
+  "chatRetry": "Retry",
+  "chatLoading": "Loading…",
+  "chatOfflineBanner": "Offline — showing cached data. Sending is disabled.",
+  "chatNoCorpusTitle": "No active documents",
+  "chatNoCorpusMessage": "Enable search on at least one ready document in the Documents tab.",
+  "chatNoCorpusCta": "Go to documents",
+  "chatErrorNoActiveDocuments": "Enable at least one document to chat with Lucy.",
+  "chatErrorLearnerProfileMissing": "Complete onboarding to use chat.",
+  "chatErrorUnauthorized": "Session expired. Please sign in again.",
+  "chatErrorNotFound": "Conversation not found.",
+  "chatErrorInvalidMessage": "Invalid message.",
+  "chatErrorLlmUnavailable": "Lucy is temporarily unavailable. Try again later.",
+  "chatErrorInvalidResponse": "Invalid server response. Try again.",
+  "chatErrorStreamInProgress": "A reply is already being generated.",
+  "chatGenericError": "Something went wrong. Please try again."
 }

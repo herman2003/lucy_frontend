@@ -364,6 +364,7 @@
   "documentErrorValidation": "Requête invalide. Vérifiez le fichier et réessayez.",
   "documentErrorUnauthorized": "Votre session a expiré. Reconnectez-vous.",
   "documentErrorUploadNotReady": "Le fichier n’est pas encore prêt. Patientez puis réessayez.",
+  "documentErrorUploadNetwork": "Échec de l’envoi vers le stockage (réseau ou CORS). Configurez le CORS du bucket Firebase Storage pour le web.",
   "documentErrorProcessingNoDelete": "Traitement en cours. Vous ne pouvez pas supprimer ce document pour l’instant.",
   "documentErrorOneUploadAtATime": "Un autre téléversement est déjà en cours. Attendez la fin.",
   "documentErrorSearchActiveLimit": "Vous pouvez activer au maximum 5 documents pour la recherche.",
@@ -400,5 +401,40 @@
   "documentsStatusUploading": "Téléversement",
   "documentsStatusProcessing": "Traitement",
   "documentsStatusReady": "Prêt",
-  "documentsStatusFailed": "Échec"
+  "documentsStatusFailed": "Échec",
+  "chatDefaultTitle": "Nouvelle conversation",
+  "@chatDefaultTitle": {
+    "description": "Default title for a new chat thread"
+  },
+  "chatNewConversation": "Nouvelle conversation",
+  "chatSourcesTitle": "Sources",
+  "chatSourcePages": "Pages {pageStart}–{pageEnd}",
+  "@chatSourcePages": {
+    "placeholders": {
+      "pageStart": {
+        "type": "int"
+      },
+      "pageEnd": {
+        "type": "int"
+      }
+    }
+  },
+  "chatEmptyHint": "Posez une question sur vos documents actifs.",
+  "chatComposerHint": "Votre message…",
+  "chatSend": "Envoyer",
+  "chatRetry": "Réessayer",
+  "chatLoading": "Chargement…",
+  "chatOfflineBanner": "Hors ligne — affichage du cache local. L’envoi est désactivé.",
+  "chatNoCorpusTitle": "Aucun document actif",
+  "chatNoCorpusMessage": "Activez la recherche sur au moins un document prêt dans l’onglet Documents.",
+  "chatNoCorpusCta": "Aller aux documents",
+  "chatErrorNoActiveDocuments": "Activez au moins un document pour discuter avec Lucy.",
+  "chatErrorLearnerProfileMissing": "Terminez l’onboarding pour utiliser le chat.",
+  "chatErrorUnauthorized": "Session expirée. Reconnectez-vous.",
+  "chatErrorNotFound": "Conversation introuvable.",
+  "chatErrorInvalidMessage": "Message invalide.",
+  "chatErrorLlmUnavailable": "Lucy est temporairement indisponible. Réessayez plus tard.",
+  "chatErrorInvalidResponse": "Réponse invalide du serveur. Réessayez.",
+  "chatErrorStreamInProgress": "Un message est déjà en cours de génération.",
+  "chatGenericError": "Une erreur est survenue. Réessayez."
 }

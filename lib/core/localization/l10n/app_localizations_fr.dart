@@ -463,6 +463,10 @@ class AppLocalizationsFr extends AppLocalizations {
       'Le fichier n’est pas encore prêt. Patientez puis réessayez.';
 
   @override
+  String get documentErrorUploadNetwork =>
+      'Échec de l’envoi vers le stockage (réseau ou CORS). Configurez le CORS du bucket Firebase Storage pour le web.';
+
+  @override
   String get documentErrorProcessingNoDelete =>
       'Traitement en cours. Vous ne pouvez pas supprimer ce document pour l’instant.';
 
@@ -568,4 +572,79 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get documentsStatusFailed => 'Échec';
+
+  @override
+  String get chatDefaultTitle => 'Nouvelle conversation';
+
+  @override
+  String get chatNewConversation => 'Nouvelle conversation';
+
+  @override
+  String get chatSourcesTitle => 'Sources';
+
+  @override
+  String chatSourcePages(int pageStart, int pageEnd) {
+    return 'Pages $pageStart–$pageEnd';
+  }
+
+  @override
+  String get chatEmptyHint => 'Posez une question sur vos documents actifs.';
+
+  @override
+  String get chatComposerHint => 'Votre message…';
+
+  @override
+  String get chatSend => 'Envoyer';
+
+  @override
+  String get chatRetry => 'Réessayer';
+
+  @override
+  String get chatLoading => 'Chargement…';
+
+  @override
+  String get chatOfflineBanner =>
+      'Hors ligne — affichage du cache local. L’envoi est désactivé.';
+
+  @override
+  String get chatNoCorpusTitle => 'Aucun document actif';
+
+  @override
+  String get chatNoCorpusMessage =>
+      'Activez la recherche sur au moins un document prêt dans l’onglet Documents.';
+
+  @override
+  String get chatNoCorpusCta => 'Aller aux documents';
+
+  @override
+  String get chatErrorNoActiveDocuments =>
+      'Activez au moins un document pour discuter avec Lucy.';
+
+  @override
+  String get chatErrorLearnerProfileMissing =>
+      'Terminez l’onboarding pour utiliser le chat.';
+
+  @override
+  String get chatErrorUnauthorized => 'Session expirée. Reconnectez-vous.';
+
+  @override
+  String get chatErrorNotFound => 'Conversation introuvable.';
+
+  @override
+  String get chatErrorInvalidMessage => 'Message invalide.';
+
+  @override
+  String get chatErrorLlmUnavailable =>
+      'Lucy est temporairement indisponible. Réessayez plus tard.';
+
+  @override
+  String get chatErrorInvalidResponse =>
+      'Réponse invalide du serveur. Réessayez.';
+
+  @override
+  String get chatErrorStreamInProgress =>
+      'Un message est déjà en cours de génération.';
+
+  @override
+  String get chatGenericError => 'Une erreur est survenue. Réessayez.';
 }

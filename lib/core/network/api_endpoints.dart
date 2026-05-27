@@ -26,7 +26,20 @@ abstract final class ApiEndpoints {
 
   static String documentComplete(String id) => '${document(id)}/complete';
 
+  static String documentUpload(String id) => '${document(id)}/upload';
+
   static String documentReprocess(String id) => '${document(id)}/reprocess';
 
   static String documentDownload(String id) => '${document(id)}/download';
+
+  static String get chats => '$baseUrl/v1/chats';
+
+  static String chat(String chatId) => '$chats/$chatId';
+
+  static String chatMessages(String chatId) => '${chat(chatId)}/messages';
+
+  static String chatMessagesStream(String chatId) =>
+      '${chatMessages(chatId)}/stream';
+
+  static String get chatEligibility => '$chats/eligibility';
 }

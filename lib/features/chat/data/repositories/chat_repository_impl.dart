@@ -2,13 +2,16 @@ import '../../domain/entities/chat_eligibility.dart';
 import '../../domain/entities/chat_message.dart';
 import '../../domain/entities/chat_thread.dart';
 import '../../domain/repositories/chat_repository.dart';
+import '../../domain/entities/chat_stream_event.dart';
 import '../datasources/chat_api_remote_data_source.dart';
+import '../datasources/chat_stream_remote_data_source.dart';
 import '../mappers/chat_mapper.dart';
 
 class ChatRepositoryImpl implements ChatRepository {
-  ChatRepositoryImpl(this._remote);
+  ChatRepositoryImpl(this._remote, this._streamRemote);
 
   final ChatApiRemoteDataSource _remote;
+  final ChatStreamRemoteDataSource _streamRemote;
 
   @override
   Future<List<ChatThread>> listThreads() async {
@@ -44,4 +47,8 @@ class ChatRepositoryImpl implements ChatRepository {
 
   @override
   Future<void> deleteThread(String chatId) => _remote.deleteThread(chatId);
+
+  @override
+  Stream<ChatStreamEvent> streamMessage(String chatId, String content) =>
+      _streamRemote.streamMessage(chatId, content);
 }

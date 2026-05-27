@@ -9,6 +9,8 @@ class LucyRoutePaths {
   static const String home = '/home';
   static const String documents = '/documents';
   static const String chat = '/chat';
+
+  static String chatThread(String chatId) => '$chat/$chatId';
   static const String quiz = '/quiz';
   static const String settings = '/settings';
   static const String onboarding = '/onboarding';
@@ -24,5 +26,10 @@ class LucyRoutePaths {
     settings,
   };
 
-  static bool isShellPath(String location) => shellPaths.contains(location);
+  static bool isShellPath(String location) {
+    if (shellPaths.contains(location)) {
+      return true;
+    }
+    return location.startsWith('$chat/');
+  }
 }

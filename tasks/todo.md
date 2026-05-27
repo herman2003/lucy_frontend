@@ -26,7 +26,7 @@
 | Statut | Id | Tâche |
 |--------|-----|--------|
 | [x] | CHAT-07 | Flutter data layer + `ApiEndpoints` + l10n + `chat_error_translator` |
-| [ ] | CHAT-08 | Client SSE + `ChatPage` + bulles + `ChatSourceCard` |
+| [x] | CHAT-08 | Client SSE + `ChatPage` + bulles + `ChatSourceCard` |
 
 ---
 

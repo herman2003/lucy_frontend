@@ -2,6 +2,8 @@ import 'package:frontend/features/chat/domain/entities/chat_eligibility.dart';
 import 'package:frontend/features/chat/domain/entities/chat_message.dart';
 import 'package:frontend/features/chat/domain/entities/chat_message_role.dart';
 import 'package:frontend/features/chat/domain/entities/chat_message_status.dart';
+import 'package:frontend/features/chat/domain/entities/chat_source.dart';
+import 'package:frontend/features/chat/domain/entities/chat_stream_event.dart';
 import 'package:frontend/features/chat/domain/entities/chat_thread.dart';
 import 'package:frontend/features/chat/domain/repositories/chat_repository.dart';
 
@@ -81,11 +83,56 @@ class FakeChatRepository implements ChatRepository {
     final list = _messagesByChatId.putIfAbsent(chatId, () => []);
     list.add(message);
   }
+
+  @override
+  Stream<ChatStreamEvent> streamMessage(String chatId, String content) async* {
+    final now = DateTime.now().toUtc().toIso8601String();
+    final userId = 'user-msg-${_messagesByChatId[chatId]?.length ?? 0}';
+    final userMessage = ChatMessage(
+      id: userId,
+      role: ChatMessageRole.user,
+      content: content,
+      createdAt: now,
+    );
+    yield ChatStreamUserMessageEvent(userMessage);
+
+    const deltas = ['Bonjour', ' ', 'Lucy'];
+    for (final delta in deltas) {
+      yield ChatStreamTextDeltaEvent(delta);
+    }
+
+    const sources = [
+      ChatSource(
+        documentId: 'doc-1',
+        title: 'Cours PDF',
+        chunkId: 'chunk-1',
+        excerpt: 'Extrait de test.',
+        pageStart: 2,
+        pageEnd: 5,
+      ),
+    ];
+    yield const ChatStreamSourcesEvent(sources);
+
+    final assistant = fakeAssistantMessage(
+      id: 'assistant-$userId',
+      content: 'Bonjour Lucy',
+      sources: sources,
+    );
+    yield ChatStreamDoneEvent(
+      userMessageId: userId,
+      assistantMessage: assistant,
+    );
+
+    final list = _messagesByChatId.putIfAbsent(chatId, () => []);
+    list.add(userMessage);
+    list.add(assistant);
+  }
 }
 
 ChatMessage fakeAssistantMessage({
   required String id,
   required String content,
+  List<ChatSource> sources = const [],
 }) {
   return ChatMessage(
     id: id,
@@ -93,6 +140,6 @@ ChatMessage fakeAssistantMessage({
     content: content,
     createdAt: DateTime.now().toUtc().toIso8601String(),
     status: ChatMessageStatus.completed,
-    sources: const [],
+    sources: sources,
   );
 }

@@ -86,8 +86,22 @@ GoRouter lucyRouter(Ref ref) {
               GoRoute(
                 name: LucyRouteNames.chat,
                 path: LucyRoutePaths.chat,
-                pageBuilder: (context, state) =>
-                    const NoTransitionPage(child: ChatPage()),
+                pageBuilder: (context, state) => NoTransitionPage(
+                  child: ChatPage(
+                    chatId: state.pathParameters['chatId'],
+                  ),
+                ),
+                routes: [
+                  GoRoute(
+                    name: LucyRouteNames.chatThread,
+                    path: ':chatId',
+                    pageBuilder: (context, state) => NoTransitionPage(
+                      child: ChatPage(
+                        chatId: state.pathParameters['chatId'],
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ],
           ),

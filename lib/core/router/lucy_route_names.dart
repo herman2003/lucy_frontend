@@ -9,6 +9,7 @@ class LucyRouteNames {
   static const String home = 'home';
   static const String documents = 'documents';
   static const String chat = 'chat';
+  static const String chatThread = 'chatThread';
   static const String quiz = 'quiz';
   static const String settings = 'settings';
   static const String onboarding = 'onboarding';

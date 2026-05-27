@@ -1,5 +1,6 @@
 import '../domain/entities/chat_eligibility.dart';
 import '../domain/entities/chat_message.dart';
+import '../domain/entities/chat_stream_event.dart';
 import '../domain/entities/chat_thread.dart';
 import '../domain/repositories/chat_repository.dart';
 
@@ -27,4 +28,7 @@ class ChatService {
   Future<ChatEligibility> getEligibility() => _repository.getEligibility();
 
   Future<void> deleteThread(String chatId) => _repository.deleteThread(chatId);
+
+  Stream<ChatStreamEvent> streamMessage(String chatId, String content) =>
+      _repository.streamMessage(chatId, content);
 }

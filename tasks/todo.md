@@ -1,6 +1,6 @@
 # Todo — Lucy frontend
 
-> **Chat (actif)** : [plan-chat.md](./plan-chat.md) · **Index plans** : [plan.md](./plan.md)
+> **Chat** : terminé · **Quiz** : en attente spec · **Index plans** : [plan.md](./plan.md)
 
 **Légende** : `[ ]` à faire · `[x]` fait · `[-]` annulé
 
@@ -51,7 +51,7 @@
 
 | Statut | Id | Tâche |
 |--------|-----|--------|
-| [ ] | QUIZ-01 | Quiz depuis corpus (spec séparée) |
+| [ ] | QUIZ-01 | Quiz depuis corpus — **bloqué** : rédiger `docs/spec-quiz.md` avant implémentation |
 
 ---
 
@@ -60,7 +60,7 @@
 | Statut | Id | Tâche |
 |--------|-----|--------|
 | [x] | R2-01 → R2-05 | Config + adapter + docs |
-| [ ] | R2-06 | Validation manuelle web + mobile |
+| [ ] | R2-06 | Validation manuelle web + mobile ([cp-r2-manual-checklist.md](../docs/cp-r2-manual-checklist.md)) |
 
 ---
 

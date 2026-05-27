@@ -35,7 +35,7 @@
 | Statut | Id | Tâche |
 |--------|-----|--------|
 | [x] | CHAT-09 | Miroir `SharedPreferences` + resync + purge logout + offline |
-| [ ] | CHAT-10 | Bannière « activer documents » + tests + checklist manuelle |
+| [x] | CHAT-10 | Bannière « activer documents » + tests + checklist manuelle |
 
 ---
 

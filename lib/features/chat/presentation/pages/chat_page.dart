@@ -14,10 +14,13 @@ import '../controllers/chat_conversation_notifier.dart';
 import '../controllers/chat_conversation_state.dart';
 import '../controllers/chat_threads_notifier.dart';
 import '../controllers/chat_threads_state.dart';
+import '../utils/chat_conversation_status_resolver.dart';
 import '../widgets/chat_composer.dart';
 import '../widgets/chat_message_bubble.dart';
+import '../widgets/chat_no_corpus_banner.dart';
 import '../widgets/chat_source_card.dart';
 import '../widgets/chat_thread_list_tile.dart';
+import '../widgets/lucy_conversation_status.dart';
 
 /// Chat tab — master-detail threads and SSE conversation (SPEC §2, P4a).
 class ChatPage extends ConsumerStatefulWidget {
@@ -32,6 +35,12 @@ class ChatPage extends ConsumerStatefulWidget {
 class _ChatPageState extends ConsumerState<ChatPage> {
   final _scrollController = ScrollController();
   String? _loadedConversationId;
+
+  bool _canChat(ChatThreadsState threadsState) =>
+      threadsState.eligibility?.canChat ?? true;
+
+  bool _canCreateThread(ChatThreadsState threadsState) =>
+      !threadsState.isOffline && _canChat(threadsState);
 
   @override
   void initState() {
@@ -83,6 +92,8 @@ class _ChatPageState extends ConsumerState<ChatPage> {
     final width = MediaQuery.sizeOf(context).width;
     final useMasterDetail = width >= ChatConstants.masterDetailBreakpoint;
     final selectedId = widget.chatId ?? threadsState.selectedChatId;
+    final canChat = _canChat(threadsState);
+    final canCreateThread = _canCreateThread(threadsState);
 
     ref.listen(chatThreadsProvider, (previous, next) {
       if (next.errorCode != null && next.errorCode != previous?.errorCode) {
@@ -133,12 +144,23 @@ class _ChatPageState extends ConsumerState<ChatPage> {
           IconButton(
             icon: const Icon(Icons.add_comment_outlined),
             tooltip: l10n.chatNewConversation,
-            onPressed: () => ref
-                .read(chatThreadsProvider.notifier)
-                .createThread(context),
+            onPressed: canCreateThread
+                ? () => ref
+                    .read(chatThreadsProvider.notifier)
+                    .createThread(context)
+                : null,
           ),
         ],
       ),
+      floatingActionButton: canCreateThread && selectedId != null
+          ? FloatingActionButton(
+              onPressed: () => ref
+                  .read(chatThreadsProvider.notifier)
+                  .createThread(context),
+              tooltip: l10n.chatNewConversation,
+              child: const Icon(Icons.add_comment_outlined),
+            )
+          : null,
       body: threadsState.isLoading
           ? const Center(child: CircularProgressIndicator())
           : Column(
@@ -149,37 +171,41 @@ class _ChatPageState extends ConsumerState<ChatPage> {
                     leading: const Icon(Icons.cloud_off_outlined),
                     actions: const [SizedBox.shrink()],
                   ),
+                if (!canChat && !threadsState.isLoading)
+                  const ChatNoCorpusBanner(),
                 Expanded(
                   child: useMasterDetail
-          ? Row(
-              children: [
-                SizedBox(
-                  width: ChatConstants.threadListWidth,
-                  child: _ThreadListPanel(
-                    threadsState: threadsState,
-                    selectedId: selectedId,
-                  ),
-                ),
-                const VerticalDivider(width: 1),
-                Expanded(
-                  child: _ConversationPanel(
-                    chatId: selectedId,
-                    scrollController: _scrollController,
-                    isOffline: threadsState.isOffline,
-                  ),
-                ),
-              ],
-            )
-          : selectedId == null
-          ? _ThreadListPanel(
-              threadsState: threadsState,
-              selectedId: selectedId,
-            )
-          : _ConversationPanel(
-              chatId: selectedId,
-              scrollController: _scrollController,
-              isOffline: threadsState.isOffline,
-            ),
+                      ? Row(
+                          children: [
+                            SizedBox(
+                              width: ChatConstants.threadListWidth,
+                              child: _ThreadListPanel(
+                                threadsState: threadsState,
+                                selectedId: selectedId,
+                              ),
+                            ),
+                            const VerticalDivider(width: 1),
+                            Expanded(
+                              child: _ConversationPanel(
+                                chatId: selectedId,
+                                scrollController: _scrollController,
+                                isOffline: threadsState.isOffline,
+                                canChat: canChat,
+                              ),
+                            ),
+                          ],
+                        )
+                      : selectedId == null
+                      ? _ThreadListPanel(
+                          threadsState: threadsState,
+                          selectedId: selectedId,
+                        )
+                      : _ConversationPanel(
+                          chatId: selectedId,
+                          scrollController: _scrollController,
+                          isOffline: threadsState.isOffline,
+                          canChat: canChat,
+                        ),
                 ),
               ],
             ),
@@ -234,11 +260,13 @@ class _ConversationPanel extends ConsumerWidget {
     required this.chatId,
     required this.scrollController,
     required this.isOffline,
+    required this.canChat,
   });
 
   final String? chatId;
   final ScrollController scrollController;
   final bool isOffline;
+  final bool canChat;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -254,27 +282,36 @@ class _ConversationPanel extends ConsumerWidget {
     }
 
     final conversation = ref.watch(chatConversationProvider(chatId!));
+    final status = ChatConversationStatusResolver.resolve(
+      conversation: conversation,
+      isOffline: isOffline,
+      canChat: canChat,
+    );
+    final errorMessage = conversation.errorCode == null
+        ? null
+        : ChatErrorTranslator.translate(context, conversation.errorCode!);
 
     return Column(
       children: [
         Expanded(
-          child: conversation.isLoadingMessages && conversation.messages.isEmpty
-              ? Center(child: Text(l10n.chatLoading))
-              : ListView.builder(
-                  controller: scrollController,
-                  padding: const EdgeInsets.all(LucyConstants.kSpacingMedium),
-                  itemCount: _conversationItemCount(conversation),
-                  itemBuilder: (context, index) {
-                    return _buildConversationItem(
-                      context,
-                      conversation,
-                      index,
-                    );
-                  },
-                ),
+          child: LucyConversationStatus(
+            status: status,
+            errorMessage: errorMessage,
+            onRetry: () => ref
+                .read(chatConversationProvider(chatId!).notifier)
+                .loadMessages(),
+            child: ListView.builder(
+              controller: scrollController,
+              padding: const EdgeInsets.all(LucyConstants.kSpacingMedium),
+              itemCount: _conversationItemCount(conversation),
+              itemBuilder: (context, index) {
+                return _buildConversationItem(context, conversation, index);
+              },
+            ),
+          ),
         ),
         ChatComposer(
-          enabled: conversation.canSend && !isOffline,
+          enabled: conversation.canSend && !isOffline && canChat,
           onSend: (text) => ref
               .read(chatConversationProvider(chatId!).notifier)
               .sendMessage(text),

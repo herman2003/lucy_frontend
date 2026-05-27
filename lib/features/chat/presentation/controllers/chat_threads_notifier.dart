@@ -93,7 +93,7 @@ class ChatThreadsNotifier extends _$ChatThreadsNotifier {
   }
 
   Future<void> createThread(BuildContext context) async {
-    if (state.isOffline) {
+    if (state.isOffline || state.eligibility?.canChat == false) {
       return;
     }
     try {

@@ -12,6 +12,7 @@ abstract class ChatThreadsState with _$ChatThreadsState {
     @Default(<ChatThread>[]) List<ChatThread> threads,
     String? selectedChatId,
     ChatEligibility? eligibility,
+    @Default(false) bool isOffline,
     String? errorCode,
   }) = _ChatThreadsState;
 }

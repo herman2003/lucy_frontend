@@ -141,7 +141,16 @@ class _ChatPageState extends ConsumerState<ChatPage> {
       ),
       body: threadsState.isLoading
           ? const Center(child: CircularProgressIndicator())
-          : useMasterDetail
+          : Column(
+              children: [
+                if (threadsState.isOffline)
+                  MaterialBanner(
+                    content: Text(l10n.chatOfflineBanner),
+                    leading: const Icon(Icons.cloud_off_outlined),
+                    actions: const [SizedBox.shrink()],
+                  ),
+                Expanded(
+                  child: useMasterDetail
           ? Row(
               children: [
                 SizedBox(
@@ -156,6 +165,7 @@ class _ChatPageState extends ConsumerState<ChatPage> {
                   child: _ConversationPanel(
                     chatId: selectedId,
                     scrollController: _scrollController,
+                    isOffline: threadsState.isOffline,
                   ),
                 ),
               ],
@@ -168,6 +178,10 @@ class _ChatPageState extends ConsumerState<ChatPage> {
           : _ConversationPanel(
               chatId: selectedId,
               scrollController: _scrollController,
+              isOffline: threadsState.isOffline,
+            ),
+                ),
+              ],
             ),
     );
   }
@@ -219,10 +233,12 @@ class _ConversationPanel extends ConsumerWidget {
   const _ConversationPanel({
     required this.chatId,
     required this.scrollController,
+    required this.isOffline,
   });
 
   final String? chatId;
   final ScrollController scrollController;
+  final bool isOffline;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -258,7 +274,7 @@ class _ConversationPanel extends ConsumerWidget {
                 ),
         ),
         ChatComposer(
-          enabled: conversation.canSend,
+          enabled: conversation.canSend && !isOffline,
           onSend: (text) => ref
               .read(chatConversationProvider(chatId!).notifier)
               .sendMessage(text),

@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$ChatThreadsState {
 
- bool get isLoading; List<ChatThread> get threads; String? get selectedChatId; ChatEligibility? get eligibility; String? get errorCode;
+ bool get isLoading; List<ChatThread> get threads; String? get selectedChatId; ChatEligibility? get eligibility; bool get isOffline; String? get errorCode;
 /// Create a copy of ChatThreadsState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $ChatThreadsStateCopyWith<ChatThreadsState> get copyWith => _$ChatThreadsStateCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ChatThreadsState&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&const DeepCollectionEquality().equals(other.threads, threads)&&(identical(other.selectedChatId, selectedChatId) || other.selectedChatId == selectedChatId)&&(identical(other.eligibility, eligibility) || other.eligibility == eligibility)&&(identical(other.errorCode, errorCode) || other.errorCode == errorCode));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ChatThreadsState&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&const DeepCollectionEquality().equals(other.threads, threads)&&(identical(other.selectedChatId, selectedChatId) || other.selectedChatId == selectedChatId)&&(identical(other.eligibility, eligibility) || other.eligibility == eligibility)&&(identical(other.isOffline, isOffline) || other.isOffline == isOffline)&&(identical(other.errorCode, errorCode) || other.errorCode == errorCode));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,isLoading,const DeepCollectionEquality().hash(threads),selectedChatId,eligibility,errorCode);
+int get hashCode => Object.hash(runtimeType,isLoading,const DeepCollectionEquality().hash(threads),selectedChatId,eligibility,isOffline,errorCode);
 
 @override
 String toString() {
-  return 'ChatThreadsState(isLoading: $isLoading, threads: $threads, selectedChatId: $selectedChatId, eligibility: $eligibility, errorCode: $errorCode)';
+  return 'ChatThreadsState(isLoading: $isLoading, threads: $threads, selectedChatId: $selectedChatId, eligibility: $eligibility, isOffline: $isOffline, errorCode: $errorCode)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $ChatThreadsStateCopyWith<$Res>  {
   factory $ChatThreadsStateCopyWith(ChatThreadsState value, $Res Function(ChatThreadsState) _then) = _$ChatThreadsStateCopyWithImpl;
 @useResult
 $Res call({
- bool isLoading, List<ChatThread> threads, String? selectedChatId, ChatEligibility? eligibility, String? errorCode
+ bool isLoading, List<ChatThread> threads, String? selectedChatId, ChatEligibility? eligibility, bool isOffline, String? errorCode
 });
 
 
@@ -62,13 +62,14 @@ class _$ChatThreadsStateCopyWithImpl<$Res>
 
 /// Create a copy of ChatThreadsState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? isLoading = null,Object? threads = null,Object? selectedChatId = freezed,Object? eligibility = freezed,Object? errorCode = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? isLoading = null,Object? threads = null,Object? selectedChatId = freezed,Object? eligibility = freezed,Object? isOffline = null,Object? errorCode = freezed,}) {
   return _then(_self.copyWith(
 isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
 as bool,threads: null == threads ? _self.threads : threads // ignore: cast_nullable_to_non_nullable
 as List<ChatThread>,selectedChatId: freezed == selectedChatId ? _self.selectedChatId : selectedChatId // ignore: cast_nullable_to_non_nullable
 as String?,eligibility: freezed == eligibility ? _self.eligibility : eligibility // ignore: cast_nullable_to_non_nullable
-as ChatEligibility?,errorCode: freezed == errorCode ? _self.errorCode : errorCode // ignore: cast_nullable_to_non_nullable
+as ChatEligibility?,isOffline: null == isOffline ? _self.isOffline : isOffline // ignore: cast_nullable_to_non_nullable
+as bool,errorCode: freezed == errorCode ? _self.errorCode : errorCode // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }
@@ -154,10 +155,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( bool isLoading,  List<ChatThread> threads,  String? selectedChatId,  ChatEligibility? eligibility,  String? errorCode)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( bool isLoading,  List<ChatThread> threads,  String? selectedChatId,  ChatEligibility? eligibility,  bool isOffline,  String? errorCode)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _ChatThreadsState() when $default != null:
-return $default(_that.isLoading,_that.threads,_that.selectedChatId,_that.eligibility,_that.errorCode);case _:
+return $default(_that.isLoading,_that.threads,_that.selectedChatId,_that.eligibility,_that.isOffline,_that.errorCode);case _:
   return orElse();
 
 }
@@ -175,10 +176,10 @@ return $default(_that.isLoading,_that.threads,_that.selectedChatId,_that.eligibi
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( bool isLoading,  List<ChatThread> threads,  String? selectedChatId,  ChatEligibility? eligibility,  String? errorCode)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( bool isLoading,  List<ChatThread> threads,  String? selectedChatId,  ChatEligibility? eligibility,  bool isOffline,  String? errorCode)  $default,) {final _that = this;
 switch (_that) {
 case _ChatThreadsState():
-return $default(_that.isLoading,_that.threads,_that.selectedChatId,_that.eligibility,_that.errorCode);case _:
+return $default(_that.isLoading,_that.threads,_that.selectedChatId,_that.eligibility,_that.isOffline,_that.errorCode);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -195,10 +196,10 @@ return $default(_that.isLoading,_that.threads,_that.selectedChatId,_that.eligibi
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( bool isLoading,  List<ChatThread> threads,  String? selectedChatId,  ChatEligibility? eligibility,  String? errorCode)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( bool isLoading,  List<ChatThread> threads,  String? selectedChatId,  ChatEligibility? eligibility,  bool isOffline,  String? errorCode)?  $default,) {final _that = this;
 switch (_that) {
 case _ChatThreadsState() when $default != null:
-return $default(_that.isLoading,_that.threads,_that.selectedChatId,_that.eligibility,_that.errorCode);case _:
+return $default(_that.isLoading,_that.threads,_that.selectedChatId,_that.eligibility,_that.isOffline,_that.errorCode);case _:
   return null;
 
 }
@@ -210,7 +211,7 @@ return $default(_that.isLoading,_that.threads,_that.selectedChatId,_that.eligibi
 
 
 class _ChatThreadsState implements ChatThreadsState {
-  const _ChatThreadsState({this.isLoading = false, final  List<ChatThread> threads = const <ChatThread>[], this.selectedChatId, this.eligibility, this.errorCode}): _threads = threads;
+  const _ChatThreadsState({this.isLoading = false, final  List<ChatThread> threads = const <ChatThread>[], this.selectedChatId, this.eligibility, this.isOffline = false, this.errorCode}): _threads = threads;
   
 
 @override@JsonKey() final  bool isLoading;
@@ -223,6 +224,7 @@ class _ChatThreadsState implements ChatThreadsState {
 
 @override final  String? selectedChatId;
 @override final  ChatEligibility? eligibility;
+@override@JsonKey() final  bool isOffline;
 @override final  String? errorCode;
 
 /// Create a copy of ChatThreadsState
@@ -235,16 +237,16 @@ _$ChatThreadsStateCopyWith<_ChatThreadsState> get copyWith => __$ChatThreadsStat
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ChatThreadsState&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&const DeepCollectionEquality().equals(other._threads, _threads)&&(identical(other.selectedChatId, selectedChatId) || other.selectedChatId == selectedChatId)&&(identical(other.eligibility, eligibility) || other.eligibility == eligibility)&&(identical(other.errorCode, errorCode) || other.errorCode == errorCode));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ChatThreadsState&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&const DeepCollectionEquality().equals(other._threads, _threads)&&(identical(other.selectedChatId, selectedChatId) || other.selectedChatId == selectedChatId)&&(identical(other.eligibility, eligibility) || other.eligibility == eligibility)&&(identical(other.isOffline, isOffline) || other.isOffline == isOffline)&&(identical(other.errorCode, errorCode) || other.errorCode == errorCode));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,isLoading,const DeepCollectionEquality().hash(_threads),selectedChatId,eligibility,errorCode);
+int get hashCode => Object.hash(runtimeType,isLoading,const DeepCollectionEquality().hash(_threads),selectedChatId,eligibility,isOffline,errorCode);
 
 @override
 String toString() {
-  return 'ChatThreadsState(isLoading: $isLoading, threads: $threads, selectedChatId: $selectedChatId, eligibility: $eligibility, errorCode: $errorCode)';
+  return 'ChatThreadsState(isLoading: $isLoading, threads: $threads, selectedChatId: $selectedChatId, eligibility: $eligibility, isOffline: $isOffline, errorCode: $errorCode)';
 }
 
 
@@ -255,7 +257,7 @@ abstract mixin class _$ChatThreadsStateCopyWith<$Res> implements $ChatThreadsSta
   factory _$ChatThreadsStateCopyWith(_ChatThreadsState value, $Res Function(_ChatThreadsState) _then) = __$ChatThreadsStateCopyWithImpl;
 @override @useResult
 $Res call({
- bool isLoading, List<ChatThread> threads, String? selectedChatId, ChatEligibility? eligibility, String? errorCode
+ bool isLoading, List<ChatThread> threads, String? selectedChatId, ChatEligibility? eligibility, bool isOffline, String? errorCode
 });
 
 
@@ -272,13 +274,14 @@ class __$ChatThreadsStateCopyWithImpl<$Res>
 
 /// Create a copy of ChatThreadsState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? isLoading = null,Object? threads = null,Object? selectedChatId = freezed,Object? eligibility = freezed,Object? errorCode = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? isLoading = null,Object? threads = null,Object? selectedChatId = freezed,Object? eligibility = freezed,Object? isOffline = null,Object? errorCode = freezed,}) {
   return _then(_ChatThreadsState(
 isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
 as bool,threads: null == threads ? _self._threads : threads // ignore: cast_nullable_to_non_nullable
 as List<ChatThread>,selectedChatId: freezed == selectedChatId ? _self.selectedChatId : selectedChatId // ignore: cast_nullable_to_non_nullable
 as String?,eligibility: freezed == eligibility ? _self.eligibility : eligibility // ignore: cast_nullable_to_non_nullable
-as ChatEligibility?,errorCode: freezed == errorCode ? _self.errorCode : errorCode // ignore: cast_nullable_to_non_nullable
+as ChatEligibility?,isOffline: null == isOffline ? _self.isOffline : isOffline // ignore: cast_nullable_to_non_nullable
+as bool,errorCode: freezed == errorCode ? _self.errorCode : errorCode // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }

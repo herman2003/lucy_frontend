@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'core/localization/l10n/app_localizations.dart';
 import 'core/localization/lucy_locale_resolution.dart';
 import 'core/router/app_router.dart';
+import 'features/chat/domain/providers/chat_mirror_provider.dart';
 import 'core/theme/lucy_flex_theme.dart';
 
 /// Root application widget for Lucy.
@@ -13,6 +14,7 @@ class LucyApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    ref.watch(chatMirrorLogoutListenerProvider);
     final router = ref.watch(lucyRouterProvider);
     final deviceLocale = readDeviceLocale();
 

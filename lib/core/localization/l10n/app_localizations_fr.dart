@@ -647,4 +647,27 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get chatGenericError => 'Une erreur est survenue. Réessayez.';
+
+  @override
+  String get quizEmptyHint =>
+      'Générez un quiz à partir de vos documents actifs.';
+
+  @override
+  String get quizComingSoon => 'La génération de quiz arrive bientôt.';
+
+  @override
+  String get quizNoCorpusTitle => 'Aucun document actif';
+
+  @override
+  String get quizNoCorpusMessage =>
+      'Activez la recherche sur au moins un document prêt pour générer un quiz.';
+
+  @override
+  String get quizNoCorpusCta => 'Aller aux documents';
+
+  @override
+  String get quizLoading => 'Chargement…';
+
+  @override
+  String get quizGenericError => 'Une erreur est survenue. Réessayez.';
 }

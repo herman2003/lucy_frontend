@@ -642,4 +642,26 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get chatGenericError => 'Something went wrong. Please try again.';
+
+  @override
+  String get quizEmptyHint => 'Generate a quiz from your active documents.';
+
+  @override
+  String get quizComingSoon => 'Quiz generation is coming soon.';
+
+  @override
+  String get quizNoCorpusTitle => 'No active documents';
+
+  @override
+  String get quizNoCorpusMessage =>
+      'Enable search on at least one ready document to generate a quiz.';
+
+  @override
+  String get quizNoCorpusCta => 'Go to documents';
+
+  @override
+  String get quizLoading => 'Loading…';
+
+  @override
+  String get quizGenericError => 'Something went wrong. Please try again.';
 }

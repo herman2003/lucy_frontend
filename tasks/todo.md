@@ -1,6 +1,6 @@
 # Todo — Lucy frontend
 
-> **Chat** : terminé · **Quiz** : en attente spec · **Index plans** : [plan.md](./plan.md)
+> **Chat** : terminé · **Quiz** : QUIZ-01 fait · **Index plans** : [plan.md](./plan.md) · [plan-quiz.md](./plan-quiz.md)
 
 **Légende** : `[ ]` à faire · `[x]` fait · `[-]` annulé
 
@@ -51,7 +51,8 @@
 
 | Statut | Id | Tâche |
 |--------|-----|--------|
-| [ ] | QUIZ-01 | Quiz depuis corpus — **bloqué** : rédiger `docs/spec-quiz.md` avant implémentation |
+| [x] | QUIZ-01 | Éligibilité corpus + garde UI (`GET /v1/quizzes/eligibility`, spec [spec-quiz.md](../docs/spec-quiz.md)) |
+| [ ] | QUIZ-02 | Génération quiz (`POST /v1/quizzes/generate`, UI QCM) — voir [plan-quiz.md](./plan-quiz.md) |
 
 ---
 

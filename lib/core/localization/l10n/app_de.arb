@@ -224,5 +224,12 @@
   "chatErrorLlmUnavailable": "Lucy ist vorübergehend nicht verfügbar. Versuchen Sie es später erneut.",
   "chatErrorInvalidResponse": "Ungültige Serverantwort. Bitte erneut versuchen.",
   "chatErrorStreamInProgress": "Eine Antwort wird bereits generiert.",
-  "chatGenericError": "Etwas ist schiefgelaufen. Bitte erneut versuchen."
+  "chatGenericError": "Etwas ist schiefgelaufen. Bitte erneut versuchen.",
+  "quizEmptyHint": "Erstellen Sie ein Quiz aus Ihren aktiven Dokumenten.",
+  "quizComingSoon": "Die Quiz-Generierung kommt bald.",
+  "quizNoCorpusTitle": "Keine aktiven Dokumente",
+  "quizNoCorpusMessage": "Aktivieren Sie die Suche für mindestens ein fertiges Dokument, um ein Quiz zu erstellen.",
+  "quizNoCorpusCta": "Zu den Dokumenten",
+  "quizLoading": "Laden…",
+  "quizGenericError": "Etwas ist schiefgelaufen. Bitte erneut versuchen."
 }

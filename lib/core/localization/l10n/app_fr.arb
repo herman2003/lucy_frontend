@@ -436,5 +436,12 @@
   "chatErrorLlmUnavailable": "Lucy est temporairement indisponible. Réessayez plus tard.",
   "chatErrorInvalidResponse": "Réponse invalide du serveur. Réessayez.",
   "chatErrorStreamInProgress": "Un message est déjà en cours de génération.",
-  "chatGenericError": "Une erreur est survenue. Réessayez."
+  "chatGenericError": "Une erreur est survenue. Réessayez.",
+  "quizEmptyHint": "Générez un quiz à partir de vos documents actifs.",
+  "quizComingSoon": "La génération de quiz arrive bientôt.",
+  "quizNoCorpusTitle": "Aucun document actif",
+  "quizNoCorpusMessage": "Activez la recherche sur au moins un document prêt pour générer un quiz.",
+  "quizNoCorpusCta": "Aller aux documents",
+  "quizLoading": "Chargement…",
+  "quizGenericError": "Une erreur est survenue. Réessayez."
 }

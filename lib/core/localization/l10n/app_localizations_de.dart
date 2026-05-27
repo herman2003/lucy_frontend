@@ -652,4 +652,28 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get chatGenericError =>
       'Etwas ist schiefgelaufen. Bitte erneut versuchen.';
+
+  @override
+  String get quizEmptyHint =>
+      'Erstellen Sie ein Quiz aus Ihren aktiven Dokumenten.';
+
+  @override
+  String get quizComingSoon => 'Die Quiz-Generierung kommt bald.';
+
+  @override
+  String get quizNoCorpusTitle => 'Keine aktiven Dokumente';
+
+  @override
+  String get quizNoCorpusMessage =>
+      'Aktivieren Sie die Suche für mindestens ein fertiges Dokument, um ein Quiz zu erstellen.';
+
+  @override
+  String get quizNoCorpusCta => 'Zu den Dokumenten';
+
+  @override
+  String get quizLoading => 'Laden…';
+
+  @override
+  String get quizGenericError =>
+      'Etwas ist schiefgelaufen. Bitte erneut versuchen.';
 }

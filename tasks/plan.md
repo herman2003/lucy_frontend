@@ -6,7 +6,7 @@
 |---------|--------|----------|
 | Documents & RAG D1–D3 | **Terminé** | Historique dans [todo.md](./todo.md) (DOC-01→14), spec [docs/spec-documents-rag.md](../docs/spec-documents-rag.md) |
 | **Chat P4a** | **Terminé** (CHAT-01→10) | Plan : **[plan-chat.md](./plan-chat.md)** · checklist [cp-chat-manual-checklist.md](../docs/cp-chat-manual-checklist.md) |
-| Quiz P4b | **Bloqué** | Spec séparée requise avant QUIZ-01 |
+| **Quiz P4b** | **En cours** (QUIZ-01 fait) | Spec : [docs/spec-quiz.md](../docs/spec-quiz.md) · Plan : [plan-quiz.md](./plan-quiz.md) |
 | Stockage R2 | Implémenté (R2-01→05) | Validation : [cp-r2-manual-checklist.md](../docs/cp-r2-manual-checklist.md) |
 
 **Spec chat** : [SPEC.md](../SPEC.md) §6 · [docs/spec-chat-rag.md](../docs/spec-chat-rag.md)

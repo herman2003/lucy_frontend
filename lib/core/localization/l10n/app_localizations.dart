@@ -1251,6 +1251,48 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'Une erreur est survenue. Réessayez.'**
   String get chatGenericError;
+
+  /// No description provided for @quizEmptyHint.
+  ///
+  /// In fr, this message translates to:
+  /// **'Générez un quiz à partir de vos documents actifs.'**
+  String get quizEmptyHint;
+
+  /// No description provided for @quizComingSoon.
+  ///
+  /// In fr, this message translates to:
+  /// **'La génération de quiz arrive bientôt.'**
+  String get quizComingSoon;
+
+  /// No description provided for @quizNoCorpusTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucun document actif'**
+  String get quizNoCorpusTitle;
+
+  /// No description provided for @quizNoCorpusMessage.
+  ///
+  /// In fr, this message translates to:
+  /// **'Activez la recherche sur au moins un document prêt pour générer un quiz.'**
+  String get quizNoCorpusMessage;
+
+  /// No description provided for @quizNoCorpusCta.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aller aux documents'**
+  String get quizNoCorpusCta;
+
+  /// No description provided for @quizLoading.
+  ///
+  /// In fr, this message translates to:
+  /// **'Chargement…'**
+  String get quizLoading;
+
+  /// No description provided for @quizGenericError.
+  ///
+  /// In fr, this message translates to:
+  /// **'Une erreur est survenue. Réessayez.'**
+  String get quizGenericError;
 }
 
 class _AppLocalizationsDelegate

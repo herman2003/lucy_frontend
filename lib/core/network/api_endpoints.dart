@@ -42,4 +42,8 @@ abstract final class ApiEndpoints {
       '${chatMessages(chatId)}/stream';
 
   static String get chatEligibility => '$chats/eligibility';
+
+  static String get quizzes => '$baseUrl/v1/quizzes';
+
+  static String get quizEligibility => '$quizzes/eligibility';
 }

@@ -224,5 +224,12 @@
   "chatErrorLlmUnavailable": "Lucy is temporarily unavailable. Try again later.",
   "chatErrorInvalidResponse": "Invalid server response. Try again.",
   "chatErrorStreamInProgress": "A reply is already being generated.",
-  "chatGenericError": "Something went wrong. Please try again."
+  "chatGenericError": "Something went wrong. Please try again.",
+  "quizEmptyHint": "Generate a quiz from your active documents.",
+  "quizComingSoon": "Quiz generation is coming soon.",
+  "quizNoCorpusTitle": "No active documents",
+  "quizNoCorpusMessage": "Enable search on at least one ready document to generate a quiz.",
+  "quizNoCorpusCta": "Go to documents",
+  "quizLoading": "Loading…",
+  "quizGenericError": "Something went wrong. Please try again."
 }

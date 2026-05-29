@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:frontend/core/localization/l10n/app_localizations.dart';
-import 'package:frontend/features/chat/domain/exceptions/chat_exception.dart';
-import 'package:frontend/features/chat/utils/chat_error_translator.dart';
+import 'package:lucy_frontend/core/localization/l10n/app_localizations.dart';
+import 'package:lucy_frontend/features/chat/domain/exceptions/chat_exception.dart';
+import 'package:lucy_frontend/features/chat/utils/chat_error_translator.dart';
 
 void main() {
   group('ChatErrorTranslator', () {

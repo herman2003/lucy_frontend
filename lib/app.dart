@@ -16,19 +16,14 @@ class LucyApp extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     ref.watch(chatMirrorLogoutListenerProvider);
     final router = ref.watch(lucyRouterProvider);
-    final deviceLocale = readDeviceLocale();
-
     return MaterialApp.router(
       title: 'Lucy',
       theme: LucyFlexTheme.lightTheme,
       darkTheme: LucyFlexTheme.darkTheme,
       themeMode: ThemeMode.system,
-      locale: resolveLucyLocale(deviceLocale),
+      locale: kLucyAppLocale,
       supportedLocales: AppLocalizations.supportedLocales,
-      localeListResolutionCallback: (locales, supportedLocales) =>
-          resolveLucyLocale(
-            locales != null && locales.isNotEmpty ? locales.first : null,
-          ),
+      localeListResolutionCallback: (_, __) => kLucyAppLocale,
       localizationsDelegates: const [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,

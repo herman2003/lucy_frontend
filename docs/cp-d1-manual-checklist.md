@@ -26,7 +26,7 @@
 
 ```bash
 cd backend && npm test
-cd frontend && flutter analyze && flutter test
+cd lucy_frontend && flutter analyze && flutter test
 ```
 
 ---

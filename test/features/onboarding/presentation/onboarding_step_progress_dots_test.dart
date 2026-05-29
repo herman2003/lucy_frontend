@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:frontend/features/onboarding/presentation/pages/onboarding_chat/onboarding_chat_state.dart';
-import 'package:frontend/features/onboarding/presentation/widgets/onboarding_step_progress_dots.dart';
+import 'package:lucy_frontend/features/onboarding/presentation/pages/onboarding_chat/onboarding_chat_state.dart';
+import 'package:lucy_frontend/features/onboarding/presentation/widgets/onboarding_step_progress_dots.dart';
 
 void main() {
   testWidgets('locked step shows lock icon and ignores tap', (tester) async {

@@ -24,7 +24,7 @@
 
 ```bash
 cd backend && npm test -- document-ingestion documents.d2-flow
-cd frontend && flutter test test/features/documents/
+cd lucy_frontend && flutter test test/features/documents/
 ```
 
 ---

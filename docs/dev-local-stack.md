@@ -19,7 +19,7 @@ Auth API : `Authorization: Bearer dev:local-user-1`
 ## Flutter web
 
 ```bash
-cd frontend
+cd lucy_frontend
 flutter run -d chrome
 # API par défaut : http://localhost:3001 (voir ApiEndpoints)
 ```

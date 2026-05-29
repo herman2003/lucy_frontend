@@ -1,25 +1,12 @@
 import 'package:flutter/material.dart';
 
-import 'l10n/app_localizations.dart';
+/// Fixed UI locale for the whole app (German only at runtime).
+const kLucyAppLocale = Locale('de');
 
 /// Reads the current platform / test locale from the binding.
 Locale? readDeviceLocale() {
   return WidgetsBinding.instance.platformDispatcher.locale;
 }
 
-/// Resolves the device [locale] to one of Lucy's supported locales (fr, en, de).
-Locale resolveLucyLocale(Locale? locale) {
-  const fallback = Locale('fr');
-
-  if (locale == null) {
-    return fallback;
-  }
-
-  for (final supported in AppLocalizations.supportedLocales) {
-    if (supported.languageCode == locale.languageCode) {
-      return supported;
-    }
-  }
-
-  return fallback;
-}
+/// Always returns [kLucyAppLocale] — the app does not follow the device language.
+Locale resolveLucyLocale(Locale? locale) => kLucyAppLocale;

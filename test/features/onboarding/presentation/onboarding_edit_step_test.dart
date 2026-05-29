@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:frontend/core/localization/l10n/app_localizations.dart';
-import 'package:frontend/features/onboarding/domain/entities/onboarding_analyze_result.dart';
-import 'package:frontend/features/onboarding/domain/entities/onboarding_chat_message.dart';
-import 'package:frontend/features/onboarding/domain/entities/onboarding_completed_turn.dart';
-import 'package:frontend/features/onboarding/domain/entities/learner_profile.dart';
-import 'package:frontend/features/onboarding/presentation/controllers/onboarding_chat_notifier.dart';
-import 'package:frontend/features/onboarding/presentation/pages/onboarding_chat/onboarding_chat_state.dart';
-import 'package:frontend/features/onboarding/utils/onboarding_question_ids.dart';
+import 'package:lucy_frontend/core/localization/l10n/app_localizations.dart';
+import 'package:lucy_frontend/features/onboarding/domain/entities/onboarding_analyze_result.dart';
+import 'package:lucy_frontend/features/onboarding/domain/entities/onboarding_chat_message.dart';
+import 'package:lucy_frontend/features/onboarding/domain/entities/onboarding_completed_turn.dart';
+import 'package:lucy_frontend/features/onboarding/domain/entities/learner_profile.dart';
+import 'package:lucy_frontend/features/onboarding/presentation/controllers/onboarding_chat_notifier.dart';
+import 'package:lucy_frontend/features/onboarding/presentation/pages/onboarding_chat/onboarding_chat_state.dart';
+import 'package:lucy_frontend/features/onboarding/utils/onboarding_question_ids.dart';
 
 import '../helpers/fake_onboarding_repository.dart';
 import '../helpers/onboarding_chat_test_overrides.dart';

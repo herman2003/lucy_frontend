@@ -95,1203 +95,1203 @@ abstract class AppLocalizations {
 
   /// A list of this localizations delegate's supported locales.
   static const List<Locale> supportedLocales = <Locale>[
+    Locale('de'),
     Locale('fr'),
     Locale('en'),
-    Locale('de'),
   ];
 
-  /// Application title
+  /// No description provided for @appTitle.
   ///
-  /// In fr, this message translates to:
+  /// In de, this message translates to:
   /// **'Lucy'**
   String get appTitle;
 
-  /// Splash screen loading message
+  /// No description provided for @splashLoading.
   ///
-  /// In fr, this message translates to:
-  /// **'Chargement…'**
+  /// In de, this message translates to:
+  /// **'Wird geladen…'**
   String get splashLoading;
 
-  /// Login web branding headline
+  /// No description provided for @authLoginBrandingTitle.
   ///
-  /// In fr, this message translates to:
-  /// **'Votre tuteur IA personnel'**
+  /// In de, this message translates to:
+  /// **'Ihr persönlicher KI-Tutor'**
   String get authLoginBrandingTitle;
 
-  /// Login web branding subtitle
+  /// No description provided for @authLoginBrandingSubtitle.
   ///
-  /// In fr, this message translates to:
-  /// **'Progressez à votre rythme avec un accompagnement sur mesure.'**
+  /// In de, this message translates to:
+  /// **'Lernen Sie in Ihrem Tempo mit individueller Begleitung.'**
   String get authLoginBrandingSubtitle;
 
-  /// Login form title
+  /// No description provided for @authLoginTitle.
   ///
-  /// In fr, this message translates to:
-  /// **'Connexion'**
+  /// In de, this message translates to:
+  /// **'Anmelden'**
   String get authLoginTitle;
 
-  /// Email field label
+  /// No description provided for @authEmailLabel.
   ///
-  /// In fr, this message translates to:
-  /// **'Email'**
+  /// In de, this message translates to:
+  /// **'E-Mail'**
   String get authEmailLabel;
 
-  /// Email field hint
+  /// No description provided for @authEmailHint.
   ///
-  /// In fr, this message translates to:
-  /// **'vous@exemple.com'**
+  /// In de, this message translates to:
+  /// **'sie@beispiel.de'**
   String get authEmailHint;
 
-  /// Password field label
+  /// No description provided for @authPasswordLabel.
   ///
-  /// In fr, this message translates to:
-  /// **'Mot de passe'**
+  /// In de, this message translates to:
+  /// **'Passwort'**
   String get authPasswordLabel;
 
-  /// Password field hint
+  /// No description provided for @authPasswordHint.
   ///
-  /// In fr, this message translates to:
-  /// **'Entrez votre mot de passe'**
+  /// In de, this message translates to:
+  /// **'Passwort eingeben'**
   String get authPasswordHint;
 
-  /// Validation when email is empty
+  /// No description provided for @authEmailRequired.
   ///
-  /// In fr, this message translates to:
-  /// **'L’email est requis.'**
+  /// In de, this message translates to:
+  /// **'E-Mail ist erforderlich.'**
   String get authEmailRequired;
 
-  /// Validation when password is empty
+  /// No description provided for @authPasswordRequired.
   ///
-  /// In fr, this message translates to:
-  /// **'Le mot de passe est requis.'**
+  /// In de, this message translates to:
+  /// **'Passwort ist erforderlich.'**
   String get authPasswordRequired;
 
-  /// Login submit button
+  /// No description provided for @authLoginButton.
   ///
-  /// In fr, this message translates to:
-  /// **'Se connecter'**
+  /// In de, this message translates to:
+  /// **'Anmelden'**
   String get authLoginButton;
 
-  /// Forgot password prompt before link
+  /// No description provided for @authForgotPasswordPrompt.
   ///
-  /// In fr, this message translates to:
-  /// **'Mot de passe oublié ?'**
+  /// In de, this message translates to:
+  /// **'Passwort vergessen?'**
   String get authForgotPasswordPrompt;
 
-  /// Link to reset password page
+  /// No description provided for @authForgotPasswordLink.
   ///
-  /// In fr, this message translates to:
-  /// **'Réinitialiser'**
+  /// In de, this message translates to:
+  /// **'Zurücksetzen'**
   String get authForgotPasswordLink;
 
-  /// Sign up prompt before link
+  /// No description provided for @authNoAccountPrompt.
   ///
-  /// In fr, this message translates to:
-  /// **'Pas encore de compte ?'**
+  /// In de, this message translates to:
+  /// **'Noch kein Konto?'**
   String get authNoAccountPrompt;
 
-  /// Link to sign up page
+  /// No description provided for @authSignUpLink.
   ///
-  /// In fr, this message translates to:
-  /// **'Créer un compte'**
+  /// In de, this message translates to:
+  /// **'Konto erstellen'**
   String get authSignUpLink;
 
-  /// Sign up web branding headline
+  /// No description provided for @authSignUpBrandingTitle.
   ///
-  /// In fr, this message translates to:
-  /// **'Rejoignez Lucy'**
+  /// In de, this message translates to:
+  /// **'Lucy beitreten'**
   String get authSignUpBrandingTitle;
 
-  /// Sign up web branding subtitle
+  /// No description provided for @authSignUpBrandingSubtitle.
   ///
-  /// In fr, this message translates to:
-  /// **'Créez votre compte et commencez à apprendre avec votre tuteur IA.'**
+  /// In de, this message translates to:
+  /// **'Erstellen Sie Ihr Konto und lernen Sie mit Ihrem KI-Tutor.'**
   String get authSignUpBrandingSubtitle;
 
-  /// Sign up form title
+  /// No description provided for @authSignUpTitle.
   ///
-  /// In fr, this message translates to:
-  /// **'Créer un compte'**
+  /// In de, this message translates to:
+  /// **'Konto erstellen'**
   String get authSignUpTitle;
 
-  /// Full name field label
+  /// No description provided for @authFullNameLabel.
   ///
-  /// In fr, this message translates to:
-  /// **'Nom complet'**
+  /// In de, this message translates to:
+  /// **'Vollständiger Name'**
   String get authFullNameLabel;
 
-  /// Full name field hint
+  /// No description provided for @authFullNameHint.
   ///
-  /// In fr, this message translates to:
-  /// **'Votre nom'**
+  /// In de, this message translates to:
+  /// **'Ihr Name'**
   String get authFullNameHint;
 
-  /// Validation when full name is empty
+  /// No description provided for @authFullNameRequired.
   ///
-  /// In fr, this message translates to:
-  /// **'Le nom complet est requis.'**
+  /// In de, this message translates to:
+  /// **'Der vollständige Name ist erforderlich.'**
   String get authFullNameRequired;
 
-  /// Sign up submit button
+  /// No description provided for @authSignUpButton.
   ///
-  /// In fr, this message translates to:
-  /// **'Créer mon compte'**
+  /// In de, this message translates to:
+  /// **'Konto erstellen'**
   String get authSignUpButton;
 
-  /// Login prompt before link on sign up
+  /// No description provided for @authAlreadyHaveAccountPrompt.
   ///
-  /// In fr, this message translates to:
-  /// **'Déjà un compte ?'**
+  /// In de, this message translates to:
+  /// **'Bereits ein Konto?'**
   String get authAlreadyHaveAccountPrompt;
 
-  /// Link to login page from sign up
+  /// No description provided for @authLoginLink.
   ///
-  /// In fr, this message translates to:
-  /// **'Se connecter'**
+  /// In de, this message translates to:
+  /// **'Anmelden'**
   String get authLoginLink;
 
-  /// Reset password web branding headline
+  /// No description provided for @authResetBrandingTitle.
   ///
-  /// In fr, this message translates to:
-  /// **'Réinitialisez votre mot de passe'**
+  /// In de, this message translates to:
+  /// **'Passwort zurücksetzen'**
   String get authResetBrandingTitle;
 
-  /// Reset password web branding subtitle
+  /// No description provided for @authResetBrandingSubtitle.
   ///
-  /// In fr, this message translates to:
-  /// **'Recevez un lien sécurisé par e-mail pour choisir un nouveau mot de passe.'**
+  /// In de, this message translates to:
+  /// **'Erhalten Sie einen sicheren Link per E-Mail für ein neues Passwort.'**
   String get authResetBrandingSubtitle;
 
-  /// Reset password form title
+  /// No description provided for @authResetTitle.
   ///
-  /// In fr, this message translates to:
-  /// **'Mot de passe oublié'**
+  /// In de, this message translates to:
+  /// **'Passwort vergessen'**
   String get authResetTitle;
 
-  /// Reset password form subtitle
+  /// No description provided for @authResetSubtitle.
   ///
-  /// In fr, this message translates to:
-  /// **'Saisissez votre adresse e-mail pour recevoir un lien de réinitialisation.'**
+  /// In de, this message translates to:
+  /// **'Geben Sie Ihre E-Mail-Adresse ein, um einen Reset-Link zu erhalten.'**
   String get authResetSubtitle;
 
-  /// Reset password submit button
+  /// No description provided for @authResetButton.
   ///
-  /// In fr, this message translates to:
-  /// **'Envoyer le lien'**
+  /// In de, this message translates to:
+  /// **'Link senden'**
   String get authResetButton;
 
-  /// Reset password success title
+  /// No description provided for @authResetSuccessTitle.
   ///
-  /// In fr, this message translates to:
-  /// **'Vérifiez votre e-mail'**
+  /// In de, this message translates to:
+  /// **'E-Mail prüfen'**
   String get authResetSuccessTitle;
 
-  /// Reset success message (anti-enumeration)
+  /// No description provided for @authResetSuccessMessage.
   ///
-  /// In fr, this message translates to:
-  /// **'Si un compte est associé à {email}, vous recevrez un e-mail pour réinitialiser votre mot de passe.'**
+  /// In de, this message translates to:
+  /// **'Wenn ein Konto für {email} existiert, erhalten Sie eine E-Mail zum Zurücksetzen des Passworts.'**
   String authResetSuccessMessage(String email);
 
-  /// Return to reset form from success
+  /// No description provided for @authResetTryAgain.
   ///
-  /// In fr, this message translates to:
-  /// **'Réessayer'**
+  /// In de, this message translates to:
+  /// **'Erneut versuchen'**
   String get authResetTryAgain;
 
-  /// Navigate back to login from reset success
+  /// No description provided for @authResetBackToLogin.
   ///
-  /// In fr, this message translates to:
-  /// **'Retour à la connexion'**
+  /// In de, this message translates to:
+  /// **'Zurück zur Anmeldung'**
   String get authResetBackToLogin;
 
-  /// Home placeholder title
+  /// No description provided for @homeWelcome.
   ///
-  /// In fr, this message translates to:
-  /// **'Bienvenue sur Lucy'**
+  /// In de, this message translates to:
+  /// **'Willkommen bei Lucy'**
   String get homeWelcome;
 
-  /// Logout button on home
+  /// No description provided for @homeLogout.
   ///
-  /// In fr, this message translates to:
-  /// **'Se déconnecter'**
+  /// In de, this message translates to:
+  /// **'Abmelden'**
   String get homeLogout;
 
-  /// Placeholder for shell tabs not yet implemented
+  /// No description provided for @pageUnderDevelopment.
   ///
-  /// In fr, this message translates to:
-  /// **'En cours de réalisation'**
+  /// In de, this message translates to:
+  /// **'In Entwicklung'**
   String get pageUnderDevelopment;
 
   /// No description provided for @navDocuments.
   ///
-  /// In fr, this message translates to:
-  /// **'Documents'**
+  /// In de, this message translates to:
+  /// **'Dokumente'**
   String get navDocuments;
 
   /// No description provided for @navChat.
   ///
-  /// In fr, this message translates to:
+  /// In de, this message translates to:
   /// **'Chat'**
   String get navChat;
 
   /// No description provided for @navQuiz.
   ///
-  /// In fr, this message translates to:
+  /// In de, this message translates to:
   /// **'Quiz'**
   String get navQuiz;
 
   /// No description provided for @navSettings.
   ///
-  /// In fr, this message translates to:
-  /// **'Paramètres'**
+  /// In de, this message translates to:
+  /// **'Einstellungen'**
   String get navSettings;
 
   /// No description provided for @documentsTitle.
   ///
-  /// In fr, this message translates to:
-  /// **'Documents'**
+  /// In de, this message translates to:
+  /// **'Dokumente'**
   String get documentsTitle;
 
   /// No description provided for @chatTitle.
   ///
-  /// In fr, this message translates to:
+  /// In de, this message translates to:
   /// **'Chat'**
   String get chatTitle;
 
   /// No description provided for @quizTitle.
   ///
-  /// In fr, this message translates to:
+  /// In de, this message translates to:
   /// **'Quiz'**
   String get quizTitle;
 
   /// No description provided for @settingsTitle.
   ///
-  /// In fr, this message translates to:
-  /// **'Paramètres'**
+  /// In de, this message translates to:
+  /// **'Einstellungen'**
   String get settingsTitle;
 
   /// No description provided for @shellMenu.
   ///
-  /// In fr, this message translates to:
-  /// **'Menu'**
+  /// In de, this message translates to:
+  /// **'Menü'**
   String get shellMenu;
 
-  /// Generic auth error
+  /// No description provided for @authUnknownError.
   ///
-  /// In fr, this message translates to:
-  /// **'Une erreur est survenue. Réessayez.'**
+  /// In de, this message translates to:
+  /// **'Etwas ist schiefgelaufen. Bitte erneut versuchen.'**
   String get authUnknownError;
 
-  /// Firebase user-not-found
+  /// No description provided for @authUserNotFound.
   ///
-  /// In fr, this message translates to:
-  /// **'Aucun compte ne correspond à cet email.'**
+  /// In de, this message translates to:
+  /// **'Kein Konto mit dieser E-Mail gefunden.'**
   String get authUserNotFound;
 
-  /// Firebase wrong-password
+  /// No description provided for @authWrongPassword.
   ///
-  /// In fr, this message translates to:
-  /// **'Mot de passe incorrect.'**
+  /// In de, this message translates to:
+  /// **'Falsches Passwort.'**
   String get authWrongPassword;
 
-  /// Firebase invalid-credential
+  /// No description provided for @authInvalidCredentials.
   ///
-  /// In fr, this message translates to:
-  /// **'Email ou mot de passe incorrect.'**
+  /// In de, this message translates to:
+  /// **'E-Mail oder Passwort ist falsch.'**
   String get authInvalidCredentials;
 
-  /// Firebase email-already-in-use
+  /// No description provided for @authEmailAlreadyInUse.
   ///
-  /// In fr, this message translates to:
-  /// **'Cet email est déjà utilisé.'**
+  /// In de, this message translates to:
+  /// **'Diese E-Mail wird bereits verwendet.'**
   String get authEmailAlreadyInUse;
 
-  /// Firebase weak-password
+  /// No description provided for @authWeakPassword.
   ///
-  /// In fr, this message translates to:
-  /// **'Le mot de passe est trop faible.'**
+  /// In de, this message translates to:
+  /// **'Das Passwort ist zu schwach.'**
   String get authWeakPassword;
 
-  /// Firebase invalid-email
+  /// No description provided for @authInvalidEmail.
   ///
-  /// In fr, this message translates to:
-  /// **'Adresse email invalide.'**
+  /// In de, this message translates to:
+  /// **'Ungültige E-Mail-Adresse.'**
   String get authInvalidEmail;
 
-  /// Firebase network-request-failed
+  /// No description provided for @authNetworkError.
   ///
-  /// In fr, this message translates to:
-  /// **'Problème de connexion. Vérifiez votre réseau.'**
+  /// In de, this message translates to:
+  /// **'Verbindungsproblem. Prüfen Sie Ihr Netzwerk.'**
   String get authNetworkError;
 
-  /// Firebase too-many-requests
+  /// No description provided for @authTooManyRequests.
   ///
-  /// In fr, this message translates to:
-  /// **'Trop de tentatives. Réessayez plus tard.'**
+  /// In de, this message translates to:
+  /// **'Zu viele Versuche. Später erneut versuchen.'**
   String get authTooManyRequests;
 
-  /// Firebase user-disabled
+  /// No description provided for @authUserDisabled.
   ///
-  /// In fr, this message translates to:
-  /// **'Ce compte a été désactivé.'**
+  /// In de, this message translates to:
+  /// **'Dieses Konto wurde deaktiviert.'**
   String get authUserDisabled;
 
-  /// Firebase operation-not-allowed
+  /// No description provided for @authOperationNotAllowed.
   ///
-  /// In fr, this message translates to:
-  /// **'Cette opération n’est pas autorisée.'**
+  /// In de, this message translates to:
+  /// **'Diese Aktion ist nicht erlaubt.'**
   String get authOperationNotAllowed;
 
-  /// Shown when Nest profile creation fails after signup
+  /// No description provided for @authProfileWriteFailed.
   ///
-  /// In fr, this message translates to:
-  /// **'Impossible d’enregistrer votre profil. Réessayez.'**
+  /// In de, this message translates to:
+  /// **'Profil konnte nicht gespeichert werden. Bitte erneut versuchen.'**
   String get authProfileWriteFailed;
 
-  /// Shown when POST /v1/users/me returns USER_PROFILE_CONFLICT
+  /// No description provided for @authUserProfileConflict.
   ///
-  /// In fr, this message translates to:
-  /// **'Cet email est déjà associé à un autre profil.'**
+  /// In de, this message translates to:
+  /// **'Diese E-Mail ist bereits mit einem anderen Profil verknüpft.'**
   String get authUserProfileConflict;
 
-  /// Onboarding placeholder screen until chat UI is implemented
+  /// No description provided for @onboardingPlaceholderTitle.
   ///
-  /// In fr, this message translates to:
-  /// **'Configuration de votre profil apprenant'**
+  /// In de, this message translates to:
+  /// **'Einrichtung Ihres Lernprofils'**
   String get onboardingPlaceholderTitle;
 
-  /// Onboarding question q_role (primary_role)
+  /// No description provided for @onboardingQuestionQRole.
   ///
-  /// In fr, this message translates to:
-  /// **'Parlez-moi de votre situation : êtes-vous étudiant·e, en reconversion, ou apprenez-vous de votre côté ?'**
+  /// In de, this message translates to:
+  /// **'Erzählen Sie mir von Ihrer Situation: Studium, Berufswechsel oder selbstständiges Lernen?'**
   String get onboardingQuestionQRole;
 
-  /// Onboarding question q_domains
+  /// No description provided for @onboardingQuestionQDomains.
   ///
-  /// In fr, this message translates to:
-  /// **'Quels sujets ou domaines allez-vous travailler avec moi ?'**
+  /// In de, this message translates to:
+  /// **'Welche Fächer oder Bereiche möchten Sie mit mir bearbeiten?'**
   String get onboardingQuestionQDomains;
 
-  /// Onboarding question q_goal
+  /// No description provided for @onboardingQuestionQGoal.
   ///
-  /// In fr, this message translates to:
-  /// **'Quel est votre objectif principal avec moi ?'**
+  /// In de, this message translates to:
+  /// **'Was ist Ihr Hauptziel mit mir?'**
   String get onboardingQuestionQGoal;
 
-  /// Onboarding question q_level
+  /// No description provided for @onboardingQuestionQLevel.
   ///
-  /// In fr, this message translates to:
-  /// **'Comment décririez-vous votre niveau aujourd’hui ?'**
+  /// In de, this message translates to:
+  /// **'Wie würden Sie Ihr aktuelles Niveau beschreiben?'**
   String get onboardingQuestionQLevel;
 
-  /// Onboarding question q_style
+  /// No description provided for @onboardingQuestionQStyle.
   ///
-  /// In fr, this message translates to:
-  /// **'Comment aimez-vous qu’on vous explique les notions ?'**
+  /// In de, this message translates to:
+  /// **'Wie sollen Ihnen Inhalte am besten erklärt werden?'**
   String get onboardingQuestionQStyle;
 
-  /// Onboarding question q_tone
+  /// No description provided for @onboardingQuestionQTone.
   ///
-  /// In fr, this message translates to:
-  /// **'Quel ton préférez-vous pour les corrections et le feedback ?'**
+  /// In de, this message translates to:
+  /// **'Welchen Ton bevorzugen Sie bei Korrekturen und Feedback?'**
   String get onboardingQuestionQTone;
 
-  /// Onboarding question q_language
+  /// No description provided for @onboardingQuestionQLanguage.
   ///
-  /// In fr, this message translates to:
-  /// **'Dans quelle langue dois-je vous expliquer les cours ?'**
+  /// In de, this message translates to:
+  /// **'In welcher Sprache soll ich Ihnen den Unterricht erklären?'**
   String get onboardingQuestionQLanguage;
 
-  /// Send answer button on onboarding chat
+  /// No description provided for @onboardingSendAnswer.
   ///
-  /// In fr, this message translates to:
-  /// **'Envoyer'**
+  /// In de, this message translates to:
+  /// **'Senden'**
   String get onboardingSendAnswer;
 
-  /// Step indicator on onboarding chat
+  /// No description provided for @onboardingStepProgress.
   ///
-  /// In fr, this message translates to:
+  /// In de, this message translates to:
   /// **'{current} / {total}'**
   String onboardingStepProgress(int current, int total);
 
-  /// Snackbar when user tries to open a locked onboarding step
+  /// No description provided for @onboardingStepLocked.
   ///
-  /// In fr, this message translates to:
-  /// **'Terminez l’étape en cours avant de continuer.'**
+  /// In de, this message translates to:
+  /// **'Schließe zuerst den aktuellen Schritt ab.'**
   String get onboardingStepLocked;
 
-  /// Label shown while Lucy typing indicator is visible
+  /// No description provided for @onboardingLucyTyping.
   ///
-  /// In fr, this message translates to:
-  /// **'Lucy écrit…'**
+  /// In de, this message translates to:
+  /// **'Lucy schreibt…'**
   String get onboardingLucyTyping;
 
-  /// Banner when browsing a completed onboarding step chat
+  /// No description provided for @onboardingStepReadOnly.
   ///
-  /// In fr, this message translates to:
-  /// **'Étape terminée — consultation seule.'**
+  /// In de, this message translates to:
+  /// **'Schritt abgeschlossen — nur Ansicht.'**
   String get onboardingStepReadOnly;
 
-  /// Button to edit a completed onboarding step without clearing others
+  /// No description provided for @onboardingStepEdit.
   ///
-  /// In fr, this message translates to:
-  /// **'Modifier cette étape'**
+  /// In de, this message translates to:
+  /// **'Schritt bearbeiten'**
   String get onboardingStepEdit;
 
-  /// Runs analyze again after the user edited answers post-analysis
+  /// No description provided for @onboardingRegenerateProfile.
   ///
-  /// In fr, this message translates to:
-  /// **'Regénérer le profil'**
+  /// In de, this message translates to:
+  /// **'Profil neu erstellen'**
   String get onboardingRegenerateProfile;
 
-  /// User confirms Lucy understood the answer
+  /// No description provided for @onboardingConfirmTurn.
   ///
-  /// In fr, this message translates to:
-  /// **'C’est bon'**
+  /// In de, this message translates to:
+  /// **'Passt'**
   String get onboardingConfirmTurn;
 
-  /// User rejects Lucy summary and re-enters answer
+  /// No description provided for @onboardingRejectTurn.
   ///
-  /// In fr, this message translates to:
-  /// **'Ce n’est pas ça'**
+  /// In de, this message translates to:
+  /// **'Das stimmt nicht'**
   String get onboardingRejectTurn;
 
-  /// Generic onboarding API error
+  /// No description provided for @onboardingGenericError.
   ///
-  /// In fr, this message translates to:
-  /// **'Une erreur est survenue. Réessayez.'**
+  /// In de, this message translates to:
+  /// **'Ein Fehler ist aufgetreten. Bitte erneut versuchen.'**
   String get onboardingGenericError;
 
   /// No description provided for @onboardingErrorUnauthorized.
   ///
-  /// In fr, this message translates to:
-  /// **'Votre session a expiré. Reconnectez-vous.'**
+  /// In de, this message translates to:
+  /// **'Ihre Sitzung ist abgelaufen. Bitte melden Sie sich erneut an.'**
   String get onboardingErrorUnauthorized;
 
   /// No description provided for @onboardingErrorValidation.
   ///
-  /// In fr, this message translates to:
-  /// **'Requête invalide. Réessayez.'**
+  /// In de, this message translates to:
+  /// **'Ungültige Anfrage. Bitte erneut versuchen.'**
   String get onboardingErrorValidation;
 
   /// No description provided for @onboardingErrorAlreadyComplete.
   ///
-  /// In fr, this message translates to:
-  /// **'Votre profil est déjà configuré.'**
+  /// In de, this message translates to:
+  /// **'Ihr Profil ist bereits eingerichtet.'**
   String get onboardingErrorAlreadyComplete;
 
   /// No description provided for @onboardingErrorTranscriptIncomplete.
   ///
-  /// In fr, this message translates to:
-  /// **'Terminez les 7 questions avant de lancer l’analyse.'**
+  /// In de, this message translates to:
+  /// **'Beantworten Sie alle 7 Fragen, bevor Sie die Analyse starten.'**
   String get onboardingErrorTranscriptIncomplete;
 
   /// No description provided for @onboardingErrorProfileIncomplete.
   ///
-  /// In fr, this message translates to:
-  /// **'Le profil généré est incomplet. Réessayez ou modifiez vos réponses.'**
+  /// In de, this message translates to:
+  /// **'Das erzeugte Profil ist unvollständig. Versuchen Sie es erneut oder passen Sie Ihre Antworten an.'**
   String get onboardingErrorProfileIncomplete;
 
   /// No description provided for @onboardingErrorPendingProfileMissing.
   ///
-  /// In fr, this message translates to:
-  /// **'Aucun profil en attente de validation. Relancez l’analyse.'**
+  /// In de, this message translates to:
+  /// **'Kein Profil wartet auf Bestätigung. Starten Sie die Analyse erneut.'**
   String get onboardingErrorPendingProfileMissing;
 
   /// No description provided for @onboardingErrorLlmInvalid.
   ///
-  /// In fr, this message translates to:
-  /// **'Lucy n’a pas pu interpréter la réponse. Réessayez dans un instant.'**
+  /// In de, this message translates to:
+  /// **'Lucy konnte die Antwort nicht verarbeiten. Bitte gleich erneut versuchen.'**
   String get onboardingErrorLlmInvalid;
 
   /// No description provided for @onboardingErrorLlmUnavailable.
   ///
-  /// In fr, this message translates to:
-  /// **'Lucy est temporairement indisponible. Réessayez plus tard.'**
+  /// In de, this message translates to:
+  /// **'Lucy ist vorübergehend nicht verfügbar. Bitte später erneut versuchen.'**
   String get onboardingErrorLlmUnavailable;
 
   /// No description provided for @onboardingErrorInternal.
   ///
-  /// In fr, this message translates to:
-  /// **'Une erreur est survenue. Réessayez.'**
+  /// In de, this message translates to:
+  /// **'Ein Fehler ist aufgetreten. Bitte erneut versuchen.'**
   String get onboardingErrorInternal;
 
-  /// Empty answer validation
+  /// No description provided for @onboardingAnswerRequired.
   ///
-  /// In fr, this message translates to:
-  /// **'Répondez avant d’envoyer.'**
+  /// In de, this message translates to:
+  /// **'Bitte geben Sie zuerst eine Antwort ein.'**
   String get onboardingAnswerRequired;
 
-  /// Answer exceeds max length
+  /// No description provided for @onboardingAnswerTooLong.
   ///
-  /// In fr, this message translates to:
-  /// **'Votre réponse est trop longue (2000 caractères maximum).'**
+  /// In de, this message translates to:
+  /// **'Ihre Antwort ist zu lang (max. 2000 Zeichen).'**
   String get onboardingAnswerTooLong;
 
-  /// Chat answer field hint
+  /// No description provided for @onboardingAnswerHint.
   ///
-  /// In fr, this message translates to:
-  /// **'Votre réponse…'**
+  /// In de, this message translates to:
+  /// **'Ihre Antwort…'**
   String get onboardingAnswerHint;
 
-  /// Hint after analyze completes (F07 will replace with confirm page)
+  /// No description provided for @onboardingAnalysisReadyHint.
   ///
-  /// In fr, this message translates to:
-  /// **'Analyse terminée. L’écran de confirmation arrive bientôt.'**
+  /// In de, this message translates to:
+  /// **'Analyse abgeschlossen. Der Bestätigungsbildschirm folgt in Kürze.'**
   String get onboardingAnalysisReadyHint;
 
   /// No description provided for @onboardingConfirmTitle.
   ///
-  /// In fr, this message translates to:
-  /// **'Votre profil apprenant'**
+  /// In de, this message translates to:
+  /// **'Ihr Lernprofil'**
   String get onboardingConfirmTitle;
 
   /// No description provided for @onboardingConfirmSummaryHeading.
   ///
-  /// In fr, this message translates to:
-  /// **'Ce que Lucy a retenu'**
+  /// In de, this message translates to:
+  /// **'Was Lucy verstanden hat'**
   String get onboardingConfirmSummaryHeading;
 
   /// No description provided for @onboardingConfirmAccept.
   ///
-  /// In fr, this message translates to:
-  /// **'Valider et continuer'**
+  /// In de, this message translates to:
+  /// **'Bestätigen und weiter'**
   String get onboardingConfirmAccept;
 
   /// No description provided for @onboardingConfirmEdit.
   ///
-  /// In fr, this message translates to:
-  /// **'Modifier mes réponses'**
+  /// In de, this message translates to:
+  /// **'Antworten bearbeiten'**
   String get onboardingConfirmEdit;
 
   /// No description provided for @onboardingConfirmMissingAnalysis.
   ///
-  /// In fr, this message translates to:
-  /// **'Aucune analyse disponible. Terminez d’abord le questionnaire.'**
+  /// In de, this message translates to:
+  /// **'Keine Analyse verfügbar. Bitte zuerst den Fragebogen abschließen.'**
   String get onboardingConfirmMissingAnalysis;
 
   /// No description provided for @onboardingProfileLabelPrimaryRole.
   ///
-  /// In fr, this message translates to:
+  /// In de, this message translates to:
   /// **'Situation'**
   String get onboardingProfileLabelPrimaryRole;
 
   /// No description provided for @onboardingProfileLabelMainDomains.
   ///
-  /// In fr, this message translates to:
-  /// **'Domaines'**
+  /// In de, this message translates to:
+  /// **'Fachgebiete'**
   String get onboardingProfileLabelMainDomains;
 
   /// No description provided for @onboardingProfileLabelLearningGoal.
   ///
-  /// In fr, this message translates to:
-  /// **'Objectif'**
+  /// In de, this message translates to:
+  /// **'Ziel'**
   String get onboardingProfileLabelLearningGoal;
 
   /// No description provided for @onboardingProfileLabelSelfAssessedLevel.
   ///
-  /// In fr, this message translates to:
+  /// In de, this message translates to:
   /// **'Niveau'**
   String get onboardingProfileLabelSelfAssessedLevel;
 
   /// No description provided for @onboardingProfileLabelExplanationStyle.
   ///
-  /// In fr, this message translates to:
-  /// **'Style d’explication'**
+  /// In de, this message translates to:
+  /// **'Erklärungsstil'**
   String get onboardingProfileLabelExplanationStyle;
 
   /// No description provided for @onboardingProfileLabelFeedbackTone.
   ///
-  /// In fr, this message translates to:
-  /// **'Ton du feedback'**
+  /// In de, this message translates to:
+  /// **'Feedback-Ton'**
   String get onboardingProfileLabelFeedbackTone;
 
   /// No description provided for @onboardingProfileLabelTutoringLanguage.
   ///
-  /// In fr, this message translates to:
-  /// **'Langue des explications'**
+  /// In de, this message translates to:
+  /// **'Erklärungssprache'**
   String get onboardingProfileLabelTutoringLanguage;
 
   /// No description provided for @onboardingEnumPrimaryRoleStudent.
   ///
-  /// In fr, this message translates to:
-  /// **'Étudiant·e'**
+  /// In de, this message translates to:
+  /// **'Studierende'**
   String get onboardingEnumPrimaryRoleStudent;
 
   /// No description provided for @onboardingEnumPrimaryRoleProfessional.
   ///
-  /// In fr, this message translates to:
-  /// **'Professionnel·le'**
+  /// In de, this message translates to:
+  /// **'Berufstätige'**
   String get onboardingEnumPrimaryRoleProfessional;
 
   /// No description provided for @onboardingEnumPrimaryRoleEducator.
   ///
-  /// In fr, this message translates to:
-  /// **'Enseignant·e'**
+  /// In de, this message translates to:
+  /// **'Lehrende'**
   String get onboardingEnumPrimaryRoleEducator;
 
   /// No description provided for @onboardingEnumPrimaryRoleSelfLearner.
   ///
-  /// In fr, this message translates to:
-  /// **'Apprentissage autonome'**
+  /// In de, this message translates to:
+  /// **'Selbstlerner'**
   String get onboardingEnumPrimaryRoleSelfLearner;
 
   /// No description provided for @onboardingEnumPrimaryRoleOther.
   ///
-  /// In fr, this message translates to:
-  /// **'Autre'**
+  /// In de, this message translates to:
+  /// **'Sonstiges'**
   String get onboardingEnumPrimaryRoleOther;
 
   /// No description provided for @onboardingEnumDomainSciences.
   ///
-  /// In fr, this message translates to:
-  /// **'Sciences'**
+  /// In de, this message translates to:
+  /// **'Naturwissenschaften'**
   String get onboardingEnumDomainSciences;
 
   /// No description provided for @onboardingEnumDomainLaw.
   ///
-  /// In fr, this message translates to:
-  /// **'Droit'**
+  /// In de, this message translates to:
+  /// **'Recht'**
   String get onboardingEnumDomainLaw;
 
   /// No description provided for @onboardingEnumDomainMedicine.
   ///
-  /// In fr, this message translates to:
-  /// **'Médecine'**
+  /// In de, this message translates to:
+  /// **'Medizin'**
   String get onboardingEnumDomainMedicine;
 
   /// No description provided for @onboardingEnumDomainLanguages.
   ///
-  /// In fr, this message translates to:
-  /// **'Langues'**
+  /// In de, this message translates to:
+  /// **'Sprachen'**
   String get onboardingEnumDomainLanguages;
 
   /// No description provided for @onboardingEnumDomainBusiness.
   ///
-  /// In fr, this message translates to:
-  /// **'Commerce / gestion'**
+  /// In de, this message translates to:
+  /// **'Wirtschaft'**
   String get onboardingEnumDomainBusiness;
 
   /// No description provided for @onboardingEnumDomainCs.
   ///
-  /// In fr, this message translates to:
-  /// **'Informatique'**
+  /// In de, this message translates to:
+  /// **'Informatik'**
   String get onboardingEnumDomainCs;
 
   /// No description provided for @onboardingEnumDomainOther.
   ///
-  /// In fr, this message translates to:
-  /// **'Autre'**
+  /// In de, this message translates to:
+  /// **'Sonstiges'**
   String get onboardingEnumDomainOther;
 
   /// No description provided for @onboardingEnumLearningGoalExam.
   ///
-  /// In fr, this message translates to:
-  /// **'Préparer un examen'**
+  /// In de, this message translates to:
+  /// **'Prüfungsvorbereitung'**
   String get onboardingEnumLearningGoalExam;
 
   /// No description provided for @onboardingEnumLearningGoalUnderstandCourse.
   ///
-  /// In fr, this message translates to:
-  /// **'Mieux comprendre un cours'**
+  /// In de, this message translates to:
+  /// **'Kurs besser verstehen'**
   String get onboardingEnumLearningGoalUnderstandCourse;
 
   /// No description provided for @onboardingEnumLearningGoalQuickReview.
   ///
-  /// In fr, this message translates to:
-  /// **'Révision rapide'**
+  /// In de, this message translates to:
+  /// **'Schnelle Wiederholung'**
   String get onboardingEnumLearningGoalQuickReview;
 
   /// No description provided for @onboardingEnumLearningGoalProfessional.
   ///
-  /// In fr, this message translates to:
-  /// **'Montée en compétences pro'**
+  /// In de, this message translates to:
+  /// **'Berufliche Weiterbildung'**
   String get onboardingEnumLearningGoalProfessional;
 
   /// No description provided for @onboardingEnumLearningGoalCertification.
   ///
-  /// In fr, this message translates to:
-  /// **'Certification'**
+  /// In de, this message translates to:
+  /// **'Zertifizierung'**
   String get onboardingEnumLearningGoalCertification;
 
   /// No description provided for @onboardingEnumLearningGoalOther.
   ///
-  /// In fr, this message translates to:
-  /// **'Autre'**
+  /// In de, this message translates to:
+  /// **'Sonstiges'**
   String get onboardingEnumLearningGoalOther;
 
   /// No description provided for @onboardingEnumLevelBeginner.
   ///
-  /// In fr, this message translates to:
-  /// **'Débutant'**
+  /// In de, this message translates to:
+  /// **'Anfänger'**
   String get onboardingEnumLevelBeginner;
 
   /// No description provided for @onboardingEnumLevelIntermediate.
   ///
-  /// In fr, this message translates to:
-  /// **'Intermédiaire'**
+  /// In de, this message translates to:
+  /// **'Mittelstufe'**
   String get onboardingEnumLevelIntermediate;
 
   /// No description provided for @onboardingEnumLevelAdvanced.
   ///
-  /// In fr, this message translates to:
-  /// **'Avancé'**
+  /// In de, this message translates to:
+  /// **'Fortgeschritten'**
   String get onboardingEnumLevelAdvanced;
 
   /// No description provided for @onboardingEnumLevelVariable.
   ///
-  /// In fr, this message translates to:
-  /// **'Variable selon les sujets'**
+  /// In de, this message translates to:
+  /// **'Je nach Thema unterschiedlich'**
   String get onboardingEnumLevelVariable;
 
   /// No description provided for @onboardingEnumStyleStepByStep.
   ///
-  /// In fr, this message translates to:
-  /// **'Étape par étape'**
+  /// In de, this message translates to:
+  /// **'Schritt für Schritt'**
   String get onboardingEnumStyleStepByStep;
 
   /// No description provided for @onboardingEnumStyleSummaryFirst.
   ///
-  /// In fr, this message translates to:
-  /// **'Résumé d’abord'**
+  /// In de, this message translates to:
+  /// **'Zuerst Zusammenfassung'**
   String get onboardingEnumStyleSummaryFirst;
 
   /// No description provided for @onboardingEnumStyleAnalogies.
   ///
-  /// In fr, this message translates to:
-  /// **'Analogies'**
+  /// In de, this message translates to:
+  /// **'Analogien'**
   String get onboardingEnumStyleAnalogies;
 
   /// No description provided for @onboardingEnumStyleSocratic.
   ///
-  /// In fr, this message translates to:
-  /// **'Questions guidées'**
+  /// In de, this message translates to:
+  /// **'Geführte Fragen'**
   String get onboardingEnumStyleSocratic;
 
   /// No description provided for @onboardingEnumToneEncouraging.
   ///
-  /// In fr, this message translates to:
-  /// **'Encourageant'**
+  /// In de, this message translates to:
+  /// **'Ermutigend'**
   String get onboardingEnumToneEncouraging;
 
   /// No description provided for @onboardingEnumToneNeutral.
   ///
-  /// In fr, this message translates to:
-  /// **'Neutre'**
+  /// In de, this message translates to:
+  /// **'Neutral'**
   String get onboardingEnumToneNeutral;
 
   /// No description provided for @onboardingEnumToneStrict.
   ///
-  /// In fr, this message translates to:
-  /// **'Exigeant'**
+  /// In de, this message translates to:
+  /// **'Streng'**
   String get onboardingEnumToneStrict;
 
   /// No description provided for @onboardingEnumTutoringLangFr.
   ///
-  /// In fr, this message translates to:
-  /// **'Français'**
+  /// In de, this message translates to:
+  /// **'Französisch'**
   String get onboardingEnumTutoringLangFr;
 
   /// No description provided for @onboardingEnumTutoringLangEn.
   ///
-  /// In fr, this message translates to:
-  /// **'Anglais'**
+  /// In de, this message translates to:
+  /// **'Englisch'**
   String get onboardingEnumTutoringLangEn;
 
   /// No description provided for @onboardingEnumTutoringLangDe.
   ///
-  /// In fr, this message translates to:
-  /// **'Allemand'**
+  /// In de, this message translates to:
+  /// **'Deutsch'**
   String get onboardingEnumTutoringLangDe;
 
   /// No description provided for @onboardingEnumTutoringLangMatchDocument.
   ///
-  /// In fr, this message translates to:
-  /// **'Langue du document'**
+  /// In de, this message translates to:
+  /// **'Sprache des Dokuments'**
   String get onboardingEnumTutoringLangMatchDocument;
 
   /// No description provided for @documentGenericError.
   ///
-  /// In fr, this message translates to:
-  /// **'Une erreur est survenue avec vos documents. Réessayez.'**
+  /// In de, this message translates to:
+  /// **'Bei Ihren Dokumenten ist ein Fehler aufgetreten. Bitte erneut versuchen.'**
   String get documentGenericError;
 
   /// No description provided for @documentErrorValidation.
   ///
-  /// In fr, this message translates to:
-  /// **'Requête invalide. Vérifiez le fichier et réessayez.'**
+  /// In de, this message translates to:
+  /// **'Ungültige Anfrage. Prüfen Sie die Datei und versuchen Sie es erneut.'**
   String get documentErrorValidation;
 
   /// No description provided for @documentErrorUnauthorized.
   ///
-  /// In fr, this message translates to:
-  /// **'Votre session a expiré. Reconnectez-vous.'**
+  /// In de, this message translates to:
+  /// **'Ihre Sitzung ist abgelaufen. Bitte melden Sie sich erneut an.'**
   String get documentErrorUnauthorized;
 
   /// No description provided for @documentErrorUploadNotReady.
   ///
-  /// In fr, this message translates to:
-  /// **'Le fichier n’est pas encore prêt. Patientez puis réessayez.'**
+  /// In de, this message translates to:
+  /// **'Die Datei ist noch nicht bereit. Warten Sie kurz und versuchen Sie es erneut.'**
   String get documentErrorUploadNotReady;
 
   /// No description provided for @documentErrorUploadNetwork.
   ///
-  /// In fr, this message translates to:
-  /// **'Échec de l’envoi vers le stockage (réseau ou CORS). Configurez le CORS du bucket Firebase Storage pour le web.'**
+  /// In de, this message translates to:
+  /// **'Upload zum Speicher fehlgeschlagen (Netzwerk oder CORS). Firebase-Storage-CORS für Web prüfen.'**
   String get documentErrorUploadNetwork;
 
   /// No description provided for @documentErrorProcessingNoDelete.
   ///
-  /// In fr, this message translates to:
-  /// **'Traitement en cours. Vous ne pouvez pas supprimer ce document pour l’instant.'**
+  /// In de, this message translates to:
+  /// **'Verarbeitung läuft. Dieses Dokument kann noch nicht gelöscht werden.'**
   String get documentErrorProcessingNoDelete;
 
   /// No description provided for @documentErrorOneUploadAtATime.
   ///
-  /// In fr, this message translates to:
-  /// **'Un autre téléversement est déjà en cours. Attendez la fin.'**
+  /// In de, this message translates to:
+  /// **'Ein anderer Upload läuft bereits. Bitte warten Sie, bis er abgeschlossen ist.'**
   String get documentErrorOneUploadAtATime;
 
   /// No description provided for @documentErrorSearchActiveLimit.
   ///
-  /// In fr, this message translates to:
-  /// **'Vous pouvez activer au maximum 5 documents pour la recherche.'**
+  /// In de, this message translates to:
+  /// **'Sie können höchstens 5 Dokumente für die Suche aktivieren.'**
   String get documentErrorSearchActiveLimit;
 
   /// No description provided for @documentErrorTypeNotAllowed.
   ///
-  /// In fr, this message translates to:
-  /// **'Ce type de fichier n’est pas pris en charge.'**
+  /// In de, this message translates to:
+  /// **'Dieser Dateityp wird nicht unterstützt.'**
   String get documentErrorTypeNotAllowed;
 
   /// No description provided for @documentErrorTypeMismatch.
   ///
-  /// In fr, this message translates to:
-  /// **'Le contenu du fichier ne correspond pas au type indiqué.'**
+  /// In de, this message translates to:
+  /// **'Der Dateiinhalt entspricht nicht dem angegebenen Typ.'**
   String get documentErrorTypeMismatch;
 
   /// No description provided for @documentErrorTooLarge.
   ///
-  /// In fr, this message translates to:
-  /// **'Ce fichier est trop volumineux (20 Mo maximum).'**
+  /// In de, this message translates to:
+  /// **'Diese Datei ist zu groß (maximal 20 MB).'**
   String get documentErrorTooLarge;
 
   /// No description provided for @documentErrorEmptyExtraction.
   ///
-  /// In fr, this message translates to:
-  /// **'Lucy n’a pas pu extraire assez de texte de ce document.'**
+  /// In de, this message translates to:
+  /// **'Lucy konnte nicht genug Text aus diesem Dokument extrahieren.'**
   String get documentErrorEmptyExtraction;
 
   /// No description provided for @documentErrorPasswordProtected.
   ///
-  /// In fr, this message translates to:
-  /// **'Ce PDF est protégé par mot de passe. Retirez la protection puis réessayez.'**
+  /// In de, this message translates to:
+  /// **'Diese PDF ist passwortgeschützt. Entfernen Sie den Schutz und versuchen Sie es erneut.'**
   String get documentErrorPasswordProtected;
 
   /// No description provided for @documentErrorOcrRequired.
   ///
-  /// In fr, this message translates to:
-  /// **'Ce document semble être un scan sans texte lisible.'**
+  /// In de, this message translates to:
+  /// **'Dieses Dokument scheint ein Scan ohne lesbaren Text zu sein.'**
   String get documentErrorOcrRequired;
 
   /// No description provided for @documentErrorNotFound.
   ///
-  /// In fr, this message translates to:
-  /// **'Document introuvable.'**
+  /// In de, this message translates to:
+  /// **'Dokument nicht gefunden.'**
   String get documentErrorNotFound;
 
   /// No description provided for @documentProcessingFailed.
   ///
-  /// In fr, this message translates to:
-  /// **'Le traitement du document a échoué. Vous pouvez réessayer.'**
+  /// In de, this message translates to:
+  /// **'Die Dokumentverarbeitung ist fehlgeschlagen. Sie können es erneut versuchen.'**
   String get documentProcessingFailed;
 
   /// No description provided for @documentErrorUploadAbandoned.
   ///
-  /// In fr, this message translates to:
-  /// **'Le téléversement a expiré. Supprimez l’entrée et réessayez.'**
+  /// In de, this message translates to:
+  /// **'Der Upload ist abgelaufen. Löschen Sie den Eintrag und versuchen Sie es erneut.'**
   String get documentErrorUploadAbandoned;
 
   /// No description provided for @documentErrorEmbeddingUnavailable.
   ///
-  /// In fr, this message translates to:
-  /// **'L’indexation est temporairement indisponible. Réessayez plus tard.'**
+  /// In de, this message translates to:
+  /// **'Die Indizierung ist vorübergehend nicht verfügbar. Versuchen Sie es später erneut.'**
   String get documentErrorEmbeddingUnavailable;
 
   /// No description provided for @documentsAdd.
   ///
-  /// In fr, this message translates to:
-  /// **'Ajouter'**
+  /// In de, this message translates to:
+  /// **'Hinzufügen'**
   String get documentsAdd;
 
   /// No description provided for @documentsAddTitle.
   ///
-  /// In fr, this message translates to:
-  /// **'Ajouter un document'**
+  /// In de, this message translates to:
+  /// **'Dokument hinzufügen'**
   String get documentsAddTitle;
 
   /// No description provided for @documentsEmpty.
   ///
-  /// In fr, this message translates to:
-  /// **'Aucun document pour l’instant. Ajoutez un PDF, Word ou fichier texte pour commencer.'**
+  /// In de, this message translates to:
+  /// **'Noch keine Dokumente. Fügen Sie eine PDF-, Word- oder Textdatei hinzu.'**
   String get documentsEmpty;
 
   /// No description provided for @documentsProcessingHint.
   ///
-  /// In fr, this message translates to:
-  /// **'Lucy traite votre document. Cela peut prendre un moment.'**
+  /// In de, this message translates to:
+  /// **'Lucy verarbeitet Ihr Dokument. Das kann einen Moment dauern.'**
   String get documentsProcessingHint;
 
   /// No description provided for @documentsPickFile.
   ///
-  /// In fr, this message translates to:
-  /// **'Choisir un fichier'**
+  /// In de, this message translates to:
+  /// **'Datei auswählen'**
   String get documentsPickFile;
 
   /// No description provided for @documentsPickFileRequired.
   ///
-  /// In fr, this message translates to:
-  /// **'Veuillez choisir un fichier à téléverser.'**
+  /// In de, this message translates to:
+  /// **'Bitte wählen Sie eine Datei zum Hochladen.'**
   String get documentsPickFileRequired;
 
   /// No description provided for @documentsFieldTitle.
   ///
-  /// In fr, this message translates to:
-  /// **'Titre'**
+  /// In de, this message translates to:
+  /// **'Titel'**
   String get documentsFieldTitle;
 
   /// No description provided for @documentsUpload.
   ///
-  /// In fr, this message translates to:
-  /// **'Téléverser'**
+  /// In de, this message translates to:
+  /// **'Hochladen'**
   String get documentsUpload;
 
   /// No description provided for @documentsDownload.
   ///
-  /// In fr, this message translates to:
-  /// **'Télécharger'**
+  /// In de, this message translates to:
+  /// **'Herunterladen'**
   String get documentsDownload;
 
   /// No description provided for @documentsDelete.
   ///
-  /// In fr, this message translates to:
-  /// **'Supprimer'**
+  /// In de, this message translates to:
+  /// **'Löschen'**
   String get documentsDelete;
 
   /// No description provided for @documentsDialogCancel.
   ///
-  /// In fr, this message translates to:
-  /// **'Annuler'**
+  /// In de, this message translates to:
+  /// **'Abbrechen'**
   String get documentsDialogCancel;
 
   /// No description provided for @documentsDeleteConfirmTitle.
   ///
-  /// In fr, this message translates to:
-  /// **'Supprimer le document ?'**
+  /// In de, this message translates to:
+  /// **'Dokument löschen?'**
   String get documentsDeleteConfirmTitle;
 
   /// No description provided for @documentsDeleteConfirmMessage.
   ///
-  /// In fr, this message translates to:
-  /// **'Supprimer « {title} » ? Cette action est irréversible.'**
+  /// In de, this message translates to:
+  /// **'„{title}“ löschen? Dies kann nicht rückgängig gemacht werden.'**
   String documentsDeleteConfirmMessage(String title);
 
   /// No description provided for @documentsStatusUploading.
   ///
-  /// In fr, this message translates to:
-  /// **'Téléversement'**
+  /// In de, this message translates to:
+  /// **'Hochladen'**
   String get documentsStatusUploading;
 
   /// No description provided for @documentsStatusProcessing.
   ///
-  /// In fr, this message translates to:
-  /// **'Traitement'**
+  /// In de, this message translates to:
+  /// **'Verarbeitung'**
   String get documentsStatusProcessing;
 
   /// No description provided for @documentsStatusReady.
   ///
-  /// In fr, this message translates to:
-  /// **'Prêt'**
+  /// In de, this message translates to:
+  /// **'Bereit'**
   String get documentsStatusReady;
 
   /// No description provided for @documentsStatusFailed.
   ///
-  /// In fr, this message translates to:
-  /// **'Échec'**
+  /// In de, this message translates to:
+  /// **'Fehlgeschlagen'**
   String get documentsStatusFailed;
 
   /// Default title for a new chat thread
   ///
-  /// In fr, this message translates to:
-  /// **'Nouvelle conversation'**
+  /// In de, this message translates to:
+  /// **'Neue Unterhaltung'**
   String get chatDefaultTitle;
 
   /// No description provided for @chatNewConversation.
   ///
-  /// In fr, this message translates to:
-  /// **'Nouvelle conversation'**
+  /// In de, this message translates to:
+  /// **'Neue Unterhaltung'**
   String get chatNewConversation;
 
   /// No description provided for @chatSourcesTitle.
   ///
-  /// In fr, this message translates to:
-  /// **'Sources'**
+  /// In de, this message translates to:
+  /// **'Quellen'**
   String get chatSourcesTitle;
 
   /// No description provided for @chatSourcePages.
   ///
-  /// In fr, this message translates to:
-  /// **'Pages {pageStart}–{pageEnd}'**
+  /// In de, this message translates to:
+  /// **'Seiten {pageStart}–{pageEnd}'**
   String chatSourcePages(int pageStart, int pageEnd);
 
   /// No description provided for @chatEmptyHint.
   ///
-  /// In fr, this message translates to:
-  /// **'Posez une question sur vos documents actifs.'**
+  /// In de, this message translates to:
+  /// **'Stellen Sie eine Frage zu Ihren aktiven Dokumenten.'**
   String get chatEmptyHint;
 
   /// No description provided for @chatComposerHint.
   ///
-  /// In fr, this message translates to:
-  /// **'Votre message…'**
+  /// In de, this message translates to:
+  /// **'Ihre Nachricht…'**
   String get chatComposerHint;
 
   /// No description provided for @chatSend.
   ///
-  /// In fr, this message translates to:
-  /// **'Envoyer'**
+  /// In de, this message translates to:
+  /// **'Senden'**
   String get chatSend;
 
   /// No description provided for @chatRetry.
   ///
-  /// In fr, this message translates to:
-  /// **'Réessayer'**
+  /// In de, this message translates to:
+  /// **'Erneut versuchen'**
   String get chatRetry;
 
   /// No description provided for @chatLoading.
   ///
-  /// In fr, this message translates to:
-  /// **'Chargement…'**
+  /// In de, this message translates to:
+  /// **'Laden…'**
   String get chatLoading;
 
   /// No description provided for @chatOfflineBanner.
   ///
-  /// In fr, this message translates to:
-  /// **'Hors ligne — affichage du cache local. L’envoi est désactivé.'**
+  /// In de, this message translates to:
+  /// **'Offline — Cache wird angezeigt. Senden ist deaktiviert.'**
   String get chatOfflineBanner;
 
   /// No description provided for @chatNoCorpusTitle.
   ///
-  /// In fr, this message translates to:
-  /// **'Aucun document actif'**
+  /// In de, this message translates to:
+  /// **'Keine aktiven Dokumente'**
   String get chatNoCorpusTitle;
 
   /// No description provided for @chatNoCorpusMessage.
   ///
-  /// In fr, this message translates to:
-  /// **'Activez la recherche sur au moins un document prêt dans l’onglet Documents.'**
+  /// In de, this message translates to:
+  /// **'Aktivieren Sie die Suche für mindestens ein fertiges Dokument im Tab Dokumente.'**
   String get chatNoCorpusMessage;
 
   /// No description provided for @chatNoCorpusCta.
   ///
-  /// In fr, this message translates to:
-  /// **'Aller aux documents'**
+  /// In de, this message translates to:
+  /// **'Zu Dokumente'**
   String get chatNoCorpusCta;
 
   /// No description provided for @chatErrorNoActiveDocuments.
   ///
-  /// In fr, this message translates to:
-  /// **'Activez au moins un document pour discuter avec Lucy.'**
+  /// In de, this message translates to:
+  /// **'Aktivieren Sie mindestens ein Dokument, um mit Lucy zu chatten.'**
   String get chatErrorNoActiveDocuments;
 
   /// No description provided for @chatErrorLearnerProfileMissing.
   ///
-  /// In fr, this message translates to:
-  /// **'Terminez l’onboarding pour utiliser le chat.'**
+  /// In de, this message translates to:
+  /// **'Schließen Sie das Onboarding ab, um den Chat zu nutzen.'**
   String get chatErrorLearnerProfileMissing;
 
   /// No description provided for @chatErrorUnauthorized.
   ///
-  /// In fr, this message translates to:
-  /// **'Session expirée. Reconnectez-vous.'**
+  /// In de, this message translates to:
+  /// **'Sitzung abgelaufen. Bitte erneut anmelden.'**
   String get chatErrorUnauthorized;
 
   /// No description provided for @chatErrorNotFound.
   ///
-  /// In fr, this message translates to:
-  /// **'Conversation introuvable.'**
+  /// In de, this message translates to:
+  /// **'Unterhaltung nicht gefunden.'**
   String get chatErrorNotFound;
 
   /// No description provided for @chatErrorInvalidMessage.
   ///
-  /// In fr, this message translates to:
-  /// **'Message invalide.'**
+  /// In de, this message translates to:
+  /// **'Ungültige Nachricht.'**
   String get chatErrorInvalidMessage;
 
   /// No description provided for @chatErrorLlmUnavailable.
   ///
-  /// In fr, this message translates to:
-  /// **'Lucy est temporairement indisponible. Réessayez plus tard.'**
+  /// In de, this message translates to:
+  /// **'Lucy ist vorübergehend nicht verfügbar. Versuchen Sie es später erneut.'**
   String get chatErrorLlmUnavailable;
 
   /// No description provided for @chatErrorInvalidResponse.
   ///
-  /// In fr, this message translates to:
-  /// **'Réponse invalide du serveur. Réessayez.'**
+  /// In de, this message translates to:
+  /// **'Ungültige Serverantwort. Bitte erneut versuchen.'**
   String get chatErrorInvalidResponse;
 
   /// No description provided for @chatErrorStreamInProgress.
   ///
-  /// In fr, this message translates to:
-  /// **'Un message est déjà en cours de génération.'**
+  /// In de, this message translates to:
+  /// **'Eine Antwort wird bereits generiert.'**
   String get chatErrorStreamInProgress;
 
   /// No description provided for @chatGenericError.
   ///
-  /// In fr, this message translates to:
-  /// **'Une erreur est survenue. Réessayez.'**
+  /// In de, this message translates to:
+  /// **'Etwas ist schiefgelaufen. Bitte erneut versuchen.'**
   String get chatGenericError;
 
   /// No description provided for @quizEmptyHint.
   ///
-  /// In fr, this message translates to:
-  /// **'Générez un quiz à partir de vos documents actifs.'**
+  /// In de, this message translates to:
+  /// **'Erstellen Sie ein Quiz aus Ihren aktiven Dokumenten.'**
   String get quizEmptyHint;
 
   /// No description provided for @quizComingSoon.
   ///
-  /// In fr, this message translates to:
-  /// **'La génération de quiz arrive bientôt.'**
+  /// In de, this message translates to:
+  /// **'Die Quiz-Generierung kommt bald.'**
   String get quizComingSoon;
 
   /// No description provided for @quizNoCorpusTitle.
   ///
-  /// In fr, this message translates to:
-  /// **'Aucun document actif'**
+  /// In de, this message translates to:
+  /// **'Keine aktiven Dokumente'**
   String get quizNoCorpusTitle;
 
   /// No description provided for @quizNoCorpusMessage.
   ///
-  /// In fr, this message translates to:
-  /// **'Activez la recherche sur au moins un document prêt pour générer un quiz.'**
+  /// In de, this message translates to:
+  /// **'Aktivieren Sie die Suche für mindestens ein fertiges Dokument, um ein Quiz zu erstellen.'**
   String get quizNoCorpusMessage;
 
   /// No description provided for @quizNoCorpusCta.
   ///
-  /// In fr, this message translates to:
-  /// **'Aller aux documents'**
+  /// In de, this message translates to:
+  /// **'Zu den Dokumenten'**
   String get quizNoCorpusCta;
 
   /// No description provided for @quizLoading.
   ///
-  /// In fr, this message translates to:
-  /// **'Chargement…'**
+  /// In de, this message translates to:
+  /// **'Laden…'**
   String get quizLoading;
 
   /// No description provided for @quizGenericError.
   ///
-  /// In fr, this message translates to:
-  /// **'Une erreur est survenue. Réessayez.'**
+  /// In de, this message translates to:
+  /// **'Etwas ist schiefgelaufen. Bitte erneut versuchen.'**
   String get quizGenericError;
 }
 

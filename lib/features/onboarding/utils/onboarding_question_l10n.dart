@@ -1,5 +1,5 @@
-import 'package:frontend/core/localization/l10n/app_localizations.dart';
-import 'package:frontend/features/onboarding/utils/onboarding_question_ids.dart';
+import 'package:lucy_frontend/core/localization/l10n/app_localizations.dart';
+import 'package:lucy_frontend/features/onboarding/utils/onboarding_question_ids.dart';
 
 /// Resolves the official UI label for a [questionId] (SPEC §4.13 R7).
 String onboardingQuestionText(AppLocalizations l10n, String questionId) {

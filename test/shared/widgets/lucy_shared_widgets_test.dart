@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:frontend/core/constants/lucy_constants.dart';
-import 'package:frontend/core/localization/l10n/app_localizations.dart';
-import 'package:frontend/core/theme/lucy_flex_theme.dart';
-import 'package:frontend/features/auth/presentation/widgets/auth_web_layout.dart';
-import 'package:frontend/shared/widgets/buttons/lucy_primary_button.dart';
-import 'package:frontend/shared/widgets/buttons/lucy_tertiary_button.dart';
-import 'package:frontend/shared/widgets/branding/lucy_logo.dart';
+import 'package:lucy_frontend/core/constants/lucy_constants.dart';
+import 'package:lucy_frontend/core/localization/l10n/app_localizations.dart';
+import 'package:lucy_frontend/core/theme/lucy_flex_theme.dart';
+import 'package:lucy_frontend/features/auth/presentation/widgets/auth_web_layout.dart';
+import 'package:lucy_frontend/shared/widgets/buttons/lucy_primary_button.dart';
+import 'package:lucy_frontend/shared/widgets/buttons/lucy_tertiary_button.dart';
+import 'package:lucy_frontend/shared/widgets/branding/lucy_logo.dart';
 
 Widget _app(Widget child) {
   return MaterialApp(

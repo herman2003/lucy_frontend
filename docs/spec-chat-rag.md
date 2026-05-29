@@ -463,7 +463,7 @@ Contenu minimal attendu :
 
 ```bash
 cd backend && npm test -- chat
-cd frontend && flutter test test/features/chat/
+cd lucy_frontend && flutter test test/features/chat/
 ```
 
 ---
@@ -487,7 +487,7 @@ cd frontend && flutter test test/features/chat/
 
 ```bash
 cd backend && npm test && npm run start:dev:local
-cd frontend
+cd lucy_frontend
 dart run build_runner build --delete-conflicting-outputs
 flutter gen-l10n && flutter analyze && flutter test
 ```

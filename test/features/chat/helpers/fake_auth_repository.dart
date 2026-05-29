@@ -1,5 +1,5 @@
-import 'package:frontend/features/auth/domain/entities/auth_user.dart';
-import 'package:frontend/features/auth/domain/repositories/auth_repository.dart';
+import 'package:lucy_frontend/features/auth/domain/entities/auth_user.dart';
+import 'package:lucy_frontend/features/auth/domain/repositories/auth_repository.dart';
 
 /// Minimal [AuthRepository] for chat notifier tests.
 class FakeAuthRepository implements AuthRepository {

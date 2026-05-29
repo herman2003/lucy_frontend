@@ -75,7 +75,7 @@ abstract final class OnboardingLocalDraftMapper {
 
     return OnboardingLocalDraft(
       uid: uid,
-      uiLocale: json['uiLocale'] is String ? json['uiLocale'] as String : 'fr',
+      uiLocale: json['uiLocale'] is String ? json['uiLocale'] as String : 'de',
       answerDraft: json['answerDraft'] is String ? json['answerDraft'] as String : '',
       currentStepIndex: stepIndex,
       currentQuestionId: questionId,

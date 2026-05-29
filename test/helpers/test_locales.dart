@@ -6,7 +6,10 @@ void setTestLocaleOverride(Locale locale) {
   TestWidgetsFlutterBinding.instance.platformDispatcher.localeTestValue = locale;
 }
 
-/// Default French locale for tests written against `app_fr.arb` strings.
+/// Default German locale (matches app fallback locale).
+void setTestLocaleDe() => setTestLocaleOverride(const Locale('de'));
+
+/// French locale for tests written against `app_fr.arb` strings.
 void setTestLocaleFr() => setTestLocaleOverride(const Locale('fr'));
 
 /// Clears the test locale override (restores platform default).

@@ -118,7 +118,7 @@ flowchart LR
 ### 2.8 Commandes
 
 ```bash
-cd frontend
+cd lucy_frontend
 flutter pub add animated_bottom_navigation_bar
 dart run build_runner build --delete-conflicting-outputs
 flutter gen-l10n
@@ -189,7 +189,7 @@ Le CSV décrit des **colonnes/lignes** ; un PDF est du **texte continu** : le co
 
 ```bash
 cd backend && npm test
-cd frontend && flutter analyze && flutter test
+cd lucy_frontend && flutter analyze && flutter test
 ```
 
 ### 3.7 Structure cible (résumé)
@@ -262,7 +262,7 @@ Tuteur **multi-fils** : l’apprenant gère plusieurs conversations avec Lucy. L
 | Référence structure | `afroschool_admin_web`, `telC_frontend` (shell) |
 
 ```bash
-cd frontend && flutter pub get
+cd lucy_frontend && flutter pub get
 dart run build_runner build --delete-conflicting-outputs
 flutter gen-l10n && flutter analyze && flutter test
 ```

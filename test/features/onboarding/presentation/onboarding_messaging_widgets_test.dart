@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:frontend/core/localization/l10n/app_localizations.dart';
-import 'package:frontend/features/onboarding/presentation/widgets/onboarding_lucy_bubble.dart';
-import 'package:frontend/features/onboarding/presentation/widgets/onboarding_lucy_typing_row.dart';
-import 'package:frontend/features/onboarding/presentation/widgets/onboarding_user_bubble.dart';
-import 'package:frontend/shared/widgets/branding/lucy_avatar.dart';
+import 'package:lucy_frontend/core/localization/l10n/app_localizations.dart';
+import 'package:lucy_frontend/features/onboarding/presentation/widgets/onboarding_lucy_bubble.dart';
+import 'package:lucy_frontend/features/onboarding/presentation/widgets/onboarding_lucy_typing_row.dart';
+import 'package:lucy_frontend/features/onboarding/presentation/widgets/onboarding_user_bubble.dart';
+import 'package:lucy_frontend/shared/widgets/branding/lucy_avatar.dart';
 
 import '../../../helpers/test_locales.dart';
 

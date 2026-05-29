@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:frontend/core/network/api_endpoints.dart';
+import 'package:lucy_frontend/core/network/api_endpoints.dart';
 
 void main() {
   test('baseUrl has no trailing slash', () {

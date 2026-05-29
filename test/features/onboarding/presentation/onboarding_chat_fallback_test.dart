@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:frontend/core/localization/l10n/app_localizations.dart';
-import 'package:frontend/core/router/lucy_route_paths.dart';
-import 'package:frontend/features/onboarding/domain/entities/validate_answer_result.dart';
-import 'package:frontend/features/onboarding/presentation/pages/onboarding_chat_page.dart';
+import 'package:lucy_frontend/core/localization/l10n/app_localizations.dart';
+import 'package:lucy_frontend/core/router/lucy_route_paths.dart';
+import 'package:lucy_frontend/features/onboarding/domain/entities/validate_answer_result.dart';
+import 'package:lucy_frontend/features/onboarding/presentation/pages/onboarding_chat_page.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../helpers/test_locales.dart';

@@ -69,7 +69,7 @@
 
 ```bash
 cd backend && npm test -- chat
-cd frontend
+cd lucy_frontend
 dart run build_runner build --delete-conflicting-outputs
 flutter gen-l10n && flutter analyze && flutter test test/features/chat/
 ```

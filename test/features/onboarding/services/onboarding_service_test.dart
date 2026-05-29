@@ -1,13 +1,13 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:frontend/features/onboarding/domain/entities/confirm_turn_result.dart';
-import 'package:frontend/features/onboarding/domain/entities/finalize_onboarding_result.dart';
-import 'package:frontend/features/onboarding/domain/entities/learner_profile.dart';
-import 'package:frontend/features/onboarding/domain/entities/onboarding_analyze_result.dart';
-import 'package:frontend/features/onboarding/domain/entities/onboarding_local_draft.dart';
-import 'package:frontend/features/onboarding/domain/entities/onboarding_resume_progress.dart';
-import 'package:frontend/features/onboarding/utils/onboarding_question_ids.dart';
-import 'package:frontend/features/onboarding/domain/entities/validate_answer_result.dart';
-import 'package:frontend/features/onboarding/services/onboarding_service.dart';
+import 'package:lucy_frontend/features/onboarding/domain/entities/confirm_turn_result.dart';
+import 'package:lucy_frontend/features/onboarding/domain/entities/finalize_onboarding_result.dart';
+import 'package:lucy_frontend/features/onboarding/domain/entities/learner_profile.dart';
+import 'package:lucy_frontend/features/onboarding/domain/entities/onboarding_analyze_result.dart';
+import 'package:lucy_frontend/features/onboarding/domain/entities/onboarding_local_draft.dart';
+import 'package:lucy_frontend/features/onboarding/domain/entities/onboarding_resume_progress.dart';
+import 'package:lucy_frontend/features/onboarding/utils/onboarding_question_ids.dart';
+import 'package:lucy_frontend/features/onboarding/domain/entities/validate_answer_result.dart';
+import 'package:lucy_frontend/features/onboarding/services/onboarding_service.dart';
 
 import '../helpers/fake_onboarding_local_draft_repository.dart';
 import '../helpers/fake_onboarding_progress_repository.dart';

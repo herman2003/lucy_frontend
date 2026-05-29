@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:frontend/features/chat/domain/entities/chat_eligibility.dart';
-import 'package:frontend/features/chat/services/chat_service.dart';
+import 'package:lucy_frontend/features/chat/domain/entities/chat_eligibility.dart';
+import 'package:lucy_frontend/features/chat/services/chat_service.dart';
 
 import '../helpers/fake_chat_repository.dart';
 

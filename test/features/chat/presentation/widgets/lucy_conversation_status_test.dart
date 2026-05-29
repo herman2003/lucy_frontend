@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:frontend/core/localization/l10n/app_localizations.dart';
-import 'package:frontend/features/chat/presentation/widgets/lucy_conversation_status.dart';
+import 'package:lucy_frontend/core/localization/l10n/app_localizations.dart';
+import 'package:lucy_frontend/features/chat/presentation/widgets/lucy_conversation_status.dart';
 
 import '../../../../helpers/test_locales.dart';
 

@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:frontend/features/onboarding/data/mappers/analyze_mapper.dart';
-import 'package:frontend/features/onboarding/domain/entities/onboarding_analyze_result.dart';
+import 'package:lucy_frontend/features/onboarding/data/mappers/analyze_mapper.dart';
+import 'package:lucy_frontend/features/onboarding/domain/entities/onboarding_analyze_result.dart';
 
 void main() {
   test('fromJson maps standard analyze success', () {

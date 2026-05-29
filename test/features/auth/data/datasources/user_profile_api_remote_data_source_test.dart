@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:frontend/features/auth/data/datasources/user_profile_api_remote_data_source.dart';
-import 'package:frontend/features/auth/data/dtos/user_profile_dto.dart';
-import 'package:frontend/features/auth/data/exceptions/auth_profile_api_exception.dart';
+import 'package:lucy_frontend/features/auth/data/datasources/user_profile_api_remote_data_source.dart';
+import 'package:lucy_frontend/features/auth/data/dtos/user_profile_dto.dart';
+import 'package:lucy_frontend/features/auth/data/exceptions/auth_profile_api_exception.dart';
 
 void main() {
   group('UserProfileApiRemoteDataSource', () {

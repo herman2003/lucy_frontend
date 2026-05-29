@@ -1,5 +1,5 @@
-import 'package:frontend/features/documents/domain/providers/documents_provider.dart';
-import 'package:frontend/features/documents/services/documents_service.dart';
+import 'package:lucy_frontend/features/documents/domain/providers/documents_provider.dart';
+import 'package:lucy_frontend/features/documents/services/documents_service.dart';
 import 'package:riverpod/misc.dart';
 
 import 'fake_documents_repository.dart';

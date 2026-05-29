@@ -1,12 +1,12 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:frontend/features/auth/data/exceptions/auth_profile_api_exception.dart';
-import 'package:frontend/features/auth/data/datasources/auth_remote_data_source.dart';
-import 'package:frontend/features/auth/data/datasources/auth_user_snapshot.dart';
-import 'package:frontend/features/auth/data/datasources/user_profile_remote_data_source.dart';
-import 'package:frontend/features/auth/data/dtos/user_profile_dto.dart';
-import 'package:frontend/features/auth/data/repositories/auth_repository_impl.dart';
-import 'package:frontend/features/auth/domain/entities/auth_user.dart';
-import 'package:frontend/features/auth/domain/exceptions/auth_exception.dart';
+import 'package:lucy_frontend/features/auth/data/exceptions/auth_profile_api_exception.dart';
+import 'package:lucy_frontend/features/auth/data/datasources/auth_remote_data_source.dart';
+import 'package:lucy_frontend/features/auth/data/datasources/auth_user_snapshot.dart';
+import 'package:lucy_frontend/features/auth/data/datasources/user_profile_remote_data_source.dart';
+import 'package:lucy_frontend/features/auth/data/dtos/user_profile_dto.dart';
+import 'package:lucy_frontend/features/auth/data/repositories/auth_repository_impl.dart';
+import 'package:lucy_frontend/features/auth/domain/entities/auth_user.dart';
+import 'package:lucy_frontend/features/auth/domain/exceptions/auth_exception.dart';
 
 class _FakeAuthRemoteDataSource implements AuthRemoteDataSource {
   AuthUserSnapshot? current;

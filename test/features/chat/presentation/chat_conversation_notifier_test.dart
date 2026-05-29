@@ -1,11 +1,11 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:frontend/features/auth/domain/entities/auth_user.dart';
-import 'package:frontend/features/auth/domain/providers/auth_provider.dart';
-import 'package:frontend/features/chat/domain/providers/chat_provider.dart';
-import 'package:frontend/features/chat/presentation/controllers/chat_conversation_notifier.dart';
-import 'package:frontend/features/chat/presentation/controllers/chat_send_phase.dart';
-import 'package:frontend/features/chat/services/chat_service.dart';
+import 'package:lucy_frontend/features/auth/domain/entities/auth_user.dart';
+import 'package:lucy_frontend/features/auth/domain/providers/auth_provider.dart';
+import 'package:lucy_frontend/features/chat/domain/providers/chat_provider.dart';
+import 'package:lucy_frontend/features/chat/presentation/controllers/chat_conversation_notifier.dart';
+import 'package:lucy_frontend/features/chat/presentation/controllers/chat_send_phase.dart';
+import 'package:lucy_frontend/features/chat/services/chat_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../helpers/fake_auth_repository.dart';

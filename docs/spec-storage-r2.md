@@ -117,7 +117,7 @@ cd backend
 npm install                    # ajoute @aws-sdk/client-s3, @aws-sdk/s3-request-presigner
 STORAGE_PROVIDER=r2 npm run start:dev
 
-cd frontend
+cd lucy_frontend
 flutter run -d chrome          # ou mobile — aucun changement code
 ```
 
@@ -139,7 +139,7 @@ curl -s -X POST http://localhost:3001/v1/documents \
 
 ```bash
 cd backend && npm test
-cd frontend && flutter analyze && flutter test test/features/documents/
+cd lucy_frontend && flutter analyze && flutter test test/features/documents/
 ```
 
 ---
@@ -169,8 +169,8 @@ backend/src/
 Fichiers documentation uniquement :
 
 ```
-frontend/docs/spec-storage-r2.md      # ce document
-frontend/storage.cors.json            # obsolète pour R2 — note dans README backend
+lucy_frontend/docs/spec-storage-r2.md      # ce document
+lucy_frontend/storage.cors.json            # obsolète pour R2 — note dans README backend
 ```
 
 ### 3.3 Dépendances npm (backend)

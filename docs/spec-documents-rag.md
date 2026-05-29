@@ -404,7 +404,7 @@ Référence UI liste/upload : patterns `telC_frontend` / cartes + états chargem
 
 ```bash
 cd backend && npm test
-cd frontend && flutter test test/features/documents/
+cd lucy_frontend && flutter test test/features/documents/
 ```
 
 ---
@@ -443,7 +443,7 @@ npm install
 npm run start:dev:local   # ou start:dev
 
 # Frontend
-cd frontend
+cd lucy_frontend
 flutter pub add file_picker   # phase D1
 dart run build_runner build --delete-conflicting-outputs
 flutter gen-l10n

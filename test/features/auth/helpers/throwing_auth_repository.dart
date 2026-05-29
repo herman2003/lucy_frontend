@@ -1,6 +1,6 @@
-import 'package:frontend/features/auth/domain/entities/auth_user.dart';
-import 'package:frontend/features/auth/domain/exceptions/auth_exception.dart';
-import 'package:frontend/features/auth/domain/repositories/auth_repository.dart';
+import 'package:lucy_frontend/features/auth/domain/entities/auth_user.dart';
+import 'package:lucy_frontend/features/auth/domain/exceptions/auth_exception.dart';
+import 'package:lucy_frontend/features/auth/domain/repositories/auth_repository.dart';
 
 /// [AuthRepository] that always fails sign-in for notifier tests.
 class ThrowingAuthRepository implements AuthRepository {

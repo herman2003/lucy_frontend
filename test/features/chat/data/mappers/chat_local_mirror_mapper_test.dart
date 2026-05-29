@@ -1,9 +1,9 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:frontend/features/chat/data/mappers/chat_local_mirror_mapper.dart';
-import 'package:frontend/features/chat/domain/entities/chat_local_mirror.dart';
-import 'package:frontend/features/chat/domain/entities/chat_message.dart';
-import 'package:frontend/features/chat/domain/entities/chat_message_role.dart';
-import 'package:frontend/features/chat/domain/entities/chat_thread.dart';
+import 'package:lucy_frontend/features/chat/data/mappers/chat_local_mirror_mapper.dart';
+import 'package:lucy_frontend/features/chat/domain/entities/chat_local_mirror.dart';
+import 'package:lucy_frontend/features/chat/domain/entities/chat_message.dart';
+import 'package:lucy_frontend/features/chat/domain/entities/chat_message_role.dart';
+import 'package:lucy_frontend/features/chat/domain/entities/chat_thread.dart';
 
 void main() {
   test('round-trip preserves threads and messages', () {

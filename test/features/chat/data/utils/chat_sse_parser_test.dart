@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:frontend/features/chat/data/utils/chat_sse_parser.dart';
+import 'package:lucy_frontend/features/chat/data/utils/chat_sse_parser.dart';
 
 void main() {
   group('ChatSseParser', () {

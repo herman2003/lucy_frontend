@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:frontend/features/documents/data/mappers/document_mapper.dart';
-import 'package:frontend/features/documents/domain/entities/document_status.dart';
+import 'package:lucy_frontend/features/documents/data/mappers/document_mapper.dart';
+import 'package:lucy_frontend/features/documents/domain/entities/document_status.dart';
 
 void main() {
   group('DocumentMapper', () {

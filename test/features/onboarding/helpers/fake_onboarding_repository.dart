@@ -1,10 +1,10 @@
-import 'package:frontend/features/onboarding/domain/entities/confirm_turn_result.dart';
-import 'package:frontend/features/onboarding/domain/entities/finalize_onboarding_result.dart';
-import 'package:frontend/features/onboarding/domain/entities/learner_profile.dart';
-import 'package:frontend/features/onboarding/domain/entities/onboarding_analyze_result.dart';
-import 'package:frontend/features/onboarding/domain/entities/validate_answer_result.dart';
-import 'package:frontend/features/onboarding/domain/repositories/onboarding_repository.dart';
-import 'package:frontend/features/onboarding/utils/onboarding_question_ids.dart';
+import 'package:lucy_frontend/features/onboarding/domain/entities/confirm_turn_result.dart';
+import 'package:lucy_frontend/features/onboarding/domain/entities/finalize_onboarding_result.dart';
+import 'package:lucy_frontend/features/onboarding/domain/entities/learner_profile.dart';
+import 'package:lucy_frontend/features/onboarding/domain/entities/onboarding_analyze_result.dart';
+import 'package:lucy_frontend/features/onboarding/domain/entities/validate_answer_result.dart';
+import 'package:lucy_frontend/features/onboarding/domain/repositories/onboarding_repository.dart';
+import 'package:lucy_frontend/features/onboarding/utils/onboarding_question_ids.dart';
 
 class FakeOnboardingRepository implements OnboardingRepository {
   FakeOnboardingRepository({

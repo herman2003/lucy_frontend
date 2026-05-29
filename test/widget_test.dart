@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:frontend/app.dart';
-import 'package:frontend/features/auth/domain/entities/auth_bootstrap_result.dart';
-import 'package:frontend/features/auth/domain/providers/auth_provider.dart';
-import 'package:frontend/features/auth/presentation/pages/login/login_page.dart';
-import 'package:frontend/features/auth/presentation/pages/reset_password/reset_password_page.dart';
-import 'package:frontend/features/auth/presentation/pages/sign_up/sign_up_page.dart';
-import 'package:frontend/features/auth/presentation/widgets/auth_mobile_layout.dart';
-import 'package:frontend/features/auth/presentation/widgets/auth_web_layout.dart';
-import 'package:frontend/shared/widgets/inputs/lucy_text_field.dart';
+import 'package:lucy_frontend/app.dart';
+import 'package:lucy_frontend/features/auth/domain/entities/auth_bootstrap_result.dart';
+import 'package:lucy_frontend/features/auth/domain/providers/auth_provider.dart';
+import 'package:lucy_frontend/features/auth/presentation/pages/login/login_page.dart';
+import 'package:lucy_frontend/features/auth/presentation/pages/reset_password/reset_password_page.dart';
+import 'package:lucy_frontend/features/auth/presentation/pages/sign_up/sign_up_page.dart';
+import 'package:lucy_frontend/features/auth/presentation/widgets/auth_mobile_layout.dart';
+import 'package:lucy_frontend/features/auth/presentation/widgets/auth_web_layout.dart';
+import 'package:lucy_frontend/shared/widgets/inputs/lucy_text_field.dart';
 
 import 'features/auth/helpers/fake_auth_repository.dart';
 import 'helpers/auth_test_overrides.dart';

@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:frontend/features/onboarding/data/datasources/onboarding_progress_api_remote_data_source.dart';
-import 'package:frontend/features/onboarding/domain/exceptions/onboarding_exception.dart';
+import 'package:lucy_frontend/features/onboarding/data/datasources/onboarding_progress_api_remote_data_source.dart';
+import 'package:lucy_frontend/features/onboarding/domain/exceptions/onboarding_exception.dart';
 
 void main() {
   group('OnboardingProgressApiRemoteDataSource', () {

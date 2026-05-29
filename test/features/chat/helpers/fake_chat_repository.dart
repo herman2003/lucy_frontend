@@ -1,11 +1,11 @@
-import 'package:frontend/features/chat/domain/entities/chat_eligibility.dart';
-import 'package:frontend/features/chat/domain/entities/chat_message.dart';
-import 'package:frontend/features/chat/domain/entities/chat_message_role.dart';
-import 'package:frontend/features/chat/domain/entities/chat_message_status.dart';
-import 'package:frontend/features/chat/domain/entities/chat_source.dart';
-import 'package:frontend/features/chat/domain/entities/chat_stream_event.dart';
-import 'package:frontend/features/chat/domain/entities/chat_thread.dart';
-import 'package:frontend/features/chat/domain/repositories/chat_repository.dart';
+import 'package:lucy_frontend/features/chat/domain/entities/chat_eligibility.dart';
+import 'package:lucy_frontend/features/chat/domain/entities/chat_message.dart';
+import 'package:lucy_frontend/features/chat/domain/entities/chat_message_role.dart';
+import 'package:lucy_frontend/features/chat/domain/entities/chat_message_status.dart';
+import 'package:lucy_frontend/features/chat/domain/entities/chat_source.dart';
+import 'package:lucy_frontend/features/chat/domain/entities/chat_stream_event.dart';
+import 'package:lucy_frontend/features/chat/domain/entities/chat_thread.dart';
+import 'package:lucy_frontend/features/chat/domain/repositories/chat_repository.dart';
 
 /// In-memory [ChatRepository] for unit tests.
 class FakeChatRepository implements ChatRepository {

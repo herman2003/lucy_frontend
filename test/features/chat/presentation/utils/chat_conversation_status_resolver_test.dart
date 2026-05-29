@@ -1,8 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:frontend/features/chat/presentation/controllers/chat_conversation_state.dart';
-import 'package:frontend/features/chat/presentation/controllers/chat_send_phase.dart';
-import 'package:frontend/features/chat/presentation/utils/chat_conversation_status_resolver.dart';
-import 'package:frontend/features/chat/presentation/widgets/lucy_conversation_status.dart';
+import 'package:lucy_frontend/features/chat/presentation/controllers/chat_conversation_state.dart';
+import 'package:lucy_frontend/features/chat/presentation/controllers/chat_send_phase.dart';
+import 'package:lucy_frontend/features/chat/presentation/utils/chat_conversation_status_resolver.dart';
+import 'package:lucy_frontend/features/chat/presentation/widgets/lucy_conversation_status.dart';
 
 void main() {
   group('ChatConversationStatusResolver', () {

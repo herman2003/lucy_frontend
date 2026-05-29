@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:frontend/features/chat/data/mappers/chat_mapper.dart';
-import 'package:frontend/features/chat/domain/entities/chat_message_role.dart';
-import 'package:frontend/features/chat/domain/entities/chat_message_status.dart';
+import 'package:lucy_frontend/features/chat/data/mappers/chat_mapper.dart';
+import 'package:lucy_frontend/features/chat/domain/entities/chat_message_role.dart';
+import 'package:lucy_frontend/features/chat/domain/entities/chat_message_status.dart';
 
 void main() {
   group('ChatMapper', () {

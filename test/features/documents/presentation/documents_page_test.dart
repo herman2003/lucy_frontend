@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:frontend/core/localization/l10n/app_localizations.dart';
-import 'package:frontend/features/documents/domain/entities/document.dart';
-import 'package:frontend/features/documents/domain/entities/document_status.dart';
-import 'package:frontend/features/documents/domain/providers/documents_provider.dart';
-import 'package:frontend/features/documents/presentation/pages/documents_page.dart';
-import 'package:frontend/features/documents/services/documents_service.dart';
-import 'package:frontend/shared/widgets/feedback/lucy_snackbar.dart';
+import 'package:lucy_frontend/core/localization/l10n/app_localizations.dart';
+import 'package:lucy_frontend/features/documents/domain/entities/document.dart';
+import 'package:lucy_frontend/features/documents/domain/entities/document_status.dart';
+import 'package:lucy_frontend/features/documents/domain/providers/documents_provider.dart';
+import 'package:lucy_frontend/features/documents/presentation/pages/documents_page.dart';
+import 'package:lucy_frontend/features/documents/services/documents_service.dart';
+import 'package:lucy_frontend/shared/widgets/feedback/lucy_snackbar.dart';
 
 import '../../../helpers/test_locales.dart';
 import '../helpers/fake_documents_repository.dart';

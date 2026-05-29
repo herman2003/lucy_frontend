@@ -370,7 +370,7 @@ class _ConversationPanel extends ConsumerWidget {
       offset += 1;
     }
 
-    
+
     final sourceIndex = index - offset;
     if (sourceIndex >= 0 && sourceIndex < conversation.pendingSources.length) {
       return ChatSourceCard(source: conversation.pendingSources[sourceIndex]);

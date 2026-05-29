@@ -22,12 +22,12 @@ Livrer l’onglet **Chat** : plusieurs fils persistés, réponses Lucy **streami
 |---------|--------|
 | **Branche de travail** | `feature/chat-p4a` |
 | **Cible PR** | `main` |
-| **Dépôt** | `Lucy/frontend` (seul dépôt git du projet aujourd’hui) |
+| **Dépôt** | `Lucy/lucy_frontend` (seul dépôt git du projet aujourd’hui) |
 | **Backend** | Dépôt `Lucy/backend/` — branche **`feature/chat-p4a`** (même nom que frontend) |
 
 ```bash
 # Frontend
-cd frontend
+cd lucy_frontend
 git checkout feature/chat-p4a
 git push -u origin feature/chat-p4a
 gh pr create --base main --title "feat(chat): P4a frontend" --body "…"
@@ -366,7 +366,7 @@ curl -N -X POST "http://localhost:3001/v1/chats/{chatId}/messages/stream" \
 ```bash
 cd backend && npm test -- chat && npm run start:dev:local
 
-cd frontend
+cd lucy_frontend
 dart run build_runner build --delete-conflicting-outputs
 flutter gen-l10n
 flutter analyze

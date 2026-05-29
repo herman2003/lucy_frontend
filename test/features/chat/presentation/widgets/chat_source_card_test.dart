@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:frontend/core/localization/l10n/app_localizations.dart';
-import 'package:frontend/features/chat/domain/entities/chat_source.dart';
-import 'package:frontend/features/chat/presentation/widgets/chat_source_card.dart';
+import 'package:lucy_frontend/core/localization/l10n/app_localizations.dart';
+import 'package:lucy_frontend/features/chat/domain/entities/chat_source.dart';
+import 'package:lucy_frontend/features/chat/presentation/widgets/chat_source_card.dart';
 
 import '../../../../helpers/test_locales.dart';
 

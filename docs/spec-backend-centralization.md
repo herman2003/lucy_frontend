@@ -95,10 +95,10 @@ Pile locale sans GCP (tests API uniquement, pas E2E Flutter complet) :
 npm run start:dev:local
 ```
 
-### 2.2 Frontend (`Lucy/frontend/`)
+### 2.2 Frontend (`Lucy/lucy_frontend/`)
 
 ```bash
-cd frontend
+cd lucy_frontend
 flutter pub get
 dart run build_runner build --delete-conflicting-outputs
 flutter gen-l10n

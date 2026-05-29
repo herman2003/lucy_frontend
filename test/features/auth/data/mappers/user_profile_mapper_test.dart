@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:frontend/features/auth/data/dtos/user_profile_dto.dart';
-import 'package:frontend/features/auth/data/mappers/user_profile_mapper.dart';
+import 'package:lucy_frontend/features/auth/data/dtos/user_profile_dto.dart';
+import 'package:lucy_frontend/features/auth/data/mappers/user_profile_mapper.dart';
 
 void main() {
   group('UserProfileMapper', () {

@@ -1,5 +1,5 @@
-import 'package:frontend/features/quiz/domain/entities/quiz_eligibility.dart';
-import 'package:frontend/features/quiz/domain/repositories/quiz_repository.dart';
+import 'package:lucy_frontend/features/quiz/domain/entities/quiz_eligibility.dart';
+import 'package:lucy_frontend/features/quiz/domain/repositories/quiz_repository.dart';
 
 class FakeQuizRepository implements QuizRepository {
   FakeQuizRepository({

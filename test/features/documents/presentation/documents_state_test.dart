@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:frontend/features/documents/domain/entities/document.dart';
-import 'package:frontend/features/documents/domain/entities/document_status.dart';
-import 'package:frontend/features/documents/presentation/controllers/documents_state.dart';
+import 'package:lucy_frontend/features/documents/domain/entities/document.dart';
+import 'package:lucy_frontend/features/documents/domain/entities/document_status.dart';
+import 'package:lucy_frontend/features/documents/presentation/controllers/documents_state.dart';
 
 void main() {
   const baseDoc = Document(

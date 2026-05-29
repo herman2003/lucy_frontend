@@ -46,7 +46,7 @@ Validation humaine après CHAT-08 → CHAT-10. Backend : `npm test -- chat` au v
 ## Régression rapide
 
 ```bash
-cd frontend && flutter test test/features/chat/
+cd lucy_frontend && flutter test test/features/chat/
 cd backend && npm test -- chat
 ```
 

@@ -50,7 +50,7 @@ curl -s -X POST http://localhost:3001/v1/documents \
 
 ```bash
 cd backend && npm test
-cd frontend && flutter analyze && flutter test test/features/documents/
+cd lucy_frontend && flutter analyze && flutter test test/features/documents/
 ```
 
 ## Clôture R2-06

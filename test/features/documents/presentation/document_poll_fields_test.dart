@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:frontend/features/documents/domain/entities/document.dart';
-import 'package:frontend/features/documents/domain/entities/document_status.dart';
-import 'package:frontend/features/documents/presentation/utils/document_poll_fields.dart';
+import 'package:lucy_frontend/features/documents/domain/entities/document.dart';
+import 'package:lucy_frontend/features/documents/domain/entities/document_status.dart';
+import 'package:lucy_frontend/features/documents/presentation/utils/document_poll_fields.dart';
 
 void main() {
   const base = Document(

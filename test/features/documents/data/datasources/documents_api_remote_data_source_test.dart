@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:frontend/features/documents/data/datasources/documents_api_remote_data_source.dart';
-import 'package:frontend/features/documents/domain/exceptions/document_exception.dart';
+import 'package:lucy_frontend/features/documents/data/datasources/documents_api_remote_data_source.dart';
+import 'package:lucy_frontend/features/documents/domain/exceptions/document_exception.dart';
 
 void main() {
   group('DocumentsApiRemoteDataSource', () {

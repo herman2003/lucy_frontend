@@ -8,6 +8,6 @@ String resolveOnboardingApiLocale(Locale locale) {
     case 'de':
       return 'de';
     default:
-      return 'fr';
+      return 'de';
   }
 }

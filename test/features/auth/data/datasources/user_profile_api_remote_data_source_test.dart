@@ -8,7 +8,7 @@ void main() {
   group('UserProfileApiRemoteDataSource', () {
     test('createUserProfile POSTs fullName and email to users/me', () async {
       late RequestOptions captured;
-      final dio = Dio(BaseOptions(baseUrl: 'http://localhost:3000'));
+      final dio = Dio(BaseOptions(baseUrl: 'http://localhost:3001'));
       dio.interceptors.add(
         InterceptorsWrapper(
           onRequest: (options, handler) {
@@ -43,14 +43,11 @@ void main() {
 
       expect(captured.path, endsWith('/v1/users/me'));
       expect(captured.method, 'POST');
-      expect(captured.data, {
-        'fullName': 'Jane',
-        'email': 'jane@test.com',
-      });
+      expect(captured.data, {'fullName': 'Jane', 'email': 'jane@test.com'});
     });
 
     test('fetchUserProfile maps GET response to UserProfileDto', () async {
-      final dio = Dio(BaseOptions(baseUrl: 'http://localhost:3000'));
+      final dio = Dio(BaseOptions(baseUrl: 'http://localhost:3001'));
       dio.interceptors.add(
         InterceptorsWrapper(
           onRequest: (options, handler) {
@@ -81,7 +78,7 @@ void main() {
     });
 
     test('maps USER_PROFILE_CONFLICT to user-profile-conflict', () async {
-      final dio = Dio(BaseOptions(baseUrl: 'http://localhost:3000'));
+      final dio = Dio(BaseOptions(baseUrl: 'http://localhost:3001'));
       dio.interceptors.add(
         InterceptorsWrapper(
           onRequest: (options, handler) {

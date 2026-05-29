@@ -9,7 +9,7 @@ cd ../backend
 cp .env.example .env   # LLM_PROVIDER=mock, FIREBASE_AUTH_MODE=dev, FIRESTORE_PROVIDER=memory
 npm install
 npm run start:dev:local
-curl http://localhost:3000/health
+curl http://localhost:3001/health
 ```
 
 Réponse attendue : `"localStackReady": true` dans `dev`.
@@ -21,6 +21,7 @@ Auth API : `Authorization: Bearer dev:local-user-1`
 ```bash
 cd frontend
 flutter run -d chrome
+# API par défaut : http://localhost:3001 (voir ApiEndpoints)
 ```
 
 L’app utilise Firebase Auth côté client (signup réel). Pour tester **uniquement** l’API Nest en local, utilisez les tests automatisés (`flutter test`) ou branchez Dio avec un token `dev:<uid>` aligné sur votre uid de test.

@@ -38,7 +38,7 @@
 
 ```bash
 # Créer document + récupérer uploadUrl (remplacer $TOKEN)
-curl -s -X POST http://localhost:3000/v1/documents \
+curl -s -X POST http://localhost:3001/v1/documents \
   -H "Authorization: Bearer $TOKEN" \
   -H "Content-Type: application/json" \
   -d '{"title":"Test R2","fileName":"a.pdf","mimeType":"application/pdf","byteSize":1234}'

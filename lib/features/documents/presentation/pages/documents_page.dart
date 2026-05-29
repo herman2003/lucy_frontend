@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../core/extensions/context.dart';
+import '../../../../shared/widgets/buttons/lucy_tertiary_button.dart';
 import '../../utils/documents_constants.dart';
 import '../controllers/documents_notifier.dart';
 import '../controllers/documents_state.dart';
@@ -65,20 +66,21 @@ class _DocumentsPageState extends ConsumerState<DocumentsPage> {
       context: context,
       isScrollControlled: true,
       builder: (sheetContext) => AddDocumentSheet(
-        onSubmit: ({
-          required title,
-          required fileName,
-          required mimeType,
-          required bytes,
-        }) {
-          notifier.uploadDocument(
-            context,
-            title: title,
-            fileName: fileName,
-            mimeType: mimeType,
-            bytes: bytes,
-          );
-        },
+        onSubmit:
+            ({
+              required title,
+              required fileName,
+              required mimeType,
+              required bytes,
+            }) {
+              notifier.uploadDocument(
+                context,
+                title: title,
+                fileName: fileName,
+                mimeType: mimeType,
+                bytes: bytes,
+              );
+            },
       ),
     );
   }
@@ -91,13 +93,13 @@ class _DocumentsPageState extends ConsumerState<DocumentsPage> {
         title: Text(l10n.documentsDeleteConfirmTitle),
         content: Text(l10n.documentsDeleteConfirmMessage(title)),
         actions: [
-          TextButton(
+          LucyTertiaryButton(
+            text: l10n.documentsDialogCancel,
             onPressed: () => Navigator.of(dialogContext).pop(false),
-            child: Text(l10n.documentsDialogCancel),
           ),
-          FilledButton(
+          LucyTertiaryButton(
+            text: l10n.documentsDelete,
             onPressed: () => Navigator.of(dialogContext).pop(true),
-            child: Text(l10n.documentsDelete),
           ),
         ],
       ),
@@ -118,22 +120,21 @@ class _DocumentsPageState extends ConsumerState<DocumentsPage> {
     _syncProcessingPoll(state);
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(l10n.documentsTitle),
-      ),
+      appBar: AppBar(title: Text(l10n.documentsTitle)),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: state.hasBlockingUpload ? null : _openAddSheet,
-        icon: const Icon(Icons.add),
-        label: Text(l10n.documentsAdd),
+        backgroundColor: context.colorScheme.primary,
+        icon:  Icon(Icons.add,color: context.colorScheme.surface,),
+        label: Text(l10n.documentsAdd,style: TextStyle(color: context.colorScheme.surface),),
       ),
       body: RefreshIndicator(
         onRefresh: () => notifier.refresh(context),
-        child: state.isLoading
+        child: state.isLoading && state.documents.isEmpty
             ? const Center(child: CircularProgressIndicator())
             : CustomScrollView(
                 physics: const AlwaysScrollableScrollPhysics(),
                 slivers: [
-                  if (state.hasProcessingDocument)
+                  if (state.hasProcessingDocument || state.isUploading)
                     SliverToBoxAdapter(
                       child: Padding(
                         padding: const EdgeInsets.all(16),
@@ -147,7 +148,9 @@ class _DocumentsPageState extends ConsumerState<DocumentsPage> {
                             const SizedBox(width: 12),
                             Expanded(
                               child: Text(
-                                l10n.documentsProcessingHint,
+                                state.isUploading
+                                    ? l10n.documentsStatusUploading
+                                    : l10n.documentsProcessingHint,
                                 style: Theme.of(context).textTheme.bodyMedium,
                               ),
                             ),
@@ -170,34 +173,29 @@ class _DocumentsPageState extends ConsumerState<DocumentsPage> {
                     )
                   else
                     SliverList(
-                      delegate: SliverChildBuilderDelegate(
-                        (context, index) {
-                          final doc = state.documents[index];
-                          final isBusy = state.busyDocumentId == doc.id;
-                          return DocumentListTile(
-                            document: doc,
-                            activeSearchCount: state.activeSearchCount,
-                            isBusy: isBusy || state.isUploading,
-                            onSearchToggled: (enabled) => notifier.toggleSearchEnabled(
-                              context,
-                              documentId: doc.id,
-                              enabled: enabled,
-                            ),
-                            onDownload: () => notifier.downloadDocument(
-                              context,
-                              doc.id,
-                            ),
-                            onDelete: () => _confirmDelete(doc.id, doc.title),
-                            onReprocess: doc.status == DocumentStatus.failed
-                                ? () => notifier.reprocessDocument(
-                                      context,
-                                      doc.id,
-                                    )
-                                : null,
-                          );
-                        },
-                        childCount: state.documents.length,
-                      ),
+                      delegate: SliverChildBuilderDelegate((context, index) {
+                        final doc = state.documents[index];
+                        final isBusy = state.busyDocumentId == doc.id;
+                        return DocumentListTile(
+                          key: ValueKey(doc.id),
+                          document: doc,
+                          activeSearchCount: state.activeSearchCount,
+                          isBusy: isBusy,
+                          onSearchToggled: (enabled) =>
+                              notifier.toggleSearchEnabled(
+                                context,
+                                documentId: doc.id,
+                                enabled: enabled,
+                              ),
+                          onDownload: () =>
+                              notifier.downloadDocument(context, doc.id),
+                          onDelete: () => _confirmDelete(doc.id, doc.title),
+                          onReprocess: doc.status == DocumentStatus.failed
+                              ? () =>
+                                    notifier.reprocessDocument(context, doc.id)
+                              : null,
+                        );
+                      }, childCount: state.documents.length),
                     ),
                 ],
               ),

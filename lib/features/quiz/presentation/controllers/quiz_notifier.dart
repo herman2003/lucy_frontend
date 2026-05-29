@@ -17,10 +17,7 @@ class QuizNotifier extends _$QuizNotifier {
       final eligibility = await ref.read(quizServiceProvider).getEligibility();
       state = state.copyWith(isLoading: false, eligibility: eligibility);
     } catch (error) {
-      state = state.copyWith(
-        isLoading: false,
-        errorCode: _errorCode(error),
-      );
+      state = state.copyWith(isLoading: false, errorCode: _errorCode(error));
     }
   }
 

@@ -31,7 +31,8 @@ class DocumentListTile extends StatelessWidget {
     final l10n = context.l10n;
     final theme = Theme.of(context);
     final canToggleSearch = document.status == DocumentStatus.ready;
-    final searchSwitchEnabled = canToggleSearch &&
+    final searchSwitchEnabled =
+        canToggleSearch &&
         (!isBusy) &&
         (document.searchEnabled ||
             activeSearchCount < DocumentsConstants.maxActiveSearchDocuments);
@@ -42,11 +43,23 @@ class DocumentListTile extends StatelessWidget {
         title: Text(document.title),
         subtitle: Text(
           '${document.fileName} · ${_statusLabel(l10n, document.status)}',
-          style: theme.textTheme.bodySmall,
+          style: theme.textTheme.bodySmall?.copyWith(
+            color: theme.colorScheme.onSurfaceVariant,
+          ),
         ),
         trailing: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
+            if (document.status == DocumentStatus.uploading ||
+                document.status == DocumentStatus.processing)
+              const Padding(
+                padding: EdgeInsets.only(right: 8),
+                child: SizedBox(
+                  width: 20,
+                  height: 20,
+                  child: CircularProgressIndicator(strokeWidth: 2),
+                ),
+              ),
             if (canToggleSearch)
               Switch(
                 value: document.searchEnabled,

@@ -24,12 +24,12 @@
 export UID="votre-uid-dev"
 export DOC_ID="id-document-actif-ready"
 
-curl -s -X POST "http://localhost:3000/v1/retrieval/search" \
+curl -s -X POST "http://localhost:3001/v1/retrieval/search" \
   -H "Authorization: Bearer dev:${UID}" \
   -H "Content-Type: application/json" \
   -d "{\"query\":\"chlorophylle photosynthèse\",\"limit\":5}" | jq .
 
-curl -s -X POST "http://localhost:3000/v1/retrieval/search" \
+curl -s -X POST "http://localhost:3001/v1/retrieval/search" \
   -H "Authorization: Bearer dev:${UID}" \
   -H "Content-Type: application/json" \
   -d "{\"query\":\"chlorophylle\",\"documentIds\":[\"${DOC_ID}\"],\"limit\":3}" | jq .

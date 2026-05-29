@@ -3,7 +3,7 @@ abstract final class ApiEndpoints {
   /// Override via `--dart-define=LUCY_API_BASE_URL=...` for staging/prod.
   static const String baseUrl = String.fromEnvironment(
     'LUCY_API_BASE_URL',
-    defaultValue: 'http://localhost:3000',
+    defaultValue: 'http://localhost:3001',
   );
 
   static String get onboardingValidateAnswer =>

@@ -24,7 +24,7 @@ class LucyAvatar extends StatelessWidget {
 
     return CircleAvatar(
       radius: size / 2,
-      backgroundColor: colorScheme.primaryContainer,
+      backgroundColor: colorScheme.primary,
       child: useAssetWhenAvailable
           ? ClipOval(
               child: Image.asset(
@@ -43,7 +43,7 @@ class LucyAvatar extends StatelessWidget {
     return Icon(
       Icons.auto_awesome,
       size: size * 0.55,
-      color: colorScheme.onPrimaryContainer,
+      color: Colors.white,
     );
   }
 }

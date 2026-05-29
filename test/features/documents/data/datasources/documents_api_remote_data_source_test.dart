@@ -7,7 +7,7 @@ void main() {
   group('DocumentsApiRemoteDataSource', () {
     test('createDocument POSTs metadata to /v1/documents', () async {
       late RequestOptions captured;
-      final dio = Dio(BaseOptions(baseUrl: 'http://localhost:3000'));
+      final dio = Dio(BaseOptions(baseUrl: 'http://localhost:3001'));
       dio.interceptors.add(
         InterceptorsWrapper(
           onRequest: (options, handler) {
@@ -47,7 +47,7 @@ void main() {
     });
 
     test('listDocuments GETs /v1/documents', () async {
-      final dio = Dio(BaseOptions(baseUrl: 'http://localhost:3000'));
+      final dio = Dio(BaseOptions(baseUrl: 'http://localhost:3001'));
       dio.interceptors.add(
         InterceptorsWrapper(
           onRequest: (options, handler) {
@@ -80,7 +80,7 @@ void main() {
     });
 
     test('maps DOCUMENT_UPLOAD_IN_PROGRESS to exception code', () async {
-      final dio = Dio(BaseOptions(baseUrl: 'http://localhost:3000'));
+      final dio = Dio(BaseOptions(baseUrl: 'http://localhost:3001'));
       dio.interceptors.add(
         InterceptorsWrapper(
           onRequest: (options, handler) {
@@ -118,29 +118,32 @@ void main() {
       );
     });
 
-    test('uploadBinary PUTs bytes to signed URL without Nest baseUrl', () async {
-      late RequestOptions captured;
-      final dio = Dio();
-      dio.interceptors.add(
-        InterceptorsWrapper(
-          onRequest: (options, handler) {
-            captured = options;
-            handler.resolve(
-              Response(requestOptions: options, statusCode: 200),
-            );
-          },
-        ),
-      );
+    test(
+      'uploadBinary PUTs bytes to signed URL without Nest baseUrl',
+      () async {
+        late RequestOptions captured;
+        final dio = Dio();
+        dio.interceptors.add(
+          InterceptorsWrapper(
+            onRequest: (options, handler) {
+              captured = options;
+              handler.resolve(
+                Response(requestOptions: options, statusCode: 200),
+              );
+            },
+          ),
+        );
 
-      await DocumentsApiRemoteDataSource(dio, uploadClient: dio).uploadBinary(
-        uploadUrl: 'https://storage.googleapis.com/bucket/object',
-        bytes: [1, 2, 3],
-        mimeType: 'text/plain',
-      );
+        await DocumentsApiRemoteDataSource(dio, uploadClient: dio).uploadBinary(
+          uploadUrl: 'https://storage.googleapis.com/bucket/object',
+          bytes: [1, 2, 3],
+          mimeType: 'text/plain',
+        );
 
-      expect(captured.uri.toString(), contains('storage.googleapis.com'));
-      expect(captured.method, 'PUT');
-      expect(captured.headers['Content-Type'], 'text/plain');
-    });
+        expect(captured.uri.toString(), contains('storage.googleapis.com'));
+        expect(captured.method, 'PUT');
+        expect(captured.headers['Content-Type'], 'text/plain');
+      },
+    );
   });
 }

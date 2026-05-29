@@ -12,6 +12,7 @@ import '../../domain/exceptions/document_exception.dart';
 import '../../domain/providers/documents_provider.dart';
 import '../../utils/documents_constants.dart';
 import '../../utils/document_error_translator.dart';
+import '../utils/document_poll_fields.dart';
 import 'documents_state.dart';
 
 part 'documents_notifier.g.dart';
@@ -23,10 +24,14 @@ class DocumentsNotifier extends _$DocumentsNotifier {
   @override
   DocumentsState build() => const DocumentsState();
 
-  Future<void> load() async {
-    state = state.copyWith(isLoading: true);
+  Future<void> load({bool showFullPageLoader = false}) async {
+    if (showFullPageLoader || state.documents.isEmpty) {
+      state = state.copyWith(isLoading: true);
+    }
     try {
-      final documents = await ref.read(documentsServiceProvider).listDocuments();
+      final documents = await ref
+          .read(documentsServiceProvider)
+          .listDocuments();
       state = state.copyWith(isLoading: false, documents: documents);
     } catch (_) {
       state = state.copyWith(isLoading: false, documents: []);
@@ -37,23 +42,46 @@ class DocumentsNotifier extends _$DocumentsNotifier {
   Future<void> refresh(BuildContext context) async {
     try {
       final previous = state.documents;
-      await load();
+      await load(showFullPageLoader: state.documents.isEmpty);
       _notifyNewlyFailed(context, previous, state.documents);
     } catch (error) {
       _showError(context, error);
     }
   }
 
-  /// Silent refresh while polling processing/uploading documents (SPEC DOC-11).
+  /// Per-document poll — no full-page loader (SPEC DOC-11).
   Future<void> pollForUpdates(BuildContext context) async {
     if (!state.needsProcessingPoll) {
       return;
     }
-    final previous = state.documents;
-    try {
-      await load();
-    } catch (_) {
+
+    final pending = state.documents
+        .where(
+          (d) =>
+              d.status == DocumentStatus.uploading ||
+              d.status == DocumentStatus.processing,
+        )
+        .toList();
+    if (pending.isEmpty) {
       return;
+    }
+
+    final previous = state.documents;
+    final service = ref.read(documentsServiceProvider);
+    final updates = <String, Document>{};
+
+    for (final doc in pending) {
+      // Refresh status only — `complete` runs during upload flow, not on every poll.
+      try {
+        updates[doc.id] = await service.getDocument(doc.id);
+      } catch (_) {
+        // Keep last known row until next poll or pull-to-refresh.
+      }
+    }
+
+    final merged = mergeDocumentUpdates(state.documents, updates);
+    if (merged != null) {
+      state = state.copyWith(documents: merged);
     }
     if (!context.mounted) {
       return;
@@ -74,15 +102,20 @@ class DocumentsNotifier extends _$DocumentsNotifier {
 
     state = state.copyWith(isUploading: true);
     try {
-      await ref.read(documentsServiceProvider).uploadDocument(
+      final uploaded = await ref
+          .read(documentsServiceProvider)
+          .uploadDocument(
             title: title,
             fileName: fileName,
             mimeType: mimeType,
             bytes: bytes,
           );
-      await load();
+      state = state.copyWith(
+        documents: upsertDocument(state.documents, uploaded),
+      );
     } catch (error) {
       _showError(context, error);
+      await _refreshSilently(context);
     } finally {
       state = state.copyWith(isUploading: false);
     }
@@ -94,7 +127,8 @@ class DocumentsNotifier extends _$DocumentsNotifier {
     required bool enabled,
   }) async {
     if (enabled &&
-        state.activeSearchCount >= DocumentsConstants.maxActiveSearchDocuments) {
+        state.activeSearchCount >=
+            DocumentsConstants.maxActiveSearchDocuments) {
       _showError(
         context,
         const DocumentException('SEARCH_ACTIVE_LIMIT_EXCEEDED'),
@@ -104,14 +138,13 @@ class DocumentsNotifier extends _$DocumentsNotifier {
 
     state = state.copyWith(busyDocumentId: documentId);
     try {
-      final updated = await ref.read(documentsServiceProvider).setSearchEnabled(
-            id: documentId,
-            enabled: enabled,
-          );
-      final next = state.documents
-          .map((d) => d.id == documentId ? updated : d)
-          .toList();
-      state = state.copyWith(documents: next, busyDocumentId: null);
+      final updated = await ref
+          .read(documentsServiceProvider)
+          .setSearchEnabled(id: documentId, enabled: enabled);
+      state = state.copyWith(
+        documents: upsertDocument(state.documents, updated),
+        busyDocumentId: null,
+      );
     } catch (error) {
       state = state.copyWith(busyDocumentId: null);
       _showError(context, error);
@@ -119,7 +152,16 @@ class DocumentsNotifier extends _$DocumentsNotifier {
   }
 
   Future<void> deleteDocument(BuildContext context, String documentId) async {
-    final doc = state.documents.firstWhere((d) => d.id == documentId);
+    Document? doc;
+    for (final candidate in state.documents) {
+      if (candidate.id == documentId) {
+        doc = candidate;
+        break;
+      }
+    }
+    if (doc == null) {
+      return;
+    }
     if (doc.status == DocumentStatus.processing) {
       _showError(
         context,
@@ -131,34 +173,48 @@ class DocumentsNotifier extends _$DocumentsNotifier {
     state = state.copyWith(busyDocumentId: documentId);
     try {
       await ref.read(documentsServiceProvider).deleteDocument(documentId);
-      await load();
+      state = state.copyWith(
+        documents: state.documents.where((d) => d.id != documentId).toList(),
+        busyDocumentId: null,
+      );
     } catch (error) {
-      _showError(context, error);
-    } finally {
       state = state.copyWith(busyDocumentId: null);
+      _showError(context, error);
     }
   }
 
-  Future<void> reprocessDocument(BuildContext context, String documentId) async {
+  Future<void> reprocessDocument(
+    BuildContext context,
+    String documentId,
+  ) async {
     state = state.copyWith(busyDocumentId: documentId);
     try {
       await ref.read(documentsServiceProvider).reprocessDocument(documentId);
       _failedSnackbarsShown.remove(documentId);
-      await load();
+      final updated = await ref
+          .read(documentsServiceProvider)
+          .getDocument(documentId);
+      state = state.copyWith(
+        documents: upsertDocument(state.documents, updated),
+        busyDocumentId: null,
+      );
     } catch (error) {
-      _showError(context, error);
-    } finally {
       state = state.copyWith(busyDocumentId: null);
+      _showError(context, error);
     }
   }
 
   Future<void> downloadDocument(BuildContext context, String documentId) async {
     state = state.copyWith(busyDocumentId: documentId);
     try {
-      final result =
-          await ref.read(documentsServiceProvider).getDownloadUrl(documentId);
+      final result = await ref
+          .read(documentsServiceProvider)
+          .getDownloadUrl(documentId);
       final uri = Uri.parse(result.downloadUrl);
-      final launched = await launchUrl(uri, mode: LaunchMode.externalApplication);
+      final launched = await launchUrl(
+        uri,
+        mode: LaunchMode.externalApplication,
+      );
       if (!launched && context.mounted) {
         _showError(context, const DocumentException('INTERNAL_ERROR'));
       }
@@ -166,6 +222,21 @@ class DocumentsNotifier extends _$DocumentsNotifier {
       _showError(context, error);
     } finally {
       state = state.copyWith(busyDocumentId: null);
+    }
+  }
+
+  Future<void> _refreshSilently(BuildContext context) async {
+    try {
+      final previous = state.documents;
+      final documents = await ref
+          .read(documentsServiceProvider)
+          .listDocuments();
+      state = state.copyWith(documents: documents);
+      if (context.mounted) {
+        _notifyNewlyFailed(context, previous, documents);
+      }
+    } catch (_) {
+      // Ignore silent refresh errors during upload recovery.
     }
   }
 

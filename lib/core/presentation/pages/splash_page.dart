@@ -27,7 +27,7 @@ class SplashPage extends StatelessWidget {
             Text(
               context.l10n.splashLoading,
               style: context.textTheme.bodyMedium?.copyWith(
-                color: context.colorScheme.tertiary,
+                color: context.colorScheme.primary,
               ),
             ),
           ],

@@ -84,7 +84,7 @@ flowchart LR
 cd backend
 npm install
 cp .env.example .env
-# Éditer .env : GOOGLE_APPLICATION_CREDENTIALS, FIRESTORE_PROVIDER=firebase, etc.
+# Éditer .env : PORT=3001 (défaut), GOOGLE_APPLICATION_CREDENTIALS, FIRESTORE_PROVIDER=firebase, etc.
 npm run start:dev
 npm test
 ```
@@ -106,13 +106,13 @@ flutter analyze
 flutter test
 ```
 
-Lancer avec backend local :
+Lancer avec backend local (API sur le port **3001** par défaut — évite le conflit avec d’autres apps sur `3000`) :
 
 ```bash
-# Terminal 1 — backend (voir §2.1)
+# Terminal 1 — backend (voir §2.1) ; PORT=3001 dans backend/.env
 # Terminal 2
 flutter run -d chrome
-# Optionnel staging :
+# Défaut : http://localhost:3001 (ApiEndpoints). Override :
 # flutter run --dart-define=LUCY_API_BASE_URL=https://api.example.com
 ```
 

@@ -59,12 +59,24 @@ class DocumentsRepositoryImpl implements DocumentsRepository {
     required String uploadUrl,
     required List<int> bytes,
     required String mimeType,
-  }) =>
-      _remote.uploadBinary(
-        uploadUrl: uploadUrl,
-        bytes: bytes,
-        mimeType: mimeType,
-      );
+  }) => _remote.uploadBinary(
+    uploadUrl: uploadUrl,
+    bytes: bytes,
+    mimeType: mimeType,
+  );
+
+  @override
+  Future<void> uploadDocumentFile({
+    required String documentId,
+    required List<int> bytes,
+    required String mimeType,
+    required String fileName,
+  }) => _remote.uploadDocumentFile(
+    documentId: documentId,
+    bytes: bytes,
+    mimeType: mimeType,
+    fileName: fileName,
+  );
 
   @override
   Future<Document> setSearchEnabled({

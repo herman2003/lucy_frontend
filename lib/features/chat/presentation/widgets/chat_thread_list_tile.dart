@@ -18,14 +18,23 @@ class ChatThreadListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
+    final textTheme = Theme.of(context).textTheme;
+    final titleColor = selected ? Colors.white : scheme.primary;
+    final subtitleColor = selected
+        ? Colors.white.withValues(alpha: 0.85)
+        : scheme.primary;
 
     return ListTile(
       selected: selected,
-      selectedTileColor: scheme.primaryContainer.withValues(alpha: 0.35),
+      selectedTileColor: scheme.primary,
       title: Text(
         thread.title,
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
+        style: textTheme.titleMedium?.copyWith(
+          color: titleColor,
+          fontWeight: selected ? FontWeight.w600 : null,
+        ),
       ),
       subtitle: thread.lastMessagePreview == null
           ? null
@@ -33,6 +42,7 @@ class ChatThreadListTile extends StatelessWidget {
               thread.lastMessagePreview!,
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
+              style: textTheme.bodySmall?.copyWith(color: subtitleColor),
             ),
       contentPadding: const EdgeInsets.symmetric(
         horizontal: LucyConstants.kSpacingMedium,

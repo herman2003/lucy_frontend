@@ -134,12 +134,12 @@ class _ChatPageState extends ConsumerState<ChatPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(l10n.chatTitle),
-        leading: !useMasterDetail && selectedId != null
+       /* leading: !useMasterDetail && selectedId != null
             ? IconButton(
                 icon: const Icon(Icons.arrow_back),
                 onPressed: () => context.go(LucyRoutePaths.chat),
               )
-            : null,
+            : null,*/
         actions: [
           IconButton(
             icon: const Icon(Icons.add_comment_outlined),
@@ -152,7 +152,7 @@ class _ChatPageState extends ConsumerState<ChatPage> {
           ),
         ],
       ),
-      floatingActionButton: canCreateThread && selectedId != null
+    /*  floatingActionButton: canCreateThread && selectedId != null
           ? FloatingActionButton(
               onPressed: () => ref
                   .read(chatThreadsProvider.notifier)
@@ -160,7 +160,7 @@ class _ChatPageState extends ConsumerState<ChatPage> {
               tooltip: l10n.chatNewConversation,
               child: const Icon(Icons.add_comment_outlined),
             )
-          : null,
+          : null,*/
       body: threadsState.isLoading
           ? const Center(child: CircularProgressIndicator())
           : Column(
@@ -370,6 +370,7 @@ class _ConversationPanel extends ConsumerWidget {
       offset += 1;
     }
 
+    
     final sourceIndex = index - offset;
     if (sourceIndex >= 0 && sourceIndex < conversation.pendingSources.length) {
       return ChatSourceCard(source: conversation.pendingSources[sourceIndex]);

@@ -6,10 +6,7 @@ import '../helpers/fake_quiz_repository.dart';
 
 void main() {
   test('getEligibility returns repository value', () async {
-    const eligibility = QuizEligibility(
-      canQuiz: false,
-      activeDocumentCount: 0,
-    );
+    const eligibility = QuizEligibility(canQuiz: false, activeDocumentCount: 0);
     final service = QuizService(
       repository: FakeQuizRepository(eligibility: eligibility),
     );

@@ -20,6 +20,12 @@ class FakeAuthRepository implements AuthRepository {
       throw UnimplementedError();
 
   @override
+  Future<void> updatePassword({
+    required String currentPassword,
+    required String newPassword,
+  }) async {}
+
+  @override
   Future<bool> fetchIsConfiguredForCurrentUser() async => true;
 
   @override

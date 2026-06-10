@@ -809,6 +809,34 @@ class AppLocalizationsDe extends AppLocalizations {
       'Diese Sitzung wird hier bald geöffnet.';
 
   @override
+  String get chatLearningSessionCardTitle => 'Quiz bereit';
+
+  @override
+  String get chatLearningSessionOpen => 'Öffnen';
+
+  @override
+  String quizSessionProgress(int current, int total) {
+    return 'Frage $current / $total';
+  }
+
+  @override
+  String get quizSessionCorrect => 'Richtig!';
+
+  @override
+  String get quizSessionIncorrect => 'Falsch';
+
+  @override
+  String get quizSessionNextQuestion => 'Nächste Frage';
+
+  @override
+  String get quizSessionFinish => 'Ergebnis ansehen';
+
+  @override
+  String quizSessionScore(int correct, int total) {
+    return 'Punkte: $correct / $total';
+  }
+
+  @override
   String get quizNoCorpusTitle => 'Keine aktiven Dokumente';
 
   @override

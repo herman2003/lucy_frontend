@@ -13,6 +13,7 @@ import '../controllers/chat_threads_notifier.dart';
 import '../controllers/chat_threads_state.dart';
 import '../utils/chat_conversation_status_resolver.dart';
 import '../widgets/chat_composer.dart';
+import '../widgets/chat_learning_session_card.dart';
 import '../widgets/chat_message_bubble.dart';
 import '../widgets/chat_no_corpus_banner.dart';
 import '../widgets/chat_source_card.dart';
@@ -338,6 +339,11 @@ class _ConversationPanel extends ConsumerWidget {
         conversation.streamingContent.isNotEmpty) {
       count += conversation.pendingSources.length;
     }
+    if (conversation.pendingLearningSession != null &&
+        conversation.isStreaming) {
+      count += 1;
+    }
+    count += conversation.learningSessionCards.length;
     return count;
   }
 
@@ -380,6 +386,27 @@ class _ConversationPanel extends ConsumerWidget {
     final sourceIndex = index - offset;
     if (sourceIndex >= 0 && sourceIndex < conversation.pendingSources.length) {
       return ChatSourceCard(source: conversation.pendingSources[sourceIndex]);
+    }
+    offset += conversation.pendingSources.length;
+
+    if (conversation.pendingLearningSession != null &&
+        conversation.isStreaming &&
+        index == offset) {
+      return ChatLearningSessionCard(
+        session: conversation.pendingLearningSession!,
+      );
+    }
+    if (conversation.pendingLearningSession != null &&
+        conversation.isStreaming) {
+      offset += 1;
+    }
+
+    final cardIndex = index - offset;
+    if (cardIndex >= 0 &&
+        cardIndex < conversation.learningSessionCards.length) {
+      return ChatLearningSessionCard(
+        session: conversation.learningSessionCards[cardIndex],
+      );
     }
 
     return const SizedBox.shrink();

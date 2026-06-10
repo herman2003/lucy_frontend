@@ -1510,6 +1510,54 @@ abstract class AppLocalizations {
   /// **'Diese Sitzung wird hier bald geöffnet.'**
   String get quizSessionPlaceholderMessage;
 
+  /// No description provided for @chatLearningSessionCardTitle.
+  ///
+  /// In de, this message translates to:
+  /// **'Quiz bereit'**
+  String get chatLearningSessionCardTitle;
+
+  /// No description provided for @chatLearningSessionOpen.
+  ///
+  /// In de, this message translates to:
+  /// **'Öffnen'**
+  String get chatLearningSessionOpen;
+
+  /// No description provided for @quizSessionProgress.
+  ///
+  /// In de, this message translates to:
+  /// **'Frage {current} / {total}'**
+  String quizSessionProgress(int current, int total);
+
+  /// No description provided for @quizSessionCorrect.
+  ///
+  /// In de, this message translates to:
+  /// **'Richtig!'**
+  String get quizSessionCorrect;
+
+  /// No description provided for @quizSessionIncorrect.
+  ///
+  /// In de, this message translates to:
+  /// **'Falsch'**
+  String get quizSessionIncorrect;
+
+  /// No description provided for @quizSessionNextQuestion.
+  ///
+  /// In de, this message translates to:
+  /// **'Nächste Frage'**
+  String get quizSessionNextQuestion;
+
+  /// No description provided for @quizSessionFinish.
+  ///
+  /// In de, this message translates to:
+  /// **'Ergebnis ansehen'**
+  String get quizSessionFinish;
+
+  /// No description provided for @quizSessionScore.
+  ///
+  /// In de, this message translates to:
+  /// **'Punkte: {correct} / {total}'**
+  String quizSessionScore(int correct, int total);
+
   /// No description provided for @quizNoCorpusTitle.
   ///
   /// In de, this message translates to:

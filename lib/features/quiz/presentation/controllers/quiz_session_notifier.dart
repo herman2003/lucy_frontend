@@ -1,0 +1,59 @@
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+
+import '../../domain/exceptions/learning_session_exception.dart';
+import '../../domain/providers/learning_session_provider.dart';
+import 'quiz_session_state.dart';
+
+part 'quiz_session_notifier.g.dart';
+
+@riverpod
+class QuizSessionNotifier extends _$QuizSessionNotifier {
+  @override
+  QuizSessionState build(String sessionId) {
+    Future.microtask(() => load(sessionId));
+    return const QuizSessionState(isLoading: true);
+  }
+
+  Future<void> load(String sessionId) async {
+    state = state.copyWith(isLoading: true, errorCode: null);
+    try {
+      final session = await ref
+          .read(learningSessionServiceProvider)
+          .getById(sessionId);
+      state = state.copyWith(isLoading: false, session: session);
+    } catch (error) {
+      state = state.copyWith(
+        isLoading: false,
+        errorCode: _errorCode(error),
+      );
+    }
+  }
+
+  void selectAnswer(String itemId, int choiceIndex) {
+    if (state.isComplete || state.selectedAnswers.containsKey(itemId)) {
+      return;
+    }
+    state = state.copyWith(
+      selectedAnswers: {...state.selectedAnswers, itemId: choiceIndex},
+    );
+  }
+
+  void goToNextQuestion() {
+    if (!state.hasSession || state.isComplete) {
+      return;
+    }
+    final nextIndex = state.currentIndex + 1;
+    if (nextIndex >= state.totalQuestions) {
+      state = state.copyWith(isComplete: true);
+      return;
+    }
+    state = state.copyWith(currentIndex: nextIndex);
+  }
+
+  String _errorCode(Object error) {
+    if (error is LearningSessionException) {
+      return error.code;
+    }
+    return 'INTERNAL_ERROR';
+  }
+}

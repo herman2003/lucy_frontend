@@ -797,6 +797,34 @@ class AppLocalizationsEn extends AppLocalizations {
       'This session will open here soon.';
 
   @override
+  String get chatLearningSessionCardTitle => 'Quiz ready';
+
+  @override
+  String get chatLearningSessionOpen => 'Open';
+
+  @override
+  String quizSessionProgress(int current, int total) {
+    return 'Question $current / $total';
+  }
+
+  @override
+  String get quizSessionCorrect => 'Correct!';
+
+  @override
+  String get quizSessionIncorrect => 'Incorrect';
+
+  @override
+  String get quizSessionNextQuestion => 'Next question';
+
+  @override
+  String get quizSessionFinish => 'See score';
+
+  @override
+  String quizSessionScore(int correct, int total) {
+    return 'Score: $correct / $total';
+  }
+
+  @override
   String get quizNoCorpusTitle => 'No active documents';
 
   @override

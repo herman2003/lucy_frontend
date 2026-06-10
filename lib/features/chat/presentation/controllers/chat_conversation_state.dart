@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../../domain/entities/chat_learning_session_created.dart';
 import '../../domain/entities/chat_message.dart';
 import '../../domain/entities/chat_source.dart';
 import 'chat_send_phase.dart';
@@ -16,6 +17,9 @@ abstract class ChatConversationState with _$ChatConversationState {
     @Default(ChatSendPhase.idle) ChatSendPhase sendPhase,
     @Default('') String streamingContent,
     @Default(<ChatSource>[]) List<ChatSource> pendingSources,
+    ChatLearningSessionCreated? pendingLearningSession,
+    @Default(<ChatLearningSessionCreated>[])
+    List<ChatLearningSessionCreated> learningSessionCards,
     String? errorCode,
   }) = _ChatConversationState;
 

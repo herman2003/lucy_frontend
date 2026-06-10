@@ -23,7 +23,7 @@
 |--------|-----|--------|
 | [x] | LEARN-03a | Flutter data layer learning sessions |
 | [x] | LEARN-03b | `QuizPage` bibliothèque (liste, **pas** de générer) |
-| [ ] | LEARN-03c | `ChatLearningSessionCard` + `QuizSessionPage` QCM |
+| [x] | LEARN-03c | `ChatLearningSessionCard` + `QuizSessionPage` QCM |
 
 ---
 

@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 
 import '../../../../core/network/api_endpoints.dart';
+import '../../domain/entities/chat_learning_session_created.dart';
 import '../../domain/entities/chat_message.dart';
 import '../../domain/entities/chat_message_role.dart';
 import '../../domain/entities/chat_stream_event.dart';
@@ -80,6 +81,13 @@ class ChatStreamRemoteDataSource {
               (item) => ChatMapper.sourceFromModel(ChatSourceModel.fromJson(item)),
             )
             .toList(),
+      ),
+      'learning_session_created' => ChatStreamLearningSessionCreatedEvent(
+        ChatLearningSessionCreated(
+          sessionId: json['sessionId'] as String,
+          type: json['type'] as String,
+          title: json['title'] as String,
+        ),
       ),
       'done' => ChatStreamDoneEvent(
         userMessageId: json['userMessageId'] as String,

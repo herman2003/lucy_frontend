@@ -282,6 +282,26 @@
     }
   },
   "quizSessionPlaceholderMessage": "Diese Sitzung wird hier bald geöffnet.",
+  "chatLearningSessionCardTitle": "Quiz bereit",
+  "chatLearningSessionOpen": "Öffnen",
+  "quizSessionProgress": "Frage {current} / {total}",
+  "@quizSessionProgress": {
+    "placeholders": {
+      "current": {"type": "int"},
+      "total": {"type": "int"}
+    }
+  },
+  "quizSessionCorrect": "Richtig!",
+  "quizSessionIncorrect": "Falsch",
+  "quizSessionNextQuestion": "Nächste Frage",
+  "quizSessionFinish": "Ergebnis ansehen",
+  "quizSessionScore": "Punkte: {correct} / {total}",
+  "@quizSessionScore": {
+    "placeholders": {
+      "correct": {"type": "int"},
+      "total": {"type": "int"}
+    }
+  },
   "quizNoCorpusTitle": "Keine aktiven Dokumente",
   "quizNoCorpusMessage": "Aktivieren Sie die Suche für mindestens ein fertiges Dokument, um ein Quiz zu erstellen.",
   "quizNoCorpusCta": "Zu den Dokumenten",

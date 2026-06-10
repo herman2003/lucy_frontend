@@ -48,5 +48,35 @@ void main() {
       expect(state.messages.last.sources, isNotEmpty);
       expect(state.streamingContent, isEmpty);
     });
+
+    test('stores learning session card from SSE event', () async {
+      SharedPreferences.setMockInitialValues({});
+      final repository = FakeChatRepository()..emitLearningSession = true;
+      final container = ProviderContainer(
+        overrides: [
+          authRepositoryProvider.overrideWithValue(
+            FakeAuthRepository(
+              user: const AuthUser(uid: 'user-1', email: 'a@b.com'),
+            ),
+          ),
+          chatRepositoryProvider.overrideWithValue(repository),
+          chatServiceProvider.overrideWith(
+            (ref) => ChatService(repository: repository),
+          ),
+        ],
+      );
+      addTearDown(container.dispose);
+
+      final thread = await repository.createThread();
+      final notifier = container.read(
+        chatConversationProvider(thread.id).notifier,
+      );
+
+      await notifier.sendMessage('Fais-moi un quiz');
+
+      final state = container.read(chatConversationProvider(thread.id));
+      expect(state.learningSessionCards, hasLength(1));
+      expect(state.learningSessionCards.first.sessionId, 'learn_test_1');
+    });
   });
 }

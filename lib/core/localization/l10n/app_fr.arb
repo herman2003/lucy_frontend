@@ -494,6 +494,26 @@
     }
   },
   "quizSessionPlaceholderMessage": "La session s'ouvrira ici prochainement.",
+  "chatLearningSessionCardTitle": "Quiz prêt",
+  "chatLearningSessionOpen": "Ouvrir",
+  "quizSessionProgress": "Question {current} / {total}",
+  "@quizSessionProgress": {
+    "placeholders": {
+      "current": {"type": "int"},
+      "total": {"type": "int"}
+    }
+  },
+  "quizSessionCorrect": "Bonne réponse !",
+  "quizSessionIncorrect": "Mauvaise réponse",
+  "quizSessionNextQuestion": "Question suivante",
+  "quizSessionFinish": "Voir le score",
+  "quizSessionScore": "Score : {correct} / {total}",
+  "@quizSessionScore": {
+    "placeholders": {
+      "correct": {"type": "int"},
+      "total": {"type": "int"}
+    }
+  },
   "quizNoCorpusTitle": "Aucun document actif",
   "quizNoCorpusMessage": "Activez la recherche sur au moins un document prêt pour générer un quiz.",
   "quizNoCorpusCta": "Aller aux documents",

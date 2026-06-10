@@ -283,7 +283,20 @@
   },
   "quizSessionPlaceholderMessage": "Diese Sitzung wird hier bald geöffnet.",
   "chatLearningSessionCardTitle": "Quiz bereit",
+  "chatLearningSessionFlashcardsCardTitle": "Karteikarten bereit",
   "chatLearningSessionOpen": "Öffnen",
+  "flashcardsSessionProgress": "Karte {current} / {total}",
+  "@flashcardsSessionProgress": {
+    "placeholders": {
+      "current": {"type": "int"},
+      "total": {"type": "int"}
+    }
+  },
+  "flashcardsSessionFront": "Vorderseite",
+  "flashcardsSessionBack": "Rückseite",
+  "flashcardsSessionTapToFlip": "Tippen zum Umdrehen",
+  "flashcardsSessionPrevious": "Zurück",
+  "flashcardsSessionNext": "Weiter",
   "quizSessionProgress": "Frage {current} / {total}",
   "@quizSessionProgress": {
     "placeholders": {

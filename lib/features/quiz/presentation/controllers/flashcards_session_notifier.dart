@@ -3,16 +3,16 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../domain/entities/learning_session.dart';
 import '../../domain/exceptions/learning_session_exception.dart';
 import '../../domain/providers/learning_session_provider.dart';
-import 'quiz_session_state.dart';
+import 'flashcards_session_state.dart';
 
-part 'quiz_session_notifier.g.dart';
+part 'flashcards_session_notifier.g.dart';
 
 @riverpod
-class QuizSessionNotifier extends _$QuizSessionNotifier {
+class FlashcardsSessionNotifier extends _$FlashcardsSessionNotifier {
   @override
-  QuizSessionState build(String sessionId) {
+  FlashcardsSessionState build(String sessionId) {
     Future.microtask(() => load(sessionId));
-    return const QuizSessionState(isLoading: true);
+    return const FlashcardsSessionState(isLoading: true);
   }
 
   void seedSession(LearningSession session) {
@@ -21,8 +21,7 @@ class QuizSessionNotifier extends _$QuizSessionNotifier {
       session: session,
       errorCode: null,
       currentIndex: 0,
-      selectedAnswers: const {},
-      isComplete: false,
+      isFlipped: false,
     );
   }
 
@@ -35,7 +34,12 @@ class QuizSessionNotifier extends _$QuizSessionNotifier {
       final session = await ref
           .read(learningSessionServiceProvider)
           .getById(sessionId);
-      state = state.copyWith(isLoading: false, session: session);
+      state = state.copyWith(
+        isLoading: false,
+        session: session,
+        currentIndex: 0,
+        isFlipped: false,
+      );
     } catch (error) {
       state = state.copyWith(
         isLoading: false,
@@ -44,25 +48,31 @@ class QuizSessionNotifier extends _$QuizSessionNotifier {
     }
   }
 
-  void selectAnswer(String itemId, int choiceIndex) {
-    if (state.isComplete || state.selectedAnswers.containsKey(itemId)) {
+  void toggleFlip() {
+    if (!state.hasSession) {
+      return;
+    }
+    state = state.copyWith(isFlipped: !state.isFlipped);
+  }
+
+  void goToPreviousCard() {
+    if (!state.canGoPrevious) {
       return;
     }
     state = state.copyWith(
-      selectedAnswers: {...state.selectedAnswers, itemId: choiceIndex},
+      currentIndex: state.currentIndex - 1,
+      isFlipped: false,
     );
   }
 
-  void goToNextQuestion() {
-    if (!state.hasSession || state.isComplete) {
+  void goToNextCard() {
+    if (!state.canGoNext) {
       return;
     }
-    final nextIndex = state.currentIndex + 1;
-    if (nextIndex >= state.totalQuestions) {
-      state = state.copyWith(isComplete: true);
-      return;
-    }
-    state = state.copyWith(currentIndex: nextIndex);
+    state = state.copyWith(
+      currentIndex: state.currentIndex + 1,
+      isFlipped: false,
+    );
   }
 
   String _errorCode(Object error) {

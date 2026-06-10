@@ -39,7 +39,7 @@
 
 | Statut | Id | Tâche |
 |--------|-----|--------|
-| [ ] | LEARN-04a | `FlashcardsSessionPage` + carte chat cartes |
+| [x] | LEARN-04a | `FlashcardsSessionPage` + carte chat cartes |
 
 ---
 

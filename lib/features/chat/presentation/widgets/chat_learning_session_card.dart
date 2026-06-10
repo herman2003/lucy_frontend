@@ -16,6 +16,9 @@ class ChatLearningSessionCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
     final l10n = context.l10n;
+    final cardTitle = session.type == 'flashcards'
+        ? l10n.chatLearningSessionFlashcardsCardTitle
+        : l10n.chatLearningSessionCardTitle;
 
     return Card(
       color: scheme.surface,
@@ -26,7 +29,7 @@ class ChatLearningSessionCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Text(
-              l10n.chatLearningSessionCardTitle,
+              cardTitle,
               style: Theme.of(context).textTheme.titleSmall?.copyWith(
                 color: scheme.primary,
                 fontWeight: FontWeight.w600,

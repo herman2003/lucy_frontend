@@ -1516,11 +1516,53 @@ abstract class AppLocalizations {
   /// **'Quiz bereit'**
   String get chatLearningSessionCardTitle;
 
+  /// No description provided for @chatLearningSessionFlashcardsCardTitle.
+  ///
+  /// In de, this message translates to:
+  /// **'Karteikarten bereit'**
+  String get chatLearningSessionFlashcardsCardTitle;
+
   /// No description provided for @chatLearningSessionOpen.
   ///
   /// In de, this message translates to:
   /// **'Öffnen'**
   String get chatLearningSessionOpen;
+
+  /// No description provided for @flashcardsSessionProgress.
+  ///
+  /// In de, this message translates to:
+  /// **'Karte {current} / {total}'**
+  String flashcardsSessionProgress(int current, int total);
+
+  /// No description provided for @flashcardsSessionFront.
+  ///
+  /// In de, this message translates to:
+  /// **'Vorderseite'**
+  String get flashcardsSessionFront;
+
+  /// No description provided for @flashcardsSessionBack.
+  ///
+  /// In de, this message translates to:
+  /// **'Rückseite'**
+  String get flashcardsSessionBack;
+
+  /// No description provided for @flashcardsSessionTapToFlip.
+  ///
+  /// In de, this message translates to:
+  /// **'Tippen zum Umdrehen'**
+  String get flashcardsSessionTapToFlip;
+
+  /// No description provided for @flashcardsSessionPrevious.
+  ///
+  /// In de, this message translates to:
+  /// **'Zurück'**
+  String get flashcardsSessionPrevious;
+
+  /// No description provided for @flashcardsSessionNext.
+  ///
+  /// In de, this message translates to:
+  /// **'Weiter'**
+  String get flashcardsSessionNext;
 
   /// No description provided for @quizSessionProgress.
   ///

@@ -6,20 +6,42 @@ import '../../../../core/extensions/context.dart';
 import '../../../../shared/widgets/buttons/lucy_primary_button.dart';
 import '../../../../shared/widgets/feedback/lucy_snackbar.dart';
 import '../../utils/learning_session_error_translator.dart';
+import '../../domain/entities/learning_session.dart';
 import '../controllers/quiz_session_notifier.dart';
 import '../controllers/quiz_session_state.dart';
 import '../widgets/learning_session_source_chip.dart';
 
 class QuizSessionPage extends ConsumerStatefulWidget {
-  const QuizSessionPage({super.key, required this.sessionId});
+  const QuizSessionPage({
+    super.key,
+    required this.sessionId,
+    this.initialSession,
+  });
 
   final String sessionId;
+  final LearningSession? initialSession;
 
   @override
   ConsumerState<QuizSessionPage> createState() => _QuizSessionPageState();
 }
 
 class _QuizSessionPageState extends ConsumerState<QuizSessionPage> {
+  @override
+  void initState() {
+    super.initState();
+    final initialSession = widget.initialSession;
+    if (initialSession != null) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (!mounted) {
+          return;
+        }
+        ref
+            .read(quizSessionProvider(widget.sessionId).notifier)
+            .seedSession(initialSession);
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final state = ref.watch(quizSessionProvider(widget.sessionId));

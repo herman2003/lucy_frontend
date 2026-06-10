@@ -495,7 +495,20 @@
   },
   "quizSessionPlaceholderMessage": "La session s'ouvrira ici prochainement.",
   "chatLearningSessionCardTitle": "Quiz prêt",
+  "chatLearningSessionFlashcardsCardTitle": "Cartes prêtes",
   "chatLearningSessionOpen": "Ouvrir",
+  "flashcardsSessionProgress": "Carte {current} / {total}",
+  "@flashcardsSessionProgress": {
+    "placeholders": {
+      "current": {"type": "int"},
+      "total": {"type": "int"}
+    }
+  },
+  "flashcardsSessionFront": "Recto",
+  "flashcardsSessionBack": "Verso",
+  "flashcardsSessionTapToFlip": "Appuyer pour retourner",
+  "flashcardsSessionPrevious": "Précédente",
+  "flashcardsSessionNext": "Suivante",
   "quizSessionProgress": "Question {current} / {total}",
   "@quizSessionProgress": {
     "placeholders": {

@@ -812,7 +812,30 @@ class AppLocalizationsDe extends AppLocalizations {
   String get chatLearningSessionCardTitle => 'Quiz bereit';
 
   @override
+  String get chatLearningSessionFlashcardsCardTitle => 'Karteikarten bereit';
+
+  @override
   String get chatLearningSessionOpen => 'Öffnen';
+
+  @override
+  String flashcardsSessionProgress(int current, int total) {
+    return 'Karte $current / $total';
+  }
+
+  @override
+  String get flashcardsSessionFront => 'Vorderseite';
+
+  @override
+  String get flashcardsSessionBack => 'Rückseite';
+
+  @override
+  String get flashcardsSessionTapToFlip => 'Tippen zum Umdrehen';
+
+  @override
+  String get flashcardsSessionPrevious => 'Zurück';
+
+  @override
+  String get flashcardsSessionNext => 'Weiter';
 
   @override
   String quizSessionProgress(int current, int total) {

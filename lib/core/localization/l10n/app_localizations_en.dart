@@ -800,7 +800,30 @@ class AppLocalizationsEn extends AppLocalizations {
   String get chatLearningSessionCardTitle => 'Quiz ready';
 
   @override
+  String get chatLearningSessionFlashcardsCardTitle => 'Flashcards ready';
+
+  @override
   String get chatLearningSessionOpen => 'Open';
+
+  @override
+  String flashcardsSessionProgress(int current, int total) {
+    return 'Card $current / $total';
+  }
+
+  @override
+  String get flashcardsSessionFront => 'Front';
+
+  @override
+  String get flashcardsSessionBack => 'Back';
+
+  @override
+  String get flashcardsSessionTapToFlip => 'Tap to flip';
+
+  @override
+  String get flashcardsSessionPrevious => 'Previous';
+
+  @override
+  String get flashcardsSessionNext => 'Next';
 
   @override
   String quizSessionProgress(int current, int total) {

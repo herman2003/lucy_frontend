@@ -43,4 +43,25 @@ void main() {
 
     expect(find.text('session:learn_test_1'), findsOneWidget);
   });
+
+  testWidgets('shows flashcards card title for flashcards session', (tester) async {
+    await tester.pumpWidget(
+      MaterialApp(
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
+        locale: const Locale('fr'),
+        home: const ChatLearningSessionCard(
+          session: ChatLearningSessionCreated(
+            sessionId: 'learn_flash_1',
+            type: 'flashcards',
+            title: 'Cartes · test',
+          ),
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.text('Cartes prêtes'), findsOneWidget);
+    expect(find.text('Cartes · test'), findsOneWidget);
+  });
 }

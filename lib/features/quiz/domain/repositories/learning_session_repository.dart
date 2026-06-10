@@ -8,4 +8,5 @@ abstract class LearningSessionRepository {
   Future<LearningSession> getById(String sessionId);
 
   Future<List<LearningSessionListItem>> list();
+  Future<void> delete(String sessionId);
 }

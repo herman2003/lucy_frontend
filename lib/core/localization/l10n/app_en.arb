@@ -267,6 +267,15 @@
   "quizLibraryHistoryTitle": "History",
   "quizLibraryDateToday": "Today",
   "quizLibraryDateYesterday": "Yesterday",
+  "quizLibraryDeleteConfirmTitle": "Delete session?",
+  "quizLibraryDeleteConfirmMessage": "Delete \"{title}\"? This action cannot be undone.",
+  "@quizLibraryDeleteConfirmMessage": {
+    "placeholders": {
+      "title": {"type": "String"}
+    }
+  },
+  "quizLibraryDeleteAction": "Delete",
+  "quizLibraryDeleteCancel": "Cancel",
   "quizComingSoon": "Quiz generation is coming soon.",
   "quizSessionQuestionCount": "{count, plural, one{{count} question} other{{count} questions}}",
   "@quizSessionQuestionCount": {

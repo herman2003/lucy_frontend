@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../core/constants/lucy_constants.dart';
 import '../../../../core/extensions/context.dart';
 import '../../../../core/router/lucy_route_paths.dart';
+import '../../../../shared/widgets/buttons/lucy_tertiary_button.dart';
 import '../../../../shared/widgets/feedback/lucy_snackbar.dart';
+import '../../domain/entities/learning_session_list_item.dart';
 import '../../utils/learning_session_error_translator.dart';
 import '../../utils/quiz_error_translator.dart';
 import '../controllers/quiz_notifier.dart';
@@ -40,6 +43,31 @@ class _QuizPageState extends ConsumerState<QuizPage> {
     return QuizErrorTranslator.translate(context, code);
   }
 
+  Future<bool> _confirmDeleteSession(LearningSessionListItem session) async {
+    final l10n = context.l10n;
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (dialogContext) => AlertDialog(
+        title: Text(l10n.quizLibraryDeleteConfirmTitle),
+        content: Text(l10n.quizLibraryDeleteConfirmMessage(session.title)),
+        actions: [
+          LucyTertiaryButton(
+            text: l10n.quizLibraryDeleteCancel,
+            onPressed: () => Navigator.of(dialogContext).pop(false),
+          ),
+          LucyTertiaryButton(
+            text: l10n.quizLibraryDeleteAction,
+            onPressed: () => Navigator.of(dialogContext).pop(true),
+          ),
+        ],
+      ),
+    );
+    if (confirmed != true || !mounted) {
+      return false;
+    }
+    return ref.read(quizProvider.notifier).deleteSession(session.id);
+  }
+
   @override
   Widget build(BuildContext context) {
     final state = ref.watch(quizProvider);
@@ -73,10 +101,27 @@ class _QuizPageState extends ConsumerState<QuizPage> {
                               return const QuizLibraryHistoryHeader();
                             }
                             final session = state.sessions[index - 1];
-                            return QuizSessionListTile(
-                              session: session,
-                              onTap: () => context.push(
-                                LucyRoutePaths.quizSession(session.id),
+                            final scheme = Theme.of(context).colorScheme;
+                            return Dismissible(
+                              key: ValueKey(session.id),
+                              direction: DismissDirection.endToStart,
+                              background: Container(
+                                alignment: Alignment.centerRight,
+                                padding: const EdgeInsets.only(
+                                  right: LucyConstants.kSpacingLarge,
+                                ),
+                                color: scheme.errorContainer,
+                                child: Icon(
+                                  Icons.delete_outline,
+                                  color: scheme.onErrorContainer,
+                                ),
+                              ),
+                              confirmDismiss: (_) => _confirmDeleteSession(session),
+                              child: QuizSessionListTile(
+                                session: session,
+                                onTap: () => context.push(
+                                  LucyRoutePaths.quizSession(session.id),
+                                ),
                               ),
                             );
                           },

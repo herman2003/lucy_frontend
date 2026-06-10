@@ -1504,6 +1504,30 @@ abstract class AppLocalizations {
   /// **'Gestern'**
   String get quizLibraryDateYesterday;
 
+  /// No description provided for @quizLibraryDeleteConfirmTitle.
+  ///
+  /// In de, this message translates to:
+  /// **'Sitzung löschen?'**
+  String get quizLibraryDeleteConfirmTitle;
+
+  /// No description provided for @quizLibraryDeleteConfirmMessage.
+  ///
+  /// In de, this message translates to:
+  /// **'« {title} » löschen? Diese Aktion kann nicht rückgängig gemacht werden.'**
+  String quizLibraryDeleteConfirmMessage(String title);
+
+  /// No description provided for @quizLibraryDeleteAction.
+  ///
+  /// In de, this message translates to:
+  /// **'Löschen'**
+  String get quizLibraryDeleteAction;
+
+  /// No description provided for @quizLibraryDeleteCancel.
+  ///
+  /// In de, this message translates to:
+  /// **'Abbrechen'**
+  String get quizLibraryDeleteCancel;
+
   /// No description provided for @quizComingSoon.
   ///
   /// In de, this message translates to:

@@ -28,6 +28,20 @@ class QuizNotifier extends _$QuizNotifier {
     }
   }
 
+  Future<bool> deleteSession(String sessionId) async {
+    try {
+      await ref.read(learningSessionServiceProvider).delete(sessionId);
+      state = state.copyWith(
+        sessions: state.sessions.where((session) => session.id != sessionId).toList(),
+        errorCode: null,
+      );
+      return true;
+    } catch (error) {
+      state = state.copyWith(errorCode: _errorCode(error));
+      return false;
+    }
+  }
+
   String _errorCode(Object error) {
     if (error is QuizException) {
       return error.code;

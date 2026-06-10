@@ -66,6 +66,14 @@ class LearningSessionApiRemoteDataSource {
     }
   }
 
+  Future<void> delete(String sessionId) async {
+    try {
+      await _dio.delete<void>(ApiEndpoints.learningSession(sessionId));
+    } on DioException catch (error) {
+      throw _mapDioError(error);
+    }
+  }
+
   LearningSessionException _mapDioError(DioException error) {
     final data = error.response?.data;
     if (data is Map<String, dynamic>) {

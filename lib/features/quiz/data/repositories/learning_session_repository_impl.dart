@@ -29,4 +29,7 @@ class LearningSessionRepositoryImpl implements LearningSessionRepository {
     final models = await _remote.list();
     return models.map(LearningSessionMapper.listItemFromModel).toList(growable: false);
   }
+
+  @override
+  Future<void> delete(String sessionId) => _remote.delete(sessionId);
 }

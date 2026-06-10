@@ -48,7 +48,7 @@
 | Statut | Id | Tâche |
 |--------|-----|--------|
 | [x] | LEARN-05a | `GET list` + polish bibliothèque |
-| [ ] | LEARN-05b | `DELETE` + checklist CP-LEARN |
+| [x] | LEARN-05b | `DELETE` + checklist CP-LEARN |
 
 ---
 

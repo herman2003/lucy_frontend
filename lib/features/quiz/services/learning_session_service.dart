@@ -16,4 +16,6 @@ class LearningSessionService {
       _repository.getById(sessionId);
 
   Future<List<LearningSessionListItem>> list() => _repository.list();
+
+  Future<void> delete(String sessionId) => _repository.delete(sessionId);
 }

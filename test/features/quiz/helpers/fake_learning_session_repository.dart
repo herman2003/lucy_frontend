@@ -39,4 +39,15 @@ class FakeLearningSessionRepository implements LearningSessionRepository {
 
   @override
   Future<List<LearningSessionListItem>> list() async => _sessions;
+
+  String? lastDeletedSessionId;
+
+  @override
+  Future<void> delete(String sessionId) async {
+    lastDeletedSessionId = sessionId;
+    _sessions = _sessions.where((session) => session.id != sessionId).toList();
+    if (_session?.id == sessionId) {
+      _session = null;
+    }
+  }
 }

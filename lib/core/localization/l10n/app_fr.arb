@@ -479,6 +479,15 @@
   "quizLibraryHistoryTitle": "Historique",
   "quizLibraryDateToday": "Aujourd'hui",
   "quizLibraryDateYesterday": "Hier",
+  "quizLibraryDeleteConfirmTitle": "Supprimer la session ?",
+  "quizLibraryDeleteConfirmMessage": "Supprimer « {title} » ? Cette action est irréversible.",
+  "@quizLibraryDeleteConfirmMessage": {
+    "placeholders": {
+      "title": {"type": "String"}
+    }
+  },
+  "quizLibraryDeleteAction": "Supprimer",
+  "quizLibraryDeleteCancel": "Annuler",
   "quizComingSoon": "La génération de quiz arrive bientôt.",
   "quizSessionQuestionCount": "{count, plural, one{{count} question} other{{count} questions}}",
   "@quizSessionQuestionCount": {

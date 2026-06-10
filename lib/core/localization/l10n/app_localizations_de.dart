@@ -789,6 +789,20 @@ class AppLocalizationsDe extends AppLocalizations {
   String get quizLibraryDateYesterday => 'Gestern';
 
   @override
+  String get quizLibraryDeleteConfirmTitle => 'Sitzung löschen?';
+
+  @override
+  String quizLibraryDeleteConfirmMessage(String title) {
+    return '« $title » löschen? Diese Aktion kann nicht rückgängig gemacht werden.';
+  }
+
+  @override
+  String get quizLibraryDeleteAction => 'Löschen';
+
+  @override
+  String get quizLibraryDeleteCancel => 'Abbrechen';
+
+  @override
   String get quizComingSoon => 'Die Quiz-Generierung kommt bald.';
 
   @override

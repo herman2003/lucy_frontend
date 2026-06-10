@@ -778,6 +778,20 @@ class AppLocalizationsEn extends AppLocalizations {
   String get quizLibraryDateYesterday => 'Yesterday';
 
   @override
+  String get quizLibraryDeleteConfirmTitle => 'Delete session?';
+
+  @override
+  String quizLibraryDeleteConfirmMessage(String title) {
+    return 'Delete \"$title\"? This action cannot be undone.';
+  }
+
+  @override
+  String get quizLibraryDeleteAction => 'Delete';
+
+  @override
+  String get quizLibraryDeleteCancel => 'Cancel';
+
+  @override
   String get quizComingSoon => 'Quiz generation is coming soon.';
 
   @override

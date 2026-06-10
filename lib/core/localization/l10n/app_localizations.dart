@@ -1515,6 +1515,30 @@ abstract class AppLocalizations {
   /// In de, this message translates to:
   /// **'Etwas ist schiefgelaufen. Bitte erneut versuchen.'**
   String get quizGenericError;
+
+  /// No description provided for @learningSessionNotFound.
+  ///
+  /// In de, this message translates to:
+  /// **'Diese Sitzung wurde nicht gefunden.'**
+  String get learningSessionNotFound;
+
+  /// No description provided for @learningSessionGenerationFailed.
+  ///
+  /// In de, this message translates to:
+  /// **'Die Generierung ist fehlgeschlagen. Versuchen Sie es erneut im Chat.'**
+  String get learningSessionGenerationFailed;
+
+  /// No description provided for @learningSessionValidationError.
+  ///
+  /// In de, this message translates to:
+  /// **'Die Generierungsanfrage ist ungültig.'**
+  String get learningSessionValidationError;
+
+  /// No description provided for @learningGenericError.
+  ///
+  /// In de, this message translates to:
+  /// **'Etwas ist schiefgelaufen. Bitte erneut versuchen.'**
+  String get learningGenericError;
 }
 
 class _AppLocalizationsDelegate

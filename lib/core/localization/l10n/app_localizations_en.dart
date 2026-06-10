@@ -782,4 +782,18 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get quizGenericError => 'Something went wrong. Please try again.';
+
+  @override
+  String get learningSessionNotFound => 'This session could not be found.';
+
+  @override
+  String get learningSessionGenerationFailed =>
+      'Generation failed. Try again from chat.';
+
+  @override
+  String get learningSessionValidationError =>
+      'The generation request is invalid.';
+
+  @override
+  String get learningGenericError => 'Something went wrong. Please try again.';
 }

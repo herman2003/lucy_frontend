@@ -795,4 +795,19 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get quizGenericError =>
       'Etwas ist schiefgelaufen. Bitte erneut versuchen.';
+
+  @override
+  String get learningSessionNotFound => 'Diese Sitzung wurde nicht gefunden.';
+
+  @override
+  String get learningSessionGenerationFailed =>
+      'Die Generierung ist fehlgeschlagen. Versuchen Sie es erneut im Chat.';
+
+  @override
+  String get learningSessionValidationError =>
+      'Die Generierungsanfrage ist ungültig.';
+
+  @override
+  String get learningGenericError =>
+      'Etwas ist schiefgelaufen. Bitte erneut versuchen.';
 }

@@ -480,5 +480,9 @@
   "quizNoCorpusMessage": "Activez la recherche sur au moins un document prêt pour générer un quiz.",
   "quizNoCorpusCta": "Aller aux documents",
   "quizLoading": "Chargement…",
-  "quizGenericError": "Une erreur est survenue. Réessayez."
+  "quizGenericError": "Une erreur est survenue. Réessayez.",
+  "learningSessionNotFound": "Cette session est introuvable.",
+  "learningSessionGenerationFailed": "La génération a échoué. Réessayez depuis le chat.",
+  "learningSessionValidationError": "La demande de génération est invalide.",
+  "learningGenericError": "Une erreur est survenue. Réessayez."
 }

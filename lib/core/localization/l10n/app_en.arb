@@ -268,5 +268,9 @@
   "quizNoCorpusMessage": "Enable search on at least one ready document to generate a quiz.",
   "quizNoCorpusCta": "Go to documents",
   "quizLoading": "Loading…",
-  "quizGenericError": "Something went wrong. Please try again."
+  "quizGenericError": "Something went wrong. Please try again.",
+  "learningSessionNotFound": "This session could not be found.",
+  "learningSessionGenerationFailed": "Generation failed. Try again from chat.",
+  "learningSessionValidationError": "The generation request is invalid.",
+  "learningGenericError": "Something went wrong. Please try again."
 }

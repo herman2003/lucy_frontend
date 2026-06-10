@@ -1,0 +1,4 @@
+enum LearningSessionStatus {
+  ready,
+  failed,
+}

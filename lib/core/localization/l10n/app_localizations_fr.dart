@@ -791,4 +791,18 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get quizGenericError => 'Une erreur est survenue. Réessayez.';
+
+  @override
+  String get learningSessionNotFound => 'Cette session est introuvable.';
+
+  @override
+  String get learningSessionGenerationFailed =>
+      'La génération a échoué. Réessayez depuis le chat.';
+
+  @override
+  String get learningSessionValidationError =>
+      'La demande de génération est invalide.';
+
+  @override
+  String get learningGenericError => 'Une erreur est survenue. Réessayez.';
 }

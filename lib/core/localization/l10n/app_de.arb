@@ -268,5 +268,9 @@
   "quizNoCorpusMessage": "Aktivieren Sie die Suche für mindestens ein fertiges Dokument, um ein Quiz zu erstellen.",
   "quizNoCorpusCta": "Zu den Dokumenten",
   "quizLoading": "Laden…",
-  "quizGenericError": "Etwas ist schiefgelaufen. Bitte erneut versuchen."
+  "quizGenericError": "Etwas ist schiefgelaufen. Bitte erneut versuchen.",
+  "learningSessionNotFound": "Diese Sitzung wurde nicht gefunden.",
+  "learningSessionGenerationFailed": "Die Generierung ist fehlgeschlagen. Versuchen Sie es erneut im Chat.",
+  "learningSessionValidationError": "Die Generierungsanfrage ist ungültig.",
+  "learningGenericError": "Etwas ist schiefgelaufen. Bitte erneut versuchen."
 }

@@ -1,0 +1,4 @@
+enum LearningSessionType {
+  quiz,
+  flashcards,
+}

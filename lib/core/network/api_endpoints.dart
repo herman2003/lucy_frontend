@@ -48,4 +48,10 @@ abstract final class ApiEndpoints {
   static String get quizzes => '$baseUrl/v1/quizzes';
 
   static String get quizEligibility => '$quizzes/eligibility';
+
+  static String get learningSessions => '$baseUrl/v1/learning-sessions';
+
+  static String learningSession(String sessionId) => '$learningSessions/$sessionId';
+
+  static String get learningSessionsGenerate => '$learningSessions/generate';
 }

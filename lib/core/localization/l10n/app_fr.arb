@@ -474,8 +474,26 @@
   "chatErrorInvalidResponse": "Réponse invalide du serveur. Réessayez.",
   "chatErrorStreamInProgress": "Un message est déjà en cours de génération.",
   "chatGenericError": "Une erreur est survenue. Réessayez.",
-  "quizEmptyHint": "Générez un quiz à partir de vos documents actifs.",
+  "quizEmptyHint": "Demandez à Lucy dans le chat pour générer un quiz.",
+  "quizLibraryEmptyHint": "Demandez à Lucy dans le chat pour générer un quiz.",
   "quizComingSoon": "La génération de quiz arrive bientôt.",
+  "quizSessionQuestionCount": "{count, plural, one{{count} question} other{{count} questions}}",
+  "@quizSessionQuestionCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "quizSessionFlashcardCount": "{count, plural, one{{count} carte} other{{count} cartes}}",
+  "@quizSessionFlashcardCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "quizSessionPlaceholderMessage": "La session s'ouvrira ici prochainement.",
   "quizNoCorpusTitle": "Aucun document actif",
   "quizNoCorpusMessage": "Activez la recherche sur au moins un document prêt pour générer un quiz.",
   "quizNoCorpusCta": "Aller aux documents",

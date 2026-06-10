@@ -262,8 +262,26 @@
   "chatErrorInvalidResponse": "Invalid server response. Try again.",
   "chatErrorStreamInProgress": "A reply is already being generated.",
   "chatGenericError": "Something went wrong. Please try again.",
-  "quizEmptyHint": "Generate a quiz from your active documents.",
+  "quizEmptyHint": "Ask Lucy in chat to generate a quiz.",
+  "quizLibraryEmptyHint": "Ask Lucy in chat to generate a quiz.",
   "quizComingSoon": "Quiz generation is coming soon.",
+  "quizSessionQuestionCount": "{count, plural, one{{count} question} other{{count} questions}}",
+  "@quizSessionQuestionCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "quizSessionFlashcardCount": "{count, plural, one{{count} flashcard} other{{count} flashcards}}",
+  "@quizSessionFlashcardCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "quizSessionPlaceholderMessage": "This session will open here soon.",
   "quizNoCorpusTitle": "No active documents",
   "quizNoCorpusMessage": "Enable search on at least one ready document to generate a quiz.",
   "quizNoCorpusCta": "Go to documents",

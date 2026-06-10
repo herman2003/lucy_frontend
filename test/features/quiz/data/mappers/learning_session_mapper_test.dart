@@ -47,6 +47,24 @@ void main() {
     expect(session.items.first.sources.first.chunkId, 'chunk_1');
   });
 
+  test('listFromJson maps session summaries', () {
+    final sessions = LearningSessionMapper.listFromJson([
+      {
+        'id': 'learn_test_1',
+        'type': 'quiz',
+        'status': 'ready',
+        'itemCount': 5,
+        'title': 'Quiz · 2026-05-29',
+        'createdAt': '2026-05-29T10:00:00.000Z',
+        'updatedAt': '2026-05-29T10:00:00.000Z',
+      },
+    ]);
+
+    expect(sessions, hasLength(1));
+    expect(sessions.first.id, 'learn_test_1');
+    expect(sessions.first.itemCount, 5);
+  });
+
   test('generateRequestToJson omits null optional fields', () {
     final json = LearningSessionMapper.generateRequestToJson(
       const GenerateLearningSessionRequest(type: LearningSessionType.quiz),

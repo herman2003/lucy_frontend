@@ -1477,14 +1477,38 @@ abstract class AppLocalizations {
   /// No description provided for @quizEmptyHint.
   ///
   /// In de, this message translates to:
-  /// **'Erstellen Sie ein Quiz aus Ihren aktiven Dokumenten.'**
+  /// **'Bitten Sie Lucy im Chat, ein Quiz zu erstellen.'**
   String get quizEmptyHint;
+
+  /// No description provided for @quizLibraryEmptyHint.
+  ///
+  /// In de, this message translates to:
+  /// **'Bitten Sie Lucy im Chat, ein Quiz zu erstellen.'**
+  String get quizLibraryEmptyHint;
 
   /// No description provided for @quizComingSoon.
   ///
   /// In de, this message translates to:
   /// **'Die Quiz-Generierung kommt bald.'**
   String get quizComingSoon;
+
+  /// No description provided for @quizSessionQuestionCount.
+  ///
+  /// In de, this message translates to:
+  /// **'{count, plural, one{{count} Frage} other{{count} Fragen}}'**
+  String quizSessionQuestionCount(int count);
+
+  /// No description provided for @quizSessionFlashcardCount.
+  ///
+  /// In de, this message translates to:
+  /// **'{count, plural, one{{count} Karte} other{{count} Karten}}'**
+  String quizSessionFlashcardCount(int count);
+
+  /// No description provided for @quizSessionPlaceholderMessage.
+  ///
+  /// In de, this message translates to:
+  /// **'Diese Sitzung wird hier bald geöffnet.'**
+  String get quizSessionPlaceholderMessage;
 
   /// No description provided for @quizNoCorpusTitle.
   ///

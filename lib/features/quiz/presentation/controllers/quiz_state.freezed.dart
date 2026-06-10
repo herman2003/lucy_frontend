@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$QuizState {
 
- bool get isLoading; QuizEligibility? get eligibility; String? get errorCode;
+ bool get isLoading; QuizEligibility? get eligibility; List<LearningSessionListItem> get sessions; String? get errorCode;
 /// Create a copy of QuizState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $QuizStateCopyWith<QuizState> get copyWith => _$QuizStateCopyWithImpl<QuizState>
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is QuizState&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.eligibility, eligibility) || other.eligibility == eligibility)&&(identical(other.errorCode, errorCode) || other.errorCode == errorCode));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is QuizState&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.eligibility, eligibility) || other.eligibility == eligibility)&&const DeepCollectionEquality().equals(other.sessions, sessions)&&(identical(other.errorCode, errorCode) || other.errorCode == errorCode));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,isLoading,eligibility,errorCode);
+int get hashCode => Object.hash(runtimeType,isLoading,eligibility,const DeepCollectionEquality().hash(sessions),errorCode);
 
 @override
 String toString() {
-  return 'QuizState(isLoading: $isLoading, eligibility: $eligibility, errorCode: $errorCode)';
+  return 'QuizState(isLoading: $isLoading, eligibility: $eligibility, sessions: $sessions, errorCode: $errorCode)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $QuizStateCopyWith<$Res>  {
   factory $QuizStateCopyWith(QuizState value, $Res Function(QuizState) _then) = _$QuizStateCopyWithImpl;
 @useResult
 $Res call({
- bool isLoading, QuizEligibility? eligibility, String? errorCode
+ bool isLoading, QuizEligibility? eligibility, List<LearningSessionListItem> sessions, String? errorCode
 });
 
 
@@ -62,11 +62,12 @@ class _$QuizStateCopyWithImpl<$Res>
 
 /// Create a copy of QuizState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? isLoading = null,Object? eligibility = freezed,Object? errorCode = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? isLoading = null,Object? eligibility = freezed,Object? sessions = null,Object? errorCode = freezed,}) {
   return _then(_self.copyWith(
 isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
 as bool,eligibility: freezed == eligibility ? _self.eligibility : eligibility // ignore: cast_nullable_to_non_nullable
-as QuizEligibility?,errorCode: freezed == errorCode ? _self.errorCode : errorCode // ignore: cast_nullable_to_non_nullable
+as QuizEligibility?,sessions: null == sessions ? _self.sessions : sessions // ignore: cast_nullable_to_non_nullable
+as List<LearningSessionListItem>,errorCode: freezed == errorCode ? _self.errorCode : errorCode // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }
@@ -152,10 +153,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( bool isLoading,  QuizEligibility? eligibility,  String? errorCode)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( bool isLoading,  QuizEligibility? eligibility,  List<LearningSessionListItem> sessions,  String? errorCode)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _QuizState() when $default != null:
-return $default(_that.isLoading,_that.eligibility,_that.errorCode);case _:
+return $default(_that.isLoading,_that.eligibility,_that.sessions,_that.errorCode);case _:
   return orElse();
 
 }
@@ -173,10 +174,10 @@ return $default(_that.isLoading,_that.eligibility,_that.errorCode);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( bool isLoading,  QuizEligibility? eligibility,  String? errorCode)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( bool isLoading,  QuizEligibility? eligibility,  List<LearningSessionListItem> sessions,  String? errorCode)  $default,) {final _that = this;
 switch (_that) {
 case _QuizState():
-return $default(_that.isLoading,_that.eligibility,_that.errorCode);case _:
+return $default(_that.isLoading,_that.eligibility,_that.sessions,_that.errorCode);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -193,10 +194,10 @@ return $default(_that.isLoading,_that.eligibility,_that.errorCode);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( bool isLoading,  QuizEligibility? eligibility,  String? errorCode)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( bool isLoading,  QuizEligibility? eligibility,  List<LearningSessionListItem> sessions,  String? errorCode)?  $default,) {final _that = this;
 switch (_that) {
 case _QuizState() when $default != null:
-return $default(_that.isLoading,_that.eligibility,_that.errorCode);case _:
+return $default(_that.isLoading,_that.eligibility,_that.sessions,_that.errorCode);case _:
   return null;
 
 }
@@ -208,11 +209,18 @@ return $default(_that.isLoading,_that.eligibility,_that.errorCode);case _:
 
 
 class _QuizState extends QuizState {
-  const _QuizState({this.isLoading = false, this.eligibility, this.errorCode}): super._();
+  const _QuizState({this.isLoading = false, this.eligibility, final  List<LearningSessionListItem> sessions = const <LearningSessionListItem>[], this.errorCode}): _sessions = sessions,super._();
   
 
 @override@JsonKey() final  bool isLoading;
 @override final  QuizEligibility? eligibility;
+ final  List<LearningSessionListItem> _sessions;
+@override@JsonKey() List<LearningSessionListItem> get sessions {
+  if (_sessions is EqualUnmodifiableListView) return _sessions;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_sessions);
+}
+
 @override final  String? errorCode;
 
 /// Create a copy of QuizState
@@ -225,16 +233,16 @@ _$QuizStateCopyWith<_QuizState> get copyWith => __$QuizStateCopyWithImpl<_QuizSt
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _QuizState&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.eligibility, eligibility) || other.eligibility == eligibility)&&(identical(other.errorCode, errorCode) || other.errorCode == errorCode));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _QuizState&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.eligibility, eligibility) || other.eligibility == eligibility)&&const DeepCollectionEquality().equals(other._sessions, _sessions)&&(identical(other.errorCode, errorCode) || other.errorCode == errorCode));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,isLoading,eligibility,errorCode);
+int get hashCode => Object.hash(runtimeType,isLoading,eligibility,const DeepCollectionEquality().hash(_sessions),errorCode);
 
 @override
 String toString() {
-  return 'QuizState(isLoading: $isLoading, eligibility: $eligibility, errorCode: $errorCode)';
+  return 'QuizState(isLoading: $isLoading, eligibility: $eligibility, sessions: $sessions, errorCode: $errorCode)';
 }
 
 
@@ -245,7 +253,7 @@ abstract mixin class _$QuizStateCopyWith<$Res> implements $QuizStateCopyWith<$Re
   factory _$QuizStateCopyWith(_QuizState value, $Res Function(_QuizState) _then) = __$QuizStateCopyWithImpl;
 @override @useResult
 $Res call({
- bool isLoading, QuizEligibility? eligibility, String? errorCode
+ bool isLoading, QuizEligibility? eligibility, List<LearningSessionListItem> sessions, String? errorCode
 });
 
 
@@ -262,11 +270,12 @@ class __$QuizStateCopyWithImpl<$Res>
 
 /// Create a copy of QuizState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? isLoading = null,Object? eligibility = freezed,Object? errorCode = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? isLoading = null,Object? eligibility = freezed,Object? sessions = null,Object? errorCode = freezed,}) {
   return _then(_QuizState(
 isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
 as bool,eligibility: freezed == eligibility ? _self.eligibility : eligibility // ignore: cast_nullable_to_non_nullable
-as QuizEligibility?,errorCode: freezed == errorCode ? _self.errorCode : errorCode // ignore: cast_nullable_to_non_nullable
+as QuizEligibility?,sessions: null == sessions ? _self._sessions : sessions // ignore: cast_nullable_to_non_nullable
+as List<LearningSessionListItem>,errorCode: freezed == errorCode ? _self.errorCode : errorCode // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }

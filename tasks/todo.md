@@ -22,7 +22,7 @@
 | Statut | Id | Tâche |
 |--------|-----|--------|
 | [x] | LEARN-03a | Flutter data layer learning sessions |
-| [ ] | LEARN-03b | `QuizPage` bibliothèque (liste, **pas** de générer) |
+| [x] | LEARN-03b | `QuizPage` bibliothèque (liste, **pas** de générer) |
 | [ ] | LEARN-03c | `ChatLearningSessionCard` + `QuizSessionPage` QCM |
 
 ---

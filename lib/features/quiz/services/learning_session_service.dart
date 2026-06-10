@@ -1,5 +1,6 @@
 import '../domain/entities/generate_learning_session_request.dart';
 import '../domain/entities/learning_session.dart';
+import '../domain/entities/learning_session_list_item.dart';
 import '../domain/repositories/learning_session_repository.dart';
 
 class LearningSessionService {
@@ -13,4 +14,6 @@ class LearningSessionService {
 
   Future<LearningSession> getById(String sessionId) =>
       _repository.getById(sessionId);
+
+  Future<List<LearningSessionListItem>> list() => _repository.list();
 }

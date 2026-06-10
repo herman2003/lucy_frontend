@@ -773,11 +773,40 @@ class AppLocalizationsDe extends AppLocalizations {
       'Etwas ist schiefgelaufen. Bitte erneut versuchen.';
 
   @override
-  String get quizEmptyHint =>
-      'Erstellen Sie ein Quiz aus Ihren aktiven Dokumenten.';
+  String get quizEmptyHint => 'Bitten Sie Lucy im Chat, ein Quiz zu erstellen.';
+
+  @override
+  String get quizLibraryEmptyHint =>
+      'Bitten Sie Lucy im Chat, ein Quiz zu erstellen.';
 
   @override
   String get quizComingSoon => 'Die Quiz-Generierung kommt bald.';
+
+  @override
+  String quizSessionQuestionCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Fragen',
+      one: '$count Frage',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String quizSessionFlashcardCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Karten',
+      one: '$count Karte',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get quizSessionPlaceholderMessage =>
+      'Diese Sitzung wird hier bald geöffnet.';
 
   @override
   String get quizNoCorpusTitle => 'Keine aktiven Dokumente';

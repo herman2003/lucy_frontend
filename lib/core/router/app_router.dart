@@ -9,6 +9,7 @@ import '../../features/documents/presentation/pages/documents_page.dart';
 import '../../features/onboarding/presentation/pages/onboarding_chat_page.dart';
 import '../../features/onboarding/presentation/pages/onboarding_confirm_page.dart';
 import '../../features/quiz/presentation/pages/quiz_page.dart';
+import '../../features/quiz/presentation/pages/quiz_session_placeholder_page.dart';
 import '../../features/settings/presentation/pages/settings_ai_config_page.dart';
 import '../../features/settings/presentation/pages/settings_change_password_page.dart';
 import '../../features/settings/presentation/pages/settings_learner_domains_page.dart';
@@ -112,6 +113,15 @@ GoRouter lucyRouter(Ref ref) {
                 path: LucyRoutePaths.quiz,
                 pageBuilder: (context, state) =>
                     const NoTransitionPage(child: QuizPage()),
+                routes: [
+                  GoRoute(
+                    name: LucyRouteNames.quizSession,
+                    path: 'session/:sessionId',
+                    builder: (context, state) => QuizSessionPlaceholderPage(
+                      sessionId: state.pathParameters['sessionId']!,
+                    ),
+                  ),
+                ],
               ),
             ],
           ),

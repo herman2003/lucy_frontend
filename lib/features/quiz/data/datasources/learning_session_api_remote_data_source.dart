@@ -4,6 +4,7 @@ import '../../../../core/network/api_endpoints.dart';
 import '../../domain/entities/generate_learning_session_request.dart';
 import '../../domain/exceptions/learning_session_exception.dart';
 import '../mappers/learning_session_mapper.dart';
+import '../models/learning_session_list_item_model.dart';
 import '../models/learning_session_model.dart';
 
 class LearningSessionApiRemoteDataSource {
@@ -39,6 +40,27 @@ class LearningSessionApiRemoteDataSource {
         throw const LearningSessionException('INTERNAL_ERROR');
       }
       return LearningSessionModel.fromJson(data);
+    } on DioException catch (error) {
+      throw _mapDioError(error);
+    }
+  }
+
+  Future<List<LearningSessionListItemModel>> list() async {
+    try {
+      final response = await _dio.get<List<dynamic>>(
+        ApiEndpoints.learningSessions,
+      );
+      final data = response.data;
+      if (data == null) {
+        throw const LearningSessionException('INTERNAL_ERROR');
+      }
+      return data
+          .map(
+            (entry) => LearningSessionListItemModel.fromJson(
+              entry as Map<String, dynamic>,
+            ),
+          )
+          .toList(growable: false);
     } on DioException catch (error) {
       throw _mapDioError(error);
     }

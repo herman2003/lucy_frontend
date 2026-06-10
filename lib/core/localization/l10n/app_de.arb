@@ -262,8 +262,26 @@
   "chatErrorInvalidResponse": "Ungültige Serverantwort. Bitte erneut versuchen.",
   "chatErrorStreamInProgress": "Eine Antwort wird bereits generiert.",
   "chatGenericError": "Etwas ist schiefgelaufen. Bitte erneut versuchen.",
-  "quizEmptyHint": "Erstellen Sie ein Quiz aus Ihren aktiven Dokumenten.",
+  "quizEmptyHint": "Bitten Sie Lucy im Chat, ein Quiz zu erstellen.",
+  "quizLibraryEmptyHint": "Bitten Sie Lucy im Chat, ein Quiz zu erstellen.",
   "quizComingSoon": "Die Quiz-Generierung kommt bald.",
+  "quizSessionQuestionCount": "{count, plural, one{{count} Frage} other{{count} Fragen}}",
+  "@quizSessionQuestionCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "quizSessionFlashcardCount": "{count, plural, one{{count} Karte} other{{count} Karten}}",
+  "@quizSessionFlashcardCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "quizSessionPlaceholderMessage": "Diese Sitzung wird hier bald geöffnet.",
   "quizNoCorpusTitle": "Keine aktiven Dokumente",
   "quizNoCorpusMessage": "Aktivieren Sie die Suche für mindestens ein fertiges Dokument, um ein Quiz zu erstellen.",
   "quizNoCorpusCta": "Zu den Dokumenten",

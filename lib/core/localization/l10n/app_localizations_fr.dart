@@ -771,10 +771,40 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get quizEmptyHint =>
-      'Générez un quiz à partir de vos documents actifs.';
+      'Demandez à Lucy dans le chat pour générer un quiz.';
+
+  @override
+  String get quizLibraryEmptyHint =>
+      'Demandez à Lucy dans le chat pour générer un quiz.';
 
   @override
   String get quizComingSoon => 'La génération de quiz arrive bientôt.';
+
+  @override
+  String quizSessionQuestionCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count questions',
+      one: '$count question',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String quizSessionFlashcardCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count cartes',
+      one: '$count carte',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get quizSessionPlaceholderMessage =>
+      'La session s\'ouvrira ici prochainement.';
 
   @override
   String get quizNoCorpusTitle => 'Aucun document actif';

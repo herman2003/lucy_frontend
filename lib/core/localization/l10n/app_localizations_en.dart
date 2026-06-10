@@ -762,10 +762,39 @@ class AppLocalizationsEn extends AppLocalizations {
   String get chatGenericError => 'Something went wrong. Please try again.';
 
   @override
-  String get quizEmptyHint => 'Generate a quiz from your active documents.';
+  String get quizEmptyHint => 'Ask Lucy in chat to generate a quiz.';
+
+  @override
+  String get quizLibraryEmptyHint => 'Ask Lucy in chat to generate a quiz.';
 
   @override
   String get quizComingSoon => 'Quiz generation is coming soon.';
+
+  @override
+  String quizSessionQuestionCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count questions',
+      one: '$count question',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String quizSessionFlashcardCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count flashcards',
+      one: '$count flashcard',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get quizSessionPlaceholderMessage =>
+      'This session will open here soon.';
 
   @override
   String get quizNoCorpusTitle => 'No active documents';

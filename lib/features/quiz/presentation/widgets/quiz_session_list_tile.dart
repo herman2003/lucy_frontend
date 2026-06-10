@@ -4,6 +4,7 @@ import '../../../../core/constants/lucy_constants.dart';
 import '../../../../core/extensions/context.dart';
 import '../../domain/entities/learning_session_list_item.dart';
 import '../../domain/entities/learning_session_type.dart';
+import '../../utils/learning_session_date_formatter.dart';
 
 class QuizSessionListTile extends StatelessWidget {
   const QuizSessionListTile({
@@ -20,11 +21,18 @@ class QuizSessionListTile extends StatelessWidget {
     final scheme = Theme.of(context).colorScheme;
     final l10n = context.l10n;
 
-    final subtitle = switch (session.type) {
+    final typeLabel = switch (session.type) {
       LearningSessionType.quiz => l10n.quizSessionQuestionCount(session.itemCount),
       LearningSessionType.flashcards =>
         l10n.quizSessionFlashcardCount(session.itemCount),
     };
+    final dateLabel = formatLearningSessionListDate(
+      l10n: l10n,
+      locale: Localizations.localeOf(context),
+      isoTimestamp: session.createdAt,
+      reference: DateTime.now(),
+    );
+    final subtitle = '$typeLabel · $dateLabel';
 
     return Card(
       color: scheme.surface,

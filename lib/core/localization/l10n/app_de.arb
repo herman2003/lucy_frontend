@@ -263,7 +263,10 @@
   "chatErrorStreamInProgress": "Eine Antwort wird bereits generiert.",
   "chatGenericError": "Etwas ist schiefgelaufen. Bitte erneut versuchen.",
   "quizEmptyHint": "Bitten Sie Lucy im Chat, ein Quiz zu erstellen.",
-  "quizLibraryEmptyHint": "Bitten Sie Lucy im Chat, ein Quiz zu erstellen.",
+  "quizLibraryEmptyHint": "Bitten Sie Lucy im Chat, ein Quiz oder Karteikarten zu erstellen.",
+  "quizLibraryHistoryTitle": "Verlauf",
+  "quizLibraryDateToday": "Heute",
+  "quizLibraryDateYesterday": "Gestern",
   "quizComingSoon": "Die Quiz-Generierung kommt bald.",
   "quizSessionQuestionCount": "{count, plural, one{{count} Frage} other{{count} Fragen}}",
   "@quizSessionQuestionCount": {

@@ -775,7 +775,16 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get quizLibraryEmptyHint =>
-      'Demandez à Lucy dans le chat pour générer un quiz.';
+      'Demandez à Lucy dans le chat pour générer un quiz ou des cartes mémoire.';
+
+  @override
+  String get quizLibraryHistoryTitle => 'Historique';
+
+  @override
+  String get quizLibraryDateToday => 'Aujourd\'hui';
+
+  @override
+  String get quizLibraryDateYesterday => 'Hier';
 
   @override
   String get quizComingSoon => 'La génération de quiz arrive bientôt.';

@@ -263,7 +263,10 @@
   "chatErrorStreamInProgress": "A reply is already being generated.",
   "chatGenericError": "Something went wrong. Please try again.",
   "quizEmptyHint": "Ask Lucy in chat to generate a quiz.",
-  "quizLibraryEmptyHint": "Ask Lucy in chat to generate a quiz.",
+  "quizLibraryEmptyHint": "Ask Lucy in chat to generate a quiz or flashcards.",
+  "quizLibraryHistoryTitle": "History",
+  "quizLibraryDateToday": "Today",
+  "quizLibraryDateYesterday": "Yesterday",
   "quizComingSoon": "Quiz generation is coming soon.",
   "quizSessionQuestionCount": "{count, plural, one{{count} question} other{{count} questions}}",
   "@quizSessionQuestionCount": {

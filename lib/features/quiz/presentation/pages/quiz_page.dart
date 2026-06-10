@@ -9,6 +9,7 @@ import '../../utils/learning_session_error_translator.dart';
 import '../../utils/quiz_error_translator.dart';
 import '../controllers/quiz_notifier.dart';
 import '../widgets/quiz_library_empty_state.dart';
+import '../widgets/quiz_library_history_header.dart';
 import '../widgets/quiz_no_corpus_banner.dart';
 import '../widgets/quiz_session_list_tile.dart';
 
@@ -66,9 +67,12 @@ class _QuizPageState extends ConsumerState<QuizPage> {
                   child: state.sessions.isEmpty
                       ? const QuizLibraryEmptyState()
                       : ListView.builder(
-                          itemCount: state.sessions.length,
+                          itemCount: state.sessions.length + 1,
                           itemBuilder: (context, index) {
-                            final session = state.sessions[index];
+                            if (index == 0) {
+                              return const QuizLibraryHistoryHeader();
+                            }
+                            final session = state.sessions[index - 1];
                             return QuizSessionListTile(
                               session: session,
                               onTap: () => context.push(

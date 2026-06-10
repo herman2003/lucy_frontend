@@ -765,7 +765,17 @@ class AppLocalizationsEn extends AppLocalizations {
   String get quizEmptyHint => 'Ask Lucy in chat to generate a quiz.';
 
   @override
-  String get quizLibraryEmptyHint => 'Ask Lucy in chat to generate a quiz.';
+  String get quizLibraryEmptyHint =>
+      'Ask Lucy in chat to generate a quiz or flashcards.';
+
+  @override
+  String get quizLibraryHistoryTitle => 'History';
+
+  @override
+  String get quizLibraryDateToday => 'Today';
+
+  @override
+  String get quizLibraryDateYesterday => 'Yesterday';
 
   @override
   String get quizComingSoon => 'Quiz generation is coming soon.';

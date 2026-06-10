@@ -475,7 +475,10 @@
   "chatErrorStreamInProgress": "Un message est déjà en cours de génération.",
   "chatGenericError": "Une erreur est survenue. Réessayez.",
   "quizEmptyHint": "Demandez à Lucy dans le chat pour générer un quiz.",
-  "quizLibraryEmptyHint": "Demandez à Lucy dans le chat pour générer un quiz.",
+  "quizLibraryEmptyHint": "Demandez à Lucy dans le chat pour générer un quiz ou des cartes mémoire.",
+  "quizLibraryHistoryTitle": "Historique",
+  "quizLibraryDateToday": "Aujourd'hui",
+  "quizLibraryDateYesterday": "Hier",
   "quizComingSoon": "La génération de quiz arrive bientôt.",
   "quizSessionQuestionCount": "{count, plural, one{{count} question} other{{count} questions}}",
   "@quizSessionQuestionCount": {

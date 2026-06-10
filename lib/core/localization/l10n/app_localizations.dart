@@ -370,6 +370,222 @@ abstract class AppLocalizations {
   /// **'Einstellungen'**
   String get settingsTitle;
 
+  /// No description provided for @settingsSectionAccount.
+  ///
+  /// In de, this message translates to:
+  /// **'Konto'**
+  String get settingsSectionAccount;
+
+  /// No description provided for @settingsSectionLearnerProfile.
+  ///
+  /// In de, this message translates to:
+  /// **'Lernprofil'**
+  String get settingsSectionLearnerProfile;
+
+  /// No description provided for @settingsSectionApplication.
+  ///
+  /// In de, this message translates to:
+  /// **'Anwendung'**
+  String get settingsSectionApplication;
+
+  /// No description provided for @settingsUiLocaleLabel.
+  ///
+  /// In de, this message translates to:
+  /// **'Oberflächensprache'**
+  String get settingsUiLocaleLabel;
+
+  /// No description provided for @settingsUiLocaleReadOnly.
+  ///
+  /// In de, this message translates to:
+  /// **'Die Oberflächensprache ist derzeit festgelegt.'**
+  String get settingsUiLocaleReadOnly;
+
+  /// No description provided for @settingsLearnerProfileUnavailable.
+  ///
+  /// In de, this message translates to:
+  /// **'Kein Lernprofil hinterlegt.'**
+  String get settingsLearnerProfileUnavailable;
+
+  /// No description provided for @settingsGenericError.
+  ///
+  /// In de, this message translates to:
+  /// **'Einstellungen konnten nicht geladen werden. Bitte erneut versuchen.'**
+  String get settingsGenericError;
+
+  /// No description provided for @settingsErrorUnauthorized.
+  ///
+  /// In de, this message translates to:
+  /// **'Sitzung abgelaufen. Bitte erneut anmelden.'**
+  String get settingsErrorUnauthorized;
+
+  /// No description provided for @settingsThemeSituation.
+  ///
+  /// In de, this message translates to:
+  /// **'Ihre Situation'**
+  String get settingsThemeSituation;
+
+  /// No description provided for @settingsThemeGoals.
+  ///
+  /// In de, this message translates to:
+  /// **'Ziele'**
+  String get settingsThemeGoals;
+
+  /// No description provided for @settingsThemeLucyStyle.
+  ///
+  /// In de, this message translates to:
+  /// **'Lucy-Stil'**
+  String get settingsThemeLucyStyle;
+
+  /// No description provided for @settingsLearnerDomainsHint.
+  ///
+  /// In de, this message translates to:
+  /// **'Wählen Sie ein oder mehrere Fächer.'**
+  String get settingsLearnerDomainsHint;
+
+  /// No description provided for @settingsSaveChanges.
+  ///
+  /// In de, this message translates to:
+  /// **'Speichern'**
+  String get settingsSaveChanges;
+
+  /// No description provided for @settingsProfileSaved.
+  ///
+  /// In de, this message translates to:
+  /// **'Profil aktualisiert'**
+  String get settingsProfileSaved;
+
+  /// No description provided for @settingsProfileSaveFailed.
+  ///
+  /// In de, this message translates to:
+  /// **'Profil konnte nicht gespeichert werden. Bitte erneut versuchen.'**
+  String get settingsProfileSaveFailed;
+
+  /// No description provided for @settingsProfileTitle.
+  ///
+  /// In de, this message translates to:
+  /// **'Profil'**
+  String get settingsProfileTitle;
+
+  /// No description provided for @settingsHubSection.
+  ///
+  /// In de, this message translates to:
+  /// **'Menü'**
+  String get settingsHubSection;
+
+  /// No description provided for @settingsProfileHubHint.
+  ///
+  /// In de, this message translates to:
+  /// **'Name, E-Mail, Passwort'**
+  String get settingsProfileHubHint;
+
+  /// No description provided for @settingsAiConfigTitle.
+  ///
+  /// In de, this message translates to:
+  /// **'Lucy-Konfiguration'**
+  String get settingsAiConfigTitle;
+
+  /// No description provided for @settingsAiConfigHubHint.
+  ///
+  /// In de, this message translates to:
+  /// **'KI-Profil, Sprache'**
+  String get settingsAiConfigHubHint;
+
+  /// No description provided for @settingsAiConfigIntro.
+  ///
+  /// In de, this message translates to:
+  /// **'Passen Sie an, wie Lucy Sie beim Lernen begleitet.'**
+  String get settingsAiConfigIntro;
+
+  /// No description provided for @settingsFirstNameLabel.
+  ///
+  /// In de, this message translates to:
+  /// **'Vorname'**
+  String get settingsFirstNameLabel;
+
+  /// No description provided for @settingsLastNameLabel.
+  ///
+  /// In de, this message translates to:
+  /// **'Nachname'**
+  String get settingsLastNameLabel;
+
+  /// No description provided for @settingsFirstNameRequired.
+  ///
+  /// In de, this message translates to:
+  /// **'Vorname ist erforderlich.'**
+  String get settingsFirstNameRequired;
+
+  /// No description provided for @settingsFieldMinTwoChars.
+  ///
+  /// In de, this message translates to:
+  /// **'Mindestens 2 Zeichen erforderlich.'**
+  String get settingsFieldMinTwoChars;
+
+  /// No description provided for @settingsSecuritySection.
+  ///
+  /// In de, this message translates to:
+  /// **'Sicherheit'**
+  String get settingsSecuritySection;
+
+  /// No description provided for @settingsChangePassword.
+  ///
+  /// In de, this message translates to:
+  /// **'Passwort ändern'**
+  String get settingsChangePassword;
+
+  /// No description provided for @settingsChangePasswordSubtitle.
+  ///
+  /// In de, this message translates to:
+  /// **'Aktuelles Passwort eingeben, dann das neue Passwort.'**
+  String get settingsChangePasswordSubtitle;
+
+  /// No description provided for @settingsCurrentPassword.
+  ///
+  /// In de, this message translates to:
+  /// **'Aktuelles Passwort'**
+  String get settingsCurrentPassword;
+
+  /// No description provided for @settingsNewPassword.
+  ///
+  /// In de, this message translates to:
+  /// **'Neues Passwort'**
+  String get settingsNewPassword;
+
+  /// No description provided for @settingsConfirmNewPassword.
+  ///
+  /// In de, this message translates to:
+  /// **'Passwort bestätigen'**
+  String get settingsConfirmNewPassword;
+
+  /// No description provided for @settingsPasswordChanged.
+  ///
+  /// In de, this message translates to:
+  /// **'Passwort aktualisiert'**
+  String get settingsPasswordChanged;
+
+  /// No description provided for @settingsPasswordChangeFailed.
+  ///
+  /// In de, this message translates to:
+  /// **'Passwort konnte nicht geändert werden. Bitte erneut versuchen.'**
+  String get settingsPasswordChangeFailed;
+
+  /// No description provided for @settingsInvalidCurrentPassword.
+  ///
+  /// In de, this message translates to:
+  /// **'Aktuelles Passwort ist falsch.'**
+  String get settingsInvalidCurrentPassword;
+
+  /// No description provided for @settingsPasswordMismatch.
+  ///
+  /// In de, this message translates to:
+  /// **'Passwörter stimmen nicht überein.'**
+  String get settingsPasswordMismatch;
+
+  /// No description provided for @settingsEmailReadOnly.
+  ///
+  /// In de, this message translates to:
+  /// **'E-Mail kann hier nicht geändert werden.'**
+  String get settingsEmailReadOnly;
+
   /// No description provided for @shellMenu.
   ///
   /// In de, this message translates to:
@@ -1131,6 +1347,12 @@ abstract class AppLocalizations {
   /// In de, this message translates to:
   /// **'Neue Unterhaltung'**
   String get chatNewConversation;
+
+  /// No description provided for @chatShowThreadList.
+  ///
+  /// In de, this message translates to:
+  /// **'Unterhaltungsliste'**
+  String get chatShowThreadList;
 
   /// No description provided for @chatSourcesTitle.
   ///

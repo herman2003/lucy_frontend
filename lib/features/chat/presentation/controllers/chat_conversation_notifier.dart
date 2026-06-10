@@ -42,12 +42,19 @@ class ChatConversationNotifier extends _$ChatConversationNotifier {
           uid: uid,
           chatId: chatId,
           messages: _mirrorMessages,
-          streamDraft: _mirrorSendPhase == ChatSendPhase.sending ||
+          streamDraft:
+              _mirrorSendPhase == ChatSendPhase.sending ||
                   _mirrorSendPhase == ChatSendPhase.streaming
               ? _mirrorStreamingContent
               : null,
         ),
       );
+    });
+    Future.microtask(() {
+      if (!ref.mounted) {
+        return;
+      }
+      unawaited(loadMessages());
     });
     return const ChatConversationState();
   }
@@ -85,9 +92,7 @@ class ChatConversationNotifier extends _$ChatConversationNotifier {
     }
 
     try {
-      final messages = await ref
-          .read(chatServiceProvider)
-          .listMessages(chatId);
+      final messages = await ref.read(chatServiceProvider).listMessages(chatId);
       state = state.copyWith(isLoadingMessages: false, messages: messages);
       _captureMirrorSnapshot();
       await mirrorService.replaceMessagesForChat(
@@ -99,7 +104,12 @@ class ChatConversationNotifier extends _$ChatConversationNotifier {
     } catch (error) {
       if (ChatNetworkUtils.isOfflineError(error) && cached != null) {
         state = state.copyWith(isLoadingMessages: false, errorCode: null);
-        ref.read(chatThreadsProvider.notifier).setOffline(true);
+        Future.microtask(() {
+          if (!ref.mounted) {
+            return;
+          }
+          ref.read(chatThreadsProvider.notifier).setOffline(true);
+        });
         return;
       }
       state = state.copyWith(
@@ -128,9 +138,8 @@ class ChatConversationNotifier extends _$ChatConversationNotifier {
     _captureMirrorSnapshot();
 
     try {
-      await for (final event in ref
-          .read(chatServiceProvider)
-          .streamMessage(chatId, trimmed)) {
+      await for (final event
+          in ref.read(chatServiceProvider).streamMessage(chatId, trimmed)) {
         _applyStreamEvent(event);
       }
       await _persistMirror();
@@ -207,7 +216,8 @@ class ChatConversationNotifier extends _$ChatConversationNotifier {
       uid: uid,
       chatId: chatId,
       messages: _mirrorMessages,
-      streamDraft: _mirrorSendPhase == ChatSendPhase.sending ||
+      streamDraft:
+          _mirrorSendPhase == ChatSendPhase.sending ||
               _mirrorSendPhase == ChatSendPhase.streaming
           ? _mirrorStreamingContent
           : null,

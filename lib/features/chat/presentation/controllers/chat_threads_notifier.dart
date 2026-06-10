@@ -66,7 +66,11 @@ class ChatThreadsNotifier extends _$ChatThreadsNotifier {
     } catch (error) {
       if (ChatNetworkUtils.isOfflineError(error) &&
           (cachedMirror?.threads.isNotEmpty ?? false)) {
-        state = state.copyWith(isLoading: false, isOffline: true, errorCode: null);
+        state = state.copyWith(
+          isLoading: false,
+          isOffline: true,
+          errorCode: null,
+        );
         return;
       }
       state = state.copyWith(
@@ -75,6 +79,12 @@ class ChatThreadsNotifier extends _$ChatThreadsNotifier {
         isOffline: ChatNetworkUtils.isOfflineError(error),
       );
     }
+  }
+
+  /// Mobile: return to the thread list (master panel) without leaving the Chat tab.
+  void openThreadList(BuildContext context) {
+    state = state.copyWith(selectedChatId: null, errorCode: null);
+    context.go(LucyRoutePaths.chat);
   }
 
   void selectThread(String chatId, BuildContext context) {
@@ -99,17 +109,16 @@ class ChatThreadsNotifier extends _$ChatThreadsNotifier {
     try {
       final thread = await ref.read(chatServiceProvider).createThread();
       final threads = [thread, ...state.threads];
-      state = state.copyWith(
-        threads: threads,
-        selectedChatId: thread.id,
-      );
+      state = state.copyWith(threads: threads, selectedChatId: thread.id);
       final uid = ref.read(authRepositoryProvider).currentUser?.uid;
       if (uid != null) {
-        await ref.read(chatMirrorServiceProvider).saveThreads(
-          uid: uid,
-          threads: threads,
-          lastActiveChatId: thread.id,
-        );
+        await ref
+            .read(chatMirrorServiceProvider)
+            .saveThreads(
+              uid: uid,
+              threads: threads,
+              lastActiveChatId: thread.id,
+            );
       }
       if (context.mounted) {
         context.go(LucyRoutePaths.chatThread(thread.id));

@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
-
 import '../../../../core/constants/lucy_constants.dart';
 import '../../../../core/extensions/context.dart';
-import '../../../../core/router/lucy_route_paths.dart';
 import '../../../../shared/widgets/feedback/lucy_snackbar.dart';
 import '../../../onboarding/presentation/widgets/onboarding_lucy_bubble.dart';
 import '../../../onboarding/presentation/widgets/onboarding_lucy_typing_row.dart';
@@ -34,7 +31,7 @@ class ChatPage extends ConsumerStatefulWidget {
 
 class _ChatPageState extends ConsumerState<ChatPage> {
   final _scrollController = ScrollController();
-  String? _loadedConversationId;
+  bool _threadListPanelVisible = true;
 
   bool _canChat(ChatThreadsState threadsState) =>
       threadsState.eligibility?.canChat ?? true;
@@ -42,10 +39,11 @@ class _ChatPageState extends ConsumerState<ChatPage> {
   bool _canCreateThread(ChatThreadsState threadsState) =>
       !threadsState.isOffline && _canChat(threadsState);
 
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+  void _scheduleBootstrap() {
+    Future.microtask(() {
+      if (!mounted) {
+        return;
+      }
       ref
           .read(chatThreadsProvider.notifier)
           .bootstrap(initialChatId: widget.chatId);
@@ -53,13 +51,16 @@ class _ChatPageState extends ConsumerState<ChatPage> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    _scheduleBootstrap();
+  }
+
+  @override
   void didUpdateWidget(ChatPage oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.chatId != widget.chatId) {
-      _loadedConversationId = null;
-      ref
-          .read(chatThreadsProvider.notifier)
-          .bootstrap(initialChatId: widget.chatId);
+      _scheduleBootstrap();
     }
   }
 
@@ -67,6 +68,20 @@ class _ChatPageState extends ConsumerState<ChatPage> {
   void dispose() {
     _scrollController.dispose();
     super.dispose();
+  }
+
+  void _onThreadListAction({
+    required bool useMasterDetail,
+    required bool hasSelectedThread,
+  }) {
+    if (!hasSelectedThread) {
+      return;
+    }
+    if (useMasterDetail) {
+      setState(() => _threadListPanelVisible = !_threadListPanelVisible);
+      return;
+    }
+    ref.read(chatThreadsProvider.notifier).openThreadList(context);
   }
 
   void _scrollToBottom() {
@@ -104,20 +119,8 @@ class _ChatPageState extends ConsumerState<ChatPage> {
       }
     });
 
-    if (selectedId != null && _loadedConversationId != selectedId) {
-      _loadedConversationId = selectedId;
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        ref
-            .read(chatConversationProvider(selectedId).notifier)
-            .loadMessages();
-      });
-    }
-
     if (selectedId != null) {
-      ref.listen(chatConversationProvider(selectedId), (
-        previous,
-        next,
-      ) {
+      ref.listen(chatConversationProvider(selectedId), (previous, next) {
         if (next.errorCode != null && next.errorCode != previous?.errorCode) {
           LucySnackBar.showError(
             context,
@@ -131,36 +134,38 @@ class _ChatPageState extends ConsumerState<ChatPage> {
       });
     }
 
+    final hasSelectedThread = selectedId != null;
+
     return Scaffold(
       appBar: AppBar(
-        title: Text(l10n.chatTitle),
-       /* leading: !useMasterDetail && selectedId != null
+        automaticallyImplyLeading: false,
+        leading: hasSelectedThread
             ? IconButton(
-                icon: const Icon(Icons.arrow_back),
-                onPressed: () => context.go(LucyRoutePaths.chat),
+                icon: Icon(
+                  useMasterDetail && _threadListPanelVisible
+                      ? Icons.view_sidebar
+                      : Icons.view_sidebar_outlined,
+                ),
+                tooltip: l10n.chatShowThreadList,
+                onPressed: () => _onThreadListAction(
+                  useMasterDetail: useMasterDetail,
+                  hasSelectedThread: hasSelectedThread,
+                ),
               )
-            : null,*/
+            : null,
+        title: Text(l10n.chatTitle),
         actions: [
           IconButton(
             icon: const Icon(Icons.add_comment_outlined),
             tooltip: l10n.chatNewConversation,
             onPressed: canCreateThread
                 ? () => ref
-                    .read(chatThreadsProvider.notifier)
-                    .createThread(context)
+                      .read(chatThreadsProvider.notifier)
+                      .createThread(context)
                 : null,
           ),
         ],
       ),
-    /*  floatingActionButton: canCreateThread && selectedId != null
-          ? FloatingActionButton(
-              onPressed: () => ref
-                  .read(chatThreadsProvider.notifier)
-                  .createThread(context),
-              tooltip: l10n.chatNewConversation,
-              child: const Icon(Icons.add_comment_outlined),
-            )
-          : null,*/
       body: threadsState.isLoading
           ? const Center(child: CircularProgressIndicator())
           : Column(
@@ -177,14 +182,16 @@ class _ChatPageState extends ConsumerState<ChatPage> {
                   child: useMasterDetail
                       ? Row(
                           children: [
-                            SizedBox(
-                              width: ChatConstants.threadListWidth,
-                              child: _ThreadListPanel(
-                                threadsState: threadsState,
-                                selectedId: selectedId,
+                            if (_threadListPanelVisible) ...[
+                              SizedBox(
+                                width: ChatConstants.threadListWidth,
+                                child: _ThreadListPanel(
+                                  threadsState: threadsState,
+                                  selectedId: selectedId,
+                                ),
                               ),
-                            ),
-                            const VerticalDivider(width: 1),
+                              const VerticalDivider(width: 1),
+                            ],
                             Expanded(
                               child: _ConversationPanel(
                                 chatId: selectedId,
@@ -369,7 +376,6 @@ class _ConversationPanel extends ConsumerWidget {
     } else if (showTyping) {
       offset += 1;
     }
-
 
     final sourceIndex = index - offset;
     if (sourceIndex >= 0 && sourceIndex < conversation.pendingSources.length) {

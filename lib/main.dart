@@ -8,3 +8,5 @@ Future<void> main() async {
   await bootstrapFirebase();
   runApp(const ProviderScope(child: LucyApp()));
 }
+
+

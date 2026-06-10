@@ -11,8 +11,7 @@ class FirebaseAuthRemoteDataSource implements AuthRemoteDataSource {
   final FirebaseAuth _firebaseAuth;
 
   @override
-  AuthUserSnapshot? get currentUser =>
-      _toSnapshot(_firebaseAuth.currentUser);
+  AuthUserSnapshot? get currentUser => _toSnapshot(_firebaseAuth.currentUser);
 
   @override
   Stream<AuthUserSnapshot?> authStateChanges() {
@@ -79,6 +78,29 @@ class FirebaseAuthRemoteDataSource implements AuthRemoteDataSource {
   Future<void> sendPasswordResetEmail({required String email}) async {
     await _runVoid(() async {
       await _firebaseAuth.sendPasswordResetEmail(email: email);
+    });
+  }
+
+  @override
+  Future<void> updatePassword({
+    required String currentPassword,
+    required String newPassword,
+  }) async {
+    await _runVoid(() async {
+      final user = _firebaseAuth.currentUser;
+      final email = user?.email;
+      if (user == null || email == null || email.isEmpty) {
+        throw const FirebaseAuthDataException(
+          code: 'user-not-found',
+          message: 'No signed-in user',
+        );
+      }
+      final credential = EmailAuthProvider.credential(
+        email: email,
+        password: currentPassword,
+      );
+      await user.reauthenticateWithCredential(credential);
+      await user.updatePassword(newPassword);
     });
   }
 

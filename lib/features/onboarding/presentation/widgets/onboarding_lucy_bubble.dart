@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../core/constants/lucy_chat_constants.dart';
 import '../../../../core/constants/lucy_constants.dart';
 import '../../../../shared/widgets/branding/lucy_avatar.dart';
+import '../../../../shared/widgets/chat/lucy_formatted_message_text.dart';
 
 /// Lucy message bubble (SPEC §4.5.1).
 class OnboardingLucyBubble extends StatelessWidget {
@@ -29,11 +30,9 @@ class OnboardingLucyBubble extends StatelessWidget {
               color: scheme.surfaceContainerHighest,
               borderRadius: LucyChatConstants.lucyBubbleRadius,
             ),
-            child: Text(
-              text,
-              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                color: scheme.onSurface,
-              ),
+            child: LucyFormattedMessageText(
+              text: text,
+              color: scheme.onSurface,
             ),
           ),
         ),

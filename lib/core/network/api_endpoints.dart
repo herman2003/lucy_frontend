@@ -18,6 +18,8 @@ abstract final class ApiEndpoints {
 
   static String get usersMe => '$baseUrl/v1/users/me';
 
+  static String get usersMeLearnerProfile => '$usersMe/learner-profile';
+
   static String get onboardingProgress => '$baseUrl/v1/onboarding/progress';
 
   static String get documents => '$baseUrl/v1/documents';

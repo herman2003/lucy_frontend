@@ -20,7 +20,10 @@ class _QuizPageState extends ConsumerState<QuizPage> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+    Future.microtask(() {
+      if (!mounted) {
+        return;
+      }
       ref.read(quizProvider.notifier).bootstrap();
     });
   }

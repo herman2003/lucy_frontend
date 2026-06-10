@@ -150,6 +150,121 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settingsTitle => 'Settings';
 
   @override
+  String get settingsSectionAccount => 'Account';
+
+  @override
+  String get settingsSectionLearnerProfile => 'Learner profile';
+
+  @override
+  String get settingsSectionApplication => 'Application';
+
+  @override
+  String get settingsUiLocaleLabel => 'Interface language';
+
+  @override
+  String get settingsUiLocaleReadOnly =>
+      'The interface language is fixed for now.';
+
+  @override
+  String get settingsLearnerProfileUnavailable => 'No learner profile on file.';
+
+  @override
+  String get settingsGenericError =>
+      'Could not load settings. Please try again.';
+
+  @override
+  String get settingsErrorUnauthorized =>
+      'Session expired. Please sign in again.';
+
+  @override
+  String get settingsThemeSituation => 'Your situation';
+
+  @override
+  String get settingsThemeGoals => 'Goals';
+
+  @override
+  String get settingsThemeLucyStyle => 'Lucy style';
+
+  @override
+  String get settingsLearnerDomainsHint => 'Select one or more domains.';
+
+  @override
+  String get settingsSaveChanges => 'Save';
+
+  @override
+  String get settingsProfileSaved => 'Profile updated';
+
+  @override
+  String get settingsProfileSaveFailed =>
+      'Could not save profile. Please try again.';
+
+  @override
+  String get settingsProfileTitle => 'Profile';
+
+  @override
+  String get settingsHubSection => 'Menu';
+
+  @override
+  String get settingsProfileHubHint => 'Name, email, password';
+
+  @override
+  String get settingsAiConfigTitle => 'Lucy configuration';
+
+  @override
+  String get settingsAiConfigHubHint => 'AI profile, language';
+
+  @override
+  String get settingsAiConfigIntro =>
+      'Customize how Lucy supports your learning.';
+
+  @override
+  String get settingsFirstNameLabel => 'First name';
+
+  @override
+  String get settingsLastNameLabel => 'Last name';
+
+  @override
+  String get settingsFirstNameRequired => 'First name is required.';
+
+  @override
+  String get settingsFieldMinTwoChars => 'At least 2 characters required.';
+
+  @override
+  String get settingsSecuritySection => 'Security';
+
+  @override
+  String get settingsChangePassword => 'Change password';
+
+  @override
+  String get settingsChangePasswordSubtitle =>
+      'Enter your current password, then your new password.';
+
+  @override
+  String get settingsCurrentPassword => 'Current password';
+
+  @override
+  String get settingsNewPassword => 'New password';
+
+  @override
+  String get settingsConfirmNewPassword => 'Confirm password';
+
+  @override
+  String get settingsPasswordChanged => 'Password updated';
+
+  @override
+  String get settingsPasswordChangeFailed =>
+      'Could not change password. Please try again.';
+
+  @override
+  String get settingsInvalidCurrentPassword => 'Current password is incorrect.';
+
+  @override
+  String get settingsPasswordMismatch => 'Passwords do not match.';
+
+  @override
+  String get settingsEmailReadOnly => 'Email cannot be changed here.';
+
+  @override
   String get shellMenu => 'Menu';
 
   @override
@@ -575,6 +690,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get chatNewConversation => 'New conversation';
+
+  @override
+  String get chatShowThreadList => 'Conversation list';
 
   @override
   String get chatSourcesTitle => 'Sources';

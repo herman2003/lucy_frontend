@@ -41,7 +41,7 @@ final class DocumentsNotifierProvider
   }
 }
 
-String _$documentsNotifierHash() => r'4576ed13fe7cbe3a73068f58cc7f518c8ee11d8a';
+String _$documentsNotifierHash() => r'dbe309a5c13622215ebbe1038080d19503cbdb97';
 
 abstract class _$DocumentsNotifier extends $Notifier<DocumentsState> {
   DocumentsState build();

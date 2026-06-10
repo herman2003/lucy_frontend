@@ -1,8 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:frontend/features/onboarding/domain/entities/onboarding_chat_message.dart';
-import 'package:frontend/features/onboarding/domain/entities/onboarding_completed_turn.dart';
-import 'package:frontend/features/onboarding/presentation/pages/onboarding_chat/onboarding_chat_state.dart';
-import 'package:frontend/features/onboarding/utils/onboarding_question_ids.dart';
+import 'package:lucy_frontend/features/onboarding/domain/entities/onboarding_chat_message.dart';
+import 'package:lucy_frontend/features/onboarding/domain/entities/onboarding_completed_turn.dart';
+import 'package:lucy_frontend/features/onboarding/presentation/pages/onboarding_chat/onboarding_chat_state.dart';
+import 'package:lucy_frontend/features/onboarding/utils/onboarding_question_ids.dart';
 
 void main() {
   group('OnboardingChatState step navigation', () {

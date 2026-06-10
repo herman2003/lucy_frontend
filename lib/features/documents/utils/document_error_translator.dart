@@ -14,6 +14,7 @@ abstract final class DocumentErrorTranslator {
       'VALIDATION_ERROR' => l10n.documentErrorValidation,
       'UNAUTHORIZED' => l10n.documentErrorUnauthorized,
       'DOCUMENT_UPLOAD_NOT_READY' => l10n.documentErrorUploadNotReady,
+      'DOCUMENT_UPLOAD_NETWORK' => l10n.documentErrorUploadNetwork,
       'DOCUMENT_PROCESSING_IN_PROGRESS' => l10n.documentErrorProcessingNoDelete,
       'DOCUMENT_UPLOAD_IN_PROGRESS' => l10n.documentErrorOneUploadAtATime,
       'SEARCH_ACTIVE_LIMIT_EXCEEDED' => l10n.documentErrorSearchActiveLimit,

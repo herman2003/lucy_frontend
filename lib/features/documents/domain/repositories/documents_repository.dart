@@ -27,6 +27,13 @@ abstract class DocumentsRepository {
     required String mimeType,
   });
 
+  Future<void> uploadDocumentFile({
+    required String documentId,
+    required List<int> bytes,
+    required String mimeType,
+    required String fileName,
+  });
+
   Future<Document> setSearchEnabled({
     required String id,
     required bool enabled,

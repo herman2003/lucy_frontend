@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:frontend/shared/widgets/branding/lucy_avatar.dart';
+import 'package:lucy_frontend/shared/widgets/branding/lucy_avatar.dart';
 
 void main() {
   testWidgets('LucyAvatar renders at requested size', (tester) async {

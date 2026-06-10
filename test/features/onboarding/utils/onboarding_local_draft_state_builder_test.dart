@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:frontend/core/localization/l10n/app_localizations.dart';
-import 'package:frontend/features/onboarding/domain/entities/onboarding_completed_turn.dart';
-import 'package:frontend/features/onboarding/domain/entities/onboarding_local_draft.dart';
-import 'package:frontend/features/onboarding/presentation/pages/onboarding_chat/onboarding_chat_state.dart';
-import 'package:frontend/features/onboarding/utils/onboarding_local_draft_state_builder.dart';
-import 'package:frontend/features/onboarding/utils/onboarding_question_ids.dart';
+import 'package:lucy_frontend/core/localization/l10n/app_localizations.dart';
+import 'package:lucy_frontend/features/onboarding/domain/entities/onboarding_completed_turn.dart';
+import 'package:lucy_frontend/features/onboarding/domain/entities/onboarding_local_draft.dart';
+import 'package:lucy_frontend/features/onboarding/presentation/pages/onboarding_chat/onboarding_chat_state.dart';
+import 'package:lucy_frontend/features/onboarding/utils/onboarding_local_draft_state_builder.dart';
+import 'package:lucy_frontend/features/onboarding/utils/onboarding_question_ids.dart';
 
 void main() {
   test('buildOnboardingStateFromLocalDraft restores pending confirmation', () async {

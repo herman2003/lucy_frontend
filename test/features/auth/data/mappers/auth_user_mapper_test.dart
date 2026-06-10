@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:frontend/features/auth/data/datasources/auth_user_snapshot.dart';
-import 'package:frontend/features/auth/data/mappers/auth_user_mapper.dart';
-import 'package:frontend/features/auth/domain/entities/auth_user.dart';
+import 'package:lucy_frontend/features/auth/data/datasources/auth_user_snapshot.dart';
+import 'package:lucy_frontend/features/auth/data/mappers/auth_user_mapper.dart';
+import 'package:lucy_frontend/features/auth/domain/entities/auth_user.dart';
 
 void main() {
   group('AuthUserMapper', () {

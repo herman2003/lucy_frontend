@@ -23,7 +23,7 @@ class LucyShellBrand extends StatelessWidget {
         Text(
           context.l10n.appTitle,
           style: context.textTheme.titleMedium?.copyWith(
-            color: scheme.onSurface,
+            color: Colors.white,
             fontWeight: FontWeight.w600,
           ),
         ),

@@ -1,8 +1,8 @@
-import 'package:frontend/features/onboarding/domain/entities/onboarding_local_draft.dart';
-import 'package:frontend/features/onboarding/domain/entities/onboarding_resume_progress.dart';
-import 'package:frontend/features/onboarding/domain/repositories/onboarding_local_draft_repository.dart';
-import 'package:frontend/features/onboarding/domain/repositories/onboarding_repository.dart';
-import 'package:frontend/features/onboarding/services/onboarding_service.dart';
+import 'package:lucy_frontend/features/onboarding/domain/entities/onboarding_local_draft.dart';
+import 'package:lucy_frontend/features/onboarding/domain/entities/onboarding_resume_progress.dart';
+import 'package:lucy_frontend/features/onboarding/domain/repositories/onboarding_local_draft_repository.dart';
+import 'package:lucy_frontend/features/onboarding/domain/repositories/onboarding_repository.dart';
+import 'package:lucy_frontend/features/onboarding/services/onboarding_service.dart';
 
 import 'fake_onboarding_local_draft_repository.dart';
 import 'fake_onboarding_progress_repository.dart';

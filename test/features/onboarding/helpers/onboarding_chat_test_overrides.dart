@@ -1,9 +1,9 @@
-import 'package:frontend/features/auth/domain/entities/auth_user.dart';
-import 'package:frontend/features/auth/domain/providers/auth_provider.dart';
-import 'package:frontend/features/onboarding/domain/entities/onboarding_local_draft.dart';
-import 'package:frontend/features/onboarding/domain/entities/onboarding_resume_progress.dart';
-import 'package:frontend/features/onboarding/domain/providers/onboarding_provider.dart';
-import 'package:frontend/features/onboarding/domain/repositories/onboarding_local_draft_repository.dart';
+import 'package:lucy_frontend/features/auth/domain/entities/auth_user.dart';
+import 'package:lucy_frontend/features/auth/domain/providers/auth_provider.dart';
+import 'package:lucy_frontend/features/onboarding/domain/entities/onboarding_local_draft.dart';
+import 'package:lucy_frontend/features/onboarding/domain/entities/onboarding_resume_progress.dart';
+import 'package:lucy_frontend/features/onboarding/domain/providers/onboarding_provider.dart';
+import 'package:lucy_frontend/features/onboarding/domain/repositories/onboarding_local_draft_repository.dart';
 import 'package:riverpod/misc.dart';
 
 import '../../auth/helpers/fake_auth_repository.dart';

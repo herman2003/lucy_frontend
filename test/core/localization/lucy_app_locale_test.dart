@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:frontend/app.dart';
-import 'package:frontend/features/auth/domain/entities/auth_bootstrap_result.dart';
-import 'package:frontend/features/auth/domain/providers/auth_provider.dart';
-import 'package:frontend/features/auth/presentation/pages/login/login_page.dart';
+import 'package:lucy_frontend/app.dart';
+import 'package:lucy_frontend/features/auth/domain/entities/auth_bootstrap_result.dart';
+import 'package:lucy_frontend/features/auth/domain/providers/auth_provider.dart';
+import 'package:lucy_frontend/features/auth/presentation/pages/login/login_page.dart';
 
 import '../../features/auth/helpers/fake_auth_repository.dart';
 import '../../helpers/test_locales.dart';
 
 void main() {
-  testWidgets('LucyApp shows English login labels when device locale is en', (
+  testWidgets('LucyApp shows German labels when device locale is en', (
     tester,
   ) async {
     final repository = FakeAuthRepository(null);
@@ -36,7 +36,8 @@ void main() {
     await tester.pump(const Duration(milliseconds: 100));
 
     expect(find.byType(LoginPage), findsOneWidget);
-    expect(find.text('Log in'), findsWidgets);
+    expect(find.text('Anmelden'), findsWidgets);
+    expect(find.text('Log in'), findsNothing);
     expect(find.text('Se connecter'), findsNothing);
   });
 

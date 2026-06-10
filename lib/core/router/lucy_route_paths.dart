@@ -9,20 +9,30 @@ class LucyRoutePaths {
   static const String home = '/home';
   static const String documents = '/documents';
   static const String chat = '/chat';
+
+  static String chatThread(String chatId) => '$chat/$chatId';
   static const String quiz = '/quiz';
   static const String settings = '/settings';
+  static const String settingsProfile = '/settings/profile';
+  static const String settingsAiConfig = '/settings/ai-config';
+  static const String settingsChangePassword = '/settings/change-password';
+  static const String settingsLearnerDomains =
+      '/settings/learner-profile/domains';
   static const String onboarding = '/onboarding';
   static const String onboardingConfirm = '/onboarding/confirm';
 
   /// Default post-onboarding destination (SPEC §2).
   static const String shellDefault = documents;
 
-  static const Set<String> shellPaths = {
-    documents,
-    chat,
-    quiz,
-    settings,
-  };
+  static const Set<String> shellPaths = {documents, chat, quiz, settings};
 
-  static bool isShellPath(String location) => shellPaths.contains(location);
+  static bool isShellPath(String location) {
+    if (shellPaths.contains(location)) {
+      return true;
+    }
+    if (location.startsWith('$chat/')) {
+      return true;
+    }
+    return location.startsWith('$settings/');
+  }
 }

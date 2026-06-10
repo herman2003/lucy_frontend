@@ -1,8 +1,8 @@
 import 'dart:async';
 
-import 'package:frontend/features/auth/domain/entities/auth_user.dart';
-import 'package:frontend/features/auth/domain/exceptions/auth_exception.dart';
-import 'package:frontend/features/auth/domain/repositories/auth_repository.dart';
+import 'package:lucy_frontend/features/auth/domain/entities/auth_user.dart';
+import 'package:lucy_frontend/features/auth/domain/exceptions/auth_exception.dart';
+import 'package:lucy_frontend/features/auth/domain/repositories/auth_repository.dart';
 
 /// In-memory [AuthRepository] for widget/router tests.
 class FakeAuthRepository implements AuthRepository {

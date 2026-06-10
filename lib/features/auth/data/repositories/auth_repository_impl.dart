@@ -13,8 +13,8 @@ class AuthRepositoryImpl implements AuthRepository {
   AuthRepositoryImpl({
     required AuthRemoteDataSource authRemote,
     required UserProfileRemoteDataSource profileRemote,
-  })  : _authRemote = authRemote,
-        _profileRemote = profileRemote;
+  }) : _authRemote = authRemote,
+       _profileRemote = profileRemote;
 
   final AuthRemoteDataSource _authRemote;
   final UserProfileRemoteDataSource _profileRemote;
@@ -97,6 +97,21 @@ class AuthRepositoryImpl implements AuthRepository {
   Future<void> sendPasswordResetEmail({required String email}) async {
     try {
       await _authRemote.sendPasswordResetEmail(email: email);
+    } on FirebaseAuthDataException catch (e) {
+      throw AuthException(code: e.code, message: e.message);
+    }
+  }
+
+  @override
+  Future<void> updatePassword({
+    required String currentPassword,
+    required String newPassword,
+  }) async {
+    try {
+      await _authRemote.updatePassword(
+        currentPassword: currentPassword,
+        newPassword: newPassword,
+      );
     } on FirebaseAuthDataException catch (e) {
       throw AuthException(code: e.code, message: e.message);
     }

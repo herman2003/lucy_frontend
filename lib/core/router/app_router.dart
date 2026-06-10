@@ -9,7 +9,11 @@ import '../../features/documents/presentation/pages/documents_page.dart';
 import '../../features/onboarding/presentation/pages/onboarding_chat_page.dart';
 import '../../features/onboarding/presentation/pages/onboarding_confirm_page.dart';
 import '../../features/quiz/presentation/pages/quiz_page.dart';
+import '../../features/settings/presentation/pages/settings_ai_config_page.dart';
+import '../../features/settings/presentation/pages/settings_change_password_page.dart';
+import '../../features/settings/presentation/pages/settings_learner_domains_page.dart';
 import '../../features/settings/presentation/pages/settings_page.dart';
+import '../../features/settings/presentation/pages/settings_profile_page.dart';
 import '../presentation/pages/splash_page.dart';
 import '../shell/lucy_app_shell.dart';
 import 'lucy_route_names.dart';
@@ -86,8 +90,18 @@ GoRouter lucyRouter(Ref ref) {
               GoRoute(
                 name: LucyRouteNames.chat,
                 path: LucyRoutePaths.chat,
-                pageBuilder: (context, state) =>
-                    const NoTransitionPage(child: ChatPage()),
+                pageBuilder: (context, state) => NoTransitionPage(
+                  child: ChatPage(chatId: state.pathParameters['chatId']),
+                ),
+                routes: [
+                  GoRoute(
+                    name: LucyRouteNames.chatThread,
+                    path: ':chatId',
+                    pageBuilder: (context, state) => NoTransitionPage(
+                      child: ChatPage(chatId: state.pathParameters['chatId']),
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
@@ -108,6 +122,30 @@ GoRouter lucyRouter(Ref ref) {
                 path: LucyRoutePaths.settings,
                 pageBuilder: (context, state) =>
                     const NoTransitionPage(child: SettingsPage()),
+                routes: [
+                  GoRoute(
+                    name: LucyRouteNames.settingsProfile,
+                    path: 'profile',
+                    builder: (context, state) => const SettingsProfilePage(),
+                  ),
+                  GoRoute(
+                    name: LucyRouteNames.settingsAiConfig,
+                    path: 'ai-config',
+                    builder: (context, state) => const SettingsAiConfigPage(),
+                  ),
+                  GoRoute(
+                    name: LucyRouteNames.settingsChangePassword,
+                    path: 'change-password',
+                    builder: (context, state) =>
+                        const SettingsChangePasswordPage(),
+                  ),
+                  GoRoute(
+                    name: LucyRouteNames.settingsLearnerDomains,
+                    path: 'learner-profile/domains',
+                    builder: (context, state) =>
+                        const SettingsLearnerDomainsPage(),
+                  ),
+                ],
               ),
             ],
           ),

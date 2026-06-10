@@ -62,7 +62,8 @@ class LucySidebar extends ConsumerWidget {
     ];
 
     final width = MediaQuery.sizeOf(context).width;
-    final isTablet = width >= ResponsiveConstants.kTabletBreakpoint &&
+    final isTablet =
+        width >= ResponsiveConstants.kTabletBreakpoint &&
         width < ResponsiveConstants.kDesktopBreakpoint;
     final borderAlpha = isTablet ? 0.35 : 0.6;
 
@@ -99,18 +100,19 @@ class LucySidebar extends ConsumerWidget {
                 final item = navItems[index];
                 final isActive = activeIndex == item.branch;
                 final tile = ListTile(
+
                   leading: Icon(
                     item.icon,
                     size: LucyConstants.kIconMedium,
                     color: isActive
-                        ? scheme.onPrimaryContainer
-                        : scheme.onSurfaceVariant,
+                        ? scheme.surface
+                        : scheme.onSurface,
                   ),
                   title: Text(
                     item.label,
                     style: context.textTheme.bodyMedium?.copyWith(
                       color: isActive
-                          ? scheme.onPrimaryContainer
+                          ? scheme.surface
                           : scheme.onSurface,
                       fontWeight: isActive ? FontWeight.w600 : null,
                     ),
@@ -126,7 +128,7 @@ class LucySidebar extends ConsumerWidget {
                   ),
                   child: DecoratedBox(
                     decoration: BoxDecoration(
-                      color: scheme.primaryContainer,
+                      color: scheme.primary,
                       borderRadius: BorderRadius.circular(
                         LucyConstants.kBorderRadiusMedium,
                       ),

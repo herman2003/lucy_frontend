@@ -9,10 +9,8 @@ import '../models/document_model.dart';
 
 /// Nest `/v1/documents` HTTP API (Bearer via shared [Dio] interceptor).
 class DocumentsApiRemoteDataSource {
-  DocumentsApiRemoteDataSource(
-    this._dio, {
-    Dio? uploadClient,
-  }) : _uploadClient = uploadClient ?? Dio();
+  DocumentsApiRemoteDataSource(this._dio, {Dio? uploadClient})
+    : _uploadClient = uploadClient ?? Dio();
 
   final Dio _dio;
   final Dio _uploadClient;
@@ -155,7 +153,30 @@ class DocumentsApiRemoteDataSource {
     }
   }
 
-  /// PUT binary to Firebase signed URL (outside Nest `baseUrl`).
+  /// Multipart upload via Nest (Flutter web — avoids R2 bucket CORS).
+  Future<void> uploadDocumentFile({
+    required String documentId,
+    required List<int> bytes,
+    required String mimeType,
+    required String fileName,
+  }) async {
+    try {
+      await _dio.post<void>(
+        ApiEndpoints.documentUpload(documentId),
+        data: FormData.fromMap({
+          'file': MultipartFile.fromBytes(bytes, filename: fileName),
+        }),
+        options: Options(
+          validateStatus: (status) =>
+              status != null && status >= 200 && status < 300,
+        ),
+      );
+    } on DioException catch (error) {
+      throw _mapDioError(error);
+    }
+  }
+
+  /// PUT binary to signed storage URL (mobile/desktop).
   Future<void> uploadBinary({
     required String uploadUrl,
     required List<int> bytes,
@@ -171,9 +192,17 @@ class DocumentsApiRemoteDataSource {
         ),
       );
     } on DioException catch (error) {
+      final status = error.response?.statusCode;
+      final isNetworkOrCors =
+          status == null &&
+          (error.type == DioExceptionType.connectionError ||
+              error.type == DioExceptionType.connectionTimeout ||
+              error.type == DioExceptionType.unknown);
       throw DocumentException(
-        'DOCUMENT_UPLOAD_NOT_READY',
-        statusCode: error.response?.statusCode,
+        isNetworkOrCors
+            ? 'DOCUMENT_UPLOAD_NETWORK'
+            : 'DOCUMENT_UPLOAD_NOT_READY',
+        statusCode: status,
       );
     }
   }

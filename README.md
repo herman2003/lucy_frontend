@@ -1,4 +1,4 @@
-# Lucy (frontend)
+# lucy_frontend
 
 Flutter client for **Lucy** — personalized AI tutoring (phase 1: Firebase email/password authentication).
 
@@ -27,7 +27,7 @@ flutter run -d chrome
 - ARB files: `lib/core/localization/l10n/app_*.arb`
 - Regenerate: `flutter gen-l10n`
 - Untranslated keys: `untranslated_messages.txt` (should stay empty)
-- The app uses the **device language** when it is `fr`, `en`, or `de`; otherwise it falls back to French (`lib/core/localization/lucy_locale_resolution.dart`).
+- UI locale is fixed to **German** (`de`) via `kLucyAppLocale` in `lib/core/localization/lucy_locale_resolution.dart`.
 
 ## Code generation
 

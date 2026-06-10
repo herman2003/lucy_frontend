@@ -90,7 +90,7 @@ class _LucyTextFieldState extends State<LucyTextField> {
             ? IconButton(
                 icon: Icon(
                   _obscure ? Icons.visibility_off : Icons.visibility,
-                  color: scheme.tertiary,
+                  color: scheme.primary,
                 ),
                 onPressed: () => setState(() => _obscure = !_obscure),
               )

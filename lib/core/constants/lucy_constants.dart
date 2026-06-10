@@ -11,4 +11,10 @@ abstract final class LucyConstants {
   static const double kBorderRadiusMedium = 12;
   static const double kContainerPaddingSmall = 8;
   static const double kShellSidebarWidth = 280;
+  static const double kSettingsContentMaxWidth = 600;
+  static const double kBorderRadiusLarge = 16;
+  static const double kBorderRadiusSmall = 8;
+  static const double kContainerPaddingMedium = 16;
+  static const double kContainerPaddingLarge = 24;
+  static const double kSpacingHigh = 20;
 }

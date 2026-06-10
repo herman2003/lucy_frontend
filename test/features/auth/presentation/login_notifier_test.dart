@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:frontend/core/localization/l10n/app_localizations.dart';
-import 'package:frontend/features/auth/domain/exceptions/auth_exception.dart';
-import 'package:frontend/features/auth/domain/providers/auth_provider.dart';
-import 'package:frontend/features/auth/presentation/controllers/login_notifier.dart';
-import 'package:frontend/shared/widgets/feedback/lucy_snackbar.dart';
+import 'package:lucy_frontend/core/localization/l10n/app_localizations.dart';
+import 'package:lucy_frontend/features/auth/domain/exceptions/auth_exception.dart';
+import 'package:lucy_frontend/features/auth/domain/providers/auth_provider.dart';
+import 'package:lucy_frontend/features/auth/presentation/controllers/login_notifier.dart';
+import 'package:lucy_frontend/shared/widgets/feedback/lucy_snackbar.dart';
 
 import '../helpers/fake_auth_repository.dart';
 import '../helpers/throwing_auth_repository.dart';

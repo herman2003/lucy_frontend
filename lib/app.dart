@@ -3,8 +3,9 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'core/localization/l10n/app_localizations.dart';
-import 'core/localization/lucy_locale_resolution.dart';
+import 'core/localization/lucy_app_locale_provider.dart';
 import 'core/router/app_router.dart';
+import 'features/chat/domain/providers/chat_mirror_provider.dart';
 import 'core/theme/lucy_flex_theme.dart';
 
 /// Root application widget for Lucy.
@@ -13,20 +14,17 @@ class LucyApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    ref.watch(chatMirrorLogoutListenerProvider);
     final router = ref.watch(lucyRouterProvider);
-    final deviceLocale = readDeviceLocale();
-
+    final locale = ref.watch(lucyAppLocaleProvider);
     return MaterialApp.router(
       title: 'Lucy',
       theme: LucyFlexTheme.lightTheme,
       darkTheme: LucyFlexTheme.darkTheme,
       themeMode: ThemeMode.system,
-      locale: resolveLucyLocale(deviceLocale),
+      locale: locale,
       supportedLocales: AppLocalizations.supportedLocales,
-      localeListResolutionCallback: (locales, supportedLocales) =>
-          resolveLucyLocale(
-            locales != null && locales.isNotEmpty ? locales.first : null,
-          ),
+      localeListResolutionCallback: (_, __) => locale,
       localizationsDelegates: const [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,

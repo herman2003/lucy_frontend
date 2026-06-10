@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:frontend/core/theme/lucy_flex_theme.dart';
-import 'package:frontend/shared/widgets/branding/auth_twinkling_stars_background.dart';
+import 'package:lucy_frontend/core/theme/lucy_flex_theme.dart';
+import 'package:lucy_frontend/shared/widgets/branding/auth_twinkling_stars_background.dart';
 
 void main() {
   testWidgets('AuthTwinklingStarsBackground paints animated stars', (

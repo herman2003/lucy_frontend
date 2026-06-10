@@ -1,9 +1,9 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:frontend/core/router/lucy_route_paths.dart';
-import 'package:frontend/core/router/lucy_router_guards.dart';
-import 'package:frontend/features/auth/domain/entities/auth_bootstrap_result.dart';
-import 'package:frontend/features/auth/domain/entities/auth_user.dart';
+import 'package:lucy_frontend/core/router/lucy_route_paths.dart';
+import 'package:lucy_frontend/core/router/lucy_router_guards.dart';
+import 'package:lucy_frontend/features/auth/domain/entities/auth_bootstrap_result.dart';
+import 'package:lucy_frontend/features/auth/domain/entities/auth_user.dart';
 
 void main() {
   const user = AuthUser(uid: 'uid', email: 'a@lucy.test');

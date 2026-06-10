@@ -7,8 +7,8 @@ Automated structural DoD: `test/core/architecture/spec_48_onboarding_dod_test.da
 
 - [tasks/todo.md](../tasks/todo.md) P1: `GEMINI_API_KEY` in `backend/.env`, **or** `LLM_PROVIDER=mock` for local dev (B07)
 - P2: `GOOGLE_APPLICATION_CREDENTIALS` (service account) for Firestore Admin, **or** `FIRESTORE_PROVIDER=memory` + `FIREBASE_AUTH_MODE=dev` (B08)
-- Backend: `cd ../backend && npm run start:dev` → `curl http://localhost:3000/health`
-- App: `flutter run -d chrome` (API base `http://localhost:3000` via `ApiEndpoints`)
+- Backend: `cd ../backend && npm run start:dev` → `curl http://localhost:3001/health`
+- App: `flutter run -d chrome` (API base `http://localhost:3001` via `ApiEndpoints`)
 
 ## CP-0 — Signup profile flag
 

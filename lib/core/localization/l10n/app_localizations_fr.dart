@@ -150,6 +150,124 @@ class AppLocalizationsFr extends AppLocalizations {
   String get settingsTitle => 'Paramètres';
 
   @override
+  String get settingsSectionAccount => 'Compte';
+
+  @override
+  String get settingsSectionLearnerProfile => 'Profil d\'apprentissage';
+
+  @override
+  String get settingsSectionApplication => 'Application';
+
+  @override
+  String get settingsUiLocaleLabel => 'Langue de l\'interface';
+
+  @override
+  String get settingsUiLocaleReadOnly =>
+      'La langue de l\'interface est fixée pour le moment.';
+
+  @override
+  String get settingsLearnerProfileUnavailable =>
+      'Aucun profil d\'apprentissage enregistré.';
+
+  @override
+  String get settingsGenericError =>
+      'Impossible de charger les paramètres. Réessayez.';
+
+  @override
+  String get settingsErrorUnauthorized => 'Session expirée. Reconnectez-vous.';
+
+  @override
+  String get settingsThemeSituation => 'Votre situation';
+
+  @override
+  String get settingsThemeGoals => 'Objectifs';
+
+  @override
+  String get settingsThemeLucyStyle => 'Style Lucy';
+
+  @override
+  String get settingsLearnerDomainsHint =>
+      'Sélectionnez un ou plusieurs domaines.';
+
+  @override
+  String get settingsSaveChanges => 'Enregistrer';
+
+  @override
+  String get settingsProfileSaved => 'Profil mis à jour';
+
+  @override
+  String get settingsProfileSaveFailed =>
+      'Impossible d\'enregistrer le profil. Réessayez.';
+
+  @override
+  String get settingsProfileTitle => 'Profil';
+
+  @override
+  String get settingsHubSection => 'Menu';
+
+  @override
+  String get settingsProfileHubHint => 'Nom, email, mot de passe';
+
+  @override
+  String get settingsAiConfigTitle => 'Configuration Lucy';
+
+  @override
+  String get settingsAiConfigHubHint => 'Profil IA, langue';
+
+  @override
+  String get settingsAiConfigIntro =>
+      'Personnalisez comment Lucy vous accompagne dans l\'apprentissage.';
+
+  @override
+  String get settingsFirstNameLabel => 'Prénom';
+
+  @override
+  String get settingsLastNameLabel => 'Nom';
+
+  @override
+  String get settingsFirstNameRequired => 'Le prénom est requis.';
+
+  @override
+  String get settingsFieldMinTwoChars => 'Au moins 2 caractères requis.';
+
+  @override
+  String get settingsSecuritySection => 'Sécurité';
+
+  @override
+  String get settingsChangePassword => 'Changer le mot de passe';
+
+  @override
+  String get settingsChangePasswordSubtitle =>
+      'Saisissez votre mot de passe actuel puis le nouveau.';
+
+  @override
+  String get settingsCurrentPassword => 'Mot de passe actuel';
+
+  @override
+  String get settingsNewPassword => 'Nouveau mot de passe';
+
+  @override
+  String get settingsConfirmNewPassword => 'Confirmer le mot de passe';
+
+  @override
+  String get settingsPasswordChanged => 'Mot de passe mis à jour';
+
+  @override
+  String get settingsPasswordChangeFailed =>
+      'Impossible de changer le mot de passe. Réessayez.';
+
+  @override
+  String get settingsInvalidCurrentPassword => 'Mot de passe actuel incorrect.';
+
+  @override
+  String get settingsPasswordMismatch =>
+      'Les mots de passe ne correspondent pas.';
+
+  @override
+  String get settingsEmailReadOnly =>
+      'L\'adresse email ne peut pas être modifiée ici.';
+
+  @override
   String get shellMenu => 'Menu';
 
   @override
@@ -463,6 +581,10 @@ class AppLocalizationsFr extends AppLocalizations {
       'Le fichier n’est pas encore prêt. Patientez puis réessayez.';
 
   @override
+  String get documentErrorUploadNetwork =>
+      'Échec de l’envoi vers le stockage (réseau ou CORS). Configurez le CORS du bucket Firebase Storage pour le web.';
+
+  @override
   String get documentErrorProcessingNoDelete =>
       'Traitement en cours. Vous ne pouvez pas supprimer ce document pour l’instant.';
 
@@ -568,4 +690,105 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get documentsStatusFailed => 'Échec';
+
+  @override
+  String get chatDefaultTitle => 'Nouvelle conversation';
+
+  @override
+  String get chatNewConversation => 'Nouvelle conversation';
+
+  @override
+  String get chatShowThreadList => 'Liste des conversations';
+
+  @override
+  String get chatSourcesTitle => 'Sources';
+
+  @override
+  String chatSourcePages(int pageStart, int pageEnd) {
+    return 'Pages $pageStart–$pageEnd';
+  }
+
+  @override
+  String get chatEmptyHint => 'Posez une question sur vos documents actifs.';
+
+  @override
+  String get chatComposerHint => 'Votre message…';
+
+  @override
+  String get chatSend => 'Envoyer';
+
+  @override
+  String get chatRetry => 'Réessayer';
+
+  @override
+  String get chatLoading => 'Chargement…';
+
+  @override
+  String get chatOfflineBanner =>
+      'Hors ligne — affichage du cache local. L’envoi est désactivé.';
+
+  @override
+  String get chatNoCorpusTitle => 'Aucun document actif';
+
+  @override
+  String get chatNoCorpusMessage =>
+      'Activez la recherche sur au moins un document prêt dans l’onglet Documents.';
+
+  @override
+  String get chatNoCorpusCta => 'Aller aux documents';
+
+  @override
+  String get chatErrorNoActiveDocuments =>
+      'Activez au moins un document pour discuter avec Lucy.';
+
+  @override
+  String get chatErrorLearnerProfileMissing =>
+      'Terminez l’onboarding pour utiliser le chat.';
+
+  @override
+  String get chatErrorUnauthorized => 'Session expirée. Reconnectez-vous.';
+
+  @override
+  String get chatErrorNotFound => 'Conversation introuvable.';
+
+  @override
+  String get chatErrorInvalidMessage => 'Message invalide.';
+
+  @override
+  String get chatErrorLlmUnavailable =>
+      'Lucy est temporairement indisponible. Réessayez plus tard.';
+
+  @override
+  String get chatErrorInvalidResponse =>
+      'Réponse invalide du serveur. Réessayez.';
+
+  @override
+  String get chatErrorStreamInProgress =>
+      'Un message est déjà en cours de génération.';
+
+  @override
+  String get chatGenericError => 'Une erreur est survenue. Réessayez.';
+
+  @override
+  String get quizEmptyHint =>
+      'Générez un quiz à partir de vos documents actifs.';
+
+  @override
+  String get quizComingSoon => 'La génération de quiz arrive bientôt.';
+
+  @override
+  String get quizNoCorpusTitle => 'Aucun document actif';
+
+  @override
+  String get quizNoCorpusMessage =>
+      'Activez la recherche sur au moins un document prêt pour générer un quiz.';
+
+  @override
+  String get quizNoCorpusCta => 'Aller aux documents';
+
+  @override
+  String get quizLoading => 'Chargement…';
+
+  @override
+  String get quizGenericError => 'Une erreur est survenue. Réessayez.';
 }

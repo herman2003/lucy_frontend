@@ -2,6 +2,8 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/extensions/context.dart';
+import '../../../../shared/widgets/buttons/lucy_primary_button.dart';
+import '../../../../shared/widgets/buttons/lucy_secondary_button.dart';
 import '../../utils/document_mime_util.dart';
 
 typedef AddDocumentSubmit = void Function({
@@ -117,12 +119,10 @@ class _AddDocumentSheetState extends State<AddDocumentSheet> {
             textInputAction: TextInputAction.done,
           ),
           const SizedBox(height: 12),
-          OutlinedButton.icon(
+          LucySecondaryButton(
+            text: _fileName ?? l10n.documentsPickFile,
             onPressed: _pickFile,
-            icon: const Icon(Icons.attach_file),
-            label: Text(
-              _fileName ?? l10n.documentsPickFile,
-            ),
+            width: double.infinity,
           ),
           if (_fileError != null) ...[
             const SizedBox(height: 8),
@@ -132,9 +132,10 @@ class _AddDocumentSheetState extends State<AddDocumentSheet> {
             ),
           ],
           const SizedBox(height: 16),
-          FilledButton(
+          LucyPrimaryButton(
+            text: l10n.documentsUpload,
             onPressed: _submit,
-            child: Text(l10n.documentsUpload),
+            width: double.infinity,
           ),
         ],
       ),

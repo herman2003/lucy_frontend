@@ -29,13 +29,13 @@ class OnboardingUserBubble extends StatelessWidget {
               vertical: LucyConstants.kSpacingLow + 4,
             ),
             decoration: BoxDecoration(
-              color: scheme.primaryContainer,
+              color: scheme.primary,
               borderRadius: LucyChatConstants.userBubbleRadius,
             ),
             child: Text(
               text,
               style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                color: scheme.onPrimaryContainer,
+                color: Colors.white,
               ),
             ),
           ),
@@ -43,10 +43,10 @@ class OnboardingUserBubble extends StatelessWidget {
         const SizedBox(width: LucyConstants.kSpacingLow),
         CircleAvatar(
           radius: LucyChatConstants.kAvatarSize / 2,
-          backgroundColor: scheme.secondaryContainer,
+          backgroundColor: scheme.primary,
           child: Icon(
             Icons.person_outline,
-            color: scheme.onSecondaryContainer,
+            color: Colors.white,
             size: LucyConstants.kIconMedium,
           ),
         ),

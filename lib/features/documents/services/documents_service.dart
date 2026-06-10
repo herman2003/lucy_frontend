@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+
 import '../domain/entities/document.dart';
 import '../domain/entities/document_download_result.dart';
 import '../domain/exceptions/document_exception.dart';
@@ -7,11 +9,26 @@ import '../utils/documents_constants.dart';
 /// Documents upload and listing orchestration (UI → notifier → service → repository).
 class DocumentsService {
   DocumentsService({required DocumentsRepository repository})
-      : _repository = repository;
+    : _repository = repository;
 
   final DocumentsRepository _repository;
 
   Future<List<Document>> listDocuments() => _repository.listDocuments();
+
+  Future<Document> getDocument(String id) => _repository.getDocument(id);
+
+  /// Single `complete` attempt during poll (avoid hammering the API).
+  Future<Document?> tryCompleteUpload(String documentId) async {
+    try {
+      await _repository.completeDocument(documentId);
+      return _repository.getDocument(documentId);
+    } on DocumentException catch (error) {
+      if (error.code == 'DOCUMENT_UPLOAD_NOT_READY') {
+        return null;
+      }
+      rethrow;
+    }
+  }
 
   Future<Document> uploadDocument({
     required String title,
@@ -25,11 +42,20 @@ class DocumentsService {
       mimeType: mimeType,
       byteSize: bytes.length,
     );
-    await _repository.uploadBinary(
-      uploadUrl: created.uploadUrl,
-      bytes: bytes,
-      mimeType: mimeType,
-    );
+    if (kIsWeb) {
+      await _repository.uploadDocumentFile(
+        documentId: created.id,
+        bytes: bytes,
+        mimeType: mimeType,
+        fileName: fileName,
+      );
+    } else {
+      await _repository.uploadBinary(
+        uploadUrl: created.uploadUrl,
+        bytes: bytes,
+        mimeType: mimeType,
+      );
+    }
     await _completeWithRetry(created.id);
     return _repository.getDocument(created.id);
   }
@@ -37,8 +63,7 @@ class DocumentsService {
   Future<Document> setSearchEnabled({
     required String id,
     required bool enabled,
-  }) =>
-      _repository.setSearchEnabled(id: id, enabled: enabled);
+  }) => _repository.setSearchEnabled(id: id, enabled: enabled);
 
   Future<void> deleteDocument(String id) => _repository.deleteDocument(id);
 
@@ -50,7 +75,11 @@ class DocumentsService {
       _repository.getDownloadUrl(id);
 
   Future<void> _completeWithRetry(String documentId) async {
-    for (var attempt = 0; attempt < DocumentsConstants.completeRetryMaxAttempts; attempt++) {
+    for (
+      var attempt = 0;
+      attempt < DocumentsConstants.completeRetryMaxAttempts;
+      attempt++
+    ) {
       try {
         await _repository.completeDocument(documentId);
         return;

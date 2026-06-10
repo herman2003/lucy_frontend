@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:frontend/core/localization/l10n/app_localizations.dart';
-import 'package:frontend/core/utils/auth_error_translator.dart';
-import 'package:frontend/features/auth/domain/exceptions/auth_exception.dart';
+import 'package:lucy_frontend/core/localization/l10n/app_localizations.dart';
+import 'package:lucy_frontend/core/utils/auth_error_translator.dart';
+import 'package:lucy_frontend/features/auth/domain/exceptions/auth_exception.dart';
 
 void main() {
   group('AuthErrorTranslator', () {

@@ -1,11 +1,11 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:frontend/app.dart';
-import 'package:frontend/features/documents/presentation/pages/documents_page.dart';
-import 'package:frontend/features/auth/presentation/pages/login/login_page.dart';
-import 'package:frontend/features/auth/domain/entities/auth_bootstrap_result.dart';
-import 'package:frontend/features/auth/domain/entities/auth_user.dart';
-import 'package:frontend/features/auth/domain/providers/auth_provider.dart';
+import 'package:lucy_frontend/app.dart';
+import 'package:lucy_frontend/features/documents/presentation/pages/documents_page.dart';
+import 'package:lucy_frontend/features/auth/presentation/pages/login/login_page.dart';
+import 'package:lucy_frontend/features/auth/domain/entities/auth_bootstrap_result.dart';
+import 'package:lucy_frontend/features/auth/domain/entities/auth_user.dart';
+import 'package:lucy_frontend/features/auth/domain/providers/auth_provider.dart';
 import '../../features/auth/helpers/fake_auth_repository.dart';
 
 void main() {

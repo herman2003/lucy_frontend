@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:frontend/features/auth/domain/entities/auth_user.dart';
-import 'package:frontend/features/auth/domain/exceptions/auth_exception.dart';
-import 'package:frontend/features/auth/services/auth_service.dart';
+import 'package:lucy_frontend/features/auth/domain/entities/auth_user.dart';
+import 'package:lucy_frontend/features/auth/domain/exceptions/auth_exception.dart';
+import 'package:lucy_frontend/features/auth/services/auth_service.dart';
 
 import '../helpers/fake_auth_repository.dart';
 

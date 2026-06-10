@@ -1,9 +1,9 @@
-import 'package:frontend/features/documents/domain/entities/create_document_result.dart';
-import 'package:frontend/features/documents/domain/entities/document.dart';
-import 'package:frontend/features/documents/domain/entities/document_complete_result.dart';
-import 'package:frontend/features/documents/domain/entities/document_download_result.dart';
-import 'package:frontend/features/documents/domain/entities/document_status.dart';
-import 'package:frontend/features/documents/domain/repositories/documents_repository.dart';
+import 'package:lucy_frontend/features/documents/domain/entities/create_document_result.dart';
+import 'package:lucy_frontend/features/documents/domain/entities/document.dart';
+import 'package:lucy_frontend/features/documents/domain/entities/document_complete_result.dart';
+import 'package:lucy_frontend/features/documents/domain/entities/document_download_result.dart';
+import 'package:lucy_frontend/features/documents/domain/entities/document_status.dart';
+import 'package:lucy_frontend/features/documents/domain/repositories/documents_repository.dart';
 
 /// In-memory [DocumentsRepository] for widget and service tests.
 class FakeDocumentsRepository implements DocumentsRepository {

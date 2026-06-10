@@ -1,5 +1,5 @@
-import 'package:frontend/features/onboarding/domain/entities/onboarding_local_draft.dart';
-import 'package:frontend/features/onboarding/domain/repositories/onboarding_local_draft_repository.dart';
+import 'package:lucy_frontend/features/onboarding/domain/entities/onboarding_local_draft.dart';
+import 'package:lucy_frontend/features/onboarding/domain/repositories/onboarding_local_draft_repository.dart';
 
 class FakeOnboardingLocalDraftRepository implements OnboardingLocalDraftRepository {
   FakeOnboardingLocalDraftRepository({

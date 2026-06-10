@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:frontend/features/onboarding/data/datasources/onboarding_progress_api_remote_data_source.dart';
-import 'package:frontend/features/onboarding/domain/exceptions/onboarding_exception.dart';
+import 'package:lucy_frontend/features/onboarding/data/datasources/onboarding_progress_api_remote_data_source.dart';
+import 'package:lucy_frontend/features/onboarding/domain/exceptions/onboarding_exception.dart';
 
 void main() {
   group('OnboardingProgressApiRemoteDataSource', () {
@@ -9,7 +9,7 @@ void main() {
       'fetchProgress GETs onboarding/progress and maps transcript',
       () async {
         late RequestOptions captured;
-        final dio = Dio(BaseOptions(baseUrl: 'http://localhost:3000'));
+        final dio = Dio(BaseOptions(baseUrl: 'http://localhost:3001'));
         dio.interceptors.add(
           InterceptorsWrapper(
             onRequest: (options, handler) {
@@ -48,7 +48,7 @@ void main() {
     );
 
     test('fetchProgress returns null for not_started empty state', () async {
-      final dio = Dio(BaseOptions(baseUrl: 'http://localhost:3000'));
+      final dio = Dio(BaseOptions(baseUrl: 'http://localhost:3001'));
       dio.interceptors.add(
         InterceptorsWrapper(
           onRequest: (options, handler) {
@@ -71,7 +71,7 @@ void main() {
     });
 
     test('maps structured API errors to OnboardingException', () async {
-      final dio = Dio(BaseOptions(baseUrl: 'http://localhost:3000'));
+      final dio = Dio(BaseOptions(baseUrl: 'http://localhost:3001'));
       dio.interceptors.add(
         InterceptorsWrapper(
           onRequest: (options, handler) {

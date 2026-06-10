@@ -1,9 +1,9 @@
 import 'dart:async';
 
-import 'package:frontend/features/auth/data/providers/auth_data_provider.dart';
-import 'package:frontend/features/auth/domain/entities/auth_bootstrap_result.dart';
-import 'package:frontend/features/auth/domain/entities/auth_user.dart';
-import 'package:frontend/features/auth/domain/providers/auth_provider.dart';
+import 'package:lucy_frontend/features/auth/data/providers/auth_data_provider.dart';
+import 'package:lucy_frontend/features/auth/domain/entities/auth_bootstrap_result.dart';
+import 'package:lucy_frontend/features/auth/domain/entities/auth_user.dart';
+import 'package:lucy_frontend/features/auth/domain/providers/auth_provider.dart';
 import '../features/auth/helpers/fake_auth_repository.dart';
 
 /// Keeps the app on splash during widget tests (bootstrap never completes).

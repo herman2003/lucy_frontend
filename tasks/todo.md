@@ -31,7 +31,7 @@
 
 | Statut | Id | Tâche |
 |--------|-----|--------|
-| [ ] | LEARN-02 | `POST generate` type flashcards + intent chat cartes |
+| [x] | LEARN-02 | `POST generate` type flashcards + intent chat cartes |
 
 ---
 

@@ -27,7 +27,12 @@ class _SettingsAiConfigPageState extends ConsumerState<SettingsAiConfigPage> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(() => ref.read(settingsProvider.notifier).load());
+    Future.microtask(() {
+      final current = ref.read(settingsProvider);
+      if (current.email.isEmpty && !current.isLoading) {
+        ref.read(settingsProvider.notifier).load();
+      }
+    });
   }
 
   @override

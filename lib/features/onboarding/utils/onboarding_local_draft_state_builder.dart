@@ -28,9 +28,9 @@ OnboardingChatState buildOnboardingStateFromLocalDraft({
 
   final questionId = draft.currentQuestionId;
   final phase = _phaseFromName(draft.phaseName);
-  final baseThread = messagesByQuestionId[questionId] ?? [
-    OnboardingChatMessage(isFromLucy: true, text: draft.activeQuestionText),
-  ];
+  final baseThread =
+      messagesByQuestionId[questionId] ??
+      [OnboardingChatMessage(isFromLucy: true, text: draft.activeQuestionText)];
 
   final currentThread = List<OnboardingChatMessage>.from(baseThread);
   final pendingAnswer = draft.pendingAnswerText;
@@ -39,13 +39,17 @@ OnboardingChatState buildOnboardingStateFromLocalDraft({
   if (pendingAnswer != null &&
       pendingAnswer.isNotEmpty &&
       !currentThread.any((m) => !m.isFromLucy && m.text == pendingAnswer)) {
-    currentThread.add(OnboardingChatMessage(isFromLucy: false, text: pendingAnswer));
+    currentThread.add(
+      OnboardingChatMessage(isFromLucy: false, text: pendingAnswer),
+    );
   }
 
   if (pendingSummary != null &&
       pendingSummary.isNotEmpty &&
       phase == OnboardingChatPhase.awaitingConfirmation) {
-    currentThread.add(OnboardingChatMessage(isFromLucy: true, text: pendingSummary));
+    currentThread.add(
+      OnboardingChatMessage(isFromLucy: true, text: pendingSummary),
+    );
   }
 
   if (currentThread.isEmpty) {

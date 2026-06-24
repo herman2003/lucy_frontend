@@ -17,9 +17,9 @@ class QuizLibraryEmptyState extends StatelessWidget {
         child: Text(
           l10n.quizLibraryEmptyHint,
           textAlign: TextAlign.center,
-          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-            color: scheme.onSurface,
-          ),
+          style: Theme.of(
+            context,
+          ).textTheme.bodyLarge?.copyWith(color: scheme.onSurface),
         ),
       ),
     );

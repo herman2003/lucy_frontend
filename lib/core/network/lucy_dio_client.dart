@@ -6,16 +6,11 @@ typedef IdTokenProvider = Future<String?> Function({bool forceRefresh});
 
 /// Shared Dio instance for Lucy backend (SPEC §4.7, A20).
 class LucyDioClient {
-  LucyDioClient({
-    required IdTokenProvider idTokenProvider,
-    Dio? dio,
-  }) : _idTokenProvider = idTokenProvider,
-       _dio = dio ?? Dio(BaseOptions(baseUrl: ApiEndpoints.baseUrl)) {
+  LucyDioClient({required IdTokenProvider idTokenProvider, Dio? dio})
+    : _idTokenProvider = idTokenProvider,
+      _dio = dio ?? Dio(BaseOptions(baseUrl: ApiEndpoints.baseUrl)) {
     _dio.interceptors.add(
-      InterceptorsWrapper(
-        onRequest: _onRequest,
-        onError: _onError,
-      ),
+      InterceptorsWrapper(onRequest: _onRequest, onError: _onError),
     );
   }
 

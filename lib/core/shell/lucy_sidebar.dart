@@ -100,20 +100,15 @@ class LucySidebar extends ConsumerWidget {
                 final item = navItems[index];
                 final isActive = activeIndex == item.branch;
                 final tile = ListTile(
-
                   leading: Icon(
                     item.icon,
                     size: LucyConstants.kIconMedium,
-                    color: isActive
-                        ? scheme.surface
-                        : scheme.onSurface,
+                    color: isActive ? scheme.surface : scheme.onSurface,
                   ),
                   title: Text(
                     item.label,
                     style: context.textTheme.bodyMedium?.copyWith(
-                      color: isActive
-                          ? scheme.surface
-                          : scheme.onSurface,
+                      color: isActive ? scheme.surface : scheme.onSurface,
                       fontWeight: isActive ? FontWeight.w600 : null,
                     ),
                   ),

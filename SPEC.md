@@ -15,7 +15,7 @@
 | **P2 — D2** | Pipeline RAG (extraction → md → chunks → embeddings) | **Spec validée** | §3, [docs/spec-documents-rag.md](./docs/spec-documents-rag.md) |
 | P3 — D3 | Retrieval API (recherche vectorielle) | **Livré** | §3 |
 | **P4a — D4** | Chat source-based (multi-fils, sources UI) | **Spec validée** | §6, [docs/spec-chat-rag.md](./docs/spec-chat-rag.md) |
-| P4b — D4 | Quiz depuis corpus | À venir | §3 (après chat) |
+| **P4b — D4** | Hub Quiz + cartes depuis corpus | **Spec validée** | §7, [docs/spec-learning-generation.md](./docs/spec-learning-generation.md) |
 
 ---
 
@@ -183,7 +183,7 @@ Le CSV décrit des **colonnes/lignes** ; un PDF est du **texte continu** : le co
 | **D2** | Indexation | `complete` → `processing` → `ready` ; chunks + embeddings ; échec → `failed` |
 | **D3** | Retrieval | `POST /v1/retrieval/search` top-k — **livré** |
 | **D4a** | Chat multi-fils + sources | [docs/spec-chat-rag.md](./docs/spec-chat-rag.md) — consomme D3 |
-| **D4b** | Quiz | Feature séparée ; pas de génération quiz dans le chat MVP |
+| **D4b** | Hub Quiz + cartes | [docs/spec-learning-generation.md](./docs/spec-learning-generation.md) — pas de génération dans le chat MVP |
 
 ### 3.6 Commandes
 
@@ -249,6 +249,48 @@ Tuteur **multi-fils** : l’apprenant gère plusieurs conversations avec Lucy. L
 
 ---
 
+## 7. Génération d’activités — Quiz + Cartes (P4b — spec **validée**)
+
+> Détail complet : [`docs/spec-learning-generation.md`](./docs/spec-learning-generation.md) · Plan : [`tasks/plan-learning-generation.md`](./tasks/plan-learning-generation.md)
+
+### 7.1 Objectif
+
+Hub dans l’onglet **Quiz** : **bibliothèque** (historique + reprise). **Génération** déclenchée depuis le **Chat** (Lucy crée la session + carte action). Sessions persistées Firestore via Nest.
+
+### 7.2 Décisions validées (2026-05-29)
+
+| # | Sujet | Décision |
+|---|--------|----------|
+| G1 | Formats MVP | **Quiz QCM** + **flashcards** |
+| G2 | UI Quiz | **Bibliothèque** `/quiz` — historique + reprise, **sans** génération |
+| G2b | UI Chat | Demande → génération + **carte action** dans le fil |
+| G3 | Persistance | **Firestore** via Nest (`learningSessions`) |
+| G4 | Corpus (génération) | **Tous les docs actifs** — pas de sélecteur ; **ne filtre pas** par domaine profil |
+| G4b | Reprise | Sessions **jouables** même si docs/domaines désactivés ensuite |
+| G5 | Entrée génération | **Chat uniquement** (MVP) — pas de bouton générer dans Quiz |
+| G6 | Sources | Citations par item (chunk + document) |
+
+### 7.3 Phases
+
+| Phase | Livrable |
+|-------|----------|
+| **QUIZ-01** | `GET eligibility` + garde UI — **livré** |
+| **LEARN-01** | Backend `POST /v1/learning-sessions/generate` (quiz) |
+| **LEARN-02** | Backend flashcards |
+| **LEARN-03** | Flutter bibliothèque Quiz + session QCM |
+| **LEARN-03b** | Chat intent + SSE + carte action |
+| **LEARN-04** | Flutter cartes + reprise |
+| **LEARN-05** | DELETE + CP-LEARN |
+
+### 7.4 Commandes
+
+```bash
+cd lucy_backend && npm test
+cd lucy_frontend && dart run build_runner build --delete-conflicting-outputs && flutter test test/features/quiz/
+```
+
+---
+
 ## 4. Conventions projet (toutes features)
 
 | Règle | Détail |
@@ -283,4 +325,4 @@ Spec onboarding détaillée : [`docs/spec-onboarding-delivered.md`](./docs/spec-
 
 ---
 
-*Ce document a été créé avec Cursor (IA). Dernière mise à jour : chat P4a (streaming SSE + miroir local), D3 livré — 2026-05-27.*
+*Ce document a été créé avec Cursor (IA). Dernière mise à jour : P4b hub Quiz + cartes (spec learning-generation) — 2026-05-29.*

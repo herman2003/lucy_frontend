@@ -124,8 +124,11 @@ class _DocumentsPageState extends ConsumerState<DocumentsPage> {
       floatingActionButton: FloatingActionButton.extended(
         onPressed: state.hasBlockingUpload ? null : _openAddSheet,
         backgroundColor: context.colorScheme.primary,
-        icon:  Icon(Icons.add,color: context.colorScheme.surface,),
-        label: Text(l10n.documentsAdd,style: TextStyle(color: context.colorScheme.surface),),
+        icon: Icon(Icons.add, color: context.colorScheme.surface),
+        label: Text(
+          l10n.documentsAdd,
+          style: TextStyle(color: context.colorScheme.surface),
+        ),
       ),
       body: RefreshIndicator(
         onRefresh: () => notifier.refresh(context),

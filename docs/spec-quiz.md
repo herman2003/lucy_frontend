@@ -1,7 +1,7 @@
 # Lucy — Quiz source-based (spec)
 
-> **Statut** : **Proposition MVP** (2026-05-27 — à valider produit)  
-> **Parent** : [SPEC.md](../SPEC.md) §3 D4b · [docs/spec-documents-rag.md](./spec-documents-rag.md) · [docs/spec-chat-rag.md](./spec-chat-rag.md)  
+> **Statut** : **Partiellement livré** — QUIZ-01 OK ; génération → **[docs/spec-learning-generation.md](./spec-learning-generation.md)**  
+> **Parent** : [SPEC.md](../SPEC.md) §7 · [docs/spec-documents-rag.md](./spec-documents-rag.md) · [docs/spec-chat-rag.md](./spec-chat-rag.md)  
 > **Dépendances** : documents D1–D3, chat P4a (eligibility corpus aligné)
 
 ---

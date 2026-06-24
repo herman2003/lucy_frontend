@@ -11,54 +11,57 @@ import '../helpers/fake_onboarding_repository.dart';
 import '../helpers/onboarding_chat_test_overrides.dart';
 
 void main() {
-  test('retryAnalyzeWithReducedProfile calls analyze with profileReduced', () async {
-    var reducedRequested = false;
-    final repository = FakeOnboardingRepository(
-      analyzeHandler: ({required locale, bool profileReduced = false}) async {
-        if (profileReduced) {
-          reducedRequested = true;
-          return const OnboardingAnalyzeResult.success(
-            learnerProfile: LearnerProfile(
-              primaryRole: 'student',
-              mainDomains: ['sciences'],
-              learningGoal: 'exam',
-              selfAssessedLevel: 'intermediate',
-              explanationStyle: 'step_by_step',
-              feedbackTone: 'encouraging',
-              tutoringLanguage: 'fr',
-            ),
-            summaryForUser: 'Profil complet après retry.',
+  test(
+    'retryAnalyzeWithReducedProfile calls analyze with profileReduced',
+    () async {
+      var reducedRequested = false;
+      final repository = FakeOnboardingRepository(
+        analyzeHandler: ({required locale, bool profileReduced = false}) async {
+          if (profileReduced) {
+            reducedRequested = true;
+            return const OnboardingAnalyzeResult.success(
+              learnerProfile: LearnerProfile(
+                primaryRole: 'student',
+                mainDomains: ['sciences'],
+                learningGoal: 'exam',
+                selfAssessedLevel: 'intermediate',
+                explanationStyle: 'step_by_step',
+                feedbackTone: 'encouraging',
+                tutoringLanguage: 'fr',
+              ),
+              summaryForUser: 'Profil complet après retry.',
+            );
+          }
+          return const OnboardingAnalyzeResult.fallback(
+            fallbackProfileSummary: 'Profil de secours initial.',
           );
-        }
-        return const OnboardingAnalyzeResult.fallback(
+        },
+      );
+
+      final container = ProviderContainer(
+        overrides: onboardingProviderOverrides(repository: repository),
+      );
+      addTearDown(container.dispose);
+
+      final l10n = await AppLocalizations.delegate.load(const Locale('fr'));
+      final notifier = container.read(onboardingChatProvider.notifier);
+      notifier.initialize(l10n: l10n, deviceLocale: const Locale('fr'));
+      notifier.state = const OnboardingChatState(
+        isInitialized: true,
+        analyzeResult: OnboardingAnalyzeResult.fallback(
           fallbackProfileSummary: 'Profil de secours initial.',
-        );
-      },
-    );
+        ),
+        phase: OnboardingChatPhase.analysisReady,
+      );
 
-    final container = ProviderContainer(
-      overrides: onboardingProviderOverrides(repository: repository),
-    );
-    addTearDown(container.dispose);
+      await notifier.retryAnalyzeWithReducedProfile();
 
-    final l10n = await AppLocalizations.delegate.load(const Locale('fr'));
-    final notifier = container.read(onboardingChatProvider.notifier);
-    notifier.initialize(l10n: l10n, deviceLocale: const Locale('fr'));
-    notifier.state = const OnboardingChatState(
-      isInitialized: true,
-      analyzeResult: OnboardingAnalyzeResult.fallback(
-        fallbackProfileSummary: 'Profil de secours initial.',
-      ),
-      phase: OnboardingChatPhase.analysisReady,
-    );
-
-    await notifier.retryAnalyzeWithReducedProfile();
-
-    expect(reducedRequested, isTrue);
-    expect(repository.lastAnalyzeProfileReduced, isTrue);
-    expect(
-      container.read(onboardingChatProvider).analyzeResult,
-      isA<OnboardingAnalyzeSuccess>(),
-    );
-  });
+      expect(reducedRequested, isTrue);
+      expect(repository.lastAnalyzeProfileReduced, isTrue);
+      expect(
+        container.read(onboardingChatProvider).analyzeResult,
+        isA<OnboardingAnalyzeSuccess>(),
+      );
+    },
+  );
 }

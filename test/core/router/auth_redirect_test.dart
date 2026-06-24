@@ -12,39 +12,36 @@ void main() {
   const testUser = AuthUser(uid: 'uid-1', email: 'user@lucy.test');
 
   group('Auth redirect (T06)', () {
-    testWidgets(
-      'authenticated user reaches documents shell after bootstrap',
-      (tester) async {
-        await tester.pumpWidget(
-          ProviderScope(
-            overrides: [
-              authRepositoryProvider.overrideWithValue(
-                FakeAuthRepository(testUser, isConfigured: true),
-              ),
-              authBootstrapProvider.overrideWith(
-                (ref) async => const AuthBootstrapResult(
-                  user: testUser,
-                  isConfigured: true,
-                ),
-              ),
-              authStateChangesProvider.overrideWith(
-                (ref) => Stream.value(testUser),
-              ),
-            ],
-            child: const LucyApp(),
-          ),
-        );
+    testWidgets('authenticated user reaches documents shell after bootstrap', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [
+            authRepositoryProvider.overrideWithValue(
+              FakeAuthRepository(testUser, isConfigured: true),
+            ),
+            authBootstrapProvider.overrideWith(
+              (ref) async =>
+                  const AuthBootstrapResult(user: testUser, isConfigured: true),
+            ),
+            authStateChangesProvider.overrideWith(
+              (ref) => Stream.value(testUser),
+            ),
+          ],
+          child: const LucyApp(),
+        ),
+      );
 
-        await tester.pump();
-        expect(find.byType(LoginPage), findsNothing);
+      await tester.pump();
+      expect(find.byType(LoginPage), findsNothing);
 
-        await tester.pump();
-        await tester.pump(const Duration(milliseconds: 100));
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 100));
 
-        expect(find.byType(DocumentsPage), findsOneWidget);
-        expect(find.byType(LoginPage), findsNothing);
-      },
-    );
+      expect(find.byType(DocumentsPage), findsOneWidget);
+      expect(find.byType(LoginPage), findsNothing);
+    });
 
     testWidgets('unauthenticated user is redirected away from home', (
       tester,
@@ -52,15 +49,11 @@ void main() {
       await tester.pumpWidget(
         ProviderScope(
           overrides: [
-            authRepositoryProvider.overrideWithValue(
-              FakeAuthRepository(null),
-            ),
+            authRepositoryProvider.overrideWithValue(FakeAuthRepository(null)),
             authBootstrapProvider.overrideWith(
               (ref) async => const AuthBootstrapResult(),
             ),
-            authStateChangesProvider.overrideWith(
-              (ref) => Stream.value(null),
-            ),
+            authStateChangesProvider.overrideWith((ref) => Stream.value(null)),
           ],
           child: const LucyApp(),
         ),

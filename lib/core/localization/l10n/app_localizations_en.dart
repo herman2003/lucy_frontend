@@ -772,6 +772,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get quizLibraryHistoryTitle => 'History';
 
   @override
+  String get quizLibraryTypeQuiz => 'Quiz';
+
+  @override
+  String get quizLibraryTypeFlashcards => 'Flashcards';
+
+  @override
+  String get quizLibraryOpen => 'Open';
+
+  @override
   String get quizLibraryDateToday => 'Today';
 
   @override
@@ -827,6 +836,20 @@ class AppLocalizationsEn extends AppLocalizations {
   String get chatLearningSessionFlashcardsCardTitle => 'Flashcards ready';
 
   @override
+  String get chatLearningSessionQuizSubtitle =>
+      'Review your courses with an interactive quiz.';
+
+  @override
+  String get chatLearningSessionFlashcardsSubtitle =>
+      'Memorize key concepts in a flash.';
+
+  @override
+  String get chatLearningSessionStartQuiz => 'Start quiz';
+
+  @override
+  String get chatLearningSessionStartFlashcards => 'View flashcards';
+
+  @override
   String get chatLearningSessionOpen => 'Open';
 
   @override
@@ -855,16 +878,38 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String quizSessionProgressPercent(int percent) {
+    return '$percent%';
+  }
+
+  @override
   String get quizSessionCorrect => 'Correct!';
 
   @override
   String get quizSessionIncorrect => 'Incorrect';
 
   @override
+  String get quizSessionExplanationTitle => 'Explanation';
+
+  @override
   String get quizSessionNextQuestion => 'Next question';
 
   @override
   String get quizSessionFinish => 'See score';
+
+  @override
+  String get quizSessionScoreTitle => 'Quiz complete!';
+
+  @override
+  String quizSessionScoreSubtitle(int correct, int total) {
+    return 'You answered $correct out of $total questions correctly.';
+  }
+
+  @override
+  String get quizSessionClose => 'Close';
+
+  @override
+  String get quizSessionRetry => 'Try again';
 
   @override
   String quizSessionScore(int correct, int total) {

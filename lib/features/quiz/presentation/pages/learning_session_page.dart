@@ -55,10 +55,7 @@ class LearningSessionPage extends ConsumerWidget {
             initialSession: session,
           );
         }
-        return QuizSessionPage(
-          sessionId: sessionId,
-          initialSession: session,
-        );
+        return QuizSessionPage(sessionId: sessionId, initialSession: session);
       },
     );
   }

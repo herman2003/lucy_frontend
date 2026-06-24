@@ -149,8 +149,9 @@ class _OnboardingChatPageState extends ConsumerState<OnboardingChatPage> {
           return;
         }
         setState(
-          () => _viewingStepIndex =
-              ref.read(onboardingChatProvider).currentStepIndex,
+          () => _viewingStepIndex = ref
+              .read(onboardingChatProvider)
+              .currentStepIndex,
         );
       });
     }
@@ -162,7 +163,10 @@ class _OnboardingChatPageState extends ConsumerState<OnboardingChatPage> {
       backgroundColor: scheme.surface,
       appBar: AppBar(
         title: Text(
-          l10n.onboardingStepProgress(stepNumber, OnboardingQuestionIds.stepCount),
+          l10n.onboardingStepProgress(
+            stepNumber,
+            OnboardingQuestionIds.stepCount,
+          ),
         ),
         centerTitle: true,
       ),
@@ -179,12 +183,12 @@ class _OnboardingChatPageState extends ConsumerState<OnboardingChatPage> {
                 itemCount: OnboardingQuestionIds.stepCount,
                 onPageChanged: (index) => _onPageChanged(index, chatState),
                 itemBuilder: (context, stepIndex) {
-                  final showTyping = isViewingCurrent &&
+                  final showTyping =
+                      isViewingCurrent &&
                       stepIndex == chatState.currentStepIndex &&
                       chatState.showTypingIndicator;
 
-                  final readOnly =
-                      stepIndex < chatState.currentStepIndex;
+                  final readOnly = stepIndex < chatState.currentStepIndex;
 
                   return OnboardingStepChatPanel(
                     messages: chatState.messagesForStep(stepIndex),
@@ -196,9 +200,7 @@ class _OnboardingChatPageState extends ConsumerState<OnboardingChatPage> {
                               stepIndex: stepIndex,
                               l10n: l10n,
                             );
-                            setState(
-                              () => _viewingStepIndex = stepIndex,
-                            );
+                            setState(() => _viewingStepIndex = stepIndex);
                             _syncPageToStep(stepIndex);
                           }
                         : null,

@@ -477,6 +477,9 @@
   "quizEmptyHint": "Demandez à Lucy dans le chat pour générer un quiz.",
   "quizLibraryEmptyHint": "Demandez à Lucy dans le chat pour générer un quiz ou des cartes mémoire.",
   "quizLibraryHistoryTitle": "Historique",
+  "quizLibraryTypeQuiz": "Quiz",
+  "quizLibraryTypeFlashcards": "Cartes",
+  "quizLibraryOpen": "Ouvrir",
   "quizLibraryDateToday": "Aujourd'hui",
   "quizLibraryDateYesterday": "Hier",
   "quizLibraryDeleteConfirmTitle": "Supprimer la session ?",
@@ -508,6 +511,10 @@
   "quizSessionPlaceholderMessage": "La session s'ouvrira ici prochainement.",
   "chatLearningSessionCardTitle": "Quiz prêt",
   "chatLearningSessionFlashcardsCardTitle": "Cartes prêtes",
+  "chatLearningSessionQuizSubtitle": "Révisez vos cours avec un quiz interactif.",
+  "chatLearningSessionFlashcardsSubtitle": "Mémorisez les notions clés en un clin d'œil.",
+  "chatLearningSessionStartQuiz": "Commencer le quiz",
+  "chatLearningSessionStartFlashcards": "Voir les cartes",
   "chatLearningSessionOpen": "Ouvrir",
   "flashcardsSessionProgress": "Carte {current} / {total}",
   "@flashcardsSessionProgress": {
@@ -528,10 +535,27 @@
       "total": {"type": "int"}
     }
   },
+  "quizSessionProgressPercent": "{percent} %",
+  "@quizSessionProgressPercent": {
+    "placeholders": {
+      "percent": {"type": "int"}
+    }
+  },
   "quizSessionCorrect": "Bonne réponse !",
   "quizSessionIncorrect": "Mauvaise réponse",
+  "quizSessionExplanationTitle": "Explication",
   "quizSessionNextQuestion": "Question suivante",
   "quizSessionFinish": "Voir le score",
+  "quizSessionScoreTitle": "Quiz terminé !",
+  "quizSessionScoreSubtitle": "Vous avez répondu correctement à {correct} question(s) sur {total}.",
+  "@quizSessionScoreSubtitle": {
+    "placeholders": {
+      "correct": {"type": "int"},
+      "total": {"type": "int"}
+    }
+  },
+  "quizSessionClose": "Fermer",
+  "quizSessionRetry": "Recommencer",
   "quizSessionScore": "Score : {correct} / {total}",
   "@quizSessionScore": {
     "placeholders": {

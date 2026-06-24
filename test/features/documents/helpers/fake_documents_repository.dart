@@ -8,7 +8,7 @@ import 'package:lucy_frontend/features/documents/domain/repositories/documents_r
 /// In-memory [DocumentsRepository] for widget and service tests.
 class FakeDocumentsRepository implements DocumentsRepository {
   FakeDocumentsRepository({List<Document>? initialDocuments})
-      : _documents = List<Document>.from(initialDocuments ?? const []);
+    : _documents = List<Document>.from(initialDocuments ?? const []);
 
   final List<Document> _documents;
   int uploadBinaryCallCount = 0;
@@ -78,7 +78,10 @@ class FakeDocumentsRepository implements DocumentsRepository {
       updatedAt: DateTime.now().toUtc().toIso8601String(),
     );
     _documents[index] = updated;
-    return DocumentCompleteResult(id: id, status: DocumentStatus.processing.name);
+    return DocumentCompleteResult(
+      id: id,
+      status: DocumentStatus.processing.name,
+    );
   }
 
   @override

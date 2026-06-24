@@ -12,6 +12,10 @@ abstract final class LucyConstants {
   static const double kContainerPaddingSmall = 8;
   static const double kShellSidebarWidth = 280;
   static const double kSettingsContentMaxWidth = 600;
+  static const double kQuizContentMaxWidth = 640;
+  static const double kQuizChoiceMinHeight = 56;
+  static const double kQuizLibraryGridMaxExtent = 340;
+  static const double kQuizLibraryGridAspectRatio = 0.95;
   static const double kBorderRadiusLarge = 16;
   static const double kBorderRadiusSmall = 8;
   static const double kContainerPaddingMedium = 16;

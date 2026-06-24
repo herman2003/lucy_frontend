@@ -12,41 +12,87 @@ class ChatLearningSessionCard extends StatelessWidget {
 
   final ChatLearningSessionCreated session;
 
+  bool get _isFlashcards => session.type == 'flashcards';
+
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
     final l10n = context.l10n;
-    final cardTitle = session.type == 'flashcards'
+    final cardTitle = _isFlashcards
         ? l10n.chatLearningSessionFlashcardsCardTitle
         : l10n.chatLearningSessionCardTitle;
+    final subtitle = _isFlashcards
+        ? l10n.chatLearningSessionFlashcardsSubtitle
+        : l10n.chatLearningSessionQuizSubtitle;
+    final ctaLabel = _isFlashcards
+        ? l10n.chatLearningSessionStartFlashcards
+        : l10n.chatLearningSessionStartQuiz;
+    final icon = _isFlashcards ? Icons.style_outlined : Icons.quiz_outlined;
 
-    return Card(
-      color: scheme.surface,
+    return Container(
       margin: const EdgeInsets.only(bottom: LucyConstants.kSpacingMedium),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(LucyConstants.kBorderRadiusLarge),
+        border: Border.all(color: scheme.primary.withValues(alpha: 0.25)),
+        color: scheme.primaryContainer.withValues(alpha: 0.22),
+      ),
       child: Padding(
-        padding: const EdgeInsets.all(LucyConstants.kSpacingMedium),
+        padding: const EdgeInsets.all(LucyConstants.kSpacingLarge),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(LucyConstants.kSpacingMedium),
+                  decoration: BoxDecoration(
+                    color: scheme.primary,
+                    shape: BoxShape.circle,
+                  ),
+                  child: Icon(icon, color: scheme.onPrimary, size: 28),
+                ),
+                const SizedBox(width: LucyConstants.kSpacingMedium),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        cardTitle,
+                        style: Theme.of(context).textTheme.titleMedium
+                            ?.copyWith(
+                              color: scheme.primary,
+                              fontWeight: FontWeight.w700,
+                            ),
+                      ),
+                      const SizedBox(height: LucyConstants.kSpacingLow / 2),
+                      Text(
+                        subtitle,
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          color: scheme.onSurfaceVariant,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: LucyConstants.kSpacingLarge),
             Text(
-              cardTitle,
-              style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                color: scheme.primary,
+              session.title,
+              style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                color: scheme.onSurface,
                 fontWeight: FontWeight.w600,
               ),
             ),
-            const SizedBox(height: LucyConstants.kSpacingLow),
-            Text(
-              session.title,
-              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                color: scheme.onSurface,
-              ),
-            ),
-            const SizedBox(height: LucyConstants.kSpacingMedium),
-            LucyPrimaryButton(
-              text: l10n.chatLearningSessionOpen,
-              onPressed: () => context.push(
-                LucyRoutePaths.quizSession(session.sessionId),
+            const SizedBox(height: LucyConstants.kSpacingLarge),
+            SizedBox(
+              width: double.infinity,
+              child: LucyPrimaryButton(
+                text: ctaLabel,
+                width: MediaQuery.sizeOf(context).width,
+                onPressed: () =>
+                    context.push(LucyRoutePaths.quizSession(session.sessionId)),
               ),
             ),
           ],

@@ -45,46 +45,62 @@ void main() {
     await tester.pump(const Duration(milliseconds: 100));
   }
 
-  testWidgets('fallback summary shows confirm actions and uses fallback confirm', (
-    tester,
-  ) async {
-    final repository = FakeOnboardingRepository(
-      validateHandler: ({required locale, required questionId, required answerText, bool fallbackReduced = false}) async {
-        return const ValidateAnswerResult.needsFallback(
-          fallbackSummary: 'Lucy retient : apprenant autodidacte.',
-        );
-      },
-    );
+  testWidgets(
+    'fallback summary shows confirm actions and uses fallback confirm',
+    (tester) async {
+      final repository = FakeOnboardingRepository(
+        validateHandler:
+            ({
+              required locale,
+              required questionId,
+              required answerText,
+              bool fallbackReduced = false,
+            }) async {
+              return const ValidateAnswerResult.needsFallback(
+                fallbackSummary: 'Lucy retient : apprenant autodidacte.',
+              );
+            },
+      );
 
-    await pumpChat(tester, repository: repository);
-    await tester.enterText(find.byType(TextField), 'réponse');
-    await tester.pump();
-    await tester.tap(find.text('Envoyer'));
-    await tester.pumpAndSettle();
+      await pumpChat(tester, repository: repository);
+      await tester.enterText(find.byType(TextField), 'réponse');
+      await tester.pump();
+      await tester.tap(find.text('Envoyer'));
+      await tester.pumpAndSettle();
 
-    expect(find.text('Lucy retient : apprenant autodidacte.'), findsOneWidget);
-    expect(find.text('C’est bon'), findsOneWidget);
+      expect(
+        find.text('Lucy retient : apprenant autodidacte.'),
+        findsOneWidget,
+      );
+      expect(find.text('C’est bon'), findsOneWidget);
 
-    await tester.tap(find.text('C’est bon'));
-    await tester.pumpAndSettle();
+      await tester.tap(find.text('C’est bon'));
+      await tester.pumpAndSettle();
 
-    expect(repository.lastConfirmationType, 'fallback');
-  });
+      expect(repository.lastConfirmationType, 'fallback');
+    },
+  );
 
   testWidgets('rejecting fallback requests reduced summary', (tester) async {
     var reducedRequested = false;
     final repository = FakeOnboardingRepository(
-      validateHandler: ({required locale, required questionId, required answerText, bool fallbackReduced = false}) async {
-        if (fallbackReduced) {
-          reducedRequested = true;
-          return const ValidateAnswerResult.needsFallback(
-            fallbackSummary: 'Version courte.',
-          );
-        }
-        return const ValidateAnswerResult.needsFallback(
-          fallbackSummary: 'Version longue du résumé de secours.',
-        );
-      },
+      validateHandler:
+          ({
+            required locale,
+            required questionId,
+            required answerText,
+            bool fallbackReduced = false,
+          }) async {
+            if (fallbackReduced) {
+              reducedRequested = true;
+              return const ValidateAnswerResult.needsFallback(
+                fallbackSummary: 'Version courte.',
+              );
+            }
+            return const ValidateAnswerResult.needsFallback(
+              fallbackSummary: 'Version longue du résumé de secours.',
+            );
+          },
     );
 
     await pumpChat(tester, repository: repository);

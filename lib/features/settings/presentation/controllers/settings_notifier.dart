@@ -10,13 +10,19 @@ part 'settings_notifier.g.dart';
 
 @riverpod
 class SettingsNotifier extends _$SettingsNotifier {
+  int _loadEpoch = 0;
+
   @override
   SettingsState build() => const SettingsState();
 
   Future<void> load() async {
+    final epoch = ++_loadEpoch;
     state = state.copyWith(isLoading: true, errorCode: null);
     try {
       final profile = await ref.read(settingsServiceProvider).fetchProfile();
+      if (epoch != _loadEpoch) {
+        return;
+      }
       state = state.copyWith(
         isLoading: false,
         fullName: profile.fullName,
@@ -28,11 +34,15 @@ class SettingsNotifier extends _$SettingsNotifier {
           .read(lucyAppLocaleProvider.notifier)
           .applyLanguageCode(profile.uiLocale);
     } catch (error) {
+      if (epoch != _loadEpoch) {
+        return;
+      }
       state = state.copyWith(isLoading: false, errorCode: _errorCode(error));
     }
   }
 
   Future<bool> saveFullName(String fullName) async {
+    ++_loadEpoch;
     state = state.copyWith(isSaving: true, saveErrorCode: null);
     try {
       final updated = await ref
@@ -53,7 +63,14 @@ class SettingsNotifier extends _$SettingsNotifier {
   }
 
   Future<bool> saveUiLocale(String uiLocale) async {
-    state = state.copyWith(isSaving: true, saveErrorCode: null);
+    final previousLocale = state.uiLocale;
+    ++_loadEpoch;
+    state = state.copyWith(
+      isSaving: true,
+      saveErrorCode: null,
+      uiLocale: uiLocale,
+    );
+    ref.read(lucyAppLocaleProvider.notifier).applyLanguageCode(uiLocale);
     try {
       final updated = await ref
           .read(settingsServiceProvider)
@@ -62,18 +79,28 @@ class SettingsNotifier extends _$SettingsNotifier {
         isSaving: false,
         fullName: updated.fullName,
         email: updated.email,
-        uiLocale: updated.uiLocale,
+        uiLocale: updated.uiLocale ?? uiLocale,
         learnerProfile: updated.learnerProfile,
       );
-      ref.read(lucyAppLocaleProvider.notifier).applyLanguageCode(uiLocale);
+      ref
+          .read(lucyAppLocaleProvider.notifier)
+          .applyLanguageCode(updated.uiLocale ?? uiLocale);
       return true;
     } catch (error) {
-      state = state.copyWith(isSaving: false, saveErrorCode: _errorCode(error));
+      state = state.copyWith(
+        isSaving: false,
+        uiLocale: previousLocale,
+        saveErrorCode: _errorCode(error),
+      );
+      ref
+          .read(lucyAppLocaleProvider.notifier)
+          .applyLanguageCode(previousLocale);
       return false;
     }
   }
 
   Future<bool> saveLearnerProfile(LearnerProfile profile) async {
+    ++_loadEpoch;
     state = state.copyWith(isSaving: true, saveErrorCode: null);
     try {
       final updated = await ref

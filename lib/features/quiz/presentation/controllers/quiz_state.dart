@@ -12,7 +12,8 @@ abstract class QuizState with _$QuizState {
   const factory QuizState({
     @Default(false) bool isLoading,
     QuizEligibility? eligibility,
-    @Default(<LearningSessionListItem>[]) List<LearningSessionListItem> sessions,
+    @Default(<LearningSessionListItem>[])
+    List<LearningSessionListItem> sessions,
     String? errorCode,
   }) = _QuizState;
 

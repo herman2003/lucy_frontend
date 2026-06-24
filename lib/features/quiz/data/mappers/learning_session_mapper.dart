@@ -102,7 +102,8 @@ abstract final class LearningSessionMapper {
   static LearningSessionType _parseType(String value) {
     return LearningSessionType.values.firstWhere(
       (type) => type.name == value,
-      orElse: () => throw FormatException('Unknown learning session type: $value'),
+      orElse: () =>
+          throw FormatException('Unknown learning session type: $value'),
     );
   }
 

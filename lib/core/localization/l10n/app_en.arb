@@ -265,6 +265,9 @@
   "quizEmptyHint": "Ask Lucy in chat to generate a quiz.",
   "quizLibraryEmptyHint": "Ask Lucy in chat to generate a quiz or flashcards.",
   "quizLibraryHistoryTitle": "History",
+  "quizLibraryTypeQuiz": "Quiz",
+  "quizLibraryTypeFlashcards": "Flashcards",
+  "quizLibraryOpen": "Open",
   "quizLibraryDateToday": "Today",
   "quizLibraryDateYesterday": "Yesterday",
   "quizLibraryDeleteConfirmTitle": "Delete session?",
@@ -296,6 +299,10 @@
   "quizSessionPlaceholderMessage": "This session will open here soon.",
   "chatLearningSessionCardTitle": "Quiz ready",
   "chatLearningSessionFlashcardsCardTitle": "Flashcards ready",
+  "chatLearningSessionQuizSubtitle": "Review your courses with an interactive quiz.",
+  "chatLearningSessionFlashcardsSubtitle": "Memorize key concepts in a flash.",
+  "chatLearningSessionStartQuiz": "Start quiz",
+  "chatLearningSessionStartFlashcards": "View flashcards",
   "chatLearningSessionOpen": "Open",
   "flashcardsSessionProgress": "Card {current} / {total}",
   "@flashcardsSessionProgress": {
@@ -316,10 +323,27 @@
       "total": {"type": "int"}
     }
   },
+  "quizSessionProgressPercent": "{percent}%",
+  "@quizSessionProgressPercent": {
+    "placeholders": {
+      "percent": {"type": "int"}
+    }
+  },
   "quizSessionCorrect": "Correct!",
   "quizSessionIncorrect": "Incorrect",
+  "quizSessionExplanationTitle": "Explanation",
   "quizSessionNextQuestion": "Next question",
   "quizSessionFinish": "See score",
+  "quizSessionScoreTitle": "Quiz complete!",
+  "quizSessionScoreSubtitle": "You answered {correct} out of {total} questions correctly.",
+  "@quizSessionScoreSubtitle": {
+    "placeholders": {
+      "correct": {"type": "int"},
+      "total": {"type": "int"}
+    }
+  },
+  "quizSessionClose": "Close",
+  "quizSessionRetry": "Try again",
   "quizSessionScore": "Score: {correct} / {total}",
   "@quizSessionScore": {
     "placeholders": {

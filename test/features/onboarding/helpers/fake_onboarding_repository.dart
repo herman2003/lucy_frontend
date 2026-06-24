@@ -67,9 +67,7 @@ class FakeOnboardingRepository implements OnboardingRepository {
         fallbackReduced: fallbackReduced,
       );
     }
-    return const ValidateAnswerResult.accepted(
-      turnSummary: 'Default summary.',
-    );
+    return const ValidateAnswerResult.accepted(turnSummary: 'Default summary.');
   }
 
   @override
@@ -91,7 +89,8 @@ class FakeOnboardingRepository implements OnboardingRepository {
     }
 
     completedTurnsAfterConfirm++;
-    final isLast = completedTurnsAfterConfirm >= OnboardingQuestionIds.stepCount;
+    final isLast =
+        completedTurnsAfterConfirm >= OnboardingQuestionIds.stepCount;
     return ConfirmTurnResult(
       onboardingStatus: isLast ? 'awaiting_analyze' : 'in_progress',
       completedTurns: completedTurnsAfterConfirm,

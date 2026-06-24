@@ -45,10 +45,7 @@ void main() {
   testWidgets('shows empty state and add FAB when there are no documents', (
     tester,
   ) async {
-    await pumpDocumentsPage(
-      tester,
-      repository: FakeDocumentsRepository(),
-    );
+    await pumpDocumentsPage(tester, repository: FakeDocumentsRepository());
 
     expect(find.text('Documents'), findsOneWidget);
     expect(find.text('Ajouter'), findsOneWidget);
@@ -80,10 +77,7 @@ void main() {
   });
 
   testWidgets('tapping add FAB opens upload sheet', (tester) async {
-    await pumpDocumentsPage(
-      tester,
-      repository: FakeDocumentsRepository(),
-    );
+    await pumpDocumentsPage(tester, repository: FakeDocumentsRepository());
 
     await tester.tap(find.text('Ajouter'));
     await tester.pumpAndSettle();

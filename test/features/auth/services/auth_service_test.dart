@@ -26,10 +26,7 @@ void main() {
       final subscription = service.authStateChanges().listen(events.add);
       addTearDown(subscription.cancel);
 
-      await service.loginWithEmail(
-        email: 'a@lucy.test',
-        password: 'password1',
-      );
+      await service.loginWithEmail(email: 'a@lucy.test', password: 'password1');
 
       expect(events.last?.email, 'a@lucy.test');
       expect(service.currentUser?.email, 'a@lucy.test');

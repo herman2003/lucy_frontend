@@ -9,7 +9,8 @@ part 'learning_session_item_model.g.dart';
 abstract class LearningSessionItemModel with _$LearningSessionItemModel {
   const factory LearningSessionItemModel({
     required String id,
-    @Default(<LearningSessionSourceModel>[]) List<LearningSessionSourceModel> sources,
+    @Default(<LearningSessionSourceModel>[])
+    List<LearningSessionSourceModel> sources,
     String? question,
     List<String>? choices,
     int? correctIndex,

@@ -27,7 +27,8 @@ class LucySnackBar {
       message: message,
       title: title,
       type: LucySnackBarType.error,
-      duration: duration ?? (onAction != null ? const Duration(seconds: 8) : null),
+      duration:
+          duration ?? (onAction != null ? const Duration(seconds: 8) : null),
       actionLabel: actionLabel,
       onAction: onAction,
     );

@@ -54,9 +54,7 @@ class ChatApiRemoteDataSource {
         ApiEndpoints.chatMessages(chatId),
         queryParameters: {
           'limit': limit,
-          ...? (beforeMessageId != null
-              ? {'before': beforeMessageId}
-              : null),
+          ...?(beforeMessageId != null ? {'before': beforeMessageId} : null),
         },
       );
       final data = response.data;

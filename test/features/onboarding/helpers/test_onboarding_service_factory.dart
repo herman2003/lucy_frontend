@@ -16,8 +16,11 @@ OnboardingService createTestOnboardingService(
 }) {
   return OnboardingService(
     repository: repository,
-    progressRepository: FakeOnboardingProgressRepository(progress: resumeProgress),
-    localDraftRepository: localDraftRepository ??
+    progressRepository: FakeOnboardingProgressRepository(
+      progress: resumeProgress,
+    ),
+    localDraftRepository:
+        localDraftRepository ??
         FakeOnboardingLocalDraftRepository(drafts: localDrafts ?? {}),
   );
 }

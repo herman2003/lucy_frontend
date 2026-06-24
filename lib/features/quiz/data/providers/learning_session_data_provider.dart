@@ -9,7 +9,9 @@ part 'learning_session_data_provider.g.dart';
 
 @Riverpod(keepAlive: true)
 LearningSessionApiRemoteDataSource learningSessionApiRemoteDataSource(Ref ref) {
-  return LearningSessionApiRemoteDataSource(ref.watch(lucyDioClientProvider).dio);
+  return LearningSessionApiRemoteDataSource(
+    ref.watch(lucyDioClientProvider).dio,
+  );
 }
 
 @Riverpod(keepAlive: true)

@@ -78,7 +78,8 @@ class ChatStreamRemoteDataSource {
         (json['sources'] as List<dynamic>? ?? const [])
             .whereType<Map<String, dynamic>>()
             .map(
-              (item) => ChatMapper.sourceFromModel(ChatSourceModel.fromJson(item)),
+              (item) =>
+                  ChatMapper.sourceFromModel(ChatSourceModel.fromJson(item)),
             )
             .toList(),
       ),
@@ -95,7 +96,9 @@ class ChatStreamRemoteDataSource {
           json['assistantMessage'] as Map<String, dynamic>,
         ),
       ),
-      'error' => ChatStreamErrorEvent(json['code'] as String? ?? 'INTERNAL_ERROR'),
+      'error' => ChatStreamErrorEvent(
+        json['code'] as String? ?? 'INTERNAL_ERROR',
+      ),
       _ => null,
     };
   }

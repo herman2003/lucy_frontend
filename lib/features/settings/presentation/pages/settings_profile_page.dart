@@ -35,7 +35,10 @@ class _SettingsProfilePageState extends ConsumerState<SettingsProfilePage> {
   void initState() {
     super.initState();
     Future.microtask(() async {
-      await ref.read(settingsProvider.notifier).load();
+      final current = ref.read(settingsProvider);
+      if (current.email.isEmpty && !current.isLoading) {
+        await ref.read(settingsProvider.notifier).load();
+      }
       if (!mounted) {
         return;
       }

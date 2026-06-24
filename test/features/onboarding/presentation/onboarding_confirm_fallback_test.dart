@@ -69,7 +69,9 @@ void main() {
 
   tearDown(clearTestLocaleOverride);
 
-  testWidgets('shows fallback summary without profile enum rows', (tester) async {
+  testWidgets('shows fallback summary without profile enum rows', (
+    tester,
+  ) async {
     await pumpConfirmWithAnalysis(
       tester,
       repository: FakeOnboardingRepository(),
@@ -82,7 +84,9 @@ void main() {
     expect(find.text('Étudiant·e'), findsNothing);
   });
 
-  testWidgets('edit on fallback analyze retries with profileReduced', (tester) async {
+  testWidgets('edit on fallback analyze retries with profileReduced', (
+    tester,
+  ) async {
     tester.view.physicalSize = const Size(400, 900);
     tester.view.devicePixelRatio = 1.0;
     addTearDown(tester.view.resetPhysicalSize);

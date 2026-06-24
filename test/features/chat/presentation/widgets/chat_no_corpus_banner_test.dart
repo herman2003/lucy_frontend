@@ -18,9 +18,7 @@ void main() {
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
         home: Scaffold(
-          body: ChatNoCorpusBanner(
-            onGoToDocuments: () => ctaTapped = true,
-          ),
+          body: ChatNoCorpusBanner(onGoToDocuments: () => ctaTapped = true),
         ),
       ),
     );

@@ -1,4 +1,1 @@
-enum LearningSessionType {
-  quiz,
-  flashcards,
-}
+enum LearningSessionType { quiz, flashcards }

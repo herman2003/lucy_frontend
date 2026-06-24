@@ -3,10 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'reset_password_state.freezed.dart';
 
 /// Reset password UI phase (T10).
-enum ResetPasswordView {
-  form,
-  success,
-}
+enum ResetPasswordView { form, success }
 
 /// Reset password form / success state.
 @freezed

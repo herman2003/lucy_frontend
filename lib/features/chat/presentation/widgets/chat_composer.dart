@@ -5,11 +5,7 @@ import '../../../../core/extensions/context.dart';
 import '../../../../shared/widgets/buttons/lucy_primary_button.dart';
 
 class ChatComposer extends StatefulWidget {
-  const ChatComposer({
-    super.key,
-    required this.enabled,
-    required this.onSend,
-  });
+  const ChatComposer({super.key, required this.enabled, required this.onSend});
 
   final bool enabled;
   final ValueChanged<String> onSend;

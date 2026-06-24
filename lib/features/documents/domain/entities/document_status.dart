@@ -8,7 +8,8 @@ enum DocumentStatus {
   static DocumentStatus fromApi(String raw) {
     return DocumentStatus.values.firstWhere(
       (status) => status.name == raw,
-      orElse: () => throw ArgumentError.value(raw, 'raw', 'Unknown document status'),
+      orElse: () =>
+          throw ArgumentError.value(raw, 'raw', 'Unknown document status'),
     );
   }
 }

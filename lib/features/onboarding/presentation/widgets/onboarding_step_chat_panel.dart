@@ -51,9 +51,8 @@ class OnboardingStepChatPanel extends StatelessWidget {
                       Expanded(
                         child: Text(
                           context.l10n.onboardingStepReadOnly,
-                          style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                            color: scheme.onSurfaceVariant,
-                          ),
+                          style: Theme.of(context).textTheme.bodySmall
+                              ?.copyWith(color: scheme.onSurfaceVariant),
                         ),
                       ),
                     ],

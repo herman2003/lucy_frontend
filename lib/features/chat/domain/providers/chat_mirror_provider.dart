@@ -24,7 +24,9 @@ ChatLocalMirrorRepository chatLocalMirrorRepository(Ref ref) {
 
 @Riverpod(keepAlive: true)
 ChatMirrorService chatMirrorService(Ref ref) {
-  return ChatMirrorService(repository: ref.watch(chatLocalMirrorRepositoryProvider));
+  return ChatMirrorService(
+    repository: ref.watch(chatLocalMirrorRepositoryProvider),
+  );
 }
 
 /// Purges chat mirror when Firebase session ends (spec §3.4).

@@ -62,9 +62,7 @@ class _FlashcardsSessionPageState extends ConsumerState<FlashcardsSessionPage> {
     });
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(state.session?.title ?? l10n.quizTitle),
-      ),
+      appBar: AppBar(title: Text(state.session?.title ?? l10n.quizTitle)),
       body: state.isLoading
           ? Center(child: Text(l10n.quizLoading))
           : !state.hasSession
@@ -76,19 +74,13 @@ class _FlashcardsSessionPageState extends ConsumerState<FlashcardsSessionPage> {
                 ),
               ),
             )
-          : _FlashcardsContent(
-              sessionId: widget.sessionId,
-              state: state,
-            ),
+          : _FlashcardsContent(sessionId: widget.sessionId, state: state),
     );
   }
 }
 
 class _FlashcardsContent extends ConsumerWidget {
-  const _FlashcardsContent({
-    required this.sessionId,
-    required this.state,
-  });
+  const _FlashcardsContent({required this.sessionId, required this.state});
 
   final String sessionId;
   final FlashcardsSessionState state;
@@ -133,7 +125,9 @@ class _FlashcardsContent extends ConsumerWidget {
             Expanded(
               child: LucySecondaryButton(
                 text: l10n.flashcardsSessionPrevious,
-                onPressed: state.canGoPrevious ? notifier.goToPreviousCard : null,
+                onPressed: state.canGoPrevious
+                    ? notifier.goToPreviousCard
+                    : null,
               ),
             ),
             const SizedBox(width: LucyConstants.kSpacingMedium),

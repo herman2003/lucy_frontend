@@ -28,13 +28,12 @@ abstract class DocumentsState with _$DocumentsState {
       .where((d) => d.status == DocumentStatus.ready && d.searchEnabled)
       .length;
 
-  bool get hasProcessingDocument => documents.any(
-        (d) => d.status == DocumentStatus.processing,
-      );
+  bool get hasProcessingDocument =>
+      documents.any((d) => d.status == DocumentStatus.processing);
 
   bool get needsProcessingPoll => documents.any(
-        (d) =>
-            d.status == DocumentStatus.processing ||
-            d.status == DocumentStatus.uploading,
-      );
+    (d) =>
+        d.status == DocumentStatus.processing ||
+        d.status == DocumentStatus.uploading,
+  );
 }

@@ -115,11 +115,7 @@ class _ResetPasswordPageState extends ConsumerState<ResetPasswordPage> {
     final email = resetState.submittedEmail ?? '';
 
     return [
-      Icon(
-        Icons.mark_email_read_outlined,
-        size: 48,
-        color: scheme.primary,
-      ),
+      Icon(Icons.mark_email_read_outlined, size: 48, color: scheme.primary),
       const SizedBox(height: LucyConstants.kSpacingMedium),
       Text(
         context.l10n.authResetSuccessTitle,

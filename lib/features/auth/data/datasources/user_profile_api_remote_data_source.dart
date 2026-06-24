@@ -20,10 +20,7 @@ class UserProfileApiRemoteDataSource implements UserProfileRemoteDataSource {
     try {
       await _dio.post<Map<String, dynamic>>(
         ApiEndpoints.usersMe,
-        data: {
-          'fullName': profile.fullName,
-          'email': profile.email,
-        },
+        data: {'fullName': profile.fullName, 'email': profile.email},
       );
     } on DioException catch (error) {
       throw _mapDioError(error);

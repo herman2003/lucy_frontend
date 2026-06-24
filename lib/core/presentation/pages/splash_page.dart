@@ -20,9 +20,7 @@ class SplashPage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 24),
-            CircularProgressIndicator(
-              color: context.colorScheme.primary,
-            ),
+            CircularProgressIndicator(color: context.colorScheme.primary),
             const SizedBox(height: 16),
             Text(
               context.l10n.splashLoading,

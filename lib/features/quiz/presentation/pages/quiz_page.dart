@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../core/constants/lucy_constants.dart';
+import '../../../../core/constants/responsive_constants.dart';
 import '../../../../core/extensions/context.dart';
 import '../../../../core/router/lucy_route_paths.dart';
 import '../../../../shared/widgets/buttons/lucy_tertiary_button.dart';
@@ -14,6 +15,7 @@ import '../controllers/quiz_notifier.dart';
 import '../widgets/quiz_library_empty_state.dart';
 import '../widgets/quiz_library_history_header.dart';
 import '../widgets/quiz_no_corpus_banner.dart';
+import '../widgets/quiz_session_card.dart';
 import '../widgets/quiz_session_list_tile.dart';
 
 /// Quiz tab — session library (SPEC learning G2, G12).
@@ -68,6 +70,79 @@ class _QuizPageState extends ConsumerState<QuizPage> {
     return ref.read(quizProvider.notifier).deleteSession(session.id);
   }
 
+  void _openSession(LearningSessionListItem session) {
+    context.push(LucyRoutePaths.quizSession(session.id));
+  }
+
+  Future<void> _deleteSession(LearningSessionListItem session) async {
+    await _confirmDeleteSession(session);
+  }
+
+  bool _useCardGrid(BuildContext context) {
+    return MediaQuery.sizeOf(context).width >=
+        ResponsiveConstants.kTabletBreakpoint;
+  }
+
+  Widget _buildPhoneList(List<LearningSessionListItem> sessions) {
+    return ListView.builder(
+      itemCount: sessions.length + 1,
+      itemBuilder: (context, index) {
+        if (index == 0) {
+          return const QuizLibraryHistoryHeader();
+        }
+        final session = sessions[index - 1];
+        final scheme = Theme.of(context).colorScheme;
+        return Dismissible(
+          key: ValueKey(session.id),
+          direction: DismissDirection.endToStart,
+          background: Container(
+            alignment: Alignment.centerRight,
+            padding: const EdgeInsets.only(right: LucyConstants.kSpacingLarge),
+            color: scheme.errorContainer,
+            child: Icon(Icons.delete_outline, color: scheme.onErrorContainer),
+          ),
+          confirmDismiss: (_) => _confirmDeleteSession(session),
+          child: QuizSessionListTile(
+            session: session,
+            onTap: () => _openSession(session),
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _buildTabletGrid(List<LearningSessionListItem> sessions) {
+    return CustomScrollView(
+      slivers: [
+        const SliverToBoxAdapter(child: QuizLibraryHistoryHeader()),
+        SliverPadding(
+          padding: const EdgeInsets.fromLTRB(
+            LucyConstants.kSpacingMedium,
+            0,
+            LucyConstants.kSpacingMedium,
+            LucyConstants.kSpacingLarge,
+          ),
+          sliver: SliverGrid(
+            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+              maxCrossAxisExtent: LucyConstants.kQuizLibraryGridMaxExtent,
+              mainAxisSpacing: LucyConstants.kSpacingMedium,
+              crossAxisSpacing: LucyConstants.kSpacingMedium,
+              childAspectRatio: LucyConstants.kQuizLibraryGridAspectRatio,
+            ),
+            delegate: SliverChildBuilderDelegate((context, index) {
+              final session = sessions[index];
+              return QuizSessionCard(
+                session: session,
+                onTap: () => _openSession(session),
+                onDelete: () => _deleteSession(session),
+              );
+            }, childCount: sessions.length),
+          ),
+        ),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final state = ref.watch(quizProvider);
@@ -94,38 +169,9 @@ class _QuizPageState extends ConsumerState<QuizPage> {
                 Expanded(
                   child: state.sessions.isEmpty
                       ? const QuizLibraryEmptyState()
-                      : ListView.builder(
-                          itemCount: state.sessions.length + 1,
-                          itemBuilder: (context, index) {
-                            if (index == 0) {
-                              return const QuizLibraryHistoryHeader();
-                            }
-                            final session = state.sessions[index - 1];
-                            final scheme = Theme.of(context).colorScheme;
-                            return Dismissible(
-                              key: ValueKey(session.id),
-                              direction: DismissDirection.endToStart,
-                              background: Container(
-                                alignment: Alignment.centerRight,
-                                padding: const EdgeInsets.only(
-                                  right: LucyConstants.kSpacingLarge,
-                                ),
-                                color: scheme.errorContainer,
-                                child: Icon(
-                                  Icons.delete_outline,
-                                  color: scheme.onErrorContainer,
-                                ),
-                              ),
-                              confirmDismiss: (_) => _confirmDeleteSession(session),
-                              child: QuizSessionListTile(
-                                session: session,
-                                onTap: () => context.push(
-                                  LucyRoutePaths.quizSession(session.id),
-                                ),
-                              ),
-                            );
-                          },
-                        ),
+                      : _useCardGrid(context)
+                      ? _buildTabletGrid(state.sessions)
+                      : _buildPhoneList(state.sessions),
                 ),
               ],
             ),

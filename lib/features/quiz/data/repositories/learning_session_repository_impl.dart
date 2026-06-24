@@ -27,7 +27,9 @@ class LearningSessionRepositoryImpl implements LearningSessionRepository {
   @override
   Future<List<LearningSessionListItem>> list() async {
     final models = await _remote.list();
-    return models.map(LearningSessionMapper.listItemFromModel).toList(growable: false);
+    return models
+        .map(LearningSessionMapper.listItemFromModel)
+        .toList(growable: false);
   }
 
   @override

@@ -10,7 +10,8 @@ part 'chat_local_mirror.freezed.dart';
 abstract class ChatLocalMirror with _$ChatLocalMirror {
   const factory ChatLocalMirror({
     @Default(<ChatThread>[]) List<ChatThread> threads,
-    @Default(<String, List<ChatMessage>>{}) Map<String, List<ChatMessage>> messagesByChatId,
+    @Default(<String, List<ChatMessage>>{})
+    Map<String, List<ChatMessage>> messagesByChatId,
     String? lastActiveChatId,
     @Default(<String, String>{}) Map<String, String> composerDraftByChatId,
     @Default(<String, String>{}) Map<String, String> streamDraftByChatId,

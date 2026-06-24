@@ -24,9 +24,9 @@ class ChatSourceCard extends StatelessWidget {
           children: [
             Text(
               source.title,
-              style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                color: scheme.onSurface,
-              ),
+              style: Theme.of(
+                context,
+              ).textTheme.titleSmall?.copyWith(color: scheme.onSurface),
             ),
             if (pagesLabel != null) ...[
               const SizedBox(height: LucyConstants.kSpacingLow / 2),
@@ -42,9 +42,9 @@ class ChatSourceCard extends StatelessWidget {
               source.excerpt,
               maxLines: 4,
               overflow: TextOverflow.ellipsis,
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: scheme.onSurfaceVariant,
-              ),
+              style: Theme.of(
+                context,
+              ).textTheme.bodyMedium?.copyWith(color: scheme.onSurfaceVariant),
             ),
           ],
         ),

@@ -37,10 +37,7 @@ class QuizSessionNotifier extends _$QuizSessionNotifier {
           .getById(sessionId);
       state = state.copyWith(isLoading: false, session: session);
     } catch (error) {
-      state = state.copyWith(
-        isLoading: false,
-        errorCode: _errorCode(error),
-      );
+      state = state.copyWith(isLoading: false, errorCode: _errorCode(error));
     }
   }
 
@@ -63,6 +60,17 @@ class QuizSessionNotifier extends _$QuizSessionNotifier {
       return;
     }
     state = state.copyWith(currentIndex: nextIndex);
+  }
+
+  void restart() {
+    if (!state.hasSession) {
+      return;
+    }
+    state = state.copyWith(
+      currentIndex: 0,
+      selectedAnswers: const {},
+      isComplete: false,
+    );
   }
 
   String _errorCode(Object error) {

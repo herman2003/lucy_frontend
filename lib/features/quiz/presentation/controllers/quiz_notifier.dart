@@ -32,7 +32,9 @@ class QuizNotifier extends _$QuizNotifier {
     try {
       await ref.read(learningSessionServiceProvider).delete(sessionId);
       state = state.copyWith(
-        sessions: state.sessions.where((session) => session.id != sessionId).toList(),
+        sessions: state.sessions
+            .where((session) => session.id != sessionId)
+            .toList(),
         errorCode: null,
       );
       return true;

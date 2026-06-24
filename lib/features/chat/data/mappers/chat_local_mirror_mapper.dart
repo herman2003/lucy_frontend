@@ -13,10 +13,8 @@ abstract final class ChatLocalMirrorMapper {
     return {
       'threads': mirror.threads.map(_threadToJson).toList(),
       'messagesByChatId': mirror.messagesByChatId.map(
-        (chatId, messages) => MapEntry(
-          chatId,
-          messages.map(_messageToJson).toList(),
-        ),
+        (chatId, messages) =>
+            MapEntry(chatId, messages.map(_messageToJson).toList()),
       ),
       if (mirror.lastActiveChatId != null)
         'lastActiveChatId': mirror.lastActiveChatId,
@@ -115,9 +113,9 @@ abstract final class ChatLocalMirrorMapper {
       return const {};
     }
     return Map<String, String>.fromEntries(
-      raw.entries.where((entry) => entry.key is String && entry.value is String).map(
-        (entry) => MapEntry(entry.key as String, entry.value as String),
-      ),
+      raw.entries
+          .where((entry) => entry.key is String && entry.value is String)
+          .map((entry) => MapEntry(entry.key as String, entry.value as String)),
     );
   }
 }

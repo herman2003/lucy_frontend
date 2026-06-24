@@ -18,11 +18,7 @@ enum OnboardingChatPhase {
 }
 
 /// Visual state for one of the seven onboarding step dots (SPEC §4.5.1).
-enum OnboardingStepStatus {
-  completed,
-  current,
-  locked,
-}
+enum OnboardingStepStatus { completed, current, locked }
 
 @freezed
 abstract class OnboardingChatState with _$OnboardingChatState {

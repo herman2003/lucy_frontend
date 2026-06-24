@@ -7,7 +7,9 @@ import 'package:lucy_frontend/features/documents/utils/document_error_translator
 
 void main() {
   group('DocumentErrorTranslator', () {
-    testWidgets('maps DOCUMENT_UPLOAD_IN_PROGRESS to French l10n', (tester) async {
+    testWidgets('maps DOCUMENT_UPLOAD_IN_PROGRESS to French l10n', (
+      tester,
+    ) async {
       await tester.pumpWidget(
         MaterialApp(
           locale: const Locale('fr'),

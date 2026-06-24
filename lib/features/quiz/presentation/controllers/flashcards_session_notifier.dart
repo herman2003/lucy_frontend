@@ -41,10 +41,7 @@ class FlashcardsSessionNotifier extends _$FlashcardsSessionNotifier {
         isFlipped: false,
       );
     } catch (error) {
-      state = state.copyWith(
-        isLoading: false,
-        errorCode: _errorCode(error),
-      );
+      state = state.copyWith(isLoading: false, errorCode: _errorCode(error));
     }
   }
 

@@ -18,10 +18,7 @@ class OnboardingValidateRemoteDataSource {
     try {
       final body = <String, dynamic>{
         'locale': locale,
-        'turn': {
-          'questionId': questionId,
-          'answerText': answerText,
-        },
+        'turn': {'questionId': questionId, 'answerText': answerText},
       };
       if (fallbackReduced) {
         body['fallbackReduced'] = true;

@@ -17,9 +17,9 @@ class LearningSessionSourceChip extends StatelessWidget {
       backgroundColor: scheme.surfaceContainerHighest,
       label: Text(
         pagesLabel == null ? source.title : '${source.title} · $pagesLabel',
-        style: Theme.of(context).textTheme.labelMedium?.copyWith(
-          color: scheme.onSurfaceVariant,
-        ),
+        style: Theme.of(
+          context,
+        ).textTheme.labelMedium?.copyWith(color: scheme.onSurfaceVariant),
       ),
     );
   }

@@ -6,10 +6,8 @@ import 'package:lucy_frontend/features/auth/domain/repositories/auth_repository.
 
 /// In-memory [AuthRepository] for widget/router tests.
 class FakeAuthRepository implements AuthRepository {
-  FakeAuthRepository(
-    AuthUser? user, {
-    this.isConfigured = false,
-  }) : _user = user {
+  FakeAuthRepository(AuthUser? user, {this.isConfigured = false})
+    : _user = user {
     _authController.add(_user);
   }
 

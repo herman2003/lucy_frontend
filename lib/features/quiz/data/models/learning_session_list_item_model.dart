@@ -4,7 +4,8 @@ part 'learning_session_list_item_model.freezed.dart';
 part 'learning_session_list_item_model.g.dart';
 
 @freezed
-abstract class LearningSessionListItemModel with _$LearningSessionListItemModel {
+abstract class LearningSessionListItemModel
+    with _$LearningSessionListItemModel {
   const factory LearningSessionListItemModel({
     required String id,
     required String type,

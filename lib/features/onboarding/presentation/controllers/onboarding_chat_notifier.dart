@@ -103,7 +103,9 @@ class OnboardingChatNotifier extends _$OnboardingChatNotifier {
       currentQuestionId: questionId,
       activeQuestionText: questionText,
       messagesByQuestionId: {
-        questionId: [OnboardingChatMessage(isFromLucy: true, text: questionText)],
+        questionId: [
+          OnboardingChatMessage(isFromLucy: true, text: questionText),
+        ],
       },
     );
   }
@@ -130,17 +132,19 @@ class OnboardingChatNotifier extends _$OnboardingChatNotifier {
 
     final questionId = state.currentQuestionId;
     state = state.copyWith(
-      messagesByQuestionId: _replaceThread(
-        questionId,
-        [..._threadFor(questionId), userMessage],
-      ),
+      messagesByQuestionId: _replaceThread(questionId, [
+        ..._threadFor(questionId),
+        userMessage,
+      ]),
       answerDraft: '',
       phase: OnboardingChatPhase.validating,
       isSubmitting: true,
     );
 
     try {
-      final result = await ref.read(onboardingServiceProvider).validateAnswer(
+      final result = await ref
+          .read(onboardingServiceProvider)
+          .validateAnswer(
             locale: _apiLocale,
             questionId: state.currentQuestionId,
             answerText: answer,
@@ -176,14 +180,16 @@ class OnboardingChatNotifier extends _$OnboardingChatNotifier {
     );
 
     try {
-      final confirmResult =
-          await ref.read(onboardingServiceProvider).confirmTurn(
-                locale: _apiLocale,
-                questionId: state.currentQuestionId,
-                answerText: answer,
-                confirmationType:
-                    state.isFallbackConfirmation ? 'fallback' : 'normal',
-              );
+      final confirmResult = await ref
+          .read(onboardingServiceProvider)
+          .confirmTurn(
+            locale: _apiLocale,
+            questionId: state.currentQuestionId,
+            answerText: answer,
+            confirmationType: state.isFallbackConfirmation
+                ? 'fallback'
+                : 'normal',
+          );
 
       final completed = OnboardingCompletedTurn(
         questionId: state.currentQuestionId,
@@ -250,7 +256,9 @@ class OnboardingChatNotifier extends _$OnboardingChatNotifier {
     );
 
     try {
-      final result = await ref.read(onboardingServiceProvider).validateAnswer(
+      final result = await ref
+          .read(onboardingServiceProvider)
+          .validateAnswer(
             locale: _apiLocale,
             questionId: state.currentQuestionId,
             answerText: answer,
@@ -285,10 +293,10 @@ class OnboardingChatNotifier extends _$OnboardingChatNotifier {
     );
     final questionId = state.currentQuestionId;
     state = state.copyWith(
-      messagesByQuestionId: _replaceThread(
-        questionId,
-        [..._threadFor(questionId), summaryMessage],
-      ),
+      messagesByQuestionId: _replaceThread(questionId, [
+        ..._threadFor(questionId),
+        summaryMessage,
+      ]),
       pendingTurnSummary: turnSummary,
       pendingAnswerText: answer,
       isFallbackConfirmation: isFallback,
@@ -306,10 +314,10 @@ class OnboardingChatNotifier extends _$OnboardingChatNotifier {
     final questionId = state.currentQuestionId;
     state = state.copyWith(
       activeQuestionText: rephrasedQuestion,
-      messagesByQuestionId: _replaceThread(
-        questionId,
-        [..._threadFor(questionId), lucyMessage],
-      ),
+      messagesByQuestionId: _replaceThread(questionId, [
+        ..._threadFor(questionId),
+        lucyMessage,
+      ]),
       phase: OnboardingChatPhase.awaitingAnswer,
       isSubmitting: false,
     );
@@ -351,10 +359,9 @@ class OnboardingChatNotifier extends _$OnboardingChatNotifier {
     );
 
     try {
-      final result = await ref.read(onboardingServiceProvider).analyze(
-            locale: _apiLocale,
-            profileReduced: true,
-          );
+      final result = await ref
+          .read(onboardingServiceProvider)
+          .analyze(locale: _apiLocale, profileReduced: true);
 
       final summaryText = switch (result) {
         OnboardingAnalyzeSuccess(:final summaryForUser) => summaryForUser,
@@ -371,10 +378,10 @@ class OnboardingChatNotifier extends _$OnboardingChatNotifier {
         analyzeResult: result,
         phase: OnboardingChatPhase.analysisReady,
         isSubmitting: false,
-        messagesByQuestionId: _replaceThread(
-          questionId,
-          [..._threadFor(questionId), analyzeMessage],
-        ),
+        messagesByQuestionId: _replaceThread(questionId, [
+          ..._threadFor(questionId),
+          analyzeMessage,
+        ]),
       );
     } catch (error) {
       state = state.copyWith(
@@ -401,7 +408,8 @@ class OnboardingChatNotifier extends _$OnboardingChatNotifier {
     final preservedTurns = state.completedTurns
         .where(
           (turn) =>
-              OnboardingQuestionIds.ordered.indexOf(turn.questionId) < stepIndex,
+              OnboardingQuestionIds.ordered.indexOf(turn.questionId) <
+              stepIndex,
         )
         .toList();
 
@@ -487,10 +495,10 @@ class OnboardingChatNotifier extends _$OnboardingChatNotifier {
 
       final questionId = state.currentQuestionId;
       state = state.copyWith(
-        messagesByQuestionId: _replaceThread(
-          questionId,
-          [..._threadFor(questionId), summaryMessage],
-        ),
+        messagesByQuestionId: _replaceThread(questionId, [
+          ..._threadFor(questionId),
+          summaryMessage,
+        ]),
         analyzeResult: result,
         phase: OnboardingChatPhase.analysisReady,
         isSubmitting: false,
@@ -508,9 +516,9 @@ class OnboardingChatNotifier extends _$OnboardingChatNotifier {
     if (!context.mounted) {
       return;
     }
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(message)),
-    );
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(SnackBar(content: Text(message)));
   }
 
   Future<void> _mirrorLocalDraft() async {
@@ -518,7 +526,9 @@ class OnboardingChatNotifier extends _$OnboardingChatNotifier {
     if (uid == null || !state.isInitialized) {
       return;
     }
-    await ref.read(onboardingServiceProvider).saveLocalDraft(
+    await ref
+        .read(onboardingServiceProvider)
+        .saveLocalDraft(
           onboardingLocalDraftFromChatState(
             uid: uid,
             uiLocale: _apiLocale,

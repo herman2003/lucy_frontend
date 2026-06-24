@@ -1,7 +1,1 @@
-enum ChatSendPhase {
-  idle,
-  sending,
-  streaming,
-  completed,
-  error,
-}
+enum ChatSendPhase { idle, sending, streaming, completed, error }

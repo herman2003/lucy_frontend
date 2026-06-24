@@ -8,15 +8,15 @@ part of 'lucy_app_locale_provider.dart';
 
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
-/// Runtime UI locale (fr / en / de) — synced from `GET /v1/users/me`.
+/// Runtime UI locale (fr / en / de) — synced from prefs and `GET /v1/users/me`.
 
 @ProviderFor(LucyAppLocale)
 const lucyAppLocaleProvider = LucyAppLocaleProvider._();
 
-/// Runtime UI locale (fr / en / de) — synced from `GET /v1/users/me`.
+/// Runtime UI locale (fr / en / de) — synced from prefs and `GET /v1/users/me`.
 final class LucyAppLocaleProvider
     extends $NotifierProvider<LucyAppLocale, Locale> {
-  /// Runtime UI locale (fr / en / de) — synced from `GET /v1/users/me`.
+  /// Runtime UI locale (fr / en / de) — synced from prefs and `GET /v1/users/me`.
   const LucyAppLocaleProvider._()
     : super(
         from: null,
@@ -44,9 +44,9 @@ final class LucyAppLocaleProvider
   }
 }
 
-String _$lucyAppLocaleHash() => r'9fc65a0c3798748ef29e3608e8f5df10cb4680d0';
+String _$lucyAppLocaleHash() => r'ace7c38f793659f92eb7e23c1463753a070fac9c';
 
-/// Runtime UI locale (fr / en / de) — synced from `GET /v1/users/me`.
+/// Runtime UI locale (fr / en / de) — synced from prefs and `GET /v1/users/me`.
 
 abstract class _$LucyAppLocale extends $Notifier<Locale> {
   Locale build();

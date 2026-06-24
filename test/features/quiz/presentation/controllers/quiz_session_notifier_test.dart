@@ -51,7 +51,9 @@ void main() {
     );
     addTearDown(container.dispose);
 
-    final notifier = container.read(quizSessionProvider('learn_test_1').notifier);
+    final notifier = container.read(
+      quizSessionProvider('learn_test_1').notifier,
+    );
     await notifier.load('learn_test_1');
 
     notifier.selectAnswer('item-1', 1);

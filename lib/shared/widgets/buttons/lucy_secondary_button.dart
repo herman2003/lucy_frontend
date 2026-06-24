@@ -24,7 +24,8 @@ class LucySecondaryButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final scheme = context.colorScheme;
-    final buttonWidth = width ??
+    final buttonWidth =
+        width ??
         (context.isDesktop
             ? context.screenWidth * 0.2.clamp(0.15, 0.3)
             : context.screenWidth * 0.85);
@@ -35,7 +36,9 @@ class LucySecondaryButton extends StatelessWidget {
         foregroundColor: scheme.primary,
         side: BorderSide(color: scheme.primary),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(LucyConstants.kButtonBorderRadius),
+          borderRadius: BorderRadius.circular(
+            LucyConstants.kButtonBorderRadius,
+          ),
         ),
         padding: const EdgeInsets.symmetric(
           horizontal: LucyConstants.kSpacingLarge,

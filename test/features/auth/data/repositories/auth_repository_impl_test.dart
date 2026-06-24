@@ -16,8 +16,7 @@ class _FakeAuthRemoteDataSource implements AuthRemoteDataSource {
   AuthUserSnapshot? get currentUser => current;
 
   @override
-  Stream<AuthUserSnapshot?> authStateChanges() =>
-      Stream.value(current);
+  Stream<AuthUserSnapshot?> authStateChanges() => Stream.value(current);
 
   @override
   Future<AuthUserSnapshot> createUserWithEmailAndPassword({
@@ -68,8 +67,7 @@ class _FakeAuthRemoteDataSource implements AuthRemoteDataSource {
   }
 
   @override
-  Future<String?> getIdToken({bool forceRefresh = false}) async =>
-      'fake-token';
+  Future<String?> getIdToken({bool forceRefresh = false}) async => 'fake-token';
 }
 
 class _FakeProfileRemoteDataSource implements UserProfileRemoteDataSource {
@@ -128,10 +126,12 @@ void main() {
       expect(authRemote.deleteUserCalled, isFalse);
     });
 
-    test('fetchIsConfiguredForCurrentUser returns false when not signed in',
-        () async {
-      expect(await repository.fetchIsConfiguredForCurrentUser(), isFalse);
-    });
+    test(
+      'fetchIsConfiguredForCurrentUser returns false when not signed in',
+      () async {
+        expect(await repository.fetchIsConfiguredForCurrentUser(), isFalse);
+      },
+    );
 
     test('fetchIsConfiguredForCurrentUser reads profile flag', () async {
       await repository.signUpWithEmailAndPassword(
@@ -190,14 +190,16 @@ void main() {
       expect(authRemote.deleteUserCalled, isTrue);
     });
 
-    test('fetchIsConfiguredForCurrentUser returns false when profile API fails',
-        () async {
-      authRemote.current = const AuthUserSnapshot(
-        uid: 'uid-1',
-        email: 'a@lucy.test',
-      );
-      profileRemote.shouldFailFetch = true;
-    });
+    test(
+      'fetchIsConfiguredForCurrentUser returns false when profile API fails',
+      () async {
+        authRemote.current = const AuthUserSnapshot(
+          uid: 'uid-1',
+          email: 'a@lucy.test',
+        );
+        profileRemote.shouldFailFetch = true;
+      },
+    );
 
     test('authStateChanges maps snapshots to AuthUser entities', () async {
       authRemote.current = const AuthUserSnapshot(
@@ -210,11 +212,7 @@ void main() {
 
       expect(
         values,
-        const AuthUser(
-          uid: 'uid-1',
-          email: 'a@lucy.test',
-          displayName: 'A',
-        ),
+        const AuthUser(uid: 'uid-1', email: 'a@lucy.test', displayName: 'A'),
       );
     });
   });

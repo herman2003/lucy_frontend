@@ -11,6 +11,8 @@ import 'package:lucy_frontend/features/quiz/domain/entities/quiz_eligibility.dar
 import 'package:lucy_frontend/features/quiz/domain/providers/learning_session_provider.dart';
 import 'package:lucy_frontend/features/quiz/domain/providers/quiz_provider.dart';
 import 'package:lucy_frontend/features/quiz/presentation/pages/quiz_page.dart';
+import 'package:lucy_frontend/features/quiz/presentation/widgets/quiz_session_card.dart';
+import 'package:lucy_frontend/features/quiz/presentation/widgets/quiz_session_list_tile.dart';
 import 'package:lucy_frontend/features/quiz/services/learning_session_service.dart';
 import 'package:lucy_frontend/features/quiz/services/quiz_service.dart';
 import 'package:lucy_frontend/shared/widgets/feedback/lucy_snackbar.dart';
@@ -49,7 +51,8 @@ void main() {
           ),
           learningSessionServiceProvider.overrideWithValue(
             LearningSessionService(
-              repository: FakeLearningSessionRepository()..setSessions(sessions),
+              repository: FakeLearningSessionRepository()
+                ..setSessions(sessions),
             ),
           ),
         ],
@@ -59,10 +62,7 @@ void main() {
           supportedLocales: AppLocalizations.supportedLocales,
           routerConfig: GoRouter(
             routes: [
-              GoRoute(
-                path: '/',
-                builder: (context, state) => const QuizPage(),
-              ),
+              GoRoute(path: '/', builder: (context, state) => const QuizPage()),
               GoRoute(
                 path: LucyRoutePaths.quizSession(':sessionId'),
                 builder: (context, state) =>
@@ -96,5 +96,17 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('session:learn_1'), findsOneWidget);
+  });
+
+  testWidgets('shows admin card grid on tablet width', (tester) async {
+    tester.view.physicalSize = const Size(1280, 800);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    await pumpQuizPage(tester);
+
+    expect(find.byType(QuizSessionCard), findsOneWidget);
+    expect(find.byType(QuizSessionListTile), findsNothing);
   });
 }

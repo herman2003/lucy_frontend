@@ -21,7 +21,9 @@ class FlashcardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
     final l10n = context.l10n;
-    final label = isFlipped ? l10n.flashcardsSessionBack : l10n.flashcardsSessionFront;
+    final label = isFlipped
+        ? l10n.flashcardsSessionBack
+        : l10n.flashcardsSessionFront;
     final text = isFlipped ? back : front;
 
     return Semantics(

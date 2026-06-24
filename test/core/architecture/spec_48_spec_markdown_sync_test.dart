@@ -71,9 +71,7 @@ const _mvpBackendCheckedSnippets = [
   '- [x] Tests : `OnboardingService`',
 ];
 
-const _mvpAppCheckedSnippetsExtra = [
-  '- [x] max **10** tentatives / question',
-];
+const _mvpAppCheckedSnippetsExtra = ['- [x] max **10** tentatives / question'];
 
 const _mvpAppCheckedSnippetsExtraAnalyze = [
   '- [x] fallback profil après 10 échecs analyze.',

@@ -5,11 +5,7 @@ import 'package:lucy_frontend/shared/widgets/branding/lucy_avatar.dart';
 void main() {
   testWidgets('LucyAvatar renders at requested size', (tester) async {
     await tester.pumpWidget(
-      const MaterialApp(
-        home: Scaffold(
-          body: LucyAvatar(size: 48),
-        ),
-      ),
+      const MaterialApp(home: Scaffold(body: LucyAvatar(size: 48))),
     );
 
     expect(find.byType(LucyAvatar), findsOneWidget);
@@ -19,11 +15,7 @@ void main() {
 
   testWidgets('LucyAvatar uses placeholder icon by default', (tester) async {
     await tester.pumpWidget(
-      const MaterialApp(
-        home: Scaffold(
-          body: LucyAvatar(),
-        ),
-      ),
+      const MaterialApp(home: Scaffold(body: LucyAvatar())),
     );
 
     expect(find.byIcon(Icons.auto_awesome), findsOneWidget);

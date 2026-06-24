@@ -5,11 +5,7 @@ import '../../../core/extensions/context.dart';
 
 /// Lucy branding mark for auth screens.
 class LucyLogo extends StatelessWidget {
-  const LucyLogo({
-    super.key,
-    this.size = 72,
-    this.showTitle = true,
-  });
+  const LucyLogo({super.key, this.size = 72, this.showTitle = true});
 
   final double size;
   final bool showTitle;
@@ -21,11 +17,7 @@ class LucyLogo extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Icon(
-          Icons.psychology_outlined,
-          size: size,
-          color: scheme.onPrimary,
-        ),
+        Icon(Icons.psychology_outlined, size: size, color: scheme.onPrimary),
         if (showTitle) ...[
           const SizedBox(height: LucyConstants.kSpacingLow),
           Text(

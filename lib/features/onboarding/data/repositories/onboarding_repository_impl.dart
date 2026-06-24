@@ -18,10 +18,10 @@ class OnboardingRepositoryImpl implements OnboardingRepository {
     required OnboardingConfirmRemoteDataSource confirmRemote,
     required OnboardingAnalyzeRemoteDataSource analyzeRemote,
     required OnboardingFinalizeRemoteDataSource finalizeRemote,
-  })  : _validateRemote = validateRemote,
-        _confirmRemote = confirmRemote,
-        _analyzeRemote = analyzeRemote,
-        _finalizeRemote = finalizeRemote;
+  }) : _validateRemote = validateRemote,
+       _confirmRemote = confirmRemote,
+       _analyzeRemote = analyzeRemote,
+       _finalizeRemote = finalizeRemote;
 
   final OnboardingValidateRemoteDataSource _validateRemote;
   final OnboardingConfirmRemoteDataSource _confirmRemote;

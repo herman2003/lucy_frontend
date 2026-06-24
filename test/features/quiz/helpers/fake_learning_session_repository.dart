@@ -4,7 +4,8 @@ import 'package:lucy_frontend/features/quiz/domain/entities/learning_session_lis
 import 'package:lucy_frontend/features/quiz/domain/repositories/learning_session_repository.dart';
 
 class FakeLearningSessionRepository implements LearningSessionRepository {
-  FakeLearningSessionRepository({LearningSession? session}) : _session = session;
+  FakeLearningSessionRepository({LearningSession? session})
+    : _session = session;
 
   LearningSession? _session;
   List<LearningSessionListItem> _sessions = const [];
@@ -20,7 +21,9 @@ class FakeLearningSessionRepository implements LearningSessionRepository {
   }
 
   @override
-  Future<LearningSession> generate(GenerateLearningSessionRequest request) async {
+  Future<LearningSession> generate(
+    GenerateLearningSessionRequest request,
+  ) async {
     lastGenerateRequest = request;
     if (_session == null) {
       throw StateError('FakeLearningSessionRepository session not set');

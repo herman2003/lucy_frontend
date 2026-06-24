@@ -265,6 +265,9 @@
   "quizEmptyHint": "Bitten Sie Lucy im Chat, ein Quiz zu erstellen.",
   "quizLibraryEmptyHint": "Bitten Sie Lucy im Chat, ein Quiz oder Karteikarten zu erstellen.",
   "quizLibraryHistoryTitle": "Verlauf",
+  "quizLibraryTypeQuiz": "Quiz",
+  "quizLibraryTypeFlashcards": "Karteikarten",
+  "quizLibraryOpen": "Öffnen",
   "quizLibraryDateToday": "Heute",
   "quizLibraryDateYesterday": "Gestern",
   "quizLibraryDeleteConfirmTitle": "Sitzung löschen?",
@@ -296,6 +299,10 @@
   "quizSessionPlaceholderMessage": "Diese Sitzung wird hier bald geöffnet.",
   "chatLearningSessionCardTitle": "Quiz bereit",
   "chatLearningSessionFlashcardsCardTitle": "Karteikarten bereit",
+  "chatLearningSessionQuizSubtitle": "Wiederhole deine Kurse mit einem interaktiven Quiz.",
+  "chatLearningSessionFlashcardsSubtitle": "Merke dir die wichtigsten Begriffe im Handumdrehen.",
+  "chatLearningSessionStartQuiz": "Quiz starten",
+  "chatLearningSessionStartFlashcards": "Karteikarten ansehen",
   "chatLearningSessionOpen": "Öffnen",
   "flashcardsSessionProgress": "Karte {current} / {total}",
   "@flashcardsSessionProgress": {
@@ -316,10 +323,27 @@
       "total": {"type": "int"}
     }
   },
+  "quizSessionProgressPercent": "{percent} %",
+  "@quizSessionProgressPercent": {
+    "placeholders": {
+      "percent": {"type": "int"}
+    }
+  },
   "quizSessionCorrect": "Richtig!",
   "quizSessionIncorrect": "Falsch",
+  "quizSessionExplanationTitle": "Erklärung",
   "quizSessionNextQuestion": "Nächste Frage",
   "quizSessionFinish": "Ergebnis ansehen",
+  "quizSessionScoreTitle": "Quiz abgeschlossen!",
+  "quizSessionScoreSubtitle": "Du hast {correct} von {total} Fragen richtig beantwortet.",
+  "@quizSessionScoreSubtitle": {
+    "placeholders": {
+      "correct": {"type": "int"},
+      "total": {"type": "int"}
+    }
+  },
+  "quizSessionClose": "Schließen",
+  "quizSessionRetry": "Erneut versuchen",
   "quizSessionScore": "Punkte: {correct} / {total}",
   "@quizSessionScore": {
     "placeholders": {

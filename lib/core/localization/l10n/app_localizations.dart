@@ -1492,6 +1492,24 @@ abstract class AppLocalizations {
   /// **'Verlauf'**
   String get quizLibraryHistoryTitle;
 
+  /// No description provided for @quizLibraryTypeQuiz.
+  ///
+  /// In de, this message translates to:
+  /// **'Quiz'**
+  String get quizLibraryTypeQuiz;
+
+  /// No description provided for @quizLibraryTypeFlashcards.
+  ///
+  /// In de, this message translates to:
+  /// **'Karteikarten'**
+  String get quizLibraryTypeFlashcards;
+
+  /// No description provided for @quizLibraryOpen.
+  ///
+  /// In de, this message translates to:
+  /// **'Öffnen'**
+  String get quizLibraryOpen;
+
   /// No description provided for @quizLibraryDateToday.
   ///
   /// In de, this message translates to:
@@ -1564,6 +1582,30 @@ abstract class AppLocalizations {
   /// **'Karteikarten bereit'**
   String get chatLearningSessionFlashcardsCardTitle;
 
+  /// No description provided for @chatLearningSessionQuizSubtitle.
+  ///
+  /// In de, this message translates to:
+  /// **'Wiederhole deine Kurse mit einem interaktiven Quiz.'**
+  String get chatLearningSessionQuizSubtitle;
+
+  /// No description provided for @chatLearningSessionFlashcardsSubtitle.
+  ///
+  /// In de, this message translates to:
+  /// **'Merke dir die wichtigsten Begriffe im Handumdrehen.'**
+  String get chatLearningSessionFlashcardsSubtitle;
+
+  /// No description provided for @chatLearningSessionStartQuiz.
+  ///
+  /// In de, this message translates to:
+  /// **'Quiz starten'**
+  String get chatLearningSessionStartQuiz;
+
+  /// No description provided for @chatLearningSessionStartFlashcards.
+  ///
+  /// In de, this message translates to:
+  /// **'Karteikarten ansehen'**
+  String get chatLearningSessionStartFlashcards;
+
   /// No description provided for @chatLearningSessionOpen.
   ///
   /// In de, this message translates to:
@@ -1612,6 +1654,12 @@ abstract class AppLocalizations {
   /// **'Frage {current} / {total}'**
   String quizSessionProgress(int current, int total);
 
+  /// No description provided for @quizSessionProgressPercent.
+  ///
+  /// In de, this message translates to:
+  /// **'{percent} %'**
+  String quizSessionProgressPercent(int percent);
+
   /// No description provided for @quizSessionCorrect.
   ///
   /// In de, this message translates to:
@@ -1624,6 +1672,12 @@ abstract class AppLocalizations {
   /// **'Falsch'**
   String get quizSessionIncorrect;
 
+  /// No description provided for @quizSessionExplanationTitle.
+  ///
+  /// In de, this message translates to:
+  /// **'Erklärung'**
+  String get quizSessionExplanationTitle;
+
   /// No description provided for @quizSessionNextQuestion.
   ///
   /// In de, this message translates to:
@@ -1635,6 +1689,30 @@ abstract class AppLocalizations {
   /// In de, this message translates to:
   /// **'Ergebnis ansehen'**
   String get quizSessionFinish;
+
+  /// No description provided for @quizSessionScoreTitle.
+  ///
+  /// In de, this message translates to:
+  /// **'Quiz abgeschlossen!'**
+  String get quizSessionScoreTitle;
+
+  /// No description provided for @quizSessionScoreSubtitle.
+  ///
+  /// In de, this message translates to:
+  /// **'Du hast {correct} von {total} Fragen richtig beantwortet.'**
+  String quizSessionScoreSubtitle(int correct, int total);
+
+  /// No description provided for @quizSessionClose.
+  ///
+  /// In de, this message translates to:
+  /// **'Schließen'**
+  String get quizSessionClose;
+
+  /// No description provided for @quizSessionRetry.
+  ///
+  /// In de, this message translates to:
+  /// **'Erneut versuchen'**
+  String get quizSessionRetry;
 
   /// No description provided for @quizSessionScore.
   ///

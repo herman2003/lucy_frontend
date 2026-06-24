@@ -5,7 +5,7 @@ import '../domain/repositories/learning_session_repository.dart';
 
 class LearningSessionService {
   LearningSessionService({required LearningSessionRepository repository})
-      : _repository = repository;
+    : _repository = repository;
 
   final LearningSessionRepository _repository;
 

@@ -21,10 +21,7 @@ class OnboardingConfirmRemoteDataSource {
         data: {
           'locale': locale,
           'confirmationType': confirmationType,
-          'turn': {
-            'questionId': questionId,
-            'answerText': answerText,
-          },
+          'turn': {'questionId': questionId, 'answerText': answerText},
         },
       );
       return response.data ?? {};

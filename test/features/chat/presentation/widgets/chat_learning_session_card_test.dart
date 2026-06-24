@@ -38,13 +38,15 @@ void main() {
     );
     await tester.pumpAndSettle();
 
-    await tester.tap(find.text('Ouvrir'));
+    await tester.tap(find.text('Commencer le quiz'));
     await tester.pumpAndSettle();
 
     expect(find.text('session:learn_test_1'), findsOneWidget);
   });
 
-  testWidgets('shows flashcards card title for flashcards session', (tester) async {
+  testWidgets('shows flashcards card title for flashcards session', (
+    tester,
+  ) async {
     await tester.pumpWidget(
       MaterialApp(
         localizationsDelegates: AppLocalizations.localizationsDelegates,

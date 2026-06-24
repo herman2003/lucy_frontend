@@ -87,10 +87,7 @@ class LucyConversationStatus extends StatelessWidget {
                 style: Theme.of(context).textTheme.bodyLarge,
               ),
               const SizedBox(height: LucyConstants.kSpacingMedium),
-              LucyPrimaryButton(
-                text: l10n.chatRetry,
-                onPressed: onRetry,
-              ),
+              LucyPrimaryButton(text: l10n.chatRetry, onPressed: onRetry),
             ],
           ),
         ),

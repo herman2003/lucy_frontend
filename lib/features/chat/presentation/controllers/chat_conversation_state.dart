@@ -24,7 +24,8 @@ abstract class ChatConversationState with _$ChatConversationState {
   }) = _ChatConversationState;
 
   bool get isStreaming =>
-      sendPhase == ChatSendPhase.sending || sendPhase == ChatSendPhase.streaming;
+      sendPhase == ChatSendPhase.sending ||
+      sendPhase == ChatSendPhase.streaming;
 
   bool get canSend => !isStreaming;
 }

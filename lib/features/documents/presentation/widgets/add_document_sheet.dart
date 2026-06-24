@@ -6,18 +6,16 @@ import '../../../../shared/widgets/buttons/lucy_primary_button.dart';
 import '../../../../shared/widgets/buttons/lucy_secondary_button.dart';
 import '../../utils/document_mime_util.dart';
 
-typedef AddDocumentSubmit = void Function({
-  required String title,
-  required String fileName,
-  required String mimeType,
-  required List<int> bytes,
-});
+typedef AddDocumentSubmit =
+    void Function({
+      required String title,
+      required String fileName,
+      required String mimeType,
+      required List<int> bytes,
+    });
 
 class AddDocumentSheet extends StatefulWidget {
-  const AddDocumentSheet({
-    required this.onSubmit,
-    super.key,
-  });
+  const AddDocumentSheet({required this.onSubmit, super.key});
 
   final AddDocumentSubmit onSubmit;
 
@@ -62,7 +60,9 @@ class _AddDocumentSheetState extends State<AddDocumentSheet> {
       _mimeType = mime;
       _fileError = null;
       if (_titleController.text.trim().isEmpty) {
-        final base = name.contains('.') ? name.substring(0, name.lastIndexOf('.')) : name;
+        final base = name.contains('.')
+            ? name.substring(0, name.lastIndexOf('.'))
+            : name;
         _titleController.text = base.length >= 3 ? base : base.padRight(3, '_');
       }
     });
@@ -113,9 +113,7 @@ class _AddDocumentSheetState extends State<AddDocumentSheet> {
           const SizedBox(height: 16),
           TextField(
             controller: _titleController,
-            decoration: InputDecoration(
-              labelText: l10n.documentsFieldTitle,
-            ),
+            decoration: InputDecoration(labelText: l10n.documentsFieldTitle),
             textInputAction: TextInputAction.done,
           ),
           const SizedBox(height: 12),

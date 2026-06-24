@@ -32,10 +32,9 @@ class LoginNotifier extends _$LoginNotifier {
     state = state.copyWith(isLoading: true);
 
     try {
-      await ref.read(authServiceProvider).loginWithEmail(
-            email: state.email.trim(),
-            password: state.password,
-          );
+      await ref
+          .read(authServiceProvider)
+          .loginWithEmail(email: state.email.trim(), password: state.password);
       state = const LoginState();
       if (!context.mounted) {
         return;

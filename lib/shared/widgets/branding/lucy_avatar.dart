@@ -40,10 +40,6 @@ class LucyAvatar extends StatelessWidget {
   }
 
   Widget _fallbackIcon(ColorScheme colorScheme) {
-    return Icon(
-      Icons.auto_awesome,
-      size: size * 0.55,
-      color: Colors.white,
-    );
+    return Icon(Icons.auto_awesome, size: size * 0.55, color: Colors.white);
   }
 }

@@ -36,9 +36,9 @@ class ChatNoCorpusBanner extends StatelessWidget {
             const SizedBox(height: LucyConstants.kSpacingLow),
             Text(
               l10n.chatNoCorpusMessage,
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: scheme.onErrorContainer,
-              ),
+              style: Theme.of(
+                context,
+              ).textTheme.bodyMedium?.copyWith(color: scheme.onErrorContainer),
             ),
             const SizedBox(height: LucyConstants.kSpacingMedium),
             LucyPrimaryButton(

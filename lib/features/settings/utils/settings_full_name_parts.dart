@@ -15,10 +15,7 @@ abstract final class SettingsFullNameParts {
     );
   }
 
-  static String join({
-    required String firstName,
-    required String lastName,
-  }) {
+  static String join({required String firstName, required String lastName}) {
     return '${firstName.trim()} ${lastName.trim()}'.trim();
   }
 }

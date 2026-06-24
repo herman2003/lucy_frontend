@@ -37,7 +37,9 @@ const _flashcardsSession = LearningSession(
 
 void main() {
   test('navigates cards and resets flip on next/previous', () async {
-    final repository = FakeLearningSessionRepository(session: _flashcardsSession);
+    final repository = FakeLearningSessionRepository(
+      session: _flashcardsSession,
+    );
     final container = ProviderContainer(
       overrides: [
         learningSessionServiceProvider.overrideWithValue(
@@ -47,8 +49,9 @@ void main() {
     );
     addTearDown(container.dispose);
 
-    final notifier =
-        container.read(flashcardsSessionProvider('learn_flash_1').notifier);
+    final notifier = container.read(
+      flashcardsSessionProvider('learn_flash_1').notifier,
+    );
     await notifier.load('learn_flash_1');
 
     notifier.toggleFlip();
@@ -58,14 +61,17 @@ void main() {
     );
 
     notifier.goToNextCard();
-    final afterNext = container.read(flashcardsSessionProvider('learn_flash_1'));
+    final afterNext = container.read(
+      flashcardsSessionProvider('learn_flash_1'),
+    );
     expect(afterNext.currentIndex, 1);
     expect(afterNext.isFlipped, isFalse);
 
     notifier.toggleFlip();
     notifier.goToPreviousCard();
-    final afterPrevious =
-        container.read(flashcardsSessionProvider('learn_flash_1'));
+    final afterPrevious = container.read(
+      flashcardsSessionProvider('learn_flash_1'),
+    );
     expect(afterPrevious.currentIndex, 0);
     expect(afterPrevious.isFlipped, isFalse);
     expect(afterPrevious.canGoNext, isTrue);

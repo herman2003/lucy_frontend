@@ -43,10 +43,7 @@ void main() {
           return const SizedBox.shrink();
         }),
       );
-      expect(
-        message,
-        'Impossible d’enregistrer votre profil. Réessayez.',
-      );
+      expect(message, 'Impossible d’enregistrer votre profil. Réessayez.');
     });
 
     testWidgets('maps user-profile-conflict to French l10n', (tester) async {
@@ -60,10 +57,7 @@ void main() {
           return const SizedBox.shrink();
         }),
       );
-      expect(
-        message,
-        'Cet email est déjà associé à un autre profil.',
-      );
+      expect(message, 'Cet email est déjà associé à un autre profil.');
     });
 
     testWidgets('maps unknown code to generic French error', (tester) async {

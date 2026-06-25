@@ -35,7 +35,7 @@
 
 | Statut | Id | Tâche |
 |--------|-----|--------|
-| [ ] | UI-03a | `LucyDocumentCard`, `LucyChip`, `LucyEmptyState` |
+| [x] | UI-03a | `LucyDocumentCard`, `LucyChip`, `LucyEmptyState` |
 | [ ] | UI-03b | `DocumentsPage` restyle grille/liste |
 
 ---

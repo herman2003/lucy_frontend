@@ -3,6 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lucy_frontend/core/localization/l10n/app_localizations.dart';
 import 'package:lucy_frontend/core/router/lucy_route_paths.dart';
+import 'package:lucy_frontend/core/theme/lucy_flex_theme.dart';
 import 'package:lucy_frontend/features/chat/domain/entities/chat_learning_session_created.dart';
 import 'package:lucy_frontend/features/chat/presentation/widgets/chat_learning_session_card.dart';
 
@@ -30,6 +31,7 @@ void main() {
 
     await tester.pumpWidget(
       MaterialApp.router(
+        theme: LucyFlexTheme.lightTheme,
         routerConfig: router,
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
@@ -49,6 +51,7 @@ void main() {
   ) async {
     await tester.pumpWidget(
       MaterialApp(
+        theme: LucyFlexTheme.lightTheme,
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
         locale: const Locale('fr'),

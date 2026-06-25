@@ -466,6 +466,17 @@
     }
   },
   "chatEmptyHint": "Posez une question sur vos documents actifs.",
+  "chatActiveDocumentsCount": "{count, plural, =0{Aucun document actif} one{{count} document actif} other{{count} documents actifs}}",
+  "@chatActiveDocumentsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "chatSuggestionSummarize": "Résume mes documents",
+  "chatSuggestionQuiz": "Propose-moi un quiz",
+  "chatSuggestionExplain": "Explique un concept clé",
   "chatComposerHint": "Votre message…",
   "chatSend": "Envoyer",
   "chatRetry": "Réessayer",

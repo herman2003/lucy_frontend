@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../../core/constants/lucy_constants.dart';
+import '../../../../core/constants/lucy_spacing.dart';
 import '../../../../core/extensions/context.dart';
 import '../../../../core/router/lucy_route_paths.dart';
+import '../../../../core/theme/lucy_theme_extensions.dart';
 import '../../../../shared/widgets/buttons/lucy_primary_button.dart';
 import '../../domain/entities/chat_learning_session_created.dart';
 
@@ -16,7 +17,8 @@ class ChatLearningSessionCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = context.colorScheme;
+    final lucy = context.lucyTheme;
     final l10n = context.l10n;
     final cardTitle = _isFlashcards
         ? l10n.chatLearningSessionFlashcardsCardTitle
@@ -30,14 +32,16 @@ class ChatLearningSessionCard extends StatelessWidget {
     final icon = _isFlashcards ? Icons.style_outlined : Icons.quiz_outlined;
 
     return Container(
-      margin: const EdgeInsets.only(bottom: LucyConstants.kSpacingMedium),
+      margin: const EdgeInsets.only(bottom: LucySpacing.spaceMd),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(LucyConstants.kBorderRadiusLarge),
-        border: Border.all(color: scheme.primary.withValues(alpha: 0.25)),
-        color: scheme.primaryContainer.withValues(alpha: 0.22),
+        borderRadius: BorderRadius.circular(LucySpacing.radiusCard),
+        border: Border.all(
+          color: lucy.tealChipForeground.withValues(alpha: 0.4),
+        ),
+        color: lucy.tealChipBackground.withValues(alpha: 0.35),
       ),
       child: Padding(
-        padding: const EdgeInsets.all(LucyConstants.kSpacingLarge),
+        padding: const EdgeInsets.all(LucySpacing.spaceLg),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -45,31 +49,30 @@ class ChatLearningSessionCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  padding: const EdgeInsets.all(LucyConstants.kSpacingMedium),
+                  padding: const EdgeInsets.all(LucySpacing.spaceSm + 2),
                   decoration: BoxDecoration(
                     color: scheme.primary,
                     shape: BoxShape.circle,
                   ),
-                  child: Icon(icon, color: scheme.onPrimary, size: 28),
+                  child: Icon(icon, color: scheme.onPrimary, size: 24),
                 ),
-                const SizedBox(width: LucyConstants.kSpacingMedium),
+                const SizedBox(width: LucySpacing.spaceMd),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         cardTitle,
-                        style: Theme.of(context).textTheme.titleMedium
-                            ?.copyWith(
-                              color: scheme.primary,
-                              fontWeight: FontWeight.w700,
-                            ),
+                        style: context.textTheme.titleMedium?.copyWith(
+                          color: scheme.primary,
+                          fontWeight: FontWeight.w700,
+                        ),
                       ),
-                      const SizedBox(height: LucyConstants.kSpacingLow / 2),
+                      const SizedBox(height: LucySpacing.spaceXs),
                       Text(
                         subtitle,
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: scheme.onSurfaceVariant,
+                        style: context.textTheme.bodyMedium?.copyWith(
+                          color: lucy.muted,
                         ),
                       ),
                     ],
@@ -77,15 +80,15 @@ class ChatLearningSessionCard extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: LucyConstants.kSpacingLarge),
+            const SizedBox(height: LucySpacing.spaceLg),
             Text(
               session.title,
-              style: Theme.of(context).textTheme.titleLarge?.copyWith(
+              style: context.textTheme.titleSmall?.copyWith(
                 color: scheme.onSurface,
                 fontWeight: FontWeight.w600,
               ),
             ),
-            const SizedBox(height: LucyConstants.kSpacingLarge),
+            const SizedBox(height: LucySpacing.spaceLg),
             SizedBox(
               width: double.infinity,
               child: LucyPrimaryButton(

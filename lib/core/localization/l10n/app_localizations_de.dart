@@ -728,6 +728,27 @@ class AppLocalizationsDe extends AppLocalizations {
       'Stellen Sie eine Frage zu Ihren aktiven Dokumenten.';
 
   @override
+  String chatActiveDocumentsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count aktive Dokumente',
+      one: '$count aktives Dokument',
+      zero: 'Keine aktiven Dokumente',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get chatSuggestionSummarize => 'Fasse meine Dokumente zusammen';
+
+  @override
+  String get chatSuggestionQuiz => 'Schlage ein Quiz vor';
+
+  @override
+  String get chatSuggestionExplain => 'Erkläre ein Schlüsselkonzept';
+
+  @override
   String get chatComposerHint => 'Ihre Nachricht…';
 
   @override

@@ -254,6 +254,17 @@
     }
   },
   "chatEmptyHint": "Ask a question about your active documents.",
+  "chatActiveDocumentsCount": "{count, plural, =0{No active documents} one{{count} active document} other{{count} active documents}}",
+  "@chatActiveDocumentsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "chatSuggestionSummarize": "Summarize my documents",
+  "chatSuggestionQuiz": "Suggest a quiz",
+  "chatSuggestionExplain": "Explain a key concept",
   "chatComposerHint": "Your message…",
   "chatSend": "Send",
   "chatRetry": "Retry",

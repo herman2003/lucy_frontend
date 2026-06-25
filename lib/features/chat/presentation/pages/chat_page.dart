@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../../core/constants/lucy_constants.dart';
+import '../../../../core/constants/lucy_spacing.dart';
 import '../../../../core/extensions/context.dart';
+import '../../../../core/localization/l10n/app_localizations.dart';
 import '../../../../core/shell/lucy_chat_threads_panel.dart';
 import '../../../../core/shell/lucy_conversations_drawer.dart';
+import '../../../../core/theme/lucy_theme_extensions.dart';
 import '../../../../shared/widgets/feedback/lucy_snackbar.dart';
-import '../../../onboarding/presentation/widgets/onboarding_lucy_bubble.dart';
-import '../../../onboarding/presentation/widgets/onboarding_lucy_typing_row.dart';
+import '../../../../shared/widgets/lucy/lucy_chip.dart';
+import '../../../../shared/widgets/lucy/lucy_message_bubble.dart';
 import '../../utils/chat_constants.dart';
 import '../../utils/chat_error_translator.dart';
 import '../controllers/chat_conversation_notifier.dart';
@@ -15,11 +17,11 @@ import '../controllers/chat_threads_notifier.dart';
 import '../controllers/chat_threads_state.dart';
 import '../utils/chat_conversation_status_resolver.dart';
 import '../widgets/chat_composer.dart';
+import '../widgets/chat_conversation_empty_state.dart';
 import '../widgets/chat_learning_session_card.dart';
 import '../widgets/chat_message_bubble.dart';
 import '../widgets/chat_no_corpus_banner.dart';
 import '../widgets/chat_source_card.dart';
-import '../widgets/chat_thread_list_tile.dart';
 import '../widgets/lucy_conversation_status.dart';
 
 /// Chat tab — master-detail threads and SSE conversation (SPEC §2, P4a).
@@ -147,8 +149,10 @@ class _ChatPageState extends ConsumerState<ChatPage> {
     }
 
     final hasSelectedThread = selectedId != null;
+    final activeDocumentCount = threadsState.eligibility?.activeDocumentCount;
 
     return Scaffold(
+      backgroundColor: context.lucyTheme.scaffoldBackground,
       appBar: AppBar(
         automaticallyImplyLeading: false,
         leading: hasSelectedThread
@@ -220,14 +224,16 @@ class _ChatPageState extends ConsumerState<ChatPage> {
                                 scrollController: _scrollController,
                                 isOffline: threadsState.isOffline,
                                 canChat: canChat,
+                                activeDocumentCount: activeDocumentCount,
                               ),
                             ),
                           ],
                         )
                       : selectedId == null
-                      ? _ThreadListPanel(
+                      ? _MobileThreadList(
                           threadsState: threadsState,
                           selectedId: selectedId,
+                          canCreateThread: canCreateThread,
                         )
                       : Stack(
                           fit: StackFit.expand,
@@ -237,6 +243,7 @@ class _ChatPageState extends ConsumerState<ChatPage> {
                               scrollController: _scrollController,
                               isOffline: threadsState.isOffline,
                               canChat: canChat,
+                              activeDocumentCount: activeDocumentCount,
                             ),
                             LucyConversationsDrawer(
                               isOpen: _mobileDrawerOpen,
@@ -264,44 +271,45 @@ class _ChatPageState extends ConsumerState<ChatPage> {
   }
 }
 
-class _ThreadListPanel extends ConsumerWidget {
-  const _ThreadListPanel({
+class _MobileThreadList extends ConsumerWidget {
+  const _MobileThreadList({
     required this.threadsState,
     required this.selectedId,
+    required this.canCreateThread,
   });
 
   final ChatThreadsState threadsState;
   final String? selectedId;
+  final bool canCreateThread;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
+    final lucy = context.lucyTheme;
 
-    if (threadsState.threads.isEmpty) {
-      return Center(
-        child: Padding(
-          padding: const EdgeInsets.all(LucyConstants.kSpacingLarge),
-          child: Text(
-            l10n.chatEmptyHint,
-            textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.bodyLarge,
-          ),
-        ),
-      );
-    }
-
-    return ListView.builder(
-      itemCount: threadsState.threads.length,
-      itemBuilder: (context, index) {
-        final thread = threadsState.threads[index];
-        return ChatThreadListTile(
-          thread: thread,
-          selected: thread.id == selectedId,
-          onTap: () => ref
-              .read(chatThreadsProvider.notifier)
-              .selectThread(thread.id, context),
-        );
-      },
+    return ColoredBox(
+      color: lucy.surfaceSecondary,
+      child: LucyChatThreadsBody(
+        title: l10n.chatConversationsTitle,
+        newConversationLabel: l10n.chatNewConversation,
+        emptyMessage: l10n.chatEmptyHint,
+        threads: threadsState.threads
+            .map(
+              (thread) => LucyChatThreadItem(
+                id: thread.id,
+                title: thread.title,
+                preview: thread.lastMessagePreview,
+              ),
+            )
+            .toList(),
+        selectedThreadId: selectedId,
+        canCreateThread: canCreateThread,
+        onThreadSelected: (id) => ref
+            .read(chatThreadsProvider.notifier)
+            .selectThread(id, context),
+        onCreateThread: () =>
+            ref.read(chatThreadsProvider.notifier).createThread(context),
+      ),
     );
   }
 }
@@ -312,12 +320,20 @@ class _ConversationPanel extends ConsumerWidget {
     required this.scrollController,
     required this.isOffline,
     required this.canChat,
+    this.activeDocumentCount,
   });
 
   final String? chatId;
   final ScrollController scrollController;
   final bool isOffline;
   final bool canChat;
+  final int? activeDocumentCount;
+
+  List<String> _suggestions(AppLocalizations l10n) => [
+    l10n.chatSuggestionSummarize,
+    l10n.chatSuggestionQuiz,
+    l10n.chatSuggestionExplain,
+  ];
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -341,9 +357,27 @@ class _ConversationPanel extends ConsumerWidget {
     final errorMessage = conversation.errorCode == null
         ? null
         : ChatErrorTranslator.translate(context, conversation.errorCode!);
+    final canSend = conversation.canSend && !isOffline && canChat;
 
     return Column(
       children: [
+        if (activeDocumentCount != null && activeDocumentCount! > 0 && canChat)
+          Padding(
+            padding: const EdgeInsets.fromLTRB(
+              LucySpacing.spaceLg,
+              LucySpacing.spaceMd,
+              LucySpacing.spaceLg,
+              0,
+            ),
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: LucyChip(
+                label: l10n.chatActiveDocumentsCount(activeDocumentCount!),
+                variant: LucyChipVariant.teal,
+                icon: Icons.description_outlined,
+              ),
+            ),
+          ),
         Expanded(
           child: LucyConversationStatus(
             status: status,
@@ -351,18 +385,34 @@ class _ConversationPanel extends ConsumerWidget {
             onRetry: () => ref
                 .read(chatConversationProvider(chatId!).notifier)
                 .loadMessages(),
+            emptyWidget: ChatConversationEmptyState(
+              message: l10n.chatEmptyHint,
+              suggestions: _suggestions(l10n),
+              onSuggestionSelected: (text) {
+                if (canSend) {
+                  ref
+                      .read(chatConversationProvider(chatId!).notifier)
+                      .sendMessage(text);
+                }
+              },
+            ),
             child: ListView.builder(
               controller: scrollController,
-              padding: const EdgeInsets.all(LucyConstants.kSpacingMedium),
+              padding: const EdgeInsets.all(LucySpacing.spaceMd),
               itemCount: _conversationItemCount(conversation),
               itemBuilder: (context, index) {
-                return _buildConversationItem(context, conversation, index);
+                return _buildConversationItem(
+                  context,
+                  l10n,
+                  conversation,
+                  index,
+                );
               },
             ),
           ),
         ),
         ChatComposer(
-          enabled: conversation.canSend && !isOffline && canChat,
+          enabled: canSend,
           onSend: (text) => ref
               .read(chatConversationProvider(chatId!).notifier)
               .sendMessage(text),
@@ -392,13 +442,14 @@ class _ConversationPanel extends ConsumerWidget {
 
   Widget _buildConversationItem(
     BuildContext context,
+    AppLocalizations l10n,
     ChatConversationState conversation,
     int index,
   ) {
     final messageCount = conversation.messages.length;
     if (index < messageCount) {
       return Padding(
-        padding: const EdgeInsets.only(bottom: LucyConstants.kSpacingMedium),
+        padding: const EdgeInsets.only(bottom: LucySpacing.spaceMd),
         child: ChatMessageBubble(message: conversation.messages[index]),
       );
     }
@@ -410,14 +461,22 @@ class _ConversationPanel extends ConsumerWidget {
 
     if (showStreamingBubble && index == offset) {
       return Padding(
-        padding: const EdgeInsets.only(bottom: LucyConstants.kSpacingMedium),
-        child: OnboardingLucyBubble(text: conversation.streamingContent),
+        padding: const EdgeInsets.only(bottom: LucySpacing.spaceMd),
+        child: LucyMessageBubble(
+          role: LucyMessageBubbleRole.assistant,
+          text: conversation.streamingContent,
+        ),
       );
     }
     if (showTyping && index == offset) {
-      return const Padding(
-        padding: EdgeInsets.only(bottom: LucyConstants.kSpacingMedium),
-        child: OnboardingLucyTypingRow(),
+      return Padding(
+        padding: const EdgeInsets.only(bottom: LucySpacing.spaceMd),
+        child: LucyMessageBubble(
+          role: LucyMessageBubbleRole.assistant,
+          text: '',
+          isTyping: true,
+          typingLabel: l10n.onboardingLucyTyping,
+        ),
       );
     }
     if (showStreamingBubble) {

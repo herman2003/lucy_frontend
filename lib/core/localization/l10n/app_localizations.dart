@@ -1384,6 +1384,30 @@ abstract class AppLocalizations {
   /// **'Stellen Sie eine Frage zu Ihren aktiven Dokumenten.'**
   String get chatEmptyHint;
 
+  /// No description provided for @chatActiveDocumentsCount.
+  ///
+  /// In de, this message translates to:
+  /// **'{count, plural, =0{Keine aktiven Dokumente} one{{count} aktives Dokument} other{{count} aktive Dokumente}}'**
+  String chatActiveDocumentsCount(int count);
+
+  /// No description provided for @chatSuggestionSummarize.
+  ///
+  /// In de, this message translates to:
+  /// **'Fasse meine Dokumente zusammen'**
+  String get chatSuggestionSummarize;
+
+  /// No description provided for @chatSuggestionQuiz.
+  ///
+  /// In de, this message translates to:
+  /// **'Schlage ein Quiz vor'**
+  String get chatSuggestionQuiz;
+
+  /// No description provided for @chatSuggestionExplain.
+  ///
+  /// In de, this message translates to:
+  /// **'Erkläre ein Schlüsselkonzept'**
+  String get chatSuggestionExplain;
+
   /// No description provided for @chatComposerHint.
   ///
   /// In de, this message translates to:

@@ -47,7 +47,7 @@
 | [x] | UI-04a | `LucyMessageBubble`, `LucySourceCard`, `LucyComposer` |
 | [x] | UI-04b | `LucyChatThreadsPanel` desktop 300 px |
 | [x] | UI-04c | `LucyConversationsDrawer` mobile |
-| [ ] | UI-04d | `ChatPage` intégration + tests chat |
+| [x] | UI-04d | `ChatPage` intégration + tests chat |
 
 ---
 

@@ -727,6 +727,27 @@ class AppLocalizationsFr extends AppLocalizations {
   String get chatEmptyHint => 'Posez une question sur vos documents actifs.';
 
   @override
+  String chatActiveDocumentsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count documents actifs',
+      one: '$count document actif',
+      zero: 'Aucun document actif',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get chatSuggestionSummarize => 'Résume mes documents';
+
+  @override
+  String get chatSuggestionQuiz => 'Propose-moi un quiz';
+
+  @override
+  String get chatSuggestionExplain => 'Explique un concept clé';
+
+  @override
   String get chatComposerHint => 'Votre message…';
 
   @override

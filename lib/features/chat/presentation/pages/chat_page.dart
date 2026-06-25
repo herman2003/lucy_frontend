@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/constants/lucy_constants.dart';
 import '../../../../core/extensions/context.dart';
 import '../../../../core/shell/lucy_chat_threads_panel.dart';
+import '../../../../core/shell/lucy_conversations_drawer.dart';
 import '../../../../shared/widgets/feedback/lucy_snackbar.dart';
 import '../../../onboarding/presentation/widgets/onboarding_lucy_bubble.dart';
 import '../../../onboarding/presentation/widgets/onboarding_lucy_typing_row.dart';
@@ -34,6 +35,7 @@ class ChatPage extends ConsumerStatefulWidget {
 class _ChatPageState extends ConsumerState<ChatPage> {
   final _scrollController = ScrollController();
   bool _threadListPanelVisible = true;
+  bool _mobileDrawerOpen = false;
 
   bool _canChat(ChatThreadsState threadsState) =>
       threadsState.eligibility?.canChat ?? true;
@@ -74,16 +76,24 @@ class _ChatPageState extends ConsumerState<ChatPage> {
 
   void _onThreadListAction({
     required bool useMasterDetail,
-    required bool hasSelectedThread,
   }) {
-    if (!hasSelectedThread) {
-      return;
-    }
     if (useMasterDetail) {
       setState(() => _threadListPanelVisible = !_threadListPanelVisible);
       return;
     }
-    ref.read(chatThreadsProvider.notifier).openThreadList(context);
+    setState(() => _mobileDrawerOpen = true);
+  }
+
+  List<LucyChatThreadItem> _threadItems(ChatThreadsState threadsState) {
+    return threadsState.threads
+        .map(
+          (thread) => LucyChatThreadItem(
+            id: thread.id,
+            title: thread.title,
+            preview: thread.lastMessagePreview,
+          ),
+        )
+        .toList();
   }
 
   void _scrollToBottom() {
@@ -144,14 +154,17 @@ class _ChatPageState extends ConsumerState<ChatPage> {
         leading: hasSelectedThread
             ? IconButton(
                 icon: Icon(
-                  useMasterDetail && _threadListPanelVisible
-                      ? Icons.view_sidebar
-                      : Icons.view_sidebar_outlined,
+                  useMasterDetail
+                      ? (_threadListPanelVisible
+                            ? Icons.view_sidebar
+                            : Icons.view_sidebar_outlined)
+                      : Icons.menu,
                 ),
-                tooltip: l10n.chatShowThreadList,
+                tooltip: useMasterDetail
+                    ? l10n.chatShowThreadList
+                    : l10n.chatConversationsTitle,
                 onPressed: () => _onThreadListAction(
                   useMasterDetail: useMasterDetail,
-                  hasSelectedThread: hasSelectedThread,
                 ),
               )
             : null,
@@ -189,15 +202,7 @@ class _ChatPageState extends ConsumerState<ChatPage> {
                                 title: l10n.chatConversationsTitle,
                                 newConversationLabel: l10n.chatNewConversation,
                                 emptyMessage: l10n.chatEmptyHint,
-                                threads: threadsState.threads
-                                    .map(
-                                      (thread) => LucyChatThreadItem(
-                                        id: thread.id,
-                                        title: thread.title,
-                                        preview: thread.lastMessagePreview,
-                                      ),
-                                    )
-                                    .toList(),
+                                threads: _threadItems(threadsState),
                                 selectedThreadId: selectedId,
                                 canCreateThread: canCreateThread,
                                 onThreadSelected: (id) => ref
@@ -224,11 +229,33 @@ class _ChatPageState extends ConsumerState<ChatPage> {
                           threadsState: threadsState,
                           selectedId: selectedId,
                         )
-                      : _ConversationPanel(
-                          chatId: selectedId,
-                          scrollController: _scrollController,
-                          isOffline: threadsState.isOffline,
-                          canChat: canChat,
+                      : Stack(
+                          fit: StackFit.expand,
+                          children: [
+                            _ConversationPanel(
+                              chatId: selectedId,
+                              scrollController: _scrollController,
+                              isOffline: threadsState.isOffline,
+                              canChat: canChat,
+                            ),
+                            LucyConversationsDrawer(
+                              isOpen: _mobileDrawerOpen,
+                              onClose: () =>
+                                  setState(() => _mobileDrawerOpen = false),
+                              title: l10n.chatConversationsTitle,
+                              newConversationLabel: l10n.chatNewConversation,
+                              emptyMessage: l10n.chatEmptyHint,
+                              threads: _threadItems(threadsState),
+                              selectedThreadId: selectedId,
+                              canCreateThread: canCreateThread,
+                              onThreadSelected: (id) => ref
+                                  .read(chatThreadsProvider.notifier)
+                                  .selectThread(id, context),
+                              onCreateThread: () => ref
+                                  .read(chatThreadsProvider.notifier)
+                                  .createThread(context),
+                            ),
+                          ],
                         ),
                 ),
               ],

@@ -48,49 +48,89 @@ class LucyChatThreadsPanel extends StatelessWidget {
       width: LucySpacing.chatThreadsPanelWidth,
       child: ColoredBox(
         color: lucy.surfaceSecondary,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            _PanelHeader(
-              title: title,
-              newConversationLabel: newConversationLabel,
-              canCreateThread: canCreateThread,
-              onCreateThread: onCreateThread,
-            ),
-            Expanded(
-              child: threads.isEmpty
-                  ? Center(
-                      child: Padding(
-                        padding: const EdgeInsets.all(LucySpacing.spaceXl),
-                        child: Text(
-                          emptyMessage,
-                          textAlign: TextAlign.center,
-                          style: context.textTheme.bodyMedium?.copyWith(
-                            color: lucy.muted,
-                          ),
-                        ),
-                      ),
-                    )
-                  : ListView.separated(
-                      padding: const EdgeInsets.symmetric(
-                        vertical: LucySpacing.spaceSm,
-                      ),
-                      itemCount: threads.length,
-                      separatorBuilder: (context, index) =>
-                          const SizedBox(height: LucySpacing.spaceXs),
-                      itemBuilder: (context, index) {
-                        final thread = threads[index];
-                        return _ThreadTile(
-                          thread: thread,
-                          selected: thread.id == selectedThreadId,
-                          onTap: () => onThreadSelected(thread.id),
-                        );
-                      },
-                    ),
-            ),
-          ],
+        child: LucyChatThreadsBody(
+          title: title,
+          newConversationLabel: newConversationLabel,
+          emptyMessage: emptyMessage,
+          threads: threads,
+          selectedThreadId: selectedThreadId,
+          canCreateThread: canCreateThread,
+          onThreadSelected: onThreadSelected,
+          onCreateThread: onCreateThread,
         ),
       ),
+    );
+  }
+}
+
+/// Shared conversations list content (desktop panel + mobile drawer).
+class LucyChatThreadsBody extends StatelessWidget {
+  const LucyChatThreadsBody({
+    required this.title,
+    required this.newConversationLabel,
+    required this.emptyMessage,
+    required this.threads,
+    required this.onThreadSelected,
+    required this.onCreateThread,
+    super.key,
+    this.selectedThreadId,
+    this.canCreateThread = true,
+  });
+
+  final String title;
+  final String newConversationLabel;
+  final String emptyMessage;
+  final List<LucyChatThreadItem> threads;
+  final String? selectedThreadId;
+  final bool canCreateThread;
+  final ValueChanged<String> onThreadSelected;
+  final VoidCallback onCreateThread;
+
+  @override
+  Widget build(BuildContext context) {
+    final lucy = context.lucyTheme;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        _PanelHeader(
+          title: title,
+          newConversationLabel: newConversationLabel,
+          canCreateThread: canCreateThread,
+          onCreateThread: onCreateThread,
+        ),
+        Expanded(
+          child: threads.isEmpty
+              ? Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(LucySpacing.spaceXl),
+                    child: Text(
+                      emptyMessage,
+                      textAlign: TextAlign.center,
+                      style: context.textTheme.bodyMedium?.copyWith(
+                        color: lucy.muted,
+                      ),
+                    ),
+                  ),
+                )
+              : ListView.separated(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: LucySpacing.spaceSm,
+                  ),
+                  itemCount: threads.length,
+                  separatorBuilder: (context, index) =>
+                      const SizedBox(height: LucySpacing.spaceXs),
+                  itemBuilder: (context, index) {
+                    final thread = threads[index];
+                    return _ThreadTile(
+                      thread: thread,
+                      selected: thread.id == selectedThreadId,
+                      onTap: () => onThreadSelected(thread.id),
+                    );
+                  },
+                ),
+        ),
+      ],
     );
   }
 }

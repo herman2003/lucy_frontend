@@ -6,6 +6,7 @@ import '../../../../core/extensions/context.dart';
 import '../../../../core/router/lucy_route_paths.dart';
 import '../../../../core/theme/lucy_theme_extensions.dart';
 import '../../../../shared/widgets/buttons/lucy_primary_button.dart';
+import '../../../../shared/widgets/lucy/lucy_chip.dart';
 import '../../domain/entities/chat_learning_session_created.dart';
 
 class ChatLearningSessionCard extends StatelessWidget {
@@ -29,17 +30,20 @@ class ChatLearningSessionCard extends StatelessWidget {
     final ctaLabel = _isFlashcards
         ? l10n.chatLearningSessionStartFlashcards
         : l10n.chatLearningSessionStartQuiz;
+    final typeLabel = _isFlashcards
+        ? l10n.quizLibraryTypeFlashcards
+        : l10n.quizLibraryTypeQuiz;
     final icon = _isFlashcards ? Icons.style_outlined : Icons.quiz_outlined;
+    final accent = _isFlashcards ? scheme.tertiary : scheme.primary;
 
-    return Container(
-      margin: const EdgeInsets.only(bottom: LucySpacing.spaceMd),
-      decoration: BoxDecoration(
+    return Material(
+      color: scheme.surface,
+      elevation: 0,
+      shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(LucySpacing.radiusCard),
-        border: Border.all(
-          color: lucy.tealChipForeground.withValues(alpha: 0.4),
-        ),
-        color: lucy.tealChipBackground.withValues(alpha: 0.35),
+        side: BorderSide(color: lucy.border),
       ),
+      clipBehavior: Clip.antiAlias,
       child: Padding(
         padding: const EdgeInsets.all(LucySpacing.spaceLg),
         child: Column(
@@ -49,12 +53,14 @@ class ChatLearningSessionCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  padding: const EdgeInsets.all(LucySpacing.spaceSm + 2),
+                  width: 44,
+                  height: 44,
                   decoration: BoxDecoration(
-                    color: scheme.primary,
-                    shape: BoxShape.circle,
+                    color: accent.withValues(alpha: 0.12),
+                    borderRadius:
+                        BorderRadius.circular(LucySpacing.radiusMedium),
                   ),
-                  child: Icon(icon, color: scheme.onPrimary, size: 24),
+                  child: Icon(icon, color: accent, size: 22),
                 ),
                 const SizedBox(width: LucySpacing.spaceMd),
                 Expanded(
@@ -63,9 +69,9 @@ class ChatLearningSessionCard extends StatelessWidget {
                     children: [
                       Text(
                         cardTitle,
-                        style: context.textTheme.titleMedium?.copyWith(
-                          color: scheme.primary,
-                          fontWeight: FontWeight.w700,
+                        style: context.textTheme.titleSmall?.copyWith(
+                          color: scheme.onSurface,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
                       const SizedBox(height: LucySpacing.spaceXs),
@@ -80,7 +86,7 @@ class ChatLearningSessionCard extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: LucySpacing.spaceLg),
+            const SizedBox(height: LucySpacing.spaceMd),
             Text(
               session.title,
               style: context.textTheme.titleSmall?.copyWith(
@@ -88,15 +94,23 @@ class ChatLearningSessionCard extends StatelessWidget {
                 fontWeight: FontWeight.w600,
               ),
             ),
+            const SizedBox(height: LucySpacing.spaceMd),
+            Row(
+              children: [
+                LucyChip(
+                  label: typeLabel,
+                  variant: _isFlashcards
+                      ? LucyChipVariant.neutral
+                      : LucyChipVariant.teal,
+                  icon: icon,
+                ),
+              ],
+            ),
             const SizedBox(height: LucySpacing.spaceLg),
-            SizedBox(
-              width: double.infinity,
-              child: LucyPrimaryButton(
-                text: ctaLabel,
-                width: MediaQuery.sizeOf(context).width,
-                onPressed: () =>
-                    context.push(LucyRoutePaths.quizSession(session.sessionId)),
-              ),
+            LucyPrimaryButton(
+              text: ctaLabel,
+              onPressed: () =>
+                  context.push(LucyRoutePaths.quizSession(session.sessionId)),
             ),
           ],
         ),

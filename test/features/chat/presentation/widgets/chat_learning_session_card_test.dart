@@ -68,5 +68,46 @@ void main() {
 
     expect(find.text('Cartes prêtes'), findsOneWidget);
     expect(find.text('Cartes · test'), findsOneWidget);
+    expect(find.text('Cartes'), findsOneWidget);
+  });
+
+  testWidgets('opens flashcards session route when tapping CTA', (
+    tester,
+  ) async {
+    final router = GoRouter(
+      routes: [
+        GoRoute(
+          path: '/',
+          builder: (context, state) => const ChatLearningSessionCard(
+            session: ChatLearningSessionCreated(
+              sessionId: 'learn_flash_1',
+              type: 'flashcards',
+              title: 'Cartes · test',
+            ),
+          ),
+        ),
+        GoRoute(
+          path: LucyRoutePaths.quizSession(':sessionId'),
+          builder: (context, state) =>
+              Text('session:${state.pathParameters['sessionId']}'),
+        ),
+      ],
+    );
+
+    await tester.pumpWidget(
+      MaterialApp.router(
+        theme: LucyFlexTheme.lightTheme,
+        routerConfig: router,
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
+        locale: const Locale('fr'),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('Voir les cartes'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('session:learn_flash_1'), findsOneWidget);
   });
 }

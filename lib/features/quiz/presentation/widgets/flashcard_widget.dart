@@ -1,7 +1,10 @@
+import 'dart:math' show pi;
+
 import 'package:flutter/material.dart';
 
-import '../../../../core/constants/lucy_constants.dart';
+import '../../../../core/constants/lucy_spacing.dart';
 import '../../../../core/extensions/context.dart';
+import '../../../../core/theme/lucy_theme_extensions.dart';
 
 class FlashcardWidget extends StatelessWidget {
   const FlashcardWidget({
@@ -19,7 +22,8 @@ class FlashcardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = context.colorScheme;
+    final lucy = context.lucyTheme;
     final l10n = context.l10n;
     final label = isFlipped
         ? l10n.flashcardsSessionBack
@@ -30,47 +34,71 @@ class FlashcardWidget extends StatelessWidget {
       button: true,
       label: label,
       child: Material(
-        color: scheme.primaryContainer,
-        elevation: 2,
-        borderRadius: BorderRadius.circular(LucyConstants.kBorderRadiusLarge),
+        color: lucy.surfaceSecondary,
+        elevation: 0,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(LucySpacing.radiusCard),
+          side: BorderSide(color: lucy.border),
+        ),
+        clipBehavior: Clip.antiAlias,
         child: InkWell(
           onTap: onFlip,
-          borderRadius: BorderRadius.circular(LucyConstants.kBorderRadiusLarge),
           child: AnimatedSwitcher(
-            duration: const Duration(milliseconds: 250),
+            duration: const Duration(milliseconds: 350),
+            switchInCurve: Curves.easeInOut,
+            switchOutCurve: Curves.easeInOut,
             transitionBuilder: (child, animation) {
-              return FadeTransition(opacity: animation, child: child);
+              final rotate = Tween<double>(
+                begin: pi / 2,
+                end: 0,
+              ).animate(CurvedAnimation(
+                parent: animation,
+                curve: Curves.easeInOut,
+              ));
+              return AnimatedBuilder(
+                animation: rotate,
+                child: child,
+                builder: (context, child) {
+                  return Transform(
+                    alignment: Alignment.center,
+                    transform: Matrix4.identity()
+                      ..setEntry(3, 2, 0.001)
+                      ..rotateY(rotate.value),
+                    child: child,
+                  );
+                },
+              );
             },
+            layoutBuilder: (currentChild, previousChildren) => currentChild!,
             child: SizedBox(
               key: ValueKey<bool>(isFlipped),
               width: double.infinity,
-              height: 220,
+              height: 240,
               child: Padding(
-                padding: const EdgeInsets.all(LucyConstants.kSpacingLarge),
+                padding: const EdgeInsets.all(LucySpacing.spaceXl),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Text(
                       label,
-                      style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                        color: scheme.onPrimaryContainer,
+                      style: context.textTheme.labelMedium?.copyWith(
+                        color: scheme.onSurfaceVariant,
                       ),
                     ),
                     const Spacer(),
                     Text(
                       text,
                       textAlign: TextAlign.center,
-                      style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                        color: scheme.onPrimaryContainer,
-                        fontWeight: FontWeight.w600,
+                      style: context.textTheme.headlineSmall?.copyWith(
+                        color: scheme.onSurface,
                       ),
                     ),
                     const Spacer(),
                     Text(
                       l10n.flashcardsSessionTapToFlip,
                       textAlign: TextAlign.center,
-                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: scheme.onPrimaryContainer.withValues(alpha: 0.8),
+                      style: context.textTheme.bodySmall?.copyWith(
+                        color: lucy.muted,
                       ),
                     ),
                   ],

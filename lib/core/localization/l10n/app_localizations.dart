@@ -1354,6 +1354,12 @@ abstract class AppLocalizations {
   /// **'Neue Unterhaltung'**
   String get chatNewConversation;
 
+  /// No description provided for @chatConversationsTitle.
+  ///
+  /// In de, this message translates to:
+  /// **'Unterhaltungen'**
+  String get chatConversationsTitle;
+
   /// No description provided for @chatShowThreadList.
   ///
   /// In de, this message translates to:

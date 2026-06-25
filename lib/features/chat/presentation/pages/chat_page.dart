@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/constants/lucy_constants.dart';
 import '../../../../core/extensions/context.dart';
+import '../../../../core/shell/lucy_chat_threads_panel.dart';
 import '../../../../shared/widgets/feedback/lucy_snackbar.dart';
 import '../../../onboarding/presentation/widgets/onboarding_lucy_bubble.dart';
 import '../../../onboarding/presentation/widgets/onboarding_lucy_typing_row.dart';
@@ -184,12 +185,27 @@ class _ChatPageState extends ConsumerState<ChatPage> {
                       ? Row(
                           children: [
                             if (_threadListPanelVisible) ...[
-                              SizedBox(
-                                width: ChatConstants.threadListWidth,
-                                child: _ThreadListPanel(
-                                  threadsState: threadsState,
-                                  selectedId: selectedId,
-                                ),
+                              LucyChatThreadsPanel(
+                                title: l10n.chatConversationsTitle,
+                                newConversationLabel: l10n.chatNewConversation,
+                                emptyMessage: l10n.chatEmptyHint,
+                                threads: threadsState.threads
+                                    .map(
+                                      (thread) => LucyChatThreadItem(
+                                        id: thread.id,
+                                        title: thread.title,
+                                        preview: thread.lastMessagePreview,
+                                      ),
+                                    )
+                                    .toList(),
+                                selectedThreadId: selectedId,
+                                canCreateThread: canCreateThread,
+                                onThreadSelected: (id) => ref
+                                    .read(chatThreadsProvider.notifier)
+                                    .selectThread(id, context),
+                                onCreateThread: () => ref
+                                    .read(chatThreadsProvider.notifier)
+                                    .createThread(context),
                               ),
                               const VerticalDivider(width: 1),
                             ],

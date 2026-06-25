@@ -239,6 +239,7 @@
     "description": "Default title for a new chat thread"
   },
   "chatNewConversation": "Neue Unterhaltung",
+  "chatConversationsTitle": "Unterhaltungen",
   "chatShowThreadList": "Unterhaltungsliste",
   "chatSourcesTitle": "Quellen",
   "chatSourcePages": "Seiten {pageStart}–{pageEnd}",

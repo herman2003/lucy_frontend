@@ -239,6 +239,7 @@
     "description": "Default title for a new chat thread"
   },
   "chatNewConversation": "New conversation",
+  "chatConversationsTitle": "Conversations",
   "chatShowThreadList": "Conversation list",
   "chatSourcesTitle": "Sources",
   "chatSourcePages": "Pages {pageStart}–{pageEnd}",

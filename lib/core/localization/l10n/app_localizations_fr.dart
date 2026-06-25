@@ -710,6 +710,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get chatNewConversation => 'Nouvelle conversation';
 
   @override
+  String get chatConversationsTitle => 'Conversations';
+
+  @override
   String get chatShowThreadList => 'Liste des conversations';
 
   @override

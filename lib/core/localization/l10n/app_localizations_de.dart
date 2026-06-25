@@ -710,6 +710,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get chatNewConversation => 'Neue Unterhaltung';
 
   @override
+  String get chatConversationsTitle => 'Unterhaltungen';
+
+  @override
   String get chatShowThreadList => 'Unterhaltungsliste';
 
   @override

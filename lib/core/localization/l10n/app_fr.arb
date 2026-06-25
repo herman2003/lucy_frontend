@@ -451,6 +451,7 @@
     "description": "Default title for a new chat thread"
   },
   "chatNewConversation": "Nouvelle conversation",
+  "chatConversationsTitle": "Conversations",
   "chatShowThreadList": "Liste des conversations",
   "chatSourcesTitle": "Sources",
   "chatSourcePages": "Pages {pageStart}–{pageEnd}",

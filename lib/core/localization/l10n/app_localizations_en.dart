@@ -704,6 +704,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get chatNewConversation => 'New conversation';
 
   @override
+  String get chatConversationsTitle => 'Conversations';
+
+  @override
   String get chatShowThreadList => 'Conversation list';
 
   @override

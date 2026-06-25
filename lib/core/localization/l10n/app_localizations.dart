@@ -1252,6 +1252,12 @@ abstract class AppLocalizations {
   /// **'Noch keine Dokumente. Fügen Sie eine PDF-, Word- oder Textdatei hinzu.'**
   String get documentsEmpty;
 
+  /// No description provided for @documentsCount.
+  ///
+  /// In de, this message translates to:
+  /// **'{count, plural, =0{Keine Dokumente} one{{count} Dokument} other{{count} Dokumente}}'**
+  String documentsCount(int count);
+
   /// No description provided for @documentsProcessingHint.
   ///
   /// In de, this message translates to:

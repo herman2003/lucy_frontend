@@ -646,6 +646,18 @@ class AppLocalizationsDe extends AppLocalizations {
       'Noch keine Dokumente. Fügen Sie eine PDF-, Word- oder Textdatei hinzu.';
 
   @override
+  String documentsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Dokumente',
+      one: '$count Dokument',
+      zero: 'Keine Dokumente',
+    );
+    return '$_temp0';
+  }
+
+  @override
   String get documentsProcessingHint =>
       'Lucy verarbeitet Ihr Dokument. Das kann einen Moment dauern.';
 

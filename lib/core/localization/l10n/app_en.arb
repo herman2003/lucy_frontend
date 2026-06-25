@@ -205,6 +205,14 @@
   "documentsAdd": "Add",
   "documentsAddTitle": "Add a document",
   "documentsEmpty": "No documents yet. Add a PDF, Word, or text file to get started.",
+  "documentsCount": "{count, plural, =0{No documents} one{{count} document} other{{count} documents}}",
+  "@documentsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "documentsProcessingHint": "Lucy is processing your document. This may take a moment.",
   "documentsPickFile": "Choose a file",
   "documentsPickFileRequired": "Please choose a file to upload.",

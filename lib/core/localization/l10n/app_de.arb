@@ -205,6 +205,14 @@
   "documentsAdd": "Hinzufügen",
   "documentsAddTitle": "Dokument hinzufügen",
   "documentsEmpty": "Noch keine Dokumente. Fügen Sie eine PDF-, Word- oder Textdatei hinzu.",
+  "documentsCount": "{count, plural, =0{Keine Dokumente} one{{count} Dokument} other{{count} Dokumente}}",
+  "@documentsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "documentsProcessingHint": "Lucy verarbeitet Ihr Dokument. Das kann einen Moment dauern.",
   "documentsPickFile": "Datei auswählen",
   "documentsPickFileRequired": "Bitte wählen Sie eine Datei zum Hochladen.",

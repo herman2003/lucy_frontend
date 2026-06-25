@@ -116,6 +116,16 @@ class FakeDocumentsRepository implements DocumentsRepository {
   }
 
   @override
+  Future<void> uploadDocumentFile({
+    required String documentId,
+    required List<int> bytes,
+    required String mimeType,
+    required String fileName,
+  }) async {
+    uploadBinaryCallCount++;
+  }
+
+  @override
   Future<Document> setSearchEnabled({
     required String id,
     required bool enabled,

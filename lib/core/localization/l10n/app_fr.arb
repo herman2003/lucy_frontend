@@ -417,6 +417,14 @@
   "documentsAdd": "Ajouter",
   "documentsAddTitle": "Ajouter un document",
   "documentsEmpty": "Aucun document pour l’instant. Ajoutez un PDF, Word ou fichier texte pour commencer.",
+  "documentsCount": "{count, plural, =0{Aucun document} one{{count} document} other{{count} documents}}",
+  "@documentsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "documentsProcessingHint": "Lucy traite votre document. Cela peut prendre un moment.",
   "documentsPickFile": "Choisir un fichier",
   "documentsPickFileRequired": "Veuillez choisir un fichier à téléverser.",

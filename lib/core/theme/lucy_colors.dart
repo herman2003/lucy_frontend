@@ -69,4 +69,15 @@ class LucyColors {
   static const Color chipBgLight = Color(0xFFEBEEF7);
   static const Color chipTextLight = Color(0xFF2E4C8A);
   static const Color processingAccent = Color(0xFFE5933C);
+
+  /// Learning session card in chat (design system §learning session).
+  static const Color learningSessionGradientEnd = Color(0xFFFCF4E8);
+  static const Color learningSessionBorder = Color(0xFFF0DCC0);
+  static const Color learningSessionSubtitle = Color(0xFF9A6A2A);
+
+  static const LinearGradient learningSessionCardGradient = LinearGradient(
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+    colors: [motivantAccentSurface, learningSessionGradientEnd],
+  );
 }

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
+import '../../../core/constants/lucy_chat_constants.dart';
 import '../../../core/constants/lucy_spacing.dart';
 import '../../../core/extensions/context.dart';
 import '../../../core/theme/lucy_theme_extensions.dart';
 
-/// Message composer with multiline field and square send button (V3/V4).
+/// Message composer — unified bordered field with square send button (V3/V4).
 class LucyComposer extends StatefulWidget {
   const LucyComposer({
     required this.enabled,
@@ -46,44 +47,53 @@ class _LucyComposerState extends State<LucyComposer> {
     final canSend = widget.enabled;
 
     return Padding(
-      padding: const EdgeInsets.all(LucySpacing.spaceLg),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: [
-          Expanded(
-            child: TextField(
-              controller: _controller,
-              enabled: widget.enabled,
-              maxLines: 4,
-              minLines: 1,
-              textInputAction: TextInputAction.send,
-              decoration: InputDecoration(
-                hintText: widget.hintText,
-                filled: true,
-                fillColor: scheme.surface,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(LucySpacing.radiusCard),
-                  borderSide: BorderSide(color: lucy.border),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(LucySpacing.radiusCard),
-                  borderSide: BorderSide(color: lucy.border),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(LucySpacing.radiusCard),
-                  borderSide: BorderSide(color: scheme.primary, width: 1.5),
-                ),
-                contentPadding: const EdgeInsets.symmetric(
-                  horizontal: LucySpacing.spaceMd,
-                  vertical: LucySpacing.spaceSm + 2,
+      padding: const EdgeInsets.fromLTRB(
+        LucySpacing.spaceXl,
+        LucySpacing.spaceLg,
+        LucySpacing.spaceXl,
+        LucySpacing.spaceXl + 6,
+      ),
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          color: scheme.surface,
+          borderRadius: BorderRadius.circular(LucySpacing.radiusCard),
+          border: Border.all(color: lucy.border, width: 1.5),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(
+            LucySpacing.spaceLg + 2,
+            LucySpacing.spaceSm,
+            LucySpacing.spaceSm,
+            LucySpacing.spaceSm,
+          ),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Expanded(
+                child: TextField(
+                  controller: _controller,
+                  enabled: widget.enabled,
+                  maxLines: 4,
+                  minLines: 1,
+                  textInputAction: TextInputAction.send,
+                  style: context.textTheme.bodyLarge,
+                  decoration: InputDecoration(
+                    hintText: widget.hintText,
+                    border: InputBorder.none,
+                    enabledBorder: InputBorder.none,
+                    focusedBorder: InputBorder.none,
+                    disabledBorder: InputBorder.none,
+                    isDense: true,
+                    contentPadding: EdgeInsets.zero,
+                  ),
+                  onSubmitted: widget.enabled ? (_) => _submit() : null,
                 ),
               ),
-              onSubmitted: widget.enabled ? (_) => _submit() : null,
-            ),
+              const SizedBox(width: LucySpacing.spaceMd),
+              _SendButton(enabled: canSend, onPressed: _submit),
+            ],
           ),
-          const SizedBox(width: LucySpacing.spaceSm),
-          _SendButton(enabled: canSend, onPressed: _submit),
-        ],
+        ),
       ),
     );
   }
@@ -106,9 +116,9 @@ class _SendButton extends StatelessWidget {
         onTap: enabled ? onPressed : null,
         borderRadius: BorderRadius.circular(LucySpacing.radiusMedium),
         child: const SizedBox(
-          width: LucySpacing.minTouchTarget,
-          height: LucySpacing.minTouchTarget,
-          child: Icon(Icons.arrow_upward, color: Colors.white, size: 22),
+          width: LucyChatConstants.kSendButtonSize,
+          height: LucyChatConstants.kSendButtonSize,
+          child: Icon(Icons.arrow_upward, color: Colors.white, size: 20),
         ),
       ),
     );

@@ -11,13 +11,16 @@ void main() {
     GoogleFonts.config.allowRuntimeFetching = false;
   });
 
-  testWidgets('invokes callback when tapping a suggestion chip', (tester) async {
+  testWidgets('invokes callback when tapping a suggestion chip', (
+    tester,
+  ) async {
     String? selected;
     await tester.pumpWidget(
       MaterialApp(
         theme: LucyFlexTheme.lightTheme,
         home: Scaffold(
           body: ChatConversationEmptyState(
+            greeting: 'Bonjour',
             message: 'Posez une question',
             suggestions: const ['Résume mes documents', 'Propose-moi un quiz'],
             onSuggestionSelected: (value) => selected = value,

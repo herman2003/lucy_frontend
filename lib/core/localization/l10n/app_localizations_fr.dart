@@ -727,6 +727,28 @@ class AppLocalizationsFr extends AppLocalizations {
   String get chatEmptyHint => 'Posez une question sur vos documents actifs.';
 
   @override
+  String get chatEmptyDescription =>
+      'Posez une question sur vos documents actifs et je réponds, sources à l\'appui.';
+
+  @override
+  String chatGreeting(String name) {
+    return 'Bonjour $name';
+  }
+
+  @override
+  String get chatGreetingFallback => 'Bonjour';
+
+  @override
+  String get chatConversationSubtitle =>
+      'Réponses basées sur vos documents actifs';
+
+  @override
+  String get chatConversationSubtitleMobile => 'Réponses sourcées';
+
+  @override
+  String get chatSourceLabel => 'Source';
+
+  @override
   String chatActiveDocumentsCount(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
@@ -748,7 +770,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get chatSuggestionExplain => 'Explique un concept clé';
 
   @override
-  String get chatComposerHint => 'Votre message…';
+  String get chatComposerHint => 'Posez une question sur vos documents actifs…';
 
   @override
   String get chatSend => 'Envoyer';

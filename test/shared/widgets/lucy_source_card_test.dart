@@ -38,6 +38,9 @@ void main() {
 
     expect(find.text('Manuel biologie'), findsOneWidget);
     expect(find.text('Pages 12–14'), findsOneWidget);
-    expect(find.text('La photosynthèse convertit la lumière.'), findsOneWidget);
+    expect(
+      find.text('« La photosynthèse convertit la lumière. »'),
+      findsOneWidget,
+    );
   });
 }

@@ -254,6 +254,19 @@
     }
   },
   "chatEmptyHint": "Stellen Sie eine Frage zu Ihren aktiven Dokumenten.",
+  "chatEmptyDescription": "Stellen Sie eine Frage zu Ihren aktiven Dokumenten — ich antworte mit Quellenangaben.",
+  "chatGreeting": "Hallo {name}",
+  "@chatGreeting": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "chatGreetingFallback": "Hallo",
+  "chatConversationSubtitle": "Antworten basierend auf Ihren aktiven Dokumenten",
+  "chatConversationSubtitleMobile": "Quellenbasierte Antworten",
+  "chatSourceLabel": "Quelle",
   "chatActiveDocumentsCount": "{count, plural, =0{Keine aktiven Dokumente} one{{count} aktives Dokument} other{{count} aktive Dokumente}}",
   "@chatActiveDocumentsCount": {
     "placeholders": {
@@ -265,7 +278,7 @@
   "chatSuggestionSummarize": "Fasse meine Dokumente zusammen",
   "chatSuggestionQuiz": "Schlage ein Quiz vor",
   "chatSuggestionExplain": "Erkläre ein Schlüsselkonzept",
-  "chatComposerHint": "Ihre Nachricht…",
+  "chatComposerHint": "Stellen Sie eine Frage zu Ihren aktiven Dokumenten…",
   "chatSend": "Senden",
   "chatRetry": "Erneut versuchen",
   "chatLoading": "Laden…",

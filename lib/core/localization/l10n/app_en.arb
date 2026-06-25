@@ -254,6 +254,19 @@
     }
   },
   "chatEmptyHint": "Ask a question about your active documents.",
+  "chatEmptyDescription": "Ask a question about your active documents and I'll answer with sources.",
+  "chatGreeting": "Hello {name}",
+  "@chatGreeting": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "chatGreetingFallback": "Hello",
+  "chatConversationSubtitle": "Answers based on your active documents",
+  "chatConversationSubtitleMobile": "Sourced answers",
+  "chatSourceLabel": "Source",
   "chatActiveDocumentsCount": "{count, plural, =0{No active documents} one{{count} active document} other{{count} active documents}}",
   "@chatActiveDocumentsCount": {
     "placeholders": {
@@ -265,7 +278,7 @@
   "chatSuggestionSummarize": "Summarize my documents",
   "chatSuggestionQuiz": "Suggest a quiz",
   "chatSuggestionExplain": "Explain a key concept",
-  "chatComposerHint": "Your message…",
+  "chatComposerHint": "Ask a question about your active documents…",
   "chatSend": "Send",
   "chatRetry": "Retry",
   "chatLoading": "Loading…",

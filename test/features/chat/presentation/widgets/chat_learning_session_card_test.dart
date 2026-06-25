@@ -66,9 +66,8 @@ void main() {
     );
     await tester.pumpAndSettle();
 
-    expect(find.text('Cartes prêtes'), findsOneWidget);
     expect(find.text('Cartes · test'), findsOneWidget);
-    expect(find.text('Cartes'), findsOneWidget);
+    expect(find.text('Voir les cartes'), findsOneWidget);
   });
 
   testWidgets('opens flashcards session route when tapping CTA', (

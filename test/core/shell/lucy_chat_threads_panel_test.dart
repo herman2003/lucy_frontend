@@ -20,10 +20,7 @@ void main() {
       title: 'Révision maths',
       preview: 'Explique les dérivées',
     ),
-    LucyChatThreadItem(
-      id: 'thread-2',
-      title: 'Biologie',
-    ),
+    LucyChatThreadItem(id: 'thread-2', title: 'Biologie'),
   ];
 
   Widget wrap({
@@ -68,7 +65,9 @@ void main() {
     expect(find.text('Révision maths'), findsOneWidget);
   });
 
-  testWidgets('invokes callbacks for thread selection and create', (tester) async {
+  testWidgets('invokes callbacks for thread selection and create', (
+    tester,
+  ) async {
     String? selectedId;
     var created = false;
 

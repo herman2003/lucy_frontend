@@ -1384,6 +1384,42 @@ abstract class AppLocalizations {
   /// **'Stellen Sie eine Frage zu Ihren aktiven Dokumenten.'**
   String get chatEmptyHint;
 
+  /// No description provided for @chatEmptyDescription.
+  ///
+  /// In de, this message translates to:
+  /// **'Stellen Sie eine Frage zu Ihren aktiven Dokumenten — ich antworte mit Quellenangaben.'**
+  String get chatEmptyDescription;
+
+  /// No description provided for @chatGreeting.
+  ///
+  /// In de, this message translates to:
+  /// **'Hallo {name}'**
+  String chatGreeting(String name);
+
+  /// No description provided for @chatGreetingFallback.
+  ///
+  /// In de, this message translates to:
+  /// **'Hallo'**
+  String get chatGreetingFallback;
+
+  /// No description provided for @chatConversationSubtitle.
+  ///
+  /// In de, this message translates to:
+  /// **'Antworten basierend auf Ihren aktiven Dokumenten'**
+  String get chatConversationSubtitle;
+
+  /// No description provided for @chatConversationSubtitleMobile.
+  ///
+  /// In de, this message translates to:
+  /// **'Quellenbasierte Antworten'**
+  String get chatConversationSubtitleMobile;
+
+  /// No description provided for @chatSourceLabel.
+  ///
+  /// In de, this message translates to:
+  /// **'Quelle'**
+  String get chatSourceLabel;
+
   /// No description provided for @chatActiveDocumentsCount.
   ///
   /// In de, this message translates to:
@@ -1411,7 +1447,7 @@ abstract class AppLocalizations {
   /// No description provided for @chatComposerHint.
   ///
   /// In de, this message translates to:
-  /// **'Ihre Nachricht…'**
+  /// **'Stellen Sie eine Frage zu Ihren aktiven Dokumenten…'**
   String get chatComposerHint;
 
   /// No description provided for @chatSend.

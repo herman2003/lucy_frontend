@@ -466,6 +466,19 @@
     }
   },
   "chatEmptyHint": "Posez une question sur vos documents actifs.",
+  "chatEmptyDescription": "Posez une question sur vos documents actifs et je réponds, sources à l'appui.",
+  "chatGreeting": "Bonjour {name}",
+  "@chatGreeting": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "chatGreetingFallback": "Bonjour",
+  "chatConversationSubtitle": "Réponses basées sur vos documents actifs",
+  "chatConversationSubtitleMobile": "Réponses sourcées",
+  "chatSourceLabel": "Source",
   "chatActiveDocumentsCount": "{count, plural, =0{Aucun document actif} one{{count} document actif} other{{count} documents actifs}}",
   "@chatActiveDocumentsCount": {
     "placeholders": {
@@ -477,7 +490,7 @@
   "chatSuggestionSummarize": "Résume mes documents",
   "chatSuggestionQuiz": "Propose-moi un quiz",
   "chatSuggestionExplain": "Explique un concept clé",
-  "chatComposerHint": "Votre message…",
+  "chatComposerHint": "Posez une question sur vos documents actifs…",
   "chatSend": "Envoyer",
   "chatRetry": "Réessayer",
   "chatLoading": "Chargement…",

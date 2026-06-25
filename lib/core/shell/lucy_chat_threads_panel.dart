@@ -161,18 +161,24 @@ class _PanelHeader extends StatelessWidget {
       ),
       child: Row(
         children: [
-          Expanded(
-            child: Text(
-              title,
-              style: context.textTheme.titleMedium?.copyWith(
-                color: scheme.onSurface,
+          Expanded(child: Text(title, style: context.textTheme.titleLarge)),
+          Tooltip(
+            message: newConversationLabel,
+            child: Material(
+              color: canCreateThread
+                  ? scheme.primary
+                  : scheme.primary.withValues(alpha: 0.35),
+              borderRadius: BorderRadius.circular(9),
+              child: InkWell(
+                onTap: canCreateThread ? onCreateThread : null,
+                borderRadius: BorderRadius.circular(9),
+                child: const SizedBox(
+                  width: 32,
+                  height: 32,
+                  child: Icon(Icons.add, color: Colors.white, size: 20),
+                ),
               ),
             ),
-          ),
-          IconButton(
-            tooltip: newConversationLabel,
-            onPressed: canCreateThread ? onCreateThread : null,
-            icon: const Icon(Icons.add_comment_outlined),
           ),
         ],
       ),
@@ -195,23 +201,22 @@ class _ThreadTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final scheme = context.colorScheme;
     final lucy = context.lucyTheme;
-    final titleColor = selected ? scheme.onPrimary : scheme.onSurface;
-    final subtitleColor = selected
-        ? scheme.onPrimary.withValues(alpha: 0.85)
-        : lucy.muted;
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: LucySpacing.spaceSm),
       child: Material(
-        color: selected ? scheme.primary : Colors.transparent,
-        borderRadius: BorderRadius.circular(LucySpacing.radiusMedium),
+        color: selected ? lucy.chipBackground : Colors.transparent,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(LucySpacing.radiusMedium),
+          side: selected ? BorderSide(color: lucy.border) : BorderSide.none,
+        ),
+        clipBehavior: Clip.antiAlias,
         child: InkWell(
           onTap: onTap,
-          borderRadius: BorderRadius.circular(LucySpacing.radiusMedium),
           child: Padding(
             padding: const EdgeInsets.symmetric(
-              horizontal: LucySpacing.spaceMd,
-              vertical: LucySpacing.spaceSm + 2,
+              horizontal: LucySpacing.spaceMd + 2,
+              vertical: LucySpacing.spaceMd + 1,
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -221,18 +226,18 @@ class _ThreadTile extends StatelessWidget {
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: context.textTheme.titleSmall?.copyWith(
-                    color: titleColor,
+                    color: scheme.onSurface,
                     fontWeight: selected ? FontWeight.w600 : FontWeight.w500,
                   ),
                 ),
                 if (thread.preview != null) ...[
-                  const SizedBox(height: LucySpacing.spaceXs),
+                  const SizedBox(height: 3),
                   Text(
                     thread.preview!,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                     style: context.textTheme.bodySmall?.copyWith(
-                      color: subtitleColor,
+                      color: lucy.muted,
                     ),
                   ),
                 ],

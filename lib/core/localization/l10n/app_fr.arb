@@ -571,5 +571,17 @@
   "learningSessionNotFound": "Cette session est introuvable.",
   "learningSessionGenerationFailed": "La génération a échoué. Réessayez depuis le chat.",
   "learningSessionValidationError": "La demande de génération est invalide.",
-  "learningGenericError": "Une erreur est survenue. Réessayez."
+  "learningGenericError": "Une erreur est survenue. Réessayez.",
+  "interfaceStyleSectionTitle": "Style d'interface",
+  "interfaceStyleSectionHint": "Change l'ambiance visuelle de Lucy",
+  "interfaceStyleAcademic": "Académique",
+  "interfaceStyleAcademicDescription": "Par défaut",
+  "interfaceStylePremiumDark": "Premium sombre",
+  "interfaceStylePremiumDarkDescription": "Lueur froide",
+  "interfaceStyleMotivant": "Motivant",
+  "interfaceStyleMotivantDescription": "Accents chaleureux",
+  "appearanceSectionTitle": "Apparence",
+  "appearanceLight": "Clair",
+  "appearanceDark": "Sombre",
+  "appearanceSystem": "Système"
 }

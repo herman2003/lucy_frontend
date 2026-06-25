@@ -35,6 +35,14 @@ class ThrowingAuthRepository implements AuthRepository {
   Future<void> sendPasswordResetEmail({required String email}) async {}
 
   @override
+  Future<void> updatePassword({
+    required String currentPassword,
+    required String newPassword,
+  }) async {
+    throw error;
+  }
+
+  @override
   Future<void> signOut() async {}
 
   @override

@@ -16,6 +16,7 @@
 | P3 — D3 | Retrieval API (recherche vectorielle) | **Livré** | §3 |
 | **P4a — D4** | Chat source-based (multi-fils, sources UI) | **Spec validée** | §6, [docs/spec-chat-rag.md](./docs/spec-chat-rag.md) |
 | **P4b — D4** | Hub Quiz + cartes depuis corpus | **Spec validée** | §7, [docs/spec-learning-generation.md](./docs/spec-learning-generation.md) |
+| **P5 — UI** | Refonte design post-login (V3 desktop / V4 mobile) | **Spec proposée** | [docs/spec-ui-redesign.md](./docs/spec-ui-redesign.md) |
 
 ---
 

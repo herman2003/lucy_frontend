@@ -1,54 +1,71 @@
-# Todo — Lucy frontend (+ backend LEARN)
+# Todo — Refonte UI post-login (P5)
 
-> **Actif** : P4b — génération **via Chat**, bibliothèque **Quiz** · **Plan** : [plan.md](./plan.md)
+> **Actif** : P5 — UI redesign V3/V4 · **Plan** : [plan.md](./plan.md) · **Spec** : [docs/spec-ui-redesign.md](../docs/spec-ui-redesign.md)
 
 **Légende** : `[ ]` à faire · `[x]` fait
 
----
-
-## Checkpoint CP-LEARN-1 — Backend + hook Chat
-
-| Statut | Id | Tâche |
-|--------|-----|--------|
-| [x] | LEARN-01a | Module `learning-sessions` + DTOs + repo |
-| [x] | LEARN-01b | `POST generate` quiz + pipeline LLM |
-| [x] | LEARN-01c | `GET …/:sessionId` sans garde corpus (G4b) |
-| [x] | LEARN-01d | Chat intent + SSE `learning_session_created` |
+**Archives** : [todo-learn.md](./todo-learn.md) (LEARN terminé)
 
 ---
 
-## Checkpoint CP-LEARN-2 — Chat UI + bibliothèque Quiz
+## Checkpoint CP-UI-1 — Identité visuelle (tokens + thème)
 
 | Statut | Id | Tâche |
 |--------|-----|--------|
-| [x] | LEARN-03a | Flutter data layer learning sessions |
-| [x] | LEARN-03b | `QuizPage` bibliothèque (liste, **pas** de générer) |
-| [x] | LEARN-03c | `ChatLearningSessionCard` + `QuizSessionPage` QCM |
+| [x] | UI-01a | Tokens couleurs + `lucy_spacing.dart` |
+| [x] | UI-01b | `google_fonts` + `lucy_typography.dart` |
+| [x] | UI-01c | `LucyInterfaceStyle` + storage SharedPreferences |
+| [x] | UI-01d | `LucyThemeExtensions` + `LucyFlexTheme.themeFor()` |
+| [x] | UI-01e | `lucyThemeProvider` + bootstrap `main.dart` / `app.dart` |
+| [x] | UI-01f | l10n styles (fr/en/de) + tests provider |
 
 ---
 
-## Checkpoint CP-LEARN-3 — Backend flashcards
+## Checkpoint CP-UI-2 — Shell hybride
 
 | Statut | Id | Tâche |
 |--------|-----|--------|
-| [x] | LEARN-02 | `POST generate` type flashcards + intent chat cartes |
+| [x] | UI-02a | `LucyDesktopSidebar` + `LucyBrandMark` |
+| [x] | UI-02b | `LucyBottomNav` custom V4 (emojis) + tests |
+| [x] | UI-02c | Refactor `LucyAppShell` ; router tests verts |
 
 ---
 
-## Checkpoint CP-LEARN-4 — Flutter cartes
+## Checkpoint CP-UI-3 — Documents
 
 | Statut | Id | Tâche |
 |--------|-----|--------|
-| [x] | LEARN-04a | `FlashcardsSessionPage` + carte chat cartes |
+| [ ] | UI-03a | `LucyDocumentCard`, `LucyChip`, `LucyEmptyState` |
+| [ ] | UI-03b | `DocumentsPage` restyle grille/liste |
 
 ---
 
-## Checkpoint CP-LEARN-5 — Finition
+## Checkpoint CP-UI-4 — Chat
 
 | Statut | Id | Tâche |
 |--------|-----|--------|
-| [x] | LEARN-05a | `GET list` + polish bibliothèque |
-| [x] | LEARN-05b | `DELETE` + checklist CP-LEARN |
+| [ ] | UI-04a | `LucyMessageBubble`, `LucySourceCard`, `LucyComposer` |
+| [ ] | UI-04b | `LucyChatThreadsPanel` desktop 300 px |
+| [ ] | UI-04c | `LucyConversationsDrawer` mobile |
+| [ ] | UI-04d | `ChatPage` intégration + tests chat |
+
+---
+
+## Checkpoint CP-UI-5 — Quiz & learning
+
+| Statut | Id | Tâche |
+|--------|-----|--------|
+| [ ] | UI-05a | Hub cards + `LearningSessionPage` QCM restyle |
+| [ ] | UI-05b | Flashcards session + `ChatLearningSessionCard` |
+
+---
+
+## Checkpoint CP-UI-6 — Settings & profil
+
+| Statut | Id | Tâche |
+|--------|-----|--------|
+| [ ] | UI-06a | Segmented clair/sombre + picker 3 styles |
+| [ ] | UI-06b | Settings hub + sous-pages profil / AI / mot de passe |
 
 ---
 
@@ -56,9 +73,11 @@
 
 | Statut | Id | Tâche |
 |--------|-----|--------|
-| [x] | QUIZ-01 | Eligibility + bannière |
+| [x] | LEARN-01→05 | Génération quiz + cartes |
 | [x] | CHAT-01→10 | Chat P4a |
+| [x] | DOC-01→14 | Documents + RAG |
+| [x] | QUIZ-01 | Eligibility |
 
 ---
 
-*Ce document a été créé avec Cursor (IA). Révisé — génération via Chat — 2026-05-29.*
+*Ce document a été créé avec Cursor (IA). Révisé — UI redesign — 2026-06-10.*

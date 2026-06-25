@@ -359,5 +359,17 @@
   "learningSessionNotFound": "Diese Sitzung wurde nicht gefunden.",
   "learningSessionGenerationFailed": "Die Generierung ist fehlgeschlagen. Versuchen Sie es erneut im Chat.",
   "learningSessionValidationError": "Die Generierungsanfrage ist ungültig.",
-  "learningGenericError": "Etwas ist schiefgelaufen. Bitte erneut versuchen."
+  "learningGenericError": "Etwas ist schiefgelaufen. Bitte erneut versuchen.",
+  "interfaceStyleSectionTitle": "Oberflächenstil",
+  "interfaceStyleSectionHint": "Ändert Lucys visuelle Atmosphäre",
+  "interfaceStyleAcademic": "Akademisch",
+  "interfaceStyleAcademicDescription": "Standard",
+  "interfaceStylePremiumDark": "Premium dunkel",
+  "interfaceStylePremiumDarkDescription": "Kühler Glow",
+  "interfaceStyleMotivant": "Motivierend",
+  "interfaceStyleMotivantDescription": "Warme Akzente",
+  "appearanceSectionTitle": "Erscheinungsbild",
+  "appearanceLight": "Hell",
+  "appearanceDark": "Dunkel",
+  "appearanceSystem": "System"
 }

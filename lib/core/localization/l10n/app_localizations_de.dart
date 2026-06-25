@@ -958,4 +958,40 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get learningGenericError =>
       'Etwas ist schiefgelaufen. Bitte erneut versuchen.';
+
+  @override
+  String get interfaceStyleSectionTitle => 'Oberflächenstil';
+
+  @override
+  String get interfaceStyleSectionHint => 'Ändert Lucys visuelle Atmosphäre';
+
+  @override
+  String get interfaceStyleAcademic => 'Akademisch';
+
+  @override
+  String get interfaceStyleAcademicDescription => 'Standard';
+
+  @override
+  String get interfaceStylePremiumDark => 'Premium dunkel';
+
+  @override
+  String get interfaceStylePremiumDarkDescription => 'Kühler Glow';
+
+  @override
+  String get interfaceStyleMotivant => 'Motivierend';
+
+  @override
+  String get interfaceStyleMotivantDescription => 'Warme Akzente';
+
+  @override
+  String get appearanceSectionTitle => 'Erscheinungsbild';
+
+  @override
+  String get appearanceLight => 'Hell';
+
+  @override
+  String get appearanceDark => 'Dunkel';
+
+  @override
+  String get appearanceSystem => 'System';
 }

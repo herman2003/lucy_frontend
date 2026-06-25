@@ -954,4 +954,40 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get learningGenericError => 'Une erreur est survenue. Réessayez.';
+
+  @override
+  String get interfaceStyleSectionTitle => 'Style d\'interface';
+
+  @override
+  String get interfaceStyleSectionHint => 'Change l\'ambiance visuelle de Lucy';
+
+  @override
+  String get interfaceStyleAcademic => 'Académique';
+
+  @override
+  String get interfaceStyleAcademicDescription => 'Par défaut';
+
+  @override
+  String get interfaceStylePremiumDark => 'Premium sombre';
+
+  @override
+  String get interfaceStylePremiumDarkDescription => 'Lueur froide';
+
+  @override
+  String get interfaceStyleMotivant => 'Motivant';
+
+  @override
+  String get interfaceStyleMotivantDescription => 'Accents chaleureux';
+
+  @override
+  String get appearanceSectionTitle => 'Apparence';
+
+  @override
+  String get appearanceLight => 'Clair';
+
+  @override
+  String get appearanceDark => 'Sombre';
+
+  @override
+  String get appearanceSystem => 'Système';
 }

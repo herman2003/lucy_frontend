@@ -1773,6 +1773,78 @@ abstract class AppLocalizations {
   /// In de, this message translates to:
   /// **'Etwas ist schiefgelaufen. Bitte erneut versuchen.'**
   String get learningGenericError;
+
+  /// No description provided for @interfaceStyleSectionTitle.
+  ///
+  /// In de, this message translates to:
+  /// **'Oberflächenstil'**
+  String get interfaceStyleSectionTitle;
+
+  /// No description provided for @interfaceStyleSectionHint.
+  ///
+  /// In de, this message translates to:
+  /// **'Ändert Lucys visuelle Atmosphäre'**
+  String get interfaceStyleSectionHint;
+
+  /// No description provided for @interfaceStyleAcademic.
+  ///
+  /// In de, this message translates to:
+  /// **'Akademisch'**
+  String get interfaceStyleAcademic;
+
+  /// No description provided for @interfaceStyleAcademicDescription.
+  ///
+  /// In de, this message translates to:
+  /// **'Standard'**
+  String get interfaceStyleAcademicDescription;
+
+  /// No description provided for @interfaceStylePremiumDark.
+  ///
+  /// In de, this message translates to:
+  /// **'Premium dunkel'**
+  String get interfaceStylePremiumDark;
+
+  /// No description provided for @interfaceStylePremiumDarkDescription.
+  ///
+  /// In de, this message translates to:
+  /// **'Kühler Glow'**
+  String get interfaceStylePremiumDarkDescription;
+
+  /// No description provided for @interfaceStyleMotivant.
+  ///
+  /// In de, this message translates to:
+  /// **'Motivierend'**
+  String get interfaceStyleMotivant;
+
+  /// No description provided for @interfaceStyleMotivantDescription.
+  ///
+  /// In de, this message translates to:
+  /// **'Warme Akzente'**
+  String get interfaceStyleMotivantDescription;
+
+  /// No description provided for @appearanceSectionTitle.
+  ///
+  /// In de, this message translates to:
+  /// **'Erscheinungsbild'**
+  String get appearanceSectionTitle;
+
+  /// No description provided for @appearanceLight.
+  ///
+  /// In de, this message translates to:
+  /// **'Hell'**
+  String get appearanceLight;
+
+  /// No description provided for @appearanceDark.
+  ///
+  /// In de, this message translates to:
+  /// **'Dunkel'**
+  String get appearanceDark;
+
+  /// No description provided for @appearanceSystem.
+  ///
+  /// In de, this message translates to:
+  /// **'System'**
+  String get appearanceSystem;
 }
 
 class _AppLocalizationsDelegate

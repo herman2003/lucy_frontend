@@ -1,10 +1,12 @@
 # Plan — Génération d’activités (index)
 
-> Plan détaillé déplacé vers **[plan.md](./plan.md)** (source unique).  
+> Plan détaillé archivé : **[plan-learn.md](./plan-learn.md)** (terminé).  
 > **Spec** : [docs/spec-learning-generation.md](../docs/spec-learning-generation.md)  
-> **Suivi tâches** : [todo.md](./todo.md)
+> **Suivi tâches** : [todo-learn.md](./todo-learn.md)
 
-Résumé des 5 checkpoints :
+**Plan actif** : [plan.md](./plan.md) — Refonte UI post-login (P5)
+
+Résumé des 5 checkpoints LEARN (livré) :
 
 | CP | Tâches | Livrable utilisateur |
 |----|--------|-------------------|

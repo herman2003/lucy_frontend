@@ -359,5 +359,17 @@
   "learningSessionNotFound": "This session could not be found.",
   "learningSessionGenerationFailed": "Generation failed. Try again from chat.",
   "learningSessionValidationError": "The generation request is invalid.",
-  "learningGenericError": "Something went wrong. Please try again."
+  "learningGenericError": "Something went wrong. Please try again.",
+  "interfaceStyleSectionTitle": "Interface style",
+  "interfaceStyleSectionHint": "Changes Lucy's visual atmosphere",
+  "interfaceStyleAcademic": "Academic",
+  "interfaceStyleAcademicDescription": "Default",
+  "interfaceStylePremiumDark": "Premium dark",
+  "interfaceStylePremiumDarkDescription": "Cool glow",
+  "interfaceStyleMotivant": "Motivating",
+  "interfaceStyleMotivantDescription": "Warm accents",
+  "appearanceSectionTitle": "Appearance",
+  "appearanceLight": "Light",
+  "appearanceDark": "Dark",
+  "appearanceSystem": "System"
 }

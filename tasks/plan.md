@@ -1,27 +1,54 @@
-# Plan — Génération d’activités Quiz + Cartes (P4b)
+# Plan — Refonte UI post-login (P5)
 
 > **Plan mode** — pas de modification de code applicatif dans ce document.  
-> **Spec** : [docs/spec-learning-generation.md](../docs/spec-learning-generation.md) · [SPEC.md](../SPEC.md) §7  
-> **Prérequis livrés** : documents D3, chat P4a, **QUIZ-01** (`GET /v1/quizzes/eligibility` + garde UI)
+> **Spec** : [docs/spec-ui-redesign.md](../docs/spec-ui-redesign.md) · [SPEC.md](../SPEC.md) P5  
+> **Design** : Prototype v3 (desktop), v4 (mobile), Design System  
+> **Prérequis livrés** : auth, onboarding, documents D1–D3, chat P4a, learning P4b
 
-**Plans terminés** : [plan-chat.md](./plan-chat.md) (CHAT-01→10) · documents (DOC-01→14)
+**Plans archivés** : [plan-learn.md](./plan-learn.md) (LEARN terminé) · [plan-chat.md](./plan-chat.md) · [plan-ui-redesign.md](./plan-ui-redesign.md) (brouillon — remplacé par ce fichier)
 
 ---
 
 ## 1. Objectif
 
-Livrer la **génération depuis le Chat** (Lucy crée quiz / cartes) et l’onglet **Quiz** comme **bibliothèque** (historique + reprise). Sessions Firestore via Nest ; reprise possible sans corpus actif (G4b).
+Refondre **toute l’UI après connexion** (shell, Documents, Chat, Quiz, Paramètres/profil) selon les maquettes V3/V4, **sans modifier** la logique métier (notifiers, repositories, routes API).
 
-**Hors scope MVP** : bouton « Générer » dans l’onglet Quiz, streaming SSE de génération, sélection de documents, spaced repetition, score persisté serveur.
+**Hors scope** : login, signup, reset password, splash, onboarding chat (design inchangé en phase 1).
 
-### Git
+**Décisions produit (validées)**
+
+| Sujet | Décision |
+|-------|----------|
+| Desktop | Sidebar design system (≥ 1024 px) ; chat master-detail V3 |
+| Mobile | **Bottom nav custom** V4 (icône + label) — **pas** `animated_bottom_navigation_bar` |
+| Styles | Académique (défaut), Premium sombre, Motivant — choix dans Paramètres |
+| Premium sombre + clair | **Variante claire dédiée** (pas de forçage dark) |
+| Typo | Bricolage + Newsreader + Hanken + JetBrains Mono (`google_fonts`) |
+| Motivant | Accents chauds ; **pas de badge streak 🔥** (pas de compteur) |
+| Icônes nav / chips | **Emojis** comme les maquettes (📄 💬 🎯 ⚙️, etc.) |
+| Portée thème | Nouveau thème **app-wide** (auth inclus) — validé |
+| Ordre écrans | Documents → Chat → Quiz → Settings (après shell) |
+
+### Packages (réutiliser avant de coder custom)
+
+| Besoin | Choix | Éviter |
+|--------|--------|--------|
+| Thème Material 3 + seeds | **`flex_color_scheme`** (déjà) | ThemeData manuel |
+| Polices design system | **`google_fonts`** | `.ttf` en dur sauf offline strict |
+| Persistance style / mode | **`shared_preferences`** (déjà) | Fichier custom |
+| Bottom nav V4 | **Widget custom** `LucyBottomNav` | `animated_bottom_navigation_bar` (style telC) |
+| Drawer mobile chat | **`Drawer` / `ModalBarrier` Flutter** | Package drawer tiers |
+| Segmented clair/sombre | **`SegmentedButton` Material 3** | Custom si M3 suffit |
+| Flip cartes quiz | **`flip_card`** ou `AnimationController` | — (à trancher CP-UI-5) |
+| Markdown chat | **`flutter_markdown_plus`** (déjà) | — |
+
+---
 
 | Dépôt | Branche suggérée |
 |-------|------------------|
-| `lucy_frontend` | `feature/learning-generation` (depuis `feature/chat-p4a` ou `main`) |
-| `lucy_backend` | même nom |
+| `lucy_frontend` | `feature/ui-redesign` (depuis `main`) |
 
-Deux PRs alignées (backend avant ou en parallèle du slice Flutter qui consomme l’API).
+Une PR par checkpoint recommandée (CP-UI-1 → CP-UI-6).
 
 ---
 
@@ -29,9 +56,21 @@ Deux PRs alignées (backend avant ou en parallèle du slice Flutter qui consomme
 
 | Zone | Actuel | Cible |
 |------|--------|--------|
-| `QuizPage` | Eligibility + bannière + « bientôt disponible » | **Bibliothèque** : liste sessions + empty « demandez à Lucy » |
-| Chat stream | Pas d’événement learning | Intent quiz/cartes → SSE `learning_session_created` + carte UI |
-| Routes `/quiz/*` | `/quiz` seul | `/quiz` + `/quiz/session/:id` |
+| Palette | `#1E3D6F`, vert Material secondaire | Design system `#2E4C8A`, `#159A8B`, `#E5933C` |
+| Thème | `ThemeMode.system` statique dans `app.dart` | Riverpod : brightness + `LucyInterfaceStyle` persistés |
+| Shell mobile | `animated_bottom_navigation_bar` (telC) | `LucyBottomNav` custom V4 — package **retiré** en UI-02c |
+| Shell desktop | `LucySidebar` surface claire telC | `LucyDesktopSidebar` fond `#22315C` |
+| Chat | `chat_message_bubble`, master-detail basique | Bulles Lucy gradient, `LucySourceCard`, drawer mobile |
+| Documents | `LucyAdminCard` / liste Material | Cartes grille desktop / liste mobile + toggle |
+| Quiz | Bibliothèque + session fonctionnelles | Hub cartes cliquables, session Newsreader + barre Mono |
+| Settings | Hub telC | Carte profil, segmented clair/sombre, picker 3 styles |
+
+**Fichiers existants à réutiliser / étendre**
+
+- `lib/shared/widgets/branding/lucy_avatar.dart` → aligner gradient Lucy ✦
+- `lib/shared/widgets/buttons/lucy_*_button.dart` → tokens ou wrappers `lib/shared/widgets/lucy/`
+- `lib/core/localization/lucy_ui_locale_storage.dart` → modèle pour `lucy_interface_style_storage.dart`
+- `lib/features/chat/presentation/widgets/*` → remplacer progressivement par composants Lucy
 
 ---
 
@@ -39,335 +78,532 @@ Deux PRs alignées (backend avant ou en parallèle du slice Flutter qui consomme
 
 ```mermaid
 flowchart TB
-  subgraph cp1 [CP-LEARN-1 Backend quiz vertical]
-    L01[LEARN-01a Module + repo + DTOs]
-    L01b[LEARN-01b Pipeline generate quiz]
-    L01c[LEARN-01c GET session by id]
-    L01 --> L01b --> L01c
+  subgraph cp1 [CP-UI-1 Identité visuelle]
+    U01a[UI-01a Colors + spacing]
+    U01b[UI-01b Typography google_fonts]
+    U01c[UI-01c InterfaceStyle enum + storage]
+    U01d[UI-01d Theme extensions + FlexTheme]
+    U01e[UI-01e lucyThemeProvider + app.dart]
+    U01f[UI-01f l10n styles + tests provider]
+    U01a --> U01d
+    U01b --> U01d
+    U01c --> U01e
+    U01d --> U01e --> U01f
   end
 
-  subgraph cp2 [CP-LEARN-2 Chat génération + bibliothèque quiz]
-    L01d[LEARN-01d Chat intent + SSE event]
-    L03a[LEARN-03a Data layer]
-    L03b[LEARN-03b QuizPage bibliothèque]
-    L03c[LEARN-03c ChatLearningSessionCard + session QCM]
-    L01d --> L03c
-    L03a --> L03b --> L03c
+  subgraph cp2 [CP-UI-2 Shell]
+    U02a[UI-02a LucyDesktopSidebar]
+    U02b[UI-02b LucyBottomNav]
+    U02c[UI-02c Refactor LucyAppShell]
+    U02a --> U02c
+    U02b --> U02c
   end
 
-  subgraph cp3 [CP-LEARN-3 Backend flashcards]
-    L02[LEARN-02 Flashcards generate]
+  subgraph cp3 [CP-UI-3 Documents]
+    U03a[UI-03a LucyDocumentCard + empty]
+    U03b[UI-03b DocumentsPage restyle]
+    U03a --> U03b
   end
 
-  subgraph cp4 [CP-LEARN-4 Flutter flashcards]
-    L04a[LEARN-04a Flashcards session UI]
+  subgraph cp4 [CP-UI-4 Chat]
+    U04a[UI-04a Bulles + source + composer]
+    U04b[UI-04b Threads panel desktop]
+    U04c[UI-04c Drawer mobile]
+    U04d[UI-04d ChatPage intégration]
+    U04a --> U04d
+    U04b --> U04d
+    U04c --> U04d
   end
 
-  subgraph cp5 [CP-LEARN-5 Historique + finition]
-    L05a[LEARN-05a GET list + history UI]
-    L05b[LEARN-05b DELETE + G4b + CP-LEARN]
+  subgraph cp5 [CP-UI-5 Quiz]
+    U05a[UI-05a Hub cards + session QCM]
+    U05b[UI-05b Flashcards + learning card chat]
+    U05a --> U05b
   end
 
-  L01c --> L03a
-  L03c --> L02
-  L02 --> L04a
-  L03c --> L05a
-  L04a --> L05b
+  subgraph cp6 [CP-UI-6 Settings]
+    U06a[UI-06a Appearance picker + segmented]
+    U06b[UI-06b Settings hub + profil sous-pages]
+    U06a --> U06b
+  end
+
+  cp1 --> cp2
+  cp2 --> cp3
+  cp2 --> cp4
+  cp2 --> cp5
+  cp1 --> cp6
+  cp2 --> cp6
 ```
 
-**Règle de découpage** : chaque checkpoint livre un **chemin utilisateur complet** testable, pas une couche horizontale isolée.
+**Règle** : chaque checkpoint = **un parcours utilisateur testable** de bout en bout sur au moins un écran.
 
 ---
 
 ## 4. Checkpoints
 
-| Checkpoint | Contenu | Validation |
-|------------|---------|------------|
-| **CP-LEARN-1** | Backend : créer quiz + relire session | `curl POST generate` → `GET :id` avec 5 QCM + sources |
-| **CP-LEARN-2** | Chat : « fais un quiz » → carte → jouer QCM ; Quiz : bibliothèque | Manuel + tests |
-| **CP-LEARN-3** | Backend : flashcards | `curl POST type=flashcards` → 10 cartes |
-| **CP-LEARN-4** | Flutter : cartes flip | Manuel : recto/verso + sources |
-| **CP-LEARN-5** | Historique, reprise G4b, DELETE, checklist | CP-LEARN spec §2.3 entière |
+| Checkpoint | Chemin utilisateur testable | Validation |
+|------------|----------------------------|------------|
+| **CP-UI-1** | Login → app : palette `#2E4C8A`, fond crème, polices Google | **Livré** — `flutter test test/core/theme/` |
+| **CP-UI-2** | Naviguer Documents / Chat / Quiz / Settings desktop + mobile | Router tests verts ; pas de régression branches |
+| **CP-UI-3** | Gérer corpus : liste, upload, toggle, états processing | Widget test carte ; manuel grille/liste |
+| **CP-UI-4** | Chat : fils, message, stream, sources, drawer mobile | Tests chat existants + manuel master-detail |
+| **CP-UI-5** | Quiz hub → session QCM ; carte learning dans chat | `flutter test test/features/quiz/` |
+| **CP-UI-6** | Changer style interface + clair/sombre ; profil | Settings tests ; persistance redémarrage app |
 
 ---
 
 ## 5. Tâches détaillées (découpage vertical)
 
-### LEARN-01a — Backend socle `learning-sessions`
+### UI-01a — Tokens couleurs + espacements
 
 | | |
 |--|--|
-| **Dépôt** | `lucy_backend` |
-| **Dépend de** | QUIZ-01, ChatModule (`ChatPrerequisitesService`), RetrievalModule |
-| **Livrable** | Module Nest, DTOs (`type`, `itemCount`, response, list item), codes `LEARNING_*`, repo port + in-memory + factory Firestore |
+| **Dépend de** | — |
+| **Fichiers** | `lucy_colors.dart`, `lucy_spacing.dart` (nouveau) |
+| **Livrable** | Seeds design system ; neutres crème/ink ; constantes rayons 10–14 px, pills 999 |
 
 **Acceptance criteria**
 
-- [ ] `LearningSessionsModule` importé dans `AppModule`
-- [ ] `parseGenerateLearningSessionRequest` valide `type ∈ {quiz, flashcards}` et `itemCount` (défaut/plafond §4.2 spec)
-- [ ] Repo in-memory : `create`, `getById`, `list`, `delete` sur `users/{uid}/learningSessions`
-- [ ] Tests unitaires DTO + repo in-memory
+- [ ] `primary` `#2E4C8A`, `secondary` `#159A8B`, `tertiary` `#E5933C`, `error` `#CE3A4E`
+- [ ] Tokens sémantiques : `rail`, `scaffoldBackgroundLight`, `lucyGradient` (dans colors ou extensions)
+- [ ] Aucun hex nouveau dans les features (grep audit)
 
 **Vérification**
 
 ```bash
-cd lucy_backend && npm test -- learning-sessions
+cd lucy_frontend && flutter analyze
 ```
 
 ---
 
-### LEARN-01b — Backend pipeline `POST generate` (quiz)
+### UI-01b — Typographie (`google_fonts`)
 
 | | |
 |--|--|
-| **Dépend de** | LEARN-01a |
-| **Livrable** | Service génération quiz : garde corpus+profil **uniquement ici**, retrieval chunks, prompt `quiz-generator`, `LlmPort.generateStructured`, validateur JSON, persistance `status: ready` |
+| **Dépend de** | UI-01a |
+| **Fichiers** | `pubspec.yaml`, `lucy_typography.dart` |
+| **Livrable** | `TextTheme` : Newsreader titres, Hanken corps, Mono labels pages |
 
 **Acceptance criteria**
 
-- [ ] `POST /v1/learning-sessions/generate` body `{ "type": "quiz" }` → 201/200 + session avec **5** items par défaut
-- [ ] Chaque item : `question`, `choices[4]`, `correctIndex`, `explanation`, `sources[]` (snapshot titre/pages/excerpt)
-- [ ] Erreurs : `LEARNING_NO_ACTIVE_DOCUMENTS`, `LEARNING_LEARNER_PROFILE_MISSING`, `LEARNING_GENERATION_FAILED`
-- [ ] Réutilise `ChatPrerequisitesService.requireActiveDocuments` + `requireLearnerProfile` (mapper codes → `LEARNING_*` si besoin)
-- [ ] Mock LLM dans tests — pas d’appel Gemini en CI
-- [ ] **Pas** de garde corpus sur les routes GET (préparer LEARN-01c)
+- [ ] `flutter pub add google_fonts`
+- [ ] Rôles : `headlineEditorial` (Newsreader 20–26), `bodyUi` (Hanken), `labelMono` (JetBrains 10–13)
+- [ ] Bricolage réservé à `LucyBrandMark` (pas tout le TextTheme)
 
 **Vérification**
 
 ```bash
-cd lucy_backend && npm test -- learning-sessions
-# Manuel dev stack :
-curl -s -X POST http://localhost:3001/v1/learning-sessions/generate \
-  -H "Authorization: Bearer dev:<uid>" -H "Content-Type: application/json" \
-  -d '{"type":"quiz"}' | jq '.id, .items | length'
+flutter analyze
 ```
 
 ---
 
-### LEARN-01c — Backend `GET /v1/learning-sessions/:sessionId`
+### UI-01c — `LucyInterfaceStyle` + persistance
 
 | | |
 |--|--|
-| **Dépend de** | LEARN-01b |
-| **Livrable** | Lecture session par id ; **aucune** re-vérification corpus/domaines (G4b) |
+| **Dépend de** | — |
+| **Fichiers** | `lucy_interface_style.dart`, `lucy_interface_style_storage.dart` |
+| **Livrable** | Enum `academic`, `premiumDark`, `motivant` ; SharedPreferences |
 
 **Acceptance criteria**
 
-- [ ] `GET …/:sessionId` retourne session complète si `uid` propriétaire et `status: ready`
-- [ ] `LEARNING_SESSION_NOT_FOUND` si id inconnu
-- [ ] Test : générer avec docs actifs → désactiver tous les docs → `GET` **toujours 200**
+- [ ] Défaut `academic` si clé absente
+- [ ] `read()` / `write()` async ; clé dédiée `lucy_interface_style`
+- [ ] Pattern identique à `LucyUiLocaleStorage`
 
 **Vérification**
 
 ```bash
-npm test -- learning-sessions
+flutter test test/core/theme/
 ```
-
-**→ Fin CP-LEARN-1**
 
 ---
 
-### LEARN-01d — Backend Chat → génération (intent + SSE)
+### UI-01d — Extensions thème + `LucyFlexTheme`
 
 | | |
 |--|--|
-| **Dépend de** | LEARN-01b |
-| **Livrable** | Détection intention dans `ChatStreamService` ; délégation `LearningSessionsService` ; événement SSE `learning_session_created` ; amendement prompt chat-tutor |
+| **Dépend de** | UI-01a, UI-01b, UI-01c |
+| **Fichiers** | `lucy_theme_extensions.dart`, `lucy_flex_theme.dart` |
+| **Livrable** | `ThemeExtension<LucyThemeColors>` : rail, lucyBubble, tealChipBg, motivantStreak… |
 
 **Acceptance criteria**
 
-- [ ] Message « fais-moi un quiz » → pas de réponse orientation seule — session créée
-- [ ] SSE inclut `learning_session_created` avec `sessionId`, `type`, `title`
-- [ ] `sourceChatId` persisté sur la session
-- [ ] Corpus vide → message Lucy + pas de session (inchangé garde chat)
-- [ ] Tests stream mock
+- [ ] `LucyFlexTheme.themeFor(brightness, interfaceStyle)` retourne `ThemeData` par variante
+- [ ] Académique clair : scaffold `#F4F0E8`, surface blanche
+- [ ] Premium sombre : dark `#0F1320` **et** variante **clair** dédiée (fond bleu-gris adouci, glow Lucy atténué)
+- [ ] Motivant : accents chauds `#FBEEDD` (light) ; **sans** badge streak / compteur jours
 
 **Vérification**
 
 ```bash
-npm test -- chat-stream learning-sessions
+flutter analyze
 ```
 
 ---
 
-### LEARN-03a — Flutter data layer learning sessions
+### UI-01e — `lucyThemeProvider` + `app.dart`
 
 | | |
 |--|--|
-| **Dépôt** | `lucy_frontend` |
-| **Dépend de** | LEARN-01c (backend déployé local ou mock) |
-| **Livrable** | `ApiEndpoints.learningSessions*`, modèles Freezed, mapper, repository, service, codes erreur + translator l10n de base |
+| **Dépend de** | UI-01d |
+| **Fichiers** | `lucy_theme_provider.dart`, `main.dart`, `app.dart` |
+| **Livrable** | Bootstrap style depuis prefs ; `MaterialApp.router` branché sur provider |
 
 **Acceptance criteria**
 
-- [ ] Entités domain : `LearningSession`, `LearningSessionItem`, `LearningSessionType`
-- [ ] `POST generate`, `GET by id` branchés via Dio
-- [ ] Tests mapper + service (fake repository)
-- [ ] `dart run build_runner build` sans conflit
+- [ ] `@riverpod` : `themeMode` + `interfaceStyle` ; `build_runner`
+- [ ] `main.dart` : `LucyInterfaceStyleStorage.read()` avant `runApp` (comme locale)
+- [ ] Remplace `themeMode: ThemeMode.system` fixe
 
 **Vérification**
 
 ```bash
-cd lucy_frontend && flutter test test/features/quiz/
+dart run build_runner build --delete-conflicting-outputs
+flutter run -d chrome
 ```
 
----
-
-### LEARN-03b — Flutter bibliothèque Quiz (sans génération)
-
-| | |
-|--|--|
-| **Dépend de** | LEARN-03a, QUIZ-01 |
-| **Livrable** | Refonte `QuizPage` : liste sessions (`GET list`), empty state « demandez à Lucy », bannière si `!canQuiz` |
-
-**Acceptance criteria**
-
-- [ ] **Pas** de tuiles / boutons « Générer quiz / cartes »
-- [ ] Historique cliquable même si `canQuiz: false` (G4b)
-- [ ] Couleurs `primary`, `secondary`, `tertiary`, `surface`
-- [ ] l10n fr/en/de
+**→ Fin CP-UI-1**
 
 ---
 
-### LEARN-03c — Chat carte action + session QCM
+### UI-01f — l10n clés styles + tests provider
 
 | | |
 |--|--|
-| **Dépend de** | LEARN-01d, LEARN-03b |
-| **Livrable** | `ChatLearningSessionCard`, handler SSE ; `QuizSessionPage` |
+| **Dépend de** | UI-01e |
+| **Fichiers** | `app_*.arb`, `test/core/theme/lucy_theme_provider_test.dart` |
 
 **Acceptance criteria**
 
-- [ ] Carte dans le fil → **Ouvrir** → `/quiz/session/:id`
-- [ ] QCM interactif + sources + score local client
-- [ ] Erreurs → translator l10n
-
-**→ Fin CP-LEARN-2**
-
----
-
-### LEARN-02 — Backend flashcards (`type: flashcards`)
-
-| | |
-|--|--|
-| **Dépend de** | LEARN-01b (même pipeline) |
-| **Livrable** | Prompt `flashcards-generator`, validateur recto/verso, branche `type` dans service |
-
-**Acceptance criteria**
-
-- [ ] `POST generate` `{ "type": "flashcards" }` → **10** cartes par défaut, plafond 30
-- [ ] Items : `front`, `back`, `sources[]`
-- [ ] Tests validateur + service mock LLM
+- [ ] Clés : `interfaceStyleAcademic`, `interfaceStylePremiumDark`, `interfaceStyleMotivant`, descriptions
+- [ ] fr / en / de
+- [ ] 2+ tests : défaut academic ; write + read persistance
 
 **Vérification**
 
 ```bash
-npm test -- learning-sessions
-curl -s -X POST ... -d '{"type":"flashcards"}' | jq '.items[0].front'
+flutter gen-l10n
+flutter test test/core/theme/
 ```
 
-**→ Fin CP-LEARN-3**
-
 ---
 
-### LEARN-04a — Flutter session cartes mémoire
+### UI-02a — `LucyDesktopSidebar`
 
 | | |
 |--|--|
-| **Dépend de** | LEARN-02, LEARN-03c |
-| **Livrable** | `FlashcardsSessionPage` ; intent chat « cartes / flashcards » |
+| **Dépend de** | CP-UI-1 |
+| **Fichiers** | `lucy_desktop_sidebar.dart`, `lucy_brand_mark.dart` |
+| **Livrable** | Sidebar `#22315C`, item actif fond blanc, avatar tertiary bas |
 
 **Acceptance criteria**
 
-- [ ] Génération cartes via **chat** (pas onglet Quiz)
-- [ ] Flip recto/verso ; navigation carte suivante/précédente
-- [ ] Sources par carte
-- [ ] Pas de scoring
+- [ ] 4 branches : documents, chat, quiz, settings (même indices que shell actuel)
+- [ ] Logo Bricolage « L » + marque Lucy
+- [ ] Logout en bas (délègue `authServiceProvider`)
+- [ ] Largeur ~264 px (constante `lucy_spacing` / `lucy_constants`)
 
 **Vérification**
 
-Manuel + `flutter test`.
-
-**→ Fin CP-LEARN-4**
+Manuel Chrome ≥ 1024 px.
 
 ---
 
-### LEARN-05a — Backend `GET list` + Flutter historique
+### UI-02b — `LucyBottomNav` (widget custom)
 
 | | |
 |--|--|
-| **Dépend de** | LEARN-01c, LEARN-03c ou LEARN-04a |
-| **Livrable** | `GET /v1/learning-sessions` (tri `createdAt` desc), `LearningHistoryPage`, section hub « Historique récent » |
+| **Dépend de** | CP-UI-1 |
+| **Fichiers** | `lucy_bottom_nav.dart` |
+| **Livrable** | Barre plate V4 : emoji + label par onglet ; actif `primary` |
+
+**Pourquoi pas `animated_bottom_navigation_bar`** : ce package impose une barre flottante / animation bulle (style telC), incompatible avec la maquette V4 (barre fixe, bordure haute, 4 colonnes égales). On implémente un `StatelessWidget` maison (~80 lignes).
 
 **Acceptance criteria**
 
-- [ ] Liste sessions sans garde corpus (G4b)
-- [ ] Tap session → reprise `/quiz/session/:id` même si `canQuiz: false`
-- [ ] Empty state historique vide (l10n)
-- [ ] Test backend : list après 2 generates
-
-**Vérification**
-
-Manuel : générer → désactiver docs → historique + reprise OK.
-
----
-
-### LEARN-05b — DELETE + checklist CP-LEARN
-
-| | |
-|--|--|
-| **Dépend de** | LEARN-05a |
-| **Livrable** | `DELETE …/:sessionId`, swipe/long-press delete UI (option simple), doc `docs/cp-learn-manual-checklist.md` |
-
-**Acceptance criteria**
-
-- [ ] DELETE owner-only ; 404 si inconnu
-- [ ] Checklist spec §2.3 entière cochée manuellement
-- [ ] `npm test` backend learning + quiz eligibility non-régression
-- [ ] `flutter analyze` + `flutter test test/features/quiz/` verts
-- [ ] Chat orientation quiz inchangé (non-régression)
+- [ ] Emojis nav : 📄 Documents, 💬 Chat, 🎯 Quiz, ⚙️ Paramètres (libellés l10n)
+- [ ] Index dérivé de `state.uri.path` (chat/quiz/settings prefixes)
+- [ ] Hauteur touch ≥ 44 px ; bordure top `border` token ; fond `surface`
 
 **Vérification**
 
 ```bash
-cd lucy_backend && npm test
-cd lucy_frontend && flutter analyze && flutter test test/features/quiz/
+flutter test test/core/shell/lucy_bottom_nav_test.dart
 ```
 
-**→ Fin CP-LEARN-5 — feature MVP livrable**
+---
+
+### UI-02c — Refactor `LucyAppShell`
+
+| | |
+|--|--|
+| **Dépend de** | UI-02a, UI-02b |
+| **Fichiers** | `lucy_app_shell.dart` ; déprécier `lucy_sidebar.dart` |
+| **Livrable** | Mobile &lt; 600 : bottom nav ; desktop : sidebar permanente ; tablet hamburger |
+
+**Acceptance criteria**
+
+- [ ] Breakpoints alignés `responsive_constants.dart`
+- [ ] `navigationShell` inchangé (pas de modif routes)
+- [ ] Tests router existants verts
+
+**Vérification**
+
+```bash
+flutter test test/core/router/
+flutter analyze
+```
+
+**→ Fin CP-UI-2** — retirer `animated_bottom_navigation_bar` du `pubspec.yaml` dans UI-02c
+
+---
+
+### UI-03a — Composants Documents
+
+| | |
+|--|--|
+| **Dépend de** | CP-UI-2 |
+| **Fichiers** | `lucy_document_card.dart`, `lucy_chip.dart`, `lucy_empty_state.dart` |
+| **Livrable** | Carte : icône type, titre, meta Mono, statut chip, toggle searchEnabled, barre processing |
+
+**Acceptance criteria**
+
+- [ ] Props data-only (pas d’appel repository dans le widget)
+- [ ] Callback `onToggle`, `onTap` optionnel
+- [ ] Widget test : toggle appelle callback
+
+**Vérification**
+
+```bash
+flutter test test/shared/widgets/lucy_document_card_test.dart
+```
+
+---
+
+### UI-03b — `DocumentsPage` restyle
+
+| | |
+|--|--|
+| **Dépend de** | UI-03a |
+| **Fichiers** | `documents_page.dart`, widgets upload/liste existants |
+| **Livrable** | Header Newsreader + CTA Ajouter ; grille 2 col desktop / liste mobile |
+
+**Acceptance criteria**
+
+- [ ] Logique `documents_notifier` **inchangée**
+- [ ] Upload, download, delete, toggle fonctionnels
+- [ ] l10n pour empty / compteur docs
+
+**Vérification**
+
+Manuel : upload PDF → processing → ready → toggle actif.
+
+**→ Fin CP-UI-3**
+
+---
+
+### UI-04a — Composants Chat message
+
+| | |
+|--|--|
+| **Dépend de** | CP-UI-2 |
+| **Fichiers** | `lucy_message_bubble.dart`, `lucy_source_card.dart`, `lucy_composer.dart` ; étendre `lucy_avatar.dart` |
+| **Livrable** | Bulle user primary ; Lucy avatar gradient + typing dots ; source bordure teal |
+
+**Acceptance criteria**
+
+- [ ] Réutilise `LucyFormattedMessageText` si pertinent
+- [ ] `LucyComposer` : Enter envoie, bouton ↑ primary carré arrondi
+- [ ] Widget test `LucySourceCard` affiche titre + pages
+
+**Vérification**
+
+```bash
+flutter test test/shared/widgets/lucy_source_card_test.dart
+```
+
+---
+
+### UI-04b — Panneau fils desktop (V3)
+
+| | |
+|--|--|
+| **Dépend de** | CP-UI-2 |
+| **Fichiers** | `lucy_chat_threads_panel.dart` |
+| **Livrable** | Colonne 300 px : titre Conversations, + nouveau, liste fils |
+
+**Acceptance criteria**
+
+- [ ] Largeur fixe 300 px ; `surface2` background
+- [ ] Délègue sélection / création à callbacks (branchés sur `chatThreadsProvider` dans page)
+
+**Vérification**
+
+Manuel desktop : créer fil, changer fil.
+
+---
+
+### UI-04c — Drawer conversations mobile (V4)
+
+| | |
+|--|--|
+| **Dépend de** | CP-UI-2 |
+| **Fichiers** | `lucy_conversations_drawer.dart` |
+| **Livrable** | Overlay 80 % largeur, animation slide, bouton + Nouvelle conversation |
+
+**Acceptance criteria**
+
+- [ ] Ouvert via ☰ dans app bar chat mobile uniquement
+- [ ] Fermeture tap extérieur + après sélection fil
+
+**Vérification**
+
+Manuel simulateur &lt; 600 px.
+
+---
+
+### UI-04d — `ChatPage` intégration
+
+| | |
+|--|--|
+| **Dépend de** | UI-04a, UI-04b, UI-04c |
+| **Fichiers** | `chat_page.dart`, widgets chat feature (délégation) |
+| **Livrable** | Master-detail desktop ; mobile conversation + drawer ; empty state suggestions ; chip « N docs actifs » |
+
+**Acceptance criteria**
+
+- [ ] SSE stream + sources inchangés (notifier)
+- [ ] `ChatLearningSessionCard` visuellement alignée (tokens)
+- [ ] Tests `chat_conversation_notifier_test` verts
+
+**Vérification**
+
+```bash
+flutter test test/features/chat/
+```
+
+**→ Fin CP-UI-4**
+
+---
+
+### UI-05a — Quiz hub + session QCM
+
+| | |
+|--|--|
+| **Dépend de** | CP-UI-2 |
+| **Fichiers** | `lucy_quiz_hub_card.dart`, `quiz_page.dart`, `learning_session_page.dart` |
+| **Livrable** | Cartes hub cliquables ; session : barre progression Mono, choix A–D, écran score |
+
+**Acceptance criteria**
+
+- [ ] `quiz_session_notifier` / routes inchangés
+- [ ] Desktop : cartes ~280 px ; mobile : pleine largeur
+- [ ] Badge type Quiz / Cartes (chips)
+
+**Vérification**
+
+```bash
+flutter test test/features/quiz/
+```
+
+---
+
+### UI-05b — Flashcards + carte chat learning
+
+| | |
+|--|--|
+| **Dépend de** | UI-05a |
+| **Fichiers** | `flashcards_session_page.dart`, `chat_learning_session_card.dart` |
+| **Livrable** | Flip card ; carte action chat style Lucy |
+
+**Acceptance criteria**
+
+- [ ] Navigation carte préc/suiv ; tap flip
+- [ ] Bouton Ouvrir sur carte chat → route session
+
+**Vérification**
+
+Manuel : générer quiz + cartes depuis chat.
+
+**→ Fin CP-UI-5**
+
+---
+
+### UI-06a — Appearance : segmented + picker 3 styles
+
+| | |
+|--|--|
+| **Dépend de** | CP-UI-1 |
+| **Fichiers** | `lucy_segmented_control.dart`, `lucy_interface_style_picker.dart`, `settings_notifier` |
+| **Livrable** | UI Paramètres : clair/sombre + grille 3 previews |
+
+**Acceptance criteria**
+
+- [ ] Changement style → `lucyThemeProvider` + persistance immédiate
+- [ ] Preview cards comme maquette (Aa académique, glow premium, dégradé chaud motivant — **sans** streak)
+- [ ] Tests settings : changement style déclenche write storage
+
+**Vérification**
+
+```bash
+flutter test test/features/settings/
+```
+
+---
+
+### UI-06b — Settings hub + profil sous-pages
+
+| | |
+|--|--|
+| **Dépend de** | UI-06a, CP-UI-2 |
+| **Fichiers** | `settings_page.dart`, `settings_profile_page.dart`, `settings_ai_config_page.dart`, etc. |
+| **Livrable** | Carte profil, langue, logout error outline ; profil apprenant layout V3/V4 |
+
+**Acceptance criteria**
+
+- [ ] `settings_notifier` logique inchangée
+- [ ] Navigation sous-routes OK
+- [ ] fr / en / de sans overflow
+
+**Vérification**
+
+```bash
+flutter analyze && flutter test test/features/settings/
+```
+
+**→ Fin CP-UI-6**
 
 ---
 
 ## 6. Ordre d’exécution recommandé
 
 ```
-LEARN-01a → LEARN-01b → LEARN-01c → LEARN-01d     [CP-LEARN-1 + chat hook]
-LEARN-03a → LEARN-03b → LEARN-03c                 [CP-LEARN-2]
-LEARN-02                              [CP-LEARN-3]
-LEARN-04a                             [CP-LEARN-4]
-LEARN-05a → LEARN-05b                 [CP-LEARN-5]
+UI-01a → UI-01b → UI-01c → UI-01d → UI-01e → UI-01f     [CP-UI-1]
+UI-02a ∥ UI-02b → UI-02c                                  [CP-UI-2]
+UI-03a → UI-03b                                           [CP-UI-3]
+UI-04a → UI-04b ∥ UI-04c → UI-04d                         [CP-UI-4]
+UI-05a → UI-05b                                           [CP-UI-5]
+UI-06a → UI-06b                                           [CP-UI-6]
 ```
 
-Parallélisation possible : LEARN-03a (Flutter data) en parallèle de LEARN-01b si contrat API figé dans la spec §4.3.
+Parallélisation après CP-UI-2 : **CP-UI-3**, **CP-UI-4**, **CP-UI-5** en parallèle si plusieurs devs ; **CP-UI-6** peut démarrer dès CP-UI-1 pour UI-06a uniquement.
 
 ---
 
 ## 7. Commandes globales
 
 ```bash
-# Backend
-cd lucy_backend
-npm test
-npm test -- learning-sessions
-npm test -- quiz-eligibility
-
-# Frontend
 cd lucy_frontend
+flutter pub add google_fonts   # UI-01b
 dart run build_runner build --delete-conflicting-outputs
 flutter gen-l10n
 flutter analyze
-flutter test test/features/quiz/
+flutter test
 ```
+
+Checklist finale : `docs/spec-ui-redesign.md` §5.2 + section CP-UI ci-dessous.
 
 ---
 
@@ -375,11 +611,22 @@ flutter test test/features/quiz/
 
 | Risque | Mitigation |
 |--------|------------|
-| JSON LLM invalide | Validateur strict + 1 retry ; `LEARNING_GENERATION_FAILED` |
-| Session Firestore trop grosse | Plafonds itemCount (quiz 15, cards 30) |
-| Confusion garde corpus | Tests explicites G4b : GET après désactivation docs |
-| Duplication codes erreur chat/quiz | Mapper `CHAT_*` → `LEARNING_*` à la frontière service |
+| Régression chat/quiz | Lancer tests feature après chaque CP |
+| Performance `google_fonts` | Cache fonts ; éviter rebuild thème complet inutile |
+| 3 styles × 2 brightness = 6 variantes | `themeFor()` centralisé ; tests sur academic light + premium dark |
+| Duplication widgets chat / shared | Migrer vers `lib/shared/widgets/lucy/` ; supprimer anciens widgets feature quand inutilisés |
+| Package bottom nav | Remplacer par widget custom ; retirer dépendance dans UI-02c |
 
 ---
 
-*Ce document a été créé avec Cursor (IA). Plan P4b learning-generation — 2026-05-29.*
+## 9. Checklist manuelle CP-UI (fin)
+
+- [ ] Desktop Chrome ≥ 1024 : sidebar + chat 2 colonnes + documents grille
+- [ ] Mobile : bottom nav + drawer chat + composer fixe
+- [ ] 3 styles interface + clair/sombre persistés après kill app
+- [ ] Auth / onboarding visuellement inchangés
+- [ ] `flutter analyze` + `flutter test` verts
+
+---
+
+*Ce document a été créé avec Cursor (IA). Plan P5 UI redesign — 2026-06-10.*

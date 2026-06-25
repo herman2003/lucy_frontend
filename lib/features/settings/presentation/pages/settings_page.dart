@@ -11,6 +11,7 @@ import '../../../../shared/widgets/buttons/lucy_secondary_button.dart';
 import '../controllers/settings_notifier.dart';
 import '../controllers/settings_state.dart';
 import '../../utils/settings_error_translator.dart';
+import '../widgets/settings_appearance_section.dart';
 import '../widgets/settings_group.dart';
 import '../widgets/settings_navigation_tile.dart';
 import '../widgets/settings_section_header.dart';
@@ -122,6 +123,7 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
                   ),
                 ),
               ),
+            const SettingsAppearanceSection(),
             SettingsSectionHeader(title: l10n.settingsHubSection),
             SettingsGroup(
               children: [

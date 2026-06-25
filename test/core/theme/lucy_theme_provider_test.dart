@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:lucy_frontend/core/theme/lucy_colors.dart';
 import 'package:lucy_frontend/core/theme/lucy_interface_style.dart';
 import 'package:lucy_frontend/core/theme/lucy_interface_style_storage.dart';
+import 'package:lucy_frontend/core/theme/lucy_theme_mode_storage.dart';
 import 'package:lucy_frontend/core/theme/lucy_theme_palette.dart';
 import 'package:lucy_frontend/core/theme/lucy_theme_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -76,6 +77,32 @@ void main() {
         container.read(lucyAppThemeProvider).interfaceStyle,
         LucyInterfaceStyle.motivant,
       );
+    });
+    test('setInterfaceStyle persists to storage', () async {
+      LucyAppTheme.bootstrap();
+      final container = ProviderContainer();
+      addTearDown(container.dispose);
+
+      container
+          .read(lucyAppThemeProvider.notifier)
+          .setInterfaceStyle(LucyInterfaceStyle.premiumDark);
+      await Future<void>.delayed(Duration.zero);
+
+      expect(
+        await LucyInterfaceStyleStorage.read(),
+        LucyInterfaceStyle.premiumDark,
+      );
+    });
+
+    test('setThemeMode persists to storage', () async {
+      LucyAppTheme.bootstrap();
+      final container = ProviderContainer();
+      addTearDown(container.dispose);
+
+      container.read(lucyAppThemeProvider.notifier).setThemeMode(ThemeMode.dark);
+      await Future<void>.delayed(Duration.zero);
+
+      expect(await LucyThemeModeStorage.read(), ThemeMode.dark);
     });
   });
 }

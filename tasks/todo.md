@@ -44,7 +44,7 @@
 
 | Statut | Id | Tâche |
 |--------|-----|--------|
-| [ ] | UI-04a | `LucyMessageBubble`, `LucySourceCard`, `LucyComposer` |
+| [x] | UI-04a | `LucyMessageBubble`, `LucySourceCard`, `LucyComposer` |
 | [ ] | UI-04b | `LucyChatThreadsPanel` desktop 300 px |
 | [ ] | UI-04c | `LucyConversationsDrawer` mobile |
 | [ ] | UI-04d | `ChatPage` intégration + tests chat |

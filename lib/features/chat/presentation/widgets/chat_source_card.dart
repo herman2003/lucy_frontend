@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/constants/lucy_constants.dart';
 import '../../../../core/extensions/context.dart';
+import '../../../../shared/widgets/lucy/lucy_source_card.dart';
 import '../../domain/entities/chat_source.dart';
 
 /// Citation card shown after SSE `sources` event (spec §3.3).
@@ -12,43 +12,10 @@ class ChatSourceCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final scheme = Theme.of(context).colorScheme;
-    final pagesLabel = _pagesLabel(context);
-
-    return Card(
-      margin: const EdgeInsets.only(bottom: LucyConstants.kSpacingLow),
-      child: Padding(
-        padding: const EdgeInsets.all(LucyConstants.kSpacingMedium),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              source.title,
-              style: Theme.of(
-                context,
-              ).textTheme.titleSmall?.copyWith(color: scheme.onSurface),
-            ),
-            if (pagesLabel != null) ...[
-              const SizedBox(height: LucyConstants.kSpacingLow / 2),
-              Text(
-                pagesLabel,
-                style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                  color: scheme.onSurfaceVariant,
-                ),
-              ),
-            ],
-            const SizedBox(height: LucyConstants.kSpacingLow),
-            Text(
-              source.excerpt,
-              maxLines: 4,
-              overflow: TextOverflow.ellipsis,
-              style: Theme.of(
-                context,
-              ).textTheme.bodyMedium?.copyWith(color: scheme.onSurfaceVariant),
-            ),
-          ],
-        ),
-      ),
+    return LucySourceCard(
+      title: source.title,
+      excerpt: source.excerpt,
+      pagesLabel: _pagesLabel(context),
     );
   }
 

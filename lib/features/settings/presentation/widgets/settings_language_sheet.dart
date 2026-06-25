@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/constants/lucy_constants.dart';
+import '../../../../core/constants/lucy_spacing.dart';
 import '../../../../core/extensions/context.dart';
+import '../../../../core/theme/lucy_theme_extensions.dart';
 import '../../../../core/localization/l10n/app_localizations.dart';
 import '../../utils/settings_ui_locale_l10n.dart';
 
@@ -12,14 +13,13 @@ Future<void> showSettingsLanguageSheet({
   required ValueChanged<String> onSelected,
 }) {
   final l10n = context.l10n;
-  final scheme = context.colorScheme;
   final options = const ['fr', 'en', 'de'];
   final selected = currentCode ?? 'de';
 
   return showModalBottomSheet<void>(
     context: context,
     showDragHandle: true,
-    backgroundColor: scheme.surface,
+    backgroundColor: context.lucyTheme.scaffoldBackground,
     builder: (sheetContext) {
       return SafeArea(
         child: Column(
@@ -28,17 +28,14 @@ Future<void> showSettingsLanguageSheet({
           children: [
             Padding(
               padding: const EdgeInsets.fromLTRB(
-                LucyConstants.kContainerPaddingMedium,
+                LucySpacing.spaceLg,
                 0,
-                LucyConstants.kContainerPaddingMedium,
-                LucyConstants.kSpacingMedium,
+                LucySpacing.spaceLg,
+                LucySpacing.spaceMd,
               ),
               child: Text(
                 l10n.settingsUiLocaleLabel,
-                style: Theme.of(sheetContext).textTheme.titleMedium?.copyWith(
-                  fontWeight: FontWeight.bold,
-                  color: scheme.primary,
-                ),
+                style: Theme.of(sheetContext).textTheme.titleMedium,
               ),
             ),
             for (final code in options)
@@ -48,11 +45,9 @@ Future<void> showSettingsLanguageSheet({
                     AppLocalizations.of(sheetContext)!,
                     code,
                   ),
-                  style: TextStyle(color: scheme.primary),
                 ),
                 value: code,
                 groupValue: selected,
-                activeColor: scheme.primary,
                 onChanged: (next) {
                   if (next == null) {
                     return;
@@ -61,7 +56,7 @@ Future<void> showSettingsLanguageSheet({
                   onSelected(next);
                 },
               ),
-            const SizedBox(height: LucyConstants.kSpacingMedium),
+            const SizedBox(height: LucySpacing.spaceMd),
           ],
         ),
       );

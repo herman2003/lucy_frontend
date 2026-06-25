@@ -65,7 +65,7 @@
 | Statut | Id | Tâche |
 |--------|-----|--------|
 | [x] | UI-06a | Segmented clair/sombre + picker 3 styles |
-| [ ] | UI-06b | Settings hub + sous-pages profil / AI / mot de passe |
+| [x] | UI-06b | Settings hub + sous-pages profil / AI / mot de passe |
 
 ---
 

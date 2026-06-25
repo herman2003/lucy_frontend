@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/constants/lucy_constants.dart';
+import '../../../../core/constants/lucy_spacing.dart';
 import '../../../../core/extensions/context.dart';
+import '../../../../core/theme/lucy_theme_extensions.dart';
 
-/// Uppercase section title (telC [SettingsSectionHeader]).
+/// Section title for settings screens.
 class SettingsSectionHeader extends StatelessWidget {
   const SettingsSectionHeader({super.key, required this.title});
 
@@ -11,19 +12,21 @@ class SettingsSectionHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final lucy = context.lucyTheme;
+
     return Padding(
       padding: const EdgeInsets.fromLTRB(
-        LucyConstants.kContainerPaddingMedium,
-        LucyConstants.kSpacingHigh,
-        LucyConstants.kContainerPaddingMedium,
-        LucyConstants.kSpacingMedium,
+        LucySpacing.spaceLg,
+        LucySpacing.spaceLg,
+        LucySpacing.spaceLg,
+        LucySpacing.spaceSm,
       ),
       child: Text(
-        title.toUpperCase(),
+        title,
         style: context.textTheme.labelMedium?.copyWith(
-          color: context.colorScheme.primary,
+          color: lucy.muted,
           fontWeight: FontWeight.w600,
-          letterSpacing: 0.8,
+          letterSpacing: 0.6,
         ),
       ),
     );

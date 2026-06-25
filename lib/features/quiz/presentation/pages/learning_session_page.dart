@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../core/extensions/context.dart';
+import '../../../../core/theme/lucy_theme_extensions.dart';
 import '../../../../shared/widgets/feedback/lucy_snackbar.dart';
 import '../../domain/entities/learning_session_type.dart';
 import '../../utils/learning_session_error_translator.dart';
@@ -34,10 +35,12 @@ class LearningSessionPage extends ConsumerWidget {
 
     return routeAsync.when(
       loading: () => Scaffold(
+        backgroundColor: context.lucyTheme.scaffoldBackground,
         appBar: AppBar(title: Text(l10n.quizTitle)),
         body: Center(child: Text(l10n.quizLoading)),
       ),
       error: (error, stackTrace) => Scaffold(
+        backgroundColor: context.lucyTheme.scaffoldBackground,
         appBar: AppBar(title: Text(l10n.quizTitle)),
         body: Center(
           child: Text(

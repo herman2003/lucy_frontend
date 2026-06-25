@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/constants/lucy_constants.dart';
+import '../../../../core/constants/lucy_spacing.dart';
 import '../../../../core/extensions/context.dart';
 
 class QuizLibraryHistoryHeader extends StatelessWidget {
@@ -8,19 +8,17 @@ class QuizLibraryHistoryHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final scheme = Theme.of(context).colorScheme;
-
     return Padding(
       padding: const EdgeInsets.fromLTRB(
-        LucyConstants.kSpacingMedium,
-        LucyConstants.kSpacingMedium,
-        LucyConstants.kSpacingMedium,
-        LucyConstants.kSpacingLow,
+        LucySpacing.spaceLg,
+        LucySpacing.spaceLg,
+        LucySpacing.spaceLg,
+        LucySpacing.spaceSm,
       ),
       child: Text(
         context.l10n.quizLibraryHistoryTitle,
-        style: Theme.of(context).textTheme.titleSmall?.copyWith(
-          color: scheme.secondary,
+        style: context.textTheme.titleSmall?.copyWith(
+          color: context.colorScheme.onSurfaceVariant,
           fontWeight: FontWeight.w600,
         ),
       ),

@@ -55,7 +55,7 @@
 
 | Statut | Id | Tâche |
 |--------|-----|--------|
-| [ ] | UI-05a | Hub cards + `LearningSessionPage` QCM restyle |
+| [x] | UI-05a | Hub cards + `LearningSessionPage` QCM restyle |
 | [ ] | UI-05b | Flashcards session + `ChatLearningSessionCard` |
 
 ---

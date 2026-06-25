@@ -3,8 +3,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../core/constants/lucy_constants.dart';
+import '../../../../core/constants/lucy_spacing.dart';
 import '../../../../core/constants/responsive_constants.dart';
 import '../../../../core/extensions/context.dart';
+import '../../../../core/theme/lucy_theme_extensions.dart';
 import '../../../../core/router/lucy_route_paths.dart';
 import '../../../../shared/widgets/buttons/lucy_tertiary_button.dart';
 import '../../../../shared/widgets/feedback/lucy_snackbar.dart';
@@ -97,7 +99,7 @@ class _QuizPageState extends ConsumerState<QuizPage> {
           direction: DismissDirection.endToStart,
           background: Container(
             alignment: Alignment.centerRight,
-            padding: const EdgeInsets.only(right: LucyConstants.kSpacingLarge),
+            padding: const EdgeInsets.only(right: LucySpacing.spaceXl),
             color: scheme.errorContainer,
             child: Icon(Icons.delete_outline, color: scheme.onErrorContainer),
           ),
@@ -117,16 +119,16 @@ class _QuizPageState extends ConsumerState<QuizPage> {
         const SliverToBoxAdapter(child: QuizLibraryHistoryHeader()),
         SliverPadding(
           padding: const EdgeInsets.fromLTRB(
-            LucyConstants.kSpacingMedium,
+            LucySpacing.spaceLg,
             0,
-            LucyConstants.kSpacingMedium,
-            LucyConstants.kSpacingLarge,
+            LucySpacing.spaceLg,
+            LucySpacing.spaceXl,
           ),
           sliver: SliverGrid(
             gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
               maxCrossAxisExtent: LucyConstants.kQuizLibraryGridMaxExtent,
-              mainAxisSpacing: LucyConstants.kSpacingMedium,
-              crossAxisSpacing: LucyConstants.kSpacingMedium,
+              mainAxisSpacing: LucySpacing.spaceMd,
+              crossAxisSpacing: LucySpacing.spaceMd,
               childAspectRatio: LucyConstants.kQuizLibraryGridAspectRatio,
             ),
             delegate: SliverChildBuilderDelegate((context, index) {
@@ -158,6 +160,7 @@ class _QuizPageState extends ConsumerState<QuizPage> {
     });
 
     return Scaffold(
+      backgroundColor: context.lucyTheme.scaffoldBackground,
       appBar: AppBar(title: Text(l10n.quizTitle)),
       body: state.isLoading
           ? Center(child: Text(l10n.quizLoading))

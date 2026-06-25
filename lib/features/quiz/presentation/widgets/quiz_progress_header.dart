@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/constants/lucy_constants.dart';
+import '../../../../core/constants/lucy_spacing.dart';
 import '../../../../core/extensions/context.dart';
+import '../../../../core/theme/lucy_theme_extensions.dart';
 
 class QuizProgressHeader extends StatelessWidget {
   const QuizProgressHeader({
@@ -15,7 +16,8 @@ class QuizProgressHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final scheme = Theme.of(context).colorScheme;
+    final lucy = context.lucyTheme;
+    final scheme = context.colorScheme;
     final l10n = context.l10n;
     final progress = total > 0 ? current / total : 0.0;
 
@@ -27,27 +29,26 @@ class QuizProgressHeader extends StatelessWidget {
           children: [
             Text(
               l10n.quizSessionProgress(current, total),
-              style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                color: scheme.secondary,
-                fontWeight: FontWeight.w600,
+              style: context.textTheme.labelMedium?.copyWith(
+                color: scheme.onSurfaceVariant,
               ),
             ),
             Text(
               l10n.quizSessionProgressPercent((progress * 100).round()),
-              style: Theme.of(context).textTheme.labelLarge?.copyWith(
+              style: context.textTheme.labelMedium?.copyWith(
                 color: scheme.primary,
                 fontWeight: FontWeight.w600,
               ),
             ),
           ],
         ),
-        const SizedBox(height: LucyConstants.kSpacingLow),
+        const SizedBox(height: LucySpacing.spaceSm),
         ClipRRect(
-          borderRadius: BorderRadius.circular(LucyConstants.kBorderRadiusSmall),
+          borderRadius: BorderRadius.circular(LucySpacing.radiusSmall),
           child: LinearProgressIndicator(
             value: progress,
-            minHeight: 8,
-            backgroundColor: scheme.surfaceContainerHighest,
+            minHeight: 6,
+            backgroundColor: lucy.border.withValues(alpha: 0.35),
             color: scheme.primary,
           ),
         ),

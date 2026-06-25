@@ -4,6 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lucy_frontend/core/localization/l10n/app_localizations.dart';
 import 'package:lucy_frontend/core/router/lucy_route_paths.dart';
+import 'package:lucy_frontend/core/theme/lucy_flex_theme.dart';
 import 'package:lucy_frontend/features/quiz/domain/entities/learning_session_list_item.dart';
 import 'package:lucy_frontend/features/quiz/domain/entities/learning_session_status.dart';
 import 'package:lucy_frontend/features/quiz/domain/entities/learning_session_type.dart';
@@ -57,6 +58,7 @@ void main() {
           ),
         ],
         child: MaterialApp.router(
+          theme: LucyFlexTheme.lightTheme,
           locale: const Locale('fr'),
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,

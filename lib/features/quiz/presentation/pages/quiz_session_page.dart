@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../core/constants/lucy_constants.dart';
+import '../../../../core/constants/lucy_spacing.dart';
 import '../../../../core/extensions/context.dart';
+import '../../../../core/theme/lucy_theme_extensions.dart';
 import '../../../../shared/widgets/buttons/lucy_primary_button.dart';
 import '../../../../shared/widgets/feedback/lucy_snackbar.dart';
 import '../../utils/learning_session_error_translator.dart';
@@ -65,6 +67,7 @@ class _QuizSessionPageState extends ConsumerState<QuizSessionPage> {
     });
 
     return Scaffold(
+      backgroundColor: context.lucyTheme.scaffoldBackground,
       appBar: AppBar(title: Text(state.session?.title ?? l10n.quizTitle)),
       body: state.isLoading
           ? const Center(child: CircularProgressIndicator())
@@ -125,40 +128,36 @@ class _QuestionView extends ConsumerWidget {
           maxWidth: LucyConstants.kQuizContentMaxWidth,
         ),
         child: ListView(
-          padding: const EdgeInsets.all(LucyConstants.kSpacingLarge),
+          padding: const EdgeInsets.all(LucySpacing.spaceXl),
           children: [
             QuizProgressHeader(
               current: questionNumber,
               total: state.totalQuestions,
             ),
-            const SizedBox(height: LucyConstants.kSpacingLarge),
+            const SizedBox(height: LucySpacing.spaceXl),
             Card(
               elevation: 0,
-              color: scheme.surfaceContainerLow,
+              color: context.lucyTheme.surfaceSecondary,
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(
-                  LucyConstants.kBorderRadiusLarge,
-                ),
+                borderRadius: BorderRadius.circular(LucySpacing.radiusCard),
+                side: BorderSide(color: context.lucyTheme.border),
               ),
               child: Padding(
-                padding: const EdgeInsets.all(LucyConstants.kSpacingLarge),
+                padding: const EdgeInsets.all(LucySpacing.spaceXl),
                 child: Text(
                   item.question ?? '',
-                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                  style: context.textTheme.headlineSmall?.copyWith(
                     color: scheme.onSurface,
-                    fontWeight: FontWeight.w600,
                     height: 1.35,
                   ),
                 ),
               ),
             ),
-            const SizedBox(height: LucyConstants.kSpacingLarge),
+            const SizedBox(height: LucySpacing.spaceXl),
             ...List.generate(item.choices?.length ?? 0, (index) {
               final choice = item.choices![index];
               return Padding(
-                padding: const EdgeInsets.only(
-                  bottom: LucyConstants.kSpacingMedium,
-                ),
+                padding: const EdgeInsets.only(bottom: LucySpacing.spaceMd),
                 child: QuizChoiceTile(
                   label: choice,
                   letter: _choiceLetter(index),
@@ -174,13 +173,13 @@ class _QuestionView extends ConsumerWidget {
               );
             }),
             if (hasAnswered) ...[
-              const SizedBox(height: LucyConstants.kSpacingLow),
+              const SizedBox(height: LucySpacing.spaceSm),
               _FeedbackPanel(
                 isCorrect: isCorrect,
                 explanation: item.explanation ?? '',
                 sources: item.sources,
               ),
-              const SizedBox(height: LucyConstants.kSpacingLarge),
+              const SizedBox(height: LucySpacing.spaceXl),
               LucyPrimaryButton(
                 text: questionNumber == state.totalQuestions
                     ? l10n.quizSessionFinish
@@ -221,10 +220,10 @@ class _FeedbackPanel extends StatelessWidget {
 
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.all(LucyConstants.kSpacingLarge),
+      padding: const EdgeInsets.all(LucySpacing.spaceXl),
       decoration: BoxDecoration(
         color: panelColor,
-        borderRadius: BorderRadius.circular(LucyConstants.kBorderRadiusLarge),
+        borderRadius: BorderRadius.circular(LucySpacing.radiusCard),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -235,7 +234,7 @@ class _FeedbackPanel extends StatelessWidget {
                 isCorrect ? Icons.check_circle_outline : Icons.info_outline,
                 color: onPanelColor,
               ),
-              const SizedBox(width: LucyConstants.kSpacingLow),
+              const SizedBox(width: LucySpacing.spaceSm),
               Text(
                 isCorrect ? l10n.quizSessionCorrect : l10n.quizSessionIncorrect,
                 style: Theme.of(context).textTheme.titleMedium?.copyWith(
@@ -246,7 +245,7 @@ class _FeedbackPanel extends StatelessWidget {
             ],
           ),
           if (explanation.isNotEmpty) ...[
-            const SizedBox(height: LucyConstants.kSpacingMedium),
+            const SizedBox(height: LucySpacing.spaceMd),
             Text(
               l10n.quizSessionExplanationTitle,
               style: Theme.of(context).textTheme.labelLarge?.copyWith(
@@ -263,10 +262,10 @@ class _FeedbackPanel extends StatelessWidget {
             ),
           ],
           if (sources.isNotEmpty) ...[
-            const SizedBox(height: LucyConstants.kSpacingMedium),
+            const SizedBox(height: LucySpacing.spaceMd),
             Wrap(
-              spacing: LucyConstants.kSpacingLow,
-              runSpacing: LucyConstants.kSpacingLow,
+              spacing: LucySpacing.spaceSm,
+              runSpacing: LucySpacing.spaceSm,
               children: [
                 for (final source in sources)
                   LearningSessionSourceChip(source: source),

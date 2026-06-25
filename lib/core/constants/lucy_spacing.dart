@@ -16,5 +16,6 @@ abstract final class LucySpacing {
   static const double shellSidebarWidth = 264;
   static const double chatThreadsPanelWidth = 300;
   static const double chatConversationsDrawerWidthFactor = 0.8;
+  static const double quizHubCardMaxWidth = 280;
   static const double minTouchTarget = 44;
 }

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/constants/lucy_constants.dart';
+import '../../../../core/constants/lucy_spacing.dart';
+import '../../../../core/extensions/context.dart';
+import '../../../../core/theme/lucy_theme_extensions.dart';
 
 class QuizChoiceTile extends StatelessWidget {
   const QuizChoiceTile({
@@ -22,14 +25,15 @@ class QuizChoiceTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final scheme = Theme.of(context).colorScheme;
+    final scheme = context.colorScheme;
+    final lucy = context.lucyTheme;
     final showAsCorrect = revealed && isCorrect;
     final showAsIncorrect = revealed && selected && !isCorrect;
 
     Color background = scheme.surface;
-    Color borderColor = scheme.outlineVariant;
-    Color letterBackground = scheme.surfaceContainerHighest;
-    Color letterColor = scheme.onSurfaceVariant;
+    Color borderColor = lucy.border;
+    Color letterBackground = lucy.chipBackground;
+    Color letterColor = lucy.chipForeground;
 
     if (showAsCorrect) {
       background = scheme.primaryContainer;
@@ -51,7 +55,7 @@ class QuizChoiceTile extends StatelessWidget {
     return Material(
       color: background,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(LucyConstants.kBorderRadiusMedium),
+        borderRadius: BorderRadius.circular(LucySpacing.radiusMedium),
         side: BorderSide(
           color: borderColor,
           width: LucyConstants.kBorderWidthSmall,
@@ -59,15 +63,15 @@ class QuizChoiceTile extends StatelessWidget {
       ),
       child: InkWell(
         onTap: onTap,
-        borderRadius: BorderRadius.circular(LucyConstants.kBorderRadiusMedium),
+        borderRadius: BorderRadius.circular(LucySpacing.radiusMedium),
         child: ConstrainedBox(
           constraints: const BoxConstraints(
             minHeight: LucyConstants.kQuizChoiceMinHeight,
           ),
           child: Padding(
             padding: const EdgeInsets.symmetric(
-              horizontal: LucyConstants.kSpacingMedium,
-              vertical: LucyConstants.kSpacingMedium,
+              horizontal: LucySpacing.spaceLg,
+              vertical: LucySpacing.spaceMd,
             ),
             child: Row(
               children: [
@@ -76,17 +80,17 @@ class QuizChoiceTile extends StatelessWidget {
                   backgroundColor: letterBackground,
                   child: Text(
                     letter,
-                    style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                    style: context.textTheme.labelLarge?.copyWith(
                       color: letterColor,
                       fontWeight: FontWeight.w700,
                     ),
                   ),
                 ),
-                const SizedBox(width: LucyConstants.kSpacingMedium),
+                const SizedBox(width: LucySpacing.spaceMd),
                 Expanded(
                   child: Text(
                     label,
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                    style: context.textTheme.bodyLarge?.copyWith(
                       color: scheme.onSurface,
                       fontWeight: selected ? FontWeight.w600 : FontWeight.w400,
                     ),

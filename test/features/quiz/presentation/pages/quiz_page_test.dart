@@ -36,7 +36,13 @@ void main() {
     ),
   ];
 
-  Future<void> pumpQuizPage(WidgetTester tester) async {
+  Future<void> pumpQuizPage(WidgetTester tester, {Size? viewport}) async {
+    if (viewport != null) {
+      tester.view.physicalSize = viewport;
+      tester.view.devicePixelRatio = 1.0;
+      addTearDown(tester.view.resetPhysicalSize);
+      addTearDown(tester.view.resetDevicePixelRatio);
+    }
     await tester.pumpWidget(
       ProviderScope(
         overrides: [
@@ -81,9 +87,9 @@ void main() {
   testWidgets('shows corpus banner and history when canQuiz is false', (
     tester,
   ) async {
-    await pumpQuizPage(tester);
+    await pumpQuizPage(tester, viewport: const Size(390, 844));
 
-    expect(find.text('Historique'), findsOneWidget);
+    expect(find.text('Quiz & cartes mémoire'), findsOneWidget);
     expect(find.text('Quiz · test'), findsOneWidget);
     expect(find.textContaining('questions'), findsOneWidget);
     expect(find.textContaining('document'), findsWidgets);
@@ -92,21 +98,16 @@ void main() {
   testWidgets('opens session route from history when canQuiz is false', (
     tester,
   ) async {
-    await pumpQuizPage(tester);
+    await pumpQuizPage(tester, viewport: const Size(390, 844));
 
-    await tester.tap(find.text('Quiz · test'));
+    await tester.tap(find.text('Démarrer le quiz'));
     await tester.pumpAndSettle();
 
     expect(find.text('session:learn_1'), findsOneWidget);
   });
 
   testWidgets('shows admin card grid on tablet width', (tester) async {
-    tester.view.physicalSize = const Size(1280, 800);
-    tester.view.devicePixelRatio = 1.0;
-    addTearDown(tester.view.resetPhysicalSize);
-    addTearDown(tester.view.resetDevicePixelRatio);
-
-    await pumpQuizPage(tester);
+    await pumpQuizPage(tester, viewport: const Size(1280, 800));
 
     expect(find.byType(QuizSessionCard), findsOneWidget);
     expect(find.byType(QuizSessionListTile), findsNothing);

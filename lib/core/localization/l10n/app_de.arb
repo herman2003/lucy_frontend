@@ -51,6 +51,8 @@
   "documentsTitle": "Dokumente",
   "chatTitle": "Chat",
   "quizTitle": "Quiz",
+  "quizPageTitle": "Quiz & Karteikarten",
+  "quizPageSubtitle": "Aus Ihren Dokumenten generiert",
   "settingsTitle": "Einstellungen",
   "settingsSectionAccount": "Konto",
   "settingsSectionLearnerProfile": "Lernprofil",
@@ -300,6 +302,17 @@
   "quizLibraryHistoryTitle": "Verlauf",
   "quizLibraryTypeQuiz": "Quiz",
   "quizLibraryTypeFlashcards": "Karteikarten",
+  "quizLibraryStartQuiz": "Quiz starten",
+  "quizLibraryOpenFlashcards": "Karteikarten öffnen",
+  "quizLibraryFlashcardsMeta": "{count, plural, one{{count} Karteikarte} other{{count} Karteikarten}}",
+  "@quizLibraryFlashcardsMeta": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "quizSessionFormatQcm": "MCQ",
   "quizLibraryOpen": "Öffnen",
   "quizLibraryDateToday": "Heute",
   "quizLibraryDateYesterday": "Gestern",
@@ -346,7 +359,7 @@
   },
   "flashcardsSessionFront": "Vorderseite",
   "flashcardsSessionBack": "Rückseite",
-  "flashcardsSessionTapToFlip": "Tippen zum Umdrehen",
+  "flashcardsSessionTapToFlip": "↻ Tippen zum Umdrehen",
   "flashcardsSessionPrevious": "Zurück",
   "flashcardsSessionNext": "Weiter",
   "quizSessionProgress": "Frage {current} / {total}",

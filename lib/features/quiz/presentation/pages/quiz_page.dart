@@ -6,8 +6,8 @@ import '../../../../core/constants/lucy_constants.dart';
 import '../../../../core/constants/lucy_spacing.dart';
 import '../../../../core/constants/responsive_constants.dart';
 import '../../../../core/extensions/context.dart';
-import '../../../../core/theme/lucy_theme_extensions.dart';
 import '../../../../core/router/lucy_route_paths.dart';
+import '../../../../core/theme/lucy_theme_extensions.dart';
 import '../../../../shared/widgets/buttons/lucy_tertiary_button.dart';
 import '../../../../shared/widgets/feedback/lucy_snackbar.dart';
 import '../../domain/entities/learning_session_list_item.dart';
@@ -15,8 +15,8 @@ import '../../utils/learning_session_error_translator.dart';
 import '../../utils/quiz_error_translator.dart';
 import '../controllers/quiz_notifier.dart';
 import '../widgets/quiz_library_empty_state.dart';
-import '../widgets/quiz_library_history_header.dart';
 import '../widgets/quiz_no_corpus_banner.dart';
+import '../widgets/quiz_page_header.dart';
 import '../widgets/quiz_session_card.dart';
 import '../widgets/quiz_session_list_tile.dart';
 
@@ -87,12 +87,13 @@ class _QuizPageState extends ConsumerState<QuizPage> {
 
   Widget _buildPhoneList(List<LearningSessionListItem> sessions) {
     return ListView.builder(
-      itemCount: sessions.length + 1,
+      padding: const EdgeInsets.symmetric(
+        horizontal: LucySpacing.spaceLg,
+        vertical: LucySpacing.spaceXl,
+      ),
+      itemCount: sessions.length,
       itemBuilder: (context, index) {
-        if (index == 0) {
-          return const QuizLibraryHistoryHeader();
-        }
-        final session = sessions[index - 1];
+        final session = sessions[index];
         final scheme = Theme.of(context).colorScheme;
         return Dismissible(
           key: ValueKey(session.id),
@@ -116,19 +117,18 @@ class _QuizPageState extends ConsumerState<QuizPage> {
   Widget _buildTabletGrid(List<LearningSessionListItem> sessions) {
     return CustomScrollView(
       slivers: [
-        const SliverToBoxAdapter(child: QuizLibraryHistoryHeader()),
         SliverPadding(
           padding: const EdgeInsets.fromLTRB(
-            LucySpacing.spaceLg,
-            0,
-            LucySpacing.spaceLg,
+            LucySpacing.space2xl,
+            LucySpacing.spaceXl,
+            LucySpacing.space2xl,
             LucySpacing.spaceXl,
           ),
           sliver: SliverGrid(
             gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
               maxCrossAxisExtent: LucyConstants.kQuizLibraryGridMaxExtent,
-              mainAxisSpacing: LucySpacing.spaceMd,
-              crossAxisSpacing: LucySpacing.spaceMd,
+              mainAxisSpacing: LucySpacing.spaceLg + 2,
+              crossAxisSpacing: LucySpacing.spaceLg + 2,
               childAspectRatio: LucyConstants.kQuizLibraryGridAspectRatio,
             ),
             delegate: SliverChildBuilderDelegate((context, index) {
@@ -161,12 +161,12 @@ class _QuizPageState extends ConsumerState<QuizPage> {
 
     return Scaffold(
       backgroundColor: context.lucyTheme.scaffoldBackground,
-      appBar: AppBar(title: Text(l10n.quizTitle)),
       body: state.isLoading
           ? Center(child: Text(l10n.quizLoading))
           : Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
+                const QuizPageHeader(),
                 if (!state.canQuiz && state.eligibility != null)
                   const QuizNoCorpusBanner(),
                 Expanded(

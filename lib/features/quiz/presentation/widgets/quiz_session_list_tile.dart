@@ -21,32 +21,36 @@ class QuizSessionListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     final isQuiz = session.type == LearningSessionType.quiz;
-    final itemLabel = isQuiz
-        ? l10n.quizSessionQuestionCount(session.itemCount)
-        : l10n.quizSessionFlashcardCount(session.itemCount);
     final dateLabel = formatLearningSessionListDate(
       l10n: l10n,
       locale: Localizations.localeOf(context),
       isoTimestamp: session.createdAt,
       reference: DateTime.now(),
     );
+    final metaLabel = isQuiz
+        ? '${l10n.quizSessionQuestionCount(session.itemCount)} · ${l10n.quizSessionFormatQcm}'
+        : l10n.quizLibraryFlashcardsMeta(session.itemCount);
     final typeBadge = isQuiz
         ? l10n.quizLibraryTypeQuiz
         : l10n.quizLibraryTypeFlashcards;
+    final ctaLabel = isQuiz
+        ? l10n.quizLibraryStartQuiz
+        : l10n.quizLibraryOpenFlashcards;
 
     return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: LucySpacing.spaceLg,
-        vertical: LucySpacing.spaceXs,
-      ),
-      child: LucyQuizHubCard(
-        title: session.title,
-        metaLabel: '$itemLabel · $dateLabel',
-        typeLabel: typeBadge,
-        type: isQuiz
-            ? LucyQuizHubCardType.quiz
-            : LucyQuizHubCardType.flashcards,
-        onTap: onTap,
+      padding: const EdgeInsets.only(bottom: LucySpacing.spaceLg),
+      child: Center(
+        child: LucyQuizHubCard(
+          title: session.title,
+          metaLabel: metaLabel,
+          typeLabel: typeBadge,
+          dateLabel: dateLabel,
+          ctaLabel: ctaLabel,
+          type: isQuiz
+              ? LucyQuizHubCardType.quiz
+              : LucyQuizHubCardType.flashcards,
+          onTap: onTap,
+        ),
       ),
     );
   }

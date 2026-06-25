@@ -9,10 +9,12 @@ class QuizProgressHeader extends StatelessWidget {
     super.key,
     required this.current,
     required this.total,
+    this.onClose,
   });
 
   final int current;
   final int total;
+  final VoidCallback? onClose;
 
   @override
   Widget build(BuildContext context) {
@@ -25,30 +27,37 @@ class QuizProgressHeader extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
               l10n.quizSessionProgress(current, total),
               style: context.textTheme.labelMedium?.copyWith(
-                color: scheme.onSurfaceVariant,
+                color: lucy.muted,
               ),
             ),
-            Text(
-              l10n.quizSessionProgressPercent((progress * 100).round()),
-              style: context.textTheme.labelMedium?.copyWith(
-                color: scheme.primary,
-                fontWeight: FontWeight.w600,
+            const Spacer(),
+            if (onClose != null)
+              InkWell(
+                onTap: onClose,
+                borderRadius: BorderRadius.circular(LucySpacing.radiusSmall),
+                child: Padding(
+                  padding: const EdgeInsets.all(LucySpacing.spaceXs),
+                  child: Text(
+                    '✕',
+                    style: context.textTheme.bodyMedium?.copyWith(
+                      color: lucy.faint,
+                    ),
+                  ),
+                ),
               ),
-            ),
           ],
         ),
-        const SizedBox(height: LucySpacing.spaceSm),
+        const SizedBox(height: LucySpacing.spaceMd + 2),
         ClipRRect(
-          borderRadius: BorderRadius.circular(LucySpacing.radiusSmall),
+          borderRadius: BorderRadius.circular(LucySpacing.radiusPill),
           child: LinearProgressIndicator(
             value: progress,
             minHeight: 6,
-            backgroundColor: lucy.border.withValues(alpha: 0.35),
+            backgroundColor: lucy.border,
             color: scheme.primary,
           ),
         ),

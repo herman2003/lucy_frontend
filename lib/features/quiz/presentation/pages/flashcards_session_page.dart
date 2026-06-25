@@ -5,13 +5,13 @@ import '../../../../core/constants/lucy_constants.dart';
 import '../../../../core/constants/lucy_spacing.dart';
 import '../../../../core/extensions/context.dart';
 import '../../../../core/theme/lucy_theme_extensions.dart';
-import '../../../../shared/widgets/buttons/lucy_secondary_button.dart';
 import '../../../../shared/widgets/feedback/lucy_snackbar.dart';
 import '../../domain/entities/learning_session.dart';
 import '../../utils/learning_session_error_translator.dart';
 import '../controllers/flashcards_session_notifier.dart';
 import '../controllers/flashcards_session_state.dart';
 import '../widgets/flashcard_widget.dart';
+import '../widgets/learning_session_close_header.dart';
 import '../widgets/learning_session_source_chip.dart';
 
 class FlashcardsSessionPage extends ConsumerStatefulWidget {
@@ -65,7 +65,6 @@ class _FlashcardsSessionPageState extends ConsumerState<FlashcardsSessionPage> {
 
     return Scaffold(
       backgroundColor: context.lucyTheme.scaffoldBackground,
-      appBar: AppBar(title: Text(state.session?.title ?? l10n.quizTitle)),
       body: state.isLoading
           ? Center(child: Text(l10n.quizLoading))
           : !state.hasSession
@@ -85,7 +84,7 @@ class _FlashcardsSessionPageState extends ConsumerState<FlashcardsSessionPage> {
               alignment: Alignment.topCenter,
               child: ConstrainedBox(
                 constraints: const BoxConstraints(
-                  maxWidth: LucyConstants.kQuizContentMaxWidth,
+                  maxWidth: LucyConstants.kFlashcardsContentMaxWidth,
                 ),
                 child: _FlashcardsContent(
                   sessionId: widget.sessionId,
@@ -106,7 +105,6 @@ class _FlashcardsContent extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
-    final scheme = context.colorScheme;
     final item = state.session!.items[state.currentIndex];
     final cardNumber = state.currentIndex + 1;
     final notifier = ref.read(flashcardsSessionProvider(sessionId).notifier);
@@ -114,13 +112,14 @@ class _FlashcardsContent extends ConsumerWidget {
     return ListView(
       padding: const EdgeInsets.all(LucySpacing.spaceXl),
       children: [
-        Text(
-          l10n.flashcardsSessionProgress(cardNumber, state.totalCards),
-          style: context.textTheme.labelMedium?.copyWith(
-            color: scheme.onSurfaceVariant,
+        LearningSessionCloseHeader(
+          progressLabel: l10n.flashcardsSessionProgress(
+            cardNumber,
+            state.totalCards,
           ),
+          onClose: () => Navigator.of(context).pop(),
         ),
-        const SizedBox(height: LucySpacing.spaceXl),
+        const SizedBox(height: LucySpacing.spaceLg),
         FlashcardWidget(
           front: item.front ?? '',
           back: item.back ?? '',
@@ -128,7 +127,7 @@ class _FlashcardsContent extends ConsumerWidget {
           onFlip: notifier.toggleFlip,
         ),
         if (item.sources.isNotEmpty) ...[
-          const SizedBox(height: LucySpacing.spaceXl),
+          const SizedBox(height: LucySpacing.spaceLg),
           Wrap(
             spacing: LucySpacing.spaceSm,
             runSpacing: LucySpacing.spaceSm,
@@ -138,27 +137,76 @@ class _FlashcardsContent extends ConsumerWidget {
             ],
           ),
         ],
-        const SizedBox(height: LucySpacing.spaceXl),
+        const SizedBox(height: LucySpacing.spaceLg + 2),
         Row(
           children: [
             Expanded(
-              child: LucySecondaryButton(
-                text: l10n.flashcardsSessionPrevious,
-                onPressed: state.canGoPrevious
-                    ? notifier.goToPreviousCard
-                    : null,
+              child: _FlashcardNavButton(
+                label: l10n.flashcardsSessionPrevious,
+                outlined: true,
+                onPressed:
+                    state.canGoPrevious ? notifier.goToPreviousCard : null,
               ),
             ),
             const SizedBox(width: LucySpacing.spaceMd),
             Expanded(
-              child: LucySecondaryButton(
-                text: l10n.flashcardsSessionNext,
+              child: _FlashcardNavButton(
+                label: l10n.flashcardsSessionNext,
+                outlined: false,
                 onPressed: state.canGoNext ? notifier.goToNextCard : null,
               ),
             ),
           ],
         ),
       ],
+    );
+  }
+}
+
+class _FlashcardNavButton extends StatelessWidget {
+  const _FlashcardNavButton({
+    required this.label,
+    required this.outlined,
+    required this.onPressed,
+  });
+
+  final String label;
+  final bool outlined;
+  final VoidCallback? onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    final scheme = context.colorScheme;
+    final lucy = context.lucyTheme;
+    final enabled = onPressed != null;
+
+    return Material(
+      color: outlined ? scheme.surface : scheme.primary,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(LucySpacing.radiusMedium + 1),
+        side: outlined
+            ? BorderSide(
+                color: enabled ? lucy.border : lucy.border.withValues(alpha: 0.5),
+                width: 1.5,
+              )
+            : BorderSide.none,
+      ),
+      child: InkWell(
+        onTap: onPressed,
+        borderRadius: BorderRadius.circular(LucySpacing.radiusMedium + 1),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: LucySpacing.spaceMd + 1),
+          child: Text(
+            label,
+            textAlign: TextAlign.center,
+            style: context.textTheme.labelLarge?.copyWith(
+              color: outlined
+                  ? (enabled ? lucy.muted : lucy.faint)
+                  : scheme.onPrimary,
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

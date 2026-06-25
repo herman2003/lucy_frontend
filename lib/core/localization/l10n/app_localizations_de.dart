@@ -147,6 +147,12 @@ class AppLocalizationsDe extends AppLocalizations {
   String get quizTitle => 'Quiz';
 
   @override
+  String get quizPageTitle => 'Quiz & Karteikarten';
+
+  @override
+  String get quizPageSubtitle => 'Aus Ihren Dokumenten generiert';
+
+  @override
   String get settingsTitle => 'Einstellungen';
 
   @override
@@ -848,6 +854,26 @@ class AppLocalizationsDe extends AppLocalizations {
   String get quizLibraryTypeFlashcards => 'Karteikarten';
 
   @override
+  String get quizLibraryStartQuiz => 'Quiz starten';
+
+  @override
+  String get quizLibraryOpenFlashcards => 'Karteikarten öffnen';
+
+  @override
+  String quizLibraryFlashcardsMeta(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Karteikarten',
+      one: '$count Karteikarte',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get quizSessionFormatQcm => 'MCQ';
+
+  @override
   String get quizLibraryOpen => 'Öffnen';
 
   @override
@@ -934,7 +960,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get flashcardsSessionBack => 'Rückseite';
 
   @override
-  String get flashcardsSessionTapToFlip => 'Tippen zum Umdrehen';
+  String get flashcardsSessionTapToFlip => '↻ Tippen zum Umdrehen';
 
   @override
   String get flashcardsSessionPrevious => 'Zurück';

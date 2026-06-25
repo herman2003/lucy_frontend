@@ -364,6 +364,18 @@ abstract class AppLocalizations {
   /// **'Quiz'**
   String get quizTitle;
 
+  /// No description provided for @quizPageTitle.
+  ///
+  /// In de, this message translates to:
+  /// **'Quiz & Karteikarten'**
+  String get quizPageTitle;
+
+  /// No description provided for @quizPageSubtitle.
+  ///
+  /// In de, this message translates to:
+  /// **'Aus Ihren Dokumenten generiert'**
+  String get quizPageSubtitle;
+
   /// No description provided for @settingsTitle.
   ///
   /// In de, this message translates to:
@@ -1576,6 +1588,30 @@ abstract class AppLocalizations {
   /// **'Karteikarten'**
   String get quizLibraryTypeFlashcards;
 
+  /// No description provided for @quizLibraryStartQuiz.
+  ///
+  /// In de, this message translates to:
+  /// **'Quiz starten'**
+  String get quizLibraryStartQuiz;
+
+  /// No description provided for @quizLibraryOpenFlashcards.
+  ///
+  /// In de, this message translates to:
+  /// **'Karteikarten öffnen'**
+  String get quizLibraryOpenFlashcards;
+
+  /// No description provided for @quizLibraryFlashcardsMeta.
+  ///
+  /// In de, this message translates to:
+  /// **'{count, plural, one{{count} Karteikarte} other{{count} Karteikarten}}'**
+  String quizLibraryFlashcardsMeta(int count);
+
+  /// No description provided for @quizSessionFormatQcm.
+  ///
+  /// In de, this message translates to:
+  /// **'MCQ'**
+  String get quizSessionFormatQcm;
+
   /// No description provided for @quizLibraryOpen.
   ///
   /// In de, this message translates to:
@@ -1705,7 +1741,7 @@ abstract class AppLocalizations {
   /// No description provided for @flashcardsSessionTapToFlip.
   ///
   /// In de, this message translates to:
-  /// **'Tippen zum Umdrehen'**
+  /// **'↻ Tippen zum Umdrehen'**
   String get flashcardsSessionTapToFlip;
 
   /// No description provided for @flashcardsSessionPrevious.

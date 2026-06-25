@@ -4,7 +4,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lucy_frontend/core/localization/l10n/app_localizations.dart';
 import 'package:lucy_frontend/core/theme/lucy_flex_theme.dart';
-import 'package:lucy_frontend/shared/widgets/lucy/lucy_chip.dart';
 import 'package:lucy_frontend/shared/widgets/lucy/lucy_quiz_hub_card.dart';
 
 void main() {
@@ -34,8 +33,10 @@ void main() {
       wrap(
         LucyQuizHubCard(
           title: 'Quiz · dérivées',
-          metaLabel: '5 questions · hier',
+          metaLabel: '5 questions · QCM',
           typeLabel: 'Quiz',
+          dateLabel: 'Hier',
+          ctaLabel: 'Démarrer le quiz',
           type: LucyQuizHubCardType.quiz,
           onTap: () {},
         ),
@@ -44,9 +45,9 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('Quiz · dérivées'), findsOneWidget);
-    expect(find.text('5 questions · hier'), findsOneWidget);
-    expect(find.text('Quiz'), findsOneWidget);
-    expect(find.byType(LucyChip), findsOneWidget);
+    expect(find.text('5 questions · QCM'), findsOneWidget);
+    expect(find.text('Démarrer le quiz'), findsOneWidget);
+    expect(find.text('🎯 Quiz'), findsOneWidget);
   });
 
   testWidgets('invokes onTap when card is tapped', (tester) async {
@@ -55,8 +56,10 @@ void main() {
       wrap(
         LucyQuizHubCard(
           title: 'Cartes · bio',
-          metaLabel: '10 cartes',
+          metaLabel: '10 cartes mémoire',
           typeLabel: 'Cartes',
+          dateLabel: 'Aujourd\'hui',
+          ctaLabel: 'Ouvrir les cartes',
           type: LucyQuizHubCardType.flashcards,
           onTap: () => tapped = true,
         ),
@@ -64,7 +67,7 @@ void main() {
     );
     await tester.pumpAndSettle();
 
-    await tester.tap(find.text('Cartes · bio'));
+    await tester.tap(find.text('Ouvrir les cartes'));
     await tester.pumpAndSettle();
 
     expect(tapped, isTrue);
@@ -76,8 +79,10 @@ void main() {
       wrap(
         LucyQuizHubCard(
           title: 'Quiz · test',
-          metaLabel: '3 questions',
+          metaLabel: '3 questions · QCM',
           typeLabel: 'Quiz',
+          dateLabel: 'Aujourd\'hui',
+          ctaLabel: 'Démarrer le quiz',
           type: LucyQuizHubCardType.quiz,
           onTap: () {},
           onDelete: () => deleted = true,

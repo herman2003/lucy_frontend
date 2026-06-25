@@ -147,6 +147,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get quizTitle => 'Quiz';
 
   @override
+  String get quizPageTitle => 'Quiz & flashcards';
+
+  @override
+  String get quizPageSubtitle => 'Generated from your documents';
+
+  @override
   String get settingsTitle => 'Settings';
 
   @override
@@ -836,6 +842,26 @@ class AppLocalizationsEn extends AppLocalizations {
   String get quizLibraryTypeFlashcards => 'Flashcards';
 
   @override
+  String get quizLibraryStartQuiz => 'Start quiz';
+
+  @override
+  String get quizLibraryOpenFlashcards => 'Open flashcards';
+
+  @override
+  String quizLibraryFlashcardsMeta(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count flashcards',
+      one: '$count flashcard',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get quizSessionFormatQcm => 'MCQ';
+
+  @override
   String get quizLibraryOpen => 'Open';
 
   @override
@@ -922,7 +948,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get flashcardsSessionBack => 'Back';
 
   @override
-  String get flashcardsSessionTapToFlip => 'Tap to flip';
+  String get flashcardsSessionTapToFlip => '↻ Tap to flip';
 
   @override
   String get flashcardsSessionPrevious => 'Previous';

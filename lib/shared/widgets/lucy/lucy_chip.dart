@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../core/constants/lucy_spacing.dart';
 import '../../../core/extensions/context.dart';
 import '../../../core/theme/lucy_theme_extensions.dart';
+import '../../../core/theme/lucy_colors.dart';
 
 /// Small status or category pill (documents, corpus, quiz type).
 class LucyChip extends StatelessWidget {
@@ -23,6 +24,10 @@ class LucyChip extends StatelessWidget {
     final (background, foreground) = switch (variant) {
       LucyChipVariant.neutral => (lucy.chipBackground, lucy.chipForeground),
       LucyChipVariant.teal => (lucy.tealChipBackground, lucy.tealChipForeground),
+      LucyChipVariant.warm => (
+        lucy.motivantAccentSurface,
+        LucyColors.warmChipForeground,
+      ),
       LucyChipVariant.error => (
         context.colorScheme.errorContainer,
         context.colorScheme.onErrorContainer,
@@ -61,4 +66,4 @@ class LucyChip extends StatelessWidget {
   }
 }
 
-enum LucyChipVariant { neutral, teal, error }
+enum LucyChipVariant { neutral, teal, warm, error }

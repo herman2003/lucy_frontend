@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/constants/lucy_spacing.dart';
 import '../../../../core/extensions/context.dart';
+import '../../../../core/theme/lucy_colors.dart';
 import '../../../../core/theme/lucy_theme_extensions.dart';
+import '../../../../core/theme/lucy_typography.dart';
 
 class FlashcardWidget extends StatelessWidget {
   const FlashcardWidget({
@@ -25,19 +27,22 @@ class FlashcardWidget extends StatelessWidget {
     final scheme = context.colorScheme;
     final lucy = context.lucyTheme;
     final l10n = context.l10n;
-    final label = isFlipped
+    final sideLabel = isFlipped
         ? l10n.flashcardsSessionBack
         : l10n.flashcardsSessionFront;
     final text = isFlipped ? back : front;
+    final cardColor = isFlipped
+        ? LucyColors.surfaceElevatedLight
+        : scheme.surface;
 
     return Semantics(
       button: true,
-      label: label,
+      label: sideLabel,
       child: Material(
-        color: lucy.surfaceSecondary,
+        color: cardColor,
         elevation: 0,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(LucySpacing.radiusCard),
+          borderRadius: BorderRadius.circular(LucySpacing.radiusLarge + 2),
           side: BorderSide(color: lucy.border),
         ),
         clipBehavior: Clip.antiAlias,
@@ -51,10 +56,9 @@ class FlashcardWidget extends StatelessWidget {
               final rotate = Tween<double>(
                 begin: pi / 2,
                 end: 0,
-              ).animate(CurvedAnimation(
-                parent: animation,
-                curve: Curves.easeInOut,
-              ));
+              ).animate(
+                CurvedAnimation(parent: animation, curve: Curves.easeInOut),
+              );
               return AnimatedBuilder(
                 animation: rotate,
                 child: child,
@@ -73,36 +77,52 @@ class FlashcardWidget extends StatelessWidget {
             child: SizedBox(
               key: ValueKey<bool>(isFlipped),
               width: double.infinity,
-              height: 240,
-              child: Padding(
-                padding: const EdgeInsets.all(LucySpacing.spaceXl),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Text(
-                      label,
-                      style: context.textTheme.labelMedium?.copyWith(
-                        color: scheme.onSurfaceVariant,
+              height: 260,
+              child: Stack(
+                children: [
+                  Positioned(
+                    top: LucySpacing.spaceLg,
+                    left: LucySpacing.spaceLg + 2,
+                    child: Text(
+                      sideLabel.toUpperCase(),
+                      style: context.textTheme.labelSmall?.copyWith(
+                        color: scheme.tertiary,
+                        letterSpacing: 0.5,
+                        fontWeight: FontWeight.w600,
                       ),
                     ),
-                    const Spacer(),
-                    Text(
-                      text,
-                      textAlign: TextAlign.center,
-                      style: context.textTheme.headlineSmall?.copyWith(
-                        color: scheme.onSurface,
+                  ),
+                  Center(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: LucySpacing.spaceXl + 6,
+                      ),
+                      child: Text(
+                        text,
+                        textAlign: TextAlign.center,
+                        style: LucyTypography.editorialQuote(
+                          fontSize: 24,
+                          color: scheme.onSurface,
+                        ).copyWith(
+                          fontStyle: FontStyle.normal,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                     ),
-                    const Spacer(),
-                    Text(
+                  ),
+                  Positioned(
+                    bottom: LucySpacing.spaceLg,
+                    left: 0,
+                    right: 0,
+                    child: Text(
                       l10n.flashcardsSessionTapToFlip,
                       textAlign: TextAlign.center,
                       style: context.textTheme.bodySmall?.copyWith(
-                        color: lucy.muted,
+                        color: lucy.faint,
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           ),

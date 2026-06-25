@@ -147,6 +147,12 @@ class AppLocalizationsFr extends AppLocalizations {
   String get quizTitle => 'Quiz';
 
   @override
+  String get quizPageTitle => 'Quiz & cartes mémoire';
+
+  @override
+  String get quizPageSubtitle => 'Générés depuis vos documents';
+
+  @override
   String get settingsTitle => 'Paramètres';
 
   @override
@@ -845,6 +851,26 @@ class AppLocalizationsFr extends AppLocalizations {
   String get quizLibraryTypeFlashcards => 'Cartes';
 
   @override
+  String get quizLibraryStartQuiz => 'Démarrer le quiz';
+
+  @override
+  String get quizLibraryOpenFlashcards => 'Ouvrir les cartes';
+
+  @override
+  String quizLibraryFlashcardsMeta(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count cartes mémoire',
+      one: '$count carte mémoire',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get quizSessionFormatQcm => 'QCM';
+
+  @override
   String get quizLibraryOpen => 'Ouvrir';
 
   @override
@@ -931,7 +957,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get flashcardsSessionBack => 'Verso';
 
   @override
-  String get flashcardsSessionTapToFlip => 'Appuyer pour retourner';
+  String get flashcardsSessionTapToFlip => '↻ Appuyer pour retourner';
 
   @override
   String get flashcardsSessionPrevious => 'Précédente';

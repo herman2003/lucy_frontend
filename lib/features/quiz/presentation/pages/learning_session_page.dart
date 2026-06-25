@@ -36,12 +36,10 @@ class LearningSessionPage extends ConsumerWidget {
     return routeAsync.when(
       loading: () => Scaffold(
         backgroundColor: context.lucyTheme.scaffoldBackground,
-        appBar: AppBar(title: Text(l10n.quizTitle)),
         body: Center(child: Text(l10n.quizLoading)),
       ),
       error: (error, stackTrace) => Scaffold(
         backgroundColor: context.lucyTheme.scaffoldBackground,
-        appBar: AppBar(title: Text(l10n.quizTitle)),
         body: Center(
           child: Text(
             LearningSessionErrorTranslator.translate(

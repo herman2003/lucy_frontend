@@ -38,12 +38,12 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('Entropie'), findsOneWidget);
-    expect(find.text('Recto'), findsOneWidget);
+    expect(find.text('RECTO'), findsOneWidget);
 
     await tester.tap(find.byType(FlashcardWidget));
     await tester.pumpAndSettle();
 
     expect(find.text('Désordre'), findsOneWidget);
-    expect(find.text('Verso'), findsOneWidget);
+    expect(find.text('VERSO'), findsOneWidget);
   });
 }

@@ -68,7 +68,12 @@ class LucyColors {
 
   static const Color chipBgLight = Color(0xFFEBEEF7);
   static const Color chipTextLight = Color(0xFF2E4C8A);
-  static const Color processingAccent = Color(0xFFE5933C);
+  static const Color warmChipForeground = Color(0xFFB26C1E);
+
+  /// Quiz choice incorrect state (design system).
+  static const Color quizIncorrectBackground = Color(0xFFFCE8EA);
+  static const Color quizIncorrectForeground = Color(0xFFB0334A);
+  static const Color quizIncorrectBorder = Color(0xFFE2A2AC);
 
   /// Learning session card in chat (design system §learning session).
   static const Color learningSessionGradientEnd = Color(0xFFFCF4E8);

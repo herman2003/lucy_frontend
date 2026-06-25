@@ -160,6 +160,8 @@
   "documentsTitle": "Documents",
   "chatTitle": "Chat",
   "quizTitle": "Quiz",
+  "quizPageTitle": "Quiz & cartes mémoire",
+  "quizPageSubtitle": "Générés depuis vos documents",
   "settingsTitle": "Paramètres",
   "settingsSectionAccount": "Compte",
   "settingsSectionLearnerProfile": "Profil d'apprentissage",
@@ -512,6 +514,17 @@
   "quizLibraryHistoryTitle": "Historique",
   "quizLibraryTypeQuiz": "Quiz",
   "quizLibraryTypeFlashcards": "Cartes",
+  "quizLibraryStartQuiz": "Démarrer le quiz",
+  "quizLibraryOpenFlashcards": "Ouvrir les cartes",
+  "quizLibraryFlashcardsMeta": "{count, plural, one{{count} carte mémoire} other{{count} cartes mémoire}}",
+  "@quizLibraryFlashcardsMeta": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "quizSessionFormatQcm": "QCM",
   "quizLibraryOpen": "Ouvrir",
   "quizLibraryDateToday": "Aujourd'hui",
   "quizLibraryDateYesterday": "Hier",
@@ -558,7 +571,7 @@
   },
   "flashcardsSessionFront": "Recto",
   "flashcardsSessionBack": "Verso",
-  "flashcardsSessionTapToFlip": "Appuyer pour retourner",
+  "flashcardsSessionTapToFlip": "↻ Appuyer pour retourner",
   "flashcardsSessionPrevious": "Précédente",
   "flashcardsSessionNext": "Suivante",
   "quizSessionProgress": "Question {current} / {total}",

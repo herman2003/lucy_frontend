@@ -13,6 +13,8 @@ class LucyQuizHubCard extends StatelessWidget {
     required this.title,
     required this.metaLabel,
     required this.typeLabel,
+    required this.dateLabel,
+    required this.ctaLabel,
     required this.type,
     super.key,
     this.onTap,
@@ -23,28 +25,27 @@ class LucyQuizHubCard extends StatelessWidget {
   final String title;
   final String metaLabel;
   final String typeLabel;
+  final String dateLabel;
+  final String ctaLabel;
   final LucyQuizHubCardType type;
   final VoidCallback? onTap;
   final VoidCallback? onDelete;
   final String? deleteLabel;
 
-  IconData get _icon => switch (type) {
-        LucyQuizHubCardType.quiz => Icons.quiz_outlined,
-        LucyQuizHubCardType.flashcards => Icons.style_outlined,
+  String get _typeEmoji => switch (type) {
+        LucyQuizHubCardType.quiz => '🎯',
+        LucyQuizHubCardType.flashcards => '🗂',
       };
 
   LucyChipVariant get _chipVariant => switch (type) {
-        LucyQuizHubCardType.quiz => LucyChipVariant.teal,
-        LucyQuizHubCardType.flashcards => LucyChipVariant.neutral,
+        LucyQuizHubCardType.quiz => LucyChipVariant.warm,
+        LucyQuizHubCardType.flashcards => LucyChipVariant.teal,
       };
 
   @override
   Widget build(BuildContext context) {
     final scheme = context.colorScheme;
     final lucy = context.lucyTheme;
-    final accent = type == LucyQuizHubCardType.quiz
-        ? scheme.primary
-        : scheme.tertiary;
 
     return Material(
       color: scheme.surface,
@@ -54,80 +55,133 @@ class LucyQuizHubCard extends StatelessWidget {
         side: BorderSide(color: lucy.border),
       ),
       clipBehavior: Clip.antiAlias,
-      child: InkWell(
-        onTap: onTap,
-        child: Padding(
-          padding: const EdgeInsets.all(LucySpacing.spaceLg),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    width: 44,
-                    height: 44,
-                    decoration: BoxDecoration(
-                      color: accent.withValues(alpha: 0.12),
-                      borderRadius:
-                          BorderRadius.circular(LucySpacing.radiusMedium),
+      child: Padding(
+        padding: const EdgeInsets.all(LucySpacing.spaceLg + 2),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Row(
+              children: [
+                LucyChip(
+                  label: '$_typeEmoji $typeLabel',
+                  variant: _chipVariant,
+                ),
+                const SizedBox(width: LucySpacing.spaceSm),
+                Expanded(
+                  child: Text(
+                    dateLabel,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    textAlign: TextAlign.end,
+                    style: context.textTheme.bodySmall?.copyWith(
+                      color: lucy.faint,
                     ),
-                    child: Icon(_icon, color: accent, size: 22),
                   ),
-                  const SizedBox(width: LucySpacing.spaceMd),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          title,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: context.textTheme.titleSmall?.copyWith(
-                            color: scheme.onSurface,
-                            fontWeight: FontWeight.w600,
+                ),
+                if (onDelete != null && deleteLabel != null)
+                  IconButton(
+                    icon: Icon(Icons.more_vert, size: 18, color: lucy.faint),
+                    padding: EdgeInsets.zero,
+                    visualDensity: VisualDensity.compact,
+                    constraints: const BoxConstraints(
+                      minWidth: 28,
+                      minHeight: 28,
+                    ),
+                    tooltip: deleteLabel,
+                    onPressed: () async {
+                      final box = context.findRenderObject()! as RenderBox;
+                      final offset = box.localToGlobal(Offset.zero);
+                      final selected = await showMenu<String>(
+                        context: context,
+                        position: RelativeRect.fromLTRB(
+                          offset.dx,
+                          offset.dy + box.size.height,
+                          offset.dx + box.size.width,
+                          offset.dy,
+                        ),
+                        items: [
+                          PopupMenuItem(
+                            value: 'delete',
+                            child: Text(deleteLabel!),
                           ),
-                        ),
-                        const SizedBox(height: LucySpacing.spaceXs),
-                        Text(
-                          metaLabel,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: context.textTheme.labelMedium,
-                        ),
-                      ],
-                    ),
+                        ],
+                      );
+                      if (selected == 'delete') {
+                        onDelete?.call();
+                      }
+                    },
                   ),
-                  if (onDelete != null && deleteLabel != null)
-                    PopupMenuButton<String>(
-                      icon: const Icon(Icons.more_vert, size: 20),
-                      onSelected: (value) {
-                        if (value == 'delete') {
-                          onDelete?.call();
-                        }
-                      },
-                      itemBuilder: (context) => [
-                        PopupMenuItem(
-                          value: 'delete',
-                          child: Text(deleteLabel!),
-                        ),
-                      ],
-                    ),
-                ],
+              ],
+            ),
+            const SizedBox(height: LucySpacing.spaceMd + 1),
+            Text(
+              title,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              style: context.textTheme.titleLarge?.copyWith(fontSize: 18),
+            ),
+            const SizedBox(height: LucySpacing.spaceXs + 1),
+            Text(
+              metaLabel,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              style: context.textTheme.bodyMedium?.copyWith(
+                color: lucy.muted,
               ),
-              const SizedBox(height: LucySpacing.spaceMd),
-              Row(
-                children: [
-                  LucyChip(
-                    label: typeLabel,
-                    variant: _chipVariant,
-                    icon: _icon,
-                  ),
-                  const Spacer(),
-                  Icon(Icons.chevron_right, color: accent, size: 20),
-                ],
-              ),
-            ],
+            ),
+            const SizedBox(height: LucySpacing.spaceMd + 1),
+            _HubCta(
+              label: ctaLabel,
+              type: type,
+              onPressed: onTap,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _HubCta extends StatelessWidget {
+  const _HubCta({
+    required this.label,
+    required this.type,
+    required this.onPressed,
+  });
+
+  final String label;
+  final LucyQuizHubCardType type;
+  final VoidCallback? onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    final scheme = context.colorScheme;
+
+    final isQuiz = type == LucyQuizHubCardType.quiz;
+
+    return Material(
+      color: isQuiz ? scheme.primary : scheme.surface,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(LucySpacing.radiusMedium),
+        side: isQuiz
+            ? BorderSide.none
+            : BorderSide(color: scheme.primary, width: 1.5),
+      ),
+      child: InkWell(
+        onTap: onPressed,
+        borderRadius: BorderRadius.circular(LucySpacing.radiusMedium),
+        child: Padding(
+          padding: EdgeInsets.symmetric(
+            vertical: isQuiz ? LucySpacing.spaceMd - 1 : LucySpacing.spaceMd - 2,
+          ),
+          child: Text(
+            label,
+            textAlign: TextAlign.center,
+            style: context.textTheme.labelLarge?.copyWith(
+              color: isQuiz ? scheme.onPrimary : scheme.primary,
+              fontSize: 13.5,
+            ),
           ),
         ),
       ),

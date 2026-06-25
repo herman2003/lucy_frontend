@@ -51,6 +51,8 @@
   "documentsTitle": "Documents",
   "chatTitle": "Chat",
   "quizTitle": "Quiz",
+  "quizPageTitle": "Quiz & flashcards",
+  "quizPageSubtitle": "Generated from your documents",
   "settingsTitle": "Settings",
   "settingsSectionAccount": "Account",
   "settingsSectionLearnerProfile": "Learner profile",
@@ -300,6 +302,17 @@
   "quizLibraryHistoryTitle": "History",
   "quizLibraryTypeQuiz": "Quiz",
   "quizLibraryTypeFlashcards": "Flashcards",
+  "quizLibraryStartQuiz": "Start quiz",
+  "quizLibraryOpenFlashcards": "Open flashcards",
+  "quizLibraryFlashcardsMeta": "{count, plural, one{{count} flashcard} other{{count} flashcards}}",
+  "@quizLibraryFlashcardsMeta": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "quizSessionFormatQcm": "MCQ",
   "quizLibraryOpen": "Open",
   "quizLibraryDateToday": "Today",
   "quizLibraryDateYesterday": "Yesterday",
@@ -346,7 +359,7 @@
   },
   "flashcardsSessionFront": "Front",
   "flashcardsSessionBack": "Back",
-  "flashcardsSessionTapToFlip": "Tap to flip",
+  "flashcardsSessionTapToFlip": "↻ Tap to flip",
   "flashcardsSessionPrevious": "Previous",
   "flashcardsSessionNext": "Next",
   "quizSessionProgress": "Question {current} / {total}",

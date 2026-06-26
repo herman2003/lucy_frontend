@@ -552,6 +552,14 @@
   },
   "quizLibraryDeleteAction": "Supprimer",
   "quizLibraryDeleteCancel": "Annuler",
+  "quizLibraryLastAttemptMeta": "{correct}/{total} · {date}",
+  "@quizLibraryLastAttemptMeta": {
+    "placeholders": {
+      "correct": { "type": "int" },
+      "total": { "type": "int" },
+      "date": { "type": "String" }
+    }
+  },
   "quizComingSoon": "La génération de quiz arrive bientôt.",
   "quizSessionQuestionCount": "{count, plural, one{{count} question} other{{count} questions}}",
   "@quizSessionQuestionCount": {

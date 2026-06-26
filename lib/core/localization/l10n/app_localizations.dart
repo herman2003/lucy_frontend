@@ -1744,6 +1744,12 @@ abstract class AppLocalizations {
   /// **'Abbrechen'**
   String get quizLibraryDeleteCancel;
 
+  /// No description provided for @quizLibraryLastAttemptMeta.
+  ///
+  /// In de, this message translates to:
+  /// **'{correct}/{total} · {date}'**
+  String quizLibraryLastAttemptMeta(int correct, int total, String date);
+
   /// No description provided for @quizComingSoon.
   ///
   /// In de, this message translates to:

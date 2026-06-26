@@ -940,6 +940,11 @@ class AppLocalizationsFr extends AppLocalizations {
   String get quizLibraryDeleteCancel => 'Annuler';
 
   @override
+  String quizLibraryLastAttemptMeta(int correct, int total, String date) {
+    return '$correct/$total · $date';
+  }
+
+  @override
   String get quizComingSoon => 'La génération de quiz arrive bientôt.';
 
   @override

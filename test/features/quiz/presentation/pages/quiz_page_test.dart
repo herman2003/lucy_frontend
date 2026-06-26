@@ -1,7 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
+import 'package:lucy_frontend/core/constants/quiz_attempt_storage_keys.dart';
 import 'package:lucy_frontend/core/localization/l10n/app_localizations.dart';
 import 'package:lucy_frontend/core/router/lucy_route_paths.dart';
 import 'package:lucy_frontend/core/theme/lucy_flex_theme.dart';
@@ -17,12 +20,17 @@ import 'package:lucy_frontend/features/quiz/presentation/widgets/quiz_session_li
 import 'package:lucy_frontend/features/quiz/services/learning_session_service.dart';
 import 'package:lucy_frontend/features/quiz/services/quiz_service.dart';
 import 'package:lucy_frontend/shared/widgets/feedback/lucy_snackbar.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../helpers/fake_learning_session_repository.dart';
 import '../../helpers/fake_quiz_repository.dart';
 
 void main() {
   tearDown(LucySnackBar.hideAll);
+
+  setUp(() {
+    SharedPreferences.setMockInitialValues({});
+  });
 
   const sessions = [
     LearningSessionListItem(
@@ -149,6 +157,31 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('session:learn_1'), findsOneWidget);
+  });
+
+  testWidgets('shows last attempt score in library when history exists', (
+    tester,
+  ) async {
+    final completedAt = DateTime.utc(2026, 5, 29, 12);
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString(
+      QuizAttemptStorageKeys.sessionAttempts('learn_1'),
+      jsonEncode([
+        {
+          'id': 'attempt_1',
+          'sessionId': 'learn_1',
+          'startedAt': '2026-05-29T11:00:00.000Z',
+          'completedAt': completedAt.toIso8601String(),
+          'scoreCorrect': 4,
+          'scoreTotal': 5,
+          'answers': [],
+        },
+      ]),
+    );
+
+    await pumpQuizPage(tester, viewport: const Size(390, 844));
+
+    expect(find.textContaining('4/5'), findsOneWidget);
   });
 
   testWidgets('shows admin card grid on tablet width', (tester) async {

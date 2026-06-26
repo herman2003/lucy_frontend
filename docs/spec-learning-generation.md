@@ -39,8 +39,8 @@ L’apprenant converse avec Lucy dans le **Chat** ; quand il demande un quiz ou 
 | G5 | **Profil apprenant** | **Obligatoire** avant génération (miroir chat / quiz eligibility) |
 | G6 | **Génération depuis le chat** | **Point d’entrée MVP** — le ChatModule détecte l’intention et appelle le pipeline `learning-sessions` (pas de génération depuis l’onglet Quiz) |
 | G6b | **Génération depuis l’onglet Quiz** | **Hors MVP** — pas de tuiles « Générer » ni route `/quiz/generate/*` en première livraison |
-| G9 | **Dialogue avant génération** | Lucy **confirme d’abord** qu’elle a compris la demande (type quiz/cartes) **avant** de lancer la génération |
-| G10 | **Nombre d’items** | Lucy **demande en chat** (« Combien de questions / cartes ? ») — pas de génération tant que non précisé (défaut proposé si l’utilisateur dit « comme tu veux ») |
+| G9 | **Dialogue avant génération** | Lucy **confirme d’abord** qu’elle a compris la demande (type quiz/cartes) **avant** de lancer la génération — **implémentation** : [spec-learning-generation-dialogue.md](./spec-learning-generation-dialogue.md) |
+| G10 | **Nombre d’items** | Lucy **demande en chat** (« Combien de questions / cartes ? ») — pas de génération tant que non précisé (défaut proposé si l’utilisateur dit « comme tu veux ») — **idem dialogue spec** |
 | G11 | **Périmètre contenu** | **Tout le corpus actif** — même si l’utilisateur mentionne un sujet (« chapitre 3 »), pas de filtrage retrieval par sujet en MVP |
 | G12 | **Quiz vide** | Texte seul : « Demandez à Lucy dans le chat » — **sans** bouton CTA vers le chat |
 | G7 | **Streaming génération** | **Non** en MVP — une requête HTTP → JSON structuré (comme spec-quiz initiale) |

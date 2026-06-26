@@ -943,6 +943,11 @@ class AppLocalizationsDe extends AppLocalizations {
   String get quizLibraryDeleteCancel => 'Abbrechen';
 
   @override
+  String quizLibraryLastAttemptMeta(int correct, int total, String date) {
+    return '$correct/$total · $date';
+  }
+
+  @override
   String get quizComingSoon => 'Die Quiz-Generierung kommt bald.';
 
   @override

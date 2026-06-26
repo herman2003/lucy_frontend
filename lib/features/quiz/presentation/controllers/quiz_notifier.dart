@@ -1,8 +1,12 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
+import '../../domain/entities/learning_session_list_item.dart';
+import '../../domain/entities/learning_session_type.dart';
+import '../../domain/entities/quiz_attempt.dart';
 import '../../domain/exceptions/learning_session_exception.dart';
 import '../../domain/exceptions/quiz_exception.dart';
 import '../../domain/providers/learning_session_provider.dart';
+import '../../domain/providers/quiz_attempt_provider.dart';
 import '../../domain/providers/quiz_provider.dart';
 import 'quiz_state.dart';
 
@@ -18,10 +22,12 @@ class QuizNotifier extends _$QuizNotifier {
     try {
       final eligibility = await ref.read(quizServiceProvider).getEligibility();
       final sessions = await ref.read(learningSessionServiceProvider).list();
+      final lastQuizAttempts = await _loadLastQuizAttempts(sessions);
       state = state.copyWith(
         isLoading: false,
         eligibility: eligibility,
         sessions: sessions,
+        lastQuizAttempts: lastQuizAttempts,
       );
     } catch (error) {
       state = state.copyWith(isLoading: false, errorCode: _errorCode(error));
@@ -35,7 +41,12 @@ class QuizNotifier extends _$QuizNotifier {
     }
     try {
       final sessions = await ref.read(learningSessionServiceProvider).list();
-      state = state.copyWith(sessions: sessions, errorCode: null);
+      final lastQuizAttempts = await _loadLastQuizAttempts(sessions);
+      state = state.copyWith(
+        sessions: sessions,
+        lastQuizAttempts: lastQuizAttempts,
+        errorCode: null,
+      );
     } catch (error) {
       state = state.copyWith(errorCode: _errorCode(error));
     }
@@ -44,10 +55,14 @@ class QuizNotifier extends _$QuizNotifier {
   Future<bool> deleteSession(String sessionId) async {
     try {
       await ref.read(learningSessionServiceProvider).delete(sessionId);
+      await ref.read(quizAttemptServiceProvider).deleteAttempts(sessionId);
+      final updatedAttempts = Map<String, QuizAttempt>.from(state.lastQuizAttempts)
+        ..remove(sessionId);
       state = state.copyWith(
         sessions: state.sessions
             .where((session) => session.id != sessionId)
             .toList(),
+        lastQuizAttempts: updatedAttempts,
         errorCode: null,
       );
       return true;
@@ -65,5 +80,15 @@ class QuizNotifier extends _$QuizNotifier {
       return error.code;
     }
     return 'INTERNAL_ERROR';
+  }
+
+  Future<Map<String, QuizAttempt>> _loadLastQuizAttempts(
+    List<LearningSessionListItem> sessions,
+  ) {
+    final quizSessionIds = [
+      for (final session in sessions)
+        if (session.type == LearningSessionType.quiz) session.id,
+    ];
+    return ref.read(quizAttemptServiceProvider).readLastAttempts(quizSessionIds);
   }
 }

@@ -931,6 +931,11 @@ class AppLocalizationsEn extends AppLocalizations {
   String get quizLibraryDeleteCancel => 'Cancel';
 
   @override
+  String quizLibraryLastAttemptMeta(int correct, int total, String date) {
+    return '$correct/$total · $date';
+  }
+
+  @override
   String get quizComingSoon => 'Quiz generation is coming soon.';
 
   @override

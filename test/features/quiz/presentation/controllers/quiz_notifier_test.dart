@@ -1,19 +1,35 @@
-import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:lucy_frontend/features/quiz/data/datasources/quiz_attempt_prefs_data_source.dart';
 import 'package:lucy_frontend/features/quiz/domain/entities/learning_session_list_item.dart';
 import 'package:lucy_frontend/features/quiz/domain/entities/learning_session_status.dart';
 import 'package:lucy_frontend/features/quiz/domain/entities/learning_session_type.dart';
 import 'package:lucy_frontend/features/quiz/domain/entities/quiz_eligibility.dart';
 import 'package:lucy_frontend/features/quiz/domain/providers/learning_session_provider.dart';
+import 'package:lucy_frontend/features/quiz/domain/providers/quiz_attempt_provider.dart';
 import 'package:lucy_frontend/features/quiz/domain/providers/quiz_provider.dart';
 import 'package:lucy_frontend/features/quiz/presentation/controllers/quiz_notifier.dart';
 import 'package:lucy_frontend/features/quiz/services/learning_session_service.dart';
+import 'package:lucy_frontend/features/quiz/services/quiz_attempt_service.dart';
 import 'package:lucy_frontend/features/quiz/services/quiz_service.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../helpers/fake_learning_session_repository.dart';
 import '../../helpers/fake_quiz_repository.dart';
 
 void main() {
+  setUp(() {
+    SharedPreferences.setMockInitialValues({});
+  });
+
+  Future<QuizAttemptService> createAttemptService() async {
+    return QuizAttemptService(
+      dataSource: QuizAttemptPrefsDataSource(
+        Future.value(await SharedPreferences.getInstance()),
+      ),
+    );
+  }
+
   test('bootstrap loads eligibility and session library', () async {
     const eligibility = QuizEligibility(canQuiz: false, activeDocumentCount: 0);
     const sessions = [
@@ -37,6 +53,9 @@ void main() {
           LearningSessionService(
             repository: FakeLearningSessionRepository()..setSessions(sessions),
           ),
+        ),
+        quizAttemptServiceProvider.overrideWithValue(
+          await createAttemptService(),
         ),
       ],
     );
@@ -79,6 +98,9 @@ void main() {
         ),
         learningSessionServiceProvider.overrideWithValue(
           LearningSessionService(repository: repository),
+        ),
+        quizAttemptServiceProvider.overrideWithValue(
+          await createAttemptService(),
         ),
       ],
     );
@@ -135,6 +157,9 @@ void main() {
         ),
         learningSessionServiceProvider.overrideWithValue(
           LearningSessionService(repository: repository),
+        ),
+        quizAttemptServiceProvider.overrideWithValue(
+          await createAttemptService(),
         ),
       ],
     );

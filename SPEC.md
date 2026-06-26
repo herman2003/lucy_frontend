@@ -15,8 +15,10 @@
 | **P2 — D2** | Pipeline RAG (extraction → md → chunks → embeddings) | **Spec validée** | §3, [docs/spec-documents-rag.md](./docs/spec-documents-rag.md) |
 | P3 — D3 | Retrieval API (recherche vectorielle) | **Livré** | §3 |
 | **P4a — D4** | Chat source-based (multi-fils, sources UI) | **Spec validée** | §6, [docs/spec-chat-rag.md](./docs/spec-chat-rag.md) |
-| **P4b — D4** | Hub Quiz + cartes depuis corpus | **Spec validée** | §7, [docs/spec-learning-generation.md](./docs/spec-learning-generation.md) |
-| **P5 — UI** | Refonte design post-login (V3 desktop / V4 mobile) | **Spec proposée** | [docs/spec-ui-redesign.md](./docs/spec-ui-redesign.md) |
+| **P4b — D4** | Hub Quiz + cartes depuis corpus | **Livré** (LEARN-01→05) | §7, [docs/spec-learning-generation.md](./docs/spec-learning-generation.md) |
+| **P4c–P4d** | Mode professeur + dialogue quiz/cartes (LEARN-06→11) | **Livré** | §7.5, [dialogue](./docs/spec-learning-generation-dialogue.md) · [mode prof](./docs/spec-learning-composition-prep.md) |
+| **P4e** | Rappels + historique quiz (LEARN-12) | **Proposition** | [spec-learning-reminders-history.md](./docs/spec-learning-reminders-history.md) |
+| **P5 — UI** | Refonte design post-login (V3 desktop / V4 mobile) | **Livré** | [docs/spec-ui-redesign.md](./docs/spec-ui-redesign.md) |
 
 ---
 
@@ -290,6 +292,35 @@ cd lucy_backend && npm test
 cd lucy_frontend && dart run build_runner build --delete-conflicting-outputs && flutter test test/features/quiz/
 ```
 
+### 7.5 Mode professeur + dialogue quiz/cartes (P4c–P4d — **validé** 2026-06-10)
+
+> Specs : [`spec-learning-generation-dialogue.md`](./docs/spec-learning-generation-dialogue.md) · [`spec-learning-composition-prep.md`](./docs/spec-learning-composition-prep.md)  
+> Suivi : [`tasks/todo-learning-professor.md`](./tasks/todo-learning-professor.md)
+
+**Décision** : pour **toute** demande quiz/cartes, Lucy agit comme un **professeur** — analyse les docs, recommande les parties, l’utilisateur choisit, puis nombre + récap + génération. **Pas** réservé à exam/composition.
+
+| Phase | Livrable |
+|-------|----------|
+| **LEARN-06** | Pending, confirm, count, récap, annulation, attente génération |
+| **LEARN-07** | Analyse corpus + choix parties + retrieval scopé |
+| **LEARN-08** | Outline persisté à l’ingestion |
+| **LEARN-09** | Titres, erreurs actionnables, regénération, sources UI |
+| **LEARN-10** | Points faibles, plan révision texte |
+| **LEARN-11** | Chips, SM-2, calendrier ; C2/C3 si produit le décide |
+
+### 7.6 Rappels + historique quiz (P4e — **proposition** 2026-06-10)
+
+> Spec : [`spec-learning-reminders-history.md`](./docs/spec-learning-reminders-history.md) · Suivi : [`tasks/todo-learning-12.md`](./tasks/todo-learning-12.md)
+
+**Objectif** : motiver la révision par des **rappels actionnables** (cartes SM-2, plan J-N, quiz ratés) et **enregistrer l’historique** des quiz joués (score, date, réponses) — aujourd’hui perdu à la fermeture de l’écran.
+
+| Phase | Livrable |
+|-------|----------|
+| **LEARN-12b** | Persistance tentatives quiz (client MVP, API V2) + dernier score en bibliothèque |
+| **LEARN-12a** | Bandeau in-app + notifs locales opt-in ; FCM plus tard |
+
+**Hors scope** : streak, appels téléphoniques, régénération LLM à chaque tentative.
+
 ---
 
 ## 4. Conventions projet (toutes features)
@@ -326,4 +357,4 @@ Spec onboarding détaillée : [`docs/spec-onboarding-delivered.md`](./docs/spec-
 
 ---
 
-*Ce document a été créé avec Cursor (IA). Dernière mise à jour : P4b hub Quiz + cartes (spec learning-generation) — 2026-05-29.*
+*Ce document a été créé avec Cursor (IA). Dernière mise à jour : mode professeur LEARN-06→11 validé — 2026-06-10.*

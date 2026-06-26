@@ -112,6 +112,7 @@ class _QuizPageState extends ConsumerState<QuizPage> {
           confirmDismiss: (_) => _confirmDeleteSession(session),
           child: QuizSessionListTile(
             session: session,
+            lastAttempt: ref.watch(quizProvider).lastQuizAttempts[session.id],
             onTap: () => _openSession(session),
           ),
         );
@@ -143,6 +144,7 @@ class _QuizPageState extends ConsumerState<QuizPage> {
               final session = sessions[index];
               return QuizSessionCard(
                 session: session,
+                lastAttempt: ref.watch(quizProvider).lastQuizAttempts[session.id],
                 onTap: () => _openSession(session),
                 onDelete: () => _deleteSession(session),
               );

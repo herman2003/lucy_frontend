@@ -1,10 +1,10 @@
-# Todo — Refonte UI post-login (P5)
+# Todo — Lucy frontend
 
-> **Actif** : P5 — UI redesign V3/V4 · **Plan** : [plan.md](./plan.md) · **Spec** : [docs/spec-ui-redesign.md](../docs/spec-ui-redesign.md)
+> **Actif** : **Mode professeur** (LEARN-06→11) · **Suivi** : [todo-learning-professor.md](./todo-learning-professor.md) · **Plan** : [plan.md](./plan.md)
 
 **Légende** : `[ ]` à faire · `[x]` fait
 
-**Archives** : [todo-learn.md](./todo-learn.md) (LEARN terminé)
+**Archives** : [todo-learn.md](./todo-learn.md) (LEARN-01→05) · [todo.md](./todo.md) (P5 UI livré)
 
 ---
 

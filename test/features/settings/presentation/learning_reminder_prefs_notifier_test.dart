@@ -151,7 +151,10 @@ void main() {
     final ok = await notifier.setEnabled(true);
 
     expect(ok, isTrue);
-    expect(container.read(learningReminderPrefsProvider).value?.enabled, isTrue);
+    expect(
+      container.read(learningReminderPrefsProvider).value?.enabled,
+      isTrue,
+    );
     final stored = await prefsService.read();
     expect(stored.enabled, isTrue);
   });

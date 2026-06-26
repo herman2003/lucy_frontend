@@ -37,7 +37,9 @@ class LearningReminderPrefsNotifier extends _$LearningReminderPrefsNotifier {
     } catch (_) {}
 
     try {
-      await ref.read(revisionReminderPushSyncServiceProvider).sync(prefs: prefs);
+      await ref
+          .read(revisionReminderPushSyncServiceProvider)
+          .sync(prefs: prefs);
     } catch (_) {}
   }
 

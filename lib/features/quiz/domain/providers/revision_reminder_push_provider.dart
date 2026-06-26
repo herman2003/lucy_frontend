@@ -3,7 +3,6 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../../../core/utils/device_timezone_reader.dart';
 import '../../../onboarding/data/providers/onboarding_data_provider.dart';
 import '../../data/clients/firebase_messaging_fcm_token_client.dart';
-import '../../data/clients/fcm_token_client.dart';
 import '../../data/datasources/revision_reminder_push_remote_data_source.dart';
 import '../../services/revision_reminder_push_sync_service.dart';
 

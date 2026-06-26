@@ -54,5 +54,8 @@ abstract final class ApiEndpoints {
   static String learningSession(String sessionId) =>
       '$learningSessions/$sessionId';
 
+  static String learningSessionAttempts(String sessionId) =>
+      '${learningSession(sessionId)}/attempts';
+
   static String get learningSessionsGenerate => '$learningSessions/generate';
 }

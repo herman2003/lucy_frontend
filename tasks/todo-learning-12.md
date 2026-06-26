@@ -15,7 +15,7 @@
 | [x] | LEARN-12b-2 | `QuizAttemptService` + enregistrement à la fin de session |
 | [x] | LEARN-12b-3 | Dernier score sur tuile bibliothèque quiz |
 | [x] | LEARN-12b-4 | Tests service + notifier + widget bibliothèque |
-| [ ] | LEARN-12b-V2 | API Nest POST/GET attempts + sync Firestore |
+| [x] | LEARN-12b-V2 | API Nest POST/GET attempts + sync Firestore |
 
 ---
 

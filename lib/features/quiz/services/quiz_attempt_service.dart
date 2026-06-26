@@ -9,7 +9,7 @@ class QuizAttemptService {
 
   final QuizAttemptPrefsDataSource _dataSource;
 
-  Future<void> recordCompletedAttempt({
+  Future<QuizAttempt?> recordCompletedAttempt({
     required LearningSession session,
     required Map<String, int> selectedAnswers,
     required DateTime startedAt,
@@ -17,7 +17,7 @@ class QuizAttemptService {
   }) async {
     if (session.items.isEmpty ||
         selectedAnswers.length != session.items.length) {
-      return;
+      return null;
     }
 
     final attempt = buildAttempt(
@@ -28,6 +28,7 @@ class QuizAttemptService {
     );
     final existing = await _dataSource.readAttempts(session.id);
     await _dataSource.writeAttempts(session.id, [...existing, attempt]);
+    return attempt;
   }
 
   Future<QuizAttempt?> readLastAttempt(String sessionId) async {

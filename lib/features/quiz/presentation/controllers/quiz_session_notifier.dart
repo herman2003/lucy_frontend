@@ -7,6 +7,7 @@ import '../../domain/exceptions/learning_session_exception.dart';
 import '../../../../core/signals/quiz_library_refresh_signal.dart';
 import '../../domain/providers/learning_session_provider.dart';
 import '../../domain/providers/quiz_attempt_provider.dart';
+import '../../domain/providers/quiz_attempt_sync_provider.dart';
 import 'quiz_session_state.dart';
 
 part 'quiz_session_notifier.g.dart';
@@ -90,7 +91,7 @@ class QuizSessionNotifier extends _$QuizSessionNotifier {
       return;
     }
 
-    await ref.read(quizAttemptServiceProvider).recordCompletedAttempt(
+    final attempt = await ref.read(quizAttemptServiceProvider).recordCompletedAttempt(
       session: session,
       selectedAnswers: state.selectedAnswers,
       startedAt: startedAt,
@@ -100,6 +101,13 @@ class QuizSessionNotifier extends _$QuizSessionNotifier {
       return;
     }
     ref.read(quizLibraryRefreshSignalProvider.notifier).notify();
+    if (attempt != null) {
+      unawaited(
+        ref.read(quizAttemptSyncServiceProvider).pushAttempt(attempt).catchError(
+          (_) {},
+        ),
+      );
+    }
   }
 
   String _errorCode(Object error) {

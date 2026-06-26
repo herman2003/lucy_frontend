@@ -6,7 +6,11 @@ import 'package:lucy_frontend/features/quiz/domain/entities/learning_session_ite
 import 'package:lucy_frontend/features/quiz/domain/entities/learning_session_status.dart';
 import 'package:lucy_frontend/features/quiz/domain/entities/learning_session_type.dart';
 import 'package:lucy_frontend/features/quiz/domain/providers/learning_session_provider.dart';
+import 'package:lucy_frontend/features/quiz/domain/entities/quiz_attempt.dart';
 import 'package:lucy_frontend/features/quiz/domain/providers/quiz_attempt_provider.dart';
+import 'package:lucy_frontend/features/quiz/data/datasources/quiz_attempt_api_remote_data_source.dart';
+import 'package:lucy_frontend/features/quiz/domain/providers/quiz_attempt_sync_provider.dart';
+import 'package:lucy_frontend/features/quiz/services/quiz_attempt_sync_service.dart';
 import 'package:lucy_frontend/features/quiz/presentation/controllers/quiz_session_notifier.dart';
 import 'package:lucy_frontend/features/quiz/services/learning_session_service.dart';
 import 'package:lucy_frontend/features/quiz/services/quiz_attempt_service.dart';
@@ -43,6 +47,17 @@ const _session = LearningSession(
   ],
 );
 
+class _NoopQuizAttemptRemotePort implements QuizAttemptRemotePort {
+  @override
+  Future<void> createAttempt({
+    required String sessionId,
+    required QuizAttempt attempt,
+  }) async {}
+
+  @override
+  Future<List<QuizAttempt>> listAttempts(String sessionId) async => const [];
+}
+
 void main() {
   setUp(() {
     SharedPreferences.setMockInitialValues({});
@@ -56,14 +71,26 @@ void main() {
     );
   }
 
+  baseOverrides({
+    required LearningSessionService learningSessionService,
+    QuizAttemptService? attemptService,
+  }) {
+    return [
+      learningSessionServiceProvider.overrideWithValue(learningSessionService),
+      if (attemptService != null)
+        quizAttemptServiceProvider.overrideWithValue(attemptService),
+      quizAttemptSyncServiceProvider.overrideWithValue(
+        QuizAttemptSyncService(remoteDataSource: _NoopQuizAttemptRemotePort()),
+      ),
+    ];
+  }
+
   test('computes local score after answering all questions', () async {
     final repository = FakeLearningSessionRepository(session: _session);
     final container = ProviderContainer(
-      overrides: [
-        learningSessionServiceProvider.overrideWithValue(
-          LearningSessionService(repository: repository),
-        ),
-      ],
+      overrides: baseOverrides(
+        learningSessionService: LearningSessionService(repository: repository),
+      ),
     );
     addTearDown(container.dispose);
 
@@ -86,12 +113,10 @@ void main() {
     final repository = FakeLearningSessionRepository(session: _session);
     final attemptService = await createAttemptService();
     final container = ProviderContainer(
-      overrides: [
-        learningSessionServiceProvider.overrideWithValue(
-          LearningSessionService(repository: repository),
-        ),
-        quizAttemptServiceProvider.overrideWithValue(attemptService),
-      ],
+      overrides: baseOverrides(
+        learningSessionService: LearningSessionService(repository: repository),
+        attemptService: attemptService,
+      ),
     );
     addTearDown(container.dispose);
 

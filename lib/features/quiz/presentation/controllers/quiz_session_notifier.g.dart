@@ -59,7 +59,7 @@ final class QuizSessionNotifierProvider
 }
 
 String _$quizSessionNotifierHash() =>
-    r'10de88474c37fb7823e4b1428469ad85bf3ab065';
+    r'd50357e1ba1267cd717793632bd7eb88b931e72c';
 
 final class QuizSessionNotifierFamily extends $Family
     with

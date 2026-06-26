@@ -20,13 +20,21 @@ class LearningReminderService {
   Future<LearningReminder?> pickPrimaryReminder({
     required List<LearningSessionListItem> sessions,
     required DateTime now,
+    bool includeFlashcards = true,
+    bool includeWeakQuiz = true,
   }) async {
-    final flashcardsReminder = await _pickFlashcardsReminder(
-      sessions: sessions,
-      now: now,
-    );
-    if (flashcardsReminder != null) {
-      return flashcardsReminder;
+    if (includeFlashcards) {
+      final flashcardsReminder = await _pickFlashcardsReminder(
+        sessions: sessions,
+        now: now,
+      );
+      if (flashcardsReminder != null) {
+        return flashcardsReminder;
+      }
+    }
+
+    if (!includeWeakQuiz) {
+      return null;
     }
 
     return _pickWeakQuizReminder(sessions: sessions);

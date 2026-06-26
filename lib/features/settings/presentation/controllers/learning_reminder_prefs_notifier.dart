@@ -1,7 +1,9 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../quiz/domain/entities/learning_reminder_prefs.dart';
+import '../../../quiz/domain/providers/learning_reminder_notification_provider.dart';
 import '../../../quiz/domain/providers/learning_reminder_prefs_provider.dart';
+import '../../../../core/localization/lucy_app_locale_provider.dart';
 
 part 'learning_reminder_prefs_notifier.g.dart';
 
@@ -16,6 +18,9 @@ class LearningReminderPrefsNotifier extends _$LearningReminderPrefsNotifier {
     state = const AsyncLoading();
     state = await AsyncValue.guard(() async {
       await ref.read(learningReminderPrefsServiceProvider).save(prefs);
+      await ref.read(learningReminderNotificationServiceProvider).sync(
+        languageCode: ref.read(lucyAppLocaleProvider).languageCode,
+      );
       return prefs;
     });
   }

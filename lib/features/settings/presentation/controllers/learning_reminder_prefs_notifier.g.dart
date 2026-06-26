@@ -38,7 +38,7 @@ final class LearningReminderPrefsNotifierProvider
 }
 
 String _$learningReminderPrefsNotifierHash() =>
-    r'1a17b88134789a4e63d1af0807b92a5b93e8a57d';
+    r'd82c211e04ba4b18bc62c7c46dd3f4074115f2ef';
 
 abstract class _$LearningReminderPrefsNotifier
     extends $AsyncNotifier<LearningReminderPrefs> {

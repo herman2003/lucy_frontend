@@ -27,7 +27,8 @@ import 'package:lucy_frontend/core/localization/l10n/app_localizations_fr.dart';
 import 'package:lucy_frontend/features/settings/presentation/pages/settings_reminders_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class _NoopRevisionReminderPushSyncService extends RevisionReminderPushSyncService {
+class _NoopRevisionReminderPushSyncService
+    extends RevisionReminderPushSyncService {
   _NoopRevisionReminderPushSyncService()
     : super(
         remotePort: _NoopRevisionReminderPushRemotePort(),

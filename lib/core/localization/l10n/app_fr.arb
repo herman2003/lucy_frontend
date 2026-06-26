@@ -194,6 +194,7 @@
   "settingsRemindersRevisionPlanLabel": "Plan de révision (J-N)",
   "settingsRemindersWeakQuizLabel": "Quiz et points faibles",
   "settingsRemindersLoadError": "Impossible de charger les préférences de rappel.",
+  "settingsRemindersSaveError": "Impossible d'enregistrer les préférences de rappel.",
   "settingsSectionLearning": "Apprentissage",
   "settingsFirstNameLabel": "Prénom",
   "settingsLastNameLabel": "Nom",

@@ -7,18 +7,21 @@ void main() {
   final l10n = AppLocalizationsFr();
 
   group('resolveChatQuickChips (LEARN-11a)', () {
-    test('returns default learning actions when there is no assistant context', () {
-      final chips = resolveChatQuickChips(l10n: l10n);
+    test(
+      'returns default learning actions when there is no assistant context',
+      () {
+        final chips = resolveChatQuickChips(l10n: l10n);
 
-      expect(
-        chips.map((chip) => chip.message),
-        containsAll([
-          l10n.chatSuggestionQuiz,
-          l10n.chatSuggestionFlashcards,
-          l10n.chatSuggestionRevisionPlan,
-        ]),
-      );
-    });
+        expect(
+          chips.map((chip) => chip.message),
+          containsAll([
+            l10n.chatSuggestionQuiz,
+            l10n.chatSuggestionFlashcards,
+            l10n.chatSuggestionRevisionPlan,
+          ]),
+        );
+      },
+    );
 
     test('returns yes and cancel during type confirmation', () {
       final chips = resolveChatQuickChips(
@@ -27,7 +30,10 @@ void main() {
             'Tu veux un **quiz** sur tes documents actifs — c’est bien ça ?',
       );
 
-      expect(chips.map((c) => c.message), [l10n.chatQuickChipYesMessage, l10n.chatQuickChipCancelMessage]);
+      expect(chips.map((c) => c.message), [
+        l10n.chatQuickChipYesMessage,
+        l10n.chatQuickChipCancelMessage,
+      ]);
     });
 
     test('returns focus shortcuts during part selection', () {
@@ -37,10 +43,10 @@ void main() {
             'Quelles parties veux-tu travailler ? Réponds avec des numéros',
       );
 
-      expect(
-        chips.map((c) => c.message),
-        [l10n.chatQuickChipAllMessage, l10n.chatQuickChipMostImportantMessage],
-      );
+      expect(chips.map((c) => c.message), [
+        l10n.chatQuickChipAllMessage,
+        l10n.chatQuickChipMostImportantMessage,
+      ]);
     });
 
     test('returns as-you-like during count step', () {
@@ -60,7 +66,10 @@ void main() {
             '**Récap** : 5 questions · sections 1 et 2 — je lance ?',
       );
 
-      expect(chips.map((c) => c.message), [l10n.chatQuickChipYesMessage, l10n.chatQuickChipCancelMessage]);
+      expect(chips.map((c) => c.message), [
+        l10n.chatQuickChipYesMessage,
+        l10n.chatQuickChipCancelMessage,
+      ]);
     });
 
     test('adds export calendar chip when J-N calendar is present', () {

@@ -150,4 +150,4 @@ final class RevisionReminderPushSyncServiceProvider
 }
 
 String _$revisionReminderPushSyncServiceHash() =>
-    r'344772e45420e90ac395ab7f5507b641d79cc370';
+    r'b06d3320ecb6fb45e91f275a9819a71b3415b075';

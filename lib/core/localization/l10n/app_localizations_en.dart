@@ -257,6 +257,10 @@ class AppLocalizationsEn extends AppLocalizations {
       'Could not load reminder preferences.';
 
   @override
+  String get settingsRemindersSaveError =>
+      'Could not save reminder preferences.';
+
+  @override
   String get settingsSectionLearning => 'Learning';
 
   @override

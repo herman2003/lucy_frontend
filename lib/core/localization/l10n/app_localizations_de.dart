@@ -259,6 +259,10 @@ class AppLocalizationsDe extends AppLocalizations {
       'Erinnerungseinstellungen konnten nicht geladen werden.';
 
   @override
+  String get settingsRemindersSaveError =>
+      'Erinnerungseinstellungen konnten nicht gespeichert werden.';
+
+  @override
   String get settingsSectionLearning => 'Lernen';
 
   @override

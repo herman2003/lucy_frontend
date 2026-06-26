@@ -85,6 +85,7 @@
   "settingsRemindersRevisionPlanLabel": "Lernplan (J-N)",
   "settingsRemindersWeakQuizLabel": "Quiz und Schwachstellen",
   "settingsRemindersLoadError": "Erinnerungseinstellungen konnten nicht geladen werden.",
+  "settingsRemindersSaveError": "Erinnerungseinstellungen konnten nicht gespeichert werden.",
   "settingsSectionLearning": "Lernen",
   "settingsFirstNameLabel": "Vorname",
   "settingsLastNameLabel": "Nachname",

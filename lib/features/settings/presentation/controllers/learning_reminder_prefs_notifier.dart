@@ -15,48 +15,47 @@ class LearningReminderPrefsNotifier extends _$LearningReminderPrefsNotifier {
     return ref.read(learningReminderPrefsServiceProvider).read();
   }
 
-  Future<void> save(LearningReminderPrefs prefs) async {
-    state = const AsyncLoading();
-    state = await AsyncValue.guard(() async {
+  Future<bool> save(LearningReminderPrefs prefs) async {
+    final previous = state.value ?? LearningReminderPrefs.defaults;
+    state = AsyncData(prefs);
+    try {
       await ref.read(learningReminderPrefsServiceProvider).save(prefs);
-      await ref.read(learningReminderNotificationServiceProvider).sync(
-        languageCode: ref.read(lucyAppLocaleProvider).languageCode,
-      );
+      await ref
+          .read(learningReminderNotificationServiceProvider)
+          .sync(languageCode: ref.read(lucyAppLocaleProvider).languageCode);
       await ref
           .read(revisionReminderPushSyncServiceProvider)
           .sync(prefs: prefs)
           .catchError((_) {});
-      return prefs;
-    });
+      return true;
+    } catch (_) {
+      state = AsyncData(previous);
+      return false;
+    }
   }
 
-  Future<void> setEnabled(bool enabled) async {
+  Future<bool> setEnabled(bool enabled) async {
     final current = state.value ?? LearningReminderPrefs.defaults;
-    await save(current.copyWith(enabled: enabled));
+    return save(current.copyWith(enabled: enabled));
   }
 
-  Future<void> setReminderTime({
-    required int hour,
-    required int minute,
-  }) async {
+  Future<bool> setReminderTime({required int hour, required int minute}) async {
     final current = state.value ?? LearningReminderPrefs.defaults;
-    await save(
-      current.copyWith(reminderHour: hour, reminderMinute: minute),
-    );
+    return save(current.copyWith(reminderHour: hour, reminderMinute: minute));
   }
 
-  Future<void> setFlashcardsDue(bool enabled) async {
+  Future<bool> setFlashcardsDue(bool enabled) async {
     final current = state.value ?? LearningReminderPrefs.defaults;
-    await save(current.copyWith(flashcardsDue: enabled));
+    return save(current.copyWith(flashcardsDue: enabled));
   }
 
-  Future<void> setRevisionPlanEnabled(bool enabled) async {
+  Future<bool> setRevisionPlanEnabled(bool enabled) async {
     final current = state.value ?? LearningReminderPrefs.defaults;
-    await save(current.copyWith(revisionPlanEnabled: enabled));
+    return save(current.copyWith(revisionPlanEnabled: enabled));
   }
 
-  Future<void> setWeakQuizEnabled(bool enabled) async {
+  Future<bool> setWeakQuizEnabled(bool enabled) async {
     final current = state.value ?? LearningReminderPrefs.defaults;
-    await save(current.copyWith(weakQuizEnabled: enabled));
+    return save(current.copyWith(weakQuizEnabled: enabled));
   }
 }

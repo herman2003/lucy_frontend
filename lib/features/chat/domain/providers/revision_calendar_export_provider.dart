@@ -8,9 +8,7 @@ part 'revision_calendar_export_provider.g.dart';
 
 @Riverpod(keepAlive: true)
 RevisionCalendarRemoteDataSource revisionCalendarRemoteDataSource(Ref ref) {
-  return RevisionCalendarRemoteDataSource(
-    ref.watch(lucyDioClientProvider).dio,
-  );
+  return RevisionCalendarRemoteDataSource(ref.watch(lucyDioClientProvider).dio);
 }
 
 @Riverpod(keepAlive: true)

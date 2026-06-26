@@ -258,6 +258,10 @@ class AppLocalizationsFr extends AppLocalizations {
       'Impossible de charger les préférences de rappel.';
 
   @override
+  String get settingsRemindersSaveError =>
+      'Impossible d\'enregistrer les préférences de rappel.';
+
+  @override
   String get settingsSectionLearning => 'Apprentissage';
 
   @override

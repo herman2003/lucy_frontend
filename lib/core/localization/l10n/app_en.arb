@@ -85,6 +85,7 @@
   "settingsRemindersRevisionPlanLabel": "Revision plan (J-N)",
   "settingsRemindersWeakQuizLabel": "Quizzes and weak points",
   "settingsRemindersLoadError": "Could not load reminder preferences.",
+  "settingsRemindersSaveError": "Could not save reminder preferences.",
   "settingsSectionLearning": "Learning",
   "settingsFirstNameLabel": "First name",
   "settingsLastNameLabel": "Last name",

@@ -568,6 +568,12 @@ abstract class AppLocalizations {
   /// **'Erinnerungseinstellungen konnten nicht geladen werden.'**
   String get settingsRemindersLoadError;
 
+  /// No description provided for @settingsRemindersSaveError.
+  ///
+  /// In de, this message translates to:
+  /// **'Erinnerungseinstellungen konnten nicht gespeichert werden.'**
+  String get settingsRemindersSaveError;
+
   /// No description provided for @settingsSectionLearning.
   ///
   /// In de, this message translates to:

@@ -36,7 +36,7 @@
 
 | Statut | Id | Tâche |
 |--------|-----|--------|
-| [ ] | LEARN-08a | `document.outline[]` à l’ingestion |
+| [x] | LEARN-08a | `document.outline[]` à l’ingestion |
 | [ ] | LEARN-08b | Analyzer utilise outline |
 
 ---

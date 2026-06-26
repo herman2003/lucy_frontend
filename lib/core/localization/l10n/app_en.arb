@@ -374,6 +374,13 @@
   "flashcardsSessionTapToFlip": "↻ Tap to flip",
   "flashcardsSessionPrevious": "Previous",
   "flashcardsSessionNext": "Next",
+  "flashcardsSessionRatePrompt": "How well did you remember this card?",
+  "flashcardsSessionRateAgain": "Again",
+  "flashcardsSessionRateHard": "Hard",
+  "flashcardsSessionRateGood": "Good",
+  "flashcardsSessionRateEasy": "Easy",
+  "flashcardsSessionCompleteTitle": "Session complete",
+  "flashcardsSessionCompleteMessage": "Come back when your cards are due again.",
   "quizSessionProgress": "Question {current} / {total}",
   "@quizSessionProgress": {
     "placeholders": {

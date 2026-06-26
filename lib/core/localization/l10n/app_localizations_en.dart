@@ -993,6 +993,29 @@ class AppLocalizationsEn extends AppLocalizations {
   String get flashcardsSessionNext => 'Next';
 
   @override
+  String get flashcardsSessionRatePrompt =>
+      'How well did you remember this card?';
+
+  @override
+  String get flashcardsSessionRateAgain => 'Again';
+
+  @override
+  String get flashcardsSessionRateHard => 'Hard';
+
+  @override
+  String get flashcardsSessionRateGood => 'Good';
+
+  @override
+  String get flashcardsSessionRateEasy => 'Easy';
+
+  @override
+  String get flashcardsSessionCompleteTitle => 'Session complete';
+
+  @override
+  String get flashcardsSessionCompleteMessage =>
+      'Come back when your cards are due again.';
+
+  @override
   String quizSessionProgress(int current, int total) {
     return 'Question $current / $total';
   }

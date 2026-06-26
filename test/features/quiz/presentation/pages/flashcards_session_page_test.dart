@@ -10,7 +10,9 @@ import 'package:lucy_frontend/features/quiz/domain/entities/learning_session_sta
 import 'package:lucy_frontend/features/quiz/domain/entities/learning_session_type.dart';
 import 'package:lucy_frontend/features/quiz/domain/entities/learning_session_source.dart';
 import 'package:lucy_frontend/features/quiz/presentation/pages/flashcards_session_page.dart';
+import 'package:lucy_frontend/features/quiz/presentation/widgets/flashcard_rating_bar.dart';
 import 'package:lucy_frontend/features/quiz/presentation/widgets/flashcard_widget.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 const _flashcardsSession = LearningSession(
   id: 'learn_flash_1',
@@ -48,6 +50,10 @@ const _flashcardsSession = LearningSession(
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
+
+  setUp(() {
+    SharedPreferences.setMockInitialValues({});
+  });
 
   setUpAll(() {
     GoogleFonts.config.allowRuntimeFetching = false;
@@ -95,17 +101,24 @@ void main() {
     );
   });
 
-  testWidgets('navigates to next and previous cards', (tester) async {
+  testWidgets('shows SM-2 rating buttons after flipping', (tester) async {
     await pumpPage(tester);
 
-    await tester.tap(find.text('Suivante'));
+    await tester.tap(find.byType(FlashcardWidget));
+    await tester.pumpAndSettle();
+
+    expect(find.byType(FlashcardRatingBar), findsOneWidget);
+    expect(find.text('Bien'), findsOneWidget);
+  });
+
+  testWidgets('advances to the next card after a good rating', (tester) async {
+    await pumpPage(tester);
+
+    await tester.tap(find.byType(FlashcardWidget));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Bien'));
     await tester.pumpAndSettle();
 
     expect(find.text('Enthalpie'), findsOneWidget);
-
-    await tester.tap(find.text('Précédente'));
-    await tester.pumpAndSettle();
-
-    expect(find.text('Entropie'), findsOneWidget);
   });
 }

@@ -586,6 +586,13 @@
   "flashcardsSessionTapToFlip": "↻ Appuyer pour retourner",
   "flashcardsSessionPrevious": "Précédente",
   "flashcardsSessionNext": "Suivante",
+  "flashcardsSessionRatePrompt": "Comment te souviens-tu de cette carte ?",
+  "flashcardsSessionRateAgain": "À revoir",
+  "flashcardsSessionRateHard": "Difficile",
+  "flashcardsSessionRateGood": "Bien",
+  "flashcardsSessionRateEasy": "Facile",
+  "flashcardsSessionCompleteTitle": "Session terminée",
+  "flashcardsSessionCompleteMessage": "Reviens quand tes cartes sont à réviser.",
   "quizSessionProgress": "Question {current} / {total}",
   "@quizSessionProgress": {
     "placeholders": {

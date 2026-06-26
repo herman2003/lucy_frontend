@@ -374,6 +374,13 @@
   "flashcardsSessionTapToFlip": "↻ Tippen zum Umdrehen",
   "flashcardsSessionPrevious": "Zurück",
   "flashcardsSessionNext": "Weiter",
+  "flashcardsSessionRatePrompt": "Wie gut erinnerst du dich an diese Karte?",
+  "flashcardsSessionRateAgain": "Nochmal",
+  "flashcardsSessionRateHard": "Schwer",
+  "flashcardsSessionRateGood": "Gut",
+  "flashcardsSessionRateEasy": "Leicht",
+  "flashcardsSessionCompleteTitle": "Sitzung beendet",
+  "flashcardsSessionCompleteMessage": "Komm zurück, wenn deine Karten wieder fällig sind.",
   "quizSessionProgress": "Frage {current} / {total}",
   "@quizSessionProgress": {
     "placeholders": {

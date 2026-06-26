@@ -1828,6 +1828,48 @@ abstract class AppLocalizations {
   /// **'Weiter'**
   String get flashcardsSessionNext;
 
+  /// No description provided for @flashcardsSessionRatePrompt.
+  ///
+  /// In de, this message translates to:
+  /// **'Wie gut erinnerst du dich an diese Karte?'**
+  String get flashcardsSessionRatePrompt;
+
+  /// No description provided for @flashcardsSessionRateAgain.
+  ///
+  /// In de, this message translates to:
+  /// **'Nochmal'**
+  String get flashcardsSessionRateAgain;
+
+  /// No description provided for @flashcardsSessionRateHard.
+  ///
+  /// In de, this message translates to:
+  /// **'Schwer'**
+  String get flashcardsSessionRateHard;
+
+  /// No description provided for @flashcardsSessionRateGood.
+  ///
+  /// In de, this message translates to:
+  /// **'Gut'**
+  String get flashcardsSessionRateGood;
+
+  /// No description provided for @flashcardsSessionRateEasy.
+  ///
+  /// In de, this message translates to:
+  /// **'Leicht'**
+  String get flashcardsSessionRateEasy;
+
+  /// No description provided for @flashcardsSessionCompleteTitle.
+  ///
+  /// In de, this message translates to:
+  /// **'Sitzung beendet'**
+  String get flashcardsSessionCompleteTitle;
+
+  /// No description provided for @flashcardsSessionCompleteMessage.
+  ///
+  /// In de, this message translates to:
+  /// **'Komm zurück, wenn deine Karten wieder fällig sind.'**
+  String get flashcardsSessionCompleteMessage;
+
   /// No description provided for @quizSessionProgress.
   ///
   /// In de, this message translates to:

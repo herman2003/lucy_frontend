@@ -10,6 +10,7 @@ import '../../domain/entities/learning_session.dart';
 import '../../utils/learning_session_error_translator.dart';
 import '../controllers/flashcards_session_notifier.dart';
 import '../controllers/flashcards_session_state.dart';
+import '../widgets/flashcard_rating_bar.dart';
 import '../widgets/flashcard_widget.dart';
 import '../widgets/learning_session_close_header.dart';
 import '../widgets/learning_session_item_sources.dart';
@@ -105,9 +106,39 @@ class _FlashcardsContent extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
-    final item = state.session!.items[state.currentIndex];
-    final cardNumber = state.currentIndex + 1;
     final notifier = ref.read(flashcardsSessionProvider(sessionId).notifier);
+
+    if (state.isSessionComplete) {
+      return ListView(
+        padding: const EdgeInsets.all(LucySpacing.spaceXl),
+        children: [
+          LearningSessionCloseHeader(
+            progressLabel: l10n.flashcardsSessionProgress(
+              state.totalCards,
+              state.totalCards,
+            ),
+            onClose: () => Navigator.of(context).pop(),
+          ),
+          const SizedBox(height: LucySpacing.spaceXl),
+          Text(
+            l10n.flashcardsSessionCompleteTitle,
+            textAlign: TextAlign.center,
+            style: context.textTheme.headlineSmall,
+          ),
+          const SizedBox(height: LucySpacing.spaceSm),
+          Text(
+            l10n.flashcardsSessionCompleteMessage,
+            textAlign: TextAlign.center,
+            style: context.textTheme.bodyMedium?.copyWith(
+              color: context.lucyTheme.muted,
+            ),
+          ),
+        ],
+      );
+    }
+
+    final item = state.session!.items[state.currentIndex];
+    final cardNumber = state.queuePosition + 1;
 
     return ListView(
       padding: const EdgeInsets.all(LucySpacing.spaceXl),
@@ -131,80 +162,9 @@ class _FlashcardsContent extends ConsumerWidget {
           LearningSessionItemSources(sources: item.sources),
         ],
         const SizedBox(height: LucySpacing.spaceLg + 2),
-        Row(
-          children: [
-            Expanded(
-              child: _FlashcardNavButton(
-                label: l10n.flashcardsSessionPrevious,
-                outlined: true,
-                onPressed: state.canGoPrevious
-                    ? notifier.goToPreviousCard
-                    : null,
-              ),
-            ),
-            const SizedBox(width: LucySpacing.spaceMd),
-            Expanded(
-              child: _FlashcardNavButton(
-                label: l10n.flashcardsSessionNext,
-                outlined: false,
-                onPressed: state.canGoNext ? notifier.goToNextCard : null,
-              ),
-            ),
-          ],
-        ),
+        if (state.isFlipped && state.awaitingRating)
+          FlashcardRatingBar(onRated: notifier.rateCard),
       ],
-    );
-  }
-}
-
-class _FlashcardNavButton extends StatelessWidget {
-  const _FlashcardNavButton({
-    required this.label,
-    required this.outlined,
-    required this.onPressed,
-  });
-
-  final String label;
-  final bool outlined;
-  final VoidCallback? onPressed;
-
-  @override
-  Widget build(BuildContext context) {
-    final scheme = context.colorScheme;
-    final lucy = context.lucyTheme;
-    final enabled = onPressed != null;
-
-    return Material(
-      color: outlined ? scheme.surface : scheme.primary,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(LucySpacing.radiusMedium + 1),
-        side: outlined
-            ? BorderSide(
-                color: enabled
-                    ? lucy.border
-                    : lucy.border.withValues(alpha: 0.5),
-                width: 1.5,
-              )
-            : BorderSide.none,
-      ),
-      child: InkWell(
-        onTap: onPressed,
-        borderRadius: BorderRadius.circular(LucySpacing.radiusMedium + 1),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(
-            vertical: LucySpacing.spaceMd + 1,
-          ),
-          child: Text(
-            label,
-            textAlign: TextAlign.center,
-            style: context.textTheme.labelLarge?.copyWith(
-              color: outlined
-                  ? (enabled ? lucy.muted : lucy.faint)
-                  : scheme.onPrimary,
-            ),
-          ),
-        ),
-      ),
     );
   }
 }

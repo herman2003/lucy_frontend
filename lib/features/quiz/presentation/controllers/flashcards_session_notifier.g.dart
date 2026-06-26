@@ -61,7 +61,7 @@ final class FlashcardsSessionNotifierProvider
 }
 
 String _$flashcardsSessionNotifierHash() =>
-    r'29ad9ced9004bf2cba41e4883e90ad80ec6a6216';
+    r'0f6a22cf242a88173ec4cd992dec8eb56083346b';
 
 final class FlashcardsSessionNotifierFamily extends $Family
     with

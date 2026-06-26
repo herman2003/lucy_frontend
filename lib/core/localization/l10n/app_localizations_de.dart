@@ -1005,6 +1005,29 @@ class AppLocalizationsDe extends AppLocalizations {
   String get flashcardsSessionNext => 'Weiter';
 
   @override
+  String get flashcardsSessionRatePrompt =>
+      'Wie gut erinnerst du dich an diese Karte?';
+
+  @override
+  String get flashcardsSessionRateAgain => 'Nochmal';
+
+  @override
+  String get flashcardsSessionRateHard => 'Schwer';
+
+  @override
+  String get flashcardsSessionRateGood => 'Gut';
+
+  @override
+  String get flashcardsSessionRateEasy => 'Leicht';
+
+  @override
+  String get flashcardsSessionCompleteTitle => 'Sitzung beendet';
+
+  @override
+  String get flashcardsSessionCompleteMessage =>
+      'Komm zurück, wenn deine Karten wieder fällig sind.';
+
+  @override
   String quizSessionProgress(int current, int total) {
     return 'Frage $current / $total';
   }

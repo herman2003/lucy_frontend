@@ -69,7 +69,7 @@
 |--------|-----|--------|
 | [x] | LEARN-11a | Chips chat |
 | [x] | LEARN-11b | Nombres en lettres |
-| [ ] | LEARN-11c | Spaced repetition |
+| [x] | LEARN-11c | Spaced repetition |
 | [ ] | LEARN-11d | Calendrier J-N |
 | [ ] | LEARN-11e | *(Option)* Génération onglet Quiz |
 | [ ] | LEARN-11f | *(Option)* Choix PDF unique |

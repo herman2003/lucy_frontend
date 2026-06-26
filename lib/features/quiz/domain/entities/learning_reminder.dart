@@ -1,10 +1,7 @@
 import 'quiz_attempt.dart';
 
 /// In-app learning reminder kinds (LEARN-12a).
-enum LearningReminderKind {
-  flashcardsDue,
-  weakQuiz,
-}
+enum LearningReminderKind { flashcardsDue, weakQuiz }
 
 /// One actionable reminder for local notifications and label building.
 class LearningReminder {

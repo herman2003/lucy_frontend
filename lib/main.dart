@@ -9,6 +9,7 @@ import 'core/theme/lucy_interface_style_storage.dart';
 import 'core/theme/lucy_theme_mode_storage.dart';
 import 'core/theme/lucy_theme_provider.dart';
 
+
 Future<void> main() async {
   await bootstrapFirebase();
   final savedLocale = await LucyUiLocaleStorage.read();

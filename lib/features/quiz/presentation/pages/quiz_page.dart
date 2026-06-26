@@ -92,31 +92,31 @@ class _QuizPageState extends ConsumerState<QuizPage> {
     return RefreshIndicator(
       onRefresh: () => ref.read(quizProvider.notifier).refreshSessions(),
       child: ListView.builder(
-      padding: const EdgeInsets.symmetric(
-        horizontal: LucySpacing.spaceLg,
-        vertical: LucySpacing.spaceXl,
-      ),
-      itemCount: sessions.length,
-      itemBuilder: (context, index) {
-        final session = sessions[index];
-        final scheme = Theme.of(context).colorScheme;
-        return Dismissible(
-          key: ValueKey(session.id),
-          direction: DismissDirection.endToStart,
-          background: Container(
-            alignment: Alignment.centerRight,
-            padding: const EdgeInsets.only(right: LucySpacing.spaceXl),
-            color: scheme.errorContainer,
-            child: Icon(Icons.delete_outline, color: scheme.onErrorContainer),
-          ),
-          confirmDismiss: (_) => _confirmDeleteSession(session),
-          child: QuizSessionListTile(
-            session: session,
-            lastAttempt: ref.watch(quizProvider).lastQuizAttempts[session.id],
-            onTap: () => _openSession(session),
-          ),
-        );
-      },
+        padding: const EdgeInsets.symmetric(
+          horizontal: LucySpacing.spaceLg,
+          vertical: LucySpacing.spaceXl,
+        ),
+        itemCount: sessions.length,
+        itemBuilder: (context, index) {
+          final session = sessions[index];
+          final scheme = Theme.of(context).colorScheme;
+          return Dismissible(
+            key: ValueKey(session.id),
+            direction: DismissDirection.endToStart,
+            background: Container(
+              alignment: Alignment.centerRight,
+              padding: const EdgeInsets.only(right: LucySpacing.spaceXl),
+              color: scheme.errorContainer,
+              child: Icon(Icons.delete_outline, color: scheme.onErrorContainer),
+            ),
+            confirmDismiss: (_) => _confirmDeleteSession(session),
+            child: QuizSessionListTile(
+              session: session,
+              lastAttempt: ref.watch(quizProvider).lastQuizAttempts[session.id],
+              onTap: () => _openSession(session),
+            ),
+          );
+        },
       ),
     );
   }
@@ -125,33 +125,35 @@ class _QuizPageState extends ConsumerState<QuizPage> {
     return RefreshIndicator(
       onRefresh: () => ref.read(quizProvider.notifier).refreshSessions(),
       child: CustomScrollView(
-      slivers: [
-        SliverPadding(
-          padding: const EdgeInsets.fromLTRB(
-            LucySpacing.space2xl,
-            LucySpacing.spaceXl,
-            LucySpacing.space2xl,
-            LucySpacing.spaceXl,
-          ),
-          sliver: SliverGrid(
-            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-              maxCrossAxisExtent: LucyConstants.kQuizLibraryGridMaxExtent,
-              mainAxisSpacing: LucySpacing.spaceLg + 2,
-              crossAxisSpacing: LucySpacing.spaceLg + 2,
-              childAspectRatio: LucyConstants.kQuizLibraryGridAspectRatio,
+        slivers: [
+          SliverPadding(
+            padding: const EdgeInsets.fromLTRB(
+              LucySpacing.space2xl,
+              LucySpacing.spaceXl,
+              LucySpacing.space2xl,
+              LucySpacing.spaceXl,
             ),
-            delegate: SliverChildBuilderDelegate((context, index) {
-              final session = sessions[index];
-              return QuizSessionCard(
-                session: session,
-                lastAttempt: ref.watch(quizProvider).lastQuizAttempts[session.id],
-                onTap: () => _openSession(session),
-                onDelete: () => _deleteSession(session),
-              );
-            }, childCount: sessions.length),
+            sliver: SliverGrid(
+              gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                maxCrossAxisExtent: LucyConstants.kQuizLibraryGridMaxExtent,
+                mainAxisSpacing: LucySpacing.spaceLg + 2,
+                crossAxisSpacing: LucySpacing.spaceLg + 2,
+                childAspectRatio: LucyConstants.kQuizLibraryGridAspectRatio,
+              ),
+              delegate: SliverChildBuilderDelegate((context, index) {
+                final session = sessions[index];
+                return QuizSessionCard(
+                  session: session,
+                  lastAttempt: ref
+                      .watch(quizProvider)
+                      .lastQuizAttempts[session.id],
+                  onTap: () => _openSession(session),
+                  onDelete: () => _deleteSession(session),
+                );
+              }, childCount: sessions.length),
+            ),
           ),
-        ),
-      ],
+        ],
       ),
     );
   }

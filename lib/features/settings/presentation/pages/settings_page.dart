@@ -170,6 +170,17 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
                 ),
               ],
             ),
+            SettingsSectionHeader(title: l10n.settingsSectionLearning),
+            SettingsGroup(
+              children: [
+                SettingsNavigationTile(
+                  icon: Icons.notifications_outlined,
+                  label: l10n.settingsRemindersTitle,
+                  trailingText: l10n.settingsRemindersHubHint,
+                  onTap: () => context.push(LucyRoutePaths.settingsReminders),
+                ),
+              ],
+            ),
             SettingsSectionHeader(title: l10n.settingsHubSection),
             SettingsGroup(
               children: [

@@ -224,6 +224,42 @@ class AppLocalizationsEn extends AppLocalizations {
       'Customize how Lucy supports your learning.';
 
   @override
+  String get settingsRemindersTitle => 'Reminders';
+
+  @override
+  String get settingsRemindersHubHint => 'Notifications and reviews';
+
+  @override
+  String get settingsRemindersIntro =>
+      'Choose when and what Lucy should remind you to review.';
+
+  @override
+  String get settingsRemindersEnabledLabel => 'Enable reminders';
+
+  @override
+  String get settingsRemindersEnabledSubtitle =>
+      'Sets up daily notifications on this device.';
+
+  @override
+  String get settingsRemindersTimeLabel => 'Reminder time';
+
+  @override
+  String get settingsRemindersFlashcardsLabel => 'Cards to review';
+
+  @override
+  String get settingsRemindersRevisionPlanLabel => 'Revision plan (J-N)';
+
+  @override
+  String get settingsRemindersWeakQuizLabel => 'Quizzes and weak points';
+
+  @override
+  String get settingsRemindersLoadError =>
+      'Could not load reminder preferences.';
+
+  @override
+  String get settingsSectionLearning => 'Learning';
+
+  @override
   String get settingsFirstNameLabel => 'First name';
 
   @override

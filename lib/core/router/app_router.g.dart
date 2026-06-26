@@ -52,4 +52,4 @@ final class LucyRouterProvider
   }
 }
 
-String _$lucyRouterHash() => r'f12a8d387f837d9297334be891c9f122012f342d';
+String _$lucyRouterHash() => r'b6dc241e94ff75559850987a538c90b465900f12';

@@ -225,6 +225,43 @@ class AppLocalizationsDe extends AppLocalizations {
       'Passen Sie an, wie Lucy Sie beim Lernen begleitet.';
 
   @override
+  String get settingsRemindersTitle => 'Erinnerungen';
+
+  @override
+  String get settingsRemindersHubHint =>
+      'Benachrichtigungen und Wiederholungen';
+
+  @override
+  String get settingsRemindersIntro =>
+      'Wählen Sie, wann und wozu Lucy Sie ans Lernen erinnert.';
+
+  @override
+  String get settingsRemindersEnabledLabel => 'Erinnerungen aktivieren';
+
+  @override
+  String get settingsRemindersEnabledSubtitle =>
+      'Richtet tägliche Benachrichtigungen auf diesem Gerät ein.';
+
+  @override
+  String get settingsRemindersTimeLabel => 'Erinnerungszeit';
+
+  @override
+  String get settingsRemindersFlashcardsLabel => 'Karten zum Wiederholen';
+
+  @override
+  String get settingsRemindersRevisionPlanLabel => 'Lernplan (J-N)';
+
+  @override
+  String get settingsRemindersWeakQuizLabel => 'Quiz und Schwachstellen';
+
+  @override
+  String get settingsRemindersLoadError =>
+      'Erinnerungseinstellungen konnten nicht geladen werden.';
+
+  @override
+  String get settingsSectionLearning => 'Lernen';
+
+  @override
   String get settingsFirstNameLabel => 'Vorname';
 
   @override

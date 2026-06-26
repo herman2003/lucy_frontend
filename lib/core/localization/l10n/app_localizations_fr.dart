@@ -225,6 +225,42 @@ class AppLocalizationsFr extends AppLocalizations {
       'Personnalisez comment Lucy vous accompagne dans l\'apprentissage.';
 
   @override
+  String get settingsRemindersTitle => 'Rappels';
+
+  @override
+  String get settingsRemindersHubHint => 'Notifications et révisions';
+
+  @override
+  String get settingsRemindersIntro =>
+      'Choisissez quand et sur quels sujets Lucy peut vous rappeler de réviser.';
+
+  @override
+  String get settingsRemindersEnabledLabel => 'Activer les rappels';
+
+  @override
+  String get settingsRemindersEnabledSubtitle =>
+      'Prépare les notifications quotidiennes sur cet appareil.';
+
+  @override
+  String get settingsRemindersTimeLabel => 'Heure du rappel';
+
+  @override
+  String get settingsRemindersFlashcardsLabel => 'Cartes à revoir';
+
+  @override
+  String get settingsRemindersRevisionPlanLabel => 'Plan de révision (J-N)';
+
+  @override
+  String get settingsRemindersWeakQuizLabel => 'Quiz et points faibles';
+
+  @override
+  String get settingsRemindersLoadError =>
+      'Impossible de charger les préférences de rappel.';
+
+  @override
+  String get settingsSectionLearning => 'Apprentissage';
+
+  @override
   String get settingsFirstNameLabel => 'Prénom';
 
   @override

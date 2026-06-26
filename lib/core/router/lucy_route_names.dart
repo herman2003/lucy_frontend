@@ -15,6 +15,7 @@ class LucyRouteNames {
   static const String settings = 'settings';
   static const String settingsProfile = 'settingsProfile';
   static const String settingsAiConfig = 'settingsAiConfig';
+  static const String settingsReminders = 'settingsReminders';
   static const String settingsChangePassword = 'settingsChangePassword';
   static const String settingsLearnerDomains = 'settingsLearnerDomains';
   static const String onboarding = 'onboarding';

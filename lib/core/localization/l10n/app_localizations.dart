@@ -508,6 +508,72 @@ abstract class AppLocalizations {
   /// **'Passen Sie an, wie Lucy Sie beim Lernen begleitet.'**
   String get settingsAiConfigIntro;
 
+  /// No description provided for @settingsRemindersTitle.
+  ///
+  /// In de, this message translates to:
+  /// **'Erinnerungen'**
+  String get settingsRemindersTitle;
+
+  /// No description provided for @settingsRemindersHubHint.
+  ///
+  /// In de, this message translates to:
+  /// **'Benachrichtigungen und Wiederholungen'**
+  String get settingsRemindersHubHint;
+
+  /// No description provided for @settingsRemindersIntro.
+  ///
+  /// In de, this message translates to:
+  /// **'Wählen Sie, wann und wozu Lucy Sie ans Lernen erinnert.'**
+  String get settingsRemindersIntro;
+
+  /// No description provided for @settingsRemindersEnabledLabel.
+  ///
+  /// In de, this message translates to:
+  /// **'Erinnerungen aktivieren'**
+  String get settingsRemindersEnabledLabel;
+
+  /// No description provided for @settingsRemindersEnabledSubtitle.
+  ///
+  /// In de, this message translates to:
+  /// **'Richtet tägliche Benachrichtigungen auf diesem Gerät ein.'**
+  String get settingsRemindersEnabledSubtitle;
+
+  /// No description provided for @settingsRemindersTimeLabel.
+  ///
+  /// In de, this message translates to:
+  /// **'Erinnerungszeit'**
+  String get settingsRemindersTimeLabel;
+
+  /// No description provided for @settingsRemindersFlashcardsLabel.
+  ///
+  /// In de, this message translates to:
+  /// **'Karten zum Wiederholen'**
+  String get settingsRemindersFlashcardsLabel;
+
+  /// No description provided for @settingsRemindersRevisionPlanLabel.
+  ///
+  /// In de, this message translates to:
+  /// **'Lernplan (J-N)'**
+  String get settingsRemindersRevisionPlanLabel;
+
+  /// No description provided for @settingsRemindersWeakQuizLabel.
+  ///
+  /// In de, this message translates to:
+  /// **'Quiz und Schwachstellen'**
+  String get settingsRemindersWeakQuizLabel;
+
+  /// No description provided for @settingsRemindersLoadError.
+  ///
+  /// In de, this message translates to:
+  /// **'Erinnerungseinstellungen konnten nicht geladen werden.'**
+  String get settingsRemindersLoadError;
+
+  /// No description provided for @settingsSectionLearning.
+  ///
+  /// In de, this message translates to:
+  /// **'Lernen'**
+  String get settingsSectionLearning;
+
   /// No description provided for @settingsFirstNameLabel.
   ///
   /// In de, this message translates to:

@@ -15,6 +15,7 @@ import '../../features/settings/presentation/pages/settings_change_password_page
 import '../../features/settings/presentation/pages/settings_learner_domains_page.dart';
 import '../../features/settings/presentation/pages/settings_page.dart';
 import '../../features/settings/presentation/pages/settings_profile_page.dart';
+import '../../features/settings/presentation/pages/settings_reminders_page.dart';
 import '../presentation/pages/splash_page.dart';
 import '../shell/lucy_app_shell.dart';
 import 'lucy_route_names.dart';
@@ -142,6 +143,11 @@ GoRouter lucyRouter(Ref ref) {
                     name: LucyRouteNames.settingsAiConfig,
                     path: 'ai-config',
                     builder: (context, state) => const SettingsAiConfigPage(),
+                  ),
+                  GoRoute(
+                    name: LucyRouteNames.settingsReminders,
+                    path: 'reminders',
+                    builder: (context, state) => const SettingsRemindersPage(),
                   ),
                   GoRoute(
                     name: LucyRouteNames.settingsChangePassword,

@@ -58,7 +58,7 @@
 | Statut | Id | Tâche |
 |--------|-----|--------|
 | [x] | LEARN-10a | Cartes sur erreurs quiz |
-| [ ] | LEARN-10b | Type d’épreuve optionnel |
+| [x] | LEARN-10b | Type d’épreuve optionnel |
 | [ ] | LEARN-10c | Plan révision en chat |
 
 ---

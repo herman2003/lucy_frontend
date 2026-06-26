@@ -68,7 +68,7 @@
 | Statut | Id | Tâche |
 |--------|-----|--------|
 | [x] | LEARN-11a | Chips chat |
-| [ ] | LEARN-11b | Nombres en lettres |
+| [x] | LEARN-11b | Nombres en lettres |
 | [ ] | LEARN-11c | Spaced repetition |
 | [ ] | LEARN-11d | Calendrier J-N |
 | [ ] | LEARN-11e | *(Option)* Génération onglet Quiz |

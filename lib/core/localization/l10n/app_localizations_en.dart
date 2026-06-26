@@ -869,6 +869,16 @@ class AppLocalizationsEn extends AppLocalizations {
       'Ask Lucy in chat to generate a quiz or flashcards.';
 
   @override
+  String get quizLibraryEmptyActionsHint =>
+      'Lucy will analyze your documents and guide you through the choices.';
+
+  @override
+  String get quizLibraryGenerateQuiz => 'Generate a quiz';
+
+  @override
+  String get quizLibraryGenerateFlashcards => 'Generate flashcards';
+
+  @override
   String get quizLibraryHistoryTitle => 'History';
 
   @override

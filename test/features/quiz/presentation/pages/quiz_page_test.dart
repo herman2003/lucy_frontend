@@ -84,6 +84,51 @@ void main() {
     await tester.pumpAndSettle();
   }
 
+  testWidgets('shows generate actions when canQuiz is true and history is empty', (
+    tester,
+  ) async {
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [
+          quizServiceProvider.overrideWithValue(
+            QuizService(
+              repository: FakeQuizRepository(
+                eligibility: const QuizEligibility(
+                  canQuiz: true,
+                  activeDocumentCount: 2,
+                ),
+              ),
+            ),
+          ),
+          learningSessionServiceProvider.overrideWithValue(
+            LearningSessionService(
+              repository: FakeLearningSessionRepository()..setSessions(const []),
+            ),
+          ),
+        ],
+        child: MaterialApp.router(
+          theme: LucyFlexTheme.lightTheme,
+          locale: const Locale('fr'),
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
+          routerConfig: GoRouter(
+            routes: [
+              GoRoute(path: '/', builder: (context, state) => const QuizPage()),
+            ],
+          ),
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.text('Générer un quiz'), findsOneWidget);
+    expect(find.text('Générer des cartes'), findsOneWidget);
+    expect(
+      find.textContaining('Lucy analysera vos documents'),
+      findsOneWidget,
+    );
+  });
+
   testWidgets('shows corpus banner and history when canQuiz is false', (
     tester,
   ) async {

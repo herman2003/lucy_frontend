@@ -1642,6 +1642,24 @@ abstract class AppLocalizations {
   /// **'Bitten Sie Lucy im Chat, ein Quiz oder Karteikarten zu erstellen.'**
   String get quizLibraryEmptyHint;
 
+  /// No description provided for @quizLibraryEmptyActionsHint.
+  ///
+  /// In de, this message translates to:
+  /// **'Lucy analysiert deine Dokumente und führt dich durch die Auswahl.'**
+  String get quizLibraryEmptyActionsHint;
+
+  /// No description provided for @quizLibraryGenerateQuiz.
+  ///
+  /// In de, this message translates to:
+  /// **'Quiz erstellen'**
+  String get quizLibraryGenerateQuiz;
+
+  /// No description provided for @quizLibraryGenerateFlashcards.
+  ///
+  /// In de, this message translates to:
+  /// **'Karteikarten erstellen'**
+  String get quizLibraryGenerateFlashcards;
+
   /// No description provided for @quizLibraryHistoryTitle.
   ///
   /// In de, this message translates to:

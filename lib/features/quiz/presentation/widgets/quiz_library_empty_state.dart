@@ -3,9 +3,12 @@ import 'package:flutter/material.dart';
 import '../../../../core/constants/lucy_spacing.dart';
 import '../../../../core/extensions/context.dart';
 import '../../../../core/theme/lucy_theme_extensions.dart';
+import 'quiz_library_generate_actions.dart';
 
 class QuizLibraryEmptyState extends StatelessWidget {
-  const QuizLibraryEmptyState({super.key});
+  const QuizLibraryEmptyState({super.key, this.canGenerate = false});
+
+  final bool canGenerate;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +36,9 @@ class QuizLibraryEmptyState extends StatelessWidget {
               ),
               const SizedBox(height: LucySpacing.spaceLg),
               Text(
-                l10n.quizLibraryEmptyHint,
+                canGenerate
+                    ? l10n.quizLibraryEmptyActionsHint
+                    : l10n.quizLibraryEmptyHint,
                 textAlign: TextAlign.center,
                 style: context.textTheme.bodyMedium?.copyWith(
                   color: scheme.onSurface,
@@ -41,6 +46,10 @@ class QuizLibraryEmptyState extends StatelessWidget {
                   fontWeight: FontWeight.w500,
                 ),
               ),
+              if (canGenerate) ...[
+                const SizedBox(height: LucySpacing.spaceXl),
+                QuizLibraryGenerateActions(enabled: true),
+              ],
             ],
           ),
         ),

@@ -16,6 +16,7 @@ import '../../domain/entities/learning_session_list_item.dart';
 import '../../utils/learning_session_error_translator.dart';
 import '../../utils/quiz_error_translator.dart';
 import '../controllers/quiz_notifier.dart';
+import '../widgets/quiz_library_generate_actions.dart';
 import '../widgets/quiz_library_empty_state.dart';
 import '../widgets/quiz_no_corpus_banner.dart';
 import '../widgets/quiz_page_header.dart';
@@ -195,11 +196,24 @@ class _QuizPageState extends ConsumerState<QuizPage> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 const QuizPageHeader(),
+                if (state.canQuiz && state.sessions.isNotEmpty)
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(
+                      LucySpacing.spaceLg,
+                      0,
+                      LucySpacing.spaceLg,
+                      LucySpacing.spaceMd,
+                    ),
+                    child: QuizLibraryGenerateActions(
+                      enabled: state.canQuiz,
+                      compact: _useCardGrid(context),
+                    ),
+                  ),
                 if (!state.canQuiz && state.eligibility != null)
                   const QuizNoCorpusBanner(),
                 Expanded(
                   child: state.sessions.isEmpty
-                      ? const QuizLibraryEmptyState()
+                      ? QuizLibraryEmptyState(canGenerate: state.canQuiz)
                       : _useCardGrid(context)
                       ? _buildTabletGrid(state.sessions)
                       : _buildPhoneList(state.sessions),

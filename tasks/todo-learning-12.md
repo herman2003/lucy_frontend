@@ -27,7 +27,7 @@
 | [x] | LEARN-12a-2 | Bandeau in-app Quiz (et optionnel Chat) |
 | [x] | LEARN-12a-3 | Page Paramètres rappels (opt-in + créneau) |
 | [x] | LEARN-12a-4 | Notifications locales `flutter_local_notifications` |
-| [ ] | LEARN-12a-V2 | FCM + rappels calendrier J-N serveur |
+| [x] | LEARN-12a-V2 | FCM + rappels calendrier J-N serveur |
 
 ---
 

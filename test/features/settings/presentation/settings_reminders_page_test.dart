@@ -13,6 +13,10 @@ import 'package:lucy_frontend/features/quiz/domain/entities/generate_learning_se
 import 'package:lucy_frontend/features/quiz/domain/entities/learning_session.dart';
 import 'package:lucy_frontend/features/quiz/domain/entities/learning_session_list_item.dart';
 import 'package:lucy_frontend/features/quiz/domain/providers/learning_reminder_notification_provider.dart';
+import 'package:lucy_frontend/features/quiz/domain/providers/revision_reminder_push_provider.dart';
+import 'package:lucy_frontend/features/quiz/data/datasources/revision_reminder_push_remote_data_source.dart';
+import 'package:lucy_frontend/features/quiz/domain/entities/learning_reminder_prefs.dart';
+import 'package:lucy_frontend/features/quiz/services/revision_reminder_push_sync_service.dart';
 import 'package:lucy_frontend/features/quiz/domain/repositories/learning_session_repository.dart';
 import 'package:lucy_frontend/features/quiz/services/flashcard_sm2_service.dart';
 import 'package:lucy_frontend/features/quiz/services/learning_reminder_notification_service.dart';
@@ -22,6 +26,33 @@ import 'package:lucy_frontend/features/quiz/services/quiz_attempt_service.dart';
 import 'package:lucy_frontend/core/localization/l10n/app_localizations_fr.dart';
 import 'package:lucy_frontend/features/settings/presentation/pages/settings_reminders_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+class _NoopRevisionReminderPushSyncService extends RevisionReminderPushSyncService {
+  _NoopRevisionReminderPushSyncService()
+    : super(
+        remotePort: _NoopRevisionReminderPushRemotePort(),
+        fcmTokenClient: _NoopFcmTokenClient(),
+        readTimezone: () async => 'Europe/Paris',
+      );
+
+  @override
+  Future<void> sync({required LearningReminderPrefs prefs}) async {}
+}
+
+class _NoopRevisionReminderPushRemotePort
+    implements RevisionReminderPushRemotePort {
+  @override
+  Future<void> syncPushState({
+    String? fcmToken,
+    required LearningReminderPrefs prefs,
+    required String timezone,
+  }) async {}
+}
+
+class _NoopFcmTokenClient implements FcmTokenClient {
+  @override
+  Future<String?> requestToken() async => null;
+}
 
 class _NoopNotificationClient implements LearningReminderNotificationClient {
   @override
@@ -95,6 +126,9 @@ void main() {
           learningReminderPrefsServiceProvider.overrideWithValue(prefsService),
           learningReminderNotificationServiceProvider.overrideWithValue(
             notificationService,
+          ),
+          revisionReminderPushSyncServiceProvider.overrideWithValue(
+            _NoopRevisionReminderPushSyncService(),
           ),
         ],
         child: MaterialApp(

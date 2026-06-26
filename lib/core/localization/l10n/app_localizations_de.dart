@@ -774,7 +774,43 @@ class AppLocalizationsDe extends AppLocalizations {
   String get chatSuggestionQuiz => 'Schlage ein Quiz vor';
 
   @override
+  String get chatSuggestionFlashcards => 'Schlage Karteikarten vor';
+
+  @override
+  String get chatSuggestionRevisionPlan => 'Erstelle einen Lernplan';
+
+  @override
   String get chatSuggestionExplain => 'Erkläre ein Schlüsselkonzept';
+
+  @override
+  String get chatQuickChipYes => 'Ja';
+
+  @override
+  String get chatQuickChipYesMessage => 'ja';
+
+  @override
+  String get chatQuickChipCancel => 'Abbrechen';
+
+  @override
+  String get chatQuickChipCancelMessage => 'abbrechen';
+
+  @override
+  String get chatQuickChipAll => 'Alle';
+
+  @override
+  String get chatQuickChipAllMessage => 'alle';
+
+  @override
+  String get chatQuickChipMostImportant => 'Wichtigsten';
+
+  @override
+  String get chatQuickChipMostImportantMessage => 'wichtigsten';
+
+  @override
+  String get chatQuickChipAsYouLike => 'Wie du willst';
+
+  @override
+  String get chatQuickChipAsYouLikeMessage => 'wie du willst';
 
   @override
   String get chatComposerHint =>

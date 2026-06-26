@@ -14,6 +14,7 @@ import '../../../../shared/widgets/feedback/lucy_snackbar.dart';
 import '../../../../shared/widgets/lucy/lucy_message_bubble.dart';
 import '../../../settings/presentation/controllers/settings_notifier.dart';
 import '../../../settings/utils/settings_full_name_parts.dart';
+import '../../domain/entities/chat_message_role.dart';
 import '../../utils/chat_constants.dart';
 import '../../utils/chat_error_translator.dart';
 import '../controllers/chat_conversation_notifier.dart';
@@ -22,12 +23,14 @@ import '../controllers/chat_threads_notifier.dart';
 import '../controllers/chat_threads_state.dart';
 import '../utils/chat_conversation_status_resolver.dart';
 import '../utils/chat_pending_outbound_dispatcher.dart';
+import '../utils/chat_quick_chips_resolver.dart';
 import '../widgets/chat_composer.dart';
 import '../widgets/chat_conversation_empty_state.dart';
 import '../widgets/chat_conversation_header.dart';
 import '../widgets/chat_learning_session_card.dart';
 import '../widgets/chat_message_bubble.dart';
 import '../widgets/chat_no_corpus_banner.dart';
+import '../widgets/chat_quick_chips_bar.dart';
 import '../widgets/chat_source_card.dart';
 import '../widgets/lucy_conversation_status.dart';
 
@@ -407,11 +410,22 @@ class _ConversationPanel extends ConsumerWidget {
   final bool canChat;
   final int? activeDocumentCount;
 
-  List<String> _suggestions(AppLocalizations l10n) => [
-    l10n.chatSuggestionSummarize,
-    l10n.chatSuggestionQuiz,
-    l10n.chatSuggestionExplain,
-  ];
+  List<String> _emptyStateSuggestions(AppLocalizations l10n) => resolveChatQuickChips(
+    l10n: l10n,
+  ).map((chip) => chip.message).toList();
+
+  String? _lastAssistantMessageContent(ChatConversationState conversation) {
+    for (var index = conversation.messages.length - 1; index >= 0; index--) {
+      final message = conversation.messages[index];
+      if (message.role == ChatMessageRole.assistant) {
+        return message.content;
+      }
+    }
+    if (conversation.streamingContent.isNotEmpty) {
+      return conversation.streamingContent;
+    }
+    return null;
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -450,6 +464,10 @@ class _ConversationPanel extends ConsumerWidget {
         ? null
         : ChatErrorTranslator.translate(context, conversation.errorCode!);
     final canSend = conversation.canSend && !isOffline && canChat;
+    final quickChips = resolveChatQuickChips(
+      l10n: l10n,
+      lastAssistantMessageContent: _lastAssistantMessageContent(conversation),
+    );
 
     return Column(
       children: [
@@ -473,7 +491,7 @@ class _ConversationPanel extends ConsumerWidget {
               emptyWidget: ChatConversationEmptyState(
                 greeting: greeting,
                 message: l10n.chatEmptyDescription,
-                suggestions: _suggestions(l10n),
+                suggestions: _emptyStateSuggestions(l10n),
                 onSuggestionSelected: (text) {
                   if (canSend) {
                     ref
@@ -496,6 +514,13 @@ class _ConversationPanel extends ConsumerWidget {
             ),
           ),
         ),
+        if (canSend && conversation.messages.isNotEmpty)
+          ChatQuickChipsBar(
+            chips: quickChips,
+            onChipSelected: (text) => ref
+                .read(chatConversationProvider(chatId!).notifier)
+                .sendMessage(text),
+          ),
         ColoredBox(
           color: lucy.scaffoldBackground,
           child: ChatComposer(

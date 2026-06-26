@@ -67,7 +67,7 @@
 
 | Statut | Id | Tâche |
 |--------|-----|--------|
-| [ ] | LEARN-11a | Chips chat |
+| [x] | LEARN-11a | Chips chat |
 | [ ] | LEARN-11b | Nombres en lettres |
 | [ ] | LEARN-11c | Spaced repetition |
 | [ ] | LEARN-11d | Calendrier J-N |

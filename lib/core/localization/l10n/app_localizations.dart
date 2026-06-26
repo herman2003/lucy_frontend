@@ -1450,11 +1450,83 @@ abstract class AppLocalizations {
   /// **'Schlage ein Quiz vor'**
   String get chatSuggestionQuiz;
 
+  /// No description provided for @chatSuggestionFlashcards.
+  ///
+  /// In de, this message translates to:
+  /// **'Schlage Karteikarten vor'**
+  String get chatSuggestionFlashcards;
+
+  /// No description provided for @chatSuggestionRevisionPlan.
+  ///
+  /// In de, this message translates to:
+  /// **'Erstelle einen Lernplan'**
+  String get chatSuggestionRevisionPlan;
+
   /// No description provided for @chatSuggestionExplain.
   ///
   /// In de, this message translates to:
   /// **'Erkläre ein Schlüsselkonzept'**
   String get chatSuggestionExplain;
+
+  /// No description provided for @chatQuickChipYes.
+  ///
+  /// In de, this message translates to:
+  /// **'Ja'**
+  String get chatQuickChipYes;
+
+  /// No description provided for @chatQuickChipYesMessage.
+  ///
+  /// In de, this message translates to:
+  /// **'ja'**
+  String get chatQuickChipYesMessage;
+
+  /// No description provided for @chatQuickChipCancel.
+  ///
+  /// In de, this message translates to:
+  /// **'Abbrechen'**
+  String get chatQuickChipCancel;
+
+  /// No description provided for @chatQuickChipCancelMessage.
+  ///
+  /// In de, this message translates to:
+  /// **'abbrechen'**
+  String get chatQuickChipCancelMessage;
+
+  /// No description provided for @chatQuickChipAll.
+  ///
+  /// In de, this message translates to:
+  /// **'Alle'**
+  String get chatQuickChipAll;
+
+  /// No description provided for @chatQuickChipAllMessage.
+  ///
+  /// In de, this message translates to:
+  /// **'alle'**
+  String get chatQuickChipAllMessage;
+
+  /// No description provided for @chatQuickChipMostImportant.
+  ///
+  /// In de, this message translates to:
+  /// **'Wichtigsten'**
+  String get chatQuickChipMostImportant;
+
+  /// No description provided for @chatQuickChipMostImportantMessage.
+  ///
+  /// In de, this message translates to:
+  /// **'wichtigsten'**
+  String get chatQuickChipMostImportantMessage;
+
+  /// No description provided for @chatQuickChipAsYouLike.
+  ///
+  /// In de, this message translates to:
+  /// **'Wie du willst'**
+  String get chatQuickChipAsYouLike;
+
+  /// No description provided for @chatQuickChipAsYouLikeMessage.
+  ///
+  /// In de, this message translates to:
+  /// **'wie du willst'**
+  String get chatQuickChipAsYouLikeMessage;
 
   /// No description provided for @chatComposerHint.
   ///

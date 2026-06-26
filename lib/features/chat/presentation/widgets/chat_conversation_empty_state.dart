@@ -5,6 +5,7 @@ import '../../../../core/constants/lucy_spacing.dart';
 import '../../../../core/extensions/context.dart';
 import '../../../../core/theme/lucy_theme_extensions.dart';
 import '../../../../shared/widgets/branding/lucy_avatar.dart';
+import 'chat_quick_chips_bar.dart';
 
 /// Empty conversation with Lucy avatar, greeting, and neutral chips (V3/V4).
 class ChatConversationEmptyState extends StatelessWidget {
@@ -56,7 +57,7 @@ class ChatConversationEmptyState extends StatelessWidget {
                 runSpacing: LucySpacing.spaceSm + 1,
                 children: suggestions
                     .map(
-                      (suggestion) => _SuggestionChip(
+                      (suggestion) => ChatQuickChipButton(
                         label: suggestion,
                         onTap: () => onSuggestionSelected(suggestion),
                       ),
@@ -64,41 +65,6 @@ class ChatConversationEmptyState extends StatelessWidget {
                     .toList(),
               ),
             ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _SuggestionChip extends StatelessWidget {
-  const _SuggestionChip({required this.label, required this.onTap});
-
-  final String label;
-  final VoidCallback onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    final scheme = context.colorScheme;
-    final lucy = context.lucyTheme;
-
-    return Material(
-      color: scheme.surface,
-      shape: StadiumBorder(side: BorderSide(color: lucy.border)),
-      clipBehavior: Clip.antiAlias,
-      child: InkWell(
-        onTap: onTap,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: LucySpacing.spaceMd + 3,
-            vertical: LucySpacing.spaceSm + 1,
-          ),
-          child: Text(
-            label,
-            style: context.textTheme.bodyMedium?.copyWith(
-              color: scheme.onSurface,
-              fontWeight: FontWeight.w500,
-            ),
           ),
         ),
       ),

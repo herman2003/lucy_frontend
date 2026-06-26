@@ -936,6 +936,42 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String learningReminderFlashcardsTitle(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count cards to review today',
+      one: '$count card to review today',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String learningReminderFlashcardsMessage(String sessionTitle) {
+    return 'Pick up your $sessionTitle session.';
+  }
+
+  @override
+  String learningReminderWeakQuizTitle(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count missed questions',
+      one: '$count missed question',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String learningReminderWeakQuizMessage(
+    String sessionTitle,
+    int correct,
+    int total,
+  ) {
+    return 'Last score on $sessionTitle: $correct/$total.';
+  }
+
+  @override
   String get quizComingSoon => 'Quiz generation is coming soon.';
 
   @override

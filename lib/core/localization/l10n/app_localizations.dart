@@ -1750,6 +1750,34 @@ abstract class AppLocalizations {
   /// **'{correct}/{total} · {date}'**
   String quizLibraryLastAttemptMeta(int correct, int total, String date);
 
+  /// No description provided for @learningReminderFlashcardsTitle.
+  ///
+  /// In de, this message translates to:
+  /// **'{count, plural, one{{count} Karte heute zu wiederholen} other{{count} Karten heute zu wiederholen}}'**
+  String learningReminderFlashcardsTitle(int count);
+
+  /// No description provided for @learningReminderFlashcardsMessage.
+  ///
+  /// In de, this message translates to:
+  /// **'Mach weiter mit {sessionTitle}.'**
+  String learningReminderFlashcardsMessage(String sessionTitle);
+
+  /// No description provided for @learningReminderWeakQuizTitle.
+  ///
+  /// In de, this message translates to:
+  /// **'{count, plural, one{{count} falsche Frage} other{{count} falsche Fragen}}'**
+  String learningReminderWeakQuizTitle(int count);
+
+  /// No description provided for @learningReminderWeakQuizMessage.
+  ///
+  /// In de, this message translates to:
+  /// **'Letztes Ergebnis bei {sessionTitle}: {correct}/{total}.'**
+  String learningReminderWeakQuizMessage(
+    String sessionTitle,
+    int correct,
+    int total,
+  );
+
   /// No description provided for @quizComingSoon.
   ///
   /// In de, this message translates to:

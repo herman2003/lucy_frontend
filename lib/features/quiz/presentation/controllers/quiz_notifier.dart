@@ -1,5 +1,6 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
+import '../../../../core/signals/quiz_library_refresh_signal.dart';
 import '../../domain/entities/learning_session_list_item.dart';
 import '../../domain/entities/learning_session_type.dart';
 import '../../domain/entities/quiz_attempt.dart';
@@ -47,6 +48,7 @@ class QuizNotifier extends _$QuizNotifier {
         lastQuizAttempts: lastQuizAttempts,
         errorCode: null,
       );
+      ref.read(quizLibraryRefreshSignalProvider.notifier).notify();
     } catch (error) {
       state = state.copyWith(errorCode: _errorCode(error));
     }
@@ -65,6 +67,7 @@ class QuizNotifier extends _$QuizNotifier {
         lastQuizAttempts: updatedAttempts,
         errorCode: null,
       );
+      ref.read(quizLibraryRefreshSignalProvider.notifier).notify();
       return true;
     } catch (error) {
       state = state.copyWith(errorCode: _errorCode(error));

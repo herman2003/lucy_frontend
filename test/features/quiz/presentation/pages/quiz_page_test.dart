@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
+import 'package:lucy_frontend/core/constants/flashcard_sm2_storage_keys.dart';
 import 'package:lucy_frontend/core/constants/quiz_attempt_storage_keys.dart';
 import 'package:lucy_frontend/core/localization/l10n/app_localizations.dart';
 import 'package:lucy_frontend/core/router/lucy_route_paths.dart';
@@ -181,7 +182,72 @@ void main() {
 
     await pumpQuizPage(tester, viewport: const Size(390, 844));
 
-    expect(find.textContaining('4/5'), findsOneWidget);
+    expect(find.textContaining('Dernier score sur Quiz · test'), findsOneWidget);
+    expect(find.textContaining('4/5'), findsNWidgets(2));
+  });
+
+  testWidgets('shows learning reminder banner for due flashcards', (
+    tester,
+  ) async {
+    const flashSession = LearningSessionListItem(
+      id: 'learn_flash_1',
+      type: LearningSessionType.flashcards,
+      status: LearningSessionStatus.ready,
+      itemCount: 2,
+      title: 'Cartes · entropie',
+      createdAt: '2026-05-29T10:00:00.000Z',
+      updatedAt: '2026-05-29T10:00:00.000Z',
+    );
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString(
+      FlashcardSm2StorageKeys.sessionStates('learn_flash_1'),
+      jsonEncode({
+        'item-1': {
+          'easeFactor': 2.5,
+          'repetitions': 1,
+          'intervalDays': 1,
+          'dueAt': '2026-06-09T00:00:00.000Z',
+        },
+      }),
+    );
+
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [
+          quizServiceProvider.overrideWithValue(
+            QuizService(
+              repository: FakeQuizRepository(
+                eligibility: const QuizEligibility(
+                  canQuiz: false,
+                  activeDocumentCount: 0,
+                ),
+              ),
+            ),
+          ),
+          learningSessionServiceProvider.overrideWithValue(
+            LearningSessionService(
+              repository: FakeLearningSessionRepository()
+                ..setSessions(const [flashSession]),
+            ),
+          ),
+        ],
+        child: MaterialApp.router(
+          theme: LucyFlexTheme.lightTheme,
+          locale: const Locale('fr'),
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
+          routerConfig: GoRouter(
+            routes: [
+              GoRoute(path: '/', builder: (context, state) => const QuizPage()),
+            ],
+          ),
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.textContaining('cartes à revoir'), findsOneWidget);
+    expect(find.textContaining('Reprends ta session'), findsOneWidget);
   });
 
   testWidgets('shows admin card grid on tablet width', (tester) async {

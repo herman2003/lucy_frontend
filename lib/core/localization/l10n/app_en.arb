@@ -348,6 +348,32 @@
       "date": { "type": "String" }
     }
   },
+  "learningReminderFlashcardsTitle": "{count, plural, one{{count} card to review today} other{{count} cards to review today}}",
+  "@learningReminderFlashcardsTitle": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "learningReminderFlashcardsMessage": "Pick up your {sessionTitle} session.",
+  "@learningReminderFlashcardsMessage": {
+    "placeholders": {
+      "sessionTitle": { "type": "String" }
+    }
+  },
+  "learningReminderWeakQuizTitle": "{count, plural, one{{count} missed question} other{{count} missed questions}}",
+  "@learningReminderWeakQuizTitle": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "learningReminderWeakQuizMessage": "Last score on {sessionTitle}: {correct}/{total}.",
+  "@learningReminderWeakQuizMessage": {
+    "placeholders": {
+      "sessionTitle": { "type": "String" },
+      "correct": { "type": "int" },
+      "total": { "type": "int" }
+    }
+  },
   "quizComingSoon": "Quiz generation is coming soon.",
   "quizSessionQuestionCount": "{count, plural, one{{count} question} other{{count} questions}}",
   "@quizSessionQuestionCount": {

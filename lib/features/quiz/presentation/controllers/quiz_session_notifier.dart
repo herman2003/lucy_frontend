@@ -4,6 +4,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../domain/entities/learning_session.dart';
 import '../../domain/exceptions/learning_session_exception.dart';
+import '../../../../core/signals/quiz_library_refresh_signal.dart';
 import '../../domain/providers/learning_session_provider.dart';
 import '../../domain/providers/quiz_attempt_provider.dart';
 import 'quiz_session_state.dart';
@@ -95,6 +96,10 @@ class QuizSessionNotifier extends _$QuizSessionNotifier {
       startedAt: startedAt,
       completedAt: DateTime.now().toUtc(),
     );
+    if (!ref.mounted) {
+      return;
+    }
+    ref.read(quizLibraryRefreshSignalProvider.notifier).notify();
   }
 
   String _errorCode(Object error) {

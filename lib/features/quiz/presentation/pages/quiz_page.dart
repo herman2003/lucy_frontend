@@ -18,6 +18,7 @@ import '../../utils/quiz_error_translator.dart';
 import '../controllers/quiz_notifier.dart';
 import '../widgets/quiz_library_generate_actions.dart';
 import '../widgets/quiz_library_empty_state.dart';
+import '../widgets/learning_reminder_banner_section.dart';
 import '../widgets/quiz_no_corpus_banner.dart';
 import '../widgets/quiz_page_header.dart';
 import '../widgets/quiz_session_card.dart';
@@ -198,6 +199,7 @@ class _QuizPageState extends ConsumerState<QuizPage> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 const QuizPageHeader(),
+                const LearningReminderBannerSection(),
                 if (state.canQuiz && state.sessions.isNotEmpty)
                   Padding(
                     padding: const EdgeInsets.fromLTRB(

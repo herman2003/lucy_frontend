@@ -560,6 +560,32 @@
       "date": { "type": "String" }
     }
   },
+  "learningReminderFlashcardsTitle": "{count, plural, one{{count} carte à revoir aujourd'hui} other{{count} cartes à revoir aujourd'hui}}",
+  "@learningReminderFlashcardsTitle": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "learningReminderFlashcardsMessage": "Reprends ta session {sessionTitle}.",
+  "@learningReminderFlashcardsMessage": {
+    "placeholders": {
+      "sessionTitle": { "type": "String" }
+    }
+  },
+  "learningReminderWeakQuizTitle": "{count, plural, one{{count} question ratée} other{{count} questions ratées}}",
+  "@learningReminderWeakQuizTitle": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "learningReminderWeakQuizMessage": "Dernier score sur {sessionTitle} : {correct}/{total}.",
+  "@learningReminderWeakQuizMessage": {
+    "placeholders": {
+      "sessionTitle": { "type": "String" },
+      "correct": { "type": "int" },
+      "total": { "type": "int" }
+    }
+  },
   "quizComingSoon": "La génération de quiz arrive bientôt.",
   "quizSessionQuestionCount": "{count, plural, one{{count} question} other{{count} questions}}",
   "@quizSessionQuestionCount": {

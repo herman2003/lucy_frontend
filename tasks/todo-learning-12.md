@@ -24,7 +24,7 @@
 | Statut | Id | Tâche |
 |--------|-----|--------|
 | [x] | LEARN-12a-1 | `LearningReminderService` (SM-2 dues + dernier quiz) |
-| [ ] | LEARN-12a-2 | Bandeau in-app Quiz (et optionnel Chat) |
+| [x] | LEARN-12a-2 | Bandeau in-app Quiz (et optionnel Chat) |
 | [ ] | LEARN-12a-3 | Page Paramètres rappels (opt-in + créneau) |
 | [ ] | LEARN-12a-4 | Notifications locales `flutter_local_notifications` |
 | [ ] | LEARN-12a-V2 | FCM + rappels calendrier J-N serveur |

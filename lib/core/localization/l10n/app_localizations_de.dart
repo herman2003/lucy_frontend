@@ -948,6 +948,42 @@ class AppLocalizationsDe extends AppLocalizations {
   }
 
   @override
+  String learningReminderFlashcardsTitle(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Karten heute zu wiederholen',
+      one: '$count Karte heute zu wiederholen',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String learningReminderFlashcardsMessage(String sessionTitle) {
+    return 'Mach weiter mit $sessionTitle.';
+  }
+
+  @override
+  String learningReminderWeakQuizTitle(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count falsche Fragen',
+      one: '$count falsche Frage',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String learningReminderWeakQuizMessage(
+    String sessionTitle,
+    int correct,
+    int total,
+  ) {
+    return 'Letztes Ergebnis bei $sessionTitle: $correct/$total.';
+  }
+
+  @override
   String get quizComingSoon => 'Die Quiz-Generierung kommt bald.';
 
   @override

@@ -348,6 +348,32 @@
       "date": { "type": "String" }
     }
   },
+  "learningReminderFlashcardsTitle": "{count, plural, one{{count} Karte heute zu wiederholen} other{{count} Karten heute zu wiederholen}}",
+  "@learningReminderFlashcardsTitle": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "learningReminderFlashcardsMessage": "Mach weiter mit {sessionTitle}.",
+  "@learningReminderFlashcardsMessage": {
+    "placeholders": {
+      "sessionTitle": { "type": "String" }
+    }
+  },
+  "learningReminderWeakQuizTitle": "{count, plural, one{{count} falsche Frage} other{{count} falsche Fragen}}",
+  "@learningReminderWeakQuizTitle": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "learningReminderWeakQuizMessage": "Letztes Ergebnis bei {sessionTitle}: {correct}/{total}.",
+  "@learningReminderWeakQuizMessage": {
+    "placeholders": {
+      "sessionTitle": { "type": "String" },
+      "correct": { "type": "int" },
+      "total": { "type": "int" }
+    }
+  },
   "quizComingSoon": "Die Quiz-Generierung kommt bald.",
   "quizSessionQuestionCount": "{count, plural, one{{count} Frage} other{{count} Fragen}}",
   "@quizSessionQuestionCount": {

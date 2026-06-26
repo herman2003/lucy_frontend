@@ -27,6 +27,34 @@ import 'package:lucy_frontend/core/localization/l10n/app_localizations_fr.dart';
 import 'package:lucy_frontend/features/settings/presentation/pages/settings_reminders_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+class _FailingNotificationClient implements LearningReminderNotificationClient {
+  @override
+  Future<void> cancelDailyReminder() async {
+    throw StateError('notifications unavailable');
+  }
+
+  @override
+  Future<void> initialize() async {
+    throw StateError('notifications unavailable');
+  }
+
+  @override
+  Future<bool> requestPermissions() async {
+    throw StateError('notifications unavailable');
+  }
+
+  @override
+  Future<void> scheduleDailyReminder({
+    required String title,
+    required String body,
+    required int hour,
+    required int minute,
+    required String sessionId,
+  }) async {
+    throw StateError('notifications unavailable');
+  }
+}
+
 class _NoopRevisionReminderPushSyncService
     extends RevisionReminderPushSyncService {
   _NoopRevisionReminderPushSyncService()
@@ -166,5 +194,60 @@ void main() {
     expect(find.text('Plan de révision (J-N)'), findsOneWidget);
     expect(find.text('Quiz et points faibles'), findsOneWidget);
     expect(find.textContaining('18:'), findsOneWidget);
+  });
+
+  testWidgets('does not show save error when notification sync fails', (
+    tester,
+  ) async {
+    final prefs = await SharedPreferences.getInstance();
+    final prefsService = LearningReminderPrefsService(
+      dataSource: LearningReminderPrefsDataSource(Future.value(prefs)),
+    );
+    final notificationService = LearningReminderNotificationService(
+      client: _FailingNotificationClient(),
+      prefsService: prefsService,
+      learningSessionService: LearningSessionService(
+        repository: _EmptyLearningSessionRepository(),
+      ),
+      reminderService: LearningReminderService(
+        flashcardSm2Service: FlashcardSm2Service(
+          dataSource: FlashcardSm2PrefsDataSource(Future.value(prefs)),
+        ),
+        quizAttemptService: QuizAttemptService(
+          dataSource: QuizAttemptPrefsDataSource(Future.value(prefs)),
+        ),
+      ),
+      resolveLocalizations: (_) => AppLocalizationsFr(),
+    );
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [
+          learningReminderPrefsServiceProvider.overrideWithValue(prefsService),
+          learningReminderNotificationServiceProvider.overrideWithValue(
+            notificationService,
+          ),
+          revisionReminderPushSyncServiceProvider.overrideWithValue(
+            _NoopRevisionReminderPushSyncService(),
+          ),
+        ],
+        child: MaterialApp(
+          theme: LucyFlexTheme.lightTheme,
+          locale: const Locale('fr'),
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
+          home: const SettingsRemindersPage(),
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.byType(Switch));
+    await tester.pumpAndSettle();
+
+    expect(
+      find.text('Impossible d\'enregistrer les préférences de rappel.'),
+      findsNothing,
+    );
+    expect(find.text('Heure du rappel'), findsOneWidget);
   });
 }

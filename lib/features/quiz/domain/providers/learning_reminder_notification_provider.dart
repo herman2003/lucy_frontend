@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -6,6 +7,7 @@ import '../../../../core/localization/lucy_app_locale_provider.dart';
 import '../../../../core/signals/quiz_library_refresh_signal.dart';
 import '../../data/clients/flutter_local_learning_reminder_notification_client.dart';
 import '../../data/clients/learning_reminder_notification_client.dart';
+import '../../data/clients/noop_learning_reminder_notification_client.dart';
 import '../../services/learning_reminder_notification_service.dart';
 import 'learning_reminder_prefs_provider.dart';
 import 'learning_reminder_provider.dart';
@@ -15,6 +17,9 @@ part 'learning_reminder_notification_provider.g.dart';
 
 @Riverpod(keepAlive: true)
 LearningReminderNotificationClient learningReminderNotificationClient(Ref ref) {
+  if (kIsWeb) {
+    return const NoopLearningReminderNotificationClient();
+  }
   return FlutterLocalLearningReminderNotificationClient();
 }
 

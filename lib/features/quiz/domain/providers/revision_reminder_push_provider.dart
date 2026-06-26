@@ -1,6 +1,6 @@
-import 'package:flutter_timezone/flutter_timezone.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
+import '../../../../core/utils/device_timezone_reader.dart';
 import '../../../onboarding/data/providers/onboarding_data_provider.dart';
 import '../../data/clients/firebase_messaging_fcm_token_client.dart';
 import '../../data/clients/fcm_token_client.dart';
@@ -28,9 +28,6 @@ RevisionReminderPushSyncService revisionReminderPushSyncService(Ref ref) {
   return RevisionReminderPushSyncService(
     remotePort: ref.watch(revisionReminderPushApiRemoteDataSourceProvider),
     fcmTokenClient: ref.watch(fcmTokenClientProvider),
-    readTimezone: () async {
-      final info = await FlutterTimezone.getLocalTimezone();
-      return info.identifier;
-    },
+    readTimezone: readDeviceTimezoneIdentifier,
   );
 }

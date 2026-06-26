@@ -20,18 +20,25 @@ class LearningReminderPrefsNotifier extends _$LearningReminderPrefsNotifier {
     state = AsyncData(prefs);
     try {
       await ref.read(learningReminderPrefsServiceProvider).save(prefs);
-      await ref
-          .read(learningReminderNotificationServiceProvider)
-          .sync(languageCode: ref.read(lucyAppLocaleProvider).languageCode);
-      await ref
-          .read(revisionReminderPushSyncServiceProvider)
-          .sync(prefs: prefs)
-          .catchError((_) {});
-      return true;
     } catch (_) {
       state = AsyncData(previous);
       return false;
     }
+
+    await _syncSideEffects(prefs);
+    return true;
+  }
+
+  Future<void> _syncSideEffects(LearningReminderPrefs prefs) async {
+    try {
+      await ref
+          .read(learningReminderNotificationServiceProvider)
+          .sync(languageCode: ref.read(lucyAppLocaleProvider).languageCode);
+    } catch (_) {}
+
+    try {
+      await ref.read(revisionReminderPushSyncServiceProvider).sync(prefs: prefs);
+    } catch (_) {}
   }
 
   Future<bool> setEnabled(bool enabled) async {

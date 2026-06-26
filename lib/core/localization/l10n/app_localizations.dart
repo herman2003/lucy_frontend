@@ -1828,6 +1828,30 @@ abstract class AppLocalizations {
   /// **'Punkte: {correct} / {total}'**
   String quizSessionScore(int correct, int total);
 
+  /// No description provided for @quizSessionWeakPointsTitle.
+  ///
+  /// In de, this message translates to:
+  /// **'Schwächen gezielt üben'**
+  String get quizSessionWeakPointsTitle;
+
+  /// No description provided for @quizSessionWeakPointsHint.
+  ///
+  /// In de, this message translates to:
+  /// **'Lucy kann Karten zu deinen Fehlern vorbereiten.'**
+  String get quizSessionWeakPointsHint;
+
+  /// No description provided for @quizSessionWeakPointsCta.
+  ///
+  /// In de, this message translates to:
+  /// **'Karten zu meinen Fehlern'**
+  String get quizSessionWeakPointsCta;
+
+  /// No description provided for @quizSessionWeakPointsFlashcardsMessage.
+  ///
+  /// In de, this message translates to:
+  /// **'Erstelle Karten zu meinen Quiz-Fehlern: {topics}'**
+  String quizSessionWeakPointsFlashcardsMessage(String topics);
+
   /// No description provided for @quizNoCorpusTitle.
   ///
   /// In de, this message translates to:

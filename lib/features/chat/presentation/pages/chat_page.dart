@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/constants/lucy_spacing.dart';
 import '../../../../core/router/app_router.dart';
 import '../../../../core/router/lucy_route_paths.dart';
+import '../../../../core/signals/pending_chat_outbound_message_holder.dart';
 import '../../../../core/signals/chat_refresh_signal.dart';
 import '../../../../core/extensions/context.dart';
 import '../../../../core/localization/l10n/app_localizations.dart';
@@ -20,6 +21,7 @@ import '../controllers/chat_conversation_state.dart';
 import '../controllers/chat_threads_notifier.dart';
 import '../controllers/chat_threads_state.dart';
 import '../utils/chat_conversation_status_resolver.dart';
+import '../utils/chat_pending_outbound_dispatcher.dart';
 import '../widgets/chat_composer.dart';
 import '../widgets/chat_conversation_empty_state.dart';
 import '../widgets/chat_conversation_header.dart';
@@ -431,6 +433,14 @@ class _ConversationPanel extends ConsumerWidget {
     }
 
     final conversation = ref.watch(chatConversationProvider(chatId!));
+
+    ref.listen(pendingChatOutboundMessageHolderProvider, (_, __) {
+      dispatchPendingChatOutboundMessage(ref, chatId!);
+    });
+    ref.listen(chatConversationProvider(chatId!), (_, __) {
+      dispatchPendingChatOutboundMessage(ref, chatId!);
+    });
+
     final status = ChatConversationStatusResolver.resolve(
       conversation: conversation,
       isOffline: isOffline,

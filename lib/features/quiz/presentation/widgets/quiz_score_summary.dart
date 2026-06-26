@@ -11,11 +11,13 @@ class QuizScoreSummary extends StatelessWidget {
     required this.state,
     required this.onClose,
     required this.onRetry,
+    this.onReviewWeakPoints,
   });
 
   final QuizSessionState state;
   final VoidCallback onClose;
   final VoidCallback onRetry;
+  final VoidCallback? onReviewWeakPoints;
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +26,8 @@ class QuizScoreSummary extends StatelessWidget {
     final lucy = context.lucyTheme;
     final total = state.totalQuestions;
     final correct = state.score;
+    final showWeakPointsCta =
+        state.hasIncorrectAnswers && onReviewWeakPoints != null;
 
     return Padding(
       padding: const EdgeInsets.all(LucySpacing.spaceXl),
@@ -54,6 +58,46 @@ class QuizScoreSummary extends StatelessWidget {
                 textAlign: TextAlign.center,
                 style: context.textTheme.bodyLarge?.copyWith(color: lucy.muted),
               ),
+              if (showWeakPointsCta) ...[
+                const SizedBox(height: LucySpacing.spaceXl),
+                DecoratedBox(
+                  decoration: BoxDecoration(
+                    color: lucy.surfaceSecondary,
+                    borderRadius: BorderRadius.circular(LucySpacing.radiusMedium),
+                    border: Border.all(color: lucy.border),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(LucySpacing.spaceLg),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Text(
+                          l10n.quizSessionWeakPointsTitle,
+                          textAlign: TextAlign.center,
+                          style: context.textTheme.titleSmall?.copyWith(
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                        const SizedBox(height: LucySpacing.spaceSm),
+                        Text(
+                          l10n.quizSessionWeakPointsHint,
+                          textAlign: TextAlign.center,
+                          style: context.textTheme.bodyMedium?.copyWith(
+                            color: lucy.muted,
+                            height: 1.4,
+                          ),
+                        ),
+                        const SizedBox(height: LucySpacing.spaceMd),
+                        _ScoreActionButton(
+                          label: l10n.quizSessionWeakPointsCta,
+                          outlined: false,
+                          onPressed: onReviewWeakPoints!,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
               const SizedBox(height: LucySpacing.spaceXl),
               Row(
                 children: [

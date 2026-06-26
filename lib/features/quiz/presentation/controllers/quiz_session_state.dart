@@ -1,6 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../domain/entities/learning_session.dart';
+import '../../domain/entities/learning_session_item.dart';
 
 part 'quiz_session_state.freezed.dart';
 
@@ -34,5 +35,27 @@ abstract class QuizSessionState with _$QuizSessionState {
       }
     }
     return correct;
+  }
+
+  List<LearningSessionItem> get incorrectItems {
+    final currentSession = session;
+    if (currentSession == null) {
+      return const [];
+    }
+
+    return [
+      for (final item in currentSession.items)
+        if (_isIncorrect(item)) item,
+    ];
+  }
+
+  bool get hasIncorrectAnswers => incorrectItems.isNotEmpty;
+
+  bool _isIncorrect(LearningSessionItem item) {
+    final selected = selectedAnswers[item.id];
+    if (selected == null) {
+      return false;
+    }
+    return selected != item.correctIndex;
   }
 }

@@ -609,6 +609,15 @@
       "total": {"type": "int"}
     }
   },
+  "quizSessionWeakPointsTitle": "Renforce tes points faibles",
+  "quizSessionWeakPointsHint": "Lucy peut te préparer des cartes sur les questions où tu t'es trompé.",
+  "quizSessionWeakPointsCta": "Cartes sur mes erreurs",
+  "quizSessionWeakPointsFlashcardsMessage": "Fais-moi des cartes sur mes erreurs au quiz : {topics}",
+  "@quizSessionWeakPointsFlashcardsMessage": {
+    "placeholders": {
+      "topics": {"type": "String"}
+    }
+  },
   "quizNoCorpusTitle": "Aucun document actif",
   "quizNoCorpusMessage": "Activez la recherche sur au moins un document prêt pour générer un quiz.",
   "quizNoCorpusCta": "Aller aux documents",

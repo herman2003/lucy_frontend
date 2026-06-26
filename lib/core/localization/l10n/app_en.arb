@@ -397,6 +397,15 @@
       "total": {"type": "int"}
     }
   },
+  "quizSessionWeakPointsTitle": "Strengthen your weak points",
+  "quizSessionWeakPointsHint": "Lucy can prepare flashcards on the questions you missed.",
+  "quizSessionWeakPointsCta": "Flashcards on my mistakes",
+  "quizSessionWeakPointsFlashcardsMessage": "Make flashcards on the quiz questions I got wrong: {topics}",
+  "@quizSessionWeakPointsFlashcardsMessage": {
+    "placeholders": {
+      "topics": {"type": "String"}
+    }
+  },
   "quizNoCorpusTitle": "No active documents",
   "quizNoCorpusMessage": "Enable search on at least one ready document to generate a quiz.",
   "quizNoCorpusCta": "Go to documents",

@@ -12,6 +12,7 @@ import '../../domain/entities/learning_session_source.dart';
 import '../../utils/learning_session_error_translator.dart';
 import '../controllers/quiz_session_notifier.dart';
 import '../controllers/quiz_session_state.dart';
+import '../utils/quiz_weak_points_navigation.dart';
 import '../widgets/learning_session_item_sources.dart';
 import '../widgets/quiz_choice_tile.dart';
 import '../widgets/quiz_progress_header.dart';
@@ -93,6 +94,13 @@ class _QuizSessionPageState extends ConsumerState<QuizSessionPage> {
                   state: state,
                   onClose: () => Navigator.of(context).pop(),
                   onRetry: notifier.restart,
+                  onReviewWeakPoints: state.hasIncorrectAnswers
+                      ? () => openQuizWeakPointsInChat(
+                          context: context,
+                          ref: ref,
+                          state: state,
+                        )
+                      : null,
                 ),
               ),
             )

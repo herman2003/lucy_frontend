@@ -397,6 +397,15 @@
       "total": {"type": "int"}
     }
   },
+  "quizSessionWeakPointsTitle": "Schwächen gezielt üben",
+  "quizSessionWeakPointsHint": "Lucy kann Karten zu deinen Fehlern vorbereiten.",
+  "quizSessionWeakPointsCta": "Karten zu meinen Fehlern",
+  "quizSessionWeakPointsFlashcardsMessage": "Erstelle Karten zu meinen Quiz-Fehlern: {topics}",
+  "@quizSessionWeakPointsFlashcardsMessage": {
+    "placeholders": {
+      "topics": {"type": "String"}
+    }
+  },
   "quizNoCorpusTitle": "Keine aktiven Dokumente",
   "quizNoCorpusMessage": "Aktivieren Sie die Suche für mindestens ein fertiges Dokument, um ein Quiz zu erstellen.",
   "quizNoCorpusCta": "Zu den Dokumenten",

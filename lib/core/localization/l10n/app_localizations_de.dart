@@ -1013,6 +1013,21 @@ class AppLocalizationsDe extends AppLocalizations {
   }
 
   @override
+  String get quizSessionWeakPointsTitle => 'Schwächen gezielt üben';
+
+  @override
+  String get quizSessionWeakPointsHint =>
+      'Lucy kann Karten zu deinen Fehlern vorbereiten.';
+
+  @override
+  String get quizSessionWeakPointsCta => 'Karten zu meinen Fehlern';
+
+  @override
+  String quizSessionWeakPointsFlashcardsMessage(String topics) {
+    return 'Erstelle Karten zu meinen Quiz-Fehlern: $topics';
+  }
+
+  @override
   String get quizNoCorpusTitle => 'Keine aktiven Dokumente';
 
   @override

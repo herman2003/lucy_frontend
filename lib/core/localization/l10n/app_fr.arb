@@ -515,6 +515,8 @@
   "chatQuickChipMostImportantMessage": "les plus importantes",
   "chatQuickChipAsYouLike": "Comme tu veux",
   "chatQuickChipAsYouLikeMessage": "comme tu veux",
+  "chatQuickChipExportRevisionCalendar": "Exporter le calendrier",
+  "chatRevisionCalendarExportFailed": "Impossible d'exporter le calendrier J-N.",
   "chatComposerHint": "Posez une question sur vos documents actifs…",
   "chatSend": "Envoyer",
   "chatRetry": "Réessayer",

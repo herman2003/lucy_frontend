@@ -850,6 +850,13 @@ class AppLocalizationsDe extends AppLocalizations {
   String get chatQuickChipAsYouLikeMessage => 'wie du willst';
 
   @override
+  String get chatQuickChipExportRevisionCalendar => 'Kalender exportieren';
+
+  @override
+  String get chatRevisionCalendarExportFailed =>
+      'Der J-N-Lernkalender konnte nicht exportiert werden.';
+
+  @override
   String get chatComposerHint =>
       'Stellen Sie eine Frage zu Ihren aktiven Dokumenten…';
 

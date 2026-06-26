@@ -24,10 +24,23 @@ List<ChatQuickChip> resolveChatQuickChips({
     return [_asYouLikeChip(l10n)];
   }
   if (_matchesRevisionPlanFollowUp(normalized)) {
-    return _revisionFollowUpChips(l10n);
+    return _revisionFollowUpChips(l10n, includeCalendarExport: _matchesRevisionCalendar(normalized));
+  }
+  if (_matchesRevisionCalendar(normalized)) {
+    return [
+      ChatQuickChip.exportRevisionCalendar(
+        label: l10n.chatQuickChipExportRevisionCalendar,
+      ),
+    ];
   }
 
   return _defaultChips(l10n);
+}
+
+bool _matchesRevisionCalendar(String content) {
+  return content.contains('## calendrier j-n') ||
+      content.contains('## j-n revision calendar') ||
+      content.contains('## j-n-lernkalender');
 }
 
 bool _matchesTypeConfirm(String content) {
@@ -86,16 +99,29 @@ List<ChatQuickChip> _defaultChips(AppLocalizations l10n) => [
   ),
 ];
 
-List<ChatQuickChip> _revisionFollowUpChips(AppLocalizations l10n) => [
-  ChatQuickChip(
-    label: l10n.chatSuggestionQuiz,
-    message: l10n.chatSuggestionQuiz,
-  ),
-  ChatQuickChip(
-    label: l10n.chatSuggestionFlashcards,
-    message: l10n.chatSuggestionFlashcards,
-  ),
-];
+List<ChatQuickChip> _revisionFollowUpChips(
+  AppLocalizations l10n, {
+  bool includeCalendarExport = false,
+}) {
+  final chips = <ChatQuickChip>[
+    ChatQuickChip(
+      label: l10n.chatSuggestionQuiz,
+      message: l10n.chatSuggestionQuiz,
+    ),
+    ChatQuickChip(
+      label: l10n.chatSuggestionFlashcards,
+      message: l10n.chatSuggestionFlashcards,
+    ),
+  ];
+  if (includeCalendarExport) {
+    chips.add(
+      ChatQuickChip.exportRevisionCalendar(
+        label: l10n.chatQuickChipExportRevisionCalendar,
+      ),
+    );
+  }
+  return chips;
+}
 
 List<ChatQuickChip> _yesCancelChips(AppLocalizations l10n) => [
   ChatQuickChip(

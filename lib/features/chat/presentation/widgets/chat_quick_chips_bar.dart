@@ -14,7 +14,7 @@ class ChatQuickChipsBar extends StatelessWidget {
   });
 
   final List<ChatQuickChip> chips;
-  final ValueChanged<String> onChipSelected;
+  final ValueChanged<ChatQuickChip> onChipSelected;
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +36,7 @@ class ChatQuickChipsBar extends StatelessWidget {
             if (index > 0) const SizedBox(width: LucySpacing.spaceSm),
             ChatQuickChipButton(
               label: chips[index].label,
-              onTap: () => onChipSelected(chips[index].message),
+              onTap: () => onChipSelected(chips[index]),
             ),
           ],
         ],

@@ -28,6 +28,7 @@
 | [x] | LEARN-12a-3 | Page Paramètres rappels (opt-in + créneau) |
 | [x] | LEARN-12a-4 | Notifications locales `flutter_local_notifications` |
 | [x] | LEARN-12a-V2 | FCM + rappels calendrier J-N serveur |
+| [x] | LEARN-12a-V3 | Export calendrier `.ics` depuis plan J-N |
 
 ---
 

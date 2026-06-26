@@ -1,6 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:lucy_frontend/core/localization/l10n/app_localizations_fr.dart';
 import 'package:lucy_frontend/features/chat/presentation/utils/chat_quick_chips_resolver.dart';
+import 'package:lucy_frontend/features/chat/domain/entities/chat_quick_chip.dart';
 
 void main() {
   final l10n = AppLocalizationsFr();
@@ -60,6 +61,22 @@ void main() {
       );
 
       expect(chips.map((c) => c.message), [l10n.chatQuickChipYesMessage, l10n.chatQuickChipCancelMessage]);
+    });
+
+    test('adds export calendar chip when J-N calendar is present', () {
+      final chips = resolveChatQuickChips(
+        l10n: l10n,
+        lastAssistantMessageContent:
+            '## Calendrier J-N\n**J-3** — Entropie\n\nProchaines étapes : quiz ou cartes.',
+      );
+
+      expect(
+        chips.any(
+          (chip) => chip.kind == ChatQuickChipKind.exportRevisionCalendar,
+        ),
+        isTrue,
+      );
+      expect(chips.last.label, l10n.chatQuickChipExportRevisionCalendar);
     });
   });
 }

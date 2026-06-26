@@ -43,6 +43,9 @@ abstract final class ApiEndpoints {
 
   static String chatMessages(String chatId) => '${chat(chatId)}/messages';
 
+  static String chatRevisionCalendarIcs(String chatId) =>
+      '${chat(chatId)}/revision-calendar.ics';
+
   static String chatMessagesStream(String chatId) =>
       '${chatMessages(chatId)}/stream';
 

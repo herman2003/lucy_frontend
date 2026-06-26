@@ -12,8 +12,8 @@ void main() {
     GoogleFonts.config.allowRuntimeFetching = false;
   });
 
-  testWidgets('sends chip message when tapped', (tester) async {
-    String? sent;
+  testWidgets('sends chip when tapped', (tester) async {
+    ChatQuickChip? selected;
     await tester.pumpWidget(
       MaterialApp(
         theme: LucyFlexTheme.lightTheme,
@@ -22,7 +22,7 @@ void main() {
             chips: const [
               ChatQuickChip(label: 'Quiz', message: 'fais-moi un quiz'),
             ],
-            onChipSelected: (message) => sent = message,
+            onChipSelected: (chip) => selected = chip,
           ),
         ),
       ),
@@ -32,6 +32,6 @@ void main() {
     await tester.tap(find.text('Quiz'));
     await tester.pump();
 
-    expect(sent, 'fais-moi un quiz');
+    expect(selected?.message, 'fais-moi un quiz');
   });
 }

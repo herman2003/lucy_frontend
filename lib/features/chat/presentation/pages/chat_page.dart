@@ -15,6 +15,8 @@ import '../../../../shared/widgets/lucy/lucy_message_bubble.dart';
 import '../../../settings/presentation/controllers/settings_notifier.dart';
 import '../../../settings/utils/settings_full_name_parts.dart';
 import '../../domain/entities/chat_message_role.dart';
+import '../../domain/entities/chat_quick_chip.dart';
+import '../../domain/providers/revision_calendar_export_provider.dart';
 import '../../utils/chat_constants.dart';
 import '../../utils/chat_error_translator.dart';
 import '../controllers/chat_conversation_notifier.dart';
@@ -414,7 +416,10 @@ class _ConversationPanel extends ConsumerWidget {
 
   List<String> _emptyStateSuggestions(AppLocalizations l10n) => resolveChatQuickChips(
     l10n: l10n,
-  ).map((chip) => chip.message).toList();
+  )
+      .where((chip) => chip.kind == ChatQuickChipKind.sendMessage)
+      .map((chip) => chip.message)
+      .toList();
 
   String? _lastAssistantMessageContent(ChatConversationState conversation) {
     for (var index = conversation.messages.length - 1; index >= 0; index--) {
@@ -519,9 +524,25 @@ class _ConversationPanel extends ConsumerWidget {
         if (canSend && conversation.messages.isNotEmpty)
           ChatQuickChipsBar(
             chips: quickChips,
-            onChipSelected: (text) => ref
-                .read(chatConversationProvider(chatId!).notifier)
-                .sendMessage(text),
+            onChipSelected: (chip) {
+              if (chip.kind == ChatQuickChipKind.exportRevisionCalendar) {
+                ref
+                    .read(revisionCalendarExportServiceProvider)
+                    .shareIcs(chatId: chatId!)
+                    .catchError((_) {
+                      if (context.mounted) {
+                        LucySnackBar.showError(
+                          context,
+                          message: l10n.chatRevisionCalendarExportFailed,
+                        );
+                      }
+                    });
+                return;
+              }
+              ref
+                  .read(chatConversationProvider(chatId!).notifier)
+                  .sendMessage(chip.message);
+            },
           ),
         ColoredBox(
           color: lucy.scaffoldBackground,

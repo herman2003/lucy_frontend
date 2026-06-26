@@ -303,6 +303,8 @@
   "chatQuickChipMostImportantMessage": "most important",
   "chatQuickChipAsYouLike": "As you like",
   "chatQuickChipAsYouLikeMessage": "as you like",
+  "chatQuickChipExportRevisionCalendar": "Export calendar",
+  "chatRevisionCalendarExportFailed": "Could not export the J-N revision calendar.",
   "chatComposerHint": "Ask a question about your active documents…",
   "chatSend": "Send",
   "chatRetry": "Retry",

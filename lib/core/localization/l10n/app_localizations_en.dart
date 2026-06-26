@@ -842,6 +842,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get chatQuickChipAsYouLikeMessage => 'as you like';
 
   @override
+  String get chatQuickChipExportRevisionCalendar => 'Export calendar';
+
+  @override
+  String get chatRevisionCalendarExportFailed =>
+      'Could not export the J-N revision calendar.';
+
+  @override
   String get chatComposerHint => 'Ask a question about your active documents…';
 
   @override

@@ -1594,6 +1594,18 @@ abstract class AppLocalizations {
   /// **'wie du willst'**
   String get chatQuickChipAsYouLikeMessage;
 
+  /// No description provided for @chatQuickChipExportRevisionCalendar.
+  ///
+  /// In de, this message translates to:
+  /// **'Kalender exportieren'**
+  String get chatQuickChipExportRevisionCalendar;
+
+  /// No description provided for @chatRevisionCalendarExportFailed.
+  ///
+  /// In de, this message translates to:
+  /// **'Der J-N-Lernkalender konnte nicht exportiert werden.'**
+  String get chatRevisionCalendarExportFailed;
+
   /// No description provided for @chatComposerHint.
   ///
   /// In de, this message translates to:

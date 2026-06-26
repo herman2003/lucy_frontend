@@ -12,7 +12,7 @@ import '../controllers/flashcards_session_notifier.dart';
 import '../controllers/flashcards_session_state.dart';
 import '../widgets/flashcard_widget.dart';
 import '../widgets/learning_session_close_header.dart';
-import '../widgets/learning_session_source_chip.dart';
+import '../widgets/learning_session_item_sources.dart';
 
 class FlashcardsSessionPage extends ConsumerStatefulWidget {
   const FlashcardsSessionPage({
@@ -128,14 +128,7 @@ class _FlashcardsContent extends ConsumerWidget {
         ),
         if (item.sources.isNotEmpty) ...[
           const SizedBox(height: LucySpacing.spaceLg),
-          Wrap(
-            spacing: LucySpacing.spaceSm,
-            runSpacing: LucySpacing.spaceSm,
-            children: [
-              for (final source in item.sources)
-                LearningSessionSourceChip(source: source),
-            ],
-          ),
+          LearningSessionItemSources(sources: item.sources),
         ],
         const SizedBox(height: LucySpacing.spaceLg + 2),
         Row(

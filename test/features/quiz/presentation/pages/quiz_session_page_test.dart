@@ -6,42 +6,38 @@ import 'package:lucy_frontend/core/localization/l10n/app_localizations.dart';
 import 'package:lucy_frontend/core/theme/lucy_flex_theme.dart';
 import 'package:lucy_frontend/features/quiz/domain/entities/learning_session.dart';
 import 'package:lucy_frontend/features/quiz/domain/entities/learning_session_item.dart';
+import 'package:lucy_frontend/features/quiz/domain/entities/learning_session_source.dart';
 import 'package:lucy_frontend/features/quiz/domain/entities/learning_session_status.dart';
 import 'package:lucy_frontend/features/quiz/domain/entities/learning_session_type.dart';
-import 'package:lucy_frontend/features/quiz/domain/entities/learning_session_source.dart';
-import 'package:lucy_frontend/features/quiz/presentation/pages/flashcards_session_page.dart';
-import 'package:lucy_frontend/features/quiz/presentation/widgets/flashcard_widget.dart';
+import 'package:lucy_frontend/features/quiz/presentation/pages/quiz_session_page.dart';
+import 'package:lucy_frontend/features/quiz/presentation/widgets/quiz_choice_tile.dart';
 
-const _flashcardsSession = LearningSession(
-  id: 'learn_flash_1',
-  type: LearningSessionType.flashcards,
+const _quizSession = LearningSession(
+  id: 'learn_quiz_1',
+  type: LearningSessionType.quiz,
   status: LearningSessionStatus.ready,
-  itemCount: 2,
-  title: 'Cartes · thermo',
+  itemCount: 1,
+  title: 'Quiz · thermo',
   createdAt: '2026-05-29T10:00:00.000Z',
   updatedAt: '2026-05-29T10:00:00.000Z',
   activeDocumentCount: 1,
   items: [
     LearningSessionItem(
       id: 'item-1',
-      front: 'Entropie',
-      back: 'Mesure du désordre',
+      question: "Qu'est-ce que l'entropie ?",
+      choices: ['Ordre', 'Désordre', 'Chaleur', 'Pression'],
+      correctIndex: 1,
+      explanation: "L'entropie mesure le désordre.",
       sources: [
         LearningSessionSource(
           chunkId: 'chunk_1',
           documentId: 'doc_1',
           title: 'Thermodynamique',
           excerpt: "L'entropie mesure le désordre.",
-          pageStart: 3,
-          pageEnd: 5,
+          pageStart: 12,
+          pageEnd: 14,
         ),
       ],
-    ),
-    LearningSessionItem(
-      id: 'item-2',
-      front: 'Enthalpie',
-      back: 'Chaleur à pression constante',
-      sources: [],
     ),
   ],
 );
@@ -58,12 +54,12 @@ void main() {
       ProviderScope(
         child: MaterialApp(
           theme: LucyFlexTheme.lightTheme,
-          locale: Locale('fr'),
+          locale: const Locale('fr'),
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
-          home: FlashcardsSessionPage(
-            sessionId: 'learn_flash_1',
-            initialSession: _flashcardsSession,
+          home: QuizSessionPage(
+            sessionId: 'learn_quiz_1',
+            initialSession: _quizSession,
           ),
         ),
       ),
@@ -72,40 +68,20 @@ void main() {
     await tester.pump();
   }
 
-  testWidgets('flips card when tapped', (tester) async {
+  testWidgets('shows source cards after answering a question', (tester) async {
     await pumpPage(tester);
 
-    expect(find.text('Entropie'), findsOneWidget);
+    expect(find.text('Sources'), findsNothing);
 
-    await tester.tap(find.byType(FlashcardWidget));
+    await tester.tap(find.byType(QuizChoiceTile).at(1));
     await tester.pumpAndSettle();
-
-    expect(find.text('Mesure du désordre'), findsOneWidget);
-  });
-
-  testWidgets('shows source cards for the current flashcard', (tester) async {
-    await pumpPage(tester);
 
     expect(find.text('Sources'), findsOneWidget);
     expect(find.text('Thermodynamique'), findsOneWidget);
-    expect(find.text('Pages 3–5'), findsOneWidget);
+    expect(find.text('Pages 12–14'), findsOneWidget);
     expect(
       find.text("« L'entropie mesure le désordre. »"),
       findsOneWidget,
     );
-  });
-
-  testWidgets('navigates to next and previous cards', (tester) async {
-    await pumpPage(tester);
-
-    await tester.tap(find.text('Suivante'));
-    await tester.pumpAndSettle();
-
-    expect(find.text('Enthalpie'), findsOneWidget);
-
-    await tester.tap(find.text('Précédente'));
-    await tester.pumpAndSettle();
-
-    expect(find.text('Entropie'), findsOneWidget);
   });
 }

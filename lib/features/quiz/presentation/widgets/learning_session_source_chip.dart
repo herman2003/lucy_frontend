@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/extensions/context.dart';
+import '../../../../shared/widgets/lucy/lucy_source_card.dart';
 import '../../domain/entities/learning_session_source.dart';
 
+/// Citation card for a learning session item source (spec G8 — chat-style).
 class LearningSessionSourceChip extends StatelessWidget {
   const LearningSessionSourceChip({super.key, required this.source});
 
@@ -10,17 +12,10 @@ class LearningSessionSourceChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final scheme = Theme.of(context).colorScheme;
-    final pagesLabel = _pagesLabel(context);
-
-    return Chip(
-      backgroundColor: scheme.surfaceContainerHighest,
-      label: Text(
-        pagesLabel == null ? source.title : '${source.title} · $pagesLabel',
-        style: Theme.of(
-          context,
-        ).textTheme.labelMedium?.copyWith(color: scheme.onSurfaceVariant),
-      ),
+    return LucySourceCard(
+      title: source.title,
+      excerpt: source.excerpt,
+      pagesLabel: _pagesLabel(context),
     );
   }
 

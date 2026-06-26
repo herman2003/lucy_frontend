@@ -12,7 +12,7 @@ import '../../domain/entities/learning_session_source.dart';
 import '../../utils/learning_session_error_translator.dart';
 import '../controllers/quiz_session_notifier.dart';
 import '../controllers/quiz_session_state.dart';
-import '../widgets/learning_session_source_chip.dart';
+import '../widgets/learning_session_item_sources.dart';
 import '../widgets/quiz_choice_tile.dart';
 import '../widgets/quiz_progress_header.dart';
 import '../widgets/quiz_score_summary.dart';
@@ -282,14 +282,7 @@ class _FeedbackPanel extends StatelessWidget {
           ),
           if (sources.isNotEmpty) ...[
             const SizedBox(height: LucySpacing.spaceMd),
-            Wrap(
-              spacing: LucySpacing.spaceSm,
-              runSpacing: LucySpacing.spaceSm,
-              children: [
-                for (final source in sources)
-                  LearningSessionSourceChip(source: source),
-              ],
-            ),
+            LearningSessionItemSources(sources: sources),
           ],
         ],
       ),

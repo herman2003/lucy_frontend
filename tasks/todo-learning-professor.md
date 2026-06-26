@@ -37,7 +37,7 @@
 | Statut | Id | Tâche |
 |--------|-----|--------|
 | [x] | LEARN-08a | `document.outline[]` à l’ingestion |
-| [ ] | LEARN-08b | Analyzer utilise outline |
+| [x] | LEARN-08b | Analyzer utilise outline |
 
 ---
 
@@ -45,11 +45,11 @@
 
 | Statut | Id | Tâche |
 |--------|-----|--------|
-| [ ] | LEARN-09a | Titres session intelligents |
-| [ ] | LEARN-09b | Erreurs actionnables |
-| [ ] | LEARN-09c | Regénération depuis chat |
-| [ ] | LEARN-09d | Prompts définitions + liens |
-| [ ] | LEARN-09e | UI sources par item |
+| [x] | LEARN-09a | Titres session intelligents |
+| [x] | LEARN-09b | Erreurs actionnables |
+| [x] | LEARN-09c | Regénération depuis chat |
+| [x] | LEARN-09d | Prompts définitions + liens |
+| [x] | LEARN-09e | UI sources par item |
 
 ---
 

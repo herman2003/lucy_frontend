@@ -317,7 +317,7 @@ cd lucy_frontend && dart run build_runner build --delete-conflicting-outputs && 
 | Phase | Livrable |
 |-------|----------|
 | **LEARN-12b** | Persistance tentatives quiz (client MVP, API V2) + dernier score en bibliothèque |
-| **LEARN-12a** | Bandeau in-app + notifs locales opt-in ; FCM plus tard |
+| **LEARN-12a** | Notifs locales opt-in + FCM J-N ; pas de bandeau in-app |
 
 **Hors scope** : streak, appels téléphoniques, régénération LLM à chaque tentative.
 

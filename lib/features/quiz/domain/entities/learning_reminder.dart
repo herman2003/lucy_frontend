@@ -6,7 +6,7 @@ enum LearningReminderKind {
   weakQuiz,
 }
 
-/// One actionable reminder for the quiz library banner.
+/// One actionable reminder for local notifications and label building.
 class LearningReminder {
   const LearningReminder({
     required this.kind,

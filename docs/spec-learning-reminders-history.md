@@ -145,7 +145,6 @@ flowchart TB
     SLOT[Créneau utilisateur]
   end
   subgraph channels [Canaux]
-    INAPP[Bandeau in-app]
     LOCAL[Notif locale]
     FCM[Push FCM - V2]
   end
@@ -154,7 +153,6 @@ flowchart TB
   QUIZ --> PICK
   DRAFT --> PICK
   PICK --> SLOT
-  SLOT --> INAPP
   SLOT --> LOCAL
   SLOT --> FCM
 ```
@@ -184,7 +182,7 @@ Stockage : `SharedPreferences` (clé `learning_reminder_prefs`) — pas de backe
 
 | Phase | Livrable |
 |-------|----------|
-| **12a-MVP** | Bandeau sur onglet Quiz + Chat : « X cartes dues » / « Dernier quiz 3/5 » avec CTA |
+| **12a-MVP** | ~~Bandeau in-app~~ retiré (décision design) — rappels via notifs opt-in |
 | **12a-M1** | `flutter_local_notifications` — planification quotidienne au créneau choisi |
 | **12a-V2** | FCM + job serveur pour J-N multi-appareil |
 | **12a-V3** | Export calendrier `.ics` depuis plan J-N (complément) |
@@ -193,7 +191,7 @@ Stockage : `SharedPreferences` (clé `learning_reminder_prefs`) — pas de backe
 
 ### 4.4 Critères d’acceptation — rappels
 
-- [ ] Sans opt-in → **aucune** notif système ; bandeau in-app seulement si contenu pertinent
+- [ ] Sans opt-in → **aucune** notif système
 - [ ] Opt-in + cartes dues → notif locale au créneau avec nombre exact
 - [ ] Max 1 notif / jour même si plusieurs sources
 - [ ] Désactiver dans Paramètres → annulation des alarmes locales
@@ -221,11 +219,10 @@ lib/features/quiz/
   services/quiz_attempt_service.dart
   services/learning_reminder_service.dart   # agrège SM-2 + attempts + prefs
 lib/features/settings/
-  presentation/pages/settings_reminders_page.dart  # ou section dans hub
-lib/core/signals/learning_reminder_banner_provider.dart
+  presentation/pages/settings_reminders_page.dart
 ```
 
-Flux : `QuizSessionNotifier` → à `isComplete` → `QuizAttemptService.recordAttempt()` → invalide bannière bibliothèque.
+Flux : `QuizSessionNotifier` → à `isComplete` → `QuizAttemptService.recordAttempt()` → sync notifs locales si opt-in.
 
 ---
 
@@ -255,8 +252,8 @@ Index : `completedAt` desc par session.
 |----|--------|-----------|
 | **LEARN-12b-MVP** | Entité + prefs + enregistrement fin de quiz | — |
 | **LEARN-12b-MVP** | Affichage dernier score bibliothèque | 12b-MVP |
-| **LEARN-12a-MVP** | Bandeau in-app (cartes dues + dernier quiz) | 12b-MVP, SM-2 |
-| **LEARN-12a-M1** | Page Paramètres rappels + notifs locales | 12a-MVP |
+| **LEARN-12a-MVP** | ~~Bandeau in-app~~ retiré — `LearningReminderService` pour notifs | 12b-MVP, SM-2 |
+| **LEARN-12a-M1** | Page Paramètres rappels + notifs locales | 12a-MVP (service) |
 | **LEARN-12b-V2** | API POST/GET attempts + sync | 12b-MVP |
 | **LEARN-12a-V2** | FCM + plan J-N serveur | 12a-M1, chat thread metadata |
 

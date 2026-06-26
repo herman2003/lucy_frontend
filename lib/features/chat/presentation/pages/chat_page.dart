@@ -32,7 +32,6 @@ import '../widgets/chat_conversation_header.dart';
 import '../widgets/chat_learning_session_card.dart';
 import '../widgets/chat_message_bubble.dart';
 import '../widgets/chat_no_corpus_banner.dart';
-import '../../../quiz/presentation/widgets/learning_reminder_banner_section.dart';
 import '../widgets/chat_quick_chips_bar.dart';
 import '../widgets/chat_source_card.dart';
 import '../widgets/lucy_conversation_status.dart';
@@ -260,7 +259,6 @@ class _ChatPageState extends ConsumerState<ChatPage> {
                   ),
                 if (!canChat && !threadsState.isLoading)
                   const ChatNoCorpusBanner(),
-                const LearningReminderBannerSection(),
                 Expanded(
                   child: useMasterDetail
                       ? Row(
@@ -414,12 +412,11 @@ class _ConversationPanel extends ConsumerWidget {
   final bool canChat;
   final int? activeDocumentCount;
 
-  List<String> _emptyStateSuggestions(AppLocalizations l10n) => resolveChatQuickChips(
-    l10n: l10n,
-  )
-      .where((chip) => chip.kind == ChatQuickChipKind.sendMessage)
-      .map((chip) => chip.message)
-      .toList();
+  List<String> _emptyStateSuggestions(AppLocalizations l10n) =>
+      resolveChatQuickChips(l10n: l10n)
+          .where((chip) => chip.kind == ChatQuickChipKind.sendMessage)
+          .map((chip) => chip.message)
+          .toList();
 
   String? _lastAssistantMessageContent(ChatConversationState conversation) {
     for (var index = conversation.messages.length - 1; index >= 0; index--) {

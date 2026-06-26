@@ -53,10 +53,7 @@ class FlashcardWidget extends StatelessWidget {
             switchInCurve: Curves.easeInOut,
             switchOutCurve: Curves.easeInOut,
             transitionBuilder: (child, animation) {
-              final rotate = Tween<double>(
-                begin: pi / 2,
-                end: 0,
-              ).animate(
+              final rotate = Tween<double>(begin: pi / 2, end: 0).animate(
                 CurvedAnimation(parent: animation, curve: Curves.easeInOut),
               );
               return AnimatedBuilder(
@@ -77,12 +74,15 @@ class FlashcardWidget extends StatelessWidget {
             child: SizedBox(
               key: ValueKey<bool>(isFlipped),
               width: double.infinity,
-              height: 260,
-              child: Stack(
+              height: LucySpacing.flashcardsCardHeight,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Positioned(
-                    top: LucySpacing.spaceLg,
-                    left: LucySpacing.spaceLg + 2,
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      top: LucySpacing.spaceLg,
+                      left: LucySpacing.spaceLg + 2,
+                    ),
                     child: Text(
                       sideLabel.toUpperCase(),
                       style: context.textTheme.labelSmall?.copyWith(
@@ -92,28 +92,28 @@ class FlashcardWidget extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Center(
-                    child: Padding(
+                  Expanded(
+                    child: SingleChildScrollView(
                       padding: const EdgeInsets.symmetric(
                         horizontal: LucySpacing.spaceXl + 6,
+                        vertical: LucySpacing.spaceMd,
                       ),
                       child: Text(
                         text,
                         textAlign: TextAlign.center,
-                        style: LucyTypography.editorialQuote(
-                          fontSize: 24,
-                          color: scheme.onSurface,
-                        ).copyWith(
-                          fontStyle: FontStyle.normal,
-                          fontWeight: FontWeight.w600,
-                        ),
+                        style:
+                            LucyTypography.editorialQuote(
+                              fontSize: 24,
+                              color: scheme.onSurface,
+                            ).copyWith(
+                              fontStyle: FontStyle.normal,
+                              fontWeight: FontWeight.w600,
+                            ),
                       ),
                     ),
                   ),
-                  Positioned(
-                    bottom: LucySpacing.spaceLg,
-                    left: 0,
-                    right: 0,
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: LucySpacing.spaceLg),
                     child: Text(
                       l10n.flashcardsSessionTapToFlip,
                       textAlign: TextAlign.center,

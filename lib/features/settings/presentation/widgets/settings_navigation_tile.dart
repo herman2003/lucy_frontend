@@ -72,11 +72,7 @@ class SettingsNavigationTile extends StatelessWidget {
                 const SizedBox(width: LucySpacing.spaceSm),
               ],
               if (showChevron)
-                Icon(
-                  Icons.chevron_right,
-                  color: lucy.muted,
-                  size: 20,
-                ),
+                Icon(Icons.chevron_right, color: lucy.muted, size: 20),
             ],
           ),
         ),

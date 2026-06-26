@@ -77,7 +77,7 @@
 | [x] | CHAT-01→10 | Chat P4a |
 | [x] | DOC-01→14 | Documents + RAG |
 | [x] | QUIZ-01 | Eligibility |
-
+    
 ---
 
 *Ce document a été créé avec Cursor (IA). Révisé — UI redesign — 2026-06-10.*

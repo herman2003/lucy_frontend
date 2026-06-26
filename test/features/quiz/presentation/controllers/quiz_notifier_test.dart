@@ -93,4 +93,60 @@ void main() {
     expect(repository.lastDeletedSessionId, 'learn_1');
     expect(container.read(quizProvider).sessions, isEmpty);
   });
+
+  test('refreshSessions reloads library without loading gate', () async {
+    const initialSessions = [
+      LearningSessionListItem(
+        id: 'learn_1',
+        type: LearningSessionType.quiz,
+        status: LearningSessionStatus.ready,
+        itemCount: 5,
+        title: 'Quiz · test',
+        createdAt: '2026-05-29T10:00:00.000Z',
+        updatedAt: '2026-05-29T10:00:00.000Z',
+      ),
+    ];
+    const updatedSessions = [
+      LearningSessionListItem(
+        id: 'learn_2',
+        type: LearningSessionType.flashcards,
+        status: LearningSessionStatus.ready,
+        itemCount: 3,
+        title: 'Cartes · test',
+        createdAt: '2026-05-30T10:00:00.000Z',
+        updatedAt: '2026-05-30T10:00:00.000Z',
+      ),
+      ...initialSessions,
+    ];
+    final repository = FakeLearningSessionRepository()
+      ..setSessions(initialSessions);
+
+    final container = ProviderContainer(
+      overrides: [
+        quizServiceProvider.overrideWithValue(
+          QuizService(
+            repository: FakeQuizRepository(
+              eligibility: const QuizEligibility(
+                canQuiz: true,
+                activeDocumentCount: 1,
+              ),
+            ),
+          ),
+        ),
+        learningSessionServiceProvider.overrideWithValue(
+          LearningSessionService(repository: repository),
+        ),
+      ],
+    );
+    addTearDown(container.dispose);
+
+    final notifier = container.read(quizProvider.notifier);
+    await notifier.bootstrap();
+    repository.setSessions(updatedSessions);
+
+    await notifier.refreshSessions();
+
+    expect(container.read(quizProvider).sessions, updatedSessions);
+    expect(container.read(quizProvider).isLoading, isFalse);
+  });
 }

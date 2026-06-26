@@ -23,9 +23,7 @@ class LearningSessionCloseHeader extends StatelessWidget {
       children: [
         Text(
           progressLabel,
-          style: context.textTheme.labelMedium?.copyWith(
-            color: lucy.muted,
-          ),
+          style: context.textTheme.labelMedium?.copyWith(color: lucy.muted),
         ),
         const Spacer(),
         if (onClose != null)

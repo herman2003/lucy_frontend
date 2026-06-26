@@ -134,15 +134,9 @@ class _SettingsProfilePageState extends ConsumerState<SettingsProfilePage> {
               isEnabled: !state.isSaving,
             ),
             const SizedBox(height: LucySpacing.spaceMd),
-            Text(
-              l10n.authEmailLabel,
-              style: context.textTheme.labelLarge,
-            ),
+            Text(l10n.authEmailLabel, style: context.textTheme.labelLarge),
             const SizedBox(height: LucySpacing.spaceXs),
-            Text(
-              state.email,
-              style: context.textTheme.bodyLarge,
-            ),
+            Text(state.email, style: context.textTheme.bodyLarge),
             const SizedBox(height: LucySpacing.spaceXs),
             Text(
               l10n.settingsEmailReadOnly,

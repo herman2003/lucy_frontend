@@ -44,9 +44,7 @@ class QuizSessionCard extends StatelessWidget {
       typeLabel: typeBadge,
       dateLabel: dateLabel,
       ctaLabel: ctaLabel,
-      type: isQuiz
-          ? LucyQuizHubCardType.quiz
-          : LucyQuizHubCardType.flashcards,
+      type: isQuiz ? LucyQuizHubCardType.quiz : LucyQuizHubCardType.flashcards,
       onTap: onTap,
       onDelete: onDelete,
       deleteLabel: onDelete != null ? l10n.quizLibraryDeleteAction : null,

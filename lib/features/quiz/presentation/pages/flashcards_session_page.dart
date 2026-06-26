@@ -144,8 +144,9 @@ class _FlashcardsContent extends ConsumerWidget {
               child: _FlashcardNavButton(
                 label: l10n.flashcardsSessionPrevious,
                 outlined: true,
-                onPressed:
-                    state.canGoPrevious ? notifier.goToPreviousCard : null,
+                onPressed: state.canGoPrevious
+                    ? notifier.goToPreviousCard
+                    : null,
               ),
             ),
             const SizedBox(width: LucySpacing.spaceMd),
@@ -186,7 +187,9 @@ class _FlashcardNavButton extends StatelessWidget {
         borderRadius: BorderRadius.circular(LucySpacing.radiusMedium + 1),
         side: outlined
             ? BorderSide(
-                color: enabled ? lucy.border : lucy.border.withValues(alpha: 0.5),
+                color: enabled
+                    ? lucy.border
+                    : lucy.border.withValues(alpha: 0.5),
                 width: 1.5,
               )
             : BorderSide.none,
@@ -195,7 +198,9 @@ class _FlashcardNavButton extends StatelessWidget {
         onTap: onPressed,
         borderRadius: BorderRadius.circular(LucySpacing.radiusMedium + 1),
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: LucySpacing.spaceMd + 1),
+          padding: const EdgeInsets.symmetric(
+            vertical: LucySpacing.spaceMd + 1,
+          ),
           child: Text(
             label,
             textAlign: TextAlign.center,

@@ -4,6 +4,9 @@ import 'package:go_router/go_router.dart';
 
 import '../constants/responsive_constants.dart';
 import '../extensions/context.dart';
+import '../signals/chat_refresh_signal.dart';
+import '../signals/documents_refresh_signal.dart';
+import '../signals/quiz_library_refresh_signal.dart';
 import '../theme/lucy_theme_extensions.dart';
 import 'lucy_bottom_nav.dart';
 import 'lucy_desktop_sidebar.dart';
@@ -40,6 +43,18 @@ class _LucyAppShellState extends ConsumerState<LucyAppShell> {
     return width < ResponsiveConstants.kTabletBreakpoint;
   }
 
+  void _onShellBranchTap(int index) {
+    widget.navigationShell.goBranch(index);
+    switch (index) {
+      case LucyShellNavigation.branchDocuments:
+        ref.read(documentsRefreshSignalProvider.notifier).notify();
+      case LucyShellNavigation.branchChat:
+        ref.read(chatRefreshSignalProvider.notifier).notify();
+      case LucyShellNavigation.branchQuiz:
+        ref.read(quizLibraryRefreshSignalProvider.notifier).notify();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final lucyTheme = context.lucyTheme;
@@ -60,7 +75,7 @@ class _LucyAppShellState extends ConsumerState<LucyAppShell> {
             body: widget.navigationShell,
             bottomNavigationBar: LucyBottomNav(
               activeIndex: activeIndex,
-              onTap: widget.navigationShell.goBranch,
+              onTap: _onShellBranchTap,
             ),
           );
         }
@@ -89,6 +104,7 @@ class _LucyAppShellState extends ConsumerState<LucyAppShell> {
                 LucyDesktopSidebar(
                   navigationShell: widget.navigationShell,
                   currentPath: path,
+                  onBranchTap: _onShellBranchTap,
                 ),
               Expanded(child: widget.navigationShell),
             ],

@@ -6,11 +6,7 @@ import '../../../../core/extensions/context.dart';
 
 /// Full-width destructive outline button for sign-out.
 class SettingsLogoutButton extends StatelessWidget {
-  const SettingsLogoutButton({
-    super.key,
-    required this.label,
-    this.onPressed,
-  });
+  const SettingsLogoutButton({super.key, required this.label, this.onPressed});
 
   final String label;
   final VoidCallback? onPressed;
@@ -33,9 +29,7 @@ class SettingsLogoutButton extends StatelessWidget {
                 LucyConstants.kButtonBorderRadius,
               ),
             ),
-            padding: const EdgeInsets.symmetric(
-              vertical: LucySpacing.spaceMd,
-            ),
+            padding: const EdgeInsets.symmetric(vertical: LucySpacing.spaceMd),
           ),
           child: Text(
             label,

@@ -30,10 +30,7 @@ class QuizPageHeader extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                l10n.quizPageTitle,
-                style: context.textTheme.headlineLarge,
-              ),
+              Text(l10n.quizPageTitle, style: context.textTheme.headlineLarge),
               const SizedBox(height: 3),
               Text(
                 l10n.quizPageSubtitle,

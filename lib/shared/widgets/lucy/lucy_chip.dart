@@ -23,7 +23,10 @@ class LucyChip extends StatelessWidget {
     final lucy = context.lucyTheme;
     final (background, foreground) = switch (variant) {
       LucyChipVariant.neutral => (lucy.chipBackground, lucy.chipForeground),
-      LucyChipVariant.teal => (lucy.tealChipBackground, lucy.tealChipForeground),
+      LucyChipVariant.teal => (
+        lucy.tealChipBackground,
+        lucy.tealChipForeground,
+      ),
       LucyChipVariant.warm => (
         lucy.motivantAccentSurface,
         LucyColors.warmChipForeground,

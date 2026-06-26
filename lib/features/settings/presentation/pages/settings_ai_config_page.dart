@@ -57,7 +57,9 @@ class _SettingsAiConfigPageState extends ConsumerState<SettingsAiConfigPage> {
             SettingsLearnerProfileSections(profile: profile)
           else if (!state.isLoading)
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: LucySpacing.spaceLg),
+              padding: const EdgeInsets.symmetric(
+                horizontal: LucySpacing.spaceLg,
+              ),
               child: Text(
                 l10n.settingsLearnerProfileUnavailable,
                 style: context.textTheme.bodyMedium?.copyWith(

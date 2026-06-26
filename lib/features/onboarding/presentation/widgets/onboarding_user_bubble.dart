@@ -22,7 +22,7 @@ class OnboardingUserBubble extends StatelessWidget {
             constraints: BoxConstraints(
               maxWidth:
                   MediaQuery.sizeOf(context).width *
-                  LucyChatConstants.kMaxBubbleWidthFactor,
+                  LucyChatConstants.kUserMaxBubbleWidthFactor,
             ),
             padding: const EdgeInsets.symmetric(
               horizontal: LucyConstants.kSpacingMedium,
@@ -42,7 +42,7 @@ class OnboardingUserBubble extends StatelessWidget {
         ),
         const SizedBox(width: LucyConstants.kSpacingLow),
         CircleAvatar(
-          radius: LucyChatConstants.kAvatarSize / 2,
+          radius: LucyChatConstants.kLucyAvatarSize / 2,
           backgroundColor: scheme.primary,
           child: Icon(
             Icons.person_outline,

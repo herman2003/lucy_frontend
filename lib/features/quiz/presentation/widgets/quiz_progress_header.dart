@@ -30,9 +30,7 @@ class QuizProgressHeader extends StatelessWidget {
           children: [
             Text(
               l10n.quizSessionProgress(current, total),
-              style: context.textTheme.labelMedium?.copyWith(
-                color: lucy.muted,
-              ),
+              style: context.textTheme.labelMedium?.copyWith(color: lucy.muted),
             ),
             const Spacer(),
             if (onClose != null)

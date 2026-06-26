@@ -52,9 +52,7 @@ class QuizScoreSummary extends StatelessWidget {
               Text(
                 l10n.quizSessionScoreSubtitle(correct, total),
                 textAlign: TextAlign.center,
-                style: context.textTheme.bodyLarge?.copyWith(
-                  color: lucy.muted,
-                ),
+                style: context.textTheme.bodyLarge?.copyWith(color: lucy.muted),
               ),
               const SizedBox(height: LucySpacing.spaceXl),
               Row(

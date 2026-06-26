@@ -19,5 +19,6 @@ abstract final class LucySpacing {
   static const double quizHubCardMaxWidth = 280;
   static const double quizSessionMaxWidth = 580;
   static const double flashcardsSessionMaxWidth = 520;
+  static const double flashcardsCardHeight = 260;
   static const double minTouchTarget = 44;
 }

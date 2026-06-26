@@ -18,8 +18,8 @@ class OnboardingLucyBubble extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
-        const LucyAvatar(size: LucyChatConstants.kAvatarSize),
-        const SizedBox(width: LucyConstants.kSpacingLow),
+        const LucyAvatar(size: LucyChatConstants.kLucyAvatarSize),
+        const SizedBox(width: LucyChatConstants.kAvatarGap),
         Flexible(
           child: Container(
             padding: const EdgeInsets.symmetric(

@@ -22,6 +22,7 @@ class LucyApp extends ConsumerWidget {
     final themeMode = ref.watch(lucyThemeModeProvider);
     return MaterialApp.router(
       title: 'Lucy',
+      debugShowCheckedModeBanner: false,
       theme: lightTheme,
       darkTheme: darkTheme,
       themeMode: themeMode,

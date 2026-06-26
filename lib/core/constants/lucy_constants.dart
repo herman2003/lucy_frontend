@@ -18,7 +18,8 @@ abstract final class LucyConstants {
   static const double kFlashcardsContentMaxWidth =
       LucySpacing.flashcardsSessionMaxWidth;
   static const double kQuizChoiceMinHeight = 56;
-  static const double kQuizLibraryGridMaxExtent = LucySpacing.quizHubCardMaxWidth;
+  static const double kQuizLibraryGridMaxExtent =
+      LucySpacing.quizHubCardMaxWidth;
   static const double kQuizLibraryGridAspectRatio = 0.86;
   static const double kBorderRadiusLarge = 16;
   static const double kBorderRadiusSmall = 8;

@@ -4,9 +4,11 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../core/constants/lucy_constants.dart';
 import '../../../../core/constants/lucy_spacing.dart';
+import '../../../../core/router/app_router.dart';
+import '../../../../core/router/lucy_route_paths.dart';
+import '../../../../core/signals/quiz_library_refresh_signal.dart';
 import '../../../../core/constants/responsive_constants.dart';
 import '../../../../core/extensions/context.dart';
-import '../../../../core/router/lucy_route_paths.dart';
 import '../../../../core/theme/lucy_theme_extensions.dart';
 import '../../../../shared/widgets/buttons/lucy_tertiary_button.dart';
 import '../../../../shared/widgets/feedback/lucy_snackbar.dart';
@@ -86,7 +88,9 @@ class _QuizPageState extends ConsumerState<QuizPage> {
   }
 
   Widget _buildPhoneList(List<LearningSessionListItem> sessions) {
-    return ListView.builder(
+    return RefreshIndicator(
+      onRefresh: () => ref.read(quizProvider.notifier).refreshSessions(),
+      child: ListView.builder(
       padding: const EdgeInsets.symmetric(
         horizontal: LucySpacing.spaceLg,
         vertical: LucySpacing.spaceXl,
@@ -111,11 +115,14 @@ class _QuizPageState extends ConsumerState<QuizPage> {
           ),
         );
       },
+      ),
     );
   }
 
   Widget _buildTabletGrid(List<LearningSessionListItem> sessions) {
-    return CustomScrollView(
+    return RefreshIndicator(
+      onRefresh: () => ref.read(quizProvider.notifier).refreshSessions(),
+      child: CustomScrollView(
       slivers: [
         SliverPadding(
           padding: const EdgeInsets.fromLTRB(
@@ -142,6 +149,7 @@ class _QuizPageState extends ConsumerState<QuizPage> {
           ),
         ),
       ],
+      ),
     );
   }
 
@@ -149,6 +157,26 @@ class _QuizPageState extends ConsumerState<QuizPage> {
   Widget build(BuildContext context) {
     final state = ref.watch(quizProvider);
     final l10n = context.l10n;
+
+    ref.listen(quizLibraryRefreshSignalProvider, (previous, next) {
+      if (previous != next) {
+        ref.read(quizProvider.notifier).refreshSessions();
+      }
+    });
+
+    ref.listen(
+      lucyRouterProvider.select((router) => router.state.matchedLocation),
+      (previous, next) {
+        if (next != LucyRoutePaths.quiz) {
+          return;
+        }
+        final cameFromSession =
+            previous?.startsWith('${LucyRoutePaths.quiz}/session/') ?? false;
+        if (cameFromSession) {
+          ref.read(quizProvider.notifier).refreshSessions();
+        }
+      },
+    );
 
     ref.listen(quizProvider, (previous, next) {
       if (next.errorCode != null && next.errorCode != previous?.errorCode) {

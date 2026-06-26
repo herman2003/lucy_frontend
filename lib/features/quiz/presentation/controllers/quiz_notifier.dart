@@ -28,6 +28,19 @@ class QuizNotifier extends _$QuizNotifier {
     }
   }
 
+  /// Reloads the session library without the full-screen loading state.
+  Future<void> refreshSessions() async {
+    if (state.isLoading) {
+      return;
+    }
+    try {
+      final sessions = await ref.read(learningSessionServiceProvider).list();
+      state = state.copyWith(sessions: sessions, errorCode: null);
+    } catch (error) {
+      state = state.copyWith(errorCode: _errorCode(error));
+    }
+  }
+
   Future<bool> deleteSession(String sessionId) async {
     try {
       await ref.read(learningSessionServiceProvider).delete(sessionId);

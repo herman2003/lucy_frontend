@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../core/constants/lucy_spacing.dart';
 import '../../../../core/constants/responsive_constants.dart';
+import '../../../../core/signals/documents_refresh_signal.dart';
 import '../../../../core/extensions/context.dart';
 import '../../../../core/theme/lucy_theme_extensions.dart';
 import '../../../../shared/widgets/buttons/lucy_tertiary_button.dart';
@@ -169,6 +170,12 @@ class _DocumentsPageState extends ConsumerState<DocumentsPage> {
 
     _syncProcessingPoll(state);
 
+    ref.listen(documentsRefreshSignalProvider, (previous, next) {
+      if (previous != next) {
+        notifier.refresh(context);
+      }
+    });
+
     return Scaffold(
       backgroundColor: lucy.scaffoldBackground,
       body: RefreshIndicator(
@@ -221,7 +228,9 @@ class _DocumentsPageState extends ConsumerState<DocumentsPage> {
                       child: LucyEmptyState(
                         message: l10n.documentsEmpty,
                         actionLabel: l10n.documentsAdd,
-                        onAction: state.hasBlockingUpload ? null : _openAddSheet,
+                        onAction: state.hasBlockingUpload
+                            ? null
+                            : _openAddSheet,
                       ),
                     )
                   else if (useGrid)
@@ -235,11 +244,11 @@ class _DocumentsPageState extends ConsumerState<DocumentsPage> {
                       sliver: SliverGrid(
                         gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          mainAxisSpacing: LucySpacing.spaceMd,
-                          crossAxisSpacing: LucySpacing.spaceMd,
-                          mainAxisExtent: 188,
-                        ),
+                              crossAxisCount: 2,
+                              mainAxisSpacing: LucySpacing.spaceMd,
+                              crossAxisSpacing: LucySpacing.spaceMd,
+                              mainAxisExtent: 188,
+                            ),
                         delegate: SliverChildBuilderDelegate(
                           (context, index) => _buildDocumentCard(
                             state.documents[index],

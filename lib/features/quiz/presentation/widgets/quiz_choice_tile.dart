@@ -66,10 +66,7 @@ class QuizChoiceTile extends StatelessWidget {
         color: background,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(LucySpacing.radiusMedium + 1),
-          side: BorderSide(
-            color: borderColor,
-            width: 1.5,
-          ),
+          side: BorderSide(color: borderColor, width: 1.5),
         ),
         child: InkWell(
           onTap: onTap,
@@ -142,10 +139,7 @@ class _CircleBadge extends StatelessWidget {
       width: 20,
       height: 20,
       alignment: Alignment.center,
-      decoration: BoxDecoration(
-        color: background,
-        shape: BoxShape.circle,
-      ),
+      decoration: BoxDecoration(color: background, shape: BoxShape.circle),
       child: Text(
         label,
         style: context.textTheme.labelSmall?.copyWith(

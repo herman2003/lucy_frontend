@@ -33,14 +33,14 @@ class LucyQuizHubCard extends StatelessWidget {
   final String? deleteLabel;
 
   String get _typeEmoji => switch (type) {
-        LucyQuizHubCardType.quiz => '🎯',
-        LucyQuizHubCardType.flashcards => '🗂',
-      };
+    LucyQuizHubCardType.quiz => '🎯',
+    LucyQuizHubCardType.flashcards => '🗂',
+  };
 
   LucyChipVariant get _chipVariant => switch (type) {
-        LucyQuizHubCardType.quiz => LucyChipVariant.warm,
-        LucyQuizHubCardType.flashcards => LucyChipVariant.teal,
-      };
+    LucyQuizHubCardType.quiz => LucyChipVariant.warm,
+    LucyQuizHubCardType.flashcards => LucyChipVariant.teal,
+  };
 
   @override
   Widget build(BuildContext context) {
@@ -126,16 +126,10 @@ class LucyQuizHubCard extends StatelessWidget {
               metaLabel,
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
-              style: context.textTheme.bodyMedium?.copyWith(
-                color: lucy.muted,
-              ),
+              style: context.textTheme.bodyMedium?.copyWith(color: lucy.muted),
             ),
             const SizedBox(height: LucySpacing.spaceMd + 1),
-            _HubCta(
-              label: ctaLabel,
-              type: type,
-              onPressed: onTap,
-            ),
+            _HubCta(label: ctaLabel, type: type, onPressed: onTap),
           ],
         ),
       ),
@@ -173,7 +167,9 @@ class _HubCta extends StatelessWidget {
         borderRadius: BorderRadius.circular(LucySpacing.radiusMedium),
         child: Padding(
           padding: EdgeInsets.symmetric(
-            vertical: isQuiz ? LucySpacing.spaceMd - 1 : LucySpacing.spaceMd - 2,
+            vertical: isQuiz
+                ? LucySpacing.spaceMd - 1
+                : LucySpacing.spaceMd - 2,
           ),
           child: Text(
             label,

@@ -169,9 +169,7 @@ class _QuestionView extends ConsumerWidget {
                         onTap: hasAnswered
                             ? null
                             : () => ref
-                                  .read(
-                                    quizSessionProvider(sessionId).notifier,
-                                  )
+                                  .read(quizSessionProvider(sessionId).notifier)
                                   .selectAnswer(item.id, index),
                       ),
                     );
@@ -185,14 +183,16 @@ class _QuestionView extends ConsumerWidget {
                     const SizedBox(height: LucySpacing.spaceLg),
                     Material(
                       color: scheme.primary,
-                      borderRadius:
-                          BorderRadius.circular(LucySpacing.radiusMedium),
+                      borderRadius: BorderRadius.circular(
+                        LucySpacing.radiusMedium,
+                      ),
                       child: InkWell(
                         onTap: () => ref
                             .read(quizSessionProvider(sessionId).notifier)
                             .goToNextQuestion(),
-                        borderRadius:
-                            BorderRadius.circular(LucySpacing.radiusMedium),
+                        borderRadius: BorderRadius.circular(
+                          LucySpacing.radiusMedium,
+                        ),
                         child: Padding(
                           padding: const EdgeInsets.symmetric(
                             vertical: LucySpacing.spaceMd + 1,

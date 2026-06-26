@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/constants/lucy_spacing.dart';
+import '../../../../core/router/app_router.dart';
+import '../../../../core/router/lucy_route_paths.dart';
+import '../../../../core/signals/chat_refresh_signal.dart';
 import '../../../../core/extensions/context.dart';
 import '../../../../core/localization/l10n/app_localizations.dart';
 import '../../../../core/shell/lucy_chat_threads_panel.dart';
@@ -144,6 +147,28 @@ class _ChatPageState extends ConsumerState<ChatPage> {
         );
       }
     });
+
+    ref.listen(chatRefreshSignalProvider, (previous, next) {
+      if (previous != next) {
+        ref
+            .read(chatThreadsProvider.notifier)
+            .refreshThreads(initialChatId: widget.chatId);
+      }
+    });
+
+    ref.listen(
+      lucyRouterProvider.select((router) => router.state.matchedLocation),
+      (previous, next) {
+        if (next != LucyRoutePaths.chat) {
+          return;
+        }
+        final cameFromThread =
+            previous?.startsWith('${LucyRoutePaths.chat}/') ?? false;
+        if (cameFromThread) {
+          ref.read(chatThreadsProvider.notifier).refreshThreads();
+        }
+      },
+    );
 
     if (selectedId != null) {
       ref.listen(chatConversationProvider(selectedId), (previous, next) {

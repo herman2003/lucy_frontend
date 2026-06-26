@@ -95,9 +95,7 @@ class SettingsProfileHeader extends StatelessWidget {
           side: BorderSide(color: lucy.border),
         ),
         clipBehavior: Clip.antiAlias,
-        child: onTap == null
-            ? content
-            : InkWell(onTap: onTap, child: content),
+        child: onTap == null ? content : InkWell(onTap: onTap, child: content),
       ),
     );
   }

@@ -18,10 +18,12 @@ class LucyDesktopSidebar extends ConsumerWidget {
     super.key,
     required this.navigationShell,
     required this.currentPath,
+    required this.onBranchTap,
   });
 
   final StatefulNavigationShell navigationShell;
   final String currentPath;
+  final ValueChanged<int> onBranchTap;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -72,7 +74,7 @@ class LucyDesktopSidebar extends ConsumerWidget {
                   child: _SidebarNavTile(
                     item: item,
                     isActive: isActive,
-                    onTap: () => navigationShell.goBranch(item.branchIndex),
+                    onTap: () => onBranchTap(item.branchIndex),
                   ),
                 );
               },

@@ -1588,6 +1588,18 @@ abstract class AppLocalizations {
   /// **'wichtigsten'**
   String get chatQuickChipMostImportantMessage;
 
+  /// No description provided for @chatQuickChipOtherProposal.
+  ///
+  /// In de, this message translates to:
+  /// **'Andere Vorschläge'**
+  String get chatQuickChipOtherProposal;
+
+  /// No description provided for @chatQuickChipOtherProposalMessage.
+  ///
+  /// In de, this message translates to:
+  /// **'andere Vorschläge'**
+  String get chatQuickChipOtherProposalMessage;
+
   /// No description provided for @chatQuickChipAsYouLike.
   ///
   /// In de, this message translates to:
@@ -1695,6 +1707,12 @@ abstract class AppLocalizations {
   /// In de, this message translates to:
   /// **'Lucy ist vorübergehend nicht verfügbar. Versuchen Sie es später erneut.'**
   String get chatErrorLlmUnavailable;
+
+  /// No description provided for @chatErrorServiceUnavailable.
+  ///
+  /// In de, this message translates to:
+  /// **'Der Dienst ist vorübergehend nicht erreichbar. Überprüfen Sie Ihre Verbindung und versuchen Sie es erneut.'**
+  String get chatErrorServiceUnavailable;
 
   /// No description provided for @chatErrorInvalidResponse.
   ///

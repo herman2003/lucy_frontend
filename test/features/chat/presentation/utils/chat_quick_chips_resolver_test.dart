@@ -46,6 +46,7 @@ void main() {
       expect(chips.map((c) => c.message), [
         l10n.chatQuickChipAllMessage,
         l10n.chatQuickChipMostImportantMessage,
+        l10n.chatQuickChipOtherProposalMessage,
       ]);
     });
 

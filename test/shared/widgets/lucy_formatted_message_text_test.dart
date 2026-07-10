@@ -44,6 +44,29 @@ void main() {
     expect(find.textContaining('Deuxième paragraphe.'), findsOneWidget);
   });
 
+  testWidgets('renders numbered list items on separate blocks', (tester) async {
+    await pumpFormattedText(
+      tester,
+      text:
+          'Voici la liste :\n\n'
+          '1. **Premier point** — *priorité haute* — Raison.\n\n'
+          '2. **Deuxième point** — *priorité moyenne* — Autre raison.',
+    );
+
+    expect(find.textContaining('Premier point'), findsOneWidget);
+    expect(find.textContaining('Deuxième point'), findsOneWidget);
+  });
+
+  testWidgets('renders unordered list items on separate blocks', (tester) async {
+    await pumpFormattedText(
+      tester,
+      text: 'Points clés :\n- Premier élément\n- Deuxième élément',
+    );
+
+    expect(find.textContaining('Premier élément'), findsOneWidget);
+    expect(find.textContaining('Deuxième élément'), findsOneWidget);
+  });
+
   testWidgets('empty text renders nothing', (tester) async {
     await pumpFormattedText(tester, text: '');
 

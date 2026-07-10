@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown_plus/flutter_markdown_plus.dart';
 
+import '../../utils/chat_markdown_normalizer.dart';
+
 /// Renders assistant chat copy as lightweight Markdown (paragraphs, lists, emphasis).
 class LucyFormattedMessageText extends StatelessWidget {
   const LucyFormattedMessageText({
@@ -47,8 +49,10 @@ class LucyFormattedMessageText extends StatelessWidget {
       ),
     );
 
+    final normalizedText = normalizeChatMarkdown(text);
+
     return MarkdownBody(
-      data: text,
+      data: normalizedText,
       styleSheet: styleSheet,
       shrinkWrap: true,
       selectable: true,

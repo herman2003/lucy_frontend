@@ -24,7 +24,10 @@ List<ChatQuickChip> resolveChatQuickChips({
     return [_asYouLikeChip(l10n)];
   }
   if (_matchesRevisionPlanFollowUp(normalized)) {
-    return _revisionFollowUpChips(l10n, includeCalendarExport: _matchesRevisionCalendar(normalized));
+    return _revisionFollowUpChips(
+      l10n,
+      includeCalendarExport: _matchesRevisionCalendar(normalized),
+    );
   }
   if (_matchesRevisionCalendar(normalized)) {
     return [
@@ -142,6 +145,10 @@ List<ChatQuickChip> _focusSelectionChips(AppLocalizations l10n) => [
   ChatQuickChip(
     label: l10n.chatQuickChipMostImportant,
     message: l10n.chatQuickChipMostImportantMessage,
+  ),
+  ChatQuickChip(
+    label: l10n.chatQuickChipOtherProposal,
+    message: l10n.chatQuickChipOtherProposalMessage,
   ),
 ];
 

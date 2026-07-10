@@ -17,6 +17,7 @@ abstract final class ChatErrorTranslator {
       'CHAT_NOT_FOUND' => l10n.chatErrorNotFound,
       'VALIDATION_ERROR' => l10n.chatErrorInvalidMessage,
       'LLM_UNAVAILABLE' => l10n.chatErrorLlmUnavailable,
+      'SERVICE_UNAVAILABLE' => l10n.chatErrorServiceUnavailable,
       'LLM_RESPONSE_INVALID' => l10n.chatErrorInvalidResponse,
       'CHAT_STREAM_IN_PROGRESS' => l10n.chatErrorStreamInProgress,
       'LEARNING_NO_ACTIVE_DOCUMENTS' => l10n.quizNoCorpusMessage,

@@ -840,6 +840,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get chatQuickChipMostImportantMessage => 'most important';
 
   @override
+  String get chatQuickChipOtherProposal => 'Other suggestions';
+
+  @override
+  String get chatQuickChipOtherProposalMessage => 'other suggestions';
+
+  @override
   String get chatQuickChipAsYouLike => 'As you like';
 
   @override
@@ -898,6 +904,10 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get chatErrorLlmUnavailable =>
       'Lucy is temporarily unavailable. Try again later.';
+
+  @override
+  String get chatErrorServiceUnavailable =>
+      'The service is temporarily unreachable. Check your connection and try again.';
 
   @override
   String get chatErrorInvalidResponse => 'Invalid server response. Try again.';

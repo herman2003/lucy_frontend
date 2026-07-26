@@ -114,6 +114,7 @@ flutter analyze
 
 - [SPEC.md](./SPEC.md)
 - [docs/](./docs/) — feature specs and manual checkpoints
+- [docs/pitch/Lucy-Pitch-Deck.pdf](./docs/pitch/Lucy-Pitch-Deck.pdf) — pitch deck (DE, PDF)
 - [tasks/](./tasks/) — implementation plan / todos
 
 ## Related repository

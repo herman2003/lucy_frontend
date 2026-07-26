@@ -1,11 +1,31 @@
-# lucy_frontend
+# Lucy — Frontend (Flutter)
 
-Flutter client for **Lucy** — personalized AI tutoring (phase 1: Firebase email/password authentication).
+[English](./README.md) · [Deutsch](./README.de.md)
+
+**Lucy** is a personalized AI learning assistant: upload study documents, chat with RAG answers, generate quizzes and flashcards, and get revision reminders.
+
+| | |
+|---|---|
+| **Live app (web)** | https://lucy-7504c.web.app |
+| **API (backend)** | https://lucy-api-yo4k.onrender.com |
+| **Backend repo** | https://github.com/herman2003/lucy_backend |
+| **This repo** | https://github.com/herman2003/lucy_frontend |
+
+> Free Render instances sleep after ~15 minutes of inactivity. The first API call after idle can take 30–60 seconds.
+
+## Stack
+
+- **Flutter** (iOS, Android, Web, macOS)
+- **Firebase Auth** (email/password)
+- **Riverpod** + **Freezed** + **GoRouter**
+- **l10n** FR / EN / DE
+- Talks only to the NestJS API (no direct Firestore reads for app data)
 
 ## Requirements
 
 - Flutter SDK ^3.10
 - Firebase project `lucy-7504c` (see `lib/firebase_options.dart`)
+- Backend running locally **or** the live Render URL above
 
 ## Setup
 
@@ -15,19 +35,52 @@ dart run build_runner build --delete-conflicting-outputs
 flutter gen-l10n
 ```
 
-## Run
+## Run (local)
+
+Default API URL is `http://localhost:3001`.
 
 ```bash
 flutter run -d chrome
-# or: flutter run -d ios / android
+# or: flutter run -d ios / android / macos
 ```
+
+Point the client at another API (e.g. production):
+
+```bash
+flutter run -d chrome \
+  --dart-define=LUCY_API_BASE_URL=https://lucy-api-yo4k.onrender.com
+```
+
+## Docker (Flutter web + nginx)
+
+```bash
+# Build & serve static web on http://localhost:8080
+LUCY_API_BASE_URL=https://lucy-api-yo4k.onrender.com docker compose up --build
+```
+
+Or build only:
+
+```bash
+docker build \
+  --build-arg LUCY_API_BASE_URL=https://lucy-api-yo4k.onrender.com \
+  -t lucy-frontend-web .
+```
+
+## Deploy (Firebase Hosting)
+
+```bash
+flutter build web --release \
+  --dart-define=LUCY_API_BASE_URL=https://lucy-api-yo4k.onrender.com
+firebase deploy --only hosting --project lucy-7504c
+```
+
+Hosting config: `firebase.json` → `public: build/web`.
 
 ## Localization (fr / en / de)
 
 - ARB files: `lib/core/localization/l10n/app_*.arb`
 - Regenerate: `flutter gen-l10n`
-- Untranslated keys: `untranslated_messages.txt` (should stay empty)
-- UI locale is fixed to **German** (`de`) via `kLucyAppLocale` in `lib/core/localization/lucy_locale_resolution.dart`.
+- UI locale defaults to **German** (`de`) via `kLucyAppLocale`
 
 ## Code generation
 
@@ -44,31 +97,29 @@ flutter test
 flutter analyze
 ```
 
-CP-0 web smoke (requires a prior web build):
+## Firebase
 
-```bash
-flutter build web
-flutter test test/smoke/cp0_web_build_test.dart
-```
-
-## Firebase (T11)
-
-- Firestore security rules: [`firestore.rules`](./firestore.rules) — **deny all client** access on `users/{uid}` (Nest Admin SDK only; see [docs/firestore-rules-centralization.md](./docs/firestore-rules-centralization.md))
+- Firestore rules: [`firestore.rules`](./firestore.rules) — deny client access on user data (Nest Admin SDK only)
 - Deploy rules: `firebase deploy --only firestore:rules --project lucy-7504c`
-- Console checklist: [docs/firebase-console-t11.md](./docs/firebase-console-t11.md)
 
-## CI
+## Features (high level)
 
-GitHub Actions runs `flutter analyze`, `flutter test`, and `flutter build web` on push/PR (see [.github/workflows/ci.yml](./.github/workflows/ci.yml)).
+- Auth + onboarding learner profile
+- Document upload (PDF / DOCX / …) via Nest → R2
+- Chat with RAG (SSE streaming)
+- Quiz & flashcards generation (“Professor Mode”)
+- Revision calendar / reminders (FCM)
 
-## Project docs
+## Docs
 
-- [SPEC.md](./SPEC.md) — spec produit (auth livré + onboarding)
-- [tasks/plan.md](./tasks/plan.md) — implementation plan
-- [tasks/todo.md](./tasks/todo.md) — task checklist
-- [docs/manual-checkpoints.md](./docs/manual-checkpoints.md) — auth phase 1 (validation manuelle)
-- [docs/manual-checkpoints-onboarding.md](./docs/manual-checkpoints-onboarding.md) — onboarding CP-0 à CP-5
-- [docs/dev-local-stack.md](./docs/dev-local-stack.md) — backend mock + memory sans P1/P2
+- [SPEC.md](./SPEC.md)
+- [docs/](./docs/) — feature specs and manual checkpoints
+- [tasks/](./tasks/) — implementation plan / todos
+
+## Related repository
+
+Backend (NestJS, Gemini, Firestore, R2):  
+https://github.com/herman2003/lucy_backend
 
 ---
 

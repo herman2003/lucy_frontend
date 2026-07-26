@@ -471,6 +471,20 @@ class OnboardingChatNotifier extends _$OnboardingChatNotifier {
     );
   }
 
+  bool get _allOnboardingStepsCompleted =>
+      state.completedTurns.length >= OnboardingQuestionIds.stepCount;
+
+  void _setStateAfterAnalyzeFailure() {
+    state = state.copyWith(
+      phase: _allOnboardingStepsCompleted
+          ? OnboardingChatPhase.awaitingRegenerateProfile
+          : OnboardingChatPhase.awaitingAnswer,
+      isSubmitting: false,
+      showRegenerateProfile:
+          _allOnboardingStepsCompleted || state.showRegenerateProfile,
+    );
+  }
+
   Future<void> _runAnalyze() async {
     state = state.copyWith(
       phase: OnboardingChatPhase.analyzing,
@@ -504,10 +518,7 @@ class OnboardingChatNotifier extends _$OnboardingChatNotifier {
         isSubmitting: false,
       );
     } catch (error) {
-      state = state.copyWith(
-        phase: OnboardingChatPhase.awaitingAnswer,
-        isSubmitting: false,
-      );
+      _setStateAfterAnalyzeFailure();
       rethrow;
     }
   }

@@ -141,10 +141,20 @@ class _OnboardingChatPageState extends ConsumerState<OnboardingChatPage> {
         if (!mounted) {
           return;
         }
-        await notifier.bootstrap(
-          l10n: l10n,
-          deviceLocale: Localizations.localeOf(context),
-        );
+        try {
+          await notifier.bootstrap(
+            l10n: l10n,
+            deviceLocale: Localizations.localeOf(context),
+          );
+        } catch (error) {
+          if (!mounted) {
+            return;
+          }
+          LucySnackBar.showError(
+            context,
+            message: OnboardingErrorTranslator.fromException(context, error),
+          );
+        }
         if (!mounted) {
           return;
         }

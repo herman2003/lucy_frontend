@@ -1,7 +1,8 @@
 import 'package:lucy_frontend/features/onboarding/domain/entities/onboarding_local_draft.dart';
 import 'package:lucy_frontend/features/onboarding/domain/repositories/onboarding_local_draft_repository.dart';
 
-class FakeOnboardingLocalDraftRepository implements OnboardingLocalDraftRepository {
+class FakeOnboardingLocalDraftRepository
+    implements OnboardingLocalDraftRepository {
   FakeOnboardingLocalDraftRepository({
     Map<String, OnboardingLocalDraft>? drafts,
     this.uiLocale,

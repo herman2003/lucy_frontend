@@ -36,7 +36,9 @@ class SignUpNotifier extends _$SignUpNotifier {
     state = state.copyWith(isLoading: true);
 
     try {
-      await ref.read(authServiceProvider).signUpWithEmail(
+      await ref
+          .read(authServiceProvider)
+          .signUpWithEmail(
             email: state.email.trim(),
             password: state.password,
             fullName: state.fullName.trim(),

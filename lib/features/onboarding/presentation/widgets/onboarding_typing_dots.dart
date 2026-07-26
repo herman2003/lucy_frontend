@@ -43,7 +43,8 @@ class _OnboardingTypingDotsState extends State<OnboardingTypingDots>
             mainAxisSize: MainAxisSize.min,
             children: List.generate(3, (index) {
               final phase = (_controller.value + index * 0.2) % 1.0;
-              final scale = 0.6 + (phase < 0.5 ? phase * 0.8 : (1 - phase) * 0.8);
+              final scale =
+                  0.6 + (phase < 0.5 ? phase * 0.8 : (1 - phase) * 0.8);
               return Padding(
                 padding: EdgeInsets.only(
                   left: index == 0 ? 0 : LucyConstants.kSpacingLow / 3,

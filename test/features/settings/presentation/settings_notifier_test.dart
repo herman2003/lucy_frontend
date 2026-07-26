@@ -1,5 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:lucy_frontend/core/localization/lucy_app_locale_provider.dart';
 import 'package:lucy_frontend/features/onboarding/domain/entities/learner_profile.dart';
 import 'package:lucy_frontend/features/settings/domain/entities/settings_profile.dart';
 import 'package:lucy_frontend/features/settings/domain/exceptions/settings_exception.dart';
@@ -72,6 +74,9 @@ const _sampleProfile = LearnerProfile(
 );
 
 void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
+  SharedPreferences.setMockInitialValues({});
+
   group('SettingsNotifier', () {
     test('loads account and learner profile on success', () async {
       final repository = _FakeSettingsRepository(
@@ -135,6 +140,34 @@ void main() {
         'educator',
       );
     });
+
+    test(
+      'saveUiLocale applies locale immediately and ignores stale load',
+      () async {
+        final repository = _FakeSettingsRepository(
+          profile: const SettingsProfile(
+            fullName: 'Anna Müller',
+            email: 'anna@example.com',
+            uiLocale: 'de',
+            learnerProfile: _sampleProfile,
+          ),
+        );
+        final container = _container(repository);
+        addTearDown(container.dispose);
+
+        final loadFuture = container.read(settingsProvider.notifier).load();
+        final saveFuture = container
+            .read(settingsProvider.notifier)
+            .saveUiLocale('fr');
+
+        final saveOk = await saveFuture;
+        await loadFuture;
+
+        expect(saveOk, isTrue);
+        expect(container.read(settingsProvider).uiLocale, 'fr');
+        expect(container.read(lucyAppLocaleProvider).languageCode, 'fr');
+      },
+    );
 
     test('stores API error code on failure', () async {
       final repository = _FakeSettingsRepository(

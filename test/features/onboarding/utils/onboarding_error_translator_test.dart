@@ -27,8 +27,7 @@ void main() {
       expectMessage(
         tester,
         code: 'ANSWER_TOO_LONG',
-        expected:
-            'Votre réponse est trop longue (2000 caractères maximum).',
+        expected: 'Votre réponse est trop longue (2000 caractères maximum).',
       );
     });
 
@@ -48,8 +47,7 @@ void main() {
       expectMessage(
         tester,
         code: 'ONBOARDING_TRANSCRIPT_INCOMPLETE',
-        expected:
-            'Terminez les 7 questions avant de lancer l’analyse.',
+        expected: 'Terminez les 7 questions avant de lancer l’analyse.',
       );
     });
 
@@ -70,8 +68,7 @@ void main() {
       expectMessage(
         tester,
         code: 'ONBOARDING_PENDING_PROFILE_MISSING',
-        expected:
-            'Aucun profil en attente de validation. Relancez l’analyse.',
+        expected: 'Aucun profil en attente de validation. Relancez l’analyse.',
       );
     });
 
@@ -88,8 +85,7 @@ void main() {
       expectMessage(
         tester,
         code: 'LLM_UNAVAILABLE',
-        expected:
-            'Lucy est temporairement indisponible. Réessayez plus tard.',
+        expected: 'Lucy est temporairement indisponible. Réessayez plus tard.',
       );
     });
 
@@ -109,9 +105,7 @@ void main() {
       );
     });
 
-    testWidgets('fromException uses OnboardingException code', (
-      tester,
-    ) async {
+    testWidgets('fromException uses OnboardingException code', (tester) async {
       late String message;
       await tester.pumpWidget(
         _harness((context) {

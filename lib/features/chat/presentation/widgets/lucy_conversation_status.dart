@@ -22,12 +22,14 @@ class LucyConversationStatus extends StatelessWidget {
     required this.child,
     this.onRetry,
     this.errorMessage,
+    this.emptyWidget,
   });
 
   final LucyConversationStatusType status;
   final Widget child;
   final VoidCallback? onRetry;
   final String? errorMessage;
+  final Widget? emptyWidget;
 
   @override
   Widget build(BuildContext context) {
@@ -45,16 +47,18 @@ class LucyConversationStatus extends StatelessWidget {
           ],
         ),
       ),
-      LucyConversationStatusType.empty => Center(
-        child: Padding(
-          padding: const EdgeInsets.all(LucyConstants.kSpacingLarge),
-          child: Text(
-            l10n.chatEmptyHint,
-            textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.bodyLarge,
-          ),
-        ),
-      ),
+      LucyConversationStatusType.empty =>
+        emptyWidget ??
+            Center(
+              child: Padding(
+                padding: const EdgeInsets.all(LucyConstants.kSpacingLarge),
+                child: Text(
+                  l10n.chatEmptyHint,
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.bodyLarge,
+                ),
+              ),
+            ),
       LucyConversationStatusType.offline => Center(
         child: Padding(
           padding: const EdgeInsets.all(LucyConstants.kSpacingLarge),
@@ -87,10 +91,7 @@ class LucyConversationStatus extends StatelessWidget {
                 style: Theme.of(context).textTheme.bodyLarge,
               ),
               const SizedBox(height: LucyConstants.kSpacingMedium),
-              LucyPrimaryButton(
-                text: l10n.chatRetry,
-                onPressed: onRetry,
-              ),
+              LucyPrimaryButton(text: l10n.chatRetry, onPressed: onRetry),
             ],
           ),
         ),

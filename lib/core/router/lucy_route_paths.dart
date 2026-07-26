@@ -12,9 +12,12 @@ class LucyRoutePaths {
 
   static String chatThread(String chatId) => '$chat/$chatId';
   static const String quiz = '/quiz';
+
+  static String quizSession(String sessionId) => '$quiz/session/$sessionId';
   static const String settings = '/settings';
   static const String settingsProfile = '/settings/profile';
   static const String settingsAiConfig = '/settings/ai-config';
+  static const String settingsReminders = '/settings/reminders';
   static const String settingsChangePassword = '/settings/change-password';
   static const String settingsLearnerDomains =
       '/settings/learner-profile/domains';
@@ -31,6 +34,9 @@ class LucyRoutePaths {
       return true;
     }
     if (location.startsWith('$chat/')) {
+      return true;
+    }
+    if (location.startsWith('$quiz/')) {
       return true;
     }
     return location.startsWith('$settings/');

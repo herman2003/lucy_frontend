@@ -92,8 +92,9 @@ void main() {
 
     expect(container.read(onboardingChatProvider).currentStepIndex, 1);
     expect(
-      container.read(onboardingChatProvider).messagesByQuestionId[
-          OnboardingQuestionIds.qGoal],
+      container
+          .read(onboardingChatProvider)
+          .messagesByQuestionId[OnboardingQuestionIds.qGoal],
       isNotEmpty,
     );
     expect(find.byType(TextField), findsOneWidget);

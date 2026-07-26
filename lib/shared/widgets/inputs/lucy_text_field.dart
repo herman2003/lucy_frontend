@@ -77,11 +77,12 @@ class _LucyTextFieldState extends State<LucyTextField> {
       textInputAction: widget.textInputAction,
       onChanged: widget.onChanged,
       validator: widget.validator,
-     // style: context.textTheme.bodyLarge?.copyWith(color: scheme.onSurface),
+      // style: context.textTheme.bodyLarge?.copyWith(color: scheme.onSurface),
       decoration: InputDecoration(
         labelText: widget.label,
         hintText: widget.hintText,
-        contentPadding: widget.contentPadding ??
+        contentPadding:
+            widget.contentPadding ??
             const EdgeInsets.symmetric(
               horizontal: LucyConstants.kSpacingMedium,
               vertical: LucyConstants.kSpacingMedium,

@@ -4,8 +4,12 @@ import 'package:flutter/material.dart';
 abstract final class LucyChatConstants {
   static const double kBubbleCornerRadius = 16;
   static const double kBubbleTailRadius = 4;
-  static const double kAvatarSize = 36;
-  static const double kMaxBubbleWidthFactor = 0.78;
+  static const double kLucyAvatarSize = 34;
+  static const double kEmptyStateAvatarSize = 66;
+  static const double kAvatarGap = 13;
+  static const double kUserMaxBubbleWidthFactor = 0.62;
+  static const double kLucyMaxBubbleWidthFactor = 0.82;
+  static const double kSendButtonSize = 40;
 
   static BorderRadius lucyBubbleRadius = const BorderRadius.only(
     topLeft: Radius.circular(kBubbleCornerRadius),

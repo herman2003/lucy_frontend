@@ -32,5 +32,4 @@ class OnboardingLocalDraft {
       completedTurns.isNotEmpty ||
       answerDraft.trim().isNotEmpty ||
       (pendingTurnSummary?.trim().isNotEmpty ?? false);
-
 }

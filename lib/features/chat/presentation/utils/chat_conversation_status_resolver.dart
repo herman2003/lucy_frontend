@@ -16,10 +16,14 @@ abstract final class ChatConversationStatusResolver {
     if (conversation.errorCode != null && conversation.messages.isEmpty) {
       return LucyConversationStatusType.error;
     }
-    if (!canChat && conversation.messages.isEmpty && !conversation.isStreaming) {
+    if (!canChat &&
+        conversation.messages.isEmpty &&
+        !conversation.isStreaming) {
       return LucyConversationStatusType.noCorpus;
     }
-    if (isOffline && conversation.messages.isEmpty && !conversation.isStreaming) {
+    if (isOffline &&
+        conversation.messages.isEmpty &&
+        !conversation.isStreaming) {
       return LucyConversationStatusType.offline;
     }
     if (conversation.messages.isEmpty && !conversation.isStreaming) {

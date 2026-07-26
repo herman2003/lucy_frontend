@@ -27,10 +27,7 @@ void main() {
   testWidgets('Lucy bubble shows shared avatar and colorScheme bubble', (
     tester,
   ) async {
-    await pumpMessaging(
-      tester,
-      const OnboardingLucyBubble(text: 'Bonjour'),
-    );
+    await pumpMessaging(tester, const OnboardingLucyBubble(text: 'Bonjour'));
 
     expect(find.byType(LucyAvatar), findsOneWidget);
     expect(find.text('Bonjour'), findsOneWidget);
@@ -38,10 +35,7 @@ void main() {
   });
 
   testWidgets('user bubble aligns right with learner avatar', (tester) async {
-    await pumpMessaging(
-      tester,
-      const OnboardingUserBubble(text: 'Ma réponse'),
-    );
+    await pumpMessaging(tester, const OnboardingUserBubble(text: 'Ma réponse'));
 
     expect(find.byType(CircleAvatar), findsOneWidget);
     expect(find.byType(OnboardingUserBubble), findsOneWidget);

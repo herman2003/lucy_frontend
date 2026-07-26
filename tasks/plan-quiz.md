@@ -14,13 +14,9 @@
 | **Livrable** | `GET /v1/quizzes/eligibility`, feature Flutter data + `QuizPage` garde |
 | **AC** | [x] `canQuiz: false` → bannière + pas d’action génération ; [x] CTA → `/documents` ; [x] tests Nest + Flutter |
 
-### QUIZ-02 — Génération quiz (à faire)
+### QUIZ-02 — Génération (remplacé par LEARN-*)
 
-`POST /v1/quizzes/generate`, prompt LLM structuré, UI questions/réponses.
-
-### QUIZ-03 — Finition + CP-QUIZ (à faire)
-
-Persistance, checklist manuelle, tests e2e.
+Voir **[plan.md](./plan.md)** et **[todo.md](./todo.md)** — decoupage vertical CP-LEARN-1→5.
 
 ---
 

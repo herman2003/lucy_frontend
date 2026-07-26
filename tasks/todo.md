@@ -1,79 +1,83 @@
 # Todo — Lucy frontend
 
-> **Chat** : terminé · **Quiz** : QUIZ-01 fait · **Index plans** : [plan.md](./plan.md) · [plan-quiz.md](./plan-quiz.md)
+> **Actif** : **Mode professeur** (LEARN-06→11) · **Suivi** : [todo-learning-professor.md](./todo-learning-professor.md) · **Plan** : [plan.md](./plan.md)
 
-**Légende** : `[ ]` à faire · `[x]` fait · `[-]` annulé
+**Légende** : `[ ]` à faire · `[x]` fait
+
+**Archives** : [todo-learn.md](./todo-learn.md) (LEARN-01→05) · [todo.md](./todo.md) (P5 UI livré)
 
 ---
 
-## Checkpoint CP-CHAT-1 (backend SSE + CRUD)
+## Checkpoint CP-UI-1 — Identité visuelle (tokens + thème)
 
 | Statut | Id | Tâche |
 |--------|-----|--------|
-| [x] | CHAT-01 | Backend `ChatModule` + CRUD memory + codes erreur `CHAT_*` |
-| [x] | CHAT-02 | Lecture `learnerProfile` + `GET /v1/chats/eligibility` |
-| [x] | CHAT-03 | `FirestoreChatsRepository` + factory memory/firestore |
-| [x] | CHAT-04 | `chat-tutor.system.hbs` + `LlmStreamingPort` + export `RetrievalService` |
-| [x] | CHAT-05 | `POST …/messages/stream` (SSE) + citations post-flux |
-| [x] | CHAT-06 | `POST …/messages` JSON (tests) + DELETE fil + tests auth |
-
-**Validation** : curl SSE → `text_delta` + `sources` + `done` (voir plan-chat § CP-CHAT-1).
+| [x] | UI-01a | Tokens couleurs + `lucy_spacing.dart` |
+| [x] | UI-01b | `google_fonts` + `lucy_typography.dart` |
+| [x] | UI-01c | `LucyInterfaceStyle` + storage SharedPreferences |
+| [x] | UI-01d | `LucyThemeExtensions` + `LucyFlexTheme.themeFor()` |
+| [x] | UI-01e | `lucyThemeProvider` + bootstrap `main.dart` / `app.dart` |
+| [x] | UI-01f | l10n styles (fr/en/de) + tests provider |
 
 ---
 
-## Checkpoint CP-CHAT-2 (Flutter stream + sources UI)
+## Checkpoint CP-UI-2 — Shell hybride
 
 | Statut | Id | Tâche |
 |--------|-----|--------|
-| [x] | CHAT-07 | Flutter data layer + `ApiEndpoints` + l10n + `chat_error_translator` |
-| [x] | CHAT-08 | Client SSE + `ChatPage` + bulles + `ChatSourceCard` |
+| [x] | UI-02a | `LucyDesktopSidebar` + `LucyBrandMark` |
+| [x] | UI-02b | `LucyBottomNav` custom V4 (emojis) + tests |
+| [x] | UI-02c | Refactor `LucyAppShell` ; router tests verts |
 
 ---
 
-## Checkpoint CP-CHAT-3 (miroir local + garde corpus)
+## Checkpoint CP-UI-3 — Documents
 
 | Statut | Id | Tâche |
 |--------|-----|--------|
-| [x] | CHAT-09 | Miroir `SharedPreferences` + resync + purge logout + offline |
-| [x] | CHAT-10 | Bannière « activer documents » + tests + checklist manuelle |
+| [x] | UI-03a | `LucyDocumentCard`, `LucyChip`, `LucyEmptyState` |
+| [x] | UI-03b | `DocumentsPage` restyle grille/liste |
 
 ---
 
-## Documents & RAG — terminé
+## Checkpoint CP-UI-4 — Chat
 
 | Statut | Id | Tâche |
 |--------|-----|--------|
-| [x] | DOC-01 → DOC-14 | Voir commits / [docs/spec-documents-rag.md](../docs/spec-documents-rag.md) |
+| [x] | UI-04a | `LucyMessageBubble`, `LucySourceCard`, `LucyComposer` |
+| [x] | UI-04b | `LucyChatThreadsPanel` desktop 300 px |
+| [x] | UI-04c | `LucyConversationsDrawer` mobile |
+| [x] | UI-04d | `ChatPage` intégration + tests chat |
 
 ---
 
-## Phase D4b — Quiz (après chat)
+## Checkpoint CP-UI-5 — Quiz & learning
 
 | Statut | Id | Tâche |
 |--------|-----|--------|
-| [x] | QUIZ-01 | Éligibilité corpus + garde UI (`GET /v1/quizzes/eligibility`, spec [spec-quiz.md](../docs/spec-quiz.md)) |
-| [ ] | QUIZ-02 | Génération quiz (`POST /v1/quizzes/generate`, UI QCM) — voir [plan-quiz.md](./plan-quiz.md) |
+| [x] | UI-05a | Hub cards + `LearningSessionPage` QCM restyle |
+| [x] | UI-05b | Flashcards session + `ChatLearningSessionCard` |
 
 ---
 
-## Stockage R2 (ops)
+## Checkpoint CP-UI-6 — Settings & profil
 
 | Statut | Id | Tâche |
 |--------|-----|--------|
-| [x] | R2-01 → R2-05 | Config + adapter + docs |
-| [ ] | R2-06 | Validation manuelle web + mobile ([cp-r2-manual-checklist.md](../docs/cp-r2-manual-checklist.md)) |
+| [x] | UI-06a | Segmented clair/sombre + picker 3 styles |
+| [x] | UI-06b | Settings hub + sous-pages profil / AI / mot de passe |
 
 ---
 
-## Vérification globale (chaque tâche chat)
+## Prérequis — terminé
 
-```bash
-cd backend && npm test -- chat
-cd lucy_frontend
-dart run build_runner build --delete-conflicting-outputs
-flutter gen-l10n && flutter analyze && flutter test test/features/chat/
-```
-
+| Statut | Id | Tâche |
+|--------|-----|--------|
+| [x] | LEARN-01→05 | Génération quiz + cartes |
+| [x] | CHAT-01→10 | Chat P4a |
+| [x] | DOC-01→14 | Documents + RAG |
+| [x] | QUIZ-01 | Eligibility |
+    
 ---
 
-*Ce document a été créé avec Cursor (IA). Todo — Chat P4a actif, 2026-05-27.*
+*Ce document a été créé avec Cursor (IA). Révisé — UI redesign — 2026-06-10.*

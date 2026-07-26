@@ -51,7 +51,8 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
       final common = (
         label: context.l10n.authFullNameLabel,
         hint: context.l10n.authFullNameHint,
-        validator: (String? value) => Validators.validateFullName(context, value),
+        validator: (String? value) =>
+            Validators.validateFullName(context, value),
         onChanged: signUpNotifier.updateFullName,
         enabled: !signUpState.isLoading,
       );

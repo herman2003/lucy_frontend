@@ -1,17 +1,21 @@
-import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../constants/responsive_constants.dart';
 import '../extensions/context.dart';
-import '../router/lucy_route_paths.dart';
-import 'lucy_sidebar.dart';
+import '../signals/chat_refresh_signal.dart';
+import '../signals/documents_refresh_signal.dart';
+import '../signals/quiz_library_refresh_signal.dart';
+import '../theme/lucy_theme_extensions.dart';
+import 'lucy_bottom_nav.dart';
+import 'lucy_desktop_sidebar.dart';
+import 'lucy_shell_navigation.dart';
 
-/// Responsive post-login shell (ref. telC [TcAppShell]).
+/// Responsive post-login shell — V3 desktop sidebar + V4 mobile bottom nav.
 ///
-/// Width &lt; 600: bottom bar (4 onglets).
-/// Width ≥ 600: sidebar ; entre 600 et 1024, menu hamburger pour afficher la sidebar.
+/// Width &lt; 600: bottom nav with emojis.
+/// Width ≥ 600: sidebar ; between 600 and 1024, hamburger toggles sidebar.
 class LucyAppShell extends ConsumerStatefulWidget {
   const LucyAppShell({
     super.key,
@@ -29,21 +33,6 @@ class LucyAppShell extends ConsumerStatefulWidget {
 class _LucyAppShellState extends ConsumerState<LucyAppShell> {
   bool _sidebarOpen = false;
 
-  static const List<IconData> _mobileIcons = [
-    Icons.description_outlined,
-    Icons.chat_bubble_outline,
-    Icons.quiz_outlined,
-    Icons.settings_outlined,
-  ];
-
-  int _mobileActiveIndex() {
-    final path = widget.state.uri.path;
-    if (path.startsWith(LucyRoutePaths.chat)) return 1;
-    if (path.startsWith(LucyRoutePaths.quiz)) return 2;
-    if (path.startsWith(LucyRoutePaths.settings)) return 3;
-    return 0;
-  }
-
   bool _isNarrowDesktopFor(double width) {
     if (width < ResponsiveConstants.kTabletBreakpoint) return false;
     return width < ResponsiveConstants.kDesktopBreakpoint;
@@ -54,9 +43,21 @@ class _LucyAppShellState extends ConsumerState<LucyAppShell> {
     return width < ResponsiveConstants.kTabletBreakpoint;
   }
 
+  void _onShellBranchTap(int index) {
+    widget.navigationShell.goBranch(index);
+    switch (index) {
+      case LucyShellNavigation.branchDocuments:
+        ref.read(documentsRefreshSignalProvider.notifier).notify();
+      case LucyShellNavigation.branchChat:
+        ref.read(chatRefreshSignalProvider.notifier).notify();
+      case LucyShellNavigation.branchQuiz:
+        ref.read(quizLibraryRefreshSignalProvider.notifier).notify();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    final scheme = context.colorScheme;
+    final lucyTheme = context.lucyTheme;
 
     return LayoutBuilder(
       builder: (context, constraints) {
@@ -65,21 +66,16 @@ class _LucyAppShellState extends ConsumerState<LucyAppShell> {
             : MediaQuery.sizeOf(context).width;
         final useMobileLayout = _useMobileLayoutFor(width);
         final isNarrowDesktop = _isNarrowDesktopFor(width);
+        final path = widget.state.uri.path;
+        final activeIndex = LucyShellNavigation.indexForPath(path);
 
         if (useMobileLayout) {
           return Scaffold(
-            backgroundColor: scheme.surface,
+            backgroundColor: lucyTheme.scaffoldBackground,
             body: widget.navigationShell,
-            bottomNavigationBar: AnimatedBottomNavigationBar(
-              icons: _mobileIcons,
-              activeIndex: _mobileActiveIndex(),
-              gapLocation: GapLocation.none,
-              leftCornerRadius: 24,
-              rightCornerRadius: 24,
-              onTap: widget.navigationShell.goBranch,
-              backgroundColor: scheme.surface,
-              activeColor: scheme.primary,
-              inactiveColor: scheme.onSurfaceVariant,
+            bottomNavigationBar: LucyBottomNav(
+              activeIndex: activeIndex,
+              onTap: _onShellBranchTap,
             ),
           );
         }
@@ -88,11 +84,11 @@ class _LucyAppShellState extends ConsumerState<LucyAppShell> {
         final showSidebar = showSidebarPermanent || _sidebarOpen;
 
         return Scaffold(
-          backgroundColor: scheme.surface,
+          backgroundColor: lucyTheme.scaffoldBackground,
           appBar: isNarrowDesktop
               ? AppBar(
-                  backgroundColor: scheme.surface,
-                  foregroundColor: scheme.onSurface,
+                  backgroundColor: Theme.of(context).colorScheme.surface,
+                  foregroundColor: Theme.of(context).colorScheme.onSurface,
                   leading: IconButton(
                     icon: const Icon(Icons.menu),
                     tooltip: context.l10n.shellMenu,
@@ -104,12 +100,12 @@ class _LucyAppShellState extends ConsumerState<LucyAppShell> {
               : null,
           body: Row(
             children: [
-              if (showSidebar) ...[
-                LucySidebar(
+              if (showSidebar)
+                LucyDesktopSidebar(
                   navigationShell: widget.navigationShell,
-                  currentPath: widget.state.uri.path,
+                  currentPath: path,
+                  onBranchTap: _onShellBranchTap,
                 ),
-              ],
               Expanded(child: widget.navigationShell),
             ],
           ),

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../../../onboarding/presentation/widgets/onboarding_lucy_bubble.dart';
-import '../../../onboarding/presentation/widgets/onboarding_user_bubble.dart';
+import '../../../../core/extensions/context.dart';
+import '../../../../shared/widgets/lucy/lucy_message_bubble.dart';
 import '../../domain/entities/chat_message.dart';
 import '../../domain/entities/chat_message_role.dart';
-import 'chat_source_card.dart';
 
 /// Renders a persisted chat message with optional source cards.
 class ChatMessageBubble extends StatelessWidget {
@@ -14,23 +13,32 @@ class ChatMessageBubble extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bubble = switch (message.role) {
-      ChatMessageRole.user => OnboardingUserBubble(text: message.content),
-      ChatMessageRole.assistant => OnboardingLucyBubble(text: message.content),
-    };
-
     final sources = message.sources;
-    if (sources == null || sources.isEmpty) {
-      return bubble;
-    }
+    final sourceData = sources == null
+        ? const <LucyMessageSourceData>[]
+        : sources
+              .map(
+                (source) => LucyMessageSourceData(
+                  title: source.title,
+                  excerpt: source.excerpt,
+                  pagesLabel: _pagesLabel(context, source.pageStart, source.pageEnd),
+                ),
+              )
+              .toList();
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        bubble,
-        const SizedBox(height: 8),
-        ...sources.map((source) => ChatSourceCard(source: source)),
-      ],
+    return LucyMessageBubble(
+      role: message.role == ChatMessageRole.user
+          ? LucyMessageBubbleRole.user
+          : LucyMessageBubbleRole.assistant,
+      text: message.content,
+      sources: sourceData,
     );
+  }
+
+  String? _pagesLabel(BuildContext context, int? start, int? end) {
+    if (start == null || end == null) {
+      return null;
+    }
+    return context.l10n.chatSourcePages(start, end);
   }
 }

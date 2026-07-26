@@ -18,9 +18,9 @@ class OnboardingPlaceholderPage extends StatelessWidget {
             padding: const EdgeInsets.all(24),
             child: Text(
               context.l10n.onboardingPlaceholderTitle,
-              style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                color: colorScheme.onSurface,
-              ),
+              style: Theme.of(
+                context,
+              ).textTheme.titleLarge?.copyWith(color: colorScheme.onSurface),
               textAlign: TextAlign.center,
             ),
           ),

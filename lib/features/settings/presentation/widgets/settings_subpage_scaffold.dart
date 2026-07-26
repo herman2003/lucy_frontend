@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/constants/lucy_constants.dart';
-import '../../../../core/extensions/context.dart';
+import '../../../../core/constants/lucy_spacing.dart';
+import '../../../../core/theme/lucy_theme_extensions.dart';
 
-/// Centered subpage layout for settings edits (telC pattern).
+/// Centered subpage layout for settings edits.
 class SettingsSubpageScaffold extends StatelessWidget {
   const SettingsSubpageScaffold({
     super.key,
@@ -16,15 +17,13 @@ class SettingsSubpageScaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final scheme = context.colorScheme;
+    final lucy = context.lucyTheme;
 
     return Scaffold(
-      backgroundColor: scheme.surface,
+      backgroundColor: lucy.scaffoldBackground,
       appBar: AppBar(
-        title: Text(title, style: TextStyle(color: scheme.primary)),
-        backgroundColor: scheme.surface,
-        foregroundColor: scheme.primary,
-        iconTheme: IconThemeData(color: scheme.primary),
+        title: Text(title),
+        backgroundColor: lucy.scaffoldBackground,
       ),
       body: Center(
         child: ConstrainedBox(
@@ -32,9 +31,7 @@ class SettingsSubpageScaffold extends StatelessWidget {
             maxWidth: LucyConstants.kSettingsContentMaxWidth,
           ),
           child: SingleChildScrollView(
-            padding: const EdgeInsets.all(
-              LucyConstants.kContainerPaddingMedium,
-            ),
+            padding: const EdgeInsets.all(LucySpacing.spaceLg),
             child: body,
           ),
         ),

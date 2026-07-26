@@ -19,6 +19,10 @@ String onboardingQuestionText(AppLocalizations l10n, String questionId) {
     case OnboardingQuestionIds.qLanguage:
       return l10n.onboardingQuestionQLanguage;
     default:
-      throw ArgumentError.value(questionId, 'questionId', 'Unknown onboarding question');
+      throw ArgumentError.value(
+        questionId,
+        'questionId',
+        'Unknown onboarding question',
+      );
   }
 }

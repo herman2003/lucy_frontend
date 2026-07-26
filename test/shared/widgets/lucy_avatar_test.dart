@@ -1,31 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:lucy_frontend/core/theme/lucy_flex_theme.dart';
 import 'package:lucy_frontend/shared/widgets/branding/lucy_avatar.dart';
 
 void main() {
-  testWidgets('LucyAvatar renders at requested size', (tester) async {
-    await tester.pumpWidget(
-      const MaterialApp(
-        home: Scaffold(
-          body: LucyAvatar(size: 48),
-        ),
-      ),
-    );
+  TestWidgetsFlutterBinding.ensureInitialized();
 
-    expect(find.byType(LucyAvatar), findsOneWidget);
-    final avatar = tester.widget<CircleAvatar>(find.byType(CircleAvatar));
-    expect(avatar.radius, 24);
+  setUpAll(() {
+    GoogleFonts.config.allowRuntimeFetching = false;
   });
 
-  testWidgets('LucyAvatar uses placeholder icon by default', (tester) async {
+  testWidgets('LucyAvatar renders at requested size', (tester) async {
     await tester.pumpWidget(
-      const MaterialApp(
-        home: Scaffold(
-          body: LucyAvatar(),
-        ),
+      MaterialApp(
+        theme: LucyFlexTheme.lightTheme,
+        home: const Scaffold(body: LucyAvatar(size: 48)),
       ),
     );
+    await tester.pumpAndSettle();
 
-    expect(find.byIcon(Icons.auto_awesome), findsOneWidget);
+    final box = tester.getSize(find.byType(LucyAvatar));
+    expect(box.width, 48);
+    expect(box.height, 48);
+  });
+
+  testWidgets('LucyAvatar shows gradient star by default', (tester) async {
+    await tester.pumpWidget(
+      MaterialApp(
+        theme: LucyFlexTheme.lightTheme,
+        home: const Scaffold(body: LucyAvatar()),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.text('✦'), findsOneWidget);
   });
 }

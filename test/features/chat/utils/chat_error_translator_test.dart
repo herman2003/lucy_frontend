@@ -42,10 +42,7 @@ void main() {
                 context,
                 const ChatException('CHAT_STREAM_IN_PROGRESS'),
               );
-              expect(
-                message,
-                'Un message est déjà en cours de génération.',
-              );
+              expect(message, 'Un message est déjà en cours de génération.');
               return const SizedBox.shrink();
             },
           ),

@@ -9,11 +9,13 @@ import '../../features/documents/presentation/pages/documents_page.dart';
 import '../../features/onboarding/presentation/pages/onboarding_chat_page.dart';
 import '../../features/onboarding/presentation/pages/onboarding_confirm_page.dart';
 import '../../features/quiz/presentation/pages/quiz_page.dart';
+import '../../features/quiz/presentation/pages/learning_session_page.dart';
 import '../../features/settings/presentation/pages/settings_ai_config_page.dart';
 import '../../features/settings/presentation/pages/settings_change_password_page.dart';
 import '../../features/settings/presentation/pages/settings_learner_domains_page.dart';
 import '../../features/settings/presentation/pages/settings_page.dart';
 import '../../features/settings/presentation/pages/settings_profile_page.dart';
+import '../../features/settings/presentation/pages/settings_reminders_page.dart';
 import '../presentation/pages/splash_page.dart';
 import '../shell/lucy_app_shell.dart';
 import 'lucy_route_names.dart';
@@ -112,6 +114,15 @@ GoRouter lucyRouter(Ref ref) {
                 path: LucyRoutePaths.quiz,
                 pageBuilder: (context, state) =>
                     const NoTransitionPage(child: QuizPage()),
+                routes: [
+                  GoRoute(
+                    name: LucyRouteNames.quizSession,
+                    path: 'session/:sessionId',
+                    builder: (context, state) => LearningSessionPage(
+                      sessionId: state.pathParameters['sessionId']!,
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
@@ -132,6 +143,11 @@ GoRouter lucyRouter(Ref ref) {
                     name: LucyRouteNames.settingsAiConfig,
                     path: 'ai-config',
                     builder: (context, state) => const SettingsAiConfigPage(),
+                  ),
+                  GoRoute(
+                    name: LucyRouteNames.settingsReminders,
+                    path: 'reminders',
+                    builder: (context, state) => const SettingsRemindersPage(),
                   ),
                   GoRoute(
                     name: LucyRouteNames.settingsChangePassword,

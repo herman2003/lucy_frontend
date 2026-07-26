@@ -12,15 +12,12 @@ void main() {
         isConfigured: false,
       );
 
-      expect(
-        dto.toFirestoreMap(),
-        {
-          'fullName': 'Jane Doe',
-          'email': 'jane@lucy.test',
-          'createdAt': '2026-05-25T12:00:00.000Z',
-          'isConfigured': false,
-        },
-      );
+      expect(dto.toFirestoreMap(), {
+        'fullName': 'Jane Doe',
+        'email': 'jane@lucy.test',
+        'createdAt': '2026-05-25T12:00:00.000Z',
+        'isConfigured': false,
+      });
     });
 
     test('fromFirestoreMap reads isConfigured when present', () {

@@ -20,6 +20,9 @@ abstract final class ApiEndpoints {
 
   static String get usersMeLearnerProfile => '$usersMe/learner-profile';
 
+  static String get usersMeRevisionReminderPush =>
+      '$usersMe/revision-reminder-push';
+
   static String get onboardingProgress => '$baseUrl/v1/onboarding/progress';
 
   static String get documents => '$baseUrl/v1/documents';
@@ -40,6 +43,9 @@ abstract final class ApiEndpoints {
 
   static String chatMessages(String chatId) => '${chat(chatId)}/messages';
 
+  static String chatRevisionCalendarIcs(String chatId) =>
+      '${chat(chatId)}/revision-calendar.ics';
+
   static String chatMessagesStream(String chatId) =>
       '${chatMessages(chatId)}/stream';
 
@@ -48,4 +54,14 @@ abstract final class ApiEndpoints {
   static String get quizzes => '$baseUrl/v1/quizzes';
 
   static String get quizEligibility => '$quizzes/eligibility';
+
+  static String get learningSessions => '$baseUrl/v1/learning-sessions';
+
+  static String learningSession(String sessionId) =>
+      '$learningSessions/$sessionId';
+
+  static String learningSessionAttempts(String sessionId) =>
+      '${learningSession(sessionId)}/attempts';
+
+  static String get learningSessionsGenerate => '$learningSessions/generate';
 }

@@ -18,9 +18,9 @@ class LucyTextFieldMobile extends LucyTextField {
     super.isEnabled,
     super.formFieldKey,
   }) : super(
-          contentPadding: const EdgeInsets.symmetric(
-            horizontal: LucyConstants.kSpacingMedium,
-            vertical: LucyConstants.kSpacingLow,
-          ),
-        );
+         contentPadding: const EdgeInsets.symmetric(
+           horizontal: LucyConstants.kSpacingMedium,
+           vertical: LucyConstants.kSpacingLow,
+         ),
+       );
 }

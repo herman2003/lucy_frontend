@@ -81,6 +81,48 @@ class ChatThreadsNotifier extends _$ChatThreadsNotifier {
     }
   }
 
+  Future<void> refreshThreads({String? initialChatId}) async {
+    final uid = ref.read(authRepositoryProvider).currentUser?.uid;
+    if (uid == null || state.isLoading) {
+      return;
+    }
+
+    try {
+      final service = ref.read(chatServiceProvider);
+      final threads = await service.listThreads();
+      final eligibility = await service.getEligibility();
+      final selectedChatId = _resolveInitialSelection(
+        threads,
+        initialChatId ?? state.selectedChatId,
+      );
+
+      await ref
+          .read(chatMirrorServiceProvider)
+          .saveThreads(
+            uid: uid,
+            threads: threads,
+            lastActiveChatId: selectedChatId,
+          );
+
+      state = state.copyWith(
+        threads: threads,
+        eligibility: eligibility,
+        selectedChatId: selectedChatId,
+        isOffline: false,
+        errorCode: null,
+      );
+    } catch (error) {
+      if (ChatNetworkUtils.isOfflineError(error) && state.threads.isNotEmpty) {
+        state = state.copyWith(isOffline: true, errorCode: null);
+        return;
+      }
+      state = state.copyWith(
+        errorCode: _errorCode(error),
+        isOffline: ChatNetworkUtils.isOfflineError(error),
+      );
+    }
+  }
+
   /// Mobile: return to the thread list (master panel) without leaving the Chat tab.
   void openThreadList(BuildContext context) {
     state = state.copyWith(selectedChatId: null, errorCode: null);

@@ -3,19 +3,27 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../core/constants/lucy_constants.dart';
+import '../../../../core/constants/lucy_spacing.dart';
 import '../../../../core/constants/responsive_constants.dart';
 import '../../../../core/extensions/context.dart';
 import '../../../../core/router/lucy_route_paths.dart';
-import '../../../auth/domain/providers/auth_provider.dart';
+import '../../../../core/theme/lucy_theme_extensions.dart';
 import '../../../../shared/widgets/buttons/lucy_secondary_button.dart';
+import '../../../../shared/widgets/feedback/lucy_snackbar.dart';
+import '../../../auth/domain/providers/auth_provider.dart';
+import '../../utils/settings_error_translator.dart';
+import '../../utils/settings_ui_locale_l10n.dart';
 import '../controllers/settings_notifier.dart';
 import '../controllers/settings_state.dart';
-import '../../utils/settings_error_translator.dart';
+import '../widgets/settings_appearance_section.dart';
 import '../widgets/settings_group.dart';
+import '../widgets/settings_language_sheet.dart';
+import '../widgets/settings_logout_button.dart';
 import '../widgets/settings_navigation_tile.dart';
+import '../widgets/settings_profile_header.dart';
 import '../widgets/settings_section_header.dart';
 
-/// Settings hub — Profil vs configuration Lucy (two separate areas).
+/// Settings hub — appearance, profile card, language, Lucy config.
 class SettingsPage extends ConsumerStatefulWidget {
   const SettingsPage({super.key});
 
@@ -35,28 +43,47 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
     });
   }
 
+  Future<void> _pickLanguage(String? current) async {
+    await showSettingsLanguageSheet(
+      context: context,
+      currentCode: current,
+      onSelected: (code) async {
+        if (code == current) {
+          return;
+        }
+        final ok = await ref.read(settingsProvider.notifier).saveUiLocale(code);
+        if (!mounted) {
+          return;
+        }
+        if (ok) {
+          LucySnackBar.showSuccess(
+            context,
+            message: context.l10n.settingsProfileSaved,
+          );
+          return;
+        }
+        final errorCode = ref.read(settingsProvider).saveErrorCode;
+        if (errorCode != null) {
+          LucySnackBar.showError(
+            context,
+            message: SettingsErrorTranslator.translate(context, errorCode),
+          );
+        }
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    final scheme = context.colorScheme;
     final state = ref.watch(settingsProvider);
     final width = MediaQuery.sizeOf(context).width;
     final useAppBar = width < ResponsiveConstants.kTabletBreakpoint;
     final showMobileLogout = width < ResponsiveConstants.kTabletBreakpoint;
 
     return Scaffold(
-      backgroundColor: scheme.surface,
-      appBar: useAppBar
-          ? AppBar(
-              title: Text(
-                l10n.settingsTitle,
-                style: TextStyle(color: scheme.primary),
-              ),
-              backgroundColor: scheme.surface,
-              foregroundColor: scheme.primary,
-              iconTheme: IconThemeData(color: scheme.primary),
-            )
-          : null,
+      backgroundColor: context.lucyTheme.scaffoldBackground,
+      appBar: useAppBar ? AppBar(title: Text(l10n.settingsTitle)) : null,
       body: _buildBody(context, state, useAppBar, showMobileLogout),
     );
   }
@@ -68,23 +95,20 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
     bool showMobileLogout,
   ) {
     final l10n = context.l10n;
-    final scheme = context.colorScheme;
 
     if (state.errorCode != null && state.email.isEmpty && !state.isLoading) {
       return Center(
         child: Padding(
-          padding: const EdgeInsets.all(LucyConstants.kSpacingLarge),
+          padding: const EdgeInsets.all(LucySpacing.spaceXl),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
                 SettingsErrorTranslator.translate(context, state.errorCode!),
                 textAlign: TextAlign.center,
-                style: context.textTheme.bodyMedium?.copyWith(
-                  color: scheme.primary,
-                ),
+                style: context.textTheme.bodyMedium,
               ),
-              const SizedBox(height: LucyConstants.kSpacingMedium),
+              const SizedBox(height: LucySpacing.spaceMd),
               LucySecondaryButton(
                 text: l10n.chatRetry,
                 onPressed: () => ref.read(settingsProvider.notifier).load(),
@@ -95,6 +119,10 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
       );
     }
 
+    final displayName = state.fullName.trim().isNotEmpty
+        ? state.fullName.trim()
+        : state.email;
+
     return Center(
       child: ConstrainedBox(
         constraints: const BoxConstraints(
@@ -102,35 +130,60 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
         ),
         child: ListView(
           physics: const AlwaysScrollableScrollPhysics(),
-          padding: const EdgeInsets.only(
-            bottom: LucyConstants.kContainerPaddingLarge,
-          ),
+          padding: const EdgeInsets.only(bottom: LucySpacing.spaceXl),
           children: [
             if (!useAppBar)
               Padding(
                 padding: const EdgeInsets.fromLTRB(
-                  LucyConstants.kContainerPaddingMedium,
-                  LucyConstants.kContainerPaddingLarge,
-                  LucyConstants.kContainerPaddingMedium,
-                  LucyConstants.kSpacingMedium,
+                  LucySpacing.spaceLg,
+                  LucySpacing.spaceXl,
+                  LucySpacing.spaceLg,
+                  LucySpacing.spaceMd,
                 ),
                 child: Text(
                   l10n.settingsTitle,
-                  style: context.textTheme.headlineSmall?.copyWith(
-                    fontWeight: FontWeight.bold,
-                    color: scheme.primary,
-                  ),
+                  style: context.textTheme.headlineSmall,
                 ),
               ),
-            SettingsSectionHeader(title: l10n.settingsHubSection),
+            const SettingsAppearanceSection(),
+            SettingsSectionHeader(title: l10n.settingsSectionAccount),
+            SettingsProfileHeader(
+              displayName: displayName,
+              email: state.email,
+              isLoading: state.isLoading && state.email.isEmpty,
+              showChevron: true,
+              onTap: state.isLoading && state.email.isEmpty
+                  ? null
+                  : () => context.push(LucyRoutePaths.settingsProfile),
+            ),
+            const SizedBox(height: LucySpacing.spaceLg),
+            SettingsSectionHeader(title: l10n.settingsSectionApplication),
             SettingsGroup(
               children: [
                 SettingsNavigationTile(
-                  icon: Icons.person_outline,
-                  label: l10n.settingsProfileTitle,
-                  trailingText: l10n.settingsProfileHubHint,
-                  onTap: () => context.push(LucyRoutePaths.settingsProfile),
+                  icon: Icons.language,
+                  label: l10n.settingsUiLocaleLabel,
+                  trailingText: SettingsUiLocaleL10n.label(l10n, state.uiLocale),
+                  onTap: state.isSaving
+                      ? null
+                      : () => _pickLanguage(state.uiLocale),
                 ),
+              ],
+            ),
+            SettingsSectionHeader(title: l10n.settingsSectionLearning),
+            SettingsGroup(
+              children: [
+                SettingsNavigationTile(
+                  icon: Icons.notifications_outlined,
+                  label: l10n.settingsRemindersTitle,
+                  trailingText: l10n.settingsRemindersHubHint,
+                  onTap: () => context.push(LucyRoutePaths.settingsReminders),
+                ),
+              ],
+            ),
+            SettingsSectionHeader(title: l10n.settingsHubSection),
+            SettingsGroup(
+              children: [
                 SettingsNavigationTile(
                   icon: Icons.auto_awesome,
                   label: l10n.settingsAiConfigTitle,
@@ -139,22 +192,15 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
                 ),
               ],
             ),
-            if (showMobileLogout)
-              Padding(
-                padding: const EdgeInsets.fromLTRB(
-                  LucyConstants.kContainerPaddingMedium,
-                  LucyConstants.kSpacingHigh,
-                  LucyConstants.kContainerPaddingMedium,
-                  LucyConstants.kSpacingMedium,
-                ),
-                child: LucySecondaryButton(
-                  text: l10n.homeLogout,
-                  onPressed: state.isLoading
-                      ? null
-                      : () => ref.read(authServiceProvider).signOut(),
-                  width: double.infinity,
-                ),
+            if (showMobileLogout) ...[
+              const SizedBox(height: LucySpacing.spaceXl),
+              SettingsLogoutButton(
+                label: l10n.homeLogout,
+                onPressed: state.isLoading
+                    ? null
+                    : () => ref.read(authServiceProvider).signOut(),
               ),
+            ],
           ],
         ),
       ),

@@ -6,11 +6,7 @@ import '../../../core/extensions/context.dart';
 
 /// White form card for auth pages (uses [ColorScheme.surface]).
 class LucyFormContainer extends StatelessWidget {
-  const LucyFormContainer({
-    super.key,
-    this.formKey,
-    required this.children,
-  });
+  const LucyFormContainer({super.key, this.formKey, required this.children});
 
   final GlobalKey<FormState>? formKey;
   final List<Widget> children;
@@ -20,11 +16,13 @@ class LucyFormContainer extends StatelessWidget {
     final scheme = context.colorScheme;
     final isDesktop = context.isDesktop;
 
-    final horizontalPadding =
-        isDesktop ? context.screenWidth * 0.04 : context.screenWidth * 0.04;
+    final horizontalPadding = isDesktop
+        ? context.screenWidth * 0.04
+        : context.screenWidth * 0.04;
 
-    final verticalPadding =
-        isDesktop ? context.screenHeight * 0.03 : context.screenHeight * 0.04;
+    final verticalPadding = isDesktop
+        ? context.screenHeight * 0.03
+        : context.screenHeight * 0.04;
 
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
@@ -40,8 +38,9 @@ class LucyFormContainer extends StatelessWidget {
           ),
           decoration: BoxDecoration(
             color: scheme.surface,
-            borderRadius:
-                BorderRadius.circular(LucyConstants.kBorderRadiusAuthCard),
+            borderRadius: BorderRadius.circular(
+              LucyConstants.kBorderRadiusAuthCard,
+            ),
             boxShadow: [
               BoxShadow(
                 blurRadius: 40,

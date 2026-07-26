@@ -3,14 +3,21 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../core/constants/lucy_spacing.dart';
+import '../../../../core/constants/responsive_constants.dart';
+import '../../../../core/signals/documents_refresh_signal.dart';
 import '../../../../core/extensions/context.dart';
+import '../../../../core/theme/lucy_theme_extensions.dart';
 import '../../../../shared/widgets/buttons/lucy_tertiary_button.dart';
+import '../../../../shared/widgets/lucy/lucy_document_card.dart';
+import '../../../../shared/widgets/lucy/lucy_empty_state.dart';
+import '../../domain/entities/document.dart';
+import '../../domain/entities/document_status.dart';
 import '../../utils/documents_constants.dart';
 import '../controllers/documents_notifier.dart';
 import '../controllers/documents_state.dart';
-import '../../domain/entities/document_status.dart';
+import '../utils/document_presentation_util.dart';
 import '../widgets/add_document_sheet.dart';
-import '../widgets/document_list_tile.dart';
 
 /// Documents corpus — list, upload, search activation (SPEC §3 P1).
 class DocumentsPage extends ConsumerStatefulWidget {
@@ -111,22 +118,66 @@ class _DocumentsPageState extends ConsumerState<DocumentsPage> {
     }
   }
 
+  bool _useDocumentGrid(BuildContext context) {
+    return MediaQuery.sizeOf(context).width >=
+        ResponsiveConstants.kDesktopBreakpoint;
+  }
+
+  Widget _buildDocumentCard(
+    Document doc,
+    DocumentsState state,
+    DocumentsNotifier notifier,
+  ) {
+    final l10n = context.l10n;
+    final isBusy = state.busyDocumentId == doc.id;
+    final toggleEnabled = DocumentPresentationUtil.searchToggleEnabled(
+      document: doc,
+      activeSearchCount: state.activeSearchCount,
+      isBusy: isBusy,
+    );
+
+    return LucyDocumentCard(
+      key: ValueKey(doc.id),
+      title: doc.title,
+      metaLabel: DocumentPresentationUtil.metaLabel(doc),
+      statusLabel: DocumentPresentationUtil.statusLabel(l10n, doc.status),
+      visualStatus: DocumentPresentationUtil.visualStatus(doc.status),
+      typeLabel: DocumentPresentationUtil.typeLabelForMime(doc.mimeType),
+      mimeType: doc.mimeType,
+      searchEnabled: doc.searchEnabled,
+      searchToggleEnabled: toggleEnabled,
+      isBusy: isBusy,
+      onToggleSearch: (enabled) => notifier.toggleSearchEnabled(
+        context,
+        documentId: doc.id,
+        enabled: enabled,
+      ),
+      onDownload: () => notifier.downloadDocument(context, doc.id),
+      onDelete: () => _confirmDelete(doc.id, doc.title),
+      onReprocess: doc.status == DocumentStatus.failed
+          ? () => notifier.reprocessDocument(context, doc.id)
+          : null,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final state = ref.watch(documentsProvider);
     final l10n = context.l10n;
     final notifier = ref.read(documentsProvider.notifier);
+    final lucy = context.lucyTheme;
+    final useGrid = _useDocumentGrid(context);
 
     _syncProcessingPoll(state);
 
+    ref.listen(documentsRefreshSignalProvider, (previous, next) {
+      if (previous != next) {
+        notifier.refresh(context);
+      }
+    });
+
     return Scaffold(
-      appBar: AppBar(title: Text(l10n.documentsTitle)),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: state.hasBlockingUpload ? null : _openAddSheet,
-        backgroundColor: context.colorScheme.primary,
-        icon:  Icon(Icons.add,color: context.colorScheme.surface,),
-        label: Text(l10n.documentsAdd,style: TextStyle(color: context.colorScheme.surface),),
-      ),
+      backgroundColor: lucy.scaffoldBackground,
       body: RefreshIndicator(
         onRefresh: () => notifier.refresh(context),
         child: state.isLoading && state.documents.isEmpty
@@ -134,10 +185,23 @@ class _DocumentsPageState extends ConsumerState<DocumentsPage> {
             : CustomScrollView(
                 physics: const AlwaysScrollableScrollPhysics(),
                 slivers: [
+                  SliverToBoxAdapter(
+                    child: _DocumentsPageHeader(
+                      title: l10n.documentsTitle,
+                      countLabel: l10n.documentsCount(state.documents.length),
+                      addLabel: l10n.documentsAdd,
+                      onAdd: state.hasBlockingUpload ? null : _openAddSheet,
+                    ),
+                  ),
                   if (state.hasProcessingDocument || state.isUploading)
                     SliverToBoxAdapter(
                       child: Padding(
-                        padding: const EdgeInsets.all(16),
+                        padding: const EdgeInsets.fromLTRB(
+                          LucySpacing.spaceLg,
+                          0,
+                          LucySpacing.spaceLg,
+                          LucySpacing.spaceMd,
+                        ),
                         child: Row(
                           children: [
                             const SizedBox(
@@ -145,7 +209,7 @@ class _DocumentsPageState extends ConsumerState<DocumentsPage> {
                               height: 24,
                               child: CircularProgressIndicator(strokeWidth: 2),
                             ),
-                            const SizedBox(width: 12),
+                            const SizedBox(width: LucySpacing.spaceMd),
                             Expanded(
                               child: Text(
                                 state.isUploading
@@ -161,44 +225,120 @@ class _DocumentsPageState extends ConsumerState<DocumentsPage> {
                   if (state.documents.isEmpty)
                     SliverFillRemaining(
                       hasScrollBody: false,
-                      child: Center(
-                        child: Padding(
-                          padding: const EdgeInsets.all(24),
-                          child: Text(
-                            l10n.documentsEmpty,
-                            textAlign: TextAlign.center,
+                      child: LucyEmptyState(
+                        message: l10n.documentsEmpty,
+                        actionLabel: l10n.documentsAdd,
+                        onAction: state.hasBlockingUpload
+                            ? null
+                            : _openAddSheet,
+                      ),
+                    )
+                  else if (useGrid)
+                    SliverPadding(
+                      padding: const EdgeInsets.fromLTRB(
+                        LucySpacing.spaceLg,
+                        0,
+                        LucySpacing.spaceLg,
+                        LucySpacing.spaceXl,
+                      ),
+                      sliver: SliverGrid(
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2,
+                              mainAxisSpacing: LucySpacing.spaceMd,
+                              crossAxisSpacing: LucySpacing.spaceMd,
+                              mainAxisExtent: 188,
+                            ),
+                        delegate: SliverChildBuilderDelegate(
+                          (context, index) => _buildDocumentCard(
+                            state.documents[index],
+                            state,
+                            notifier,
                           ),
+                          childCount: state.documents.length,
                         ),
                       ),
                     )
                   else
-                    SliverList(
-                      delegate: SliverChildBuilderDelegate((context, index) {
-                        final doc = state.documents[index];
-                        final isBusy = state.busyDocumentId == doc.id;
-                        return DocumentListTile(
-                          key: ValueKey(doc.id),
-                          document: doc,
-                          activeSearchCount: state.activeSearchCount,
-                          isBusy: isBusy,
-                          onSearchToggled: (enabled) =>
-                              notifier.toggleSearchEnabled(
-                                context,
-                                documentId: doc.id,
-                                enabled: enabled,
-                              ),
-                          onDownload: () =>
-                              notifier.downloadDocument(context, doc.id),
-                          onDelete: () => _confirmDelete(doc.id, doc.title),
-                          onReprocess: doc.status == DocumentStatus.failed
-                              ? () =>
-                                    notifier.reprocessDocument(context, doc.id)
-                              : null,
-                        );
-                      }, childCount: state.documents.length),
+                    SliverPadding(
+                      padding: const EdgeInsets.fromLTRB(
+                        LucySpacing.spaceLg,
+                        0,
+                        LucySpacing.spaceLg,
+                        LucySpacing.spaceXl,
+                      ),
+                      sliver: SliverList.separated(
+                        itemCount: state.documents.length,
+                        separatorBuilder: (context, index) =>
+                            const SizedBox(height: LucySpacing.spaceMd),
+                        itemBuilder: (context, index) => _buildDocumentCard(
+                          state.documents[index],
+                          state,
+                          notifier,
+                        ),
+                      ),
                     ),
                 ],
               ),
+      ),
+    );
+  }
+}
+
+class _DocumentsPageHeader extends StatelessWidget {
+  const _DocumentsPageHeader({
+    required this.title,
+    required this.countLabel,
+    required this.addLabel,
+    this.onAdd,
+  });
+
+  final String title;
+  final String countLabel;
+  final String addLabel;
+  final VoidCallback? onAdd;
+
+  @override
+  Widget build(BuildContext context) {
+    final scheme = context.colorScheme;
+    final lucy = context.lucyTheme;
+
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(
+        LucySpacing.spaceLg,
+        LucySpacing.spaceXl,
+        LucySpacing.spaceLg,
+        LucySpacing.spaceLg,
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: context.textTheme.headlineLarge?.copyWith(
+                    color: scheme.onSurface,
+                  ),
+                ),
+                const SizedBox(height: LucySpacing.spaceXs),
+                Text(
+                  countLabel,
+                  style: context.textTheme.labelMedium?.copyWith(
+                    color: lucy.muted,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          FilledButton.icon(
+            onPressed: onAdd,
+            icon: const Icon(Icons.add, size: 18),
+            label: Text(addLabel),
+          ),
+        ],
       ),
     );
   }

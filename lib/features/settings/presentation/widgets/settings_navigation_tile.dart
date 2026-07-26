@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/constants/lucy_constants.dart';
+import '../../../../core/constants/lucy_spacing.dart';
 import '../../../../core/extensions/context.dart';
+import '../../../../core/theme/lucy_theme_extensions.dart';
 
-/// Tappable settings row — [ColorScheme.primary] + [ColorScheme.surface] only.
+/// Tappable settings row with Lucy tokens.
 class SettingsNavigationTile extends StatelessWidget {
   const SettingsNavigationTile({
     super.key,
@@ -23,6 +24,7 @@ class SettingsNavigationTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final scheme = context.colorScheme;
+    final lucy = context.lucyTheme;
 
     return Material(
       color: scheme.surface,
@@ -30,54 +32,47 @@ class SettingsNavigationTile extends StatelessWidget {
         onTap: onTap,
         child: Padding(
           padding: const EdgeInsets.symmetric(
-            horizontal: LucyConstants.kContainerPaddingMedium,
-            vertical: LucyConstants.kContainerPaddingMedium,
+            horizontal: LucySpacing.spaceLg,
+            vertical: LucySpacing.spaceMd,
           ),
           child: Row(
             children: [
               Container(
-                padding: const EdgeInsets.all(LucyConstants.kSpacingMedium),
+                width: 40,
+                height: 40,
                 decoration: BoxDecoration(
-                  color: scheme.primary,
-                  borderRadius: BorderRadius.circular(
-                    LucyConstants.kBorderRadiusSmall,
-                  ),
+                  color: scheme.primary.withValues(alpha: 0.1),
+                  borderRadius: BorderRadius.circular(LucySpacing.radiusMedium),
                 ),
-                child: Icon(
-                  icon,
-                  color: scheme.surface,
-                  size: LucyConstants.kIconMedium,
-                ),
+                child: Icon(icon, color: scheme.primary, size: 20),
               ),
-              const SizedBox(width: LucyConstants.kSpacingHigh),
+              const SizedBox(width: LucySpacing.spaceMd),
               Expanded(
                 child: Text(
                   label,
                   style: context.textTheme.bodyLarge?.copyWith(
-                    color: scheme.primary,
+                    color: scheme.onSurface,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
               ),
               if (trailingText != null) ...[
                 Flexible(
+                  flex: 2,
                   child: Text(
                     trailingText!,
                     textAlign: TextAlign.end,
+                    maxLines: 2,
                     overflow: TextOverflow.ellipsis,
-                    style: context.textTheme.bodyMedium?.copyWith(
-                      color: scheme.primary,
+                    style: context.textTheme.bodySmall?.copyWith(
+                      color: lucy.muted,
                     ),
                   ),
                 ),
-                const SizedBox(width: LucyConstants.kSpacingLow),
+                const SizedBox(width: LucySpacing.spaceSm),
               ],
               if (showChevron)
-                Icon(
-                  Icons.chevron_right,
-                  color: scheme.primary,
-                  size: LucyConstants.kIconMedium,
-                ),
+                Icon(Icons.chevron_right, color: lucy.muted, size: 20),
             ],
           ),
         ),

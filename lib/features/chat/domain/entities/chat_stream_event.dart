@@ -1,3 +1,4 @@
+import 'chat_learning_session_created.dart';
 import 'chat_message.dart';
 import 'chat_source.dart';
 
@@ -22,6 +23,12 @@ final class ChatStreamSourcesEvent extends ChatStreamEvent {
   const ChatStreamSourcesEvent(this.sources);
 
   final List<ChatSource> sources;
+}
+
+final class ChatStreamLearningSessionCreatedEvent extends ChatStreamEvent {
+  const ChatStreamLearningSessionCreatedEvent(this.session);
+
+  final ChatLearningSessionCreated session;
 }
 
 final class ChatStreamDoneEvent extends ChatStreamEvent {

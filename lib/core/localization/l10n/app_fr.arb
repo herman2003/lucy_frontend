@@ -160,6 +160,8 @@
   "documentsTitle": "Documents",
   "chatTitle": "Chat",
   "quizTitle": "Quiz",
+  "quizPageTitle": "Quiz & cartes mémoire",
+  "quizPageSubtitle": "Générés depuis vos documents",
   "settingsTitle": "Paramètres",
   "settingsSectionAccount": "Compte",
   "settingsSectionLearnerProfile": "Profil d'apprentissage",
@@ -182,6 +184,18 @@
   "settingsAiConfigTitle": "Configuration Lucy",
   "settingsAiConfigHubHint": "Profil IA, langue",
   "settingsAiConfigIntro": "Personnalisez comment Lucy vous accompagne dans l'apprentissage.",
+  "settingsRemindersTitle": "Rappels",
+  "settingsRemindersHubHint": "Notifications et révisions",
+  "settingsRemindersIntro": "Choisissez quand et sur quels sujets Lucy peut vous rappeler de réviser.",
+  "settingsRemindersEnabledLabel": "Activer les rappels",
+  "settingsRemindersEnabledSubtitle": "Prépare les notifications quotidiennes sur cet appareil.",
+  "settingsRemindersTimeLabel": "Heure du rappel",
+  "settingsRemindersFlashcardsLabel": "Cartes à revoir",
+  "settingsRemindersRevisionPlanLabel": "Plan de révision (J-N)",
+  "settingsRemindersWeakQuizLabel": "Quiz et points faibles",
+  "settingsRemindersLoadError": "Impossible de charger les préférences de rappel.",
+  "settingsRemindersSaveError": "Impossible d'enregistrer les préférences de rappel.",
+  "settingsSectionLearning": "Apprentissage",
   "settingsFirstNameLabel": "Prénom",
   "settingsLastNameLabel": "Nom",
   "settingsFirstNameRequired": "Le prénom est requis.",
@@ -417,6 +431,14 @@
   "documentsAdd": "Ajouter",
   "documentsAddTitle": "Ajouter un document",
   "documentsEmpty": "Aucun document pour l’instant. Ajoutez un PDF, Word ou fichier texte pour commencer.",
+  "documentsCount": "{count, plural, =0{Aucun document} one{{count} document} other{{count} documents}}",
+  "@documentsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "documentsProcessingHint": "Lucy traite votre document. Cela peut prendre un moment.",
   "documentsPickFile": "Choisir un fichier",
   "documentsPickFileRequired": "Veuillez choisir un fichier à téléverser.",
@@ -443,6 +465,7 @@
     "description": "Default title for a new chat thread"
   },
   "chatNewConversation": "Nouvelle conversation",
+  "chatConversationsTitle": "Conversations",
   "chatShowThreadList": "Liste des conversations",
   "chatSourcesTitle": "Sources",
   "chatSourcePages": "Pages {pageStart}–{pageEnd}",
@@ -457,7 +480,47 @@
     }
   },
   "chatEmptyHint": "Posez une question sur vos documents actifs.",
-  "chatComposerHint": "Votre message…",
+  "chatEmptyDescription": "Posez une question sur vos documents actifs et je réponds, sources à l'appui.",
+  "chatGreeting": "Bonjour {name}",
+  "@chatGreeting": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "chatGreetingFallback": "Bonjour",
+  "chatConversationSubtitle": "Réponses basées sur vos documents actifs",
+  "chatConversationSubtitleMobile": "Réponses sourcées",
+  "chatSourceLabel": "Source",
+  "chatActiveDocumentsCount": "{count, plural, =0{Aucun document actif} one{{count} document actif} other{{count} documents actifs}}",
+  "@chatActiveDocumentsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "chatSuggestionSummarize": "Résume mes documents",
+  "chatSuggestionQuiz": "Propose-moi un quiz",
+  "chatSuggestionFlashcards": "Propose-moi des cartes",
+  "chatSuggestionRevisionPlan": "Fais-moi un plan de révision",
+  "chatSuggestionExplain": "Explique un concept clé",
+  "chatQuickChipYes": "Oui",
+  "chatQuickChipYesMessage": "oui",
+  "chatQuickChipCancel": "Annule",
+  "chatQuickChipCancelMessage": "annule",
+  "chatQuickChipAll": "Tout",
+  "chatQuickChipAllMessage": "tout",
+  "chatQuickChipMostImportant": "Les plus importantes",
+  "chatQuickChipMostImportantMessage": "les plus importantes",
+  "chatQuickChipOtherProposal": "Autre proposition",
+  "chatQuickChipOtherProposalMessage": "autre proposition",
+  "chatQuickChipAsYouLike": "Comme tu veux",
+  "chatQuickChipAsYouLikeMessage": "comme tu veux",
+  "chatQuickChipExportRevisionCalendar": "Exporter le calendrier",
+  "chatRevisionCalendarExportFailed": "Impossible d'exporter le calendrier J-N.",
+  "chatComposerHint": "Posez une question sur vos documents actifs…",
   "chatSend": "Envoyer",
   "chatRetry": "Réessayer",
   "chatLoading": "Chargement…",
@@ -471,14 +534,182 @@
   "chatErrorNotFound": "Conversation introuvable.",
   "chatErrorInvalidMessage": "Message invalide.",
   "chatErrorLlmUnavailable": "Lucy est temporairement indisponible. Réessayez plus tard.",
+  "chatErrorServiceUnavailable": "Le service est temporairement inaccessible. Vérifiez votre connexion et réessayez.",
   "chatErrorInvalidResponse": "Réponse invalide du serveur. Réessayez.",
   "chatErrorStreamInProgress": "Un message est déjà en cours de génération.",
   "chatGenericError": "Une erreur est survenue. Réessayez.",
-  "quizEmptyHint": "Générez un quiz à partir de vos documents actifs.",
+  "quizEmptyHint": "Demandez à Lucy dans le chat pour générer un quiz.",
+  "quizLibraryEmptyHint": "Demandez à Lucy dans le chat pour générer un quiz ou des cartes mémoire.",
+  "quizLibraryEmptyActionsHint": "Lucy analysera vos documents et vous guidera dans vos choix.",
+  "quizLibraryGenerateQuiz": "Générer un quiz",
+  "quizLibraryGenerateFlashcards": "Générer des cartes",
+  "quizLibraryHistoryTitle": "Historique",
+  "quizLibraryTypeQuiz": "Quiz",
+  "quizLibraryTypeFlashcards": "Cartes",
+  "quizLibraryStartQuiz": "Démarrer le quiz",
+  "quizLibraryOpenFlashcards": "Ouvrir les cartes",
+  "quizLibraryFlashcardsMeta": "{count, plural, one{{count} carte mémoire} other{{count} cartes mémoire}}",
+  "@quizLibraryFlashcardsMeta": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "quizSessionFormatQcm": "QCM",
+  "quizLibraryOpen": "Ouvrir",
+  "quizLibraryDateToday": "Aujourd'hui",
+  "quizLibraryDateYesterday": "Hier",
+  "quizLibraryDeleteConfirmTitle": "Supprimer la session ?",
+  "quizLibraryDeleteConfirmMessage": "Supprimer « {title} » ? Cette action est irréversible.",
+  "@quizLibraryDeleteConfirmMessage": {
+    "placeholders": {
+      "title": {"type": "String"}
+    }
+  },
+  "quizLibraryDeleteAction": "Supprimer",
+  "quizLibraryDeleteCancel": "Annuler",
+  "quizLibraryLastAttemptMeta": "{correct}/{total} · {date}",
+  "@quizLibraryLastAttemptMeta": {
+    "placeholders": {
+      "correct": { "type": "int" },
+      "total": { "type": "int" },
+      "date": { "type": "String" }
+    }
+  },
+  "learningReminderFlashcardsTitle": "{count, plural, one{{count} carte à revoir aujourd'hui} other{{count} cartes à revoir aujourd'hui}}",
+  "@learningReminderFlashcardsTitle": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "learningReminderFlashcardsMessage": "Reprends ta session {sessionTitle}.",
+  "@learningReminderFlashcardsMessage": {
+    "placeholders": {
+      "sessionTitle": { "type": "String" }
+    }
+  },
+  "learningReminderWeakQuizTitle": "{count, plural, one{{count} question ratée} other{{count} questions ratées}}",
+  "@learningReminderWeakQuizTitle": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "learningReminderWeakQuizMessage": "Dernier score sur {sessionTitle} : {correct}/{total}.",
+  "@learningReminderWeakQuizMessage": {
+    "placeholders": {
+      "sessionTitle": { "type": "String" },
+      "correct": { "type": "int" },
+      "total": { "type": "int" }
+    }
+  },
   "quizComingSoon": "La génération de quiz arrive bientôt.",
+  "quizSessionQuestionCount": "{count, plural, one{{count} question} other{{count} questions}}",
+  "@quizSessionQuestionCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "quizSessionFlashcardCount": "{count, plural, one{{count} carte} other{{count} cartes}}",
+  "@quizSessionFlashcardCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "quizSessionPlaceholderMessage": "La session s'ouvrira ici prochainement.",
+  "chatLearningSessionCardTitle": "Quiz prêt",
+  "chatLearningSessionFlashcardsCardTitle": "Cartes prêtes",
+  "chatLearningSessionQuizSubtitle": "Révisez vos cours avec un quiz interactif.",
+  "chatLearningSessionFlashcardsSubtitle": "Mémorisez les notions clés en un clin d'œil.",
+  "chatLearningSessionStartQuiz": "Commencer le quiz",
+  "chatLearningSessionStartFlashcards": "Voir les cartes",
+  "chatLearningSessionOpen": "Ouvrir",
+  "flashcardsSessionProgress": "Carte {current} / {total}",
+  "@flashcardsSessionProgress": {
+    "placeholders": {
+      "current": {"type": "int"},
+      "total": {"type": "int"}
+    }
+  },
+  "flashcardsSessionFront": "Recto",
+  "flashcardsSessionBack": "Verso",
+  "flashcardsSessionTapToFlip": "↻ Appuyer pour retourner",
+  "flashcardsSessionPrevious": "Précédente",
+  "flashcardsSessionNext": "Suivante",
+  "flashcardsSessionRatePrompt": "Comment te souviens-tu de cette carte ?",
+  "flashcardsSessionRateAgain": "À revoir",
+  "flashcardsSessionRateHard": "Difficile",
+  "flashcardsSessionRateGood": "Bien",
+  "flashcardsSessionRateEasy": "Facile",
+  "flashcardsSessionCompleteTitle": "Session terminée",
+  "flashcardsSessionCompleteMessage": "Reviens quand tes cartes sont à réviser.",
+  "quizSessionProgress": "Question {current} / {total}",
+  "@quizSessionProgress": {
+    "placeholders": {
+      "current": {"type": "int"},
+      "total": {"type": "int"}
+    }
+  },
+  "quizSessionProgressPercent": "{percent} %",
+  "@quizSessionProgressPercent": {
+    "placeholders": {
+      "percent": {"type": "int"}
+    }
+  },
+  "quizSessionCorrect": "Bonne réponse !",
+  "quizSessionIncorrect": "Mauvaise réponse",
+  "quizSessionExplanationTitle": "Explication",
+  "quizSessionNextQuestion": "Question suivante",
+  "quizSessionFinish": "Voir le score",
+  "quizSessionScoreTitle": "Quiz terminé !",
+  "quizSessionScoreSubtitle": "Vous avez répondu correctement à {correct} question(s) sur {total}.",
+  "@quizSessionScoreSubtitle": {
+    "placeholders": {
+      "correct": {"type": "int"},
+      "total": {"type": "int"}
+    }
+  },
+  "quizSessionClose": "Fermer",
+  "quizSessionRetry": "Recommencer",
+  "quizSessionScore": "Score : {correct} / {total}",
+  "@quizSessionScore": {
+    "placeholders": {
+      "correct": {"type": "int"},
+      "total": {"type": "int"}
+    }
+  },
+  "quizSessionWeakPointsTitle": "Renforce tes points faibles",
+  "quizSessionWeakPointsHint": "Lucy peut te préparer des cartes sur les questions où tu t'es trompé.",
+  "quizSessionWeakPointsCta": "Cartes sur mes erreurs",
+  "quizSessionWeakPointsFlashcardsMessage": "Fais-moi des cartes sur mes erreurs au quiz : {topics}",
+  "@quizSessionWeakPointsFlashcardsMessage": {
+    "placeholders": {
+      "topics": {"type": "String"}
+    }
+  },
   "quizNoCorpusTitle": "Aucun document actif",
   "quizNoCorpusMessage": "Activez la recherche sur au moins un document prêt pour générer un quiz.",
   "quizNoCorpusCta": "Aller aux documents",
   "quizLoading": "Chargement…",
-  "quizGenericError": "Une erreur est survenue. Réessayez."
+  "quizGenericError": "Une erreur est survenue. Réessayez.",
+  "learningSessionNotFound": "Cette session est introuvable.",
+  "learningSessionGenerationFailed": "La génération a échoué. Réessayez depuis le chat.",
+  "learningSessionValidationError": "La demande de génération est invalide.",
+  "learningGenericError": "Une erreur est survenue. Réessayez.",
+  "interfaceStyleSectionTitle": "Style d'interface",
+  "interfaceStyleSectionHint": "Change l'ambiance visuelle de Lucy",
+  "interfaceStyleAcademic": "Académique",
+  "interfaceStyleAcademicDescription": "Par défaut",
+  "interfaceStylePremiumDark": "Premium sombre",
+  "interfaceStylePremiumDarkDescription": "Lueur froide",
+  "interfaceStyleMotivant": "Motivant",
+  "interfaceStyleMotivantDescription": "Accents chaleureux",
+  "appearanceSectionTitle": "Apparence",
+  "appearanceLight": "Clair",
+  "appearanceDark": "Sombre",
+  "appearanceSystem": "Système"
 }

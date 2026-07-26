@@ -65,12 +65,18 @@ void main() {
         'Tu es plutôt étudiant, en reconversion, ou tu apprends seul ?';
 
     final repository = FakeOnboardingRepository(
-      validateHandler: ({required locale, required questionId, required answerText, bool fallbackReduced = false}) async {
-        return const ValidateAnswerResult.needsRetry(
-          rephrasedQuestion: rephrased,
-          reason: 'too_vague',
-        );
-      },
+      validateHandler:
+          ({
+            required locale,
+            required questionId,
+            required answerText,
+            bool fallbackReduced = false,
+          }) async {
+            return const ValidateAnswerResult.needsRetry(
+              rephrasedQuestion: rephrased,
+              reason: 'too_vague',
+            );
+          },
     );
 
     await pumpChat(tester, repository: repository);
@@ -82,20 +88,28 @@ void main() {
     await tester.pump(const Duration(milliseconds: 100));
     await tester.pumpAndSettle();
 
-    expect(repository.validateCallCount, 1, reason: 'send button should call validate');
+    expect(
+      repository.validateCallCount,
+      1,
+      reason: 'send button should call validate',
+    );
     expect(find.text(rephrased), findsOneWidget);
     expect(repository.lastQuestionId, OnboardingQuestionIds.qRole);
   });
 
-  testWidgets('shows turnSummary when validate accepts answer', (
-    tester,
-  ) async {
+  testWidgets('shows turnSummary when validate accepts answer', (tester) async {
     const summary = 'Tu es étudiant en biologie en L2.';
 
     final repository = FakeOnboardingRepository(
-      validateHandler: ({required locale, required questionId, required answerText, bool fallbackReduced = false}) async {
-        return const ValidateAnswerResult.accepted(turnSummary: summary);
-      },
+      validateHandler:
+          ({
+            required locale,
+            required questionId,
+            required answerText,
+            bool fallbackReduced = false,
+          }) async {
+            return const ValidateAnswerResult.accepted(turnSummary: summary);
+          },
     );
 
     await pumpChat(tester, repository: repository);

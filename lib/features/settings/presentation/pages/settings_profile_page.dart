@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../../core/constants/lucy_constants.dart';
+import '../../../../core/constants/lucy_spacing.dart';
 import '../../../../core/extensions/context.dart';
 import '../../../../core/router/lucy_route_paths.dart';
 import '../../../../shared/widgets/buttons/lucy_primary_button.dart';
@@ -35,7 +35,10 @@ class _SettingsProfilePageState extends ConsumerState<SettingsProfilePage> {
   void initState() {
     super.initState();
     Future.microtask(() async {
-      await ref.read(settingsProvider.notifier).load();
+      final current = ref.read(settingsProvider);
+      if (current.email.isEmpty && !current.isLoading) {
+        await ref.read(settingsProvider.notifier).load();
+      }
       if (!mounted) {
         return;
       }
@@ -91,7 +94,6 @@ class _SettingsProfilePageState extends ConsumerState<SettingsProfilePage> {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    final scheme = context.colorScheme;
     final state = ref.watch(settingsProvider);
     final displayName = state.fullName.trim().isNotEmpty
         ? state.fullName.trim()
@@ -100,7 +102,7 @@ class _SettingsProfilePageState extends ConsumerState<SettingsProfilePage> {
     if (state.isLoading && state.email.isEmpty) {
       return SettingsSubpageScaffold(
         title: l10n.settingsProfileTitle,
-        body: Center(child: CircularProgressIndicator(color: scheme.primary)),
+        body: const Center(child: CircularProgressIndicator()),
       );
     }
 
@@ -116,7 +118,7 @@ class _SettingsProfilePageState extends ConsumerState<SettingsProfilePage> {
               email: state.email,
               isLoading: false,
             ),
-            const SizedBox(height: LucyConstants.kSpacingMedium),
+            const SizedBox(height: LucySpacing.spaceXl),
             LucyTextField(
               label: l10n.settingsFirstNameLabel,
               initialValue: _firstName,
@@ -124,42 +126,32 @@ class _SettingsProfilePageState extends ConsumerState<SettingsProfilePage> {
               onChanged: (v) => _firstName = v,
               isEnabled: !state.isSaving,
             ),
-            const SizedBox(height: LucyConstants.kSpacingMedium),
+            const SizedBox(height: LucySpacing.spaceMd),
             LucyTextField(
               label: l10n.settingsLastNameLabel,
               initialValue: _lastName,
               onChanged: (v) => _lastName = v,
               isEnabled: !state.isSaving,
             ),
-            const SizedBox(height: LucyConstants.kSpacingMedium),
-            Text(
-              l10n.authEmailLabel,
-              style: context.textTheme.labelLarge?.copyWith(
-                color: scheme.primary,
-              ),
-            ),
-            const SizedBox(height: LucyConstants.kSpacingLow / 2),
-            Text(
-              state.email,
-              style: context.textTheme.bodyLarge?.copyWith(
-                color: scheme.primary,
-              ),
-            ),
-            const SizedBox(height: LucyConstants.kSpacingLow),
+            const SizedBox(height: LucySpacing.spaceMd),
+            Text(l10n.authEmailLabel, style: context.textTheme.labelLarge),
+            const SizedBox(height: LucySpacing.spaceXs),
+            Text(state.email, style: context.textTheme.bodyLarge),
+            const SizedBox(height: LucySpacing.spaceXs),
             Text(
               l10n.settingsEmailReadOnly,
               style: context.textTheme.bodySmall?.copyWith(
-                color: scheme.primary,
+                color: context.colorScheme.onSurfaceVariant,
               ),
             ),
-            const SizedBox(height: LucyConstants.kSpacingLarge),
+            const SizedBox(height: LucySpacing.spaceXl),
             LucyPrimaryButton(
               text: l10n.settingsSaveChanges,
               isLoading: state.isSaving,
               onPressed: state.isSaving ? null : _save,
               width: double.infinity,
             ),
-            const SizedBox(height: LucyConstants.kSpacingLarge),
+            const SizedBox(height: LucySpacing.spaceXl),
             SettingsSectionHeader(title: l10n.settingsSecuritySection),
             SettingsGroup(
               children: [

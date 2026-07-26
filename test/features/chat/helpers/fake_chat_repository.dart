@@ -1,3 +1,4 @@
+import 'package:lucy_frontend/features/chat/domain/entities/chat_learning_session_created.dart';
 import 'package:lucy_frontend/features/chat/domain/entities/chat_eligibility.dart';
 import 'package:lucy_frontend/features/chat/domain/entities/chat_message.dart';
 import 'package:lucy_frontend/features/chat/domain/entities/chat_message_role.dart';
@@ -84,6 +85,9 @@ class FakeChatRepository implements ChatRepository {
     list.add(message);
   }
 
+  /// When true, stream includes a learning session card event (LEARN-03c tests).
+  bool emitLearningSession = false;
+
   @override
   Stream<ChatStreamEvent> streamMessage(String chatId, String content) async* {
     final now = DateTime.now().toUtc().toIso8601String();
@@ -112,6 +116,16 @@ class FakeChatRepository implements ChatRepository {
       ),
     ];
     yield const ChatStreamSourcesEvent(sources);
+
+    if (emitLearningSession) {
+      yield const ChatStreamLearningSessionCreatedEvent(
+        ChatLearningSessionCreated(
+          sessionId: 'learn_test_1',
+          type: 'quiz',
+          title: 'Quiz · test',
+        ),
+      );
+    }
 
     final assistant = fakeAssistantMessage(
       id: 'assistant-$userId',

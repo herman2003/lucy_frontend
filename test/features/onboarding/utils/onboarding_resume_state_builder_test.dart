@@ -10,44 +10,47 @@ import 'package:lucy_frontend/features/onboarding/utils/onboarding_question_ids.
 import 'package:lucy_frontend/features/onboarding/utils/onboarding_resume_state_builder.dart';
 
 void main() {
-  test('buildOnboardingResumeState restores threads and opens next step', () async {
-    final l10n = await AppLocalizations.delegate.load(const Locale('fr'));
+  test(
+    'buildOnboardingResumeState restores threads and opens next step',
+    () async {
+      final l10n = await AppLocalizations.delegate.load(const Locale('fr'));
 
-    final state = buildOnboardingResumeState(
-      l10n: l10n,
-      progress: const OnboardingResumeProgress(
-        onboardingStatus: 'in_progress',
-        transcript: [
-          OnboardingTranscriptTurn(
-            questionId: OnboardingQuestionIds.qRole,
-            questionText: 'Question rôle',
-            answerText: 'Je suis étudiant',
-            confirmedAt: '2026-01-01T00:00:00Z',
-          ),
-          OnboardingTranscriptTurn(
-            questionId: OnboardingQuestionIds.qDomains,
-            questionText: 'Question domaines',
-            answerText: 'Sciences',
-            confirmedAt: '2026-01-01T00:01:00Z',
-          ),
-        ],
-      ),
-    );
+      final state = buildOnboardingResumeState(
+        l10n: l10n,
+        progress: const OnboardingResumeProgress(
+          onboardingStatus: 'in_progress',
+          transcript: [
+            OnboardingTranscriptTurn(
+              questionId: OnboardingQuestionIds.qRole,
+              questionText: 'Question rôle',
+              answerText: 'Je suis étudiant',
+              confirmedAt: '2026-01-01T00:00:00Z',
+            ),
+            OnboardingTranscriptTurn(
+              questionId: OnboardingQuestionIds.qDomains,
+              questionText: 'Question domaines',
+              answerText: 'Sciences',
+              confirmedAt: '2026-01-01T00:01:00Z',
+            ),
+          ],
+        ),
+      );
 
-    expect(state.currentStepIndex, 2);
-    expect(state.currentQuestionId, OnboardingQuestionIds.qGoal);
-    expect(state.completedTurns, hasLength(2));
-    expect(
-      state.messagesForStep(0).map((m) => m.text).toList(),
-      ['Question rôle', 'Je suis étudiant'],
-    );
-    expect(
-      state.messagesForStep(1).map((m) => m.text).toList(),
-      ['Question domaines', 'Sciences'],
-    );
-    expect(state.messagesForStep(2), isNotEmpty);
-    expect(state.phase, OnboardingChatPhase.awaitingAnswer);
-  });
+      expect(state.currentStepIndex, 2);
+      expect(state.currentQuestionId, OnboardingQuestionIds.qGoal);
+      expect(state.completedTurns, hasLength(2));
+      expect(state.messagesForStep(0).map((m) => m.text).toList(), [
+        'Question rôle',
+        'Je suis étudiant',
+      ]);
+      expect(state.messagesForStep(1).map((m) => m.text).toList(), [
+        'Question domaines',
+        'Sciences',
+      ]);
+      expect(state.messagesForStep(2), isNotEmpty);
+      expect(state.phase, OnboardingChatPhase.awaitingAnswer);
+    },
+  );
 
   test(
     'buildOnboardingResumeState restores confirm screen when awaiting_final_confirm',

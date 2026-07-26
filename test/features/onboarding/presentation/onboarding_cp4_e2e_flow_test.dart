@@ -37,9 +37,17 @@ void main() {
 
     final authRepository = FakeAuthRepository(null);
     final onboardingRepository = FakeOnboardingRepository(
-      validateHandler: ({required locale, required questionId, required answerText, bool fallbackReduced = false}) async {
-        return const ValidateAnswerResult.accepted(turnSummary: 'Résumé accepté.');
-      },
+      validateHandler:
+          ({
+            required locale,
+            required questionId,
+            required answerText,
+            bool fallbackReduced = false,
+          }) async {
+            return const ValidateAnswerResult.accepted(
+              turnSummary: 'Résumé accepté.',
+            );
+          },
       analyzeHandler: ({required locale, bool profileReduced = false}) async {
         return const OnboardingAnalyzeResult.success(
           learnerProfile: LearnerProfile(
@@ -94,7 +102,10 @@ void main() {
     expect(authRepository.isConfigured, isFalse);
 
     for (var step = 0; step < OnboardingQuestionIds.stepCount; step++) {
-      await tester.enterText(find.byType(TextField), 'Réponse détaillée tour ${step + 1}.');
+      await tester.enterText(
+        find.byType(TextField),
+        'Réponse détaillée tour ${step + 1}.',
+      );
       await tester.pump();
       await tester.tap(find.text('Envoyer'));
       await tester.pump();
@@ -107,7 +118,10 @@ void main() {
       await tester.pumpAndSettle();
     }
 
-    expect(onboardingRepository.confirmCallCount, OnboardingQuestionIds.stepCount);
+    expect(
+      onboardingRepository.confirmCallCount,
+      OnboardingQuestionIds.stepCount,
+    );
     expect(onboardingRepository.analyzeCallCount, 1);
     expect(find.byType(OnboardingConfirmPage), findsOneWidget);
     expect(find.text('Tu prépares un examen en sciences.'), findsOneWidget);

@@ -22,7 +22,7 @@ class OnboardingUserBubble extends StatelessWidget {
             constraints: BoxConstraints(
               maxWidth:
                   MediaQuery.sizeOf(context).width *
-                  LucyChatConstants.kMaxBubbleWidthFactor,
+                  LucyChatConstants.kUserMaxBubbleWidthFactor,
             ),
             padding: const EdgeInsets.symmetric(
               horizontal: LucyConstants.kSpacingMedium,
@@ -34,15 +34,15 @@ class OnboardingUserBubble extends StatelessWidget {
             ),
             child: Text(
               text,
-              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                color: Colors.white,
-              ),
+              style: Theme.of(
+                context,
+              ).textTheme.bodyLarge?.copyWith(color: Colors.white),
             ),
           ),
         ),
         const SizedBox(width: LucyConstants.kSpacingLow),
         CircleAvatar(
-          radius: LucyChatConstants.kAvatarSize / 2,
+          radius: LucyChatConstants.kLucyAvatarSize / 2,
           backgroundColor: scheme.primary,
           child: Icon(
             Icons.person_outline,

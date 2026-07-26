@@ -364,6 +364,18 @@ abstract class AppLocalizations {
   /// **'Quiz'**
   String get quizTitle;
 
+  /// No description provided for @quizPageTitle.
+  ///
+  /// In de, this message translates to:
+  /// **'Quiz & Karteikarten'**
+  String get quizPageTitle;
+
+  /// No description provided for @quizPageSubtitle.
+  ///
+  /// In de, this message translates to:
+  /// **'Aus Ihren Dokumenten generiert'**
+  String get quizPageSubtitle;
+
   /// No description provided for @settingsTitle.
   ///
   /// In de, this message translates to:
@@ -495,6 +507,78 @@ abstract class AppLocalizations {
   /// In de, this message translates to:
   /// **'Passen Sie an, wie Lucy Sie beim Lernen begleitet.'**
   String get settingsAiConfigIntro;
+
+  /// No description provided for @settingsRemindersTitle.
+  ///
+  /// In de, this message translates to:
+  /// **'Erinnerungen'**
+  String get settingsRemindersTitle;
+
+  /// No description provided for @settingsRemindersHubHint.
+  ///
+  /// In de, this message translates to:
+  /// **'Benachrichtigungen und Wiederholungen'**
+  String get settingsRemindersHubHint;
+
+  /// No description provided for @settingsRemindersIntro.
+  ///
+  /// In de, this message translates to:
+  /// **'Wählen Sie, wann und wozu Lucy Sie ans Lernen erinnert.'**
+  String get settingsRemindersIntro;
+
+  /// No description provided for @settingsRemindersEnabledLabel.
+  ///
+  /// In de, this message translates to:
+  /// **'Erinnerungen aktivieren'**
+  String get settingsRemindersEnabledLabel;
+
+  /// No description provided for @settingsRemindersEnabledSubtitle.
+  ///
+  /// In de, this message translates to:
+  /// **'Richtet tägliche Benachrichtigungen auf diesem Gerät ein.'**
+  String get settingsRemindersEnabledSubtitle;
+
+  /// No description provided for @settingsRemindersTimeLabel.
+  ///
+  /// In de, this message translates to:
+  /// **'Erinnerungszeit'**
+  String get settingsRemindersTimeLabel;
+
+  /// No description provided for @settingsRemindersFlashcardsLabel.
+  ///
+  /// In de, this message translates to:
+  /// **'Karten zum Wiederholen'**
+  String get settingsRemindersFlashcardsLabel;
+
+  /// No description provided for @settingsRemindersRevisionPlanLabel.
+  ///
+  /// In de, this message translates to:
+  /// **'Lernplan (J-N)'**
+  String get settingsRemindersRevisionPlanLabel;
+
+  /// No description provided for @settingsRemindersWeakQuizLabel.
+  ///
+  /// In de, this message translates to:
+  /// **'Quiz und Schwachstellen'**
+  String get settingsRemindersWeakQuizLabel;
+
+  /// No description provided for @settingsRemindersLoadError.
+  ///
+  /// In de, this message translates to:
+  /// **'Erinnerungseinstellungen konnten nicht geladen werden.'**
+  String get settingsRemindersLoadError;
+
+  /// No description provided for @settingsRemindersSaveError.
+  ///
+  /// In de, this message translates to:
+  /// **'Erinnerungseinstellungen konnten nicht gespeichert werden.'**
+  String get settingsRemindersSaveError;
+
+  /// No description provided for @settingsSectionLearning.
+  ///
+  /// In de, this message translates to:
+  /// **'Lernen'**
+  String get settingsSectionLearning;
 
   /// No description provided for @settingsFirstNameLabel.
   ///
@@ -1252,6 +1336,12 @@ abstract class AppLocalizations {
   /// **'Noch keine Dokumente. Fügen Sie eine PDF-, Word- oder Textdatei hinzu.'**
   String get documentsEmpty;
 
+  /// No description provided for @documentsCount.
+  ///
+  /// In de, this message translates to:
+  /// **'{count, plural, =0{Keine Dokumente} one{{count} Dokument} other{{count} Dokumente}}'**
+  String documentsCount(int count);
+
   /// No description provided for @documentsProcessingHint.
   ///
   /// In de, this message translates to:
@@ -1348,6 +1438,12 @@ abstract class AppLocalizations {
   /// **'Neue Unterhaltung'**
   String get chatNewConversation;
 
+  /// No description provided for @chatConversationsTitle.
+  ///
+  /// In de, this message translates to:
+  /// **'Unterhaltungen'**
+  String get chatConversationsTitle;
+
   /// No description provided for @chatShowThreadList.
   ///
   /// In de, this message translates to:
@@ -1372,10 +1468,166 @@ abstract class AppLocalizations {
   /// **'Stellen Sie eine Frage zu Ihren aktiven Dokumenten.'**
   String get chatEmptyHint;
 
+  /// No description provided for @chatEmptyDescription.
+  ///
+  /// In de, this message translates to:
+  /// **'Stellen Sie eine Frage zu Ihren aktiven Dokumenten — ich antworte mit Quellenangaben.'**
+  String get chatEmptyDescription;
+
+  /// No description provided for @chatGreeting.
+  ///
+  /// In de, this message translates to:
+  /// **'Hallo {name}'**
+  String chatGreeting(String name);
+
+  /// No description provided for @chatGreetingFallback.
+  ///
+  /// In de, this message translates to:
+  /// **'Hallo'**
+  String get chatGreetingFallback;
+
+  /// No description provided for @chatConversationSubtitle.
+  ///
+  /// In de, this message translates to:
+  /// **'Antworten basierend auf Ihren aktiven Dokumenten'**
+  String get chatConversationSubtitle;
+
+  /// No description provided for @chatConversationSubtitleMobile.
+  ///
+  /// In de, this message translates to:
+  /// **'Quellenbasierte Antworten'**
+  String get chatConversationSubtitleMobile;
+
+  /// No description provided for @chatSourceLabel.
+  ///
+  /// In de, this message translates to:
+  /// **'Quelle'**
+  String get chatSourceLabel;
+
+  /// No description provided for @chatActiveDocumentsCount.
+  ///
+  /// In de, this message translates to:
+  /// **'{count, plural, =0{Keine aktiven Dokumente} one{{count} aktives Dokument} other{{count} aktive Dokumente}}'**
+  String chatActiveDocumentsCount(int count);
+
+  /// No description provided for @chatSuggestionSummarize.
+  ///
+  /// In de, this message translates to:
+  /// **'Fasse meine Dokumente zusammen'**
+  String get chatSuggestionSummarize;
+
+  /// No description provided for @chatSuggestionQuiz.
+  ///
+  /// In de, this message translates to:
+  /// **'Schlage ein Quiz vor'**
+  String get chatSuggestionQuiz;
+
+  /// No description provided for @chatSuggestionFlashcards.
+  ///
+  /// In de, this message translates to:
+  /// **'Schlage Karteikarten vor'**
+  String get chatSuggestionFlashcards;
+
+  /// No description provided for @chatSuggestionRevisionPlan.
+  ///
+  /// In de, this message translates to:
+  /// **'Erstelle einen Lernplan'**
+  String get chatSuggestionRevisionPlan;
+
+  /// No description provided for @chatSuggestionExplain.
+  ///
+  /// In de, this message translates to:
+  /// **'Erkläre ein Schlüsselkonzept'**
+  String get chatSuggestionExplain;
+
+  /// No description provided for @chatQuickChipYes.
+  ///
+  /// In de, this message translates to:
+  /// **'Ja'**
+  String get chatQuickChipYes;
+
+  /// No description provided for @chatQuickChipYesMessage.
+  ///
+  /// In de, this message translates to:
+  /// **'ja'**
+  String get chatQuickChipYesMessage;
+
+  /// No description provided for @chatQuickChipCancel.
+  ///
+  /// In de, this message translates to:
+  /// **'Abbrechen'**
+  String get chatQuickChipCancel;
+
+  /// No description provided for @chatQuickChipCancelMessage.
+  ///
+  /// In de, this message translates to:
+  /// **'abbrechen'**
+  String get chatQuickChipCancelMessage;
+
+  /// No description provided for @chatQuickChipAll.
+  ///
+  /// In de, this message translates to:
+  /// **'Alle'**
+  String get chatQuickChipAll;
+
+  /// No description provided for @chatQuickChipAllMessage.
+  ///
+  /// In de, this message translates to:
+  /// **'alle'**
+  String get chatQuickChipAllMessage;
+
+  /// No description provided for @chatQuickChipMostImportant.
+  ///
+  /// In de, this message translates to:
+  /// **'Wichtigsten'**
+  String get chatQuickChipMostImportant;
+
+  /// No description provided for @chatQuickChipMostImportantMessage.
+  ///
+  /// In de, this message translates to:
+  /// **'wichtigsten'**
+  String get chatQuickChipMostImportantMessage;
+
+  /// No description provided for @chatQuickChipOtherProposal.
+  ///
+  /// In de, this message translates to:
+  /// **'Andere Vorschläge'**
+  String get chatQuickChipOtherProposal;
+
+  /// No description provided for @chatQuickChipOtherProposalMessage.
+  ///
+  /// In de, this message translates to:
+  /// **'andere Vorschläge'**
+  String get chatQuickChipOtherProposalMessage;
+
+  /// No description provided for @chatQuickChipAsYouLike.
+  ///
+  /// In de, this message translates to:
+  /// **'Wie du willst'**
+  String get chatQuickChipAsYouLike;
+
+  /// No description provided for @chatQuickChipAsYouLikeMessage.
+  ///
+  /// In de, this message translates to:
+  /// **'wie du willst'**
+  String get chatQuickChipAsYouLikeMessage;
+
+  /// No description provided for @chatQuickChipExportRevisionCalendar.
+  ///
+  /// In de, this message translates to:
+  /// **'Kalender exportieren'**
+  String get chatQuickChipExportRevisionCalendar;
+
+  /// No description provided for @chatRevisionCalendarExportFailed.
+  ///
+  /// In de, this message translates to:
+  /// **'Der J-N-Lernkalender konnte nicht exportiert werden.'**
+  String get chatRevisionCalendarExportFailed;
+
   /// No description provided for @chatComposerHint.
   ///
   /// In de, this message translates to:
-  /// **'Ihre Nachricht…'**
+  /// **'Stellen Sie eine Frage zu Ihren aktiven Dokumenten…'**
   String get chatComposerHint;
 
   /// No description provided for @chatSend.
@@ -1456,6 +1708,12 @@ abstract class AppLocalizations {
   /// **'Lucy ist vorübergehend nicht verfügbar. Versuchen Sie es später erneut.'**
   String get chatErrorLlmUnavailable;
 
+  /// No description provided for @chatErrorServiceUnavailable.
+  ///
+  /// In de, this message translates to:
+  /// **'Der Dienst ist vorübergehend nicht erreichbar. Überprüfen Sie Ihre Verbindung und versuchen Sie es erneut.'**
+  String get chatErrorServiceUnavailable;
+
   /// No description provided for @chatErrorInvalidResponse.
   ///
   /// In de, this message translates to:
@@ -1477,14 +1735,390 @@ abstract class AppLocalizations {
   /// No description provided for @quizEmptyHint.
   ///
   /// In de, this message translates to:
-  /// **'Erstellen Sie ein Quiz aus Ihren aktiven Dokumenten.'**
+  /// **'Bitten Sie Lucy im Chat, ein Quiz zu erstellen.'**
   String get quizEmptyHint;
+
+  /// No description provided for @quizLibraryEmptyHint.
+  ///
+  /// In de, this message translates to:
+  /// **'Bitten Sie Lucy im Chat, ein Quiz oder Karteikarten zu erstellen.'**
+  String get quizLibraryEmptyHint;
+
+  /// No description provided for @quizLibraryEmptyActionsHint.
+  ///
+  /// In de, this message translates to:
+  /// **'Lucy analysiert deine Dokumente und führt dich durch die Auswahl.'**
+  String get quizLibraryEmptyActionsHint;
+
+  /// No description provided for @quizLibraryGenerateQuiz.
+  ///
+  /// In de, this message translates to:
+  /// **'Quiz erstellen'**
+  String get quizLibraryGenerateQuiz;
+
+  /// No description provided for @quizLibraryGenerateFlashcards.
+  ///
+  /// In de, this message translates to:
+  /// **'Karteikarten erstellen'**
+  String get quizLibraryGenerateFlashcards;
+
+  /// No description provided for @quizLibraryHistoryTitle.
+  ///
+  /// In de, this message translates to:
+  /// **'Verlauf'**
+  String get quizLibraryHistoryTitle;
+
+  /// No description provided for @quizLibraryTypeQuiz.
+  ///
+  /// In de, this message translates to:
+  /// **'Quiz'**
+  String get quizLibraryTypeQuiz;
+
+  /// No description provided for @quizLibraryTypeFlashcards.
+  ///
+  /// In de, this message translates to:
+  /// **'Karteikarten'**
+  String get quizLibraryTypeFlashcards;
+
+  /// No description provided for @quizLibraryStartQuiz.
+  ///
+  /// In de, this message translates to:
+  /// **'Quiz starten'**
+  String get quizLibraryStartQuiz;
+
+  /// No description provided for @quizLibraryOpenFlashcards.
+  ///
+  /// In de, this message translates to:
+  /// **'Karteikarten öffnen'**
+  String get quizLibraryOpenFlashcards;
+
+  /// No description provided for @quizLibraryFlashcardsMeta.
+  ///
+  /// In de, this message translates to:
+  /// **'{count, plural, one{{count} Karteikarte} other{{count} Karteikarten}}'**
+  String quizLibraryFlashcardsMeta(int count);
+
+  /// No description provided for @quizSessionFormatQcm.
+  ///
+  /// In de, this message translates to:
+  /// **'MCQ'**
+  String get quizSessionFormatQcm;
+
+  /// No description provided for @quizLibraryOpen.
+  ///
+  /// In de, this message translates to:
+  /// **'Öffnen'**
+  String get quizLibraryOpen;
+
+  /// No description provided for @quizLibraryDateToday.
+  ///
+  /// In de, this message translates to:
+  /// **'Heute'**
+  String get quizLibraryDateToday;
+
+  /// No description provided for @quizLibraryDateYesterday.
+  ///
+  /// In de, this message translates to:
+  /// **'Gestern'**
+  String get quizLibraryDateYesterday;
+
+  /// No description provided for @quizLibraryDeleteConfirmTitle.
+  ///
+  /// In de, this message translates to:
+  /// **'Sitzung löschen?'**
+  String get quizLibraryDeleteConfirmTitle;
+
+  /// No description provided for @quizLibraryDeleteConfirmMessage.
+  ///
+  /// In de, this message translates to:
+  /// **'« {title} » löschen? Diese Aktion kann nicht rückgängig gemacht werden.'**
+  String quizLibraryDeleteConfirmMessage(String title);
+
+  /// No description provided for @quizLibraryDeleteAction.
+  ///
+  /// In de, this message translates to:
+  /// **'Löschen'**
+  String get quizLibraryDeleteAction;
+
+  /// No description provided for @quizLibraryDeleteCancel.
+  ///
+  /// In de, this message translates to:
+  /// **'Abbrechen'**
+  String get quizLibraryDeleteCancel;
+
+  /// No description provided for @quizLibraryLastAttemptMeta.
+  ///
+  /// In de, this message translates to:
+  /// **'{correct}/{total} · {date}'**
+  String quizLibraryLastAttemptMeta(int correct, int total, String date);
+
+  /// No description provided for @learningReminderFlashcardsTitle.
+  ///
+  /// In de, this message translates to:
+  /// **'{count, plural, one{{count} Karte heute zu wiederholen} other{{count} Karten heute zu wiederholen}}'**
+  String learningReminderFlashcardsTitle(int count);
+
+  /// No description provided for @learningReminderFlashcardsMessage.
+  ///
+  /// In de, this message translates to:
+  /// **'Mach weiter mit {sessionTitle}.'**
+  String learningReminderFlashcardsMessage(String sessionTitle);
+
+  /// No description provided for @learningReminderWeakQuizTitle.
+  ///
+  /// In de, this message translates to:
+  /// **'{count, plural, one{{count} falsche Frage} other{{count} falsche Fragen}}'**
+  String learningReminderWeakQuizTitle(int count);
+
+  /// No description provided for @learningReminderWeakQuizMessage.
+  ///
+  /// In de, this message translates to:
+  /// **'Letztes Ergebnis bei {sessionTitle}: {correct}/{total}.'**
+  String learningReminderWeakQuizMessage(
+    String sessionTitle,
+    int correct,
+    int total,
+  );
 
   /// No description provided for @quizComingSoon.
   ///
   /// In de, this message translates to:
   /// **'Die Quiz-Generierung kommt bald.'**
   String get quizComingSoon;
+
+  /// No description provided for @quizSessionQuestionCount.
+  ///
+  /// In de, this message translates to:
+  /// **'{count, plural, one{{count} Frage} other{{count} Fragen}}'**
+  String quizSessionQuestionCount(int count);
+
+  /// No description provided for @quizSessionFlashcardCount.
+  ///
+  /// In de, this message translates to:
+  /// **'{count, plural, one{{count} Karte} other{{count} Karten}}'**
+  String quizSessionFlashcardCount(int count);
+
+  /// No description provided for @quizSessionPlaceholderMessage.
+  ///
+  /// In de, this message translates to:
+  /// **'Diese Sitzung wird hier bald geöffnet.'**
+  String get quizSessionPlaceholderMessage;
+
+  /// No description provided for @chatLearningSessionCardTitle.
+  ///
+  /// In de, this message translates to:
+  /// **'Quiz bereit'**
+  String get chatLearningSessionCardTitle;
+
+  /// No description provided for @chatLearningSessionFlashcardsCardTitle.
+  ///
+  /// In de, this message translates to:
+  /// **'Karteikarten bereit'**
+  String get chatLearningSessionFlashcardsCardTitle;
+
+  /// No description provided for @chatLearningSessionQuizSubtitle.
+  ///
+  /// In de, this message translates to:
+  /// **'Wiederhole deine Kurse mit einem interaktiven Quiz.'**
+  String get chatLearningSessionQuizSubtitle;
+
+  /// No description provided for @chatLearningSessionFlashcardsSubtitle.
+  ///
+  /// In de, this message translates to:
+  /// **'Merke dir die wichtigsten Begriffe im Handumdrehen.'**
+  String get chatLearningSessionFlashcardsSubtitle;
+
+  /// No description provided for @chatLearningSessionStartQuiz.
+  ///
+  /// In de, this message translates to:
+  /// **'Quiz starten'**
+  String get chatLearningSessionStartQuiz;
+
+  /// No description provided for @chatLearningSessionStartFlashcards.
+  ///
+  /// In de, this message translates to:
+  /// **'Karteikarten ansehen'**
+  String get chatLearningSessionStartFlashcards;
+
+  /// No description provided for @chatLearningSessionOpen.
+  ///
+  /// In de, this message translates to:
+  /// **'Öffnen'**
+  String get chatLearningSessionOpen;
+
+  /// No description provided for @flashcardsSessionProgress.
+  ///
+  /// In de, this message translates to:
+  /// **'Karte {current} / {total}'**
+  String flashcardsSessionProgress(int current, int total);
+
+  /// No description provided for @flashcardsSessionFront.
+  ///
+  /// In de, this message translates to:
+  /// **'Vorderseite'**
+  String get flashcardsSessionFront;
+
+  /// No description provided for @flashcardsSessionBack.
+  ///
+  /// In de, this message translates to:
+  /// **'Rückseite'**
+  String get flashcardsSessionBack;
+
+  /// No description provided for @flashcardsSessionTapToFlip.
+  ///
+  /// In de, this message translates to:
+  /// **'↻ Tippen zum Umdrehen'**
+  String get flashcardsSessionTapToFlip;
+
+  /// No description provided for @flashcardsSessionPrevious.
+  ///
+  /// In de, this message translates to:
+  /// **'Zurück'**
+  String get flashcardsSessionPrevious;
+
+  /// No description provided for @flashcardsSessionNext.
+  ///
+  /// In de, this message translates to:
+  /// **'Weiter'**
+  String get flashcardsSessionNext;
+
+  /// No description provided for @flashcardsSessionRatePrompt.
+  ///
+  /// In de, this message translates to:
+  /// **'Wie gut erinnerst du dich an diese Karte?'**
+  String get flashcardsSessionRatePrompt;
+
+  /// No description provided for @flashcardsSessionRateAgain.
+  ///
+  /// In de, this message translates to:
+  /// **'Nochmal'**
+  String get flashcardsSessionRateAgain;
+
+  /// No description provided for @flashcardsSessionRateHard.
+  ///
+  /// In de, this message translates to:
+  /// **'Schwer'**
+  String get flashcardsSessionRateHard;
+
+  /// No description provided for @flashcardsSessionRateGood.
+  ///
+  /// In de, this message translates to:
+  /// **'Gut'**
+  String get flashcardsSessionRateGood;
+
+  /// No description provided for @flashcardsSessionRateEasy.
+  ///
+  /// In de, this message translates to:
+  /// **'Leicht'**
+  String get flashcardsSessionRateEasy;
+
+  /// No description provided for @flashcardsSessionCompleteTitle.
+  ///
+  /// In de, this message translates to:
+  /// **'Sitzung beendet'**
+  String get flashcardsSessionCompleteTitle;
+
+  /// No description provided for @flashcardsSessionCompleteMessage.
+  ///
+  /// In de, this message translates to:
+  /// **'Komm zurück, wenn deine Karten wieder fällig sind.'**
+  String get flashcardsSessionCompleteMessage;
+
+  /// No description provided for @quizSessionProgress.
+  ///
+  /// In de, this message translates to:
+  /// **'Frage {current} / {total}'**
+  String quizSessionProgress(int current, int total);
+
+  /// No description provided for @quizSessionProgressPercent.
+  ///
+  /// In de, this message translates to:
+  /// **'{percent} %'**
+  String quizSessionProgressPercent(int percent);
+
+  /// No description provided for @quizSessionCorrect.
+  ///
+  /// In de, this message translates to:
+  /// **'Richtig!'**
+  String get quizSessionCorrect;
+
+  /// No description provided for @quizSessionIncorrect.
+  ///
+  /// In de, this message translates to:
+  /// **'Falsch'**
+  String get quizSessionIncorrect;
+
+  /// No description provided for @quizSessionExplanationTitle.
+  ///
+  /// In de, this message translates to:
+  /// **'Erklärung'**
+  String get quizSessionExplanationTitle;
+
+  /// No description provided for @quizSessionNextQuestion.
+  ///
+  /// In de, this message translates to:
+  /// **'Nächste Frage'**
+  String get quizSessionNextQuestion;
+
+  /// No description provided for @quizSessionFinish.
+  ///
+  /// In de, this message translates to:
+  /// **'Ergebnis ansehen'**
+  String get quizSessionFinish;
+
+  /// No description provided for @quizSessionScoreTitle.
+  ///
+  /// In de, this message translates to:
+  /// **'Quiz abgeschlossen!'**
+  String get quizSessionScoreTitle;
+
+  /// No description provided for @quizSessionScoreSubtitle.
+  ///
+  /// In de, this message translates to:
+  /// **'Du hast {correct} von {total} Fragen richtig beantwortet.'**
+  String quizSessionScoreSubtitle(int correct, int total);
+
+  /// No description provided for @quizSessionClose.
+  ///
+  /// In de, this message translates to:
+  /// **'Schließen'**
+  String get quizSessionClose;
+
+  /// No description provided for @quizSessionRetry.
+  ///
+  /// In de, this message translates to:
+  /// **'Erneut versuchen'**
+  String get quizSessionRetry;
+
+  /// No description provided for @quizSessionScore.
+  ///
+  /// In de, this message translates to:
+  /// **'Punkte: {correct} / {total}'**
+  String quizSessionScore(int correct, int total);
+
+  /// No description provided for @quizSessionWeakPointsTitle.
+  ///
+  /// In de, this message translates to:
+  /// **'Schwächen gezielt üben'**
+  String get quizSessionWeakPointsTitle;
+
+  /// No description provided for @quizSessionWeakPointsHint.
+  ///
+  /// In de, this message translates to:
+  /// **'Lucy kann Karten zu deinen Fehlern vorbereiten.'**
+  String get quizSessionWeakPointsHint;
+
+  /// No description provided for @quizSessionWeakPointsCta.
+  ///
+  /// In de, this message translates to:
+  /// **'Karten zu meinen Fehlern'**
+  String get quizSessionWeakPointsCta;
+
+  /// No description provided for @quizSessionWeakPointsFlashcardsMessage.
+  ///
+  /// In de, this message translates to:
+  /// **'Erstelle Karten zu meinen Quiz-Fehlern: {topics}'**
+  String quizSessionWeakPointsFlashcardsMessage(String topics);
 
   /// No description provided for @quizNoCorpusTitle.
   ///
@@ -1515,6 +2149,102 @@ abstract class AppLocalizations {
   /// In de, this message translates to:
   /// **'Etwas ist schiefgelaufen. Bitte erneut versuchen.'**
   String get quizGenericError;
+
+  /// No description provided for @learningSessionNotFound.
+  ///
+  /// In de, this message translates to:
+  /// **'Diese Sitzung wurde nicht gefunden.'**
+  String get learningSessionNotFound;
+
+  /// No description provided for @learningSessionGenerationFailed.
+  ///
+  /// In de, this message translates to:
+  /// **'Die Generierung ist fehlgeschlagen. Versuchen Sie es erneut im Chat.'**
+  String get learningSessionGenerationFailed;
+
+  /// No description provided for @learningSessionValidationError.
+  ///
+  /// In de, this message translates to:
+  /// **'Die Generierungsanfrage ist ungültig.'**
+  String get learningSessionValidationError;
+
+  /// No description provided for @learningGenericError.
+  ///
+  /// In de, this message translates to:
+  /// **'Etwas ist schiefgelaufen. Bitte erneut versuchen.'**
+  String get learningGenericError;
+
+  /// No description provided for @interfaceStyleSectionTitle.
+  ///
+  /// In de, this message translates to:
+  /// **'Oberflächenstil'**
+  String get interfaceStyleSectionTitle;
+
+  /// No description provided for @interfaceStyleSectionHint.
+  ///
+  /// In de, this message translates to:
+  /// **'Ändert Lucys visuelle Atmosphäre'**
+  String get interfaceStyleSectionHint;
+
+  /// No description provided for @interfaceStyleAcademic.
+  ///
+  /// In de, this message translates to:
+  /// **'Akademisch'**
+  String get interfaceStyleAcademic;
+
+  /// No description provided for @interfaceStyleAcademicDescription.
+  ///
+  /// In de, this message translates to:
+  /// **'Standard'**
+  String get interfaceStyleAcademicDescription;
+
+  /// No description provided for @interfaceStylePremiumDark.
+  ///
+  /// In de, this message translates to:
+  /// **'Premium dunkel'**
+  String get interfaceStylePremiumDark;
+
+  /// No description provided for @interfaceStylePremiumDarkDescription.
+  ///
+  /// In de, this message translates to:
+  /// **'Kühler Glow'**
+  String get interfaceStylePremiumDarkDescription;
+
+  /// No description provided for @interfaceStyleMotivant.
+  ///
+  /// In de, this message translates to:
+  /// **'Motivierend'**
+  String get interfaceStyleMotivant;
+
+  /// No description provided for @interfaceStyleMotivantDescription.
+  ///
+  /// In de, this message translates to:
+  /// **'Warme Akzente'**
+  String get interfaceStyleMotivantDescription;
+
+  /// No description provided for @appearanceSectionTitle.
+  ///
+  /// In de, this message translates to:
+  /// **'Erscheinungsbild'**
+  String get appearanceSectionTitle;
+
+  /// No description provided for @appearanceLight.
+  ///
+  /// In de, this message translates to:
+  /// **'Hell'**
+  String get appearanceLight;
+
+  /// No description provided for @appearanceDark.
+  ///
+  /// In de, this message translates to:
+  /// **'Dunkel'**
+  String get appearanceDark;
+
+  /// No description provided for @appearanceSystem.
+  ///
+  /// In de, this message translates to:
+  /// **'System'**
+  String get appearanceSystem;
 }
 
 class _AppLocalizationsDelegate

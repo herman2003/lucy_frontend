@@ -49,11 +49,13 @@ void main() {
     );
     addTearDown(container.dispose);
 
-    await container.read(chatMirrorServiceProvider).saveThreads(
-      uid: uid,
-      threads: const [cachedThread],
-      lastActiveChatId: cachedThread.id,
-    );
+    await container
+        .read(chatMirrorServiceProvider)
+        .saveThreads(
+          uid: uid,
+          threads: const [cachedThread],
+          lastActiveChatId: cachedThread.id,
+        );
 
     final notifier = container.read(chatThreadsProvider.notifier);
     await notifier.bootstrap();

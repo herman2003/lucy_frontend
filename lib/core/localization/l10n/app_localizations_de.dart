@@ -147,6 +147,12 @@ class AppLocalizationsDe extends AppLocalizations {
   String get quizTitle => 'Quiz';
 
   @override
+  String get quizPageTitle => 'Quiz & Karteikarten';
+
+  @override
+  String get quizPageSubtitle => 'Aus Ihren Dokumenten generiert';
+
+  @override
   String get settingsTitle => 'Einstellungen';
 
   @override
@@ -217,6 +223,47 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get settingsAiConfigIntro =>
       'Passen Sie an, wie Lucy Sie beim Lernen begleitet.';
+
+  @override
+  String get settingsRemindersTitle => 'Erinnerungen';
+
+  @override
+  String get settingsRemindersHubHint =>
+      'Benachrichtigungen und Wiederholungen';
+
+  @override
+  String get settingsRemindersIntro =>
+      'Wählen Sie, wann und wozu Lucy Sie ans Lernen erinnert.';
+
+  @override
+  String get settingsRemindersEnabledLabel => 'Erinnerungen aktivieren';
+
+  @override
+  String get settingsRemindersEnabledSubtitle =>
+      'Richtet tägliche Benachrichtigungen auf diesem Gerät ein.';
+
+  @override
+  String get settingsRemindersTimeLabel => 'Erinnerungszeit';
+
+  @override
+  String get settingsRemindersFlashcardsLabel => 'Karten zum Wiederholen';
+
+  @override
+  String get settingsRemindersRevisionPlanLabel => 'Lernplan (J-N)';
+
+  @override
+  String get settingsRemindersWeakQuizLabel => 'Quiz und Schwachstellen';
+
+  @override
+  String get settingsRemindersLoadError =>
+      'Erinnerungseinstellungen konnten nicht geladen werden.';
+
+  @override
+  String get settingsRemindersSaveError =>
+      'Erinnerungseinstellungen konnten nicht gespeichert werden.';
+
+  @override
+  String get settingsSectionLearning => 'Lernen';
 
   @override
   String get settingsFirstNameLabel => 'Vorname';
@@ -646,6 +693,18 @@ class AppLocalizationsDe extends AppLocalizations {
       'Noch keine Dokumente. Fügen Sie eine PDF-, Word- oder Textdatei hinzu.';
 
   @override
+  String documentsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Dokumente',
+      one: '$count Dokument',
+      zero: 'Keine Dokumente',
+    );
+    return '$_temp0';
+  }
+
+  @override
   String get documentsProcessingHint =>
       'Lucy verarbeitet Ihr Dokument. Das kann einen Moment dauern.';
 
@@ -698,6 +757,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get chatNewConversation => 'Neue Unterhaltung';
 
   @override
+  String get chatConversationsTitle => 'Unterhaltungen';
+
+  @override
   String get chatShowThreadList => 'Unterhaltungsliste';
 
   @override
@@ -713,7 +775,100 @@ class AppLocalizationsDe extends AppLocalizations {
       'Stellen Sie eine Frage zu Ihren aktiven Dokumenten.';
 
   @override
-  String get chatComposerHint => 'Ihre Nachricht…';
+  String get chatEmptyDescription =>
+      'Stellen Sie eine Frage zu Ihren aktiven Dokumenten — ich antworte mit Quellenangaben.';
+
+  @override
+  String chatGreeting(String name) {
+    return 'Hallo $name';
+  }
+
+  @override
+  String get chatGreetingFallback => 'Hallo';
+
+  @override
+  String get chatConversationSubtitle =>
+      'Antworten basierend auf Ihren aktiven Dokumenten';
+
+  @override
+  String get chatConversationSubtitleMobile => 'Quellenbasierte Antworten';
+
+  @override
+  String get chatSourceLabel => 'Quelle';
+
+  @override
+  String chatActiveDocumentsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count aktive Dokumente',
+      one: '$count aktives Dokument',
+      zero: 'Keine aktiven Dokumente',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get chatSuggestionSummarize => 'Fasse meine Dokumente zusammen';
+
+  @override
+  String get chatSuggestionQuiz => 'Schlage ein Quiz vor';
+
+  @override
+  String get chatSuggestionFlashcards => 'Schlage Karteikarten vor';
+
+  @override
+  String get chatSuggestionRevisionPlan => 'Erstelle einen Lernplan';
+
+  @override
+  String get chatSuggestionExplain => 'Erkläre ein Schlüsselkonzept';
+
+  @override
+  String get chatQuickChipYes => 'Ja';
+
+  @override
+  String get chatQuickChipYesMessage => 'ja';
+
+  @override
+  String get chatQuickChipCancel => 'Abbrechen';
+
+  @override
+  String get chatQuickChipCancelMessage => 'abbrechen';
+
+  @override
+  String get chatQuickChipAll => 'Alle';
+
+  @override
+  String get chatQuickChipAllMessage => 'alle';
+
+  @override
+  String get chatQuickChipMostImportant => 'Wichtigsten';
+
+  @override
+  String get chatQuickChipMostImportantMessage => 'wichtigsten';
+
+  @override
+  String get chatQuickChipOtherProposal => 'Andere Vorschläge';
+
+  @override
+  String get chatQuickChipOtherProposalMessage => 'andere Vorschläge';
+
+  @override
+  String get chatQuickChipAsYouLike => 'Wie du willst';
+
+  @override
+  String get chatQuickChipAsYouLikeMessage => 'wie du willst';
+
+  @override
+  String get chatQuickChipExportRevisionCalendar => 'Kalender exportieren';
+
+  @override
+  String get chatRevisionCalendarExportFailed =>
+      'Der J-N-Lernkalender konnte nicht exportiert werden.';
+
+  @override
+  String get chatComposerHint =>
+      'Stellen Sie eine Frage zu Ihren aktiven Dokumenten…';
 
   @override
   String get chatSend => 'Senden';
@@ -761,6 +916,10 @@ class AppLocalizationsDe extends AppLocalizations {
       'Lucy ist vorübergehend nicht verfügbar. Versuchen Sie es später erneut.';
 
   @override
+  String get chatErrorServiceUnavailable =>
+      'Der Dienst ist vorübergehend nicht erreichbar. Überprüfen Sie Ihre Verbindung und versuchen Sie es erneut.';
+
+  @override
   String get chatErrorInvalidResponse =>
       'Ungültige Serverantwort. Bitte erneut versuchen.';
 
@@ -773,11 +932,268 @@ class AppLocalizationsDe extends AppLocalizations {
       'Etwas ist schiefgelaufen. Bitte erneut versuchen.';
 
   @override
-  String get quizEmptyHint =>
-      'Erstellen Sie ein Quiz aus Ihren aktiven Dokumenten.';
+  String get quizEmptyHint => 'Bitten Sie Lucy im Chat, ein Quiz zu erstellen.';
+
+  @override
+  String get quizLibraryEmptyHint =>
+      'Bitten Sie Lucy im Chat, ein Quiz oder Karteikarten zu erstellen.';
+
+  @override
+  String get quizLibraryEmptyActionsHint =>
+      'Lucy analysiert deine Dokumente und führt dich durch die Auswahl.';
+
+  @override
+  String get quizLibraryGenerateQuiz => 'Quiz erstellen';
+
+  @override
+  String get quizLibraryGenerateFlashcards => 'Karteikarten erstellen';
+
+  @override
+  String get quizLibraryHistoryTitle => 'Verlauf';
+
+  @override
+  String get quizLibraryTypeQuiz => 'Quiz';
+
+  @override
+  String get quizLibraryTypeFlashcards => 'Karteikarten';
+
+  @override
+  String get quizLibraryStartQuiz => 'Quiz starten';
+
+  @override
+  String get quizLibraryOpenFlashcards => 'Karteikarten öffnen';
+
+  @override
+  String quizLibraryFlashcardsMeta(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Karteikarten',
+      one: '$count Karteikarte',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get quizSessionFormatQcm => 'MCQ';
+
+  @override
+  String get quizLibraryOpen => 'Öffnen';
+
+  @override
+  String get quizLibraryDateToday => 'Heute';
+
+  @override
+  String get quizLibraryDateYesterday => 'Gestern';
+
+  @override
+  String get quizLibraryDeleteConfirmTitle => 'Sitzung löschen?';
+
+  @override
+  String quizLibraryDeleteConfirmMessage(String title) {
+    return '« $title » löschen? Diese Aktion kann nicht rückgängig gemacht werden.';
+  }
+
+  @override
+  String get quizLibraryDeleteAction => 'Löschen';
+
+  @override
+  String get quizLibraryDeleteCancel => 'Abbrechen';
+
+  @override
+  String quizLibraryLastAttemptMeta(int correct, int total, String date) {
+    return '$correct/$total · $date';
+  }
+
+  @override
+  String learningReminderFlashcardsTitle(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Karten heute zu wiederholen',
+      one: '$count Karte heute zu wiederholen',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String learningReminderFlashcardsMessage(String sessionTitle) {
+    return 'Mach weiter mit $sessionTitle.';
+  }
+
+  @override
+  String learningReminderWeakQuizTitle(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count falsche Fragen',
+      one: '$count falsche Frage',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String learningReminderWeakQuizMessage(
+    String sessionTitle,
+    int correct,
+    int total,
+  ) {
+    return 'Letztes Ergebnis bei $sessionTitle: $correct/$total.';
+  }
 
   @override
   String get quizComingSoon => 'Die Quiz-Generierung kommt bald.';
+
+  @override
+  String quizSessionQuestionCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Fragen',
+      one: '$count Frage',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String quizSessionFlashcardCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Karten',
+      one: '$count Karte',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get quizSessionPlaceholderMessage =>
+      'Diese Sitzung wird hier bald geöffnet.';
+
+  @override
+  String get chatLearningSessionCardTitle => 'Quiz bereit';
+
+  @override
+  String get chatLearningSessionFlashcardsCardTitle => 'Karteikarten bereit';
+
+  @override
+  String get chatLearningSessionQuizSubtitle =>
+      'Wiederhole deine Kurse mit einem interaktiven Quiz.';
+
+  @override
+  String get chatLearningSessionFlashcardsSubtitle =>
+      'Merke dir die wichtigsten Begriffe im Handumdrehen.';
+
+  @override
+  String get chatLearningSessionStartQuiz => 'Quiz starten';
+
+  @override
+  String get chatLearningSessionStartFlashcards => 'Karteikarten ansehen';
+
+  @override
+  String get chatLearningSessionOpen => 'Öffnen';
+
+  @override
+  String flashcardsSessionProgress(int current, int total) {
+    return 'Karte $current / $total';
+  }
+
+  @override
+  String get flashcardsSessionFront => 'Vorderseite';
+
+  @override
+  String get flashcardsSessionBack => 'Rückseite';
+
+  @override
+  String get flashcardsSessionTapToFlip => '↻ Tippen zum Umdrehen';
+
+  @override
+  String get flashcardsSessionPrevious => 'Zurück';
+
+  @override
+  String get flashcardsSessionNext => 'Weiter';
+
+  @override
+  String get flashcardsSessionRatePrompt =>
+      'Wie gut erinnerst du dich an diese Karte?';
+
+  @override
+  String get flashcardsSessionRateAgain => 'Nochmal';
+
+  @override
+  String get flashcardsSessionRateHard => 'Schwer';
+
+  @override
+  String get flashcardsSessionRateGood => 'Gut';
+
+  @override
+  String get flashcardsSessionRateEasy => 'Leicht';
+
+  @override
+  String get flashcardsSessionCompleteTitle => 'Sitzung beendet';
+
+  @override
+  String get flashcardsSessionCompleteMessage =>
+      'Komm zurück, wenn deine Karten wieder fällig sind.';
+
+  @override
+  String quizSessionProgress(int current, int total) {
+    return 'Frage $current / $total';
+  }
+
+  @override
+  String quizSessionProgressPercent(int percent) {
+    return '$percent %';
+  }
+
+  @override
+  String get quizSessionCorrect => 'Richtig!';
+
+  @override
+  String get quizSessionIncorrect => 'Falsch';
+
+  @override
+  String get quizSessionExplanationTitle => 'Erklärung';
+
+  @override
+  String get quizSessionNextQuestion => 'Nächste Frage';
+
+  @override
+  String get quizSessionFinish => 'Ergebnis ansehen';
+
+  @override
+  String get quizSessionScoreTitle => 'Quiz abgeschlossen!';
+
+  @override
+  String quizSessionScoreSubtitle(int correct, int total) {
+    return 'Du hast $correct von $total Fragen richtig beantwortet.';
+  }
+
+  @override
+  String get quizSessionClose => 'Schließen';
+
+  @override
+  String get quizSessionRetry => 'Erneut versuchen';
+
+  @override
+  String quizSessionScore(int correct, int total) {
+    return 'Punkte: $correct / $total';
+  }
+
+  @override
+  String get quizSessionWeakPointsTitle => 'Schwächen gezielt üben';
+
+  @override
+  String get quizSessionWeakPointsHint =>
+      'Lucy kann Karten zu deinen Fehlern vorbereiten.';
+
+  @override
+  String get quizSessionWeakPointsCta => 'Karten zu meinen Fehlern';
+
+  @override
+  String quizSessionWeakPointsFlashcardsMessage(String topics) {
+    return 'Erstelle Karten zu meinen Quiz-Fehlern: $topics';
+  }
 
   @override
   String get quizNoCorpusTitle => 'Keine aktiven Dokumente';
@@ -795,4 +1211,55 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get quizGenericError =>
       'Etwas ist schiefgelaufen. Bitte erneut versuchen.';
+
+  @override
+  String get learningSessionNotFound => 'Diese Sitzung wurde nicht gefunden.';
+
+  @override
+  String get learningSessionGenerationFailed =>
+      'Die Generierung ist fehlgeschlagen. Versuchen Sie es erneut im Chat.';
+
+  @override
+  String get learningSessionValidationError =>
+      'Die Generierungsanfrage ist ungültig.';
+
+  @override
+  String get learningGenericError =>
+      'Etwas ist schiefgelaufen. Bitte erneut versuchen.';
+
+  @override
+  String get interfaceStyleSectionTitle => 'Oberflächenstil';
+
+  @override
+  String get interfaceStyleSectionHint => 'Ändert Lucys visuelle Atmosphäre';
+
+  @override
+  String get interfaceStyleAcademic => 'Akademisch';
+
+  @override
+  String get interfaceStyleAcademicDescription => 'Standard';
+
+  @override
+  String get interfaceStylePremiumDark => 'Premium dunkel';
+
+  @override
+  String get interfaceStylePremiumDarkDescription => 'Kühler Glow';
+
+  @override
+  String get interfaceStyleMotivant => 'Motivierend';
+
+  @override
+  String get interfaceStyleMotivantDescription => 'Warme Akzente';
+
+  @override
+  String get appearanceSectionTitle => 'Erscheinungsbild';
+
+  @override
+  String get appearanceLight => 'Hell';
+
+  @override
+  String get appearanceDark => 'Dunkel';
+
+  @override
+  String get appearanceSystem => 'System';
 }

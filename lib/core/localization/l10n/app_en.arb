@@ -51,6 +51,8 @@
   "documentsTitle": "Documents",
   "chatTitle": "Chat",
   "quizTitle": "Quiz",
+  "quizPageTitle": "Quiz & flashcards",
+  "quizPageSubtitle": "Generated from your documents",
   "settingsTitle": "Settings",
   "settingsSectionAccount": "Account",
   "settingsSectionLearnerProfile": "Learner profile",
@@ -73,6 +75,18 @@
   "settingsAiConfigTitle": "Lucy configuration",
   "settingsAiConfigHubHint": "AI profile, language",
   "settingsAiConfigIntro": "Customize how Lucy supports your learning.",
+  "settingsRemindersTitle": "Reminders",
+  "settingsRemindersHubHint": "Notifications and reviews",
+  "settingsRemindersIntro": "Choose when and what Lucy should remind you to review.",
+  "settingsRemindersEnabledLabel": "Enable reminders",
+  "settingsRemindersEnabledSubtitle": "Sets up daily notifications on this device.",
+  "settingsRemindersTimeLabel": "Reminder time",
+  "settingsRemindersFlashcardsLabel": "Cards to review",
+  "settingsRemindersRevisionPlanLabel": "Revision plan (J-N)",
+  "settingsRemindersWeakQuizLabel": "Quizzes and weak points",
+  "settingsRemindersLoadError": "Could not load reminder preferences.",
+  "settingsRemindersSaveError": "Could not save reminder preferences.",
+  "settingsSectionLearning": "Learning",
   "settingsFirstNameLabel": "First name",
   "settingsLastNameLabel": "Last name",
   "settingsFirstNameRequired": "First name is required.",
@@ -205,6 +219,14 @@
   "documentsAdd": "Add",
   "documentsAddTitle": "Add a document",
   "documentsEmpty": "No documents yet. Add a PDF, Word, or text file to get started.",
+  "documentsCount": "{count, plural, =0{No documents} one{{count} document} other{{count} documents}}",
+  "@documentsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "documentsProcessingHint": "Lucy is processing your document. This may take a moment.",
   "documentsPickFile": "Choose a file",
   "documentsPickFileRequired": "Please choose a file to upload.",
@@ -231,6 +253,7 @@
     "description": "Default title for a new chat thread"
   },
   "chatNewConversation": "New conversation",
+  "chatConversationsTitle": "Conversations",
   "chatShowThreadList": "Conversation list",
   "chatSourcesTitle": "Sources",
   "chatSourcePages": "Pages {pageStart}–{pageEnd}",
@@ -245,7 +268,47 @@
     }
   },
   "chatEmptyHint": "Ask a question about your active documents.",
-  "chatComposerHint": "Your message…",
+  "chatEmptyDescription": "Ask a question about your active documents and I'll answer with sources.",
+  "chatGreeting": "Hello {name}",
+  "@chatGreeting": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "chatGreetingFallback": "Hello",
+  "chatConversationSubtitle": "Answers based on your active documents",
+  "chatConversationSubtitleMobile": "Sourced answers",
+  "chatSourceLabel": "Source",
+  "chatActiveDocumentsCount": "{count, plural, =0{No active documents} one{{count} active document} other{{count} active documents}}",
+  "@chatActiveDocumentsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "chatSuggestionSummarize": "Summarize my documents",
+  "chatSuggestionQuiz": "Suggest a quiz",
+  "chatSuggestionFlashcards": "Suggest flashcards",
+  "chatSuggestionRevisionPlan": "Create a revision plan",
+  "chatSuggestionExplain": "Explain a key concept",
+  "chatQuickChipYes": "Yes",
+  "chatQuickChipYesMessage": "yes",
+  "chatQuickChipCancel": "Cancel",
+  "chatQuickChipCancelMessage": "cancel",
+  "chatQuickChipAll": "All",
+  "chatQuickChipAllMessage": "all",
+  "chatQuickChipMostImportant": "Most important",
+  "chatQuickChipMostImportantMessage": "most important",
+  "chatQuickChipOtherProposal": "Other suggestions",
+  "chatQuickChipOtherProposalMessage": "other suggestions",
+  "chatQuickChipAsYouLike": "As you like",
+  "chatQuickChipAsYouLikeMessage": "as you like",
+  "chatQuickChipExportRevisionCalendar": "Export calendar",
+  "chatRevisionCalendarExportFailed": "Could not export the J-N revision calendar.",
+  "chatComposerHint": "Ask a question about your active documents…",
   "chatSend": "Send",
   "chatRetry": "Retry",
   "chatLoading": "Loading…",
@@ -259,14 +322,182 @@
   "chatErrorNotFound": "Conversation not found.",
   "chatErrorInvalidMessage": "Invalid message.",
   "chatErrorLlmUnavailable": "Lucy is temporarily unavailable. Try again later.",
+  "chatErrorServiceUnavailable": "The service is temporarily unreachable. Check your connection and try again.",
   "chatErrorInvalidResponse": "Invalid server response. Try again.",
   "chatErrorStreamInProgress": "A reply is already being generated.",
   "chatGenericError": "Something went wrong. Please try again.",
-  "quizEmptyHint": "Generate a quiz from your active documents.",
+  "quizEmptyHint": "Ask Lucy in chat to generate a quiz.",
+  "quizLibraryEmptyHint": "Ask Lucy in chat to generate a quiz or flashcards.",
+  "quizLibraryEmptyActionsHint": "Lucy will analyze your documents and guide you through the choices.",
+  "quizLibraryGenerateQuiz": "Generate a quiz",
+  "quizLibraryGenerateFlashcards": "Generate flashcards",
+  "quizLibraryHistoryTitle": "History",
+  "quizLibraryTypeQuiz": "Quiz",
+  "quizLibraryTypeFlashcards": "Flashcards",
+  "quizLibraryStartQuiz": "Start quiz",
+  "quizLibraryOpenFlashcards": "Open flashcards",
+  "quizLibraryFlashcardsMeta": "{count, plural, one{{count} flashcard} other{{count} flashcards}}",
+  "@quizLibraryFlashcardsMeta": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "quizSessionFormatQcm": "MCQ",
+  "quizLibraryOpen": "Open",
+  "quizLibraryDateToday": "Today",
+  "quizLibraryDateYesterday": "Yesterday",
+  "quizLibraryDeleteConfirmTitle": "Delete session?",
+  "quizLibraryDeleteConfirmMessage": "Delete \"{title}\"? This action cannot be undone.",
+  "@quizLibraryDeleteConfirmMessage": {
+    "placeholders": {
+      "title": {"type": "String"}
+    }
+  },
+  "quizLibraryDeleteAction": "Delete",
+  "quizLibraryDeleteCancel": "Cancel",
+  "quizLibraryLastAttemptMeta": "{correct}/{total} · {date}",
+  "@quizLibraryLastAttemptMeta": {
+    "placeholders": {
+      "correct": { "type": "int" },
+      "total": { "type": "int" },
+      "date": { "type": "String" }
+    }
+  },
+  "learningReminderFlashcardsTitle": "{count, plural, one{{count} card to review today} other{{count} cards to review today}}",
+  "@learningReminderFlashcardsTitle": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "learningReminderFlashcardsMessage": "Pick up your {sessionTitle} session.",
+  "@learningReminderFlashcardsMessage": {
+    "placeholders": {
+      "sessionTitle": { "type": "String" }
+    }
+  },
+  "learningReminderWeakQuizTitle": "{count, plural, one{{count} missed question} other{{count} missed questions}}",
+  "@learningReminderWeakQuizTitle": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "learningReminderWeakQuizMessage": "Last score on {sessionTitle}: {correct}/{total}.",
+  "@learningReminderWeakQuizMessage": {
+    "placeholders": {
+      "sessionTitle": { "type": "String" },
+      "correct": { "type": "int" },
+      "total": { "type": "int" }
+    }
+  },
   "quizComingSoon": "Quiz generation is coming soon.",
+  "quizSessionQuestionCount": "{count, plural, one{{count} question} other{{count} questions}}",
+  "@quizSessionQuestionCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "quizSessionFlashcardCount": "{count, plural, one{{count} flashcard} other{{count} flashcards}}",
+  "@quizSessionFlashcardCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "quizSessionPlaceholderMessage": "This session will open here soon.",
+  "chatLearningSessionCardTitle": "Quiz ready",
+  "chatLearningSessionFlashcardsCardTitle": "Flashcards ready",
+  "chatLearningSessionQuizSubtitle": "Review your courses with an interactive quiz.",
+  "chatLearningSessionFlashcardsSubtitle": "Memorize key concepts in a flash.",
+  "chatLearningSessionStartQuiz": "Start quiz",
+  "chatLearningSessionStartFlashcards": "View flashcards",
+  "chatLearningSessionOpen": "Open",
+  "flashcardsSessionProgress": "Card {current} / {total}",
+  "@flashcardsSessionProgress": {
+    "placeholders": {
+      "current": {"type": "int"},
+      "total": {"type": "int"}
+    }
+  },
+  "flashcardsSessionFront": "Front",
+  "flashcardsSessionBack": "Back",
+  "flashcardsSessionTapToFlip": "↻ Tap to flip",
+  "flashcardsSessionPrevious": "Previous",
+  "flashcardsSessionNext": "Next",
+  "flashcardsSessionRatePrompt": "How well did you remember this card?",
+  "flashcardsSessionRateAgain": "Again",
+  "flashcardsSessionRateHard": "Hard",
+  "flashcardsSessionRateGood": "Good",
+  "flashcardsSessionRateEasy": "Easy",
+  "flashcardsSessionCompleteTitle": "Session complete",
+  "flashcardsSessionCompleteMessage": "Come back when your cards are due again.",
+  "quizSessionProgress": "Question {current} / {total}",
+  "@quizSessionProgress": {
+    "placeholders": {
+      "current": {"type": "int"},
+      "total": {"type": "int"}
+    }
+  },
+  "quizSessionProgressPercent": "{percent}%",
+  "@quizSessionProgressPercent": {
+    "placeholders": {
+      "percent": {"type": "int"}
+    }
+  },
+  "quizSessionCorrect": "Correct!",
+  "quizSessionIncorrect": "Incorrect",
+  "quizSessionExplanationTitle": "Explanation",
+  "quizSessionNextQuestion": "Next question",
+  "quizSessionFinish": "See score",
+  "quizSessionScoreTitle": "Quiz complete!",
+  "quizSessionScoreSubtitle": "You answered {correct} out of {total} questions correctly.",
+  "@quizSessionScoreSubtitle": {
+    "placeholders": {
+      "correct": {"type": "int"},
+      "total": {"type": "int"}
+    }
+  },
+  "quizSessionClose": "Close",
+  "quizSessionRetry": "Try again",
+  "quizSessionScore": "Score: {correct} / {total}",
+  "@quizSessionScore": {
+    "placeholders": {
+      "correct": {"type": "int"},
+      "total": {"type": "int"}
+    }
+  },
+  "quizSessionWeakPointsTitle": "Strengthen your weak points",
+  "quizSessionWeakPointsHint": "Lucy can prepare flashcards on the questions you missed.",
+  "quizSessionWeakPointsCta": "Flashcards on my mistakes",
+  "quizSessionWeakPointsFlashcardsMessage": "Make flashcards on the quiz questions I got wrong: {topics}",
+  "@quizSessionWeakPointsFlashcardsMessage": {
+    "placeholders": {
+      "topics": {"type": "String"}
+    }
+  },
   "quizNoCorpusTitle": "No active documents",
   "quizNoCorpusMessage": "Enable search on at least one ready document to generate a quiz.",
   "quizNoCorpusCta": "Go to documents",
   "quizLoading": "Loading…",
-  "quizGenericError": "Something went wrong. Please try again."
+  "quizGenericError": "Something went wrong. Please try again.",
+  "learningSessionNotFound": "This session could not be found.",
+  "learningSessionGenerationFailed": "Generation failed. Try again from chat.",
+  "learningSessionValidationError": "The generation request is invalid.",
+  "learningGenericError": "Something went wrong. Please try again.",
+  "interfaceStyleSectionTitle": "Interface style",
+  "interfaceStyleSectionHint": "Changes Lucy's visual atmosphere",
+  "interfaceStyleAcademic": "Academic",
+  "interfaceStyleAcademicDescription": "Default",
+  "interfaceStylePremiumDark": "Premium dark",
+  "interfaceStylePremiumDarkDescription": "Cool glow",
+  "interfaceStyleMotivant": "Motivating",
+  "interfaceStyleMotivantDescription": "Warm accents",
+  "appearanceSectionTitle": "Appearance",
+  "appearanceLight": "Light",
+  "appearanceDark": "Dark",
+  "appearanceSystem": "System"
 }

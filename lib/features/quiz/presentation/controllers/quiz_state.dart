@@ -1,5 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../../domain/entities/learning_session_list_item.dart';
+import '../../domain/entities/quiz_attempt.dart';
 import '../../domain/entities/quiz_eligibility.dart';
 
 part 'quiz_state.freezed.dart';
@@ -11,6 +13,9 @@ abstract class QuizState with _$QuizState {
   const factory QuizState({
     @Default(false) bool isLoading,
     QuizEligibility? eligibility,
+    @Default(<LearningSessionListItem>[])
+    List<LearningSessionListItem> sessions,
+    @Default(<String, QuizAttempt>{}) Map<String, QuizAttempt> lastQuizAttempts,
     String? errorCode,
   }) = _QuizState;
 

@@ -3,7 +3,8 @@ import 'package:flutter_test/flutter_test.dart';
 
 /// Overrides [PlatformDispatcher.locale] for widget tests.
 void setTestLocaleOverride(Locale locale) {
-  TestWidgetsFlutterBinding.instance.platformDispatcher.localeTestValue = locale;
+  TestWidgetsFlutterBinding.instance.platformDispatcher.localeTestValue =
+      locale;
 }
 
 /// Default German locale (matches app fallback locale).

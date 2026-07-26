@@ -42,7 +42,7 @@ final class ChatThreadsNotifierProvider
 }
 
 String _$chatThreadsNotifierHash() =>
-    r'4f080aed8d1bd923dc06015da11a82138dda49e7';
+    r'fe5cc4d67f621d33b60353a21f34c7be394dac11';
 
 abstract class _$ChatThreadsNotifier extends $Notifier<ChatThreadsState> {
   ChatThreadsState build();

@@ -1,10 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../../core/constants/lucy_constants.dart';
+import '../../../../core/constants/lucy_spacing.dart';
+import '../../../../core/router/app_router.dart';
+import '../../../../core/router/lucy_route_paths.dart';
+import '../../../../core/signals/pending_chat_outbound_message_holder.dart';
+import '../../../../core/signals/chat_refresh_signal.dart';
 import '../../../../core/extensions/context.dart';
+import '../../../../core/localization/l10n/app_localizations.dart';
+import '../../../../core/shell/lucy_chat_threads_panel.dart';
+import '../../../../core/shell/lucy_conversations_drawer.dart';
+import '../../../../core/theme/lucy_theme_extensions.dart';
 import '../../../../shared/widgets/feedback/lucy_snackbar.dart';
-import '../../../onboarding/presentation/widgets/onboarding_lucy_bubble.dart';
-import '../../../onboarding/presentation/widgets/onboarding_lucy_typing_row.dart';
+import '../../../../shared/widgets/lucy/lucy_message_bubble.dart';
+import '../../../settings/presentation/controllers/settings_notifier.dart';
+import '../../../settings/utils/settings_full_name_parts.dart';
+import '../../domain/entities/chat_message_role.dart';
+import '../../domain/entities/chat_quick_chip.dart';
+import '../../domain/providers/revision_calendar_export_provider.dart';
 import '../../utils/chat_constants.dart';
 import '../../utils/chat_error_translator.dart';
 import '../controllers/chat_conversation_notifier.dart';
@@ -12,11 +24,16 @@ import '../controllers/chat_conversation_state.dart';
 import '../controllers/chat_threads_notifier.dart';
 import '../controllers/chat_threads_state.dart';
 import '../utils/chat_conversation_status_resolver.dart';
+import '../utils/chat_pending_outbound_dispatcher.dart';
+import '../utils/chat_quick_chips_resolver.dart';
 import '../widgets/chat_composer.dart';
+import '../widgets/chat_conversation_empty_state.dart';
+import '../widgets/chat_conversation_header.dart';
+import '../widgets/chat_learning_session_card.dart';
 import '../widgets/chat_message_bubble.dart';
 import '../widgets/chat_no_corpus_banner.dart';
+import '../widgets/chat_quick_chips_bar.dart';
 import '../widgets/chat_source_card.dart';
-import '../widgets/chat_thread_list_tile.dart';
 import '../widgets/lucy_conversation_status.dart';
 
 /// Chat tab — master-detail threads and SSE conversation (SPEC §2, P4a).
@@ -32,6 +49,7 @@ class ChatPage extends ConsumerStatefulWidget {
 class _ChatPageState extends ConsumerState<ChatPage> {
   final _scrollController = ScrollController();
   bool _threadListPanelVisible = true;
+  bool _mobileDrawerOpen = false;
 
   bool _canChat(ChatThreadsState threadsState) =>
       threadsState.eligibility?.canChat ?? true;
@@ -70,18 +88,36 @@ class _ChatPageState extends ConsumerState<ChatPage> {
     super.dispose();
   }
 
-  void _onThreadListAction({
-    required bool useMasterDetail,
-    required bool hasSelectedThread,
-  }) {
-    if (!hasSelectedThread) {
-      return;
-    }
+  void _onThreadListAction({required bool useMasterDetail}) {
     if (useMasterDetail) {
       setState(() => _threadListPanelVisible = !_threadListPanelVisible);
       return;
     }
-    ref.read(chatThreadsProvider.notifier).openThreadList(context);
+    setState(() => _mobileDrawerOpen = true);
+  }
+
+  List<LucyChatThreadItem> _threadItems(ChatThreadsState threadsState) {
+    return threadsState.threads
+        .map(
+          (thread) => LucyChatThreadItem(
+            id: thread.id,
+            title: thread.title,
+            preview: thread.lastMessagePreview,
+          ),
+        )
+        .toList();
+  }
+
+  String? _selectedThreadTitle(ChatThreadsState threadsState, String? chatId) {
+    if (chatId == null) {
+      return null;
+    }
+    for (final thread in threadsState.threads) {
+      if (thread.id == chatId) {
+        return thread.title;
+      }
+    }
+    return null;
   }
 
   void _scrollToBottom() {
@@ -119,6 +155,28 @@ class _ChatPageState extends ConsumerState<ChatPage> {
       }
     });
 
+    ref.listen(chatRefreshSignalProvider, (previous, next) {
+      if (previous != next) {
+        ref
+            .read(chatThreadsProvider.notifier)
+            .refreshThreads(initialChatId: widget.chatId);
+      }
+    });
+
+    ref.listen(
+      lucyRouterProvider.select((router) => router.state.matchedLocation),
+      (previous, next) {
+        if (next != LucyRoutePaths.chat) {
+          return;
+        }
+        final cameFromThread =
+            previous?.startsWith('${LucyRoutePaths.chat}/') ?? false;
+        if (cameFromThread) {
+          ref.read(chatThreadsProvider.notifier).refreshThreads();
+        }
+      },
+    );
+
     if (selectedId != null) {
       ref.listen(chatConversationProvider(selectedId), (previous, next) {
         if (next.errorCode != null && next.errorCode != previous?.errorCode) {
@@ -135,37 +193,60 @@ class _ChatPageState extends ConsumerState<ChatPage> {
     }
 
     final hasSelectedThread = selectedId != null;
+    final activeDocumentCount = threadsState.eligibility?.activeDocumentCount;
+    final threadTitle = _selectedThreadTitle(threadsState, selectedId);
+    final showDesktopConversationHeader = useMasterDetail && hasSelectedThread;
 
     return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        leading: hasSelectedThread
-            ? IconButton(
-                icon: Icon(
-                  useMasterDetail && _threadListPanelVisible
-                      ? Icons.view_sidebar
-                      : Icons.view_sidebar_outlined,
-                ),
-                tooltip: l10n.chatShowThreadList,
-                onPressed: () => _onThreadListAction(
-                  useMasterDetail: useMasterDetail,
-                  hasSelectedThread: hasSelectedThread,
-                ),
-              )
-            : null,
-        title: Text(l10n.chatTitle),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.add_comment_outlined),
-            tooltip: l10n.chatNewConversation,
-            onPressed: canCreateThread
-                ? () => ref
-                      .read(chatThreadsProvider.notifier)
-                      .createThread(context)
-                : null,
-          ),
-        ],
-      ),
+      backgroundColor: context.lucyTheme.scaffoldBackground,
+      appBar: useMasterDetail
+          ? null
+          : AppBar(
+              automaticallyImplyLeading: false,
+              leading: hasSelectedThread
+                  ? IconButton(
+                      icon: const Icon(Icons.menu),
+                      tooltip: l10n.chatConversationsTitle,
+                      onPressed: () =>
+                          _onThreadListAction(useMasterDetail: useMasterDetail),
+                    )
+                  : null,
+              title: hasSelectedThread
+                  ? Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          threadTitle ?? l10n.chatTitle,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: context.textTheme.titleLarge?.copyWith(
+                            fontSize: 18,
+                          ),
+                        ),
+                        Text(
+                          l10n.chatConversationSubtitleMobile,
+                          style: context.textTheme.labelSmall?.copyWith(
+                            color: context.lucyTheme.muted,
+                            letterSpacing: 0,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                      ],
+                    )
+                  : Text(l10n.chatTitle),
+              actions: [
+                if (!hasSelectedThread)
+                  IconButton(
+                    icon: const Icon(Icons.add_comment_outlined),
+                    tooltip: l10n.chatNewConversation,
+                    onPressed: canCreateThread
+                        ? () => ref
+                              .read(chatThreadsProvider.notifier)
+                              .createThread(context)
+                        : null,
+                  ),
+              ],
+            ),
       body: threadsState.isLoading
           ? const Center(child: CircularProgressIndicator())
           : Column(
@@ -183,35 +264,83 @@ class _ChatPageState extends ConsumerState<ChatPage> {
                       ? Row(
                           children: [
                             if (_threadListPanelVisible) ...[
-                              SizedBox(
-                                width: ChatConstants.threadListWidth,
-                                child: _ThreadListPanel(
-                                  threadsState: threadsState,
-                                  selectedId: selectedId,
-                                ),
+                              LucyChatThreadsPanel(
+                                title: l10n.chatConversationsTitle,
+                                newConversationLabel: l10n.chatNewConversation,
+                                emptyMessage: l10n.chatEmptyHint,
+                                threads: _threadItems(threadsState),
+                                selectedThreadId: selectedId,
+                                canCreateThread: canCreateThread,
+                                onThreadSelected: (id) => ref
+                                    .read(chatThreadsProvider.notifier)
+                                    .selectThread(id, context),
+                                onCreateThread: () => ref
+                                    .read(chatThreadsProvider.notifier)
+                                    .createThread(context),
                               ),
                               const VerticalDivider(width: 1),
                             ],
                             Expanded(
                               child: _ConversationPanel(
                                 chatId: selectedId,
+                                threadTitle: threadTitle,
+                                showInlineHeader: showDesktopConversationHeader,
+                                headerTrailing: IconButton(
+                                  icon: Icon(
+                                    _threadListPanelVisible
+                                        ? Icons.view_sidebar
+                                        : Icons.view_sidebar_outlined,
+                                  ),
+                                  tooltip: l10n.chatShowThreadList,
+                                  onPressed: () => setState(
+                                    () => _threadListPanelVisible =
+                                        !_threadListPanelVisible,
+                                  ),
+                                ),
                                 scrollController: _scrollController,
                                 isOffline: threadsState.isOffline,
                                 canChat: canChat,
+                                activeDocumentCount: activeDocumentCount,
                               ),
                             ),
                           ],
                         )
                       : selectedId == null
-                      ? _ThreadListPanel(
+                      ? _MobileThreadList(
                           threadsState: threadsState,
                           selectedId: selectedId,
+                          canCreateThread: canCreateThread,
                         )
-                      : _ConversationPanel(
-                          chatId: selectedId,
-                          scrollController: _scrollController,
-                          isOffline: threadsState.isOffline,
-                          canChat: canChat,
+                      : Stack(
+                          fit: StackFit.expand,
+                          children: [
+                            _ConversationPanel(
+                              chatId: selectedId,
+                              threadTitle: threadTitle,
+                              showInlineHeader: false,
+                              scrollController: _scrollController,
+                              isOffline: threadsState.isOffline,
+                              canChat: canChat,
+                              activeDocumentCount: activeDocumentCount,
+                            ),
+                            LucyConversationsDrawer(
+                              isOpen: _mobileDrawerOpen,
+                              onClose: () =>
+                                  setState(() => _mobileDrawerOpen = false),
+                              title: l10n.chatConversationsTitle,
+                              newConversationLabel: l10n.chatNewConversation,
+                              emptyMessage: l10n.chatEmptyHint,
+                              threads: _threadItems(threadsState),
+                              selectedThreadId: selectedId,
+                              canCreateThread: canCreateThread,
+                              onThreadSelected: (id) => ref
+                                  .read(chatThreadsProvider.notifier)
+                                  .selectThread(id, context),
+                              onCreateThread: () => ref
+                                  .read(chatThreadsProvider.notifier)
+                                  .createThread(context),
+                            ),
+                          ],
                         ),
                 ),
               ],
@@ -220,44 +349,44 @@ class _ChatPageState extends ConsumerState<ChatPage> {
   }
 }
 
-class _ThreadListPanel extends ConsumerWidget {
-  const _ThreadListPanel({
+class _MobileThreadList extends ConsumerWidget {
+  const _MobileThreadList({
     required this.threadsState,
     required this.selectedId,
+    required this.canCreateThread,
   });
 
   final ChatThreadsState threadsState;
   final String? selectedId;
+  final bool canCreateThread;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
+    final lucy = context.lucyTheme;
 
-    if (threadsState.threads.isEmpty) {
-      return Center(
-        child: Padding(
-          padding: const EdgeInsets.all(LucyConstants.kSpacingLarge),
-          child: Text(
-            l10n.chatEmptyHint,
-            textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.bodyLarge,
-          ),
-        ),
-      );
-    }
-
-    return ListView.builder(
-      itemCount: threadsState.threads.length,
-      itemBuilder: (context, index) {
-        final thread = threadsState.threads[index];
-        return ChatThreadListTile(
-          thread: thread,
-          selected: thread.id == selectedId,
-          onTap: () => ref
-              .read(chatThreadsProvider.notifier)
-              .selectThread(thread.id, context),
-        );
-      },
+    return ColoredBox(
+      color: lucy.surfaceSecondary,
+      child: LucyChatThreadsBody(
+        title: l10n.chatConversationsTitle,
+        newConversationLabel: l10n.chatNewConversation,
+        emptyMessage: l10n.chatEmptyHint,
+        threads: threadsState.threads
+            .map(
+              (thread) => LucyChatThreadItem(
+                id: thread.id,
+                title: thread.title,
+                preview: thread.lastMessagePreview,
+              ),
+            )
+            .toList(),
+        selectedThreadId: selectedId,
+        canCreateThread: canCreateThread,
+        onThreadSelected: (id) =>
+            ref.read(chatThreadsProvider.notifier).selectThread(id, context),
+        onCreateThread: () =>
+            ref.read(chatThreadsProvider.notifier).createThread(context),
+      ),
     );
   }
 }
@@ -268,16 +397,49 @@ class _ConversationPanel extends ConsumerWidget {
     required this.scrollController,
     required this.isOffline,
     required this.canChat,
+    this.threadTitle,
+    this.showInlineHeader = false,
+    this.headerTrailing,
+    this.activeDocumentCount,
   });
 
   final String? chatId;
+  final String? threadTitle;
+  final bool showInlineHeader;
+  final Widget? headerTrailing;
   final ScrollController scrollController;
   final bool isOffline;
   final bool canChat;
+  final int? activeDocumentCount;
+
+  List<String> _emptyStateSuggestions(AppLocalizations l10n) =>
+      resolveChatQuickChips(l10n: l10n)
+          .where((chip) => chip.kind == ChatQuickChipKind.sendMessage)
+          .map((chip) => chip.message)
+          .toList();
+
+  String? _lastAssistantMessageContent(ChatConversationState conversation) {
+    for (var index = conversation.messages.length - 1; index >= 0; index--) {
+      final message = conversation.messages[index];
+      if (message.role == ChatMessageRole.assistant) {
+        return message.content;
+      }
+    }
+    if (conversation.streamingContent.isNotEmpty) {
+      return conversation.streamingContent;
+    }
+    return null;
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
+    final lucy = context.lucyTheme;
+    final settings = ref.watch(settingsProvider);
+    final firstName = SettingsFullNameParts.split(settings.fullName).firstName;
+    final greeting = firstName.isNotEmpty
+        ? l10n.chatGreeting(firstName)
+        : l10n.chatGreetingFallback;
 
     if (chatId == null) {
       return Center(
@@ -289,6 +451,14 @@ class _ConversationPanel extends ConsumerWidget {
     }
 
     final conversation = ref.watch(chatConversationProvider(chatId!));
+
+    ref.listen(pendingChatOutboundMessageHolderProvider, (_, __) {
+      dispatchPendingChatOutboundMessage(ref, chatId!);
+    });
+    ref.listen(chatConversationProvider(chatId!), (_, __) {
+      dispatchPendingChatOutboundMessage(ref, chatId!);
+    });
+
     final status = ChatConversationStatusResolver.resolve(
       conversation: conversation,
       isOffline: isOffline,
@@ -297,31 +467,88 @@ class _ConversationPanel extends ConsumerWidget {
     final errorMessage = conversation.errorCode == null
         ? null
         : ChatErrorTranslator.translate(context, conversation.errorCode!);
+    final canSend = conversation.canSend && !isOffline && canChat;
+    final quickChips = resolveChatQuickChips(
+      l10n: l10n,
+      lastAssistantMessageContent: _lastAssistantMessageContent(conversation),
+    );
 
     return Column(
       children: [
+        if (showInlineHeader && threadTitle != null)
+          ChatConversationHeader(
+            threadTitle: threadTitle!,
+            subtitle: l10n.chatConversationSubtitle,
+            activeDocumentCount: activeDocumentCount,
+            showActiveDocumentsChip: canChat,
+            trailing: headerTrailing,
+          ),
         Expanded(
-          child: LucyConversationStatus(
-            status: status,
-            errorMessage: errorMessage,
-            onRetry: () => ref
-                .read(chatConversationProvider(chatId!).notifier)
-                .loadMessages(),
-            child: ListView.builder(
-              controller: scrollController,
-              padding: const EdgeInsets.all(LucyConstants.kSpacingMedium),
-              itemCount: _conversationItemCount(conversation),
-              itemBuilder: (context, index) {
-                return _buildConversationItem(context, conversation, index);
-              },
+          child: ColoredBox(
+            color: lucy.scaffoldBackground,
+            child: LucyConversationStatus(
+              status: status,
+              errorMessage: errorMessage,
+              onRetry: () => ref
+                  .read(chatConversationProvider(chatId!).notifier)
+                  .loadMessages(),
+              emptyWidget: ChatConversationEmptyState(
+                greeting: greeting,
+                message: l10n.chatEmptyDescription,
+                suggestions: _emptyStateSuggestions(l10n),
+                onSuggestionSelected: (text) {
+                  if (canSend) {
+                    ref
+                        .read(chatConversationProvider(chatId!).notifier)
+                        .sendMessage(text);
+                  }
+                },
+              ),
+              child: ListView.builder(
+                controller: scrollController,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: LucySpacing.spaceXl + 4,
+                  vertical: LucySpacing.spaceXl + 2,
+                ),
+                itemCount: _conversationItemCount(conversation),
+                itemBuilder: (context, index) {
+                  return _buildConversationItem(context, conversation, index);
+                },
+              ),
             ),
           ),
         ),
-        ChatComposer(
-          enabled: conversation.canSend && !isOffline && canChat,
-          onSend: (text) => ref
-              .read(chatConversationProvider(chatId!).notifier)
-              .sendMessage(text),
+        if (canSend && conversation.messages.isNotEmpty)
+          ChatQuickChipsBar(
+            chips: quickChips,
+            onChipSelected: (chip) {
+              if (chip.kind == ChatQuickChipKind.exportRevisionCalendar) {
+                ref
+                    .read(revisionCalendarExportServiceProvider)
+                    .shareIcs(chatId: chatId!)
+                    .catchError((_) {
+                      if (context.mounted) {
+                        LucySnackBar.showError(
+                          context,
+                          message: l10n.chatRevisionCalendarExportFailed,
+                        );
+                      }
+                    });
+                return;
+              }
+              ref
+                  .read(chatConversationProvider(chatId!).notifier)
+                  .sendMessage(chip.message);
+            },
+          ),
+        ColoredBox(
+          color: lucy.scaffoldBackground,
+          child: ChatComposer(
+            enabled: canSend,
+            onSend: (text) => ref
+                .read(chatConversationProvider(chatId!).notifier)
+                .sendMessage(text),
+          ),
         ),
       ],
     );
@@ -338,6 +565,11 @@ class _ConversationPanel extends ConsumerWidget {
         conversation.streamingContent.isNotEmpty) {
       count += conversation.pendingSources.length;
     }
+    if (conversation.pendingLearningSession != null &&
+        conversation.isStreaming) {
+      count += 1;
+    }
+    count += conversation.learningSessionCards.length;
     return count;
   }
 
@@ -349,7 +581,7 @@ class _ConversationPanel extends ConsumerWidget {
     final messageCount = conversation.messages.length;
     if (index < messageCount) {
       return Padding(
-        padding: const EdgeInsets.only(bottom: LucyConstants.kSpacingMedium),
+        padding: const EdgeInsets.only(bottom: LucySpacing.spaceLg),
         child: ChatMessageBubble(message: conversation.messages[index]),
       );
     }
@@ -361,14 +593,21 @@ class _ConversationPanel extends ConsumerWidget {
 
     if (showStreamingBubble && index == offset) {
       return Padding(
-        padding: const EdgeInsets.only(bottom: LucyConstants.kSpacingMedium),
-        child: OnboardingLucyBubble(text: conversation.streamingContent),
+        padding: const EdgeInsets.only(bottom: LucySpacing.spaceLg),
+        child: LucyMessageBubble(
+          role: LucyMessageBubbleRole.assistant,
+          text: conversation.streamingContent,
+        ),
       );
     }
     if (showTyping && index == offset) {
-      return const Padding(
-        padding: EdgeInsets.only(bottom: LucyConstants.kSpacingMedium),
-        child: OnboardingLucyTypingRow(),
+      return Padding(
+        padding: const EdgeInsets.only(bottom: LucySpacing.spaceLg),
+        child: LucyMessageBubble(
+          role: LucyMessageBubbleRole.assistant,
+          text: '',
+          isTyping: true,
+        ),
       );
     }
     if (showStreamingBubble) {
@@ -380,6 +619,27 @@ class _ConversationPanel extends ConsumerWidget {
     final sourceIndex = index - offset;
     if (sourceIndex >= 0 && sourceIndex < conversation.pendingSources.length) {
       return ChatSourceCard(source: conversation.pendingSources[sourceIndex]);
+    }
+    offset += conversation.pendingSources.length;
+
+    if (conversation.pendingLearningSession != null &&
+        conversation.isStreaming &&
+        index == offset) {
+      return ChatLearningSessionCard(
+        session: conversation.pendingLearningSession!,
+      );
+    }
+    if (conversation.pendingLearningSession != null &&
+        conversation.isStreaming) {
+      offset += 1;
+    }
+
+    final cardIndex = index - offset;
+    if (cardIndex >= 0 &&
+        cardIndex < conversation.learningSessionCards.length) {
+      return ChatLearningSessionCard(
+        session: conversation.learningSessionCards[cardIndex],
+      );
     }
 
     return const SizedBox.shrink();

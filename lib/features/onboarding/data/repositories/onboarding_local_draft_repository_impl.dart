@@ -3,7 +3,8 @@ import '../../domain/repositories/onboarding_local_draft_repository.dart';
 import '../datasources/onboarding_local_draft_prefs_data_source.dart';
 import '../mappers/onboarding_local_draft_mapper.dart';
 
-class OnboardingLocalDraftRepositoryImpl implements OnboardingLocalDraftRepository {
+class OnboardingLocalDraftRepositoryImpl
+    implements OnboardingLocalDraftRepository {
   OnboardingLocalDraftRepositoryImpl(this._dataSource);
 
   final OnboardingLocalDraftPrefsDataSource _dataSource;

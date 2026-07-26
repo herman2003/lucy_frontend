@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
+import '../../../../core/signals/quiz_library_refresh_signal.dart';
 import '../../../auth/domain/providers/auth_provider.dart';
 import '../../data/utils/chat_sse_parser.dart';
 import '../../domain/entities/chat_message.dart';
@@ -173,12 +174,21 @@ class ChatConversationNotifier extends _$ChatConversationNotifier {
       case ChatStreamSourcesEvent(:final sources):
         state = state.copyWith(pendingSources: sources);
         unawaited(_persistMirror());
+      case ChatStreamLearningSessionCreatedEvent(:final session):
+        state = state.copyWith(pendingLearningSession: session);
+        ref.read(quizLibraryRefreshSignalProvider.notifier).notify();
+        unawaited(_persistMirror());
       case ChatStreamDoneEvent(:final assistantMessage):
+        final cards = state.pendingLearningSession != null
+            ? [...state.learningSessionCards, state.pendingLearningSession!]
+            : state.learningSessionCards;
         state = state.copyWith(
           messages: [...state.messages, assistantMessage],
           sendPhase: ChatSendPhase.completed,
           streamingContent: '',
           pendingSources: const [],
+          learningSessionCards: cards,
+          pendingLearningSession: null,
         );
         state = state.copyWith(sendPhase: ChatSendPhase.idle);
         unawaited(_persistMirror());
@@ -188,6 +198,7 @@ class ChatConversationNotifier extends _$ChatConversationNotifier {
           errorCode: code,
           streamingContent: '',
           pendingSources: const [],
+          pendingLearningSession: null,
         );
         _captureMirrorSnapshot();
         unawaited(_persistMirror());

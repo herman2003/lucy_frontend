@@ -1,12 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:lucy_frontend/core/localization/l10n/app_localizations.dart';
+import 'package:lucy_frontend/core/theme/lucy_flex_theme.dart';
 import 'package:lucy_frontend/features/chat/domain/entities/chat_source.dart';
 import 'package:lucy_frontend/features/chat/presentation/widgets/chat_source_card.dart';
 
 import '../../../../helpers/test_locales.dart';
 
 void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
+
+  setUpAll(() {
+    GoogleFonts.config.allowRuntimeFetching = false;
+  });
+
   testWidgets('shows title, page range, and excerpt', (tester) async {
     setTestLocaleFr();
     addTearDown(clearTestLocaleOverride);
@@ -22,20 +30,20 @@ void main() {
 
     await tester.pumpWidget(
       MaterialApp(
+        theme: LucyFlexTheme.lightTheme,
         locale: const Locale('fr'),
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
-        home: const Scaffold(
-          body: ChatSourceCard(source: source),
-        ),
+        home: const Scaffold(body: ChatSourceCard(source: source)),
       ),
     );
 
     expect(find.text('Manuel biologie'), findsOneWidget);
     expect(find.text('Pages 12–14'), findsOneWidget);
     expect(
-      find.text('La photosynthèse convertit la lumière.'),
+      find.text('« La photosynthèse convertit la lumière. »'),
       findsOneWidget,
     );
+    expect(find.text('SOURCE'), findsOneWidget);
   });
 }

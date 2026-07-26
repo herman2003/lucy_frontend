@@ -1,0 +1,15 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        # URL of the Lucy backend API, baked into the web build.
+        # For a full local stack next to lucy_backend, point this at your host,
+        # e.g. http://localhost:3001 (default) or your deployed API URL.
+        LUCY_API_BASE_URL: ${LUCY_API_BASE_URL:-http://localhost:3001}
+    image: lucy-frontend-web:latest
+    container_name: lucy-frontend-web
+    restart: unless-stopped
+    ports:
+      - "8080:80"

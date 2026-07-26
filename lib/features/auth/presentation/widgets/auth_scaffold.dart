@@ -28,10 +28,7 @@ class AuthScaffold extends StatelessWidget {
             brandingSubtitle: brandingSubtitle,
             formKey: formKey,
           )
-        : AuthMobileLayout(
-            formContent: formContent,
-            formKey: formKey,
-          );
+        : AuthMobileLayout(formContent: formContent, formKey: formKey);
 
     return Scaffold(body: body);
   }

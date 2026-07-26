@@ -11,7 +11,7 @@ abstract final class OnboardingLocalDraftKeys {
 /// Persists onboarding draft JSON via [SharedPreferences].
 class OnboardingLocalDraftPrefsDataSource {
   OnboardingLocalDraftPrefsDataSource([Future<SharedPreferences>? prefs])
-      : _prefsFuture = prefs ?? SharedPreferences.getInstance();
+    : _prefsFuture = prefs ?? SharedPreferences.getInstance();
 
   final Future<SharedPreferences> _prefsFuture;
 

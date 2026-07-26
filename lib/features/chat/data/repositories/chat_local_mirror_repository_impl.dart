@@ -19,7 +19,10 @@ class ChatLocalMirrorRepositoryImpl implements ChatLocalMirrorRepository {
 
   @override
   Future<void> save({required String uid, required ChatLocalMirror mirror}) {
-    return _dataSource.writeMirrorJson(uid, ChatLocalMirrorMapper.toJson(mirror));
+    return _dataSource.writeMirrorJson(
+      uid,
+      ChatLocalMirrorMapper.toJson(mirror),
+    );
   }
 
   @override
